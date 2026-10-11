@@ -1,0 +1,12 @@
+.DS_Store
+__pycache__/
+.pytest_cache/
+.venv/
+
+# Claude Code (local settings and session files)
+.claude/settings.local.json
+.claude/plans/
+.claude/todos.json
+.claude/worktrees
+.claude/scheduled_tasks.lock
+CLAUDE.local.md
