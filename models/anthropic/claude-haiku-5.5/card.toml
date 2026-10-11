@@ -1,0 +1,28 @@
+id = "anthropic/claude-haiku-5.5"
+section = "text.catalog"
+
+label = "Claude Haiku 5.5"
+short_label = "Haiku 5.5"
+multimodal = true
+image_input_mimes = ["image/jpeg", "image/png", "image/gif", "image/webp"]
+tool_call = true
+context_window = 1_000_000
+output_limit = 128_000
+
+[release]
+date = "2026-10-07"
+basis = "model"
+source_url = "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+
+# Priced by prompt length: a request whose prompt (all input tokens, cache reads and writes
+# included) is over 100,000 tokens pays 5x on every rate, cache reads and writes included.
+[cost]
+input = 0.1
+output = 0.5
+cache_read = 0.01
+cache_write = 0.125
+
+[cost.long_context]
+input_tokens_above = 100_000
+input_multiplier = 5
+output_multiplier = 5
