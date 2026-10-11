@@ -18,8 +18,8 @@ bindings, and published prices.
 [`catalogue/models.json`](./catalogue/models.json) is generated from it and is the contract
 consumers read, at schema version 1. The catalogue was imported from
 [gridaco/grida](https://github.com/gridaco/grida). Each content change to `catalogue/` on
-`main` is published as a versioned GitHub Release. Other distribution channels are undecided;
-don't add anything that assumes an answer.
+`main` is published as a versioned GitHub Release and as `@grida/ai-models` on npm. A hosted
+endpoint of its own is undecided; don't add anything that assumes an answer.
 
 ## Project Structure
 
@@ -53,7 +53,7 @@ These are listed in the [README](./README.md#open-decisions). Treat them as quar
 nothing written here may depend on an answer that has not been decided. When a task forces
 one of these questions, raise it with the user instead of answering it implicitly.
 
-1. Further distribution: whether to publish beyond GitHub Releases (package registry, HTTP endpoint).
+1. Hosted endpoint: whether to serve the catalogue from a domain of its own.
 2. Whether a provider registry (labels, logos, ID prefixes) lives here.
 
 ## Public repository rules
@@ -118,7 +118,10 @@ every PR.
 
 Releases are automatic: on every push to `main` that changes the content of `catalogue/`,
 `.github/workflows/release.yml` publishes a snapshot built by `scripts/release.py`
-(`v<schema>.<YYYYMMDD>.<n>`). A breaking schema change must bump `SCHEMA_MAJOR` in
+(`v<schema>.<YYYYMMDD>.<n>`), then publishes that release's archive to npm as
+`@grida/ai-models` (`<schema>.<YYYYMMDD>.<n>`) through trusted publishing, with no stored
+token. The npm job publishes the latest release whenever npm lacks it, so a failed publish is
+caught up by the next run. A breaking schema change must bump `SCHEMA_MAJOR` in
 `scripts/release.py` together with both schema `$id`s. Pull requests that touch the catalogue
 get a preview of the release as a workflow artifact.
 
