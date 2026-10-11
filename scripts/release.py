@@ -13,10 +13,13 @@ Usage:
     uv run scripts/release.py version
     uv run scripts/release.py build --version v1.20261012.0 --out dist
     uv run scripts/release.py notes --version v1.20261012.0 --previous previous/
+    uv run scripts/release.py npm --archive grida-models-v1.20261012.0.tar.gz --out package/
 
 `digest` prints a fingerprint of the catalogue's content; the release workflow publishes only
 when it differs from the latest release's. `build` writes the release assets, and builds the
 same bytes from the same commit. `notes` compares against the previous release's assets.
+`npm` turns a release archive into the npm package, so the package holds exactly what was
+released; its version is the release tag without the `v`.
 """
 
 from __future__ import annotations
@@ -39,6 +42,7 @@ ROOT = Path(__file__).resolve().parent.parent
 CATALOGUE = ROOT / "catalogue"
 REPOSITORY = "https://github.com/gridaco/models"
 NAME = "grida-models"
+NPM_NAME = "@grida/ai-models"
 
 # The catalogue's schema major version. Both schema `$id`s end in `-v<major>.json`;
 # a breaking change to either bumps it.
@@ -284,6 +288,110 @@ def load_previous(directory: Path) -> dict[str, Any] | None:
     return previous
 
 
+def read_archive(data: bytes) -> dict[str, bytes]:
+    """The files of a release `.tar.gz`, keyed by their path below its top directory."""
+    files = {}
+    with tarfile.open(fileobj=io.BytesIO(data), mode="r:gz") as tar:
+        for member in tar.getmembers():
+            if not member.isfile():
+                continue
+            _, _, name = member.name.partition("/")
+            if not name or name.startswith("/") or ".." in name.split("/"):
+                raise ValueError(f"unexpected archive member {member.name!r}")
+            extracted = tar.extractfile(member)
+            assert extracted is not None
+            files[name] = extracted.read()
+    return dict(sorted(files.items()))
+
+
+NPM_README = """# {name}
+
+A hand-curated, source-backed catalogue of AI models: identities, capabilities, limits,
+provider bindings, and published prices, with the labs that make them and their official
+logos. Every fact cites a first-party source.
+
+This package is the data, published unchanged from release
+[`{tag}`]({repository}/releases/tag/{tag}) of [gridaco/models]({repository}). It contains no code.
+
+| file | contents |
+| --- | --- |
+| `models.json` | Model cards, by family (`text.catalog`, `image.models`, `video.models`, ...) |
+| `labs.json` | Labs, keyed by lab ID: name, homepage, and logo |
+| `logos/` | Each lab's official logo |
+| `schemas/` | JSON Schemas for `models.json` and `labs.json` |
+| `manifest.json` | Version, source commit, content digest, and the SHA-256 of every file |
+| `PROVENANCE.md` | Source notes that do not fit in JSON |
+
+```js
+import models from "{name}/models.json" with {{ type: "json" }};
+import labs from "{name}/labs.json" with {{ type: "json" }};
+```
+
+From a CDN, without installing:
+
+```
+https://cdn.jsdelivr.net/npm/{name}@{major}/models.json
+https://cdn.jsdelivr.net/npm/{name}@{version}/models.json
+```
+
+## Versions
+
+Versions read `<schema>.<YYYYMMDD>.<n>`. The major is the schema version, so `^{major}` follows
+every snapshot without crossing a breaking change. A new version is published whenever the
+catalogue's content changes.
+
+## License
+
+The data is MIT licensed. Lab logos are trademarks of their owners and are not covered by that
+license; each lab's entry in `labs.json` links its source and brand guidelines.
+"""
+
+
+def npm_package(archive: dict[str, bytes]) -> dict[str, bytes]:
+    """The npm package for a release, from the files of its archive."""
+    meta = json.loads(archive["manifest.json"])
+    tag = meta["version"]
+    version = tag.removeprefix("v")
+    catalogue = {name[len("catalogue/"):]: data for name, data in archive.items() if name.startswith("catalogue/")}
+    data_files = {
+        name: content
+        for name, content in catalogue.items()
+        if name in ("models.json", "labs.json", "PROVENANCE.md") or name.startswith(("schemas/", "logos/"))
+    }
+    package = {
+        "name": NPM_NAME,
+        "version": version,
+        "description": "A hand-curated, source-backed catalogue of AI models, their labs, and published prices.",
+        "keywords": ["ai", "models", "llm", "catalogue", "model-catalog", "pricing", "json"],
+        "homepage": f"{REPOSITORY}#readme",
+        "bugs": f"{REPOSITORY}/issues",
+        "repository": {"type": "git", "url": f"git+{REPOSITORY}.git"},
+        "license": "MIT",
+        "files": sorted({name.split("/")[0] for name in data_files} | {"manifest.json"}),
+        "exports": {
+            ".": "./models.json",
+            "./models.json": "./models.json",
+            "./labs.json": "./labs.json",
+            "./manifest.json": "./manifest.json",
+            "./schemas/*": "./schemas/*",
+            "./logos/*": "./logos/*",
+            "./package.json": "./package.json",
+        },
+        "sideEffects": False,
+    }
+    readme = NPM_README.format(
+        name=NPM_NAME, tag=tag, version=version, major=version.split(".")[0], repository=REPOSITORY
+    )
+    files = {
+        **data_files,
+        "manifest.json": archive["manifest.json"],
+        "LICENSE": archive["LICENSE"],
+        "README.md": readme.encode(),
+        "package.json": (json.dumps(package, indent=2) + "\n").encode(),
+    }
+    return dict(sorted(files.items()))
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     commands = parser.add_subparsers(dest="command", required=True)
@@ -295,7 +403,18 @@ def main(argv: list[str] | None = None) -> int:
     notes_cmd = commands.add_parser("notes", help="print release notes")
     notes_cmd.add_argument("--version", required=True)
     notes_cmd.add_argument("--previous", type=Path, help="directory with the previous release's assets")
+    npm_cmd = commands.add_parser("npm", help="write the npm package for a release archive")
+    npm_cmd.add_argument("--archive", type=Path, required=True, help="the release's .tar.gz")
+    npm_cmd.add_argument("--out", type=Path, required=True)
     args = parser.parse_args(argv)
+
+    if args.command == "npm":
+        for name, data in npm_package(read_archive(args.archive.read_bytes())).items():
+            path = args.out / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(data)
+        print(f"{args.out}: {NPM_NAME}@{json.loads((args.out / 'package.json').read_text())['version']}")
+        return 0
 
     files = catalogue_files()
     if schema_major(files) != {SCHEMA_MAJOR}:

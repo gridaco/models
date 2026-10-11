@@ -163,3 +163,62 @@ def test_renamed_files_compare_with_their_old_selves():
     text = release.notes("v1.20261012.0", current_snapshot(), previous_snapshot(mutate))
     assert "- Renamed: `facts.json` → `models.json`, `schemas/facts.schema.json` → `schemas/models.schema.json`" in text
     assert "Schema changed" not in text and "Other files changed" not in text
+
+
+# The npm package, built from a release archive.
+
+
+def package_from_build(version="v1.20261012.0"):
+    assets = release.build(version, COMMIT, WHEN, FILES)
+    return release.npm_package(release.read_archive(assets[f"grida-models-{version}.tar.gz"]))
+
+
+def test_npm_package_is_the_released_data():
+    package = package_from_build()
+    meta = json.loads(package["package.json"])
+    assert meta["name"] == release.NPM_NAME
+    assert meta["version"] == "1.20261012.0"
+    assert package["models.json"] == FILES["models.json"]
+    assert package["labs.json"] == FILES["labs.json"]
+    assert {name for name in package if name.startswith("logos/")} == {
+        f"logos/{name.split('/', 1)[1]}" for name in FILES if name.startswith("logos/")
+    }
+    assert json.loads(package["manifest.json"])["version"] == "v1.20261012.0"
+
+
+def test_npm_package_repository_matches_this_repository():
+    # Trusted publishing requires repository.url to match the publishing repository exactly.
+    meta = json.loads(package_from_build()["package.json"])
+    assert meta["repository"]["url"] == f"git+{release.REPOSITORY}.git"
+
+
+def test_npm_package_exports_and_files_resolve():
+    package = package_from_build()
+    meta = json.loads(package["package.json"])
+    for target in meta["exports"].values():
+        path = target.removeprefix("./")
+        if path.endswith("/*"):
+            assert any(name.startswith(path[:-1]) for name in package)
+        else:
+            assert path in package
+    for entry in meta["files"]:
+        assert any(name == entry or name.startswith(entry + "/") for name in package)
+
+
+def test_npm_package_is_reproducible():
+    assert package_from_build() == package_from_build()
+
+
+def test_archive_paths_cannot_escape():
+    raw = io.BytesIO()
+    with tarfile.open(fileobj=raw, mode="w:gz") as tar:
+        info = tarfile.TarInfo("grida-models-x/../../evil")
+        info.size = 0
+        tar.addfile(info, io.BytesIO(b""))
+    with pytest.raises(ValueError):
+        release.read_archive(raw.getvalue())
+
+
+def test_workflow_publishes_the_package_release_py_builds():
+    workflow = (release.ROOT / ".github" / "workflows" / "release.yml").read_text()
+    assert f'NPM_PACKAGE: "{release.NPM_NAME}"' in workflow

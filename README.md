@@ -15,7 +15,28 @@ place answers "which models exist and what are they" for every Grida product.
 ## Get the catalogue
 
 Every change to the catalogue on `main` is published as a
-[release](https://github.com/gridaco/models/releases). The newest snapshot is always at:
+[release](https://github.com/gridaco/models/releases) and as the npm package
+[`@grida/ai-models`](https://www.npmjs.com/package/@grida/ai-models), which holds the same
+files and no code.
+
+```sh
+npm install @grida/ai-models
+```
+
+```js
+import models from "@grida/ai-models/models.json" with { type: "json" };
+```
+
+For fetching at runtime, use the package through jsDelivr's CDN: compressed, cached at the
+edge, and with no redirects. `@1` follows the newest snapshot of schema version 1; a full
+version pins one snapshot.
+
+```
+https://cdn.jsdelivr.net/npm/@grida/ai-models@1/models.json
+https://cdn.jsdelivr.net/npm/@grida/ai-models@1.20261011.1/models.json
+```
+
+The GitHub Release assets suit scripts and archiving. The newest snapshot is always at:
 
 ```sh
 curl -LO https://github.com/gridaco/models/releases/latest/download/models.v1.json
@@ -107,9 +128,9 @@ with a JSON Schema, readable from any language. Its shape and rules are document
 - **Labs are registered.** Each lab directory holds a `lab.toml` with the lab's display
   name, first-party homepage, and official logo, published as `catalogue/labs.json` and
   `catalogue/logos/`. A card's `vendor` is a lab ID.
-- **Snapshots are GitHub Releases.** Each content change to `catalogue/` on `main` is
-  published as a versioned, checksummed release (`scripts/release.py`,
-  `.github/workflows/release.yml`).
+- **Snapshots are GitHub Releases and an npm package.** Each content change to `catalogue/`
+  on `main` is published as a versioned, checksummed release and as `@grida/ai-models` on
+  npm, through trusted publishing (`scripts/release.py`, `.github/workflows/release.yml`).
 - **Facts only.** Product policy (which models a product lists, its tiers and defaults)
   stays with each product.
 
@@ -117,8 +138,8 @@ with a JSON Schema, readable from any language. Its shape and rules are document
 
 These are deliberately undecided, and are tracked here so nobody mistakes them for settled.
 
-1. **Further distribution.** Whether to publish beyond GitHub Releases: a package registry,
-   a hosted HTTP endpoint, or both.
+1. **Hosted endpoint.** Whether to serve the catalogue from a domain of its own, beyond
+   GitHub Releases, npm, and the CDNs that mirror npm.
 2. **Provider registry.** Whether this repository also owns display labels, logos, and
    ID-prefix rules for providers.
 
