@@ -1,2 +1,10 @@
 name = "ByteDance"
 url = "https://www.bytedance.com/"
+
+# The bytedance.com shortcut icon (a data URI), decoded unchanged. The site's only SVG is
+# a white lockup, which is invisible on light backgrounds.
+[logo]
+file = "logo.png"
+kind = "symbol"
+source_url = "https://www.bytedance.com/en/"
+retrieved = "2026-10-12"

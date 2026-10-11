@@ -1,2 +1,3 @@
 catalogue/facts.json linguist-generated=true
 catalogue/labs.json linguist-generated=true
+catalogue/logos/** linguist-generated=true

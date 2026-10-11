@@ -125,12 +125,12 @@ def test_cards_generate_the_committed_facts():
 
 def test_hand_edited_facts_are_reported_out_of_date():
     edited = check.FACTS.read_text(encoding="utf-8").replace('"GPT-5.5"', '"GPT 5.5"', 1)
-    assert any("facts.json is out of date" in e for e in check.source_errors({check.FACTS: edited}))
+    assert any("facts.json is out of date" in e for e in check.source_errors({check.FACTS: edited.encode()}))
 
 
 def test_hand_edited_labs_are_reported_out_of_date():
     edited = check.LABS.read_text(encoding="utf-8").replace('"OpenAI"', '"Open AI"', 1)
-    assert any("labs.json is out of date" in e for e in check.source_errors({check.LABS: edited}))
+    assert any("labs.json is out of date" in e for e in check.source_errors({check.LABS: edited.encode()}))
 
 
 def test_cards_round_trip_every_null():
@@ -240,3 +240,73 @@ def test_lab_schema_rejects_unknown_fields():
 
 def test_lab_toml_is_not_a_card():
     assert not any(c.file == cards.LAB_FILE for c in CARDS)
+
+
+# Logos: models/<lab>/logo.<ext>, copied to catalogue/logos/<lab>.<ext>.
+
+SVG = b'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z"/></svg>'
+LOGO = {"file": "logo.svg", "kind": "symbol", "source_url": "https://example.com/logo.svg", "retrieved": "2026-10-12"}
+
+
+def logo_check(svg=SVG, logo=LOGO, files=None):
+    lab = cards.Lab("example", {"name": "Example", "url": "https://example.com/", "logo": logo})
+    lab.files = {"logo.svg": svg} if files is None else files
+    return list(cards.logo_errors(lab))
+
+
+def test_clean_svg_logo_passes():
+    assert logo_check() == []
+
+
+@pytest.mark.parametrize(
+    "svg, problem",
+    [
+        (SVG.replace(b"<path", b'<script>alert(1)</script><path'), "contains <script>"),
+        (SVG.replace(b"<path", b"<foreignObject/><path"), "contains <foreignObject>"),
+        (SVG.replace(b"<path", b'<path onclick="x()"'), "event attribute"),
+        (SVG.replace(b"<path", b'<image href="https://example.com/a.png"/><path'), "references"),
+        (SVG.replace(b"<path", b'<image href="data:image/png;base64,AAAA"/><path'), "references"),
+        (SVG.replace(b"<path", b'<style>path{fill:url(https://example.com/a)}</style><path'), "external url()"),
+        (SVG.replace(b' viewBox="0 0 24 24"', b""), "no viewBox"),
+        (b"<svg", "well-formed"),
+        (b'<!DOCTYPE svg [<!ENTITY a "b">]>' + SVG, "DOCTYPE"),
+    ],
+)
+def test_svg_logo_is_plain_artwork(svg, problem):
+    assert any(problem in e for e in logo_check(svg))
+
+
+def test_internal_svg_references_are_allowed():
+    svg = SVG.replace(b"<path", b'<defs><linearGradient id="g"/></defs><use href="#g"/><path fill="url(#g)"')
+    assert logo_check(svg) == []
+
+
+def test_raster_logo_must_match_its_extension():
+    logo = {**LOGO, "file": "logo.png"}
+    assert any("is not a PNG" in e for e in logo_check(logo=logo, files={"logo.png": SVG}))
+
+
+def test_logo_file_must_be_named_logo():
+    logo = {**LOGO, "file": "brand.svg"}
+    assert any("logo.file must be one of" in e for e in logo_check(logo=logo, files={"brand.svg": SVG}))
+
+
+def test_logo_file_must_exist():
+    assert any("does not exist" in e for e in logo_check(files={}))
+
+
+def test_lab_directory_holds_no_other_files():
+    assert any("unexpected file" in e for e in logo_check(files={"logo.svg": SVG, "notes.txt": b""}))
+
+
+def test_lab_schema_requires_logo_provenance():
+    labs = cards.assemble_labs(LABS)
+    labs["openai"]["logo"] = {"path": "logos/openai.svg", "media_type": "image/svg+xml", "kind": "symbol"}
+    errors = list(check.schema_errors(labs, check.load(check.LABS_SCHEMA)))
+    assert any("source_url" in e for e in errors) and any("retrieved" in e for e in errors)
+
+
+def test_logo_not_generated_by_any_lab_is_reported(tmp_path, monkeypatch):
+    monkeypatch.setattr(check.build, "LOGOS", tmp_path)
+    (tmp_path / "gone.svg").write_bytes(SVG)
+    assert check.build.orphans({}) == [tmp_path / "gone.svg"]

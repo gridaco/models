@@ -1,2 +1,12 @@
 name = "OpenAI"
 url = "https://openai.com/"
+
+# Inline SVG from the openai.com header wordmark, extracted unchanged. OpenAI's
+# guidelines make the wordmark its primary mark. The logo ZIP on openai.com/brand
+# requires accepting OpenAI's marks usage terms and was not downloaded.
+[logo]
+file = "logo.svg"
+kind = "wordmark"
+source_url = "https://openai.com/"
+guidelines_url = "https://openai.com/brand/"
+retrieved = "2026-10-12"

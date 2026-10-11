@@ -41,9 +41,10 @@ plain JSON and JSON Schema, no generated code, no language-specific files.
 both may use whichever language fits the job (Python today, TypeScript when it fits better),
 and is never part of the contract.
 
-Each lab directory in `models/` holds a `lab.toml` (display name and first-party homepage),
-generated into `catalogue/labs.json`. Provider labels and logos are still undecided (open
-decision 2).
+Each lab directory in `models/` holds a `lab.toml` (display name, first-party homepage, and
+the source of its logo) and the lab's official logo, generated into `catalogue/labs.json` and
+`catalogue/logos/`. A logo comes from the lab's own brand kit, press kit, or website, never an
+aggregator or a redrawing. A provider registry is still undecided (open decision 2).
 
 ## Open decisions
 
@@ -52,7 +53,7 @@ nothing written here may depend on an answer that has not been decided. When a t
 one of these questions, raise it with the user instead of answering it implicitly.
 
 1. Distribution: how consumers pin and receive the catalogue.
-2. Whether a provider registry (labels, ID prefixes) and logo assets live here.
+2. Whether a provider registry (labels, logos, ID prefixes) lives here.
 
 ## Public repository rules
 

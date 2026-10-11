@@ -1,2 +1,9 @@
 name = "Tripo"
 url = "https://www.tripo3d.ai/"
+
+# The developer site's header logo, unchanged. Tripo publishes no symbol-only vector.
+[logo]
+file = "logo.svg"
+kind = "lockup"
+source_url = "https://developers.tripo3d.ai/assets/icons/logo-dark.svg"
+retrieved = "2026-10-12"

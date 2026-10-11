@@ -1,2 +1,10 @@
 name = "Bria"
 url = "https://bria.ai/"
+
+# Bria publishes no SVG. The official full logo PNG, used in the bria.ai footer and the
+# docs.bria.ai header, downloaded unchanged.
+[logo]
+file = "logo.png"
+kind = "lockup"
+source_url = "https://docs.bria.ai/assets/logo.4aab4827f8ef484ab0149a267109951af9b35a6e5d7ddacfc52a0cb2bf07aec6.9c1bb791.png"
+retrieved = "2026-10-12"

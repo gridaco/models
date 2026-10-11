@@ -41,7 +41,25 @@ Every lab directory holds a `lab.toml`, generated into
 ```toml
 name = "Black Forest Labs"   # display name, as the lab writes it
 url = "https://bfl.ai/"      # the lab's first-party homepage
+
+# The guidelines allow the symbol alone in small-scale use; the logotype is primary.
+[logo]
+file = "logo.svg"            # logo.svg, logo.png, or logo.webp, beside lab.toml
+kind = "symbol"              # symbol, wordmark, or lockup
+source_url = "https://…"     # the asset's URL, or the first-party page it came from
+guidelines_url = "https://…" # the lab's brand guidelines, when it publishes them
+retrieved = "2026-10-12"
 ```
+
+A logo is the lab's official artwork from a first-party source: its brand kit, press kit, or
+its own website. Never an aggregator or a redrawing. Prefer SVG, then PNG, then WebP; prefer
+the lab's symbol to its wordmark unless the lab's guidelines say otherwise. A logo is
+optional: when a lab requires approval or accepting terms before its logo is used, leave
+`[logo]` out until a maintainer has done so. Keep the artwork unchanged, and say in a comment above
+`[logo]` how it was obtained when it was not a plain download (for example, extracted from
+the site header). `check.py` rejects SVGs with scripts, event attributes, `foreignObject`, or
+external references. Logos are trademarks of their owners and are not covered by this
+repository's license.
 
 The directory name is the lab ID; the file has no `id`. A new lab needs a `lab.toml` in the
 same change as its first card, and a `lab.toml` with no cards is reported. Publisher
@@ -87,7 +105,7 @@ A section that is one object rather than a table of cards
 ## After editing
 
 ```sh
-uv run scripts/build.py   # regenerate catalogue/facts.json and catalogue/labs.json
+uv run scripts/build.py   # regenerate catalogue/facts.json, labs.json, and logos/
 uv run scripts/check.py   # cards, generated file, schema, invariants
 ```
 

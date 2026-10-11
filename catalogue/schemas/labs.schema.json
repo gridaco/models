@@ -25,6 +25,43 @@
         "type": "string",
         "format": "uri",
         "pattern": "^https://"
+      },
+      "logo": {
+        "description": "The lab's official logo, copied unchanged from a first-party source. Logos are trademarks of their owners and are not covered by this repository's license.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "media_type", "kind", "source_url", "retrieved"],
+        "properties": {
+          "path": {
+            "description": "The logo file, relative to labs.json.",
+            "type": "string",
+            "pattern": "^logos/[a-z0-9][a-z0-9-]*\\.(svg|png|webp)$"
+          },
+          "media_type": {
+            "enum": ["image/svg+xml", "image/png", "image/webp"]
+          },
+          "kind": {
+            "description": "symbol: the mark alone; wordmark: the name alone; lockup: mark and name together.",
+            "enum": ["symbol", "wordmark", "lockup"]
+          },
+          "source_url": {
+            "description": "Where the artwork was obtained: the asset's URL, or the first-party page it was extracted from.",
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://"
+          },
+          "guidelines_url": {
+            "description": "The lab's brand or logo usage guidelines, when it publishes them.",
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://"
+          },
+          "retrieved": {
+            "description": "The day the artwork was obtained.",
+            "type": "string",
+            "format": "date"
+          }
+        }
       }
     }
   }

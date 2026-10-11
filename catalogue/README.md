@@ -9,6 +9,7 @@ authored as one card per model in [`models/`](../models/); everything else outsi
 | `facts.json`                | Generated from `models/`. Model identities, release provenance, provider bindings, capabilities, limits, list prices |
 | `labs.json`                 | Generated from `models/<lab>/lab.toml`. The labs that make catalogued models                                         |
 | `schemas/facts.schema.json` | JSON Schema 2020-12 for `facts.json`                                                                                 |
+| `logos/`                    | Generated from `models/<lab>/logo.*`. Each lab's official logo                                                       |
 | `schemas/labs.schema.json`  | JSON Schema 2020-12 for `labs.json`                                                                                  |
 | `PROVENANCE.md`             | Source notes and qualifications that don't fit in JSON                                                               |
 
@@ -50,6 +51,12 @@ other families have one card per provider endpoint.
 `labs.json` is an object keyed by lab ID. Each lab has `id` (equal to its key), `name` (the
 display name as the lab writes it), and `url` (its first-party homepage). A card's `vendor`
 is a lab ID. Its `$id` is `https://grida.co/schemas/ai-model-labs-v1.json`.
+
+A lab may have a `logo`: `path` (the file in `logos/`, relative to `labs.json`),
+`media_type`, `kind` (`symbol`, `wordmark`, or `lockup`), `source_url`, optional
+`guidelines_url`, and `retrieved`. Logo files are the labs' official artwork, copied
+unchanged. They are trademarks of their owners, are not covered by this repository's
+license, and are used under each owner's guidelines.
 
 ## Rules
 

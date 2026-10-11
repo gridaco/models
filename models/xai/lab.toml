@@ -1,2 +1,11 @@
-name = "xAI"
+name = "SpaceXSI"
 url = "https://x.ai/"
+
+# The lab now presents itself as SpaceXSI on x.ai (page title, logo label, brand guidelines).
+# The black SVG from the x.ai header logo's "Copy black SVG" menu, unchanged.
+[logo]
+file = "logo.svg"
+kind = "symbol"
+source_url = "https://x.ai/"
+guidelines_url = "https://x.ai/legal/brand-guidelines"
+retrieved = "2026-10-12"

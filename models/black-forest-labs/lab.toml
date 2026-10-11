@@ -1,2 +1,10 @@
 name = "Black Forest Labs"
 url = "https://bfl.ai/"
+
+# The guidelines allow the symbol alone in small-scale use; the logotype is primary.
+[logo]
+file = "logo.svg"
+kind = "symbol"
+source_url = "https://bfl.ai/brand/symbol-black.svg"
+guidelines_url = "https://bfl.ai/brand"
+retrieved = "2026-10-12"

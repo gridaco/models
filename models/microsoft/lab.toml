@@ -1,2 +1,11 @@
 name = "Microsoft"
 url = "https://www.microsoft.com/"
+
+# "The official Microsoft logo" offered for app branding on Microsoft Learn
+# (learn.microsoft.com/en-us/entra/identity-platform/howto-add-branding-in-apps), unchanged.
+[logo]
+file = "logo.svg"
+kind = "symbol"
+source_url = "https://learn.microsoft.com/en-us/entra/identity-platform/media/howto-add-branding-in-apps/ms-symbollockup_mssymbol_19.svg"
+guidelines_url = "https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks"
+retrieved = "2026-10-12"

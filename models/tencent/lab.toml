@@ -1,2 +1,11 @@
 name = "Tencent"
 url = "https://www.tencent.com/"
+
+# The English logo from tencent.com's media resources (newsroom/media-resources/logos),
+# unchanged. Tencent publishes no SVG, and its guide restricts the standalone icon.
+[logo]
+file = "logo.png"
+kind = "wordmark"
+source_url = "https://www.tencent.com/wp-content/uploads/2022/12/03_Tencent_English-logo.png"
+guidelines_url = "https://www.tencent.com/newsroom/media-resources/brand-and-usage-guides/"
+retrieved = "2026-10-12"
