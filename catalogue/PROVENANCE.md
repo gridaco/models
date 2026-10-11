@@ -120,7 +120,14 @@ Unlike Fable 5.1, this version accepts forced tool choice.
 
 ## `"anthropic/claude-opus-5": {`
 
-Drop-in successor to Opus 4.8 at the same rate card.
+Same $5/$25 rate card as Claude Opus 4.8, but not a drop-in successor, so
+Opus 4.8 stays catalogued. On Opus 5, `thinking: {"type": "disabled"}` with
+effort `xhigh` or `max` returns a 400 error, which Anthropic lists as a
+breaking change from Opus 4.8; and Opus 5 thinks by default, where Opus 4.8
+runs without thinking unless asked. (Corrects an earlier note that called
+Opus 5 a drop-in successor.)
+https://platform.claude.com/docs/en/release-notes/overview
+https://platform.claude.com/docs/en/models/opus-5-5/migration-guide
 
 ## `"google/gemini-3.8-flash": {`
 
