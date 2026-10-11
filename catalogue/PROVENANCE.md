@@ -53,6 +53,36 @@ which is the release fact relevant to this route card.
 https://openai.com/products/release-notes/
 https://vercel.com/ai-gateway/models/gpt-6-astra
 
+## `"anthropic/claude-opus-5.5": {`
+
+Anthropic API ID `claude-opus-5-5`; this is the Vercel AI Gateway ID, whose
+model feed lists the same rates. Cache reads are 0.05x base input ($0.20);
+`cache_write` is the 5-minute write ($5; the 1-hour write is $8). Released
+2026-09-22 as generally available; only its fast mode is a research preview.
+https://platform.claude.com/docs/en/models/opus-5-5/overview
+https://platform.claude.com/docs/en/about-claude/pricing
+https://vercel.com/ai-gateway/models/claude-opus-5.5
+
+Claude Opus 5 stays catalogued. Opus 5.5 is cheaper, but it is not a drop-in
+successor: thinking can't be disabled, forced tool use (`tool_choice`
+`any`/`tool`) returns an error, and `computer_20251124` is not accepted on
+the Claude API and Google Cloud. Opus 5 is still the choice for those.
+https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5
+
+## `"anthropic/claude-haiku-5.5": {`
+
+Anthropic API ID `claude-haiku-5-5`; this is the Vercel AI Gateway ID. Priced
+by prompt length: a request whose prompt is over 100,000 tokens, counting all
+input tokens including cache reads and writes, pays $0.50 input, $2.50
+output, $0.05 cache read and $0.625 5-minute cache write, 5x each base rate.
+`long_context` records that band; its input multiplier also applies to cache
+reads and writes. The gateway's model feed publishes the same tiers. The
+1.1x US-only inference multiplier (`inference_geo`) also applies to the
+higher band.
+https://platform.claude.com/docs/en/models/haiku-5-5/overview
+https://platform.claude.com/docs/en/about-claude/pricing
+https://vercel.com/ai-gateway/models/claude-haiku-5.5
+
 ## `"anthropic/claude-sonnet-5": {`
 
 $2/$10 is the standard rate, not a live discount: it launched as an

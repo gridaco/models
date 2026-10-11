@@ -53,6 +53,37 @@
         "source_url": "https://platform.claude.com/docs/en/models/fable-5-1/overview"
       }
     },
+    "anthropic/claude-haiku-5.5": {
+      "id": "anthropic/claude-haiku-5.5",
+      "label": "Claude Haiku 5.5",
+      "short_label": "Haiku 5.5",
+      "multimodal": true,
+      "image_input_mimes": [
+        "image/jpeg",
+        "image/png",
+        "image/gif",
+        "image/webp"
+      ],
+      "tool_call": true,
+      "context_window": 1000000,
+      "output_limit": 128000,
+      "release": {
+        "date": "2026-10-07",
+        "basis": "model",
+        "source_url": "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+      },
+      "cost": {
+        "input": 0.1,
+        "output": 0.5,
+        "cache_read": 0.01,
+        "cache_write": 0.125,
+        "long_context": {
+          "input_tokens_above": 100000,
+          "input_multiplier": 5,
+          "output_multiplier": 5
+        }
+      }
+    },
     "anthropic/claude-opus-4.8": {
       "id": "anthropic/claude-opus-4.8",
       "label": "Claude Opus 4.8",
@@ -103,6 +134,32 @@
         "date": "2026-07-24",
         "basis": "model",
         "source_url": "https://platform.claude.com/docs/en/release-notes/overview"
+      }
+    },
+    "anthropic/claude-opus-5.5": {
+      "id": "anthropic/claude-opus-5.5",
+      "label": "Claude Opus 5.5",
+      "short_label": "Opus 5.5",
+      "multimodal": true,
+      "image_input_mimes": [
+        "image/jpeg",
+        "image/png",
+        "image/gif",
+        "image/webp"
+      ],
+      "tool_call": true,
+      "context_window": 1000000,
+      "output_limit": 128000,
+      "cost": {
+        "input": 4,
+        "output": 20,
+        "cache_read": 0.2,
+        "cache_write": 5
+      },
+      "release": {
+        "date": "2026-09-22",
+        "basis": "model",
+        "source_url": "https://platform.claude.com/docs/en/models/opus-5-5/overview"
       }
     },
     "anthropic/claude-sonnet-5": {
