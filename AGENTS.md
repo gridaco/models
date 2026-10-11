@@ -24,15 +24,15 @@ undecided; don't add anything that assumes an answer.
 
 > **When entering an unfamiliar directory**, always check for `README.md` and `AGENTS.md` first.
 
-| path                                         | notes                                                                    |
-| -------------------------------------------- | ------------------------------------------------------------------------ |
-| [models/](./models/)                         | **The source.** One card per model: `models/<lab>/<model>/card.toml`     |
-| [catalogue/](./catalogue/)                   | **The contract.** Generated JSON, JSON Schema, provenance notes          |
-| [scripts/](./scripts/)                       | Tooling: build and validation                                            |
-| [tests/](./tests/)                           | Tests for the tooling                                                    |
-| [.agents/skills/](./.agents/skills/)         | Agent skills. `.claude/skills` is a symlink to it                        |
-| [README.md](./README.md)                     | Public overview, principles, decisions                                   |
-| [AGENTS.md](./AGENTS.md)                     | This file. `CLAUDE.md` is a symlink to it                                |
+| path                                 | notes                                                                |
+| ------------------------------------ | -------------------------------------------------------------------- |
+| [models/](./models/)                 | **The source.** One card per model: `models/<lab>/<model>/card.toml` |
+| [catalogue/](./catalogue/)           | **The contract.** Generated JSON, JSON Schema, provenance notes      |
+| [scripts/](./scripts/)               | Tooling: build and validation                                        |
+| [tests/](./tests/)                   | Tests for the tooling                                                |
+| [.agents/skills/](./.agents/skills/) | Agent skills. `.claude/skills` is a symlink to it                    |
+| [README.md](./README.md)             | Public overview, principles, decisions                               |
+| [AGENTS.md](./AGENTS.md)             | This file. `CLAUDE.md` is a symlink to it                            |
 
 **Source vs. contract vs. tooling.** Facts are authored once, as cards in `models/`.
 Everything a consumer reads lives in `catalogue/` and must be readable from any language:
@@ -107,11 +107,17 @@ uv sync                              # install tooling dependencies
 uv run scripts/build.py              # regenerate catalogue/facts.json from models/
 uv run scripts/check.py              # validate cards, the generated file, schema + invariants
 uv run pytest                        # test the checker
+npx -y oxfmt@0.71.0                  # format Markdown, TOML, JSON, YAML
 ```
 
 After editing a card, run `build.py` then `check.py`, and commit the card with the regenerated
 `facts.json`. CI runs `check.py` (which fails if `facts.json` is out of date) and `pytest` on
 every PR.
+
+Formatting uses [oxfmt](https://oxc.rs/docs/guide/usage/formatter) through `npx`, with no
+`package.json`; its settings are in `.oxfmtrc.json`, and the generated `facts.json` is
+excluded. CI runs `npx -y oxfmt@0.71.0 --check`; keep the version here and in
+`.github/workflows/check.yml` in sync.
 
 When adding an invariant to `check.py`, add a test in `tests/` that proves it rejects the case
 it exists for. A known violation goes in `KNOWN_EXCEPTIONS` with a reason, never in a skipped

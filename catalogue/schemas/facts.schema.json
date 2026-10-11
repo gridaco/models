@@ -63,14 +63,7 @@
     },
     "three_d.rig_check.operation": {
       "type": "object",
-      "required": [
-        "feature",
-        "provider",
-        "binding_id",
-        "rig_types",
-        "input",
-        "pricing"
-      ],
+      "required": ["feature", "provider", "binding_id", "rig_types", "input", "pricing"],
       "properties": {
         "feature": {
           "const": "rig-check"
@@ -209,11 +202,7 @@
             "long_context": {
               "type": "object",
               "additionalProperties": false,
-              "required": [
-                "input_tokens_above",
-                "input_multiplier",
-                "output_multiplier"
-              ],
+              "required": ["input_tokens_above", "input_multiplier", "output_multiplier"],
               "properties": {
                 "input_tokens_above": {
                   "type": "integer",

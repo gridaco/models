@@ -69,18 +69,18 @@ silent output, omit those keys rather than copying another provider's rates.
 
 ### Audio
 
-| type                  | shape                                                           |
-| --------------------- | --------------------------------------------------------------- |
-| `per_run_flat`        | `usd` per generation                                            |
-| `per_1000_characters` | `usd` per 1,000 input characters                                |
+| type                  | shape                                                                  |
+| --------------------- | ---------------------------------------------------------------------- |
+| `per_run_flat`        | `usd` per generation                                                   |
+| `per_1000_characters` | `usd` per 1,000 input characters                                       |
 | `provider_credits`    | Credit counts as published; the credit's USD rate stated by its source |
 
 ### 3D
 
-| type                                  | shape                                                               |
-| ------------------------------------- | ------------------------------------------------------------------- |
-| `per_generation_base_plus_surcharges` | `base_usd` plus named `surcharges_usd` for options                  |
-| `per_generation_credits`              | Credit counts per option, `usd_per_credit`, and a `source_url`      |
+| type                                  | shape                                                          |
+| ------------------------------------- | -------------------------------------------------------------- |
+| `per_generation_base_plus_surcharges` | `base_usd` plus named `surcharges_usd` for options             |
+| `per_generation_credits`              | Credit counts per option, `usd_per_credit`, and a `source_url` |
 
 ### Embedding
 

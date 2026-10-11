@@ -1,0 +1,4 @@
+{
+  "$schema": "https://unpkg.com/oxfmt@0.71.0/configuration_schema.json",
+  "ignorePatterns": ["catalogue/facts.json"]
+}

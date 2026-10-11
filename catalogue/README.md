@@ -4,11 +4,11 @@ This directory is the contract: language-agnostic JSON that consumers read. Its 
 authored as one card per model in [`models/`](../models/); everything else outside it
 (scripts, tests, skills) is tooling for maintaining it.
 
-| file                        | role                                                                                     |
-| --------------------------- | ---------------------------------------------------------------------------------------- |
+| file                        | role                                                                                                                 |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | `facts.json`                | Generated from `models/`. Model identities, release provenance, provider bindings, capabilities, limits, list prices |
-| `schemas/facts.schema.json` | JSON Schema 2020-12 for `facts.json`                                                      |
-| `PROVENANCE.md`             | Source notes and qualifications that don't fit in JSON                                    |
+| `schemas/facts.schema.json` | JSON Schema 2020-12 for `facts.json`                                                                                 |
+| `PROVENANCE.md`             | Source notes and qualifications that don't fit in JSON                                                               |
 
 ## Origin
 
@@ -22,20 +22,20 @@ and keys changed.
 `facts.json` is an object of sections. Each section key is a dotted family path, and each
 section is a table of cards keyed by card ID:
 
-| section                           | cards                                               |
-| --------------------------------- | --------------------------------------------------- |
-| `text.catalog`                    | Language models                                     |
-| `image.models`                    | Image generation, with per-provider bindings        |
-| `video.models`                    | Video generation, with per-provider bindings        |
-| `audio.music.models`              | Music generation                                    |
-| `audio.sound_effects.models`      | Sound effects                                       |
-| `audio.text_to_speech.models`     | Speech                                              |
-| `three_d.models`                  | 3D generation endpoints                             |
-| `three_d.model_generation.models` | 3D model generation                                 |
-| `three_d.rigging.models`          | Rigging                                             |
-| `three_d.rig_check.operation`     | One operation, not a table                          |
-| `image_tools.models`              | Background removal and upscaling                    |
-| `embedding.models`                | Embeddings                                          |
+| section                           | cards                                        |
+| --------------------------------- | -------------------------------------------- |
+| `text.catalog`                    | Language models                              |
+| `image.models`                    | Image generation, with per-provider bindings |
+| `video.models`                    | Video generation, with per-provider bindings |
+| `audio.music.models`              | Music generation                             |
+| `audio.sound_effects.models`      | Sound effects                                |
+| `audio.text_to_speech.models`     | Speech                                       |
+| `three_d.models`                  | 3D generation endpoints                      |
+| `three_d.model_generation.models` | 3D model generation                          |
+| `three_d.rigging.models`          | Rigging                                      |
+| `three_d.rig_check.operation`     | One operation, not a table                   |
+| `image_tools.models`              | Background removal and upscaling             |
+| `embedding.models`                | Embeddings                                   |
 
 Cards are listed in ID order within each section; the order carries no meaning. Every
 card has `id` (equal to its table key), `label`, and `release`

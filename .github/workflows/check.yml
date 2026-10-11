@@ -19,3 +19,11 @@ jobs:
         run: uv run scripts/check.py
       - name: Test checker
         run: uv run pytest
+
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # oxfmt runs through npx; there is no package.json. Keep the version in sync with AGENTS.md.
+      - name: Check formatting
+        run: npx -y oxfmt@0.71.0 --check

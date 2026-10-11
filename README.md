@@ -23,14 +23,14 @@ consumes a projection of it.
 
 ## What is in a catalogue entry
 
-| Kind                   | Examples                                                                                     |
-| ---------------------- | -------------------------------------------------------------------------------------------- |
-| **Identity**           | Canonical ID (`vendor/model`), label, vendor, family (text, image, video, audio, 3D, …)      |
-| **Release provenance** | First broad public release date, its basis, and the first-party source URL                   |
-| **Capabilities**       | Modalities, accepted image formats, tool calling, audio, transparent background              |
-| **Limits**             | Context window, output limit, sizes, aspect ratios, durations, size constraints              |
+| Kind                   | Examples                                                                                      |
+| ---------------------- | --------------------------------------------------------------------------------------------- |
+| **Identity**           | Canonical ID (`vendor/model`), label, vendor, family (text, image, video, audio, 3D, …)       |
+| **Release provenance** | First broad public release date, its basis, and the first-party source URL                    |
+| **Capabilities**       | Modalities, accepted image formats, tool calling, audio, transparent background               |
+| **Limits**             | Context window, output limit, sizes, aspect ratios, durations, size constraints               |
 | **Provider bindings**  | The exact ID a provider uses for the model (Vercel AI Gateway, fal, OpenRouter, Replicate, …) |
-| **Published prices**   | Public list prices per provider, in the provider's own billing unit                          |
+| **Published prices**   | Public list prices per provider, in the provider's own billing unit                           |
 
 ## What it is not
 

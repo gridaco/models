@@ -10,20 +10,20 @@ The authored source of the catalogue: one directory per model card, grouped by l
 models/<lab>/<model>/card.toml
 ```
 
-| part      | value                                                                                   |
-| --------- | --------------------------------------------------------------------------------------- |
-| `<lab>`   | The card's `vendor`. A card without `vendor` uses the first segment of its `id`          |
+| part      | value                                                                                                               |
+| --------- | ------------------------------------------------------------------------------------------------------------------- |
+| `<lab>`   | The card's `vendor`. A card without `vendor` uses the first segment of its `id`                                     |
 | `<model>` | The `id` without its first segment (`openai/gpt-5.5` → `gpt-5.5`), or the whole `id` when it has none (`eleven_v3`) |
 
 Examples:
 
-| id                                      | vendor              | directory                                     |
-| --------------------------------------- | ------------------- | --------------------------------------------- |
-| `openai/gpt-image-2.5-flare`            | `openai`            | `openai/gpt-image-2.5-flare/`                 |
-| `bfl/flux-2-pro`                        | `black-forest-labs` | `black-forest-labs/flux-2-pro/`               |
-| `eleven_v3`                             | `elevenlabs`        | `elevenlabs/eleven_v3/`                       |
-| `fal-ai/trellis-2`                      | `microsoft`         | `microsoft/trellis-2/`                        |
-| `anthropic/claude-opus-5` (no `vendor`) | —                   | `anthropic/claude-opus-5/`                    |
+| id                                      | vendor              | directory                       |
+| --------------------------------------- | ------------------- | ------------------------------- |
+| `openai/gpt-image-2.5-flare`            | `openai`            | `openai/gpt-image-2.5-flare/`   |
+| `bfl/flux-2-pro`                        | `black-forest-labs` | `black-forest-labs/flux-2-pro/` |
+| `eleven_v3`                             | `elevenlabs`        | `elevenlabs/eleven_v3/`         |
+| `fal-ai/trellis-2`                      | `microsoft`         | `microsoft/trellis-2/`          |
+| `anthropic/claude-opus-5` (no `vendor`) | —                   | `anthropic/claude-opus-5/`      |
 
 The directory is derived, never chosen: `uv run scripts/check.py` reports a card that is
 not where its lab and ID put it. A directory holds one card and may later hold the card's
@@ -39,9 +39,9 @@ A card is TOML holding the card's contract fields, in the shape
 [`catalogue/README.md`](../catalogue/README.md) describes, plus two authoring keys that
 are not written to `facts.json`:
 
-| key         | meaning                                                                         |
-| ----------- | ------------------------------------------------------------------------------- |
-| `section`   | The `facts.json` section the card belongs to, e.g. `"image.models"`              |
+| key         | meaning                                                                           |
+| ----------- | --------------------------------------------------------------------------------- |
+| `section`   | The `facts.json` section the card belongs to, e.g. `"image.models"`               |
 | `null_keys` | Dotted paths written as JSON `null`, which TOML cannot express, e.g. `["styles"]` |
 
 ```toml

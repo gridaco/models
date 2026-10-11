@@ -16,28 +16,28 @@ change a `basis: "model"` release date.
 
 ## ID formats
 
-| provider          | ID format, examples                                                                  |
-| ----------------- | ------------------------------------------------------------------------------------ |
-| Vercel AI Gateway | `vendor/model`: `google/veo-3.1-generate-001`, `bytedance/seedance-2.0`              |
-| fal               | Endpoint path: `fal-ai/veo3.1/image-to-video`, `fal-ai/flux-2-pro/edit`              |
-| OpenRouter        | `vendor/model`: `google/veo-3.1`, `google/veo-3.1-fast`                              |
-| Replicate         | `owner/model`: `google/lyria-3`, `nightmareai/real-esrgan`                           |
+| provider          | ID format, examples                                                     |
+| ----------------- | ----------------------------------------------------------------------- |
+| Vercel AI Gateway | `vendor/model`: `google/veo-3.1-generate-001`, `bytedance/seedance-2.0` |
+| fal               | Endpoint path: `fal-ai/veo3.1/image-to-video`, `fal-ai/flux-2-pro/edit` |
+| OpenRouter        | `vendor/model`: `google/veo-3.1`, `google/veo-3.1-fast`                 |
+| Replicate         | `owner/model`: `google/lyria-3`, `nightmareai/real-esrgan`              |
 
 On fal, the capability is often part of the ID (`…/image-to-video`, `…/edit`). A different
 capability on fal is a different endpoint, so it is a different binding.
 
 ## Where to verify
 
-| source            | URL                                                                         |
-| ----------------- | --------------------------------------------------------------------------- |
-| OpenAI            | `https://developers.openai.com/api/docs/models/<model_id>`                  |
-| Anthropic         | `https://docs.anthropic.com/en/docs/about-claude/models`                    |
-| Google            | `https://ai.google.dev/pricing`                                             |
-| Black Forest Labs | `https://docs.bfl.ml/pricing`                                               |
+| source            | URL                                                                                                        |
+| ----------------- | ---------------------------------------------------------------------------------------------------------- |
+| OpenAI            | `https://developers.openai.com/api/docs/models/<model_id>`                                                 |
+| Anthropic         | `https://docs.anthropic.com/en/docs/about-claude/models`                                                   |
+| Google            | `https://ai.google.dev/pricing`                                                                            |
+| Black Forest Labs | `https://docs.bfl.ml/pricing`                                                                              |
 | fal               | `https://fal.ai/models/<endpoint-id>`; pricing API: `https://fal.ai/docs/documentation/model-apis/pricing` |
-| OpenRouter        | `https://openrouter.ai/<vendor>/<model>`                                    |
-| Vercel AI Gateway | `https://vercel.com/ai-gateway/models/<model>`                              |
-| models.dev        | `https://models.dev/api.json`. **Discovery only**, never a source           |
+| OpenRouter        | `https://openrouter.ai/<vendor>/<model>`                                                                   |
+| Vercel AI Gateway | `https://vercel.com/ai-gateway/models/<model>`                                                             |
+| models.dev        | `https://models.dev/api.json`. **Discovery only**, never a source                                          |
 
 ## Known quirks
 
