@@ -119,8 +119,8 @@
     "logo": {
       "path": "logos/openai.svg",
       "media_type": "image/svg+xml",
-      "kind": "wordmark",
-      "source_url": "https://openai.com/",
+      "kind": "symbol",
+      "source_url": "https://cdn.openai.com/brand/openai-logos.zip",
       "guidelines_url": "https://openai.com/brand/",
       "retrieved": "2026-10-12"
     }
