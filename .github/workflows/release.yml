@@ -1,0 +1,89 @@
+name: release
+
+# Publishes a versioned snapshot of catalogue/ as a GitHub Release whenever its content
+# changes on main. On pull requests it builds the same snapshot as a preview artifact and
+# publishes nothing. See scripts/release.py.
+
+on:
+  push:
+    branches: [main]
+    paths: ["catalogue/**"]
+  pull_request:
+    paths: ["catalogue/**", "scripts/release.py", ".github/workflows/release.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  # Releases on main run one at a time, so version numbers never collide.
+  group: release-${{ github.event_name == 'pull_request' && github.ref || 'main' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      PUBLISH: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # tags, for the next version number
+
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --locked
+
+      - name: Validate catalogue
+        run: uv run scripts/check.py
+
+      - name: Download the latest release
+        run: |
+          mkdir -p previous
+          gh release download --dir previous \
+            --pattern manifest.json --pattern facts.json --pattern labs.json \
+            || echo "No previous release."
+
+      - name: Compare with the latest release
+        id: compare
+        run: |
+          digest="$(uv run scripts/release.py digest)"
+          previous="$(jq -r '.digest // empty' previous/manifest.json 2>/dev/null || true)"
+          if [ "$digest" = "$previous" ]; then
+            echo "Catalogue unchanged since the latest release ($digest)."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build snapshot
+        if: steps.compare.outputs.changed == 'true'
+        id: build
+        run: |
+          version="$(uv run scripts/release.py version)"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          uv run scripts/release.py build --version "$version" --out dist
+          uv run scripts/release.py notes --version "$version" --previous previous > notes.md
+          cat notes.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload preview
+        if: steps.compare.outputs.changed == 'true' && env.PUBLISH != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: snapshot-preview
+          path: |
+            dist/
+            notes.md
+
+      - name: Publish release
+        if: steps.compare.outputs.changed == 'true' && env.PUBLISH == 'true'
+        env:
+          VERSION: ${{ steps.build.outputs.version }}
+        run: |
+          gh release create "$VERSION" dist/* \
+            --target "$GITHUB_SHA" \
+            --title "$VERSION" \
+            --notes-file notes.md \
+            --latest
