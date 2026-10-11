@@ -1,4 +1,5 @@
 {
+  "$schema": "https://grida.co/schemas/ai-model-facts-v1.json",
   "text.catalog": {
     "anthropic/claude-fable-5": {
       "id": "anthropic/claude-fable-5",

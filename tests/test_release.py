@@ -81,7 +81,7 @@ def test_archives_hold_the_whole_catalogue_with_fixed_metadata():
         members = tar.getmembers()
         assert {m.name for m in members} == expected
         assert {(m.uid, m.gid, m.mtime, m.mode) for m in members} == {(0, 0, int(WHEN.timestamp()), 0o644)}
-        assert tar.extractfile(prefix + "catalogue/facts.json").read() == FILES["facts.json"]
+        assert tar.extractfile(prefix + "catalogue/models.json").read() == FILES["models.json"]
 
     with zipfile.ZipFile(io.BytesIO(assets["grida-models-v1.20261012.0.zip"])) as archive:
         assert set(archive.namelist()) == expected
@@ -90,14 +90,14 @@ def test_archives_hold_the_whole_catalogue_with_fixed_metadata():
 
 def current_snapshot(files=FILES):
     snapshot = release.manifest("v1.20261012.0", COMMIT, WHEN, files)
-    snapshot["facts"], snapshot["labs"] = json.loads(files["facts.json"]), json.loads(files["labs.json"])
+    snapshot["models"], snapshot["labs"] = json.loads(files["models.json"]), json.loads(files["labs.json"])
     return snapshot
 
 
 def previous_snapshot(mutate):
     previous = {
         "manifest": release.manifest("v1.20261011.0", COMMIT, WHEN, FILES),
-        "facts": json.loads(FILES["facts.json"]),
+        "models": json.loads(FILES["models.json"]),
         "labs": json.loads(FILES["labs.json"]),
     }
     mutate(previous)
@@ -116,7 +116,7 @@ def test_notes_without_content_changes():
 
 def test_notes_list_added_removed_and_changed_entries():
     def mutate(previous):
-        text = previous["facts"]["text.catalog"]
+        text = previous["models"]["text.catalog"]
         text.pop("openai/gpt-5.5")
         text["anthropic/claude-opus-5"]["label"] = "Old label"
         text["example/retired"] = {"id": "example/retired"}
@@ -132,3 +132,34 @@ def test_notes_list_added_removed_and_changed_entries():
     assert "- Schema changed: `schemas/labs.schema.json`" in text
     assert "- Other files changed: `PROVENANCE.md`" in text
     assert "No content changes." not in text
+
+
+def test_asset_names_carry_the_schema_major():
+    major = f".v{release.SCHEMA_MAJOR}."
+    assert all(major in name for name in release.ASSETS)
+    assert set(release.ASSETS.values()) <= set(FILES)
+
+
+def test_previous_release_under_legacy_names_is_read(tmp_path):
+    meta = release.manifest("v1.20261011.0", COMMIT, WHEN, FILES)
+    (tmp_path / "manifest.json").write_text(json.dumps(meta))
+    (tmp_path / "facts.json").write_bytes(FILES["models.json"])
+    (tmp_path / "labs.json").write_bytes(FILES["labs.json"])
+    previous = release.load_previous(tmp_path)
+    assert previous["models"] == json.loads(FILES["models.json"])
+
+
+def test_previous_release_needs_models_labs_and_manifest(tmp_path):
+    (tmp_path / "manifest.json").write_text("{}")
+    assert release.load_previous(tmp_path) is None
+
+
+def test_renamed_files_compare_with_their_old_selves():
+    def mutate(previous):
+        files = previous["manifest"]["files"]
+        for old, new in release.RENAMED.items():
+            files[old] = files.pop(new)
+
+    text = release.notes("v1.20261012.0", current_snapshot(), previous_snapshot(mutate))
+    assert "- Renamed: `facts.json` → `models.json`, `schemas/facts.schema.json` → `schemas/models.schema.json`" in text
+    assert "Schema changed" not in text and "Other files changed" not in text

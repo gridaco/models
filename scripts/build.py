@@ -1,6 +1,6 @@
 """Generate the catalogue contract from the authored source in `models/`.
 
-- `catalogue/facts.json` from the model cards (`models/<lab>/<model>/card.toml`)
+- `catalogue/models.json` from the model cards (`models/<lab>/<model>/card.toml`)
 - `catalogue/labs.json` from the lab files (`models/<lab>/lab.toml`)
 - `catalogue/logos/<lab>.<ext>`, copied from each lab's logo (`models/<lab>/logo.<ext>`)
 
@@ -29,16 +29,22 @@ from cards import (
 
 ROOT = Path(__file__).resolve().parent.parent
 MODELS = ROOT / "models"
-FACTS = ROOT / "catalogue" / "facts.json"
+MODELS_JSON = ROOT / "catalogue" / "models.json"
 LABS = ROOT / "catalogue" / "labs.json"
 LOGOS = ROOT / "catalogue" / "logos"
-FACTS_SCHEMA = ROOT / "catalogue" / "schemas" / "facts.schema.json"
+MODELS_SCHEMA = ROOT / "catalogue" / "schemas" / "models.schema.json"
 
 
 def sections() -> list[str]:
-    """The facts.json sections, in the order the schema requires them."""
-    with FACTS_SCHEMA.open(encoding="utf-8") as f:
+    """The models.json sections, in the order the schema requires them."""
+    with MODELS_SCHEMA.open(encoding="utf-8") as f:
         return json.load(f)["required"]
+
+
+def schema_id() -> str:
+    """The `$id` of models.schema.json, written as the `$schema` of models.json."""
+    with MODELS_SCHEMA.open(encoding="utf-8") as f:
+        return json.load(f)["$id"]
 
 
 def build() -> tuple[dict[Path, bytes], list[str]]:
@@ -47,7 +53,7 @@ def build() -> tuple[dict[Path, bytes], list[str]]:
     labs = load_labs(MODELS)
     names = sections()
     outputs = {
-        FACTS: dumps(assemble(cards, names)).encode(),
+        MODELS_JSON: dumps(assemble(cards, names, schema_id())).encode(),
         LABS: dumps(assemble_labs(labs)).encode(),
     }
     for lab in labs:

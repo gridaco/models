@@ -1,8 +1,8 @@
 # Models
 
 The authored source of the catalogue: one directory per model card, grouped by lab.
-[`catalogue/facts.json`](../catalogue/facts.json) is generated from these files by
-[`scripts/build.py`](../scripts/build.py). Edit a card here, never `facts.json`.
+[`catalogue/models.json`](../catalogue/models.json) is generated from these files by
+[`scripts/build.py`](../scripts/build.py). Edit a card here, never `models.json`.
 
 ## Layout
 
@@ -69,11 +69,11 @@ get a sourced `vendor`.
 
 A card is TOML holding the card's contract fields, in the shape
 [`catalogue/README.md`](../catalogue/README.md) describes, plus two authoring keys that
-are not written to `facts.json`:
+are not written to `models.json`:
 
 | key         | meaning                                                                           |
 | ----------- | --------------------------------------------------------------------------------- |
-| `section`   | The `facts.json` section the card belongs to, e.g. `"image.models"`               |
+| `section`   | The `models.json` section the card belongs to, e.g. `"image.models"`              |
 | `null_keys` | Dotted paths written as JSON `null`, which TOML cannot express, e.g. `["styles"]` |
 
 ```toml
@@ -103,9 +103,9 @@ A section that is one object rather than a table of cards
 ## After editing
 
 ```sh
-uv run scripts/build.py   # regenerate catalogue/facts.json, labs.json, and logos/
+uv run scripts/build.py   # regenerate catalogue/models.json, labs.json, and logos/
 uv run scripts/check.py   # cards, generated file, schema, invariants
 ```
 
-Commit the source and the regenerated files together. `facts.json` lists cards
+Commit the source and the regenerated files together. `models.json` lists cards
 sorted by ID within each section; that order carries no meaning.

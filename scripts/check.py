@@ -4,9 +4,9 @@ Three layers:
 
 1. Source: every card in `models/` sits at the path its lab and ID give it, names a
    known section, every lab directory has a `lab.toml`, and the generated
-   `catalogue/facts.json` and `catalogue/labs.json` are exactly what the source
+   `catalogue/models.json` and `catalogue/labs.json` are exactly what the source
    generates (`scripts/build.py`).
-2. Structure: `catalogue/facts.json` and `catalogue/labs.json` against their schemas in
+2. Structure: `catalogue/models.json` and `catalogue/labs.json` against their schemas in
    `catalogue/schemas/` (JSON Schema 2020-12, with format assertions on).
 3. Invariants the schema cannot express: table keys equal card IDs, release
    dates are real calendar dates, facts carry no product policy, and provider
@@ -32,8 +32,8 @@ import build
 import cards
 
 ROOT = Path(__file__).resolve().parent.parent
-FACTS = ROOT / "catalogue" / "facts.json"
-FACTS_SCHEMA = ROOT / "catalogue" / "schemas" / "facts.schema.json"
+MODELS_JSON = ROOT / "catalogue" / "models.json"
+MODELS_SCHEMA = ROOT / "catalogue" / "schemas" / "models.schema.json"
 LABS = ROOT / "catalogue" / "labs.json"
 LABS_SCHEMA = ROOT / "catalogue" / "schemas" / "labs.schema.json"
 
@@ -161,8 +161,8 @@ def source_errors(committed: dict[Path, bytes] | None = None) -> list[str]:
 
 
 def main() -> int:
-    facts = load(FACTS)
-    errors = source_errors() + check(facts, load(FACTS_SCHEMA))
+    facts = load(MODELS_JSON)
+    errors = source_errors() + check(facts, load(MODELS_SCHEMA))
     errors += [f"labs.json {error}" for error in schema_errors(load(LABS), load(LABS_SCHEMA))]
     for error in errors:
         print(error, file=sys.stderr)
@@ -172,9 +172,9 @@ def main() -> int:
     count = sum(
         len(table)
         for section, table in facts.items()
-        if section not in NON_TABLE_SECTIONS
+        if section not in NON_TABLE_SECTIONS and isinstance(table, dict)
     )
-    print(f"ok: {FACTS.relative_to(ROOT)} ({count} cards), {LABS.relative_to(ROOT)} ({len(load(LABS))} labs)")
+    print(f"ok: {MODELS_JSON.relative_to(ROOT)} ({count} cards), {LABS.relative_to(ROOT)} ({len(load(LABS))} labs)")
     return 0
 
 

@@ -18,13 +18,13 @@ change, a limit correction, a deprecation, or an audit against provider document
 
 ## Where to edit
 
-| file                                  | holds                                                                                   |
-| ------------------------------------- | --------------------------------------------------------------------------------------- |
-| `models/<lab>/<model>/card.toml`      | One card: identity, release provenance, provider bindings, capabilities, limits, prices |
-| `models/<lab>/lab.toml`               | The lab's display name and first-party homepage. Required for every lab                 |
-| `catalogue/facts.json`                | Generated from `models/` by `scripts/build.py`. Never edit by hand                      |
-| `catalogue/schemas/facts.schema.json` | JSON Schema for `facts.json`                                                            |
-| `catalogue/PROVENANCE.md`             | Source notes and qualifications that do not fit in JSON                                 |
+| file                                   | holds                                                                                   |
+| -------------------------------------- | --------------------------------------------------------------------------------------- |
+| `models/<lab>/<model>/card.toml`       | One card: identity, release provenance, provider bindings, capabilities, limits, prices |
+| `models/<lab>/lab.toml`                | The lab's display name and first-party homepage. Required for every lab                 |
+| `catalogue/models.json`                | Generated from `models/` by `scripts/build.py`. Never edit by hand                      |
+| `catalogue/schemas/models.schema.json` | JSON Schema for `models.json`                                                           |
+| `catalogue/PROVENANCE.md`              | Source notes and qualifications that do not fit in JSON                                 |
 
 Card layout and the `section` / `null_keys` authoring keys are in
 [`models/README.md`](../../../models/README.md); the shape and its rules are in
@@ -139,6 +139,6 @@ pricing shapes in use and their rules are in [`pricing.md`](./pricing.md).
 - [ ] IDs are exact; field names are `lower_snake_case`
 - [ ] Every entry has a complete `release` (`$provenance`)
 - [ ] Deprecated vs. deleted was decided by the lifecycle rules above
-- [ ] `catalogue/facts.json` was regenerated with `uv run scripts/build.py`, not edited by hand
+- [ ] `catalogue/models.json` was regenerated with `uv run scripts/build.py`, not edited by hand
 - [ ] `uv run scripts/check.py` passes
 - [ ] Nothing from a private source made it into the diff, the commit, or the PR (see `AGENTS.md`)

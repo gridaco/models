@@ -14,12 +14,12 @@ check = importlib.util.module_from_spec(spec)
 assert spec.loader is not None
 spec.loader.exec_module(check)
 
-FACTS = check.load(check.FACTS)
-SCHEMA = check.load(check.FACTS_SCHEMA)
+MODELS_JSON = check.load(check.MODELS_JSON)
+SCHEMA = check.load(check.MODELS_SCHEMA)
 
 
 def mutated(mutate):
-    facts = copy.deepcopy(FACTS)
+    facts = copy.deepcopy(MODELS_JSON)
     mutate(facts)
     return check.check(facts, SCHEMA)
 
@@ -29,7 +29,7 @@ def first(section: str, facts) -> dict:
 
 
 def test_catalogue_is_valid():
-    assert check.check(FACTS, SCHEMA) == []
+    assert check.check(MODELS_JSON, SCHEMA) == []
 
 
 def test_id_must_match_table_key():
@@ -101,7 +101,7 @@ def test_stale_known_exception_is_reported():
     assert any("stale known exception" in e for e in mutated(mutate))
 
 
-# The authored cards in models/ and their projection to facts.json.
+# The authored cards in models/ and their projection to models.json.
 
 import cards  # noqa: E402
 
@@ -124,8 +124,8 @@ def test_cards_generate_the_committed_facts():
 
 
 def test_hand_edited_facts_are_reported_out_of_date():
-    edited = check.FACTS.read_text(encoding="utf-8").replace('"GPT-5.5"', '"GPT 5.5"', 1)
-    assert any("facts.json is out of date" in e for e in check.source_errors({check.FACTS: edited.encode()}))
+    edited = check.MODELS_JSON.read_text(encoding="utf-8").replace('"GPT-5.5"', '"GPT 5.5"', 1)
+    assert any("models.json is out of date" in e for e in check.source_errors({check.MODELS_JSON: edited.encode()}))
 
 
 def test_hand_edited_labs_are_reported_out_of_date():
@@ -134,8 +134,8 @@ def test_hand_edited_labs_are_reported_out_of_date():
 
 
 def test_cards_round_trip_every_null():
-    assembled = cards.assemble(CARDS, SECTIONS)
-    assert assembled == FACTS
+    assembled = cards.assemble(CARDS, SECTIONS, check.build.schema_id())
+    assert assembled == MODELS_JSON
 
 
 def test_card_must_sit_under_its_vendor():
@@ -156,7 +156,7 @@ def test_card_must_name_a_known_section():
     def mutate(loaded):
         card(loaded, "openai/gpt-5.5").data["section"] = "text.models"
 
-    assert any("is not a facts.json section" in e for e in layout(mutate))
+    assert any("is not a models.json section" in e for e in layout(mutate))
 
 
 def test_card_file_must_be_named_card_toml():
@@ -310,3 +310,15 @@ def test_logo_not_generated_by_any_lab_is_reported(tmp_path, monkeypatch):
     monkeypatch.setattr(check.build, "LOGOS", tmp_path)
     (tmp_path / "gone.svg").write_bytes(SVG)
     assert check.build.orphans({}) == [tmp_path / "gone.svg"]
+
+
+def test_models_json_names_its_schema():
+    assert next(iter(MODELS_JSON)) == "$schema"
+    assert MODELS_JSON["$schema"] == SCHEMA["$id"]
+
+
+def test_models_json_schema_must_be_this_schema():
+    def mutate(facts):
+        facts["$schema"] = "https://example.com/other.json"
+
+    assert any("$schema" in e for e in mutated(mutate))

@@ -42,9 +42,8 @@ jobs:
       - name: Download the latest release
         run: |
           mkdir -p previous
-          gh release download --dir previous \
-            --pattern manifest.json --pattern facts.json --pattern labs.json \
-            || echo "No previous release."
+          # Every JSON asset: the manifest, models and labs under current or earlier names.
+          gh release download --dir previous --pattern '*.json' || echo "No previous release."
 
       - name: Compare with the latest release
         id: compare

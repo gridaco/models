@@ -18,22 +18,24 @@ Every change to the catalogue on `main` is published as a
 [release](https://github.com/gridaco/models/releases). The newest snapshot is always at:
 
 ```sh
-curl -LO https://github.com/gridaco/models/releases/latest/download/facts.json
-curl -LO https://github.com/gridaco/models/releases/latest/download/labs.json
+curl -LO https://github.com/gridaco/models/releases/latest/download/models.v1.json
+curl -LO https://github.com/gridaco/models/releases/latest/download/labs.v1.json
 ```
 
-To pin a snapshot, use its version instead of `latest`:
-`https://github.com/gridaco/models/releases/download/<version>/facts.json`.
+The `v1` in the file name is the schema version. `latest` always serves the newest snapshot
+that is compatible with it; after a breaking change, the `v1` names stop resolving instead of
+serving a different shape. To pin a snapshot, use its version instead of `latest`:
+`https://github.com/gridaco/models/releases/download/<version>/models.v1.json`.
 
 Each release holds:
 
-| asset                                   | contents                                                                                      |
-| --------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `facts.json`, `labs.json`               | Model cards and labs                                                                          |
-| `facts.schema.json`, `labs.schema.json` | Their JSON Schemas                                                                            |
-| `grida-models-<version>.tar.gz`, `.zip` | The whole catalogue, logos included, with `LICENSE` and `manifest.json`                       |
-| `manifest.json`                         | Version, schema version, source commit, content digest, counts, and the SHA-256 of every file |
-| `SHA256SUMS`                            | Checksums of the other assets: `sha256sum -c SHA256SUMS --ignore-missing`                     |
+| asset                                          | contents                                                                                      |
+| ---------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `models.v1.json`, `labs.v1.json`               | Model cards and labs (`catalogue/models.json`, `catalogue/labs.json`)                         |
+| `models.v1.schema.json`, `labs.v1.schema.json` | Their JSON Schemas                                                                            |
+| `grida-models-<version>.tar.gz`, `.zip`        | The whole catalogue, logos included, with `LICENSE` and `manifest.json`                       |
+| `manifest.json`                                | Version, schema version, source commit, content digest, counts, and the SHA-256 of every file |
+| `SHA256SUMS`                                   | Checksums of the other assets: `sha256sum -c SHA256SUMS --ignore-missing`                     |
 
 Versions read `v<schema>.<YYYYMMDD>.<n>`, for example `v1.20261012.0`: the schema version,
 the UTC date of the source commit, and a counter for snapshots on the same day. They are valid
@@ -80,7 +82,7 @@ consumes a projection of it.
 
 Each model is authored as one TOML card in [`models/`](./models/), grouped by lab
 (`models/openai/gpt-5.5/card.toml`). The contract consumers read,
-[`catalogue/facts.json`](./catalogue/facts.json), is generated from those cards: plain JSON
+[`catalogue/models.json`](./catalogue/models.json), is generated from those cards: plain JSON
 with a JSON Schema, readable from any language. Its shape and rules are documented in
 [`catalogue/README.md`](./catalogue/README.md).
 
@@ -100,7 +102,7 @@ with a JSON Schema, readable from any language. Its shape and rules are document
   notes. Tooling and tests use whichever language fits (currently Python). Typed bindings
   and code generation live in each consumer.
 - **One card per model.** Facts are authored as TOML cards in `models/<lab>/<model>/`, and
-  `catalogue/facts.json` is generated from them. A card's directory leaves room for
+  `catalogue/models.json` is generated from them. A card's directory leaves room for
   per-model material such as example assets.
 - **Labs are registered.** Each lab directory holds a `lab.toml` with the lab's display
   name, first-party homepage, and official logo, published as `catalogue/labs.json` and
@@ -123,7 +125,7 @@ These are deliberately undecided, and are tracked here so nobody mistakes them f
 ## Contributing
 
 Add or correct a model by opening a pull request that changes its card in
-[`models/`](./models/), regenerates `catalogue/facts.json`, and cites a first-party source
+[`models/`](./models/), regenerates `catalogue/models.json`, and cites a first-party source
 for every new fact. Contributor and agent conventions live in
 [`AGENTS.md`](./AGENTS.md) and [`.agents/skills/`](./.agents/skills/).
 
