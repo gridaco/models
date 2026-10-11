@@ -1,0 +1,12 @@
+id = "recraft-ai/recraft-remove-background"
+section = "image_tools.models"
+null_keys = ["release.date"]
+
+label = "Recraft Remove Background"
+url = "https://replicate.com/recraft-ai/recraft-remove-background"
+category = "image/tool/remove-background"
+cost_usd = 0.01
+
+[release]
+basis = "provider_endpoint"
+source_url = "https://replicate.com/recraft-ai/recraft-remove-background/versions"

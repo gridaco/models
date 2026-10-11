@@ -1,0 +1,47 @@
+id = "google/veo-3.1-fast"
+section = "video.models"
+
+label = "Veo 3.1 Fast"
+short_description = "Faster, cheaper Veo 3.1 — the same envelope and native audio at a fraction of the price."
+vendor = "google"
+aspect_ratios = ["16:9", "9:16"]
+min_duration = 4
+max_duration = 8
+audio = true
+speed_label = "medium"
+url = "https://deepmind.google/models/veo/"
+
+[release]
+date = "2025-10-15"
+basis = "model"
+source_url = "https://ai.google.dev/gemini-api/docs/changelog"
+
+[providers.vercel]
+provider = "vercel"
+id = "google/veo-3.1-fast-generate-001"
+input = "text-or-image"
+avg_cost_usd = 1.2
+url = "https://vercel.com/ai-gateway/models/veo-3.1-fast-generate-001"
+
+[providers.vercel.pricing]
+type = "per_second"
+
+[providers.vercel.pricing.usd_per_second]
+720p = { audio = 0.15, silent = 0.1 }
+1080p = { audio = 0.15, silent = 0.1 }
+4k = { audio = 0.35, silent = 0.3 }
+
+[providers.fal]
+provider = "fal"
+id = "fal-ai/veo3.1/fast/image-to-video"
+input = "image"
+avg_cost_usd = 1.2
+url = "https://fal.ai/models/fal-ai/veo3.1/fast/image-to-video"
+
+[providers.fal.pricing]
+type = "per_second"
+
+[providers.fal.pricing.usd_per_second]
+720p = { audio = 0.15, silent = 0.1 }
+1080p = { audio = 0.15, silent = 0.1 }
+4k = { audio = 0.35, silent = 0.3 }

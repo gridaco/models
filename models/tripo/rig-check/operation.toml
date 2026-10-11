@@ -1,0 +1,14 @@
+section = "three_d.rig_check.operation"
+
+feature = "rig-check"
+provider = "tripo"
+binding_id = "rig-check"
+input = { formats = ["glb"], max_bytes = 150_000_000 }
+rig_types = ["biped", "quadruped", "hexapod", "octopod", "avian", "serpentine", "aquatic"]
+url = "https://developers.tripo3d.ai/en/docs/animations-rig-check"
+
+[pricing]
+type = "per_operation_credits"
+credits = 0
+usd_per_credit = 0.01
+source_url = "https://developers.tripo3d.ai/en/pricing"

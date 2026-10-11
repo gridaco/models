@@ -1,0 +1,38 @@
+id = "recraft/recraft-v4.1"
+section = "image.models"
+null_keys = ["styles", "sizes"]
+
+label = "Recraft V4.1"
+short_description = "Design-first image model — sharper prompt control and production-ready raster for brand and editorial work."
+vendor = "recraft-ai"
+speed_label = "medium"
+speed_max = "30s"
+constraints = { max_edge = 2048 }
+pricing = { type = "per_image_flat", usd = 0.035 }
+avg_cost_usd = 0.035
+
+[release]
+date = "2026-05-14"
+basis = "model"
+source_url = "https://www.recraft.ai/blog/recraft-v4-1-more-beautiful-by-nature"
+
+[providers.vercel]
+provider = "vercel"
+id = "recraft/recraft-v4.1"
+pricing = { type = "per_image_flat", usd = 0.035 }
+avg_cost_usd = 0.035
+
+[providers.openrouter]
+provider = "openrouter"
+id = "recraft/recraft-v4.1"
+pricing = { type = "per_image_flat", usd = 0.035 }
+avg_cost_usd = 0.035
+url = "https://openrouter.ai/recraft/recraft-v4.1"
+references = { id = "recraft/recraft-v4.1", max = 1 }
+
+[providers.fal]
+provider = "fal"
+id = "fal-ai/recraft/v4.1/text-to-image"
+pricing = { type = "per_image_flat", usd = 0.035 }
+avg_cost_usd = 0.035
+url = "https://fal.ai/models/fal-ai/recraft/v4.1/text-to-image"

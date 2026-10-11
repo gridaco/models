@@ -1,0 +1,30 @@
+id = "bfl/flux-kontext-max"
+section = "image.models"
+null_keys = ["styles", "sizes"]
+
+label = "Flux Kontext Max"
+short_description = "Highest quality Flux model for context-aware image generation and editing"
+vendor = "black-forest-labs"
+speed_label = "slow"
+speed_max = "30s"
+constraints = { max_edge = 1820 }
+pricing = { type = "per_image_flat", usd = 0.08 }
+avg_cost_usd = 0.08
+
+[release]
+date = "2025-05-29"
+basis = "model"
+source_url = "https://bfl.ai/blog/flux-1-kontext"
+
+[providers.vercel]
+provider = "vercel"
+id = "bfl/flux-kontext-max"
+pricing = { type = "per_image_flat", usd = 0.08 }
+avg_cost_usd = 0.08
+
+[providers.fal]
+provider = "fal"
+id = "fal-ai/flux-pro/kontext/max"
+pricing = { type = "per_image_flat", usd = 0.08 }
+avg_cost_usd = 0.08
+url = "https://fal.ai/models/fal-ai/flux-pro/kontext/max"

@@ -1,0 +1,39 @@
+id = "bytedance/seedance-2.0"
+section = "video.models"
+
+label = "Seedance 2.0"
+short_description = "ByteDance's video model — image-to-video with reference modes, up to 4K, at roughly two-thirds the price of Seedance 2.5."
+vendor = "bytedance"
+aspect_ratios = ["16:9", "9:16", "1:1"]
+min_duration = 5
+max_duration = 15
+audio = true
+speed_label = "slow"
+url = "https://seed.bytedance.com/en/seedance2_0"
+
+[release]
+date = "2026-02-12"
+basis = "model"
+source_url = "https://seed.bytedance.com/en/blog/seedance-2-0-%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83"
+
+[providers.fal]
+provider = "fal"
+id = "bytedance/seedance-2.0/image-to-video"
+input = "image"
+avg_cost_usd = 1.52
+url = "https://fal.ai/models/bytedance/seedance-2.0/image-to-video"
+
+[providers.fal.pricing]
+type = "per_second"
+usd_per_second = { 720p = { audio = 0.3034 }, 1080p = { audio = 0.682 } }
+
+[providers.openrouter]
+provider = "openrouter"
+id = "bytedance/seedance-2.0"
+input = "text-or-image"
+avg_cost_usd = 0.34
+url = "https://openrouter.ai/bytedance/seedance-2.0"
+
+[providers.openrouter.pricing]
+type = "per_second"
+usd_per_second = { 480p = { audio = 0.06726 }, 720p = { audio = 0.06726 } }

@@ -1,0 +1,27 @@
+id = "tripo/p2"
+section = "three_d.model_generation.models"
+
+vendor = "tripo"
+provider = "tripo"
+feature = "model-generation"
+inputs = ["text", "image", "multiview"]
+output = { primary = "glb", compression = "none" }
+texture_quality = ["standard", "detailed", "extreme"]
+label = "Tripo P2 Preview"
+binding_id = "P2-20260801"
+preview = true
+short_description = "Preview of next-generation low-poly mesh generation."
+face_limit = { min = 48, max = 50_000 }
+url = "https://developers.tripo3d.ai/en/docs/generation-text-to-model/p"
+
+[release]
+date = "2026-08-19"
+basis = "model"
+source_url = "https://www.tripo3d.ai/blog/tripo-p2-0-preview"
+
+[pricing]
+type = "per_generation_credits"
+usd_per_credit = 0.01
+texture_credits = { standard = 10, detailed = 20, extreme = 30 }
+source_url = "https://developers.tripo3d.ai/en/pricing"
+base_credits = { text = 100, image = 100, multiview = 100 }

@@ -1,0 +1,25 @@
+id = "tripo/rig-v1.0"
+section = "three_d.rigging.models"
+null_keys = ["release.date"]
+
+vendor = "tripo"
+provider = "tripo"
+feature = "rigging"
+specs = ["tripo", "mixamo"]
+input = { formats = ["glb", "gltf", "fbx", "obj", "stl"], max_bytes = 150_000_000 }
+output = { formats = ["glb", "fbx"] }
+url = "https://developers.tripo3d.ai/en/docs/animations-rig"
+label = "Tripo Rig v1.0"
+binding_id = "v1.0-20240301"
+short_description = "Automatic skeleton rigging for humanoid characters."
+rig_types = ["biped"]
+
+[pricing]
+type = "per_operation_credits"
+credits = 25
+usd_per_credit = 0.01
+source_url = "https://developers.tripo3d.ai/en/pricing"
+
+[release]
+basis = "provider_endpoint"
+source_url = "https://developers.tripo3d.ai/en/docs/animations-rig"

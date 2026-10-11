@@ -1,0 +1,23 @@
+id = "bfl/flux-pro-1.1"
+section = "image.models"
+null_keys = ["styles", "sizes"]
+
+label = "Flux Pro 1.1"
+short_description = "Faster, better FLUX Pro. Text-to-image model with excellent image quality and output diversity."
+vendor = "black-forest-labs"
+speed_label = "slow"
+speed_max = "30s"
+constraints = { min_edge = 256, max_edge = 1440 }
+pricing = { type = "per_image_flat", usd = 0.04 }
+avg_cost_usd = 0.04
+
+[release]
+date = "2024-10-02"
+basis = "model"
+source_url = "https://bfl.ai/blog/24-10-02-flux"
+
+[providers.vercel]
+provider = "vercel"
+id = "bfl/flux-pro-1.1"
+pricing = { type = "per_image_flat", usd = 0.04 }
+avg_cost_usd = 0.04

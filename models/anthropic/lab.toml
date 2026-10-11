@@ -1,0 +1,10 @@
+name = "Anthropic"
+url = "https://www.anthropic.com/"
+
+# File "Anthropic logos/2 Anthropic symbol/SVG/Anthropic symbol - Slate.svg" from the
+# press kit ZIP ("Media assets" on anthropic.com/news), extracted unchanged.
+[logo]
+file = "logo.svg"
+kind = "symbol"
+source_url = "https://www.anthropic.com/press-kit"
+retrieved = "2026-10-12"

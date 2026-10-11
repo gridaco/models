@@ -1,0 +1,25 @@
+id = "tripo/rig-v2.5"
+section = "three_d.rigging.models"
+null_keys = ["release.date"]
+
+vendor = "tripo"
+provider = "tripo"
+feature = "rigging"
+specs = ["tripo", "mixamo"]
+input = { formats = ["glb", "gltf", "fbx", "obj", "stl"], max_bytes = 150_000_000 }
+output = { formats = ["glb", "fbx"] }
+url = "https://developers.tripo3d.ai/en/docs/animations-rig"
+label = "Tripo Rig v2.5"
+binding_id = "v2.5-20260210"
+short_description = "Automatic skeleton rigging for animals and other creatures."
+rig_types = ["quadruped", "hexapod", "octopod", "avian", "serpentine", "aquatic"]
+
+[pricing]
+type = "per_operation_credits"
+credits = 25
+usd_per_credit = 0.01
+source_url = "https://developers.tripo3d.ai/en/pricing"
+
+[release]
+basis = "provider_endpoint"
+source_url = "https://developers.tripo3d.ai/en/docs/animations-rig"

@@ -1,0 +1,10 @@
+name = "ElevenLabs"
+url = "https://elevenlabs.io/"
+
+# The symbol download on elevenlabs.io/brand, unchanged.
+[logo]
+file = "logo.svg"
+kind = "symbol"
+source_url = "https://11labs-nonprd-15f22c1d.s3.eu-west-3.amazonaws.com/a2ea339b-8b5e-41bb-b706-24eda8a4c9e3/elevenlabs-symbol.svg"
+guidelines_url = "https://elevenlabs.io/brand"
+retrieved = "2026-10-12"

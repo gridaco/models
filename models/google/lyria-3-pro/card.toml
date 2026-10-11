@@ -1,0 +1,28 @@
+id = "google/lyria-3-pro"
+section = "audio.music.models"
+
+label = "Lyria 3 Pro"
+short_description = "Generate full-length tracks up to ~3 minutes from text or images."
+vendor = "google"
+provider = "replicate"
+input = { modalities = ["text", "image"], max_images = 10 }
+duration_label = "up to 3m"
+output_format = "mp3"
+sample_rate_label = "48 kHz stereo"
+speed_label = "medium"
+speed_max = "60s"
+pricing = { type = "per_run_flat", usd = 0.08 }
+avg_cost_usd = 0.08
+url = "https://replicate.com/google/lyria-3-pro"
+
+[release]
+date = "2026-03-25"
+basis = "model"
+source_url = "https://blog.google/innovation-and-ai/technology/developers-tools/lyria-3-developers/"
+
+[output]
+default_format = "mp3"
+formats = ["mp3"]
+sample_rate_hz = 48_000
+channels = 2
+duration = { mode = "up_to", max_seconds = 180 }

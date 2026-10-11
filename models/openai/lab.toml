@@ -1,0 +1,11 @@
+name = "OpenAI"
+url = "https://openai.com/"
+
+# File "OpenAI-logos/SVGs/OAI_OpenAI-Blossom_Black.svg" from the official logo ZIP
+# ("Download logos" on openai.com/brand), extracted unchanged.
+[logo]
+file = "logo.svg"
+kind = "symbol"
+source_url = "https://cdn.openai.com/brand/openai-logos.zip"
+guidelines_url = "https://openai.com/brand/"
+retrieved = "2026-10-12"

@@ -1,0 +1,47 @@
+id = "alibaba/wan-3.0"
+section = "video.models"
+
+label = "Wan 3.0"
+short_description = "Alibaba's flagship video model — long clips (up to 30s) with bundled audio at the lowest per-second rates in the catalogue."
+vendor = "alibaba"
+aspect_ratios = ["16:9", "4:3", "1:1", "3:4", "9:16"]
+min_duration = 2
+max_duration = 30
+audio = true
+speed_label = "medium"
+url = "https://wan.video/"
+
+[release]
+date = "2026-08-06"
+basis = "model"
+source_url = "https://www.alibabacloud.com/help/en/model-studio/newly-released-models"
+
+[providers.vercel]
+provider = "vercel"
+id = "alibaba/wan-v3.0-video"
+input = "text-or-image"
+avg_cost_usd = 1
+url = "https://vercel.com/ai-gateway/models/wan-v3.0-video"
+
+[providers.vercel.pricing]
+type = "per_second"
+
+[providers.vercel.pricing.usd_per_second]
+480p = { audio = 0.05 }
+720p = { audio = 0.1 }
+1080p = { audio = 0.2 }
+
+[providers.fal]
+provider = "fal"
+id = "alibaba/wan-3.0/image-to-video"
+input = "image"
+avg_cost_usd = 1
+url = "https://fal.ai/models/alibaba/wan-3.0/image-to-video"
+
+[providers.fal.pricing]
+type = "per_second"
+
+[providers.fal.pricing.usd_per_second]
+480p = { audio = 0.05 }
+720p = { audio = 0.1 }
+1080p = { audio = 0.2 }

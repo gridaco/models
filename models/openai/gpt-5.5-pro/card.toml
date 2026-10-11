@@ -1,0 +1,15 @@
+id = "openai/gpt-5.5-pro"
+section = "text.catalog"
+
+label = "GPT-5.5 Pro"
+multimodal = true
+image_input_mimes = ["image/png", "image/jpeg", "image/webp", "image/gif"]
+tool_call = true
+context_window = 1_050_000
+output_limit = 128_000
+cost = { input = 30, output = 180 }
+
+[release]
+date = "2026-04-23"
+basis = "model"
+source_url = "https://openai.com/index/introducing-gpt-5-5/"

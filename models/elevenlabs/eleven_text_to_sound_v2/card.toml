@@ -1,0 +1,29 @@
+id = "eleven_text_to_sound_v2"
+section = "audio.sound_effects.models"
+null_keys = ["avg_cost_usd"]
+
+label = "Eleven Text to Sound v2"
+short_description = "Generate loopable sound effects up to 30 seconds from text."
+vendor = "elevenlabs"
+provider = "elevenlabs"
+input = { type = "text" }
+duration_label = "0.5–30s"
+output_format = "mp3"
+sample_rate_label = "44.1 kHz"
+url = "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert"
+
+[release]
+date = "2025-09-02"
+basis = "model"
+source_url = "https://www.linkedin.com/posts/elevenlabsio_introducing-v2-of-our-sfx-model-generate-activity-7368680062662909953-aeBg"
+
+[output]
+default_format = "mp3"
+formats = ["mp3"]
+sample_rate_hz = 44_100
+duration = { mode = "automatic_or_fixed", min_seconds = 0.5, max_seconds = 30 }
+
+[pricing]
+type = "provider_credits"
+automatic_duration_credits = 100
+specified_duration_credits_per_second = 11

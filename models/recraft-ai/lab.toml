@@ -1,0 +1,10 @@
+name = "Recraft"
+url = "https://www.recraft.ai/"
+
+# The current header logo of recraft.ai/press-releases, served from the site's CDN,
+# unchanged. The press kit ZIP holds an older mark the site no longer uses.
+[logo]
+file = "logo.svg"
+kind = "symbol"
+source_url = "https://cdn.prod.website-files.com/655727fe69827d9a402de12c/6a0dafb5b8eead82b93ff59f_sign%2040x40%20(1).svg"
+retrieved = "2026-10-12"

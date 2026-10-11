@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grida.co/schemas/ai-model-labs-v1.json",
+  "title": "Model labs, version 1",
+  "description": "The labs that make catalogued models, keyed by lab ID. A lab ID is the `vendor` value on facts.json cards.",
+  "type": "object",
+  "minProperties": 1,
+  "additionalProperties": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "name", "url"],
+    "properties": {
+      "id": {
+        "description": "The lab ID, equal to its key.",
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9-]*$"
+      },
+      "name": {
+        "description": "Display name, as the lab writes it.",
+        "type": "string",
+        "minLength": 1
+      },
+      "url": {
+        "description": "The lab's first-party homepage.",
+        "type": "string",
+        "format": "uri",
+        "pattern": "^https://"
+      },
+      "logo": {
+        "description": "The lab's official logo, copied unchanged from a first-party source. Logos are trademarks of their owners and are not covered by this repository's license.",
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "media_type", "kind", "source_url", "retrieved"],
+        "properties": {
+          "path": {
+            "description": "The logo file, relative to labs.json.",
+            "type": "string",
+            "pattern": "^logos/[a-z0-9][a-z0-9-]*\\.(svg|png|webp)$"
+          },
+          "media_type": {
+            "enum": ["image/svg+xml", "image/png", "image/webp"]
+          },
+          "kind": {
+            "description": "symbol: the mark alone; wordmark: the name alone; lockup: mark and name together.",
+            "enum": ["symbol", "wordmark", "lockup"]
+          },
+          "source_url": {
+            "description": "Where the artwork was obtained: the asset's URL, or the first-party page it was extracted from.",
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://"
+          },
+          "guidelines_url": {
+            "description": "The lab's brand or logo usage guidelines, when it publishes them.",
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://"
+          },
+          "retrieved": {
+            "description": "The day the artwork was obtained.",
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    }
+  }
+}

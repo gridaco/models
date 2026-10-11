@@ -127,9 +127,11 @@ https://openrouter.ai/api/v1/images/models/openai/gpt-image-2.5-sunburst/endpoin
 
 ## `"openai/gpt-image-2": {`
 
------------------------------------------------------------------
+---
+
 OpenAI
 -----------------------------------------------------------------
+
 https://developers.openai.com/api/docs/models/gpt-image-2
 
 ## `transparent_background: true,`
@@ -238,9 +240,11 @@ https://developers.openai.com/api/docs/models/gpt-image-1-mini
 
 ## `"google/gemini-3.1-flash-image-preview": {`
 
------------------------------------------------------------------
+---
+
 Google (multimodal LLMs with native image output)
 -----------------------------------------------------------------
+
 python .tools/model_info.py --image gemini-3.1-flash-image
 Vercel AI Gateway pricing: $0.50/MTok input, $3.00/MTok output
 
@@ -296,9 +300,11 @@ budget meter charges this per image, so it must be the real cost.
 
 ## `"bfl/flux-2-pro": {`
 
------------------------------------------------------------------
+---
+
 Black Forest Labs (via Vercel AI Gateway)
 -----------------------------------------------------------------
+
 https://vercel.com/docs/ai-gateway/capabilities/image-generation/ai-sdk
 https://docs.bfl.ml/pricing
 
@@ -317,9 +323,11 @@ input_references advertised by OpenRouter (0–8), 2026-07-01.
 
 ## `"bfl/flux-2-max": {`
 
------------------------------------------------------------------
+---
+
 Black Forest Labs — Flux 2 Max
 -----------------------------------------------------------------
+
 BFL's top Flux 2 line (2025-12-16). $0.07 per megapixel on all three
 (Vercel AI Gateway model page — the feed carries no BFL pricing; OpenRouter
 `cost_usd`/megapixel; fal "first megapixel", +$0.03 each additional).
@@ -341,9 +349,11 @@ page ("Fixed $0.04 cost per image edit"), verified 2026-09-02.
 
 ## `"bytedance/seedream-5.0-pro": {`
 
------------------------------------------------------------------
+---
+
 ByteDance — Seedream 5.0 Pro
 -----------------------------------------------------------------
+
 Vercel AI Gateway feed `pricing.image` $0.035 (the model page's rate table shows
 $0.04 while its copy says $0.035 — the feed is the billing contract);
 OpenRouter `cost_usd` $0.045 at 1K ($0.09 high-res, +$0.003 per
@@ -363,9 +373,11 @@ between 1:16 and 16:1 — an area bound, not a per-edge one, so a
 
 ## `"bytedance/seedream-5.0-lite": {`
 
------------------------------------------------------------------
+---
+
 ByteDance — Seedream 5.0 Lite
 -----------------------------------------------------------------
+
 Universal: $0.035/img on all three (Vercel AI Gateway feed `pricing.image`,
 OpenRouter `cost_usd`, fal page payload), verified 2026-09-02. A
 2K–4K model: fal scales requests below 2560x1440 up to its floor.
@@ -383,9 +395,11 @@ only. An area envelope, so the default is a 2K request.
 
 ## `"bytedance/seedream-4.5": {`
 
------------------------------------------------------------------
+---
+
 ByteDance — Seedream 4.5
 -----------------------------------------------------------------
+
 $0.04/img on all three providers (re-verified 2026-09-02).
 
 ## `references: { id: "bytedance-seed/seedream-4.5", max: 14 },`
@@ -396,9 +410,11 @@ supported_parameters.input_references.
 
 ## `"xai/grok-imagine-image-2.0": {`
 
------------------------------------------------------------------
+---
+
 SpaceXAI — Grok Imagine Image 2.0
 -----------------------------------------------------------------
+
 Tiered by quality (low/medium) × resolution (1K/2K); the same four
 rates on all three providers (Vercel AI Gateway feed
 `image_dimension_quality_pricing`, OpenRouter `cost_usd` variants,
@@ -412,9 +428,11 @@ OpenRouter `supported_parameters.input_references` 0–3
 
 ## `"meta/muse-image-1.0": {`
 
------------------------------------------------------------------
+---
+
 Meta — Muse Image 1.0
 -----------------------------------------------------------------
+
 Meta's agentic image model (2026-08-26): $0.01/img on Vercel AI Gateway (feed
 `pricing.image`) and fal (page payload). OpenRouter lists it but
 exposes no serving endpoint.
@@ -427,9 +445,11 @@ provider exposes a size envelope, so none is claimed.
 
 ## `"recraft/recraft-v4.1": {`
 
------------------------------------------------------------------
+---
+
 Recraft — V4.1
 -----------------------------------------------------------------
+
 Universal: $0.035/img raster on every provider (Vercel AI Gateway feed
 `pricing.image`, OpenRouter endpoint `cost_usd`, fal page payload),
 verified 2026-09-02. Vector styles are $0.08 and a separate route on
@@ -444,9 +464,11 @@ OpenRouter `supported_parameters.input_references` 0–1
 
 ## `"recraft/recraft-v3": {`
 
------------------------------------------------------------------
+---
+
 Recraft — V3
 -----------------------------------------------------------------
+
 $0.04/img raster on every provider (re-verified 2026-09-02; Recraft's
 own pricing table agrees).
 
@@ -472,7 +494,8 @@ Follow the documented compatibility table, not its contradictory biped example.
 
 ## `"google/veo-3.1": {`
 
------------------------------------------------------------------
+---
+
 Google — Veo 3.1
 -----------------------------------------------------------------
 
@@ -509,9 +532,11 @@ Text-to-video + image-to-video; native audio. "from $0.40/s"
 
 ## `"google/veo-3.1-fast": {`
 
------------------------------------------------------------------
+---
+
 Google — Veo 3.1 Fast
 -----------------------------------------------------------------
+
 Same envelope as Veo 3.1 (16:9/9:16, 4/6/8s, native audio, ≤4K) at
 ~2.7x lower cost. Rate matrix is identical on Vercel AI Gateway and fal —
 Vercel AI Gateway feed `video_duration_pricing` and fal's stated per-second
@@ -519,9 +544,11 @@ rates, verified 2026-09-02.
 
 ## `"google/veo-3.1-lite": {`
 
------------------------------------------------------------------
+---
+
 Google — Veo 3.1 Lite
 -----------------------------------------------------------------
+
 The budget Veo: 720p/1080p only, 4/6/8s, native audio. Rates
 identical on Vercel AI Gateway and fal (verified 2026-09-02). Vercel AI Gateway
 supports both text and image input (FAQ verified 2026-09-07); the fal binding
@@ -529,9 +556,11 @@ below requires an image. Hosted GG's narrower wire is a host concern.
 
 ## `"alibaba/wan-3.0": {`
 
------------------------------------------------------------------
+---
+
 Alibaba — Wan 3.0
 -----------------------------------------------------------------
+
 Per-second by resolution, audio bundled into the rate (Vercel AI Gateway
 feed has no audio axis; fal exposes an `audio` toggle but bills the
 same). Identical on Vercel AI Gateway and fal, verified 2026-09-02. 2–30s.
@@ -572,9 +601,11 @@ diverges finding, #908). No separate silent meter surfaced.
 
 ## `"bytedance/seedance-2.5": {`
 
------------------------------------------------------------------
+---
+
 ByteDance — Seedance 2.5
 -----------------------------------------------------------------
+
 Newer generation (2026-07-31), NOT a drop-in successor: ~55% more
 per token on Vercel AI Gateway ($10.70/MTok at 480p/720p, $11.70 at 1080p
 vs 2.0's $7.00/$7.70), ~56–71% more per second on fal, and no 4K.
@@ -590,9 +621,11 @@ https://fal.ai/models/bytedance/seedance-2.5/image-to-video
 
 ## `"xai/grok-imagine-video-1.5": {`
 
------------------------------------------------------------------
+---
+
 SpaceXAI — Grok Imagine Video 1.5
 -----------------------------------------------------------------
+
 Image-to-video only (no t2v, per SpaceXAI docs); native lip-synced audio
 bundled into the rate. Per-second by resolution, identical on Vercel AI Gateway
 (no markup) and fal: $0.08/s @480p, $0.14/s @720p, $0.25/s @1080p.

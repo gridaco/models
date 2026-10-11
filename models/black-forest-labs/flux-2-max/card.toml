@@ -1,0 +1,38 @@
+id = "bfl/flux-2-max"
+section = "image.models"
+null_keys = ["styles", "sizes"]
+
+label = "Flux 2 Max"
+short_description = "Black Forest Labs' highest-fidelity Flux 2 — maximum prompt adherence and detail."
+vendor = "black-forest-labs"
+speed_label = "slow"
+speed_max = "45s"
+constraints = { min_edge = 256, max_edge = 1440 }
+pricing = { type = "per_image_flat", usd = 0.07 }
+avg_cost_usd = 0.07
+
+[release]
+date = "2025-12-16"
+basis = "model"
+source_url = "https://playground.bfl.ai/changelog"
+
+[providers.vercel]
+provider = "vercel"
+id = "bfl/flux-2-max"
+pricing = { type = "per_image_flat", usd = 0.07 }
+avg_cost_usd = 0.07
+
+[providers.openrouter]
+provider = "openrouter"
+id = "black-forest-labs/flux.2-max"
+pricing = { type = "per_image_flat", usd = 0.07 }
+avg_cost_usd = 0.07
+url = "https://openrouter.ai/black-forest-labs/flux.2-max"
+references = { id = "black-forest-labs/flux.2-max", max = 8 }
+
+[providers.fal]
+provider = "fal"
+id = "fal-ai/flux-2-max"
+pricing = { type = "per_image_flat", usd = 0.07 }
+avg_cost_usd = 0.07
+url = "https://fal.ai/models/fal-ai/flux-2-max"

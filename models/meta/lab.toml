@@ -1,0 +1,11 @@
+name = "Meta"
+url = "https://ai.meta.com/"
+
+# The ai.meta.com SVG icon, served from Meta's static CDN, downloaded unchanged. The official
+# lockup ZIP on the brand page sits behind a signed, expiring link.
+[logo]
+file = "logo.svg"
+kind = "symbol"
+source_url = "https://static.xx.fbcdn.net/rsrc.php/yf/r/-7pQO6hUGK_.svg"
+guidelines_url = "https://www.meta.com/brand/resources/meta/company-brand/"
+retrieved = "2026-10-12"

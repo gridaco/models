@@ -1,0 +1,11 @@
+name = "Alibaba Cloud"
+url = "https://www.alibabacloud.com/"
+
+# Qwen and Wan are published as "Powered by Alibaba Cloud" (qwen.ai, wan.video footers),
+# and Alibaba Group publishes no logo downloads. Inline SVG from the alibabacloud.com
+# header logo, extracted unchanged.
+[logo]
+file = "logo.svg"
+kind = "lockup"
+source_url = "https://www.alibabacloud.com/en"
+retrieved = "2026-10-12"

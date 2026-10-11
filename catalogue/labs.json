@@ -1,0 +1,178 @@
+{
+  "alibaba": {
+    "id": "alibaba",
+    "name": "Alibaba Cloud",
+    "url": "https://www.alibabacloud.com/",
+    "logo": {
+      "path": "logos/alibaba.svg",
+      "media_type": "image/svg+xml",
+      "kind": "lockup",
+      "source_url": "https://www.alibabacloud.com/en",
+      "retrieved": "2026-10-12"
+    }
+  },
+  "anthropic": {
+    "id": "anthropic",
+    "name": "Anthropic",
+    "url": "https://www.anthropic.com/",
+    "logo": {
+      "path": "logos/anthropic.svg",
+      "media_type": "image/svg+xml",
+      "kind": "symbol",
+      "source_url": "https://www.anthropic.com/press-kit",
+      "retrieved": "2026-10-12"
+    }
+  },
+  "black-forest-labs": {
+    "id": "black-forest-labs",
+    "name": "Black Forest Labs",
+    "url": "https://bfl.ai/",
+    "logo": {
+      "path": "logos/black-forest-labs.svg",
+      "media_type": "image/svg+xml",
+      "kind": "symbol",
+      "source_url": "https://bfl.ai/brand/symbol-black.svg",
+      "guidelines_url": "https://bfl.ai/brand",
+      "retrieved": "2026-10-12"
+    }
+  },
+  "bria": {
+    "id": "bria",
+    "name": "Bria",
+    "url": "https://bria.ai/",
+    "logo": {
+      "path": "logos/bria.png",
+      "media_type": "image/png",
+      "kind": "lockup",
+      "source_url": "https://docs.bria.ai/assets/logo.4aab4827f8ef484ab0149a267109951af9b35a6e5d7ddacfc52a0cb2bf07aec6.9c1bb791.png",
+      "retrieved": "2026-10-12"
+    }
+  },
+  "bytedance": {
+    "id": "bytedance",
+    "name": "ByteDance",
+    "url": "https://www.bytedance.com/",
+    "logo": {
+      "path": "logos/bytedance.png",
+      "media_type": "image/png",
+      "kind": "symbol",
+      "source_url": "https://www.bytedance.com/en/",
+      "retrieved": "2026-10-12"
+    }
+  },
+  "elevenlabs": {
+    "id": "elevenlabs",
+    "name": "ElevenLabs",
+    "url": "https://elevenlabs.io/",
+    "logo": {
+      "path": "logos/elevenlabs.svg",
+      "media_type": "image/svg+xml",
+      "kind": "symbol",
+      "source_url": "https://11labs-nonprd-15f22c1d.s3.eu-west-3.amazonaws.com/a2ea339b-8b5e-41bb-b706-24eda8a4c9e3/elevenlabs-symbol.svg",
+      "guidelines_url": "https://elevenlabs.io/brand",
+      "retrieved": "2026-10-12"
+    }
+  },
+  "google": {
+    "id": "google",
+    "name": "Google",
+    "url": "https://ai.google/",
+    "logo": {
+      "path": "logos/google.png",
+      "media_type": "image/png",
+      "kind": "symbol",
+      "source_url": "https://www.gstatic.com/images/branding/googleg_gradient/2x/googleg_gradient_standard_96dp.png",
+      "guidelines_url": "https://about.google/brand-resource-center/",
+      "retrieved": "2026-10-12"
+    }
+  },
+  "meta": {
+    "id": "meta",
+    "name": "Meta",
+    "url": "https://ai.meta.com/",
+    "logo": {
+      "path": "logos/meta.svg",
+      "media_type": "image/svg+xml",
+      "kind": "symbol",
+      "source_url": "https://static.xx.fbcdn.net/rsrc.php/yf/r/-7pQO6hUGK_.svg",
+      "guidelines_url": "https://www.meta.com/brand/resources/meta/company-brand/",
+      "retrieved": "2026-10-12"
+    }
+  },
+  "microsoft": {
+    "id": "microsoft",
+    "name": "Microsoft",
+    "url": "https://www.microsoft.com/",
+    "logo": {
+      "path": "logos/microsoft.svg",
+      "media_type": "image/svg+xml",
+      "kind": "symbol",
+      "source_url": "https://learn.microsoft.com/en-us/entra/identity-platform/media/howto-add-branding-in-apps/ms-symbollockup_mssymbol_19.svg",
+      "guidelines_url": "https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks",
+      "retrieved": "2026-10-12"
+    }
+  },
+  "openai": {
+    "id": "openai",
+    "name": "OpenAI",
+    "url": "https://openai.com/",
+    "logo": {
+      "path": "logos/openai.svg",
+      "media_type": "image/svg+xml",
+      "kind": "symbol",
+      "source_url": "https://cdn.openai.com/brand/openai-logos.zip",
+      "guidelines_url": "https://openai.com/brand/",
+      "retrieved": "2026-10-12"
+    }
+  },
+  "recraft-ai": {
+    "id": "recraft-ai",
+    "name": "Recraft",
+    "url": "https://www.recraft.ai/",
+    "logo": {
+      "path": "logos/recraft-ai.svg",
+      "media_type": "image/svg+xml",
+      "kind": "symbol",
+      "source_url": "https://cdn.prod.website-files.com/655727fe69827d9a402de12c/6a0dafb5b8eead82b93ff59f_sign%2040x40%20(1).svg",
+      "retrieved": "2026-10-12"
+    }
+  },
+  "tencent": {
+    "id": "tencent",
+    "name": "Tencent",
+    "url": "https://www.tencent.com/",
+    "logo": {
+      "path": "logos/tencent.png",
+      "media_type": "image/png",
+      "kind": "wordmark",
+      "source_url": "https://www.tencent.com/wp-content/uploads/2022/12/03_Tencent_English-logo.png",
+      "guidelines_url": "https://www.tencent.com/newsroom/media-resources/brand-and-usage-guides/",
+      "retrieved": "2026-10-12"
+    }
+  },
+  "tripo": {
+    "id": "tripo",
+    "name": "Tripo",
+    "url": "https://www.tripo3d.ai/",
+    "logo": {
+      "path": "logos/tripo.svg",
+      "media_type": "image/svg+xml",
+      "kind": "lockup",
+      "source_url": "https://developers.tripo3d.ai/assets/icons/logo-dark.svg",
+      "retrieved": "2026-10-12"
+    }
+  },
+  "xai": {
+    "id": "xai",
+    "name": "SpaceXSI",
+    "url": "https://x.ai/",
+    "logo": {
+      "path": "logos/xai.svg",
+      "media_type": "image/svg+xml",
+      "kind": "symbol",
+      "source_url": "https://x.ai/",
+      "guidelines_url": "https://x.ai/legal/brand-guidelines",
+      "retrieved": "2026-10-12"
+    }
+  }
+}
