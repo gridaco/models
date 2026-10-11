@@ -172,7 +172,7 @@ def main() -> int:
     count = sum(
         len(table)
         for section, table in facts.items()
-        if section not in NON_TABLE_SECTIONS
+        if section not in NON_TABLE_SECTIONS and isinstance(table, dict)
     )
     print(f"ok: {MODELS_JSON.relative_to(ROOT)} ({count} cards), {LABS.relative_to(ROOT)} ({len(load(LABS))} labs)")
     return 0

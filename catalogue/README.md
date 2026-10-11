@@ -28,7 +28,8 @@ next breaking change.
 
 ## Shape
 
-`models.json` is an object of sections. Each section key is a dotted family path, and each
+`models.json` starts with `$schema`, the `$id` of its schema, so a copy of the file says what
+it is. The rest is an object of sections. Each section key is a dotted family path, and each
 section is a table of cards keyed by card ID:
 
 | section                           | cards                                        |

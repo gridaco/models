@@ -41,13 +41,19 @@ def sections() -> list[str]:
         return json.load(f)["required"]
 
 
+def schema_id() -> str:
+    """The `$id` of models.schema.json, written as the `$schema` of models.json."""
+    with MODELS_SCHEMA.open(encoding="utf-8") as f:
+        return json.load(f)["$id"]
+
+
 def build() -> tuple[dict[Path, bytes], list[str]]:
     """Return the content of each generated file, and any layout errors."""
     cards = load_cards(MODELS)
     labs = load_labs(MODELS)
     names = sections()
     outputs = {
-        MODELS_JSON: dumps(assemble(cards, names)).encode(),
+        MODELS_JSON: dumps(assemble(cards, names, schema_id())).encode(),
         LABS: dumps(assemble_labs(labs)).encode(),
     }
     for lab in labs:

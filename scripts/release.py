@@ -121,7 +121,11 @@ def schema_major(files: dict[str, bytes]) -> set[int]:
 
 def manifest(version: str, commit: str, created: datetime.datetime, files: dict[str, bytes]) -> dict[str, Any]:
     facts = json.loads(files["models.json"])
-    cards = sum(len(table) for section, table in facts.items() if not section.endswith(".operation"))
+    cards = sum(
+        len(table)
+        for section, table in facts.items()
+        if isinstance(table, dict) and not section.endswith(".operation")
+    )
     return {
         "name": NAME,
         "version": version,
@@ -187,6 +191,8 @@ def cards_by_key(facts: dict[str, Any]) -> dict[str, Any]:
     """Cards keyed by how release notes name them: `id` (section)."""
     keyed = {}
     for section, table in facts.items():
+        if not isinstance(table, dict):  # `$schema`
+            continue
         if section.endswith(".operation"):
             keyed[f"`{section}`"] = table
         else:

@@ -20,6 +20,10 @@
     "embedding.models"
   ],
   "properties": {
+    "$schema": {
+      "description": "This file's schema: the `$id` of models.schema.json. Generated files always carry it.",
+      "const": "https://grida.co/schemas/ai-model-facts-v1.json"
+    },
     "text.catalog": {
       "type": "object",
       "minProperties": 1,

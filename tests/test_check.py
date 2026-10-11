@@ -134,7 +134,7 @@ def test_hand_edited_labs_are_reported_out_of_date():
 
 
 def test_cards_round_trip_every_null():
-    assembled = cards.assemble(CARDS, SECTIONS)
+    assembled = cards.assemble(CARDS, SECTIONS, check.build.schema_id())
     assert assembled == MODELS_JSON
 
 
@@ -310,3 +310,15 @@ def test_logo_not_generated_by_any_lab_is_reported(tmp_path, monkeypatch):
     monkeypatch.setattr(check.build, "LOGOS", tmp_path)
     (tmp_path / "gone.svg").write_bytes(SVG)
     assert check.build.orphans({}) == [tmp_path / "gone.svg"]
+
+
+def test_models_json_names_its_schema():
+    assert next(iter(MODELS_JSON)) == "$schema"
+    assert MODELS_JSON["$schema"] == SCHEMA["$id"]
+
+
+def test_models_json_schema_must_be_this_schema():
+    def mutate(facts):
+        facts["$schema"] = "https://example.com/other.json"
+
+    assert any("$schema" in e for e in mutated(mutate))

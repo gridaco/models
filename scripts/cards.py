@@ -213,9 +213,10 @@ def project(card: Card) -> dict[str, Any]:
     return data
 
 
-def assemble(cards: list[Card], sections: list[str]) -> dict[str, Any]:
-    """Build models.json: sections in schema order, cards sorted by id."""
-    facts: dict[str, Any] = {section: {} for section in sections}
+def assemble(cards: list[Card], sections: list[str], schema_id: str | None = None) -> dict[str, Any]:
+    """Build models.json: its `$schema` first, then sections in schema order, cards sorted by id."""
+    facts: dict[str, Any] = {"$schema": schema_id} if schema_id else {}
+    facts.update({section: {} for section in sections})
     for card in sorted(cards, key=lambda c: str(c.data.get("id", ""))):
         section = card.data.get("section")
         if section not in facts:
