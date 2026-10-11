@@ -1,7 +1,7 @@
 # Catalogue research notes
 
 Source-specific qualifications and references for the values in
-[`facts.json`](./facts.json). The JSON holds the values; these notes explain
+[`models.json`](./models.json). The JSON holds the values; these notes explain
 where they came from and any caveat a value cannot carry itself. Update a note
 in the same change as the fact it qualifies.
 

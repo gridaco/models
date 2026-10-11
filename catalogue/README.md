@@ -4,14 +4,14 @@ This directory is the contract: language-agnostic JSON that consumers read. Its 
 authored as one card per model in [`models/`](../models/); everything else outside it
 (scripts, tests, skills) is tooling for maintaining it.
 
-| file                        | role                                                                                                                 |
-| --------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `facts.json`                | Generated from `models/`. Model identities, release provenance, provider bindings, capabilities, limits, list prices |
-| `labs.json`                 | Generated from `models/<lab>/lab.toml`. The labs that make catalogued models                                         |
-| `schemas/facts.schema.json` | JSON Schema 2020-12 for `facts.json`                                                                                 |
-| `logos/`                    | Generated from `models/<lab>/logo.*`. Each lab's official logo                                                       |
-| `schemas/labs.schema.json`  | JSON Schema 2020-12 for `labs.json`                                                                                  |
-| `PROVENANCE.md`             | Source notes and qualifications that don't fit in JSON                                                               |
+| file                         | role                                                                                                                 |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `models.json`                | Generated from `models/`. Model identities, release provenance, provider bindings, capabilities, limits, list prices |
+| `labs.json`                  | Generated from `models/<lab>/lab.toml`. The labs that make catalogued models                                         |
+| `schemas/models.schema.json` | JSON Schema 2020-12 for `models.json`                                                                                |
+| `logos/`                     | Generated from `models/<lab>/logo.*`. Each lab's official logo                                                       |
+| `schemas/labs.schema.json`   | JSON Schema 2020-12 for `labs.json`                                                                                  |
+| `PROVENANCE.md`              | Source notes and qualifications that don't fit in JSON                                                               |
 
 Released snapshots of this directory, versioned `v<schema>.<YYYYMMDD>.<n>`, are published at
 [github.com/gridaco/models/releases](https://github.com/gridaco/models/releases); see the
@@ -21,12 +21,14 @@ Released snapshots of this directory, versioned `v<schema>.<YYYYMMDD>.<n>`, are 
 
 Imported byte-identical from [gridaco/grida](https://github.com/gridaco/grida) (`data/ai/`,
 commit `f053893047af`), with the shape unchanged. It was then split into per-model cards in
-`models/`, from which `facts.json` is generated with the same data; only the order of cards
-and keys changed.
+`models/`, from which the file is generated with the same data; only the order of cards and
+keys changed. It was named `facts.json` until release `v1.20261011.0`, and published under
+that name in that release; its schema `$id` keeps the original `ai-model-facts-v1` until the
+next breaking change.
 
 ## Shape
 
-`facts.json` is an object of sections. Each section key is a dotted family path, and each
+`models.json` is an object of sections. Each section key is a dotted family path, and each
 section is a table of cards keyed by card ID:
 
 | section                           | cards                                        |

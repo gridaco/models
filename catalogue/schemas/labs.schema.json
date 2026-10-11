@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://grida.co/schemas/ai-model-labs-v1.json",
   "title": "Model labs, version 1",
-  "description": "The labs that make catalogued models, keyed by lab ID. A lab ID is the `vendor` value on facts.json cards.",
+  "description": "The labs that make catalogued models, keyed by lab ID. A lab ID is the `vendor` value on models.json cards.",
   "type": "object",
   "minProperties": 1,
   "additionalProperties": {

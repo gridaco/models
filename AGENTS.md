@@ -15,7 +15,7 @@ bindings, and published prices.
 ## Current state
 
 [`models/`](./models/) is the authored source: one TOML card per model, grouped by lab.
-[`catalogue/facts.json`](./catalogue/facts.json) is generated from it and is the contract
+[`catalogue/models.json`](./catalogue/models.json) is generated from it and is the contract
 consumers read, at schema version 1. The catalogue was imported from
 [gridaco/grida](https://github.com/gridaco/grida). Each content change to `catalogue/` on
 `main` is published as a versioned GitHub Release. Other distribution channels are undecided;
@@ -38,7 +38,7 @@ don't add anything that assumes an answer.
 **Source vs. contract vs. tooling.** Facts are authored once, as cards in `models/`.
 Everything a consumer reads lives in `catalogue/` and must be readable from any language:
 plain JSON and JSON Schema, no generated code, no language-specific files.
-`catalogue/facts.json` is generated from the cards; never edit it by hand. Tooling outside
+`catalogue/models.json` is generated from the cards; never edit it by hand. Tooling outside
 both may use whichever language fits the job (Python today, TypeScript when it fits better),
 and is never part of the contract.
 
@@ -106,14 +106,14 @@ Tooling runs with [uv](https://docs.astral.sh/uv/) (Python 3.12+).
 
 ```sh
 uv sync                              # install tooling dependencies
-uv run scripts/build.py              # regenerate catalogue/facts.json and labs.json from models/
+uv run scripts/build.py              # regenerate catalogue/models.json and labs.json from models/
 uv run scripts/check.py              # validate the source, generated files, schemas + invariants
 uv run pytest                        # test the checker
 npx -y oxfmt@0.71.0                  # format Markdown, TOML, JSON, YAML
 ```
 
 After editing a card, run `build.py` then `check.py`, and commit the card with the regenerated
-`facts.json`. CI runs `check.py` (which fails if `facts.json` is out of date) and `pytest` on
+`models.json`. CI runs `check.py` (which fails if `models.json` is out of date) and `pytest` on
 every PR.
 
 Releases are automatic: on every push to `main` that changes the content of `catalogue/`,
@@ -123,7 +123,7 @@ Releases are automatic: on every push to `main` that changes the content of `cat
 get a preview of the release as a workflow artifact.
 
 Formatting uses [oxfmt](https://oxc.rs/docs/guide/usage/formatter) through `npx`, with no
-`package.json`; its settings are in `.oxfmtrc.json`, and the generated `facts.json` is
+`package.json`; its settings are in `.oxfmtrc.json`, and the generated `models.json` is
 excluded. CI runs `npx -y oxfmt@0.71.0 --check`; keep the version here and in
 `.github/workflows/check.yml` in sync.
 

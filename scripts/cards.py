@@ -1,4 +1,4 @@
-"""Read the authored cards in `models/` and project them to `catalogue/facts.json`.
+"""Read the authored cards in `models/` and project them to `catalogue/models.json`.
 
 Layout: `models/<lab>/<model>/card.toml`, one directory per card.
 
@@ -9,7 +9,7 @@ Layout: `models/<lab>/<model>/card.toml`, one directory per card.
 
 A card holds its contract fields plus two authoring keys that are not projected:
 
-- `section`: the `facts.json` section the card belongs to, e.g. `"image.models"`.
+- `section`: the `models.json` section the card belongs to, e.g. `"image.models"`.
 - `null_keys`: dotted paths emitted as JSON `null`, which TOML cannot express.
 
 A section that is a single object rather than a table of cards is authored as
@@ -181,7 +181,7 @@ def layout_errors(cards: list[Card], sections: list[str]) -> Iterator[str]:
             continue
         section = card.data.get("section")
         if section not in sections:
-            yield f"{where}: section {section!r} is not a facts.json section"
+            yield f"{where}: section {section!r} is not a models.json section"
         elif card.file == OPERATION_FILE and not section.endswith(".operation"):
             yield f"{where}: an operation belongs to an .operation section"
         elif card.file == CARD_FILE and section.endswith(".operation"):
@@ -214,7 +214,7 @@ def project(card: Card) -> dict[str, Any]:
 
 
 def assemble(cards: list[Card], sections: list[str]) -> dict[str, Any]:
-    """Build facts.json: sections in schema order, cards sorted by id."""
+    """Build models.json: sections in schema order, cards sorted by id."""
     facts: dict[str, Any] = {section: {} for section in sections}
     for card in sorted(cards, key=lambda c: str(c.data.get("id", ""))):
         section = card.data.get("section")

@@ -44,13 +44,25 @@ NAME = "grida-models"
 # a breaking change to either bumps it.
 SCHEMA_MAJOR = 1
 
-# Files published individually, so `releases/latest/download/<name>` always resolves.
+# Files published individually, keyed by asset name. The names carry the schema major, so
+# `releases/latest/download/models.v1.json` only ever resolves to a compatible snapshot:
+# after a breaking change it stops resolving instead of serving a different shape.
 ASSETS = {
-    "facts.json": "facts.json",
-    "labs.json": "labs.json",
-    "facts.schema.json": "schemas/facts.schema.json",
-    "labs.schema.json": "schemas/labs.schema.json",
+    f"models.v{SCHEMA_MAJOR}.json": "models.json",
+    f"labs.v{SCHEMA_MAJOR}.json": "labs.json",
+    f"models.v{SCHEMA_MAJOR}.schema.json": "schemas/models.schema.json",
+    f"labs.v{SCHEMA_MAJOR}.schema.json": "schemas/labs.schema.json",
 }
+
+# Catalogue files renamed since an earlier release: old path -> current path. Release notes
+# compare a renamed file with its old self instead of reporting it as removed and added.
+RENAMED = {
+    "facts.json": "models.json",
+    "schemas/facts.schema.json": "schemas/models.schema.json",
+}
+
+# Each asset's name in earlier releases, before the schema major was part of it.
+LEGACY_ASSETS = {"models": ["facts.json"], "labs": ["labs.json"]}
 
 
 def sha256(data: bytes) -> str:
@@ -101,14 +113,14 @@ def commit_info(rev: str = "HEAD") -> tuple[str, datetime.datetime]:
 def schema_major(files: dict[str, bytes]) -> set[int]:
     """The major version each schema `$id` declares."""
     majors = set()
-    for name in ("schemas/facts.schema.json", "schemas/labs.schema.json"):
+    for name in ("schemas/models.schema.json", "schemas/labs.schema.json"):
         match = re.search(r"-v(\d+)\.json$", json.loads(files[name])["$id"])
         majors.add(int(match.group(1)) if match else -1)
     return majors
 
 
 def manifest(version: str, commit: str, created: datetime.datetime, files: dict[str, bytes]) -> dict[str, Any]:
-    facts = json.loads(files["facts.json"])
+    facts = json.loads(files["models.json"])
     cards = sum(len(table) for section, table in facts.items() if not section.endswith(".operation"))
     return {
         "name": NAME,
@@ -203,7 +215,7 @@ def notes(version: str, current: dict[str, Any], previous: dict[str, Any] | None
     else:
         lines += [f"## Changes since `{previous['manifest']['version']}`", ""]
         sections = [
-            ("models", cards_by_key(previous["facts"]), cards_by_key(current["facts"])),
+            ("models", cards_by_key(previous["models"]), cards_by_key(current["models"])),
             ("labs", *({f"`{k}`": v for k, v in labs.items()} for labs in (previous["labs"], current["labs"]))),
         ]
         any_change = False
@@ -212,12 +224,17 @@ def notes(version: str, current: dict[str, Any], previous: dict[str, Any] | None
                 if keys:
                     any_change = True
                     lines.append(f"- {verb} {label} ({len(keys)}): " + ", ".join(keys))
-        old_files, new_files = previous["manifest"]["files"], current["files"]
-        for name in ("schemas/facts.schema.json", "schemas/labs.schema.json"):
+        old_files = {RENAMED.get(name, name): meta for name, meta in previous["manifest"]["files"].items()}
+        new_files = current["files"]
+        renamed = [old for old, new in RENAMED.items() if old in previous["manifest"]["files"] and new in new_files]
+        if renamed:
+            any_change = True
+            lines.append("- Renamed: " + ", ".join(f"`{old}` → `{RENAMED[old]}`" for old in renamed))
+        for name in ("schemas/models.schema.json", "schemas/labs.schema.json"):
             if old_files.get(name, {}).get("sha256") != new_files[name]["sha256"]:
                 any_change = True
                 lines.append(f"- Schema changed: `{name}`")
-        covered = {"facts.json", "labs.json", "schemas/facts.schema.json", "schemas/labs.schema.json"}
+        covered = {"models.json", "labs.json", "schemas/models.schema.json", "schemas/labs.schema.json"}
         others = [
             name
             for name in sorted(old_files.keys() | new_files.keys())
@@ -232,11 +249,11 @@ def notes(version: str, current: dict[str, Any], previous: dict[str, Any] | None
     lines += [
         "## Download",
         "",
-        f"- Model facts: [`facts.json`]({download}/facts.json), labs: [`labs.json`]({download}/labs.json), "
-        f"schemas: [`facts.schema.json`]({download}/facts.schema.json), [`labs.schema.json`]({download}/labs.schema.json)",
+        "- Models and labs: " + ", ".join(f"[`{name}`]({download}/{name})" for name in ASSETS),
         f"- Everything, logos included: [`{NAME}-{version}.tar.gz`]({download}/{NAME}-{version}.tar.gz) or "
         f"[`.zip`]({download}/{NAME}-{version}.zip)",
-        f"- Always the newest snapshot: `{REPOSITORY}/releases/latest/download/facts.json`",
+        f"- Always the newest schema v{SCHEMA_MAJOR} snapshot: "
+        f"`{REPOSITORY}/releases/latest/download/models.v{SCHEMA_MAJOR}.json`",
         "- Verify: download `SHA256SUMS` with the assets and run `sha256sum -c SHA256SUMS --ignore-missing`",
         "",
         "Catalogue data is MIT licensed. Lab logos are trademarks of their owners and are not covered by "
@@ -246,10 +263,19 @@ def notes(version: str, current: dict[str, Any], previous: dict[str, Any] | None
 
 
 def load_previous(directory: Path) -> dict[str, Any] | None:
-    paths = {name: directory / name for name in ("manifest.json", "facts.json", "labs.json")}
-    if not all(path.exists() for path in paths.values()):
-        return None
-    return {name.removesuffix(".json"): json.loads(path.read_text()) for name, path in paths.items()}
+    """The previous release's manifest, models, and labs, from its downloaded assets."""
+    names = {
+        "manifest": ["manifest.json"],
+        "models": [f"models.v{SCHEMA_MAJOR}.json", *LEGACY_ASSETS["models"]],
+        "labs": [f"labs.v{SCHEMA_MAJOR}.json", *LEGACY_ASSETS["labs"]],
+    }
+    previous = {}
+    for key, candidates in names.items():
+        path = next((directory / name for name in candidates if (directory / name).exists()), None)
+        if path is None:
+            return None
+        previous[key] = json.loads(path.read_text())
+    return previous
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -283,7 +309,7 @@ def main(argv: list[str] | None = None) -> int:
     elif args.command == "notes":
         commit, created = commit_info()
         current = manifest(args.version, commit, created, files)
-        current["facts"], current["labs"] = json.loads(files["facts.json"]), json.loads(files["labs.json"])
+        current["models"], current["labs"] = json.loads(files["models.json"]), json.loads(files["labs.json"])
         previous = load_previous(args.previous) if args.previous else None
         sys.stdout.write(notes(args.version, current, previous))
     return 0
