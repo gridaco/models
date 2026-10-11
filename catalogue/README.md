@@ -13,6 +13,10 @@ authored as one card per model in [`models/`](../models/); everything else outsi
 | `schemas/labs.schema.json`  | JSON Schema 2020-12 for `labs.json`                                                                                  |
 | `PROVENANCE.md`             | Source notes and qualifications that don't fit in JSON                                                               |
 
+Released snapshots of this directory, versioned `v<schema>.<YYYYMMDD>.<n>`, are published at
+[github.com/gridaco/models/releases](https://github.com/gridaco/models/releases); see the
+[repository README](../README.md#get-the-catalogue).
+
 ## Origin
 
 Imported byte-identical from [gridaco/grida](https://github.com/gridaco/grida) (`data/ai/`,

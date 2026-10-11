@@ -17,8 +17,9 @@ bindings, and published prices.
 [`models/`](./models/) is the authored source: one TOML card per model, grouped by lab.
 [`catalogue/facts.json`](./catalogue/facts.json) is generated from it and is the contract
 consumers read, at schema version 1. The catalogue was imported from
-[gridaco/grida](https://github.com/gridaco/grida). How other projects will consume it is
-undecided; don't add anything that assumes an answer.
+[gridaco/grida](https://github.com/gridaco/grida). Each content change to `catalogue/` on
+`main` is published as a versioned GitHub Release. Other distribution channels are undecided;
+don't add anything that assumes an answer.
 
 ## Project Structure
 
@@ -28,7 +29,7 @@ undecided; don't add anything that assumes an answer.
 | ------------------------------------ | -------------------------------------------------------------------- |
 | [models/](./models/)                 | **The source.** One card per model: `models/<lab>/<model>/card.toml` |
 | [catalogue/](./catalogue/)           | **The contract.** Generated JSON, JSON Schema, provenance notes      |
-| [scripts/](./scripts/)               | Tooling: build and validation                                        |
+| [scripts/](./scripts/)               | Tooling: build, validation, and release snapshots                    |
 | [tests/](./tests/)                   | Tests for the tooling                                                |
 | [.agents/skills/](./.agents/skills/) | Agent skills. `.claude/skills` is a symlink to it                    |
 | [README.md](./README.md)             | Public overview, principles, decisions                               |
@@ -52,7 +53,7 @@ These are listed in the [README](./README.md#open-decisions). Treat them as quar
 nothing written here may depend on an answer that has not been decided. When a task forces
 one of these questions, raise it with the user instead of answering it implicitly.
 
-1. Distribution: how consumers pin and receive the catalogue.
+1. Further distribution: whether to publish beyond GitHub Releases (package registry, HTTP endpoint).
 2. Whether a provider registry (labels, logos, ID prefixes) lives here.
 
 ## Public repository rules
@@ -114,6 +115,12 @@ npx -y oxfmt@0.71.0                  # format Markdown, TOML, JSON, YAML
 After editing a card, run `build.py` then `check.py`, and commit the card with the regenerated
 `facts.json`. CI runs `check.py` (which fails if `facts.json` is out of date) and `pytest` on
 every PR.
+
+Releases are automatic: on every push to `main` that changes the content of `catalogue/`,
+`.github/workflows/release.yml` publishes a snapshot built by `scripts/release.py`
+(`v<schema>.<YYYYMMDD>.<n>`). A breaking schema change must bump `SCHEMA_MAJOR` in
+`scripts/release.py` together with both schema `$id`s. Pull requests that touch the catalogue
+get a preview of the release as a workflow artifact.
 
 Formatting uses [oxfmt](https://oxc.rs/docs/guide/usage/formatter) through `npx`, with no
 `package.json`; its settings are in `.oxfmtrc.json`, and the generated `facts.json` is

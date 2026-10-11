@@ -8,8 +8,42 @@ place answers "which models exist and what are they" for every Grida product.
 
 [Grida](https://grida.co) · [Catalogue](./catalogue/)
 
-> **Status: early.** The catalogue is at schema version 1. How it is distributed is not
-> decided yet; see [Open decisions](#open-decisions).
+> **Status: early.** The catalogue is at schema version 1. Snapshots are published as
+> [GitHub Releases](https://github.com/gridaco/models/releases); see
+> [Get the catalogue](#get-the-catalogue).
+
+## Get the catalogue
+
+Every change to the catalogue on `main` is published as a
+[release](https://github.com/gridaco/models/releases). The newest snapshot is always at:
+
+```sh
+curl -LO https://github.com/gridaco/models/releases/latest/download/facts.json
+curl -LO https://github.com/gridaco/models/releases/latest/download/labs.json
+```
+
+To pin a snapshot, use its version instead of `latest`:
+`https://github.com/gridaco/models/releases/download/<version>/facts.json`.
+
+Each release holds:
+
+| asset                                   | contents                                                                                      |
+| --------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `facts.json`, `labs.json`               | Model cards and labs                                                                          |
+| `facts.schema.json`, `labs.schema.json` | Their JSON Schemas                                                                            |
+| `grida-models-<version>.tar.gz`, `.zip` | The whole catalogue, logos included, with `LICENSE` and `manifest.json`                       |
+| `manifest.json`                         | Version, schema version, source commit, content digest, counts, and the SHA-256 of every file |
+| `SHA256SUMS`                            | Checksums of the other assets: `sha256sum -c SHA256SUMS --ignore-missing`                     |
+
+Versions read `v<schema>.<YYYYMMDD>.<n>`, for example `v1.20261012.0`: the schema version,
+the UTC date of the source commit, and a counter for snapshots on the same day. They are valid
+semver, so a range such as `^1` follows every snapshot without crossing a breaking schema
+change. A release is published only when the catalogue's content changes, and the archives
+are reproducible from the same commit. Release notes list the models, labs, schemas, and
+other files that changed since the previous release.
+
+The catalogue data is MIT licensed. Lab logos are trademarks of their owners and are not
+covered by that license.
 
 ## Why
 
@@ -71,6 +105,9 @@ with a JSON Schema, readable from any language. Its shape and rules are document
 - **Labs are registered.** Each lab directory holds a `lab.toml` with the lab's display
   name, first-party homepage, and official logo, published as `catalogue/labs.json` and
   `catalogue/logos/`. A card's `vendor` is a lab ID.
+- **Snapshots are GitHub Releases.** Each content change to `catalogue/` on `main` is
+  published as a versioned, checksummed release (`scripts/release.py`,
+  `.github/workflows/release.yml`).
 - **Facts only.** Product policy (which models a product lists, its tiers and defaults)
   stays with each product.
 
@@ -78,8 +115,8 @@ with a JSON Schema, readable from any language. Its shape and rules are document
 
 These are deliberately undecided, and are tracked here so nobody mistakes them for settled.
 
-1. **Distribution.** How consumers pin and receive the catalogue: tagged releases, a
-   published package, a submodule, an HTTP endpoint, or a combination.
+1. **Further distribution.** Whether to publish beyond GitHub Releases: a package registry,
+   a hosted HTTP endpoint, or both.
 2. **Provider registry.** Whether this repository also owns display labels, logos, and
    ID-prefix rules for providers.
 
