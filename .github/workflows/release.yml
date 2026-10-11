@@ -137,4 +137,21 @@ jobs:
 
       - name: Publish to npm
         if: steps.latest.outputs.publish == 'true'
-        run: npm publish ./package --access public
+        run: |
+          # A version npm already has is success: right after a publish, `npm view` above can
+          # still report it missing while the registry's cache catches up.
+          set -o pipefail
+          if ! npm publish ./package --access public 2>&1 | tee publish.log; then
+            grep -q "cannot publish over the previously published versions" publish.log || exit 1
+            echo "$NPM_PACKAGE is already published at this version."
+          fi
+
+      - name: Refresh the CDN
+        if: steps.latest.outputs.publish == 'true'
+        run: |
+          # jsDelivr caches the `@<major>` alias for hours; ask it to resolve the new version now.
+          major="$(jq -r .version package/package.json | cut -d. -f1)"
+          for file in models.json labs.json manifest.json; do
+            curl -fsS "https://purge.jsdelivr.net/npm/$NPM_PACKAGE@$major/$file" > /dev/null \
+              || echo "Could not refresh $file; jsDelivr will pick it up within hours."
+          done
