@@ -125,7 +125,12 @@ def test_cards_generate_the_committed_facts():
 
 def test_hand_edited_facts_are_reported_out_of_date():
     edited = check.FACTS.read_text(encoding="utf-8").replace('"GPT-5.5"', '"GPT 5.5"', 1)
-    assert any("out of date" in e for e in check.source_errors(edited))
+    assert any("facts.json is out of date" in e for e in check.source_errors({check.FACTS: edited}))
+
+
+def test_hand_edited_labs_are_reported_out_of_date():
+    edited = check.LABS.read_text(encoding="utf-8").replace('"OpenAI"', '"Open AI"', 1)
+    assert any("labs.json is out of date" in e for e in check.source_errors({check.LABS: edited}))
 
 
 def test_cards_round_trip_every_null():
@@ -191,3 +196,47 @@ def test_null_keys_must_be_dotted_paths():
         card(loaded, "openai/gpt-image-2").data["null_keys"] = "styles"
 
     assert any("null_keys" in e for e in layout(mutate))
+
+
+# Labs: models/<lab>/lab.toml, projected to catalogue/labs.json.
+
+LABS = cards.load_labs(check.build.MODELS)
+
+
+def lab_check(labs, unregistered=check.KNOWN_UNREGISTERED_LABS):
+    return list(cards.lab_errors(labs, CARDS, unregistered))
+
+
+def test_labs_are_valid():
+    assert lab_check(LABS) == []
+    assert list(check.schema_errors(check.load(check.LABS), check.load(check.LABS_SCHEMA))) == []
+
+
+def test_lab_directory_needs_a_lab_toml():
+    labs = [lab for lab in LABS if lab.id != "openai"]
+    assert any("models/openai/: lab directory has no lab.toml" in e for e in lab_check(labs))
+
+
+def test_lab_toml_needs_cards():
+    labs = LABS + [cards.Lab("nobody", {"name": "Nobody", "url": "https://example.com/"})]
+    assert any("lab has no cards" in e for e in lab_check(labs))
+
+
+def test_stale_unregistered_lab_is_reported():
+    labs = LABS + [cards.Lab("nightmareai", {"name": "x", "url": "https://example.com/"})]
+    assert any("stale unregistered lab 'nightmareai'" in e for e in lab_check(labs))
+
+
+def test_unregistered_lab_without_cards_is_reported():
+    unregistered = check.KNOWN_UNREGISTERED_LABS | {"nobody"}
+    assert any("stale unregistered lab 'nobody'" in e for e in lab_check(LABS, unregistered))
+
+
+def test_lab_schema_rejects_unknown_fields():
+    labs = cards.assemble_labs(LABS)
+    labs["openai"]["logo"] = "openai.svg"
+    assert list(check.schema_errors(labs, check.load(check.LABS_SCHEMA)))
+
+
+def test_lab_toml_is_not_a_card():
+    assert not any(c.file == cards.LAB_FILE for c in CARDS)

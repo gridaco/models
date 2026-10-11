@@ -21,6 +21,7 @@ change, a limit correction, a deprecation, or an audit against provider document
 | file                                  | holds                                                                                   |
 | ------------------------------------- | --------------------------------------------------------------------------------------- |
 | `models/<lab>/<model>/card.toml`      | One card: identity, release provenance, provider bindings, capabilities, limits, prices |
+| `models/<lab>/lab.toml`               | The lab's display name and first-party homepage. Required for every lab                 |
 | `catalogue/facts.json`                | Generated from `models/` by `scripts/build.py`. Never edit by hand                      |
 | `catalogue/schemas/facts.schema.json` | JSON Schema for `facts.json`                                                            |
 | `catalogue/PROVENANCE.md`             | Source notes and qualifications that do not fit in JSON                                 |
@@ -123,6 +124,8 @@ pricing shapes in use and their rules are in [`pricing.md`](./pricing.md).
 3. **Ground the release.** Follow `$provenance`.
 4. **Edit the card in `models/`.** A new model gets a new directory at
    `models/<lab>/<model>/card.toml` (see [`models/README.md`](../../../models/README.md)).
+   A model from a new lab also needs `models/<lab>/lab.toml`, sourced from the lab's own
+   homepage.
    Fields are `lower_snake_case`; IDs keep their exact spelling. Run
    `uv run scripts/build.py`, then `uv run scripts/check.py`.
 5. **Record qualifications** that do not fit the JSON (promotions, long-context bands,

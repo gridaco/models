@@ -68,6 +68,9 @@ with a JSON Schema, readable from any language. Its shape and rules are document
 - **One card per model.** Facts are authored as TOML cards in `models/<lab>/<model>/`, and
   `catalogue/facts.json` is generated from them. A card's directory leaves room for
   per-model material such as example assets.
+- **Labs are registered.** Each lab directory holds a `lab.toml` with the lab's display
+  name and first-party homepage, published as `catalogue/labs.json`. A card's `vendor` is a
+  lab ID.
 - **Facts only.** Product policy (which models a product lists, its tiers and defaults)
   stays with each product.
 
@@ -77,8 +80,8 @@ These are deliberately undecided, and are tracked here so nobody mistakes them f
 
 1. **Distribution.** How consumers pin and receive the catalogue: tagged releases, a
    published package, a submodule, an HTTP endpoint, or a combination.
-2. **Vendor and provider registry.** Whether this repository also owns display labels,
-   logo keys, and ID-prefix rules for vendors and providers.
+2. **Provider registry and logos.** Whether this repository also owns display labels and
+   ID-prefix rules for providers, and logo assets for labs or providers.
 
 ## Contributing
 

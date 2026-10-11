@@ -41,9 +41,9 @@ plain JSON and JSON Schema, no generated code, no language-specific files.
 both may use whichever language fits the job (Python today, TypeScript when it fits better),
 and is never part of the contract.
 
-Lab directories in `models/` reuse each card's existing `vendor` value (or its ID
-namespace). They are not a vendor registry: adding lab labels, logos, or a `lab.toml` would
-answer open decision 2.
+Each lab directory in `models/` holds a `lab.toml` (display name and first-party homepage),
+generated into `catalogue/labs.json`. Provider labels and logos are still undecided (open
+decision 2).
 
 ## Open decisions
 
@@ -52,7 +52,7 @@ nothing written here may depend on an answer that has not been decided. When a t
 one of these questions, raise it with the user instead of answering it implicitly.
 
 1. Distribution: how consumers pin and receive the catalogue.
-2. Whether a vendor and provider registry (labels, logo keys, ID prefixes) lives here.
+2. Whether a provider registry (labels, ID prefixes) and logo assets live here.
 
 ## Public repository rules
 
@@ -104,8 +104,8 @@ Tooling runs with [uv](https://docs.astral.sh/uv/) (Python 3.12+).
 
 ```sh
 uv sync                              # install tooling dependencies
-uv run scripts/build.py              # regenerate catalogue/facts.json from models/
-uv run scripts/check.py              # validate cards, the generated file, schema + invariants
+uv run scripts/build.py              # regenerate catalogue/facts.json and labs.json from models/
+uv run scripts/check.py              # validate the source, generated files, schemas + invariants
 uv run pytest                        # test the checker
 npx -y oxfmt@0.71.0                  # format Markdown, TOML, JSON, YAML
 ```

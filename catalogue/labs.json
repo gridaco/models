@@ -1,0 +1,72 @@
+{
+  "alibaba": {
+    "id": "alibaba",
+    "name": "Alibaba",
+    "url": "https://www.alibabagroup.com/"
+  },
+  "anthropic": {
+    "id": "anthropic",
+    "name": "Anthropic",
+    "url": "https://www.anthropic.com/"
+  },
+  "black-forest-labs": {
+    "id": "black-forest-labs",
+    "name": "Black Forest Labs",
+    "url": "https://bfl.ai/"
+  },
+  "bria": {
+    "id": "bria",
+    "name": "Bria",
+    "url": "https://bria.ai/"
+  },
+  "bytedance": {
+    "id": "bytedance",
+    "name": "ByteDance",
+    "url": "https://www.bytedance.com/"
+  },
+  "elevenlabs": {
+    "id": "elevenlabs",
+    "name": "ElevenLabs",
+    "url": "https://elevenlabs.io/"
+  },
+  "google": {
+    "id": "google",
+    "name": "Google",
+    "url": "https://ai.google/"
+  },
+  "meta": {
+    "id": "meta",
+    "name": "Meta",
+    "url": "https://ai.meta.com/"
+  },
+  "microsoft": {
+    "id": "microsoft",
+    "name": "Microsoft",
+    "url": "https://www.microsoft.com/"
+  },
+  "openai": {
+    "id": "openai",
+    "name": "OpenAI",
+    "url": "https://openai.com/"
+  },
+  "recraft-ai": {
+    "id": "recraft-ai",
+    "name": "Recraft",
+    "url": "https://www.recraft.ai/"
+  },
+  "tencent": {
+    "id": "tencent",
+    "name": "Tencent",
+    "url": "https://www.tencent.com/"
+  },
+  "tripo": {
+    "id": "tripo",
+    "name": "Tripo",
+    "url": "https://www.tripo3d.ai/"
+  },
+  "xai": {
+    "id": "xai",
+    "name": "xAI",
+    "url": "https://x.ai/"
+  }
+}

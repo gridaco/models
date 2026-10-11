@@ -33,6 +33,22 @@ A card without `vendor` sits under its ID namespace, which for a provider-hosted
 the publisher on that provider, not necessarily the lab that made the model (for example
 `nightmareai/real-esrgan`). Adding a sourced `vendor` moves the card to its lab.
 
+## A lab
+
+Every lab directory holds a `lab.toml`, generated into
+[`catalogue/labs.json`](../catalogue/labs.json):
+
+```toml
+name = "Black Forest Labs"   # display name, as the lab writes it
+url = "https://bfl.ai/"      # the lab's first-party homepage
+```
+
+The directory name is the lab ID; the file has no `id`. A new lab needs a `lab.toml` in the
+same change as its first card, and a `lab.toml` with no cards is reported. Publisher
+namespaces that are not labs (`851-labs`, `nightmareai`) have no `lab.toml`; they are listed
+in `KNOWN_UNREGISTERED_LABS` in [`scripts/check.py`](../scripts/check.py) until their cards
+get a sourced `vendor`.
+
 ## A card
 
 A card is TOML holding the card's contract fields, in the shape
@@ -71,9 +87,9 @@ A section that is one object rather than a table of cards
 ## After editing
 
 ```sh
-uv run scripts/build.py   # regenerate catalogue/facts.json
+uv run scripts/build.py   # regenerate catalogue/facts.json and catalogue/labs.json
 uv run scripts/check.py   # cards, generated file, schema, invariants
 ```
 
-Commit the card and the regenerated `facts.json` together. `facts.json` lists cards
+Commit the source and the regenerated files together. `facts.json` lists cards
 sorted by ID within each section; that order carries no meaning.

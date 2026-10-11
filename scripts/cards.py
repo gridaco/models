@@ -14,6 +14,8 @@ A card holds its contract fields plus two authoring keys that are not projected:
 
 A section that is a single object rather than a table of cards is authored as
 `models/<provider>/<binding_id>/operation.toml`.
+
+Each lab directory holds a `lab.toml` (`name`, `url`), projected to `catalogue/labs.json`.
 """
 
 from __future__ import annotations
@@ -26,6 +28,7 @@ from typing import Any, Iterator
 
 CARD_FILE = "card.toml"
 OPERATION_FILE = "operation.toml"
+LAB_FILE = "lab.toml"
 AUTHORING_KEYS = ("section", "null_keys")
 
 
@@ -36,13 +39,47 @@ class Card:
     data: dict[str, Any]
 
 
+@dataclass
+class Lab:
+    id: str  # the lab directory name
+    data: dict[str, Any]
+
+
 def load_cards(root: Path) -> list[Card]:
     cards = []
     for file in sorted(root.rglob("*.toml")):
+        if file.name == LAB_FILE and file.parent.parent == root:
+            continue
         with file.open("rb") as f:
             data = tomllib.load(f)
         cards.append(Card(file.parent.relative_to(root).as_posix(), file.name, data))
     return cards
+
+
+def load_labs(root: Path) -> list[Lab]:
+    labs = []
+    for file in sorted(root.glob(f"*/{LAB_FILE}")):
+        with file.open("rb") as f:
+            labs.append(Lab(file.parent.name, tomllib.load(f)))
+    return labs
+
+
+def lab_errors(labs: list[Lab], cards: list[Card], unregistered: set[str]) -> Iterator[str]:
+    """Every lab directory with cards has a lab.toml, and every lab.toml has cards.
+
+    `unregistered` names lab directories known to lack a lab.toml (for example a
+    publisher namespace that is not a lab); an entry that no longer applies is reported.
+    """
+    registered = {lab.id for lab in labs}
+    used = {card.path.split("/", 1)[0] for card in cards}
+    for lab in sorted(used - registered - unregistered):
+        yield f"models/{lab}/: lab directory has no {LAB_FILE}"
+    for lab in sorted(registered - used):
+        yield f"models/{lab}/{LAB_FILE}: lab has no cards"
+    for lab in sorted(unregistered & registered):
+        yield f"stale unregistered lab {lab!r}: it now has a {LAB_FILE}"
+    for lab in sorted(unregistered - used):
+        yield f"stale unregistered lab {lab!r}: it has no cards"
 
 
 def expected_path(card: Card) -> str | None:
@@ -118,5 +155,10 @@ def assemble(cards: list[Card], sections: list[str]) -> dict[str, Any]:
     return facts
 
 
-def dumps(facts: dict[str, Any]) -> str:
-    return json.dumps(facts, indent=2, ensure_ascii=False) + "\n"
+def assemble_labs(labs: list[Lab]) -> dict[str, Any]:
+    """Build labs.json: labs sorted by id."""
+    return {lab.id: {"id": lab.id, **lab.data} for lab in sorted(labs, key=lambda lab: lab.id)}
+
+
+def dumps(value: dict[str, Any]) -> str:
+    return json.dumps(value, indent=2, ensure_ascii=False) + "\n"

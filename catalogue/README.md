@@ -7,7 +7,9 @@ authored as one card per model in [`models/`](../models/); everything else outsi
 | file                        | role                                                                                                                 |
 | --------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | `facts.json`                | Generated from `models/`. Model identities, release provenance, provider bindings, capabilities, limits, list prices |
+| `labs.json`                 | Generated from `models/<lab>/lab.toml`. The labs that make catalogued models                                         |
 | `schemas/facts.schema.json` | JSON Schema 2020-12 for `facts.json`                                                                                 |
+| `schemas/labs.schema.json`  | JSON Schema 2020-12 for `labs.json`                                                                                  |
 | `PROVENANCE.md`             | Source notes and qualifications that don't fit in JSON                                                               |
 
 ## Origin
@@ -42,6 +44,12 @@ card has `id` (equal to its table key), `label`, and `release`
 (`{ date, basis, source_url }`). The rest depends on the family. Image and video cards are
 canonical (`vendor/model`) and hold a `providers` record of bindings keyed by provider;
 other families have one card per provider endpoint.
+
+## Labs
+
+`labs.json` is an object keyed by lab ID. Each lab has `id` (equal to its key), `name` (the
+display name as the lab writes it), and `url` (its first-party homepage). A card's `vendor`
+is a lab ID. Its `$id` is `https://grida.co/schemas/ai-model-labs-v1.json`.
 
 ## Rules
 

@@ -1,10 +1,13 @@
-"""Generate `catalogue/facts.json` from the authored cards in `models/`.
+"""Generate the catalogue contract from the authored source in `models/`.
+
+- `catalogue/facts.json` from the model cards (`models/<lab>/<model>/card.toml`)
+- `catalogue/labs.json` from the lab files (`models/<lab>/lab.toml`)
 
 Usage:
-    uv run scripts/build.py           # write catalogue/facts.json
-    uv run scripts/build.py --check   # exit 1 if catalogue/facts.json is out of date
+    uv run scripts/build.py           # write the generated files
+    uv run scripts/build.py --check   # exit 1 if a generated file is out of date
 
-`models/` is the source. Never edit `catalogue/facts.json` by hand.
+`models/` is the source. Never edit the generated files by hand.
 """
 
 from __future__ import annotations
@@ -13,11 +16,12 @@ import json
 import sys
 from pathlib import Path
 
-from cards import assemble, dumps, layout_errors, load_cards
+from cards import assemble, assemble_labs, dumps, layout_errors, load_cards, load_labs
 
 ROOT = Path(__file__).resolve().parent.parent
 MODELS = ROOT / "models"
 FACTS = ROOT / "catalogue" / "facts.json"
+LABS = ROOT / "catalogue" / "labs.json"
 FACTS_SCHEMA = ROOT / "catalogue" / "schemas" / "facts.schema.json"
 
 
@@ -27,30 +31,46 @@ def sections() -> list[str]:
         return json.load(f)["required"]
 
 
-def build() -> tuple[str, list[str]]:
+def build() -> tuple[dict[Path, str], list[str]]:
+    """Return the text of each generated file, and any layout errors."""
     cards = load_cards(MODELS)
     names = sections()
-    return dumps(assemble(cards, names)), list(layout_errors(cards, names))
+    outputs = {
+        FACTS: dumps(assemble(cards, names)),
+        LABS: dumps(assemble_labs(load_labs(MODELS))),
+    }
+    return outputs, list(layout_errors(cards, names))
+
+
+def stale(outputs: dict[Path, str], committed: dict[Path, str] | None = None) -> list[Path]:
+    """The generated files whose committed text differs from what the source generates."""
+    def read(path: Path) -> str | None:
+        if committed is not None and path in committed:
+            return committed[path]
+        return path.read_text(encoding="utf-8") if path.exists() else None
+
+    return [path for path, text in outputs.items() if read(path) != text]
 
 
 def main() -> int:
-    text, errors = build()
+    outputs, errors = build()
     for error in errors:
         print(error, file=sys.stderr)
     if errors:
         return 1
-    current = FACTS.read_text(encoding="utf-8") if FACTS.exists() else None
+    out_of_date = stale(outputs)
     if "--check" in sys.argv[1:]:
-        if current != text:
-            print(f"{FACTS.relative_to(ROOT)} is out of date: run uv run scripts/build.py", file=sys.stderr)
+        for path in out_of_date:
+            print(f"{path.relative_to(ROOT)} is out of date: run uv run scripts/build.py", file=sys.stderr)
+        if out_of_date:
             return 1
-        print(f"ok: {FACTS.relative_to(ROOT)} matches models/")
+        print("ok: generated files match models/")
         return 0
-    if current != text:
-        FACTS.write_text(text, encoding="utf-8")
-        print(f"wrote {FACTS.relative_to(ROOT)}")
-    else:
-        print(f"{FACTS.relative_to(ROOT)} already up to date")
+    for path in out_of_date:
+        path.write_text(outputs[path], encoding="utf-8")
+        print(f"wrote {path.relative_to(ROOT)}")
+    if not out_of_date:
+        print("generated files already up to date")
     return 0
 
 
