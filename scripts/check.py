@@ -1,10 +1,13 @@
-"""Validate the catalogue contract in `catalogue/`.
+"""Validate the authored cards in `models/` and the catalogue contract in `catalogue/`.
 
-Two layers:
+Three layers:
 
-1. Structure: `catalogue/facts.json` against `catalogue/schemas/facts.schema.json`
+1. Source: every card in `models/` sits at the path its lab and ID give it, names a
+   known section, and `catalogue/facts.json` is exactly what the cards generate
+   (`scripts/build.py`).
+2. Structure: `catalogue/facts.json` against `catalogue/schemas/facts.schema.json`
    (JSON Schema 2020-12, with format assertions on).
-2. Invariants the schema cannot express: table keys equal card IDs, release
+3. Invariants the schema cannot express: table keys equal card IDs, release
    dates are real calendar dates, facts carry no product policy, and provider
    bindings are keyed by their own provider.
 
@@ -23,6 +26,8 @@ from pathlib import Path
 from typing import Any, Iterator
 
 from jsonschema import Draft202012Validator
+
+import build
 
 ROOT = Path(__file__).resolve().parent.parent
 FACTS = ROOT / "catalogue" / "facts.json"
@@ -130,9 +135,18 @@ def check(facts: Any, schema: Any) -> list[str]:
     return errors
 
 
+def source_errors(committed: str | None = None) -> list[str]:
+    text, errors = build.build()
+    if committed is None:
+        committed = FACTS.read_text(encoding="utf-8")
+    if not errors and committed != text:
+        errors.append(f"{FACTS.relative_to(ROOT)} is out of date: run uv run scripts/build.py")
+    return errors
+
+
 def main() -> int:
     facts = load(FACTS)
-    errors = check(facts, load(FACTS_SCHEMA))
+    errors = source_errors() + check(facts, load(FACTS_SCHEMA))
     for error in errors:
         print(error, file=sys.stderr)
     if errors:

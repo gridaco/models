@@ -20,11 +20,14 @@ change, a limit correction, a deprecation, or an audit against provider document
 
 | file                                  | holds                                                                                      |
 | ------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `catalogue/facts.json`                | Model identities, release provenance, provider bindings, capabilities, limits, list prices |
+| `models/<lab>/<model>/card.toml`      | One card: identity, release provenance, provider bindings, capabilities, limits, prices    |
+| `catalogue/facts.json`                | Generated from `models/` by `scripts/build.py`. Never edit by hand                         |
 | `catalogue/schemas/facts.schema.json` | JSON Schema for `facts.json`                                                               |
 | `catalogue/PROVENANCE.md`             | Source notes and qualifications that do not fit in JSON                                    |
 
-The shape and its rules are in [`catalogue/README.md`](../../../catalogue/README.md). Product
+Card layout and the `section` / `null_keys` authoring keys are in
+[`models/README.md`](../../../models/README.md); the shape and its rules are in
+[`catalogue/README.md`](../../../catalogue/README.md). Product
 policy (which models a product lists, tiers, defaults) is not part of the catalogue.
 
 ## What an entry is
@@ -117,8 +120,10 @@ pricing shapes in use and their rules are in [`pricing.md`](./pricing.md).
 2. **Verify.** Confirm each fact on a first-party page: the vendor's model page or pricing
    page, or the provider's own page for a binding. See [`providers.md`](./providers.md).
 3. **Ground the release.** Follow `$provenance`.
-4. **Edit `catalogue/facts.json`.** Fields are `lower_snake_case`; IDs keep their exact
-   spelling. Run `uv run scripts/check.py`.
+4. **Edit the card in `models/`.** A new model gets a new directory at
+   `models/<lab>/<model>/card.toml` (see [`models/README.md`](../../../models/README.md)).
+   Fields are `lower_snake_case`; IDs keep their exact spelling. Run
+   `uv run scripts/build.py`, then `uv run scripts/check.py`.
 5. **Record qualifications** that do not fit the JSON (promotions, long-context bands,
    ambiguous units) in `catalogue/PROVENANCE.md`, with source URLs.
 
@@ -130,5 +135,6 @@ pricing shapes in use and their rules are in [`pricing.md`](./pricing.md).
 - [ ] IDs are exact; field names are `lower_snake_case`
 - [ ] Every entry has a complete `release` (`$provenance`)
 - [ ] Deprecated vs. deleted was decided by the lifecycle rules above
+- [ ] `catalogue/facts.json` was regenerated with `uv run scripts/build.py`, not edited by hand
 - [ ] `uv run scripts/check.py` passes
 - [ ] Nothing from a private source made it into the diff, the commit, or the PR (see `AGENTS.md`)

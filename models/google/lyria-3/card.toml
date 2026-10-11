@@ -1,0 +1,28 @@
+id = "google/lyria-3"
+section = "audio.music.models"
+
+label = "Lyria 3"
+short_description = "Generate 30-second 48kHz stereo music clips from text or images."
+vendor = "google"
+provider = "replicate"
+input = { modalities = ["text", "image"], max_images = 10 }
+duration_label = "30s"
+output_format = "mp3"
+sample_rate_label = "48 kHz stereo"
+speed_label = "fast"
+speed_max = "20s"
+pricing = { type = "per_run_flat", usd = 0.04 }
+avg_cost_usd = 0.04
+url = "https://replicate.com/google/lyria-3"
+
+[release]
+date = "2026-02-18"
+basis = "model"
+source_url = "https://deepmind.google/models/model-cards/lyria-3/"
+
+[output]
+default_format = "mp3"
+formats = ["mp3"]
+sample_rate_hz = 48_000
+channels = 2
+duration = { mode = "fixed", seconds = 30 }

@@ -1,0 +1,38 @@
+id = "bfl/flux-2-pro"
+section = "image.models"
+null_keys = ["styles", "sizes"]
+
+label = "Flux 2 Pro"
+short_description = "Latest Flux model with best-in-class image quality and prompt adherence"
+vendor = "black-forest-labs"
+speed_label = "medium"
+speed_max = "30s"
+constraints = { min_edge = 256, max_edge = 1440 }
+pricing = { type = "per_image_flat", usd = 0.03 }
+avg_cost_usd = 0.03
+
+[release]
+date = "2025-11-25"
+basis = "model"
+source_url = "https://bfl.ai/blog/flux-2"
+
+[providers.vercel]
+provider = "vercel"
+id = "bfl/flux-2-pro"
+pricing = { type = "per_image_flat", usd = 0.03 }
+avg_cost_usd = 0.03
+
+[providers.openrouter]
+provider = "openrouter"
+id = "black-forest-labs/flux.2-pro"
+pricing = { type = "per_image_flat", usd = 0.03 }
+avg_cost_usd = 0.03
+url = "https://openrouter.ai/black-forest-labs/flux.2-pro"
+references = { id = "black-forest-labs/flux.2-pro", max = 8 }
+
+[providers.fal]
+provider = "fal"
+id = "fal-ai/flux-2-pro"
+pricing = { type = "per_image_flat", usd = 0.03 }
+avg_cost_usd = 0.03
+url = "https://fal.ai/models/fal-ai/flux-2-pro"

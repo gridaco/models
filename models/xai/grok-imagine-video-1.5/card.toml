@@ -1,0 +1,49 @@
+id = "xai/grok-imagine-video-1.5"
+section = "video.models"
+
+label = "Grok Imagine Video 1.5"
+short_description = "SpaceXAI's image-to-video model — animates a still into cinematic video with native, lip-synced audio."
+vendor = "xai"
+aspect_ratios = ["16:9", "9:16"]
+min_duration = 1
+max_duration = 15
+audio = true
+speed_label = "fast"
+url = "https://docs.x.ai/developers/models/grok-imagine-video-1.5"
+
+[release]
+date = "2026-06-03"
+basis = "model"
+source_url = "https://x.ai/news/grok-imagine-1-5"
+
+[providers.vercel]
+provider = "vercel"
+id = "spacexai/grok-imagine-video-1.5"
+input = "image"
+avg_cost_usd = 0.71
+url = "https://vercel.com/ai-gateway/models/grok-imagine-video-1.5"
+
+[providers.vercel.pricing]
+type = "per_second"
+usd_per_input_image = 0.01
+
+[providers.vercel.pricing.usd_per_second]
+480p = { audio = 0.08 }
+720p = { audio = 0.14 }
+1080p = { audio = 0.25 }
+
+[providers.fal]
+provider = "fal"
+id = "xai/grok-imagine-video/v1.5/image-to-video"
+input = "image"
+avg_cost_usd = 0.71
+url = "https://fal.ai/models/xai/grok-imagine-video/v1.5/image-to-video"
+
+[providers.fal.pricing]
+type = "per_second"
+usd_per_input_image = 0.01
+
+[providers.fal.pricing.usd_per_second]
+480p = { audio = 0.08 }
+720p = { audio = 0.14 }
+1080p = { audio = 0.25 }

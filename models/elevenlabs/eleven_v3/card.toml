@@ -1,0 +1,23 @@
+id = "eleven_v3"
+section = "audio.text_to_speech.models"
+
+label = "Eleven v3"
+short_description = "Generate expressive speech with bracketed audio and emotion tags."
+vendor = "elevenlabs"
+provider = "elevenlabs"
+input = { type = "text", max_characters = 5000, audio_tags = true }
+output_format = "mp3"
+sample_rate_label = "44.1 kHz · 128 kbps"
+pricing = { type = "per_1000_characters", usd = 0.1 }
+url = "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
+
+[release]
+date = "2025-06-03"
+basis = "model"
+source_url = "https://elevenlabs.io/blog/eleven-v3"
+
+[output]
+default_format = "mp3"
+formats = ["mp3"]
+sample_rate_hz = 44_100
+bit_rate_kbps = 128

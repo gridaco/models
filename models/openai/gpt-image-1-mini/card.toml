@@ -1,0 +1,43 @@
+id = "openai/gpt-image-1-mini"
+section = "image.models"
+null_keys = ["styles", "constraints"]
+
+label = "GPT Image Mini"
+short_description = "Cost-efficient image generation model"
+vendor = "openai"
+speed_label = "slow"
+speed_max = "1m"
+sizes = [[1024, 1024, "1:1"], [1024, 1536, "2:3"], [1536, 1024, "3:2"]]
+avg_cost_usd = 0.011
+
+[release]
+date = "2025-10-06"
+basis = "model"
+source_url = "https://openai.com/devday/"
+
+[providers.vercel]
+provider = "vercel"
+id = "openai/gpt-image-1-mini"
+pricing = { type = "per_token", input = 2, output = 8 }
+avg_cost_usd = 0.011
+
+[pricing]
+type = "per_image_tiered"
+
+[pricing.tiers]
+"low/1024x1024" = 0.005
+"low/1024x1536" = 0.006
+"low/1536x1024" = 0.006
+"medium/1024x1024" = 0.011
+"medium/1024x1536" = 0.015
+"medium/1536x1024" = 0.015
+"high/1024x1024" = 0.036
+"high/1024x1536" = 0.052
+"high/1536x1024" = 0.052
+
+[pricing.tokens]
+input = 2
+cached_input = 0.2
+image_input = 2.5
+cached_image_input = 0.25
+output = 8

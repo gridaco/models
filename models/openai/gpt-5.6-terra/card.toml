@@ -1,0 +1,25 @@
+id = "openai/gpt-5.6-terra"
+section = "text.catalog"
+
+label = "GPT-5.6 Terra"
+multimodal = true
+image_input_mimes = ["image/png", "image/jpeg", "image/webp", "image/gif"]
+tool_call = true
+context_window = 1_050_000
+output_limit = 128_000
+
+[release]
+date = "2026-07-09"
+basis = "model"
+source_url = "https://openai.com/index/gpt-5-6/"
+
+[cost]
+input = 2
+output = 12
+cache_read = 0.2
+cache_write = 2.5
+
+[cost.long_context]
+input_tokens_above = 272_000
+input_multiplier = 2
+output_multiplier = 1.5

@@ -1,0 +1,58 @@
+id = "openai/gpt-image-2.5-sunburst"
+section = "image.models"
+null_keys = ["styles"]
+
+label = "GPT Image 2.5 Sunburst"
+short_description = "Detailed image generation and precise editing with longer generation times."
+vendor = "openai"
+transparent_background = true
+speed_label = "slow"
+speed_max = "varies"
+sizes = [[1024, 1024, "1:1"], [1024, 1536, "2:3"], [1536, 1024, "3:2"]]
+quality = { options = ["auto", "low", "medium", "high", "xhigh", "max"], default = "high" }
+pricing = { type = "per_token", input = 5, cached_input = 1.25, output = 30 }
+avg_cost_usd = 0.055
+
+[release]
+date = "2026-09-08"
+basis = "model"
+source_url = "https://openai.com/index/introducing-chatgpt-images-2-5/"
+
+[providers.vercel]
+provider = "vercel"
+id = "openai/gpt-image-2.5-sunburst"
+pricing = { type = "per_token", input = 5, cached_input = 1.25, output = 30 }
+avg_cost_usd = 0.055
+url = "https://vercel.com/ai-gateway/models/gpt-image-2.5-sunburst"
+
+[providers.openrouter]
+provider = "openrouter"
+id = "openai/gpt-image-2.5-sunburst"
+pricing = { type = "per_token", input = 5, image_input = 8, output = 30 }
+avg_cost_usd = 0.055
+url = "https://openrouter.ai/openai/gpt-image-2.5-sunburst"
+transparent_background = false
+references = { id = "openai/gpt-image-2.5-sunburst", max = 16 }
+
+[providers.fal]
+provider = "fal"
+id = "openai/gpt-image-2.5/sunburst/text-to-image"
+avg_cost_usd = 0.055
+url = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image"
+references = { id = "openai/gpt-image-2.5/sunburst/edit", max = 16 }
+
+[providers.fal.pricing]
+type = "per_token"
+input = 5
+cached_input = 1.25
+image_input = 8
+cached_image_input = 2
+text_output = 10
+output = 30
+
+[constraints]
+step = 16
+max_edge = 3840
+min_pixels = 655_360
+max_pixels = 8_294_400
+aspect_ratio = { max = 3 }

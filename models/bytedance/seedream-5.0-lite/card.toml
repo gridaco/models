@@ -1,0 +1,38 @@
+id = "bytedance/seedream-5.0-lite"
+section = "image.models"
+null_keys = ["styles", "sizes"]
+
+label = "Seedream 5.0 Lite"
+short_description = "ByteDance's fast 2K–4K image model — Seedream 5.0 quality at the 4.5 price point."
+vendor = "bytedance"
+speed_label = "fast"
+speed_max = "15s"
+constraints = { min_pixels = 3_686_400, max_pixels = 16_777_216 }
+pricing = { type = "per_image_flat", usd = 0.035 }
+avg_cost_usd = 0.035
+
+[release]
+date = "2026-02-13"
+basis = "model"
+source_url = "https://seed.bytedance.com/en/blog/deeper-thinking-more-accurate-generation-introducing-seedream-5-0-lite"
+
+[providers.vercel]
+provider = "vercel"
+id = "bytedance/seedream-5.0-lite"
+pricing = { type = "per_image_flat", usd = 0.035 }
+avg_cost_usd = 0.035
+
+[providers.openrouter]
+provider = "openrouter"
+id = "bytedance-seed/seedream-5-0-lite"
+pricing = { type = "per_image_flat", usd = 0.035 }
+avg_cost_usd = 0.035
+url = "https://openrouter.ai/bytedance-seed/seedream-5-0-lite"
+references = { id = "bytedance-seed/seedream-5-0-lite", max = 14 }
+
+[providers.fal]
+provider = "fal"
+id = "bytedance/seedream/v5/lite/text-to-image"
+pricing = { type = "per_image_flat", usd = 0.035 }
+avg_cost_usd = 0.035
+url = "https://fal.ai/models/bytedance/seedream/v5/lite/text-to-image"

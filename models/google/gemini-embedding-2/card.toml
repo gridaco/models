@@ -1,0 +1,19 @@
+id = "google/gemini-embedding-2"
+section = "embedding.models"
+
+label = "Gemini Embedding 2"
+deprecated = false
+short_description = "Natively multimodal embedding (text + image into one space); 3072-d, MRL-truncatable."
+vendor = "google"
+category = "embedding/multimodal"
+dimensions = 1536
+normalized = true
+multimodal = true
+pricing = { type = "per_token_input", input = 0.15 }
+avg_cost_usd = 2e-05
+url = "https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2-preview"
+
+[release]
+date = "2026-03-10"
+basis = "model"
+source_url = "https://ai.google.dev/gemini-api/docs/changelog"

@@ -1,0 +1,12 @@
+id = "nightmareai/real-esrgan"
+section = "image_tools.models"
+
+label = "Real-ESRGAN"
+url = "https://replicate.com/nightmareai/real-esrgan"
+category = "image/tool/upscale"
+cost_usd = 0.002
+
+[release]
+date = "2021-07-22"
+basis = "model"
+source_url = "https://github.com/xinntao/Real-ESRGAN/releases/tag/v0.1.0"

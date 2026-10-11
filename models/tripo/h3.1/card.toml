@@ -1,0 +1,29 @@
+id = "tripo/h3.1"
+section = "three_d.model_generation.models"
+
+vendor = "tripo"
+provider = "tripo"
+feature = "model-generation"
+inputs = ["text", "image", "multiview"]
+output = { primary = "glb", compression = "none" }
+texture_quality = ["standard", "detailed", "extreme"]
+label = "Tripo H3.1"
+binding_id = "v3.1-20260211"
+preview = false
+short_description = "High-detail geometry with optional PBR textures."
+face_limit = { min = 1, max = 1_500_000, detailed_max = 2_000_000 }
+geometry_quality = ["standard", "detailed"]
+url = "https://developers.tripo3d.ai/en/docs/generation-text-to-model/standard"
+
+[release]
+date = "2026-03-06"
+basis = "model"
+source_url = "https://www.tripo3d.ai/blog/introducing-hd-model-v3-1"
+
+[pricing]
+type = "per_generation_credits"
+usd_per_credit = 0.01
+texture_credits = { standard = 10, detailed = 20, extreme = 30 }
+source_url = "https://developers.tripo3d.ai/en/pricing"
+base_credits = { text = 10, image = 20, multiview = 20 }
+detailed_geometry_credits = 20

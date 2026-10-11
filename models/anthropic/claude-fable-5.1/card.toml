@@ -1,0 +1,16 @@
+id = "anthropic/claude-fable-5.1"
+section = "text.catalog"
+
+label = "Claude Fable 5.1"
+short_label = "Fable 5.1"
+multimodal = true
+image_input_mimes = ["image/jpeg", "image/png", "image/gif", "image/webp"]
+tool_call = true
+context_window = 1_000_000
+output_limit = 128_000
+cost = { input = 10, output = 50, cache_read = 0.25, cache_write = 12.5 }
+
+[release]
+date = "2026-09-01"
+basis = "model"
+source_url = "https://platform.claude.com/docs/en/models/fable-5-1/overview"

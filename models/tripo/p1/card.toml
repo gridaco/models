@@ -1,0 +1,27 @@
+id = "tripo/p1"
+section = "three_d.model_generation.models"
+
+vendor = "tripo"
+provider = "tripo"
+feature = "model-generation"
+inputs = ["text", "image", "multiview"]
+output = { primary = "glb", compression = "none" }
+texture_quality = ["standard", "detailed", "extreme"]
+label = "Tripo P1"
+binding_id = "P1-20260311"
+preview = false
+short_description = "Low-poly generation with clean mesh topology."
+face_limit = { min = 50, max = 20_000 }
+url = "https://developers.tripo3d.ai/en/docs/generation-text-to-model/p"
+
+[release]
+date = "2026-03-11"
+basis = "model"
+source_url = "https://www.tripo3d.ai/blog/introducing-smart-mesh-v1"
+
+[pricing]
+type = "per_generation_credits"
+usd_per_credit = 0.01
+texture_credits = { standard = 10, detailed = 20, extreme = 30 }
+source_url = "https://developers.tripo3d.ai/en/pricing"
+base_credits = { text = 30, image = 40, multiview = 40 }

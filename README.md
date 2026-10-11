@@ -44,8 +44,11 @@ consumes a projection of it.
 - **Not an endorsement.** Being catalogued does not mean any Grida product offers the model.
   Which models a product lists, and in what order, is that product's decision.
 
-The contract is plain JSON with a JSON Schema, readable from any language. Its shape and
-rules are documented in [`catalogue/README.md`](./catalogue/README.md).
+Each model is authored as one TOML card in [`models/`](./models/), grouped by lab
+(`models/openai/gpt-5.5/card.toml`). The contract consumers read,
+[`catalogue/facts.json`](./catalogue/facts.json), is generated from those cards: plain JSON
+with a JSON Schema, readable from any language. Its shape and rules are documented in
+[`catalogue/README.md`](./catalogue/README.md).
 
 ## Principles
 
@@ -59,9 +62,12 @@ rules are documented in [`catalogue/README.md`](./catalogue/README.md).
 
 ## Decided
 
-- **The contract is language-agnostic.** This repository holds JSON, JSON Schema, and
-  provenance notes. Tooling and tests use whichever language fits (currently Python).
-  Typed bindings and code generation live in each consumer.
+- **The contract is language-agnostic.** Consumers read JSON, JSON Schema, and provenance
+  notes. Tooling and tests use whichever language fits (currently Python). Typed bindings
+  and code generation live in each consumer.
+- **One card per model.** Facts are authored as TOML cards in `models/<lab>/<model>/`, and
+  `catalogue/facts.json` is generated from them. A card's directory leaves room for
+  per-model material such as example assets.
 - **Facts only.** Product policy (which models a product lists, its tiers and defaults)
   stays with each product.
 
@@ -76,8 +82,9 @@ These are deliberately undecided, and are tracked here so nobody mistakes them f
 
 ## Contributing
 
-Add or correct a model by opening a pull request that changes the catalogue and cites a
-first-party source for every new fact. Contributor and agent conventions live in
+Add or correct a model by opening a pull request that changes its card in
+[`models/`](./models/), regenerates `catalogue/facts.json`, and cites a first-party source
+for every new fact. Contributor and agent conventions live in
 [`AGENTS.md`](./AGENTS.md) and [`.agents/skills/`](./.agents/skills/).
 
 ## License

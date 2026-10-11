@@ -1,18 +1,21 @@
 # Catalogue
 
-This directory is the contract: language-agnostic JSON that consumers read. Everything
-outside it (scripts, tests, skills) is tooling for maintaining it.
+This directory is the contract: language-agnostic JSON that consumers read. Its facts are
+authored as one card per model in [`models/`](../models/); everything else outside it
+(scripts, tests, skills) is tooling for maintaining it.
 
 | file                        | role                                                                                     |
 | --------------------------- | ---------------------------------------------------------------------------------------- |
-| `facts.json`                | Model identities, release provenance, provider bindings, capabilities, limits, list prices |
+| `facts.json`                | Generated from `models/`. Model identities, release provenance, provider bindings, capabilities, limits, list prices |
 | `schemas/facts.schema.json` | JSON Schema 2020-12 for `facts.json`                                                      |
 | `PROVENANCE.md`             | Source notes and qualifications that don't fit in JSON                                    |
 
 ## Origin
 
 Imported byte-identical from [gridaco/grida](https://github.com/gridaco/grida) (`data/ai/`,
-commit `f053893047af`), with the shape unchanged.
+commit `f053893047af`), with the shape unchanged. It was then split into per-model cards in
+`models/`, from which `facts.json` is generated with the same data; only the order of cards
+and keys changed.
 
 ## Shape
 
@@ -34,7 +37,8 @@ section is a table of cards keyed by card ID:
 | `image_tools.models`              | Background removal and upscaling                    |
 | `embedding.models`                | Embeddings                                          |
 
-Every card has `id` (equal to its table key), `label`, and `release`
+Cards are listed in ID order within each section; the order carries no meaning. Every
+card has `id` (equal to its table key), `label`, and `release`
 (`{ date, basis, source_url }`). The rest depends on the family. Image and video cards are
 canonical (`vendor/model`) and hold a `providers` record of bindings keyed by provider;
 other families have one card per provider endpoint.

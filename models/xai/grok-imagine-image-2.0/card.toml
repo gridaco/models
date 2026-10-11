@@ -1,0 +1,70 @@
+id = "xai/grok-imagine-image-2.0"
+section = "image.models"
+null_keys = ["styles", "sizes"]
+
+label = "Grok Imagine Image 2.0"
+short_description = "SpaceXAI's image model — fast 1K/2K generation with a low-cost quality tier."
+vendor = "xai"
+speed_label = "fast"
+speed_max = "15s"
+constraints = { max_edge = 2048 }
+avg_cost_usd = 0.06
+
+[release]
+date = "2026-08-07"
+basis = "model"
+source_url = "https://x.ai/news/grok-imagine-image-2"
+
+[providers.vercel]
+provider = "vercel"
+id = "spacexai/grok-imagine-image-2.0"
+avg_cost_usd = 0.06
+
+[providers.vercel.pricing]
+type = "per_image_tiered"
+
+[providers.vercel.pricing.tiers]
+"low/1024x1024" = 0.04
+"medium/1024x1024" = 0.06
+"low/2048x2048" = 0.06
+"medium/2048x2048" = 0.08
+
+[providers.openrouter]
+provider = "openrouter"
+id = "x-ai/grok-imagine-image-2.0"
+avg_cost_usd = 0.06
+url = "https://openrouter.ai/x-ai/grok-imagine-image-2.0"
+references = { id = "x-ai/grok-imagine-image-2.0", max = 3 }
+
+[providers.openrouter.pricing]
+type = "per_image_tiered"
+
+[providers.openrouter.pricing.tiers]
+"low/1024x1024" = 0.04
+"medium/1024x1024" = 0.06
+"low/2048x2048" = 0.06
+"medium/2048x2048" = 0.08
+
+[providers.fal]
+provider = "fal"
+id = "xai/grok-imagine-image/v2.0/text-to-image"
+avg_cost_usd = 0.06
+url = "https://fal.ai/models/xai/grok-imagine-image/v2.0/text-to-image"
+
+[providers.fal.pricing]
+type = "per_image_tiered"
+
+[providers.fal.pricing.tiers]
+"low/1024x1024" = 0.04
+"medium/1024x1024" = 0.06
+"low/2048x2048" = 0.06
+"medium/2048x2048" = 0.08
+
+[pricing]
+type = "per_image_tiered"
+
+[pricing.tiers]
+"low/1024x1024" = 0.04
+"medium/1024x1024" = 0.06
+"low/2048x2048" = 0.06
+"medium/2048x2048" = 0.08

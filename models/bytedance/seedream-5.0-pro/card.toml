@@ -1,0 +1,42 @@
+id = "bytedance/seedream-5.0-pro"
+section = "image.models"
+null_keys = ["styles", "sizes"]
+
+label = "Seedream 5.0 Pro"
+short_description = "ByteDance's flagship image model — dense layouts, infographics and text-heavy compositions at 1K–2K."
+vendor = "bytedance"
+speed_label = "medium"
+speed_max = "30s"
+pricing = { type = "per_image_flat", usd = 0.035 }
+avg_cost_usd = 0.035
+
+[release]
+date = "2026-07-08"
+basis = "model"
+source_url = "https://seed.bytedance.com/en/blog/beyond-generation-it-understands-design-introducing-seedream-5-0-pro"
+
+[providers.vercel]
+provider = "vercel"
+id = "bytedance/seedream-5.0-pro"
+pricing = { type = "per_image_flat", usd = 0.035 }
+avg_cost_usd = 0.035
+
+[providers.openrouter]
+provider = "openrouter"
+id = "bytedance-seed/seedream-5-0-pro"
+pricing = { type = "per_image_flat", usd = 0.045 }
+avg_cost_usd = 0.045
+url = "https://openrouter.ai/bytedance-seed/seedream-5-0-pro"
+references = { id = "bytedance-seed/seedream-5-0-pro", max = 14 }
+
+[providers.fal]
+provider = "fal"
+id = "bytedance/seedream/v5/pro/text-to-image"
+pricing = { type = "per_image_flat", usd = 0.0675 }
+avg_cost_usd = 0.0675
+url = "https://fal.ai/models/bytedance/seedream/v5/pro/text-to-image"
+
+[constraints]
+min_pixels = 1_048_576
+max_pixels = 4_194_304
+aspect_ratio = { max = 16 }

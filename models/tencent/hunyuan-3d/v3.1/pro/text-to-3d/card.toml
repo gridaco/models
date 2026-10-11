@@ -1,0 +1,22 @@
+id = "fal-ai/hunyuan-3d/v3.1/pro/text-to-3d"
+section = "three_d.models"
+
+label = "Hunyuan 3D v3.1 Pro — Text"
+short_description = "Generate a textured 3D asset from a text prompt."
+vendor = "tencent"
+provider = "fal"
+category = "3d/text-to-3d"
+input = { type = "text", max_utf8_characters = 1024 }
+output = { primary = "glb", optional = ["fbx", "obj", "usdz"] }
+avg_cost_usd = 0.375
+url = "https://fal.ai/models/fal-ai/hunyuan-3d/v3.1/pro/text-to-3d"
+
+[release]
+date = "2026-01-16"
+basis = "model"
+source_url = "https://cloud.tencent.com/document/product/1804/120694"
+
+[pricing]
+type = "per_generation_base_plus_surcharges"
+base_usd = 0.375
+surcharges_usd = { pbr = 0.15, custom_face_count = 0.15 }

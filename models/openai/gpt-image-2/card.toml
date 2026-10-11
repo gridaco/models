@@ -1,0 +1,70 @@
+id = "openai/gpt-image-2"
+section = "image.models"
+null_keys = ["providers.vercel.transparent_background", "styles"]
+
+label = "GPT Image 2"
+short_description = "Previous-generation image model. Superseded by GPT Image 2.5."
+vendor = "openai"
+transparent_background = true
+speed_label = "medium"
+speed_max = "1m"
+sizes = [[1024, 1024, "1:1"], [1024, 1536, "2:3"], [1536, 1024, "3:2"]]
+avg_cost_usd = 0.053
+
+[release]
+date = "2026-04-21"
+basis = "model"
+source_url = "https://developers.openai.com/api/docs/models/gpt-image-2"
+
+[providers.vercel]
+provider = "vercel"
+id = "openai/gpt-image-2"
+pricing = { type = "per_token", input = 5, output = 30 }
+avg_cost_usd = 0.053
+
+[providers.openrouter]
+provider = "openrouter"
+id = "openai/gpt-image-2"
+pricing = { type = "per_token", input = 8, output = 8 }
+avg_cost_usd = 0.05
+url = "https://openrouter.ai/openai/gpt-image-2"
+transparent_background = false
+references = { id = "openai/gpt-image-2", max = 16 }
+
+[providers.fal]
+provider = "fal"
+id = "fal-ai/gpt-image-2"
+avg_cost_usd = 0.053
+url = "https://fal.ai/models/openai/gpt-image-2"
+
+[providers.fal.pricing]
+type = "per_image_tiered"
+tiers = { "low/1024x1024" = 0.006, "medium/1024x1024" = 0.053, "high/1024x1024" = 0.211 }
+
+[constraints]
+step = 16
+max_edge = 3840
+min_pixels = 655_360
+max_pixels = 8_294_400
+aspect_ratio = { max = 3 }
+
+[pricing]
+type = "per_image_tiered"
+
+[pricing.tiers]
+"low/1024x1024" = 0.006
+"low/1024x1536" = 0.005
+"low/1536x1024" = 0.005
+"medium/1024x1024" = 0.053
+"medium/1024x1536" = 0.041
+"medium/1536x1024" = 0.041
+"high/1024x1024" = 0.211
+"high/1024x1536" = 0.165
+"high/1536x1024" = 0.165
+
+[pricing.tokens]
+input = 5
+cached_input = 1.25
+image_input = 8
+cached_image_input = 2
+output = 30

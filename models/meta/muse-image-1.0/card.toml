@@ -1,0 +1,29 @@
+id = "meta/muse-image-1.0"
+section = "image.models"
+null_keys = ["styles", "sizes", "constraints"]
+
+label = "Muse Image 1.0"
+short_description = "Meta's agentic image model — reasons before it renders; generates and edits from text and references."
+vendor = "meta"
+speed_label = "medium"
+speed_max = "30s"
+pricing = { type = "per_image_flat", usd = 0.01 }
+avg_cost_usd = 0.01
+
+[release]
+date = "2026-07-07"
+basis = "model"
+source_url = "https://about.fb.com/news/2026/07/introducing-muse-image-meta-ai/"
+
+[providers.vercel]
+provider = "vercel"
+id = "meta/muse-image-1.0"
+pricing = { type = "per_image_flat", usd = 0.01 }
+avg_cost_usd = 0.01
+
+[providers.fal]
+provider = "fal"
+id = "meta/muse-image/text-to-image"
+pricing = { type = "per_image_flat", usd = 0.01 }
+avg_cost_usd = 0.01
+url = "https://fal.ai/models/meta/muse-image/text-to-image"

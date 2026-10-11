@@ -1,0 +1,12 @@
+id = "851-labs/background-remover"
+section = "image_tools.models"
+null_keys = ["release.date"]
+
+label = "851 Labs Background Remover"
+url = "https://replicate.com/851-labs/background-remover"
+category = "image/tool/remove-background"
+cost_usd = 0.00048
+
+[release]
+basis = "provider_endpoint"
+source_url = "https://replicate.com/851-labs/background-remover/versions"

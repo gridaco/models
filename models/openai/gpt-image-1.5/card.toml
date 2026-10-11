@@ -1,0 +1,43 @@
+id = "openai/gpt-image-1.5"
+section = "image.models"
+null_keys = ["styles", "constraints"]
+
+label = "GPT Image 1.5"
+short_description = "Previous-generation image model. Superseded by GPT Image 2."
+vendor = "openai"
+speed_label = "medium"
+speed_max = "1m"
+sizes = [[1024, 1024, "1:1"], [1024, 1536, "2:3"], [1536, 1024, "3:2"]]
+avg_cost_usd = 0.034
+
+[release]
+date = "2025-12-16"
+basis = "model"
+source_url = "https://openai.com/index/new-chatgpt-images-is-here/"
+
+[providers.vercel]
+provider = "vercel"
+id = "openai/gpt-image-1.5"
+pricing = { type = "per_token", input = 5, output = 32 }
+avg_cost_usd = 0.034
+
+[pricing]
+type = "per_image_tiered"
+
+[pricing.tiers]
+"low/1024x1024" = 0.009
+"low/1024x1536" = 0.013
+"low/1536x1024" = 0.013
+"medium/1024x1024" = 0.034
+"medium/1024x1536" = 0.05
+"medium/1536x1024" = 0.05
+"high/1024x1024" = 0.133
+"high/1024x1536" = 0.2
+"high/1536x1024" = 0.2
+
+[pricing.tokens]
+input = 5
+cached_input = 1.25
+image_input = 8
+cached_image_input = 2
+output = 32

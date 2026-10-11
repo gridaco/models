@@ -1,0 +1,25 @@
+id = "openai/gpt-6-astra"
+section = "text.catalog"
+
+label = "GPT-6 Astra"
+multimodal = true
+image_input_mimes = ["image/png", "image/jpeg", "image/webp", "image/gif"]
+tool_call = true
+context_window = 1_050_000
+output_limit = 128_000
+
+[release]
+date = "2026-09-04"
+basis = "provider_endpoint"
+source_url = "https://vercel.com/ai-gateway/models/gpt-6-astra"
+
+[cost]
+input = 10
+output = 50
+cache_read = 1
+cache_write = 12.5
+
+[cost.long_context]
+input_tokens_above = 272_000
+input_multiplier = 2
+output_multiplier = 1.5

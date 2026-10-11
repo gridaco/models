@@ -1,0 +1,38 @@
+id = "bytedance/seedream-4.5"
+section = "image.models"
+null_keys = ["styles", "sizes"]
+
+label = "Seedream 4.5"
+short_description = "ByteDance's unified image generation and editing model."
+vendor = "bytedance"
+speed_label = "fast"
+speed_max = "15s"
+constraints = { max_edge = 4096 }
+pricing = { type = "per_image_flat", usd = 0.04 }
+avg_cost_usd = 0.04
+
+[release]
+date = "2025-12-03"
+basis = "model"
+source_url = "https://blog.fal.ai/seedream-4-5-is-now-available-on-fal/"
+
+[providers.vercel]
+provider = "vercel"
+id = "bytedance/seedream-4.5"
+pricing = { type = "per_image_flat", usd = 0.04 }
+avg_cost_usd = 0.04
+
+[providers.openrouter]
+provider = "openrouter"
+id = "bytedance-seed/seedream-4.5"
+pricing = { type = "per_image_flat", usd = 0.04 }
+avg_cost_usd = 0.04
+url = "https://openrouter.ai/bytedance-seed/seedream-4.5"
+references = { id = "bytedance-seed/seedream-4.5", max = 14 }
+
+[providers.fal]
+provider = "fal"
+id = "fal-ai/bytedance/seedream/v4.5/text-to-image"
+pricing = { type = "per_image_flat", usd = 0.04 }
+avg_cost_usd = 0.04
+url = "https://fal.ai/models/fal-ai/bytedance/seedream/v4.5/text-to-image"

@@ -1,0 +1,38 @@
+id = "google/gemini-3-pro-image"
+section = "image.models"
+null_keys = ["styles", "sizes"]
+
+label = "Gemini 3 Pro Image"
+short_description = "High-quality multimodal model with native image generation"
+vendor = "google"
+speed_label = "medium"
+speed_max = "30s"
+constraints = { max_edge = 1536 }
+pricing = { type = "per_token", input = 2, output = 12 }
+avg_cost_usd = 0.015
+
+[release]
+date = "2025-11-20"
+basis = "model"
+source_url = "https://blog.google/innovation-and-ai/products/nano-banana-pro/"
+
+[providers.vercel]
+provider = "vercel"
+id = "google/gemini-3-pro-image"
+pricing = { type = "per_token", input = 2, output = 12 }
+avg_cost_usd = 0.015
+
+[providers.openrouter]
+provider = "openrouter"
+id = "google/gemini-3-pro-image-preview"
+pricing = { type = "per_token", input = 2, output = 12 }
+avg_cost_usd = 0.015
+url = "https://openrouter.ai/google/gemini-3-pro-image-preview"
+references = { id = "google/gemini-3-pro-image-preview", max = 14 }
+
+[providers.fal]
+provider = "fal"
+id = "fal-ai/nano-banana-pro"
+pricing = { type = "per_image_flat", usd = 0.15 }
+avg_cost_usd = 0.15
+url = "https://fal.ai/models/fal-ai/nano-banana-pro"

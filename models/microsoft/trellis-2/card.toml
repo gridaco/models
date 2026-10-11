@@ -1,0 +1,22 @@
+id = "fal-ai/trellis-2"
+section = "three_d.models"
+
+label = "TRELLIS.2"
+short_description = "Generate a textured GLB asset from a single reference image."
+vendor = "microsoft"
+provider = "fal"
+category = "3d/image-to-3d"
+input = { type = "image", min_images = 1, max_images = 1 }
+output = { primary = "glb", optional = [] }
+avg_cost_usd = 0.3
+url = "https://fal.ai/models/fal-ai/trellis-2"
+
+[release]
+date = "2025-12-16"
+basis = "model"
+source_url = "https://huggingface.co/microsoft/TRELLIS.2-4B"
+
+[pricing]
+type = "per_generation_by_resolution"
+default_resolution = "1024"
+usd_by_resolution = { 512 = 0.25, 1024 = 0.3, 1536 = 0.35 }

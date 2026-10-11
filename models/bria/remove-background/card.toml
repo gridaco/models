@@ -1,0 +1,12 @@
+id = "bria/remove-background"
+section = "image_tools.models"
+
+label = "Bria Remove Background"
+url = "https://replicate.com/bria/remove-background"
+category = "image/tool/remove-background"
+cost_usd = 0.018
+
+[release]
+date = "2024-11-12"
+basis = "model"
+source_url = "https://bria.ai/blog/brias-new-state-of-the-art-remove-background-outperforms-the-competition"
