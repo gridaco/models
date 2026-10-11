@@ -1,2 +1,11 @@
 name = "Google"
 url = "https://ai.google/"
+
+# The ai.google apple-touch-icon, downloaded unchanged. Google's SVG of the same mark only
+# wraps a 48 px PNG. Logo use is governed by the Google Brand Resource Center.
+[logo]
+file = "logo.png"
+kind = "symbol"
+source_url = "https://www.gstatic.com/images/branding/googleg_gradient/2x/googleg_gradient_standard_96dp.png"
+guidelines_url = "https://about.google/brand-resource-center/"
+retrieved = "2026-10-12"

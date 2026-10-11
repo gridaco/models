@@ -53,9 +53,7 @@ retrieved = "2026-10-12"
 
 A logo is the lab's official artwork from a first-party source: its brand kit, press kit, or
 its own website. Never an aggregator or a redrawing. Prefer SVG, then PNG, then WebP; prefer
-the lab's symbol to its wordmark unless the lab's guidelines say otherwise. A logo is
-optional: when a lab requires approval or accepting terms before its logo is used, leave
-`[logo]` out until a maintainer has done so. Keep the artwork unchanged, and say in a comment above
+the lab's symbol to its wordmark unless the lab's guidelines say otherwise. Keep the artwork unchanged, and say in a comment above
 `[logo]` how it was obtained when it was not a plain download (for example, extracted from
 the site header). `check.py` rejects SVGs with scripts, event attributes, `foreignObject`, or
 external references. Logos are trademarks of their owners and are not covered by this

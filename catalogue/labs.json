@@ -76,12 +76,28 @@
   "google": {
     "id": "google",
     "name": "Google",
-    "url": "https://ai.google/"
+    "url": "https://ai.google/",
+    "logo": {
+      "path": "logos/google.png",
+      "media_type": "image/png",
+      "kind": "symbol",
+      "source_url": "https://www.gstatic.com/images/branding/googleg_gradient/2x/googleg_gradient_standard_96dp.png",
+      "guidelines_url": "https://about.google/brand-resource-center/",
+      "retrieved": "2026-10-12"
+    }
   },
   "meta": {
     "id": "meta",
     "name": "Meta",
-    "url": "https://ai.meta.com/"
+    "url": "https://ai.meta.com/",
+    "logo": {
+      "path": "logos/meta.svg",
+      "media_type": "image/svg+xml",
+      "kind": "symbol",
+      "source_url": "https://static.xx.fbcdn.net/rsrc.php/yf/r/-7pQO6hUGK_.svg",
+      "guidelines_url": "https://www.meta.com/brand/resources/meta/company-brand/",
+      "retrieved": "2026-10-12"
+    }
   },
   "microsoft": {
     "id": "microsoft",
