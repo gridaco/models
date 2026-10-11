@@ -83,6 +83,22 @@ https://platform.claude.com/docs/en/models/haiku-5-5/overview
 https://platform.claude.com/docs/en/about-claude/pricing
 https://vercel.com/ai-gateway/models/claude-haiku-5.5
 
+## `"anthropic/claude-sonnet-5.5": {`
+
+Anthropic API ID `claude-sonnet-5-5`; this is the Vercel AI Gateway ID, whose
+model feed lists the same rates. Same $2/$10 card as Claude Sonnet 5, with
+cache reads at 0.05x base input ($0.10) instead of $0.20; `cache_write` is
+the 5-minute write ($2.50; the 1-hour write is $4).
+https://platform.claude.com/docs/en/models/sonnet-5-5/overview
+https://platform.claude.com/docs/en/about-claude/pricing
+https://vercel.com/ai-gateway/models/claude-sonnet-5.5
+
+Claude Sonnet 5 stays catalogued. Sonnet 5.5 is not a drop-in successor:
+forced tool use (`tool_choice` `any`/`tool`) returns a 400 error, thinking
+can't be fully disabled (`between_tools` is its lowest setting), and
+`computer_20251124` is not accepted on the Claude API and Google Cloud.
+https://platform.claude.com/docs/en/models/sonnet-5-5/whats-new-sonnet-5-5
+
 ## `"anthropic/claude-sonnet-5": {`
 
 $2/$10 is the standard rate, not a live discount: it launched as an

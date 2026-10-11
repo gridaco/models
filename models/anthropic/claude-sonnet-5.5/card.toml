@@ -1,0 +1,16 @@
+id = "anthropic/claude-sonnet-5.5"
+section = "text.catalog"
+
+label = "Claude Sonnet 5.5"
+short_label = "Sonnet 5.5"
+multimodal = true
+image_input_mimes = ["image/jpeg", "image/png", "image/gif", "image/webp"]
+tool_call = true
+context_window = 1_000_000
+output_limit = 128_000
+cost = { input = 2, output = 10, cache_read = 0.1, cache_write = 2.5 }
+
+[release]
+date = "2026-09-28"
+basis = "model"
+source_url = "https://platform.claude.com/docs/en/models/sonnet-5-5/overview"
