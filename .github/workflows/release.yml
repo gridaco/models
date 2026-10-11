@@ -150,7 +150,14 @@ jobs:
         if: steps.latest.outputs.publish == 'true'
         run: |
           # jsDelivr caches the `@<major>` alias for hours; ask it to resolve the new version now.
-          major="$(jq -r .version package/package.json | cut -d. -f1)"
+          # Wait until the registry serves the new version first: a refresh before then resolves
+          # the alias to the previous version and caches that again.
+          version="$(jq -r .version package/package.json)"
+          for attempt in $(seq 1 20); do
+            [ "$(npm view "$NPM_PACKAGE" dist-tags.latest --prefer-online 2>/dev/null)" = "$version" ] && break
+            sleep 15
+          done
+          major="${version%%.*}"
           for file in models.json labs.json manifest.json; do
             curl -fsS "https://purge.jsdelivr.net/npm/$NPM_PACKAGE@$major/$file" > /dev/null \
               || echo "Could not refresh $file; jsDelivr will pick it up within hours."
