@@ -31,7 +31,7 @@ output_multiplier = 5
 [providers.vercel]
 provider = "vercel"
 id = "anthropic/claude-haiku-5.5"
-url = "https://vercel.com/ai-gateway/models/claude-haiku-5.5"
+url = "https://ai-gateway.vercel.sh/v1/models"
 endpoints = [
   { id = "anthropic/claude-haiku-5.5", input = "text", source_url = "https://ai-gateway.vercel.sh/v1/models" },
 ]

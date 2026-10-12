@@ -19,7 +19,7 @@ source_url = "https://platform.claude.com/docs/en/models/fable-5-1/overview"
 [providers.vercel]
 provider = "vercel"
 id = "anthropic/claude-fable-5.1"
-url = "https://vercel.com/ai-gateway/models/claude-fable-5.1"
+url = "https://ai-gateway.vercel.sh/v1/models"
 endpoints = [
   { id = "anthropic/claude-fable-5.1", input = "text", source_url = "https://ai-gateway.vercel.sh/v1/models" },
 ]

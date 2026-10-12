@@ -19,7 +19,7 @@ source_url = "https://platform.claude.com/docs/en/release-notes/overview"
 [providers.vercel]
 provider = "vercel"
 id = "anthropic/claude-opus-4.8"
-url = "https://vercel.com/ai-gateway/models/claude-opus-4.8"
+url = "https://ai-gateway.vercel.sh/v1/models"
 endpoints = [
   { id = "anthropic/claude-opus-4.8", input = "text", source_url = "https://ai-gateway.vercel.sh/v1/models" },
 ]
