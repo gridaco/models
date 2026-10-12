@@ -100,3 +100,15 @@ From the repository root:
 uv run scripts/check.py   # schema + invariants
 uv run pytest             # the checker rejects what it should
 ```
+
+## Provider endpoints
+
+A provider binding may list `endpoints`: exact call IDs with `input` (`text`,
+`image`, `video`, `audio`, or `task`) and a first-party `source_url`. These identify
+input variants, not a routing preference. The existing binding `id` remains its
+primary call ID; `references` and pricing retain their existing meaning.
+Endpoint IDs are unique within a binding. The list records documented variants,
+not an assertion that a consumer supports every variant.
+
+`vendor`, including on text cards, identifies the model's lab in `labs.json`.
+It is independent of a model ID's namespace and its serving provider.

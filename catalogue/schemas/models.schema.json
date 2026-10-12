@@ -84,6 +84,47 @@
           "items": {
             "type": "string"
           }
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vendor": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Lab ID resolving in labs.json; independent of the serving provider."
+        },
+        "release": {
+          "type": "object",
+          "required": ["date", "basis", "source_url"],
+          "additionalProperties": false,
+          "properties": {
+            "date": {
+              "type": ["string", "null"],
+              "format": "date"
+            },
+            "basis": {
+              "enum": ["model", "provider_endpoint"]
+            },
+            "source_url": {
+              "type": "string",
+              "pattern": "^https://"
+            }
+          },
+          "if": {
+            "properties": {
+              "date": {
+                "type": "null"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "basis": {
+                "const": "provider_endpoint"
+              }
+            }
+          }
         }
       }
     }
@@ -153,9 +194,21 @@
               "id": {
                 "type": "string",
                 "minLength": 1
+              },
+              "endpoints": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/provider_endpoint"
+                }
               }
             }
           }
+        },
+        "vendor": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Lab ID resolving in labs.json; independent of the serving provider."
         }
       }
     },
@@ -223,6 +276,24 @@
               }
             }
           }
+        }
+      }
+    },
+    "provider_endpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "input", "source_url"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "input": {
+          "enum": ["text", "image", "video", "audio", "task"]
+        },
+        "source_url": {
+          "type": "string",
+          "pattern": "^https://"
         }
       }
     }

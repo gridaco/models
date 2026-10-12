@@ -322,3 +322,20 @@ def test_models_json_schema_must_be_this_schema():
         facts["$schema"] = "https://example.com/other.json"
 
     assert any("$schema" in e for e in mutated(mutate))
+
+
+def test_provider_endpoint_needs_source_and_input():
+    def mutate(facts):
+        first("image.models", facts)["providers"]["fal"]["endpoints"] = [{"id": "test/route"}]
+    assert any("required property" in e for e in mutated(mutate))
+
+
+def test_provider_endpoints_cannot_repeat():
+    def mutate(facts):
+        endpoint = {"id": "test/route", "input": "text", "source_url": "https://example.com/api"}
+        first("image.models", facts)["providers"]["fal"]["endpoints"] = [endpoint, endpoint.copy()]
+    assert any("duplicate endpoint" in e for e in mutated(mutate))
+
+
+def test_existing_binding_without_endpoints_remains_valid():
+    assert check.check(MODELS_JSON, SCHEMA) == []

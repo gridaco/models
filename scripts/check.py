@@ -136,6 +136,14 @@ def invariant_errors(facts: dict[str, Any]) -> Iterator[str]:
                     if not binding.get("id"):
                         yield f"{where}/providers/{name}: binding has no id"
 
+            for name, binding in card.get("providers", {}).items():
+                endpoint_ids = set()
+                for endpoint in binding.get("endpoints", []):
+                    endpoint_id = endpoint.get("id")
+                    if endpoint_id in endpoint_ids:
+                        yield f"{where}/providers/{name}: duplicate endpoint {endpoint_id!r}"
+                    endpoint_ids.add(endpoint_id)
+
     for exception in sorted(KNOWN_EXCEPTIONS - used_exceptions):
         yield f"stale known exception {exception}: remove it from KNOWN_EXCEPTIONS"
 
