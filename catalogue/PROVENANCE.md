@@ -702,3 +702,28 @@ https://fal.ai/models/xai/grok-imagine-video/v1.5/image-to-video
 VERIFY before prod: models.dev lists no per-1M price for
 gemini-embedding-2 yet; using the gemini-embedding-001 family
 input rate ($0.15 / 1M) as a conservative stand-in.
+
+## Text labs and Vercel endpoints (2026-10-13)
+
+Text cards identify the lab named by their existing first-party release source:
+OpenAI, Anthropic, or Google. Their exact serving IDs are verified against
+[Vercel's public model discovery](https://ai-gateway.vercel.sh/v1/models),
+which lists all 17 recorded text models. This records availability, not a price
+or a routing preference. Existing model release dates and prices are unchanged.
+
+## fal input variants (2026-10-13)
+
+Bindings list the text and image variants documented on their exact fal API
+pages. Each endpoint includes its own source URL; existing `references` fields
+remain unchanged. GPT Image 2's ID is corrected to `openai/gpt-image-2` from
+[fal's API example](https://fal.ai/models/openai/gpt-image-2/api); the overview's
+hand-written quick start still shows `fal-ai/gpt-image-2`, which disagrees with
+the generated API documentation. The generated endpoint-specific API example
+is the more specific source. This correction does not change prices.
+
+## Tripo rig check
+
+[Tripo's rig-check documentation](https://developers.tripo3d.ai/en/docs/animations-rig-check)
+identifies the operation and lab but does not establish its first public release
+day. It carries `basis: provider_endpoint` and `date: null`, as do the rigging
+endpoints; a consumer must not substitute its own integration date.

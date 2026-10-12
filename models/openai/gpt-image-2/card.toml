@@ -32,8 +32,12 @@ transparent_background = false
 references = { id = "openai/gpt-image-2", max = 16 }
 
 [providers.fal]
+endpoints = [
+  { id = "openai/gpt-image-2", input = "text", source_url = "https://fal.ai/models/openai/gpt-image-2/api" },
+  { id = "openai/gpt-image-2/edit", input = "image", source_url = "https://fal.ai/models/openai/gpt-image-2/edit/api" },
+]
 provider = "fal"
-id = "fal-ai/gpt-image-2"
+id = "openai/gpt-image-2"
 avg_cost_usd = 0.053
 url = "https://fal.ai/models/openai/gpt-image-2"
 

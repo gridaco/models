@@ -3,6 +3,7 @@
   "text.catalog": {
     "anthropic/claude-fable-5": {
       "id": "anthropic/claude-fable-5",
+      "vendor": "anthropic",
       "label": "Claude Fable 5",
       "short_label": "Fable 5",
       "multimodal": true,
@@ -25,10 +26,25 @@
         "date": "2026-06-09",
         "basis": "model",
         "source_url": "https://platform.claude.com/docs/en/release-notes/overview"
+      },
+      "providers": {
+        "vercel": {
+          "provider": "vercel",
+          "id": "anthropic/claude-fable-5",
+          "url": "https://vercel.com/ai-gateway/models/claude-fable-5",
+          "endpoints": [
+            {
+              "id": "anthropic/claude-fable-5",
+              "input": "text",
+              "source_url": "https://ai-gateway.vercel.sh/v1/models"
+            }
+          ]
+        }
       }
     },
     "anthropic/claude-fable-5.1": {
       "id": "anthropic/claude-fable-5.1",
+      "vendor": "anthropic",
       "label": "Claude Fable 5.1",
       "short_label": "Fable 5.1",
       "multimodal": true,
@@ -51,10 +67,25 @@
         "date": "2026-09-01",
         "basis": "model",
         "source_url": "https://platform.claude.com/docs/en/models/fable-5-1/overview"
+      },
+      "providers": {
+        "vercel": {
+          "provider": "vercel",
+          "id": "anthropic/claude-fable-5.1",
+          "url": "https://vercel.com/ai-gateway/models/claude-fable-5.1",
+          "endpoints": [
+            {
+              "id": "anthropic/claude-fable-5.1",
+              "input": "text",
+              "source_url": "https://ai-gateway.vercel.sh/v1/models"
+            }
+          ]
+        }
       }
     },
     "anthropic/claude-haiku-5.5": {
       "id": "anthropic/claude-haiku-5.5",
+      "vendor": "anthropic",
       "label": "Claude Haiku 5.5",
       "short_label": "Haiku 5.5",
       "multimodal": true,
@@ -82,10 +113,25 @@
           "input_multiplier": 5,
           "output_multiplier": 5
         }
+      },
+      "providers": {
+        "vercel": {
+          "provider": "vercel",
+          "id": "anthropic/claude-haiku-5.5",
+          "url": "https://vercel.com/ai-gateway/models/claude-haiku-5.5",
+          "endpoints": [
+            {
+              "id": "anthropic/claude-haiku-5.5",
+              "input": "text",
+              "source_url": "https://ai-gateway.vercel.sh/v1/models"
+            }
+          ]
+        }
       }
     },
     "anthropic/claude-opus-4.8": {
       "id": "anthropic/claude-opus-4.8",
+      "vendor": "anthropic",
       "label": "Claude Opus 4.8",
       "short_label": "Opus 4.8",
       "multimodal": true,
@@ -108,10 +154,25 @@
         "date": "2026-05-28",
         "basis": "model",
         "source_url": "https://platform.claude.com/docs/en/release-notes/overview"
+      },
+      "providers": {
+        "vercel": {
+          "provider": "vercel",
+          "id": "anthropic/claude-opus-4.8",
+          "url": "https://vercel.com/ai-gateway/models/claude-opus-4.8",
+          "endpoints": [
+            {
+              "id": "anthropic/claude-opus-4.8",
+              "input": "text",
+              "source_url": "https://ai-gateway.vercel.sh/v1/models"
+            }
+          ]
+        }
       }
     },
     "anthropic/claude-opus-5": {
       "id": "anthropic/claude-opus-5",
+      "vendor": "anthropic",
       "label": "Claude Opus 5",
       "short_label": "Opus 5",
       "multimodal": true,
@@ -134,10 +195,25 @@
         "date": "2026-07-24",
         "basis": "model",
         "source_url": "https://platform.claude.com/docs/en/release-notes/overview"
+      },
+      "providers": {
+        "vercel": {
+          "provider": "vercel",
+          "id": "anthropic/claude-opus-5",
+          "url": "https://vercel.com/ai-gateway/models/claude-opus-5",
+          "endpoints": [
+            {
+              "id": "anthropic/claude-opus-5",
+              "input": "text",
+              "source_url": "https://ai-gateway.vercel.sh/v1/models"
+            }
+          ]
+        }
       }
     },
     "anthropic/claude-opus-5.5": {
       "id": "anthropic/claude-opus-5.5",
+      "vendor": "anthropic",
       "label": "Claude Opus 5.5",
       "short_label": "Opus 5.5",
       "multimodal": true,
@@ -160,10 +236,25 @@
         "date": "2026-09-22",
         "basis": "model",
         "source_url": "https://platform.claude.com/docs/en/models/opus-5-5/overview"
+      },
+      "providers": {
+        "vercel": {
+          "provider": "vercel",
+          "id": "anthropic/claude-opus-5.5",
+          "url": "https://vercel.com/ai-gateway/models/claude-opus-5.5",
+          "endpoints": [
+            {
+              "id": "anthropic/claude-opus-5.5",
+              "input": "text",
+              "source_url": "https://ai-gateway.vercel.sh/v1/models"
+            }
+          ]
+        }
       }
     },
     "anthropic/claude-sonnet-5": {
       "id": "anthropic/claude-sonnet-5",
+      "vendor": "anthropic",
       "label": "Claude Sonnet 5",
       "short_label": "Sonnet 5",
       "multimodal": true,
@@ -186,10 +277,25 @@
         "date": "2026-06-30",
         "basis": "model",
         "source_url": "https://platform.claude.com/docs/en/release-notes/overview"
+      },
+      "providers": {
+        "vercel": {
+          "provider": "vercel",
+          "id": "anthropic/claude-sonnet-5",
+          "url": "https://vercel.com/ai-gateway/models/claude-sonnet-5",
+          "endpoints": [
+            {
+              "id": "anthropic/claude-sonnet-5",
+              "input": "text",
+              "source_url": "https://ai-gateway.vercel.sh/v1/models"
+            }
+          ]
+        }
       }
     },
     "anthropic/claude-sonnet-5.5": {
       "id": "anthropic/claude-sonnet-5.5",
+      "vendor": "anthropic",
       "label": "Claude Sonnet 5.5",
       "short_label": "Sonnet 5.5",
       "multimodal": true,
@@ -212,10 +318,25 @@
         "date": "2026-09-28",
         "basis": "model",
         "source_url": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview"
+      },
+      "providers": {
+        "vercel": {
+          "provider": "vercel",
+          "id": "anthropic/claude-sonnet-5.5",
+          "url": "https://vercel.com/ai-gateway/models/claude-sonnet-5.5",
+          "endpoints": [
+            {
+              "id": "anthropic/claude-sonnet-5.5",
+              "input": "text",
+              "source_url": "https://ai-gateway.vercel.sh/v1/models"
+            }
+          ]
+        }
       }
     },
     "google/gemini-3.1-pro-preview": {
       "id": "google/gemini-3.1-pro-preview",
+      "vendor": "google",
       "label": "Gemini 3.1 Pro Preview",
       "short_label": "Gemini 3.1 Pro",
       "multimodal": true,
@@ -243,10 +364,25 @@
           "input_multiplier": 2,
           "output_multiplier": 1.5
         }
+      },
+      "providers": {
+        "vercel": {
+          "provider": "vercel",
+          "id": "google/gemini-3.1-pro-preview",
+          "url": "https://vercel.com/ai-gateway/models/gemini-3.1-pro-preview",
+          "endpoints": [
+            {
+              "id": "google/gemini-3.1-pro-preview",
+              "input": "text",
+              "source_url": "https://ai-gateway.vercel.sh/v1/models"
+            }
+          ]
+        }
       }
     },
     "google/gemini-3.7-flash": {
       "id": "google/gemini-3.7-flash",
+      "vendor": "google",
       "label": "Gemini 3.7 Flash",
       "multimodal": true,
       "image_input_mimes": [
@@ -268,10 +404,25 @@
         "date": "2026-08-13",
         "basis": "model",
         "source_url": "https://ai.google.dev/gemini-api/docs/changelog"
+      },
+      "providers": {
+        "vercel": {
+          "provider": "vercel",
+          "id": "google/gemini-3.7-flash",
+          "url": "https://vercel.com/ai-gateway/models/gemini-3.7-flash",
+          "endpoints": [
+            {
+              "id": "google/gemini-3.7-flash",
+              "input": "text",
+              "source_url": "https://ai-gateway.vercel.sh/v1/models"
+            }
+          ]
+        }
       }
     },
     "google/gemini-3.8-flash": {
       "id": "google/gemini-3.8-flash",
+      "vendor": "google",
       "label": "Gemini 3.8 Flash",
       "multimodal": true,
       "image_input_mimes": [
@@ -293,10 +444,25 @@
         "date": "2026-09-02",
         "basis": "model",
         "source_url": "https://ai.google.dev/gemini-api/docs/changelog"
+      },
+      "providers": {
+        "vercel": {
+          "provider": "vercel",
+          "id": "google/gemini-3.8-flash",
+          "url": "https://vercel.com/ai-gateway/models/gemini-3.8-flash",
+          "endpoints": [
+            {
+              "id": "google/gemini-3.8-flash",
+              "input": "text",
+              "source_url": "https://ai-gateway.vercel.sh/v1/models"
+            }
+          ]
+        }
       }
     },
     "openai/gpt-5.5": {
       "id": "openai/gpt-5.5",
+      "vendor": "openai",
       "label": "GPT-5.5",
       "multimodal": true,
       "image_input_mimes": [
@@ -322,10 +488,25 @@
           "input_multiplier": 2,
           "output_multiplier": 1.5
         }
+      },
+      "providers": {
+        "vercel": {
+          "provider": "vercel",
+          "id": "openai/gpt-5.5",
+          "url": "https://vercel.com/ai-gateway/models/gpt-5.5",
+          "endpoints": [
+            {
+              "id": "openai/gpt-5.5",
+              "input": "text",
+              "source_url": "https://ai-gateway.vercel.sh/v1/models"
+            }
+          ]
+        }
       }
     },
     "openai/gpt-5.5-pro": {
       "id": "openai/gpt-5.5-pro",
+      "vendor": "openai",
       "label": "GPT-5.5 Pro",
       "multimodal": true,
       "image_input_mimes": [
@@ -345,10 +526,25 @@
         "date": "2026-04-23",
         "basis": "model",
         "source_url": "https://openai.com/index/introducing-gpt-5-5/"
+      },
+      "providers": {
+        "vercel": {
+          "provider": "vercel",
+          "id": "openai/gpt-5.5-pro",
+          "url": "https://vercel.com/ai-gateway/models/gpt-5.5-pro",
+          "endpoints": [
+            {
+              "id": "openai/gpt-5.5-pro",
+              "input": "text",
+              "source_url": "https://ai-gateway.vercel.sh/v1/models"
+            }
+          ]
+        }
       }
     },
     "openai/gpt-5.6-luna": {
       "id": "openai/gpt-5.6-luna",
+      "vendor": "openai",
       "label": "GPT-5.6 Luna",
       "multimodal": true,
       "image_input_mimes": [
@@ -375,10 +571,25 @@
           "input_multiplier": 2,
           "output_multiplier": 1.5
         }
+      },
+      "providers": {
+        "vercel": {
+          "provider": "vercel",
+          "id": "openai/gpt-5.6-luna",
+          "url": "https://vercel.com/ai-gateway/models/gpt-5.6-luna",
+          "endpoints": [
+            {
+              "id": "openai/gpt-5.6-luna",
+              "input": "text",
+              "source_url": "https://ai-gateway.vercel.sh/v1/models"
+            }
+          ]
+        }
       }
     },
     "openai/gpt-5.6-sol": {
       "id": "openai/gpt-5.6-sol",
+      "vendor": "openai",
       "label": "GPT-5.6 Sol",
       "multimodal": true,
       "image_input_mimes": [
@@ -405,10 +616,25 @@
           "input_multiplier": 2,
           "output_multiplier": 1.5
         }
+      },
+      "providers": {
+        "vercel": {
+          "provider": "vercel",
+          "id": "openai/gpt-5.6-sol",
+          "url": "https://vercel.com/ai-gateway/models/gpt-5.6-sol",
+          "endpoints": [
+            {
+              "id": "openai/gpt-5.6-sol",
+              "input": "text",
+              "source_url": "https://ai-gateway.vercel.sh/v1/models"
+            }
+          ]
+        }
       }
     },
     "openai/gpt-5.6-terra": {
       "id": "openai/gpt-5.6-terra",
+      "vendor": "openai",
       "label": "GPT-5.6 Terra",
       "multimodal": true,
       "image_input_mimes": [
@@ -435,10 +661,25 @@
           "input_multiplier": 2,
           "output_multiplier": 1.5
         }
+      },
+      "providers": {
+        "vercel": {
+          "provider": "vercel",
+          "id": "openai/gpt-5.6-terra",
+          "url": "https://vercel.com/ai-gateway/models/gpt-5.6-terra",
+          "endpoints": [
+            {
+              "id": "openai/gpt-5.6-terra",
+              "input": "text",
+              "source_url": "https://ai-gateway.vercel.sh/v1/models"
+            }
+          ]
+        }
       }
     },
     "openai/gpt-6-astra": {
       "id": "openai/gpt-6-astra",
+      "vendor": "openai",
       "label": "GPT-6 Astra",
       "multimodal": true,
       "image_input_mimes": [
@@ -464,6 +705,20 @@
           "input_tokens_above": 272000,
           "input_multiplier": 2,
           "output_multiplier": 1.5
+        }
+      },
+      "providers": {
+        "vercel": {
+          "provider": "vercel",
+          "id": "openai/gpt-6-astra",
+          "url": "https://vercel.com/ai-gateway/models/gpt-6-astra",
+          "endpoints": [
+            {
+              "id": "openai/gpt-6-astra",
+              "input": "text",
+              "source_url": "https://ai-gateway.vercel.sh/v1/models"
+            }
+          ]
         }
       }
     }
@@ -515,6 +770,18 @@
           }
         },
         "fal": {
+          "endpoints": [
+            {
+              "id": "fal-ai/flux-2-max",
+              "input": "text",
+              "source_url": "https://fal.ai/models/fal-ai/flux-2-max/api"
+            },
+            {
+              "id": "fal-ai/flux-2-max/edit",
+              "input": "image",
+              "source_url": "https://fal.ai/models/fal-ai/flux-2-max/edit/api"
+            }
+          ],
           "provider": "fal",
           "id": "fal-ai/flux-2-max",
           "pricing": {
@@ -574,6 +841,18 @@
           }
         },
         "fal": {
+          "endpoints": [
+            {
+              "id": "fal-ai/flux-2-pro",
+              "input": "text",
+              "source_url": "https://fal.ai/models/fal-ai/flux-2-pro/api"
+            },
+            {
+              "id": "fal-ai/flux-2-pro/edit",
+              "input": "image",
+              "source_url": "https://fal.ai/models/fal-ai/flux-2-pro/edit/api"
+            }
+          ],
           "provider": "fal",
           "id": "fal-ai/flux-2-pro",
           "pricing": {
@@ -814,6 +1093,18 @@
           }
         },
         "fal": {
+          "endpoints": [
+            {
+              "id": "bytedance/seedream/v5/lite/text-to-image",
+              "input": "text",
+              "source_url": "https://fal.ai/models/bytedance/seedream/v5/lite/text-to-image/api"
+            },
+            {
+              "id": "fal-ai/bytedance/seedream/v5/lite/edit",
+              "input": "image",
+              "source_url": "https://fal.ai/models/fal-ai/bytedance/seedream/v5/lite/edit/api"
+            }
+          ],
           "provider": "fal",
           "id": "bytedance/seedream/v5/lite/text-to-image",
           "pricing": {
@@ -869,6 +1160,18 @@
           }
         },
         "fal": {
+          "endpoints": [
+            {
+              "id": "bytedance/seedream/v5/pro/edit",
+              "input": "image",
+              "source_url": "https://fal.ai/models/bytedance/seedream/v5/pro/edit/api"
+            },
+            {
+              "id": "bytedance/seedream/v5/pro/text-to-image",
+              "input": "text",
+              "source_url": "https://fal.ai/models/bytedance/seedream/v5/pro/text-to-image/api"
+            }
+          ],
           "provider": "fal",
           "id": "bytedance/seedream/v5/pro/text-to-image",
           "pricing": {
@@ -937,6 +1240,18 @@
           }
         },
         "fal": {
+          "endpoints": [
+            {
+              "id": "fal-ai/nano-banana-pro",
+              "input": "text",
+              "source_url": "https://fal.ai/models/fal-ai/nano-banana-pro/api"
+            },
+            {
+              "id": "fal-ai/nano-banana-pro/edit",
+              "input": "image",
+              "source_url": "https://fal.ai/models/fal-ai/nano-banana-pro/edit/api"
+            }
+          ],
           "provider": "fal",
           "id": "fal-ai/nano-banana-pro",
           "pricing": {
@@ -998,6 +1313,18 @@
           }
         },
         "fal": {
+          "endpoints": [
+            {
+              "id": "fal-ai/nano-banana-2",
+              "input": "text",
+              "source_url": "https://fal.ai/models/fal-ai/nano-banana-2/api"
+            },
+            {
+              "id": "fal-ai/nano-banana-2/edit",
+              "input": "image",
+              "source_url": "https://fal.ai/models/fal-ai/nano-banana-2/edit/api"
+            }
+          ],
           "provider": "fal",
           "id": "fal-ai/nano-banana-2",
           "pricing": {
@@ -1292,8 +1619,20 @@
           }
         },
         "fal": {
+          "endpoints": [
+            {
+              "id": "openai/gpt-image-2",
+              "input": "text",
+              "source_url": "https://fal.ai/models/openai/gpt-image-2/api"
+            },
+            {
+              "id": "openai/gpt-image-2/edit",
+              "input": "image",
+              "source_url": "https://fal.ai/models/openai/gpt-image-2/edit/api"
+            }
+          ],
           "provider": "fal",
-          "id": "fal-ai/gpt-image-2",
+          "id": "openai/gpt-image-2",
           "avg_cost_usd": 0.053,
           "url": "https://fal.ai/models/openai/gpt-image-2",
           "pricing": {
@@ -1417,6 +1756,18 @@
           }
         },
         "fal": {
+          "endpoints": [
+            {
+              "id": "openai/gpt-image-2.5/flare/edit",
+              "input": "image",
+              "source_url": "https://fal.ai/models/openai/gpt-image-2.5/flare/edit/api"
+            },
+            {
+              "id": "openai/gpt-image-2.5/flare/text-to-image",
+              "input": "text",
+              "source_url": "https://fal.ai/models/openai/gpt-image-2.5/flare/text-to-image/api"
+            }
+          ],
           "provider": "fal",
           "id": "openai/gpt-image-2.5/flare/text-to-image",
           "avg_cost_usd": 0.055,
@@ -1526,6 +1877,18 @@
           }
         },
         "fal": {
+          "endpoints": [
+            {
+              "id": "openai/gpt-image-2.5/sunburst/edit",
+              "input": "image",
+              "source_url": "https://fal.ai/models/openai/gpt-image-2.5/sunburst/edit/api"
+            },
+            {
+              "id": "openai/gpt-image-2.5/sunburst/text-to-image",
+              "input": "text",
+              "source_url": "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image/api"
+            }
+          ],
           "provider": "fal",
           "id": "openai/gpt-image-2.5/sunburst/text-to-image",
           "avg_cost_usd": 0.055,
@@ -1655,6 +2018,13 @@
           }
         },
         "fal": {
+          "endpoints": [
+            {
+              "id": "fal-ai/recraft/v4.1/text-to-image",
+              "input": "text",
+              "source_url": "https://fal.ai/models/fal-ai/recraft/v4.1/text-to-image/api"
+            }
+          ],
           "provider": "fal",
           "id": "fal-ai/recraft/v4.1/text-to-image",
           "pricing": {
@@ -1719,6 +2089,18 @@
           }
         },
         "fal": {
+          "endpoints": [
+            {
+              "id": "xai/grok-imagine-image/v2.0/edit",
+              "input": "image",
+              "source_url": "https://fal.ai/models/xai/grok-imagine-image/v2.0/edit/api"
+            },
+            {
+              "id": "xai/grok-imagine-image/v2.0/text-to-image",
+              "input": "text",
+              "source_url": "https://fal.ai/models/xai/grok-imagine-image/v2.0/text-to-image/api"
+            }
+          ],
           "provider": "fal",
           "id": "xai/grok-imagine-image/v2.0/text-to-image",
           "avg_cost_usd": 0.06,
@@ -1793,6 +2175,18 @@
           }
         },
         "fal": {
+          "endpoints": [
+            {
+              "id": "alibaba/wan-3.0/image-to-video",
+              "input": "image",
+              "source_url": "https://fal.ai/models/alibaba/wan-3.0/image-to-video/api"
+            },
+            {
+              "id": "alibaba/wan-3.0/text-to-video",
+              "input": "text",
+              "source_url": "https://fal.ai/models/alibaba/wan-3.0/text-to-video/api"
+            }
+          ],
           "provider": "fal",
           "id": "alibaba/wan-3.0/image-to-video",
           "input": "image",
@@ -1837,6 +2231,18 @@
       },
       "providers": {
         "fal": {
+          "endpoints": [
+            {
+              "id": "bytedance/seedance-2.0/image-to-video",
+              "input": "image",
+              "source_url": "https://fal.ai/models/bytedance/seedance-2.0/image-to-video/api"
+            },
+            {
+              "id": "bytedance/seedance-2.0/text-to-video",
+              "input": "text",
+              "source_url": "https://fal.ai/models/bytedance/seedance-2.0/text-to-video/api"
+            }
+          ],
           "provider": "fal",
           "id": "bytedance/seedance-2.0/image-to-video",
           "input": "image",
@@ -1899,6 +2305,13 @@
       },
       "providers": {
         "fal": {
+          "endpoints": [
+            {
+              "id": "bytedance/seedance-2.5/image-to-video",
+              "input": "image",
+              "source_url": "https://fal.ai/models/bytedance/seedance-2.5/image-to-video/api"
+            }
+          ],
           "provider": "fal",
           "id": "bytedance/seedance-2.5/image-to-video",
           "input": "image",
@@ -1966,6 +2379,18 @@
           }
         },
         "fal": {
+          "endpoints": [
+            {
+              "id": "fal-ai/veo3.1",
+              "input": "text",
+              "source_url": "https://fal.ai/models/fal-ai/veo3.1/api"
+            },
+            {
+              "id": "fal-ai/veo3.1/image-to-video",
+              "input": "image",
+              "source_url": "https://fal.ai/models/fal-ai/veo3.1/image-to-video/api"
+            }
+          ],
           "provider": "fal",
           "id": "fal-ai/veo3.1/image-to-video",
           "input": "image",
@@ -2054,6 +2479,18 @@
           }
         },
         "fal": {
+          "endpoints": [
+            {
+              "id": "fal-ai/veo3.1/fast",
+              "input": "text",
+              "source_url": "https://fal.ai/models/fal-ai/veo3.1/fast/api"
+            },
+            {
+              "id": "fal-ai/veo3.1/fast/image-to-video",
+              "input": "image",
+              "source_url": "https://fal.ai/models/fal-ai/veo3.1/fast/image-to-video/api"
+            }
+          ],
           "provider": "fal",
           "id": "fal-ai/veo3.1/fast/image-to-video",
           "input": "image",
@@ -2120,6 +2557,18 @@
           }
         },
         "fal": {
+          "endpoints": [
+            {
+              "id": "fal-ai/veo3.1/lite",
+              "input": "text",
+              "source_url": "https://fal.ai/models/fal-ai/veo3.1/lite/api"
+            },
+            {
+              "id": "fal-ai/veo3.1/lite/image-to-video",
+              "input": "image",
+              "source_url": "https://fal.ai/models/fal-ai/veo3.1/lite/image-to-video/api"
+            }
+          ],
           "provider": "fal",
           "id": "fal-ai/veo3.1/lite/image-to-video",
           "input": "image",
@@ -2184,6 +2633,13 @@
           }
         },
         "fal": {
+          "endpoints": [
+            {
+              "id": "xai/grok-imagine-video/v1.5/image-to-video",
+              "input": "image",
+              "source_url": "https://fal.ai/models/xai/grok-imagine-video/v1.5/image-to-video/api"
+            }
+          ],
           "provider": "fal",
           "id": "xai/grok-imagine-video/v1.5/image-to-video",
           "input": "image",
@@ -2744,11 +3200,18 @@
       "aquatic"
     ],
     "url": "https://developers.tripo3d.ai/en/docs/animations-rig-check",
+    "label": "Tripo Rig Check",
+    "vendor": "tripo",
     "pricing": {
       "type": "per_operation_credits",
       "credits": 0,
       "usd_per_credit": 0.01,
       "source_url": "https://developers.tripo3d.ai/en/pricing"
+    },
+    "release": {
+      "basis": "provider_endpoint",
+      "source_url": "https://developers.tripo3d.ai/en/docs/animations-rig-check",
+      "date": null
     }
   },
   "image_tools.models": {

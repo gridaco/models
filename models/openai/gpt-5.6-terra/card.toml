@@ -1,5 +1,6 @@
 id = "openai/gpt-5.6-terra"
 section = "text.catalog"
+vendor = "openai"
 
 label = "GPT-5.6 Terra"
 multimodal = true
@@ -23,3 +24,11 @@ cache_write = 2.5
 input_tokens_above = 272_000
 input_multiplier = 2
 output_multiplier = 1.5
+
+[providers.vercel]
+provider = "vercel"
+id = "openai/gpt-5.6-terra"
+url = "https://vercel.com/ai-gateway/models/gpt-5.6-terra"
+endpoints = [
+  { id = "openai/gpt-5.6-terra", input = "text", source_url = "https://ai-gateway.vercel.sh/v1/models" },
+]

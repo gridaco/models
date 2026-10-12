@@ -102,6 +102,9 @@ def invariant_errors(facts: dict[str, Any]) -> Iterator[str]:
             if card.get("id") != key:
                 yield f"{where}: id {card.get('id')!r} does not match its table key"
 
+            if section == "text.catalog" and not card.get("vendor"):
+                yield f"{where}: text card requires a vendor lab"
+
             release = card.get("release")
             if isinstance(release, dict):
                 date = release.get("date")

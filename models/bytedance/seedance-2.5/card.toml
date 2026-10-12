@@ -17,6 +17,9 @@ basis = "model"
 source_url = "https://seed.bytedance.com/en/blog/one-take-creation-flexible-referencing-introducing-seedance-2-5"
 
 [providers.fal]
+endpoints = [
+  { id = "bytedance/seedance-2.5/image-to-video", input = "image", source_url = "https://fal.ai/models/bytedance/seedance-2.5/image-to-video/api" },
+]
 provider = "fal"
 id = "bytedance/seedance-2.5/image-to-video"
 input = "image"

@@ -1,5 +1,6 @@
 id = "anthropic/claude-haiku-5.5"
 section = "text.catalog"
+vendor = "anthropic"
 
 label = "Claude Haiku 5.5"
 short_label = "Haiku 5.5"
@@ -26,3 +27,11 @@ cache_write = 0.125
 input_tokens_above = 100_000
 input_multiplier = 5
 output_multiplier = 5
+
+[providers.vercel]
+provider = "vercel"
+id = "anthropic/claude-haiku-5.5"
+url = "https://vercel.com/ai-gateway/models/claude-haiku-5.5"
+endpoints = [
+  { id = "anthropic/claude-haiku-5.5", input = "text", source_url = "https://ai-gateway.vercel.sh/v1/models" },
+]

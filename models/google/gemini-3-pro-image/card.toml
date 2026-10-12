@@ -31,6 +31,10 @@ url = "https://openrouter.ai/google/gemini-3-pro-image-preview"
 references = { id = "google/gemini-3-pro-image-preview", max = 14 }
 
 [providers.fal]
+endpoints = [
+  { id = "fal-ai/nano-banana-pro", input = "text", source_url = "https://fal.ai/models/fal-ai/nano-banana-pro/api" },
+  { id = "fal-ai/nano-banana-pro/edit", input = "image", source_url = "https://fal.ai/models/fal-ai/nano-banana-pro/edit/api" },
+]
 provider = "fal"
 id = "fal-ai/nano-banana-pro"
 pricing = { type = "per_image_flat", usd = 0.15 }

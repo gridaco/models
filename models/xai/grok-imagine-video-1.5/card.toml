@@ -33,6 +33,9 @@ usd_per_input_image = 0.01
 1080p = { audio = 0.25 }
 
 [providers.fal]
+endpoints = [
+  { id = "xai/grok-imagine-video/v1.5/image-to-video", input = "image", source_url = "https://fal.ai/models/xai/grok-imagine-video/v1.5/image-to-video/api" },
+]
 provider = "fal"
 id = "xai/grok-imagine-video/v1.5/image-to-video"
 input = "image"

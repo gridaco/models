@@ -32,6 +32,10 @@ type = "per_second"
 1080p = { audio = 0.2 }
 
 [providers.fal]
+endpoints = [
+  { id = "alibaba/wan-3.0/image-to-video", input = "image", source_url = "https://fal.ai/models/alibaba/wan-3.0/image-to-video/api" },
+  { id = "alibaba/wan-3.0/text-to-video", input = "text", source_url = "https://fal.ai/models/alibaba/wan-3.0/text-to-video/api" },
+]
 provider = "fal"
 id = "alibaba/wan-3.0/image-to-video"
 input = "image"

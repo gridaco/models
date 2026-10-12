@@ -1,5 +1,6 @@
 id = "openai/gpt-6-astra"
 section = "text.catalog"
+vendor = "openai"
 
 label = "GPT-6 Astra"
 multimodal = true
@@ -23,3 +24,11 @@ cache_write = 12.5
 input_tokens_above = 272_000
 input_multiplier = 2
 output_multiplier = 1.5
+
+[providers.vercel]
+provider = "vercel"
+id = "openai/gpt-6-astra"
+url = "https://vercel.com/ai-gateway/models/gpt-6-astra"
+endpoints = [
+  { id = "openai/gpt-6-astra", input = "text", source_url = "https://ai-gateway.vercel.sh/v1/models" },
+]

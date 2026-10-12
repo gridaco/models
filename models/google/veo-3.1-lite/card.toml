@@ -31,6 +31,10 @@ type = "per_second"
 1080p = { audio = 0.08, silent = 0.05 }
 
 [providers.fal]
+endpoints = [
+  { id = "fal-ai/veo3.1/lite", input = "text", source_url = "https://fal.ai/models/fal-ai/veo3.1/lite/api" },
+  { id = "fal-ai/veo3.1/lite/image-to-video", input = "image", source_url = "https://fal.ai/models/fal-ai/veo3.1/lite/image-to-video/api" },
+]
 provider = "fal"
 id = "fal-ai/veo3.1/lite/image-to-video"
 input = "image"

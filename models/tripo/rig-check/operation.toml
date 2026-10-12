@@ -7,8 +7,16 @@ input = { formats = ["glb"], max_bytes = 150_000_000 }
 rig_types = ["biped", "quadruped", "hexapod", "octopod", "avian", "serpentine", "aquatic"]
 url = "https://developers.tripo3d.ai/en/docs/animations-rig-check"
 
+label = "Tripo Rig Check"
+vendor = "tripo"
+null_keys = ["release.date"]
+
 [pricing]
 type = "per_operation_credits"
 credits = 0
 usd_per_credit = 0.01
 source_url = "https://developers.tripo3d.ai/en/pricing"
+
+[release]
+basis = "provider_endpoint"
+source_url = "https://developers.tripo3d.ai/en/docs/animations-rig-check"

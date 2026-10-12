@@ -339,3 +339,9 @@ def test_provider_endpoints_cannot_repeat():
 
 def test_existing_binding_without_endpoints_remains_valid():
     assert check.check(MODELS_JSON, SCHEMA) == []
+
+
+def test_text_card_requires_vendor_lab():
+    def mutate(facts):
+        first("text.catalog", facts).pop("vendor", None)
+    assert any("requires a vendor lab" in e for e in mutated(mutate))

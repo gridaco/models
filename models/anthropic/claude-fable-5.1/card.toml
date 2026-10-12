@@ -1,5 +1,6 @@
 id = "anthropic/claude-fable-5.1"
 section = "text.catalog"
+vendor = "anthropic"
 
 label = "Claude Fable 5.1"
 short_label = "Fable 5.1"
@@ -14,3 +15,11 @@ cost = { input = 10, output = 50, cache_read = 0.25, cache_write = 12.5 }
 date = "2026-09-01"
 basis = "model"
 source_url = "https://platform.claude.com/docs/en/models/fable-5-1/overview"
+
+[providers.vercel]
+provider = "vercel"
+id = "anthropic/claude-fable-5.1"
+url = "https://vercel.com/ai-gateway/models/claude-fable-5.1"
+endpoints = [
+  { id = "anthropic/claude-fable-5.1", input = "text", source_url = "https://ai-gateway.vercel.sh/v1/models" },
+]

@@ -31,6 +31,10 @@ url = "https://openrouter.ai/black-forest-labs/flux.2-max"
 references = { id = "black-forest-labs/flux.2-max", max = 8 }
 
 [providers.fal]
+endpoints = [
+  { id = "fal-ai/flux-2-max", input = "text", source_url = "https://fal.ai/models/fal-ai/flux-2-max/api" },
+  { id = "fal-ai/flux-2-max/edit", input = "image", source_url = "https://fal.ai/models/fal-ai/flux-2-max/edit/api" },
+]
 provider = "fal"
 id = "fal-ai/flux-2-max"
 pricing = { type = "per_image_flat", usd = 0.07 }

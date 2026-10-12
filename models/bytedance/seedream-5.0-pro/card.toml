@@ -30,6 +30,10 @@ url = "https://openrouter.ai/bytedance-seed/seedream-5-0-pro"
 references = { id = "bytedance-seed/seedream-5-0-pro", max = 14 }
 
 [providers.fal]
+endpoints = [
+  { id = "bytedance/seedream/v5/pro/edit", input = "image", source_url = "https://fal.ai/models/bytedance/seedream/v5/pro/edit/api" },
+  { id = "bytedance/seedream/v5/pro/text-to-image", input = "text", source_url = "https://fal.ai/models/bytedance/seedream/v5/pro/text-to-image/api" },
+]
 provider = "fal"
 id = "bytedance/seedream/v5/pro/text-to-image"
 pricing = { type = "per_image_flat", usd = 0.0675 }

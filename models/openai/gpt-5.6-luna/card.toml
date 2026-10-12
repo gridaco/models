@@ -1,5 +1,6 @@
 id = "openai/gpt-5.6-luna"
 section = "text.catalog"
+vendor = "openai"
 
 label = "GPT-5.6 Luna"
 multimodal = true
@@ -23,3 +24,11 @@ cache_write = 0.25
 input_tokens_above = 272_000
 input_multiplier = 2
 output_multiplier = 1.5
+
+[providers.vercel]
+provider = "vercel"
+id = "openai/gpt-5.6-luna"
+url = "https://vercel.com/ai-gateway/models/gpt-5.6-luna"
+endpoints = [
+  { id = "openai/gpt-5.6-luna", input = "text", source_url = "https://ai-gateway.vercel.sh/v1/models" },
+]

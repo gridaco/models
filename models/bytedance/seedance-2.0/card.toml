@@ -17,6 +17,10 @@ basis = "model"
 source_url = "https://seed.bytedance.com/en/blog/seedance-2-0-%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83"
 
 [providers.fal]
+endpoints = [
+  { id = "bytedance/seedance-2.0/image-to-video", input = "image", source_url = "https://fal.ai/models/bytedance/seedance-2.0/image-to-video/api" },
+  { id = "bytedance/seedance-2.0/text-to-video", input = "text", source_url = "https://fal.ai/models/bytedance/seedance-2.0/text-to-video/api" },
+]
 provider = "fal"
 id = "bytedance/seedance-2.0/image-to-video"
 input = "image"
