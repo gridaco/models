@@ -1,3 +1,4 @@
+reference_provider = "byteplus"
 id = "bytedance/seedance-2.5"
 section = "video.models"
 
@@ -75,3 +76,90 @@ source_url = "https://fal.ai/models/bytedance/seedance-2.5/image-to-video/api"
 "image_url" = { "type" = "string" }
 "prompt" = { "type" = "string" }
 "resolution" = { "type" = "string", "enum" = ["480p", "720p", "1080p"] }
+
+[providers.vercel]
+provider = "vercel"
+id = "bytedance/seedance-2.5"
+source_url = "https://vercel.com/ai-gateway/models/seedance-2.5"
+url = "https://vercel.com/ai-gateway/models/seedance-2.5"
+pricing = { "type" = "video_token_tiers", "tiers" = [
+  { "resolution" = "480p", "no_video_input" = { "cost_per_million_tokens" = "10.7" }, "with_video_input" = { "cost_per_million_tokens" = "6.4" } },
+  { "resolution" = "720p", "no_video_input" = { "cost_per_million_tokens" = "10.7" }, "with_video_input" = { "cost_per_million_tokens" = "6.4" } },
+  { "resolution" = "1080p", "no_video_input" = { "cost_per_million_tokens" = "11.7" }, "with_video_input" = { "cost_per_million_tokens" = "7" } },
+], "notes" = "Pricing varies based on whether the input contains video. When video is included in the input, all tokens are billed at the reduced rate. Token count includes both input and output video and is subject to minimum token floors based on output duration.", "source_url" = "https://vercel.com/ai-gateway/models/seedance-2.5" }
+input = "text-or-image"
+
+[providers.byteplus]
+provider = "byteplus"
+id = "dreamina-seedance-2-5-260628"
+source_url = "https://docs.byteplus.com/en/docs/ModelArk/model-pricing"
+url = "https://docs.byteplus.com/en/docs/ModelArk/model-pricing"
+pricing = { "type" = "video_token_tiers", "usd_per_million_tokens" = { "480p" = { "without_video_input" = 10.7, "with_video_input" = 6.4 }, "720p" = { "without_video_input" = 10.7, "with_video_input" = 6.4 }, "1080p" = { "without_video_input" = 11.7, "with_video_input" = 7 } }, "billing_quantity" = "usage.completion_tokens", "source_url" = "https://docs.byteplus.com/en/docs/ModelArk/model-pricing" }
+
+[provider_coverage]
+openrouter = { "disposition" = "listed", "source_url" = "https://openrouter.ai/api/v1/videos/models" }
+vercel = { "disposition" = "listed", "source_url" = "https://vercel.com/ai-gateway/models/seedance-2.5" }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/bytedance/seedance-2.5/image-to-video" }
+byteplus = { "disposition" = "listed", "source_url" = "https://docs.byteplus.com/en/docs/ModelArk/model-pricing" }
+
+[providers.openrouter]
+provider = "openrouter"
+id = "bytedance/seedance-2.5"
+source_url = "https://openrouter.ai/api/v1/videos/models"
+url = "https://openrouter.ai/api/v1/videos/models"
+pricing = { "type" = "provider_skus", "skus" = { "video_tokens" = "0.0000107", "video_tokens_without_audio" = "0.0000107", "video_tokens_with_video_input" = "0.0000064" }, "source_unit_notes" = "duration_seconds: USD/second; video_tokens: USD/token; cents_per: cents per named unit", "source_url" = "https://openrouter.ai/api/v1/videos/models" }
+endpoints = [
+  { "id" = "bytedance/seedance-2.5", "source_url" = "https://openrouter.ai/api/v1/videos/models", "parameters" = { "resolution" = { "enum" = [
+    "480p",
+    "720p",
+  ] }, "duration" = { "type" = "integer", "enum" = [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+  ] }, "aspect_ratio" = { "type" = "string", "enum" = [
+    "16:9",
+    "4:3",
+    "1:1",
+    "3:4",
+    "9:16",
+    "21:9",
+  ] } }, "input" = "text" },
+]
+
+[providers.grida]
+provider = "grida"
+id = "bytedance/seedance-2.5"
+url = "https://gateway.grida.ai/v1/models"
+endpoints = [
+  { "id" = "video.bytedance.seedance-2.5.image", "operation" = "video.bytedance.seedance-2.5.image", "input" = "image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.bytedance.seedance-2.5.image.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result", "interface" = "videos", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.0214" },
+  ] } },
+]
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"

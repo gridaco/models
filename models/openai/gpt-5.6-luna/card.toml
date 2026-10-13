@@ -1,6 +1,7 @@
 id = "openai/gpt-5.6-luna"
 section = "text.catalog"
 vendor = "openai"
+reference_provider = "openai"
 
 label = "GPT-5.6 Luna"
 multimodal = true
@@ -34,8 +35,9 @@ endpoints = [
 ]
 
 [providers.vercel.token_pricing]
-source_url = "https://ai-gateway.vercel.sh/v1/models"
+source_url = "https://vercel.com/ai-gateway/models/gpt-5.6-luna"
 unit = "usd_per_token"
+scope = "Standard global token rates; alternate service tiers, optional tools and regional premiums are excluded. Cache-write rates, where present, use the default cache duration."
 input = "0.0000002"
 output = "0.0000012"
 input_cache_read = "0.00000002"
@@ -71,3 +73,122 @@ token_rounding = "ceil"
 maximum_patch_count = 30000
 detail_patch_budgets = { "high" = 2500 }
 detail_maximum_edges = { "low" = 512, "high" = 2048, "original" = 65535, "auto" = 65535 }
+
+[providers.openai]
+provider = "openai"
+id = "gpt-5.6-luna"
+url = "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
+source_url = "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
+endpoints = [
+  { id = "gpt-5.6-luna", input = "text", source_url = "https://developers.openai.com/api/docs/models/gpt-5.6-luna" },
+]
+
+[providers.openai.token_pricing]
+source_url = "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
+unit = "usd_per_token"
+scope = "Standard synchronous text token rates; optional tools and other service tiers are excluded."
+input = "0.0000002"
+output = "0.0000012"
+input_cache_read = "0.00000002"
+input_cache_write = "0.00000025"
+tiers = [
+  { meter = "input", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.0000002" },
+  { meter = "input", minimum_input_tokens = 272001, usd_per_token = "0.0000004" },
+  { meter = "output", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.0000012" },
+  { meter = "output", minimum_input_tokens = 272001, usd_per_token = "0.00000180" },
+  { meter = "input_cache_read", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.00000002" },
+  { meter = "input_cache_read", minimum_input_tokens = 272001, usd_per_token = "0.00000004" },
+  { meter = "input_cache_write", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.00000025" },
+  { meter = "input_cache_write", minimum_input_tokens = 272001, usd_per_token = "0.00000050" },
+]
+
+[providers.openai.capabilities]
+source_url = "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
+image_input = true
+reasoning = true
+tools = true
+structured_output = true
+streaming = true
+
+[providers.openai.limits]
+source_url = "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
+context_tokens = 1050000
+max_output_tokens = 128000
+
+[providers.openrouter]
+provider = "openrouter"
+id = "openai/gpt-5.6-luna"
+url = "https://openrouter.ai/openai/gpt-5.6-luna"
+source_url = "https://openrouter.ai/openai/gpt-5.6-luna"
+endpoints = [
+  { id = "openai/gpt-5.6-luna", input = "text", source_url = "https://openrouter.ai/api/v1/models" },
+]
+
+[providers.openrouter.token_pricing]
+source_url = "https://openrouter.ai/openai/gpt-5.6-luna"
+unit = "usd_per_token"
+scope = "Standard route token rates; optional tools, regional premiums and alternate service tiers are excluded."
+input = "0.0000002"
+output = "0.0000012"
+input_cache_read = "0.00000002"
+input_cache_write = "0.00000025"
+tiers = [
+  { meter = "input", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.0000002" },
+  { meter = "input", minimum_input_tokens = 272000, usd_per_token = "0.0000004" },
+  { meter = "output", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.0000012" },
+  { meter = "output", minimum_input_tokens = 272000, usd_per_token = "0.0000018" },
+  { meter = "input_cache_read", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.00000002" },
+  { meter = "input_cache_read", minimum_input_tokens = 272000, usd_per_token = "0.00000004" },
+  { meter = "input_cache_write", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.00000025" },
+  { meter = "input_cache_write", minimum_input_tokens = 272000, usd_per_token = "0.0000005" },
+]
+
+[providers.openrouter.capabilities]
+source_url = "https://openrouter.ai/api/v1/models"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.openrouter.limits]
+source_url = "https://openrouter.ai/api/v1/models"
+context_tokens = 1050000
+max_output_tokens = 128000
+
+[provider_coverage.openai]
+disposition = "listed"
+source_url = "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/gpt-5.6-luna"
+
+[provider_coverage.openrouter]
+disposition = "listed"
+source_url = "https://openrouter.ai/openai/gpt-5.6-luna"
+
+[providers.grida]
+provider = "grida"
+id = "openai/gpt-5.6-luna"
+url = "https://gateway.grida.ai/v1/models"
+endpoints = [
+  { "id" = "openai/gpt-5.6-luna", "input" = "text", "source_url" = "https://gateway.grida.ai/v1/models", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "input_tokens.0", "meter" = "input_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "0", "max" = "272000" }, "usd_per_unit" = "0.0000002" },
+    { "id" = "input_tokens.1", "meter" = "input_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "272000" }, "usd_per_unit" = "0.0000004" },
+    { "id" = "cached_input_tokens.0", "meter" = "cached_input_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "0", "max" = "272000" }, "usd_per_unit" = "0.00000002" },
+    { "id" = "cached_input_tokens.1", "meter" = "cached_input_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "272000" }, "usd_per_unit" = "0.00000004" },
+    { "id" = "output_tokens.0", "meter" = "output_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "0", "max" = "272000" }, "usd_per_unit" = "0.0000012" },
+    { "id" = "output_tokens.1", "meter" = "output_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "272000" }, "usd_per_unit" = "0.0000018" },
+  ] } },
+]
+capabilities = { "source_url" = "https://gateway.grida.ai/v1/models", "image_input" = true, "tools" = true, "reasoning" = true, "structured_output" = true }
+limits = { "source_url" = "https://gateway.grida.ai/v1/models", "context_tokens" = 1050000, "max_output_tokens" = 128000 }
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"
+
+[provider_coverage.fal]
+disposition = "excluded"
+source_url = "https://fal.ai/models"
+reason = "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."

@@ -1,3 +1,4 @@
+reference_provider = "recraft"
 id = "recraft/recraft-v3"
 section = "image.models"
 null_keys = ["styles", "sizes"]
@@ -35,3 +36,16 @@ id = "fal-ai/recraft/v3/text-to-image"
 pricing = { type = "per_image_flat", usd = 0.04 }
 avg_cost_usd = 0.04
 url = "https://fal.ai/models/fal-ai/recraft/v3/text-to-image"
+
+[providers.recraft]
+provider = "recraft"
+id = "recraftv3"
+source_url = "https://www.recraft.ai/docs/api-reference/pricing"
+url = "https://www.recraft.ai/docs/api-reference/pricing"
+pricing = { "type" = "per_image_flat", "usd" = 0.04, "source_url" = "https://www.recraft.ai/docs/api-reference/pricing" }
+
+[provider_coverage]
+openrouter = { "disposition" = "listed", "source_url" = "https://openrouter.ai/recraft/recraft-v3" }
+vercel = { "disposition" = "listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models" }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/fal-ai/recraft/v3/text-to-image" }
+recraft = { "disposition" = "listed", "source_url" = "https://www.recraft.ai/docs/api-reference/pricing" }

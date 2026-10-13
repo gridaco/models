@@ -1,6 +1,7 @@
 id = "anthropic/claude-haiku-5.5"
 section = "text.catalog"
 vendor = "anthropic"
+reference_provider = "anthropic"
 
 label = "Claude Haiku 5.5"
 short_label = "Haiku 5.5"
@@ -37,8 +38,9 @@ endpoints = [
 ]
 
 [providers.vercel.token_pricing]
-source_url = "https://ai-gateway.vercel.sh/v1/models"
+source_url = "https://vercel.com/ai-gateway/models/claude-haiku-5.5"
 unit = "usd_per_token"
+scope = "Standard global token rates; alternate service tiers, optional tools and regional premiums are excluded. Cache-write rates, where present, use the default cache duration."
 input = "0.0000001"
 output = "0.0000005"
 input_cache_read = "0.00000001"
@@ -71,3 +73,104 @@ source_url = "https://platform.claude.com/docs/en/build-with-claude/vision"
 patch_size_px = 28
 maximum_tokens_per_image = 4784
 detail_maximum_edges = { "default" = 2576 }
+
+[providers.anthropic]
+provider = "anthropic"
+id = "claude-haiku-5-5"
+url = "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+source_url = "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+endpoints = [
+  { id = "claude-haiku-5-5", input = "text", source_url = "https://platform.claude.com/docs/en/models/haiku-5-5/overview" },
+]
+
+[providers.anthropic.token_pricing]
+source_url = "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+unit = "usd_per_token"
+scope = "Standard global synchronous service; input_cache_write is the 5-minute cache write, input_cache_write_1h is the 1-hour cache write. Batch, fast mode and regional premiums are excluded."
+input = "0.0000001"
+output = "0.0000005"
+input_cache_write = "0.000000125"
+input_cache_write_1h = "0.0000002"
+input_cache_read = "0.00000001"
+tiers = [
+  { meter = "input", minimum_input_tokens = 0, maximum_input_tokens = 100001, usd_per_token = "0.0000001" },
+  { meter = "input", minimum_input_tokens = 100001, usd_per_token = "0.0000005" },
+  { meter = "output", minimum_input_tokens = 0, maximum_input_tokens = 100001, usd_per_token = "0.0000005" },
+  { meter = "output", minimum_input_tokens = 100001, usd_per_token = "0.0000025" },
+  { meter = "input_cache_write", minimum_input_tokens = 0, maximum_input_tokens = 100001, usd_per_token = "0.000000125" },
+  { meter = "input_cache_write", minimum_input_tokens = 100001, usd_per_token = "0.000000625" },
+  { meter = "input_cache_write_1h", minimum_input_tokens = 0, maximum_input_tokens = 100001, usd_per_token = "0.0000002" },
+  { meter = "input_cache_write_1h", minimum_input_tokens = 100001, usd_per_token = "0.0000010" },
+  { meter = "input_cache_read", minimum_input_tokens = 0, maximum_input_tokens = 100001, usd_per_token = "0.00000001" },
+  { meter = "input_cache_read", minimum_input_tokens = 100001, usd_per_token = "0.00000005" },
+]
+
+[providers.anthropic.capabilities]
+source_url = "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+image_input = true
+reasoning = true
+
+[providers.anthropic.limits]
+source_url = "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+context_tokens = 1000000
+max_output_tokens = 128000
+
+[providers.openrouter]
+provider = "openrouter"
+id = "anthropic/claude-haiku-5.5"
+url = "https://openrouter.ai/anthropic/claude-haiku-5.5"
+source_url = "https://openrouter.ai/anthropic/claude-haiku-5.5"
+endpoints = [
+  { id = "anthropic/claude-haiku-5.5", input = "text", source_url = "https://openrouter.ai/api/v1/models" },
+]
+
+[providers.openrouter.token_pricing]
+source_url = "https://openrouter.ai/anthropic/claude-haiku-5.5"
+unit = "usd_per_token"
+scope = "Standard route token rates; optional tools, regional premiums and alternate service tiers are excluded. input_cache_write is the 5-minute cache write; input_cache_write_1h is the 1-hour cache write."
+input = "0.0000001"
+output = "0.0000005"
+input_cache_read = "0.00000001"
+input_cache_write = "0.000000125"
+input_cache_write_1h = "0.0000002"
+tiers = [
+  { meter = "input", minimum_input_tokens = 0, maximum_input_tokens = 100000, usd_per_token = "0.0000001" },
+  { meter = "input", minimum_input_tokens = 100000, usd_per_token = "0.0000005" },
+  { meter = "output", minimum_input_tokens = 0, maximum_input_tokens = 100000, usd_per_token = "0.0000005" },
+  { meter = "output", minimum_input_tokens = 100000, usd_per_token = "0.0000025" },
+  { meter = "input_cache_read", minimum_input_tokens = 0, maximum_input_tokens = 100000, usd_per_token = "0.00000001" },
+  { meter = "input_cache_read", minimum_input_tokens = 100000, usd_per_token = "0.00000005" },
+  { meter = "input_cache_write", minimum_input_tokens = 0, maximum_input_tokens = 100000, usd_per_token = "0.000000125" },
+  { meter = "input_cache_write", minimum_input_tokens = 100000, usd_per_token = "0.000000625" },
+  { meter = "input_cache_write_1h", minimum_input_tokens = 0, maximum_input_tokens = 100000, usd_per_token = "0.0000002" },
+  { meter = "input_cache_write_1h", minimum_input_tokens = 100000, usd_per_token = "0.000001" },
+]
+
+[providers.openrouter.capabilities]
+source_url = "https://openrouter.ai/api/v1/models"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.openrouter.limits]
+source_url = "https://openrouter.ai/api/v1/models"
+context_tokens = 1000000
+max_output_tokens = 128000
+
+[provider_coverage.anthropic]
+disposition = "listed"
+source_url = "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/claude-haiku-5.5"
+
+[provider_coverage.openrouter]
+disposition = "listed"
+source_url = "https://openrouter.ai/anthropic/claude-haiku-5.5"
+
+[provider_coverage.fal]
+disposition = "excluded"
+source_url = "https://fal.ai/models"
+reason = "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."

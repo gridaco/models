@@ -1,3 +1,4 @@
+reference_provider = "openai"
 id = "openai/gpt-image-1.5"
 section = "image.models"
 null_keys = ["styles", "constraints"]
@@ -41,3 +42,24 @@ cached_input = 1.25
 image_input = 8
 cached_image_input = 2
 output = 32
+
+[providers.openai]
+provider = "openai"
+id = "gpt-image-1.5"
+source_url = "https://developers.openai.com/api/docs/models/gpt-image-1.5"
+url = "https://developers.openai.com/api/docs/models/gpt-image-1.5"
+pricing = { "input" = 5, "cached_input" = 1.25, "image_input" = 8, "cached_image_input" = 2, "output" = 32, "type" = "per_token", "source_url" = "https://developers.openai.com/api/docs/models/gpt-image-1.5" }
+
+[providers.fal]
+provider = "fal"
+id = "fal-ai/gpt-image-1.5"
+source_url = "https://fal.ai/models/fal-ai/gpt-image-1.5"
+url = "https://fal.ai/models/fal-ai/gpt-image-1.5"
+pricing = { "type" = "per_image_tiered", "tiers" = { "low/1024x1024" = 0.009, "low/1024x1536" = 0.013, "low/1536x1024" = 0.013, "medium/1024x1024" = 0.034, "medium/1024x1536" = 0.051, "medium/1536x1024" = 0.05, "high/1024x1024" = 0.133, "high/1024x1536" = 0.2, "high/1536x1024" = 0.199 }, "input_text_usd_per_million" = 5, "text_output_usd_per_million" = 10, "source_url" = "https://fal.ai/models/fal-ai/gpt-image-1.5" }
+input = "text"
+
+[provider_coverage]
+openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/images/models", "reason" = "No matching model/version is listed in the inspected public image model catalogue." }
+vercel = { "disposition" = "listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models" }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/fal-ai/gpt-image-1.5" }
+openai = { "disposition" = "listed", "source_url" = "https://developers.openai.com/api/docs/models/gpt-image-1.5" }

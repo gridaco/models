@@ -1,3 +1,4 @@
+reference_provider = "openai"
 id = "openai/gpt-image-1-mini"
 section = "image.models"
 null_keys = ["styles", "constraints"]
@@ -41,3 +42,50 @@ cached_input = 0.2
 image_input = 2.5
 cached_image_input = 0.25
 output = 8
+
+[providers.openai]
+provider = "openai"
+id = "gpt-image-1-mini"
+source_url = "https://developers.openai.com/api/docs/models/gpt-image-1-mini"
+url = "https://developers.openai.com/api/docs/models/gpt-image-1-mini"
+pricing = { "input" = 2, "cached_input" = 0.2, "image_input" = 2.5, "cached_image_input" = 0.25, "output" = 8, "type" = "per_token", "source_url" = "https://developers.openai.com/api/docs/models/gpt-image-1-mini" }
+
+[providers.fal]
+provider = "fal"
+id = "fal-ai/gpt-image-1-mini"
+source_url = "https://fal.ai/models/fal-ai/gpt-image-1-mini"
+url = "https://fal.ai/models/fal-ai/gpt-image-1-mini"
+pricing = { "type" = "per_image_tiered", "tiers" = { "low/1024x1024" = 0.005, "low/1024x1536" = 0.006, "low/1536x1024" = 0.006, "medium/1024x1024" = 0.011, "medium/1024x1536" = 0.015, "medium/1536x1024" = 0.015, "high/1024x1024" = 0.036, "high/1024x1536" = 0.052, "high/1536x1024" = 0.052 }, "input_text_usd_per_million" = 2, "total_rounding_usd" = 0.01, "source_url" = "https://fal.ai/models/fal-ai/gpt-image-1-mini" }
+input = "text"
+
+[provider_coverage]
+openrouter = { "disposition" = "listed", "source_url" = "https://openrouter.ai/api/v1/images/models/openai/gpt-image-1-mini/endpoints" }
+vercel = { "disposition" = "listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models" }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/fal-ai/gpt-image-1-mini" }
+openai = { "disposition" = "listed", "source_url" = "https://developers.openai.com/api/docs/models/gpt-image-1-mini" }
+
+[providers.openrouter]
+provider = "openrouter"
+id = "openai/gpt-image-1-mini"
+source_url = "https://openrouter.ai/api/v1/images/models/openai/gpt-image-1-mini/endpoints"
+url = "https://openrouter.ai/api/v1/images/models/openai/gpt-image-1-mini/endpoints"
+pricing = { "type" = "per_token", "image_input" = 2.5, "input" = 2.0, "output" = 8.0, "source_url" = "https://openrouter.ai/api/v1/images/models/openai/gpt-image-1-mini/endpoints" }
+transparent_background = true
+references = { "id" = "openai/gpt-image-1-mini", "max" = 16 }
+endpoints = [
+  { "id" = "openai/gpt-image-1-mini", "source_url" = "https://openrouter.ai/api/v1/images/models/openai/gpt-image-1-mini/endpoints", "parameters" = { "aspect_ratio" = { "enum" = [
+    "1:1",
+    "3:2",
+    "2:3",
+    "auto",
+  ] }, "quality" = { "enum" = [
+    "auto",
+    "low",
+    "medium",
+    "high",
+  ] }, "background" = { "enum" = [
+    "auto",
+    "transparent",
+    "opaque",
+  ] }, "n" = { "type" = "integer", "minimum" = 1, "maximum" = 10 }, "input_references" = { "type" = "integer", "minimum" = 0, "maximum" = 16 }, "output_compression" = { "type" = "integer", "minimum" = 0, "maximum" = 100 } }, "input" = "text" },
+]

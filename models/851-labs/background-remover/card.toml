@@ -10,3 +10,8 @@ cost_usd = 0.00048
 [release]
 basis = "provider_endpoint"
 source_url = "https://replicate.com/851-labs/background-remover/versions"
+
+[provider_coverage]
+openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/models", "reason" = "No matching model/version is listed in the inspected public model catalogue." }
+vercel = { "disposition" = "not_listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models", "reason" = "No matching model/version is listed in the inspected public Gateway model catalogue." }
+fal = { "disposition" = "not_listed", "source_url" = "https://fal.ai/models", "reason" = "This card identifies a specific hosted implementation; no identical implementation/version was verified in the public media catalogue." }

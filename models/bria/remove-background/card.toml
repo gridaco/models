@@ -1,3 +1,4 @@
+reference_provider = "bria"
 id = "bria/remove-background"
 section = "image_tools.models"
 
@@ -10,3 +11,25 @@ cost_usd = 0.018
 date = "2024-11-12"
 basis = "model"
 source_url = "https://bria.ai/blog/brias-new-state-of-the-art-remove-background-outperforms-the-competition"
+
+[providers.fal]
+provider = "fal"
+id = "fal-ai/bria/background/remove"
+source_url = "https://fal.ai/models/fal-ai/bria/background/remove"
+url = "https://fal.ai/models/fal-ai/bria/background/remove"
+pricing = { "type" = "per_image_tiered", "tiers" = { "without_prompt" = 0.018, "with_prompt" = 0.03 }, "source_url" = "https://fal.ai/models/fal-ai/bria/background/remove" }
+
+[providers.bria]
+provider = "bria"
+id = "/v2/image/edit/remove_background"
+source_url = "https://docs.bria.ai/image-editing/editing/background-remove"
+url = "https://docs.bria.ai/image-editing/editing/background-remove"
+qualifications = [
+  { "source_url" = "https://docs.bria.ai/image-editing/editing/background-remove", "notes" = "Native background-removal endpoint verified. The API documentation does not establish a regular USD price or pin the current hosted checkpoint; neither is inferred from reseller listings." },
+]
+
+[provider_coverage]
+openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/models", "reason" = "No matching model/version is listed in the inspected public model catalogue." }
+vercel = { "disposition" = "not_listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models", "reason" = "No matching model/version is listed in the inspected public Gateway model catalogue." }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/fal-ai/bria/background/remove" }
+bria = { "disposition" = "listed", "source_url" = "https://docs.bria.ai/image-editing/editing/background-remove" }

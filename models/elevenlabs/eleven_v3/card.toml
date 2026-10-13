@@ -1,3 +1,4 @@
+reference_provider = "elevenlabs"
 id = "eleven_v3"
 section = "audio.text_to_speech.models"
 
@@ -21,3 +22,16 @@ default_format = "mp3"
 formats = ["mp3"]
 sample_rate_hz = 44_100
 bit_rate_kbps = 128
+
+[providers.fal]
+provider = "fal"
+id = "fal-ai/elevenlabs/tts/eleven-v3"
+source_url = "https://fal.ai/models/fal-ai/elevenlabs/tts/eleven-v3"
+url = "https://fal.ai/models/fal-ai/elevenlabs/tts/eleven-v3"
+pricing = { "type" = "per_1000_characters", "usd" = 0.1, "source_url" = "https://fal.ai/models/fal-ai/elevenlabs/tts/eleven-v3" }
+
+[provider_coverage]
+openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/models", "reason" = "No matching model/version is listed in the inspected public model catalogue." }
+vercel = { "disposition" = "not_listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models", "reason" = "No matching model/version is listed in the inspected public Gateway model catalogue." }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/fal-ai/elevenlabs/tts/eleven-v3" }
+elevenlabs = { "disposition" = "listed", "source_url" = "https://elevenlabs.io/docs/api-reference/text-to-speech/convert" }

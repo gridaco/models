@@ -1,6 +1,7 @@
 id = "openai/gpt-5.5-pro"
 section = "text.catalog"
 vendor = "openai"
+reference_provider = "openai"
 
 label = "GPT-5.5 Pro"
 multimodal = true
@@ -24,8 +25,9 @@ endpoints = [
 ]
 
 [providers.vercel.token_pricing]
-source_url = "https://ai-gateway.vercel.sh/v1/models"
+source_url = "https://vercel.com/ai-gateway/models/gpt-5.5-pro"
 unit = "usd_per_token"
+scope = "Standard global token rates; alternate service tiers, optional tools and regional premiums are excluded. Cache-write rates, where present, use the default cache duration."
 input = "0.00003"
 output = "0.00018"
 tiers = [
@@ -46,3 +48,103 @@ structured_output = true
 source_url = "https://ai-gateway.vercel.sh/v1/models"
 context_tokens = 1000000
 max_output_tokens = 128000
+
+[providers.openai]
+provider = "openai"
+id = "gpt-5.5-pro"
+url = "https://developers.openai.com/api/docs/models/gpt-5.5-pro"
+source_url = "https://developers.openai.com/api/docs/models/gpt-5.5-pro"
+endpoints = [
+  { id = "gpt-5.5-pro", input = "text", source_url = "https://developers.openai.com/api/docs/models/gpt-5.5-pro" },
+]
+
+[providers.openai.token_pricing]
+source_url = "https://developers.openai.com/api/docs/models/gpt-5.5-pro"
+unit = "usd_per_token"
+scope = "Standard text rates for prompts up to 272,000 input tokens; cached input has no discount. Longer-context rates are not recorded here."
+input = "0.00003"
+output = "0.00018"
+
+[providers.openai.capabilities]
+source_url = "https://developers.openai.com/api/docs/models/gpt-5.5-pro"
+image_input = true
+reasoning = true
+tools = true
+structured_output = true
+streaming = false
+
+[providers.openai.limits]
+source_url = "https://developers.openai.com/api/docs/models/gpt-5.5-pro"
+context_tokens = 1050000
+max_output_tokens = 128000
+
+[providers.openrouter]
+provider = "openrouter"
+id = "openai/gpt-5.5-pro"
+url = "https://openrouter.ai/openai/gpt-5.5-pro"
+source_url = "https://openrouter.ai/openai/gpt-5.5-pro"
+endpoints = [
+  { id = "openai/gpt-5.5-pro", input = "text", source_url = "https://openrouter.ai/api/v1/models" },
+]
+
+[providers.openrouter.token_pricing]
+source_url = "https://openrouter.ai/openai/gpt-5.5-pro"
+unit = "usd_per_token"
+scope = "Standard route token rates; optional tools, regional premiums and alternate service tiers are excluded."
+input = "0.00003"
+output = "0.00018"
+tiers = [
+  { meter = "input", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.00003" },
+  { meter = "input", minimum_input_tokens = 272000, usd_per_token = "0.00006" },
+  { meter = "output", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.00018" },
+  { meter = "output", minimum_input_tokens = 272000, usd_per_token = "0.00027" },
+]
+
+[providers.openrouter.capabilities]
+source_url = "https://openrouter.ai/api/v1/models"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.openrouter.limits]
+source_url = "https://openrouter.ai/api/v1/models"
+context_tokens = 1050000
+max_output_tokens = 128000
+
+[provider_coverage.openai]
+disposition = "listed"
+source_url = "https://developers.openai.com/api/docs/models/gpt-5.5-pro"
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/gpt-5.5-pro"
+
+[provider_coverage.openrouter]
+disposition = "listed"
+source_url = "https://openrouter.ai/openai/gpt-5.5-pro"
+
+[providers.grida]
+provider = "grida"
+id = "openai/gpt-5.5-pro"
+url = "https://gateway.grida.ai/v1/models"
+endpoints = [
+  { "id" = "openai/gpt-5.5-pro", "input" = "text", "source_url" = "https://gateway.grida.ai/v1/models", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "input_tokens.0", "meter" = "input_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "0", "max" = "272000" }, "usd_per_unit" = "0.00003" },
+    { "id" = "input_tokens.1", "meter" = "input_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "272000" }, "usd_per_unit" = "0.00006" },
+    { "id" = "cached_input_tokens", "meter" = "cached_input_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.00003" },
+    { "id" = "output_tokens.0", "meter" = "output_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "0", "max" = "272000" }, "usd_per_unit" = "0.00018" },
+    { "id" = "output_tokens.1", "meter" = "output_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "272000" }, "usd_per_unit" = "0.00027" },
+  ] } },
+]
+capabilities = { "source_url" = "https://gateway.grida.ai/v1/models", "image_input" = true, "tools" = true, "reasoning" = true, "structured_output" = true }
+limits = { "source_url" = "https://gateway.grida.ai/v1/models", "context_tokens" = 1000000, "max_output_tokens" = 128000 }
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"
+
+[provider_coverage.fal]
+disposition = "excluded"
+source_url = "https://fal.ai/models"
+reason = "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."

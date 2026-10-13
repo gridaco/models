@@ -1,3 +1,4 @@
+reference_provider = "google"
 id = "google/lyria-3"
 section = "audio.music.models"
 
@@ -26,3 +27,30 @@ formats = ["mp3"]
 sample_rate_hz = 48_000
 channels = 2
 duration = { mode = "fixed", seconds = 30 }
+
+[providers.google]
+provider = "google"
+id = "lyria-3-clip-preview"
+source_url = "https://ai.google.dev/gemini-api/docs/pricing"
+url = "https://ai.google.dev/gemini-api/docs/pricing"
+pricing = { "type" = "per_run_flat", "usd" = 0.04, "source_url" = "https://ai.google.dev/gemini-api/docs/pricing" }
+
+[providers.fal]
+provider = "fal"
+id = "fal-ai/lyria3"
+source_url = "https://fal.ai/models/fal-ai/lyria3"
+url = "https://fal.ai/models/fal-ai/lyria3"
+pricing = { "type" = "per_run_flat", "usd" = 0.04, "source_url" = "https://fal.ai/models/fal-ai/lyria3" }
+
+[providers.openrouter]
+provider = "openrouter"
+id = "google/lyria-3-clip-preview"
+source_url = "https://openrouter.ai/google/lyria-3-clip-preview"
+url = "https://openrouter.ai/google/lyria-3-clip-preview"
+pricing = { "type" = "per_run_flat", "usd" = 0.04, "source_url" = "https://openrouter.ai/google/lyria-3-clip-preview" }
+
+[provider_coverage]
+openrouter = { "disposition" = "listed", "source_url" = "https://openrouter.ai/google/lyria-3-clip-preview" }
+vercel = { "disposition" = "not_listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models", "reason" = "No matching model/version is listed in the inspected public Gateway model catalogue." }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/fal-ai/lyria3" }
+google = { "disposition" = "listed", "source_url" = "https://ai.google.dev/gemini-api/docs/pricing" }

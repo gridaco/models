@@ -1,3 +1,4 @@
+reference_provider = "bfl"
 id = "bfl/flux-kontext-max"
 section = "image.models"
 null_keys = ["styles", "sizes"]
@@ -28,3 +29,16 @@ id = "fal-ai/flux-pro/kontext/max"
 pricing = { type = "per_image_flat", usd = 0.08 }
 avg_cost_usd = 0.08
 url = "https://fal.ai/models/fal-ai/flux-pro/kontext/max"
+
+[providers.bfl]
+provider = "bfl"
+id = "flux-kontext-max"
+source_url = "https://docs.bfl.ai/quick_start/pricing"
+url = "https://docs.bfl.ai/quick_start/pricing"
+pricing = { "type" = "per_image_flat", "usd" = 0.08, "source_url" = "https://docs.bfl.ai/quick_start/pricing" }
+
+[provider_coverage]
+openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/images/models", "reason" = "No matching model/version is listed in the inspected public image model catalogue." }
+vercel = { "disposition" = "listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models" }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/fal-ai/flux-pro/kontext/max" }
+bfl = { "disposition" = "listed", "source_url" = "https://docs.bfl.ai/quick_start/pricing" }

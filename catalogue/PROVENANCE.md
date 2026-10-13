@@ -101,9 +101,8 @@ https://platform.claude.com/docs/en/models/sonnet-5-5/whats-new-sonnet-5-5
 
 ## `"anthropic/claude-sonnet-5": {`
 
-$2/$10 is the standard rate, not a live discount: it launched as an
-introductory rate and Anthropic made it permanent, cancelling the
-announced step up to $3/$15. Do not restore the higher card.
+$2/$10 per million input/output tokens is Anthropic's published regular rate.
+Do not substitute an obsolete higher rate.
 https://platform.claude.com/docs/en/about-claude/pricing
 
 ## `"anthropic/claude-fable-5.1": {`
@@ -134,11 +133,12 @@ https://platform.claude.com/docs/en/models/opus-5-5/migration-guide
 Google's cache model is read + hourly storage (no one-time write
 premium that matches `cacheWrite` semantics), so the field is omitted.
 
-Steady-state rates. Google is promoting $0.75 in / $3.75 out / $0.075
-cacheRead through 2026-12-31; these are the prices that apply from
-2027-01-01. Checking Google's page before then will show the lower
-set — that is the promotion, not a correction. Gemini 3.8 Flash is GA,
-and this exact id is live on both Vercel AI Gateway and OpenRouter.
+The intrinsic cost records Google's published regular rates: $1.50 input,
+$7.50 output, and $0.15 cached input per million tokens. Promotional rates
+and their expiry dates are excluded. This evidence applies to Google's
+rates; each serving provider's regular prices need its own evidence.
+Gemini 3.8 Flash is GA, and this exact id is listed on both Vercel AI Gateway
+and OpenRouter.
 https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash
 https://ai.google.dev/gemini-api/docs/pricing
 https://vercel.com/ai-gateway/models/gemini-3.8-flash
@@ -894,19 +894,108 @@ qualification and each resolution's published budget, including the 2240-token
 These parameters describe provider tokenization. Preflight estimates do not
 establish final charges.
 
-## Vercel standard token pricing and capabilities (2026-10-13)
+## Text provider references and regular pricing (2026-10-13)
 
-[Vercel's public model feed](https://ai-gateway.vercel.sh/v1/models) supplies the
-standard decimal USD-per-token rates, input-length pricing bands, served
-context/output limits and provider-backed image-input, tools, reasoning and
-structured-output facts for the 17 recorded text bindings. A band's minimum is
-inclusive and maximum is exclusive; an omitted maximum is unbounded. Published
-band thresholds are preserved exactly rather than normalized across models.
-Provider serving limits can be narrower than the intrinsic lab limits, so both
-are retained at their respective scopes.
+All 17 text cards retain independent native, Vercel and OpenRouter bindings.
+The native model pages establish exact IDs and synchronous limits. Claude's
+[pricing table](https://platform.claude.com/docs/en/about-claude/pricing) separates
+five-minute and one-hour cache writes. Google's
+[Standard pricing](https://ai.google.dev/gemini-api/docs/pricing) excludes optional
+cache storage, grounding and alternate service tiers. Native and intermediary
+limits and input-length bands intentionally remain distinct; a native reference
+is a presentation choice, not a routing preference.
 
-Standard token pricing excludes separately published fast, regional, alternate
-service-tier and server-tool prices. It is not a claim that those options have
-the same rate. Streaming is an API transport behavior rather than a per-model
-flag in the feed, and a provider's structured-output support does not establish
-every consumer's particular JSON-format compatibility.
+[Vercel's model feed](https://ai-gateway.vercel.sh/v1/models) supplies serving
+limits and supported capabilities. Prices were checked against each model's
+public page for regular-rate qualification. The
+[Gemini 3.7 Flash](https://vercel.com/ai-gateway/models/gemini-3.7-flash) and
+[Gemini 3.8 Flash](https://vercel.com/ai-gateway/models/gemini-3.8-flash) pages
+publish explicit list tiers of $1.50 input, $7.50 output and $0.15 cached input
+per million tokens. These replace discounted feed values; they are not inferred
+by reversing a percentage. OpenRouter's corresponding model pages independently
+publish the same list rates. Standard/global pricing excludes regional premiums,
+optional tools and alternate service tiers.
+
+[OpenRouter's model feed](https://openrouter.ai/api/v1/models) supplies its exact
+IDs, modalities, limits and capabilities. Each model page qualifies the rates;
+provider input-length boundaries are preserved exactly. The
+[GPT-5.6 Sol endpoint listing](https://openrouter.ai/api/v1/models/openai/gpt-5.6-sol/endpoints)
+independently establishes the recorded Standard rates and tiers. Time-based
+cache-storage rates are not per-token cache-write prices.
+
+The native [GPT-5.6 Sol page](https://developers.openai.com/api/docs/models/gpt-5.6-sol)
+and [OpenAI pricing](https://developers.openai.com/api/docs/pricing) qualify the
+visible native rate as promotional without publishing a regular replacement.
+That binding therefore omits pricing; unknown does not mean free. Its Vercel and
+OpenRouter prices remain independently sourced. No discount schedule is tracked.
+GPT-5.5 Pro has no invented native cache discount or unverified native
+long-context price; intermediary bands remain separate provider facts.
+
+## TRELLIS.2 distribution (2026-10-13)
+
+Microsoft's [official repository](https://github.com/microsoft/TRELLIS.2) links
+the [TRELLIS.2-4B weights](https://huggingface.co/microsoft/TRELLIS.2-4B).
+The [code license](https://github.com/microsoft/TRELLIS.2/blob/main/LICENSE)
+and the weight model card both identify MIT; these are recorded separately.
+The Hugging Face model metadata reports `gated: false`, so the published weight
+access is recorded as public. Dependency licenses remain separate from these
+artifact licenses. Distribution links do not establish a hosted inference API,
+free inference or permission for every possible use.
+
+## Provider coverage and non-text differences (2026-10-13)
+
+All existing cards are retained. Provider coverage was checked against
+[OpenRouter discovery](https://openrouter.ai/api/v1/models) and its image, video
+and embedding feeds, [Vercel discovery](https://ai-gateway.vercel.sh/v1/models),
+and fal's endpoint catalogue. Exact aliases matter: OpenRouter's Muse and Lyria
+preview IDs differ from canonical card IDs. `not_listed` records absence from
+those inspected public listings, not a promise that a provider will never offer
+an equivalent endpoint. fal coverage is restricted to media.
+
+Native references now identify actual lab APIs, including BytePlus for ByteDance,
+Google Developer API, Meta, BFL, Recraft, xAI and Alibaba. Open weights do not
+invent a lab-hosted API. Native and reseller prices retain their own meters:
+
+- OpenRouter GPT Image 2 uses separate text-input, image-input and image-output
+  token meters. Its 2.5 endpoints now list transparency; its Image 2 endpoint
+  lists only `auto` and `opaque`.
+- Seedance video-token SKUs replace an inaccurate OpenRouter per-second estimate.
+  Input-video, resolution and audio variants remain distinct. BytePlus's current
+  [pricing page](https://docs.byteplus.com/en/docs/ModelArk/model-pricing)
+  publishes Seedream Pro's 2.61-million-pixel threshold; older indexed material
+  differs. The dated native model ID is retained.
+- Google's [regular embedding prices](https://ai.google.dev/gemini-api/docs/pricing)
+  distinguish text, image, audio and video inputs. A provider that only publishes
+  some meters does not inherit the others by assumption.
+- [BFL pricing](https://bfl.ai/pricing) distinguishes first versus additional/input
+  megapixels, ceiling rounding, pixel units and capped input sizes. Its flat
+  FLUX 1.1 image price is not fal's megapixel price. Native xAI input-image charges
+  and Alibaba's documented International-region regular rates remain qualified.
+
+fal Tripo P2, native Tencent Hunyuan and native Bria retain verified endpoints
+without an invented regular USD price. Bria's hosted checkpoint is not pinned by
+its API reference. OpenRouter Muse's image-specific endpoint metadata is empty;
+its general endpoint token meters do not establish image parameter parity.
+These gaps are explicit qualifications, not zero-price defaults or passed paid
+behavior tests. Real-ESRGAN's official code link is distribution metadata, not
+an invented native hosted provider.
+
+## Grida public service bindings (2026-10-13)
+
+Grida bindings cover its existing 40 models and the rig-check operation; the
+other 21 retained model cards do not claim Grida availability. Public
+[model discovery](https://gateway.grida.ai/v1/models),
+[endpoint discovery](https://gateway.grida.ai/v1/endpoints), and
+[operation schemas](https://gateway.grida.ai/schemas/operations.json) establish
+service identities and contracts. Discovery requires authentication. Synchronous
+image, asynchronous video and specialized operation interfaces stay explicit;
+these bindings do not imply another provider's parameter compatibility.
+
+`published_pricing` records advertised USD per named quantity, including bands,
+conditions and rounding. Provider-specific normalized quantities are not raw
+image counts or guaranteed per-request totals. Source unit identifiers are
+preserved. Grida's two Gemini Flash regular-price entries are the proposed next
+published schedule; release coordination must precede describing those rates as
+already live. Other recorded service rates match the inspected discovery.
+This catalogue describes public service facts without supplier selection or
+private financial policy.

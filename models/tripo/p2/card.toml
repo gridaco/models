@@ -1,3 +1,4 @@
+reference_provider = "tripo"
 id = "tripo/p2"
 section = "three_d.model_generation.models"
 
@@ -99,3 +100,42 @@ source_url = "https://developers.tripo3d.ai/en/docs/generation-multiview-to-mode
   "v3.0-20250812",
   "v2.5-20250123",
 ] }
+
+[providers.fal]
+provider = "fal"
+id = "tripo3d/p2/text-to-3d"
+url = "https://fal.ai/models/tripo3d/p2/text-to-3d"
+source_url = "https://fal.ai/models/tripo3d/p2/text-to-3d/api"
+qualifications = [
+  { "source_url" = "https://fal.ai/models/tripo3d/p2/text-to-3d", "notes" = "The public endpoint documentation verifies P2 submission. No regular USD rate is published on the inspected endpoint page; direct-provider pricing is not substituted." },
+]
+endpoints = [
+  { "id" = "tripo3d/p2/text-to-3d", "source_url" = "https://fal.ai/models/tripo3d/p2/text-to-3d/api", "input" = "text" },
+  { "id" = "tripo3d/p2/image-to-3d", "source_url" = "https://fal.ai/models/tripo3d/p2/image-to-3d/api", "input" = "image" },
+]
+
+[provider_coverage]
+openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/models", "reason" = "No matching model/version is listed in the inspected public model catalogue." }
+vercel = { "disposition" = "not_listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models", "reason" = "No matching model/version is listed in the inspected public Gateway model catalogue." }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/tripo3d/p2/text-to-3d/api" }
+tripo = { "disposition" = "listed", "source_url" = "https://developers.tripo3d.ai/en/docs/generation-text-to-model/p" }
+
+[providers.grida]
+provider = "grida"
+id = "tripo/p2"
+url = "https://gateway.grida.ai/v1/endpoints"
+endpoints = [
+  { "id" = "three-d.tripo.p2.image", "operation" = "three-d.tripo.p2.image", "input" = "image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.tripo.p2.image.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/glb_result", "interface" = "endpoints", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/endpoints", "currency" = "USD", "components" = [
+    { "id" = "provider_credits", "meter" = "provider_credits", "unit" = "provider_credit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+  ] } },
+  { "id" = "three-d.tripo.p2.multiview", "operation" = "three-d.tripo.p2.multiview", "input" = "multi_image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.tripo.p2.multiview.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/glb_result", "interface" = "endpoints", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/endpoints", "currency" = "USD", "components" = [
+    { "id" = "provider_credits", "meter" = "provider_credits", "unit" = "provider_credit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+  ] } },
+  { "id" = "three-d.tripo.p2.text", "operation" = "three-d.tripo.p2.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.tripo.p2.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/glb_result", "interface" = "endpoints", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/endpoints", "currency" = "USD", "components" = [
+    { "id" = "provider_credits", "meter" = "provider_credits", "unit" = "provider_credit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+  ] } },
+]
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/endpoints"

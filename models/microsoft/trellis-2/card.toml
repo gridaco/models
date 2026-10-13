@@ -16,6 +16,19 @@ date = "2025-12-16"
 basis = "model"
 source_url = "https://huggingface.co/microsoft/TRELLIS.2-4B"
 
+[distribution]
+source_url = "https://github.com/microsoft/TRELLIS.2"
+
+[distribution.code]
+repository_url = "https://github.com/microsoft/TRELLIS.2"
+license = { name = "MIT", url = "https://github.com/microsoft/TRELLIS.2/blob/main/LICENSE" }
+
+[[distribution.weights]]
+id = "microsoft/TRELLIS.2-4B"
+url = "https://huggingface.co/microsoft/TRELLIS.2-4B"
+access = "public"
+license = { name = "MIT", url = "https://huggingface.co/microsoft/TRELLIS.2-4B" }
+
 [pricing]
 type = "per_generation_by_resolution"
 default_resolution = "1024"
@@ -57,3 +70,23 @@ source_url = "https://fal.ai/models/fal-ai/trellis-2/api"
 "uv_unwrap_global_iterations" = { "type" = "integer", "maximum" = 10, "minimum" = 1 }
 "uv_unwrap_refine_iterations" = { "type" = "integer", "maximum" = 10, "minimum" = 0 }
 "uv_unwrap_smooth_strength" = { "type" = "number", "maximum" = 10, "minimum" = 0 }
+
+[provider_coverage]
+openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/models", "reason" = "No matching model/version is listed in the inspected public model catalogue." }
+vercel = { "disposition" = "not_listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models", "reason" = "No matching model/version is listed in the inspected public Gateway model catalogue." }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/fal-ai/trellis-2" }
+microsoft = { "disposition" = "not_listed", "source_url" = "https://github.com/microsoft/TRELLIS.2", "reason" = "The official release distributes code and weights; it does not document a Microsoft-hosted inference API for this model." }
+
+[providers.grida]
+provider = "grida"
+id = "fal-ai/trellis-2"
+url = "https://gateway.grida.ai/v1/endpoints"
+endpoints = [
+  { "id" = "three-d.fal-ai.trellis-2.image", "operation" = "three-d.fal-ai.trellis-2.image", "input" = "image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.fal-ai.trellis-2.image.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/glb_result", "interface" = "endpoints", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/endpoints", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.05" },
+  ] } },
+]
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/endpoints"

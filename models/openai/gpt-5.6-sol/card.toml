@@ -1,6 +1,7 @@
 id = "openai/gpt-5.6-sol"
 section = "text.catalog"
 vendor = "openai"
+reference_provider = "openai"
 
 label = "GPT-5.6 Sol"
 multimodal = true
@@ -14,17 +15,6 @@ date = "2026-07-09"
 basis = "model"
 source_url = "https://openai.com/index/gpt-5-6/"
 
-[cost]
-input = 4
-output = 20
-cache_read = 0.4
-cache_write = 5
-
-[cost.long_context]
-input_tokens_above = 272_000
-input_multiplier = 2
-output_multiplier = 1.5
-
 [providers.vercel]
 provider = "vercel"
 id = "openai/gpt-5.6-sol"
@@ -34,8 +24,9 @@ endpoints = [
 ]
 
 [providers.vercel.token_pricing]
-source_url = "https://ai-gateway.vercel.sh/v1/models"
+source_url = "https://vercel.com/ai-gateway/models/gpt-5.6-sol"
 unit = "usd_per_token"
+scope = "Standard global token rates; alternate service tiers, optional tools and regional premiums are excluded. Cache-write rates, where present, use the default cache duration."
 input = "0.000004"
 output = "0.00002"
 input_cache_read = "0.0000004"
@@ -71,3 +62,104 @@ token_rounding = "ceil"
 maximum_patch_count = 30000
 detail_patch_budgets = { "high" = 2500 }
 detail_maximum_edges = { "low" = 512, "high" = 2048, "original" = 65535, "auto" = 65535 }
+
+[providers.openai]
+provider = "openai"
+id = "gpt-5.6-sol"
+url = "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
+source_url = "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
+endpoints = [
+  { id = "gpt-5.6-sol", input = "text", source_url = "https://developers.openai.com/api/docs/models/gpt-5.6-sol" },
+]
+
+[providers.openai.capabilities]
+source_url = "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
+image_input = true
+reasoning = true
+tools = true
+structured_output = true
+streaming = true
+
+[providers.openai.limits]
+source_url = "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
+context_tokens = 1050000
+max_output_tokens = 128000
+
+[providers.openrouter]
+provider = "openrouter"
+id = "openai/gpt-5.6-sol"
+url = "https://openrouter.ai/openai/gpt-5.6-sol"
+source_url = "https://openrouter.ai/openai/gpt-5.6-sol"
+endpoints = [
+  { id = "openai/gpt-5.6-sol", input = "text", source_url = "https://openrouter.ai/api/v1/models" },
+]
+
+[providers.openrouter.token_pricing]
+source_url = "https://openrouter.ai/openai/gpt-5.6-sol"
+unit = "usd_per_token"
+scope = "Regular Standard Azure endpoint token rates, also shown as list input/output/cache-read rates in the model page. Other endpoints and service tiers may differ."
+input = "0.000004"
+output = "0.00002"
+input_cache_read = "0.0000004"
+input_cache_write = "0.000005"
+tiers = [
+  { meter = "input", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.000004" },
+  { meter = "input", minimum_input_tokens = 272000, usd_per_token = "0.000008" },
+  { meter = "output", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.00002" },
+  { meter = "output", minimum_input_tokens = 272000, usd_per_token = "0.00003" },
+  { meter = "input_cache_read", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.0000004" },
+  { meter = "input_cache_read", minimum_input_tokens = 272000, usd_per_token = "0.0000008" },
+  { meter = "input_cache_write", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.000005" },
+  { meter = "input_cache_write", minimum_input_tokens = 272000, usd_per_token = "0.00001" },
+]
+
+[providers.openrouter.capabilities]
+source_url = "https://openrouter.ai/api/v1/models"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.openrouter.limits]
+source_url = "https://openrouter.ai/api/v1/models"
+context_tokens = 1050000
+max_output_tokens = 128000
+
+[provider_coverage.openai]
+disposition = "listed"
+reason = "Native model availability is verified; its published pricing is promotional, so an unqualified regular native price is not recorded."
+source_url = "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/gpt-5.6-sol"
+
+[provider_coverage.openrouter]
+disposition = "listed"
+source_url = "https://openrouter.ai/openai/gpt-5.6-sol"
+
+[providers.grida]
+provider = "grida"
+id = "openai/gpt-5.6-sol"
+url = "https://gateway.grida.ai/v1/models"
+endpoints = [
+  { "id" = "openai/gpt-5.6-sol", "input" = "text", "source_url" = "https://gateway.grida.ai/v1/models", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "input_tokens.0", "meter" = "input_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "0", "max" = "272000" }, "usd_per_unit" = "0.000004" },
+    { "id" = "input_tokens.1", "meter" = "input_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "272000" }, "usd_per_unit" = "0.000008" },
+    { "id" = "cached_input_tokens.0", "meter" = "cached_input_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "0", "max" = "272000" }, "usd_per_unit" = "0.0000004" },
+    { "id" = "cached_input_tokens.1", "meter" = "cached_input_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "272000" }, "usd_per_unit" = "0.0000008" },
+    { "id" = "output_tokens.0", "meter" = "output_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "0", "max" = "272000" }, "usd_per_unit" = "0.00002" },
+    { "id" = "output_tokens.1", "meter" = "output_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "272000" }, "usd_per_unit" = "0.00003" },
+  ] } },
+]
+capabilities = { "source_url" = "https://gateway.grida.ai/v1/models", "image_input" = true, "tools" = true, "reasoning" = true, "structured_output" = true }
+limits = { "source_url" = "https://gateway.grida.ai/v1/models", "context_tokens" = 1050000, "max_output_tokens" = 128000 }
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"
+
+[provider_coverage.fal]
+disposition = "excluded"
+source_url = "https://fal.ai/models"
+reason = "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."

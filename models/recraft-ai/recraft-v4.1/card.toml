@@ -1,3 +1,4 @@
+reference_provider = "recraft"
 id = "recraft/recraft-v4.1"
 section = "image.models"
 null_keys = ["styles", "sizes"]
@@ -55,3 +56,30 @@ source_url = "https://fal.ai/models/fal-ai/recraft/v4.1/text-to-image/api"
 "image_size.height" = { "maximum" = 14142, "type" = "integer", "minimum" = 1 }
 "image_size.width" = { "maximum" = 14142, "type" = "integer", "minimum" = 1 }
 "prompt" = { "min_length" = 1, "type" = "string", "max_length" = 10000 }
+
+[providers.recraft]
+provider = "recraft"
+id = "recraftv4_1"
+source_url = "https://www.recraft.ai/docs/api-reference/pricing"
+url = "https://www.recraft.ai/docs/api-reference/pricing"
+pricing = { "type" = "per_image_flat", "usd" = 0.035, "source_url" = "https://www.recraft.ai/docs/api-reference/pricing" }
+
+[provider_coverage]
+openrouter = { "disposition" = "listed", "source_url" = "https://openrouter.ai/recraft/recraft-v4.1" }
+vercel = { "disposition" = "listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models" }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/fal-ai/recraft/v4.1/text-to-image" }
+recraft = { "disposition" = "listed", "source_url" = "https://www.recraft.ai/docs/api-reference/pricing" }
+
+[providers.grida]
+provider = "grida"
+id = "recraft/recraft-v4.1"
+url = "https://gateway.grida.ai/v1/models"
+endpoints = [
+  { "id" = "image.recraft.recraft-v4.1.text", "operation" = "image.recraft.recraft-v4.1.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.recraft.recraft-v4.1.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_1", "interface" = "images.generations", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.035" },
+  ] } },
+]
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"

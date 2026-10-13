@@ -1,3 +1,4 @@
+reference_provider = "byteplus"
 id = "bytedance/seedream-5.0-lite"
 section = "image.models"
 null_keys = ["styles", "sizes"]
@@ -93,3 +94,33 @@ source_url = "https://fal.ai/models/fal-ai/bytedance/seedream/v5/lite/edit/api"
 [providers.fal.endpoints.image_constraints]
 min_pixels = 3686400
 max_pixels = 16777216
+
+[providers.byteplus]
+provider = "byteplus"
+id = "seedream-5-0-lite-260128"
+source_url = "https://docs.byteplus.com/en/docs/ModelArk/model-pricing"
+url = "https://docs.byteplus.com/en/docs/ModelArk/model-pricing"
+pricing = { "type" = "per_image_flat", "usd" = 0.035, "source_url" = "https://docs.byteplus.com/en/docs/ModelArk/model-pricing" }
+
+[provider_coverage]
+openrouter = { "disposition" = "listed", "source_url" = "https://openrouter.ai/bytedance-seed/seedream-5-0-lite" }
+vercel = { "disposition" = "listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models" }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/bytedance/seedream/v5/lite/text-to-image" }
+byteplus = { "disposition" = "listed", "source_url" = "https://docs.byteplus.com/en/docs/ModelArk/model-pricing" }
+
+[providers.grida]
+provider = "grida"
+id = "bytedance/seedream-5.0-lite"
+url = "https://gateway.grida.ai/v1/models"
+endpoints = [
+  { "id" = "image.bytedance.seedream-5.0-lite.references", "operation" = "image.bytedance.seedream-5.0-lite.references", "input" = "multi_image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bytedance.seedream-5.0-lite.references.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_6", "interface" = "images.edits", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.035" },
+  ] } },
+  { "id" = "image.bytedance.seedream-5.0-lite.text", "operation" = "image.bytedance.seedream-5.0-lite.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bytedance.seedream-5.0-lite.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_6", "interface" = "images.generations", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.035" },
+  ] } },
+]
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"
