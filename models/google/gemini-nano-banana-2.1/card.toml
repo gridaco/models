@@ -1,0 +1,204 @@
+id = "google/gemini-nano-banana-2.1"
+section = "image.models"
+vendor = "google"
+reference_provider = "google"
+null_keys = ["styles", "sizes"]
+
+label = "Gemini Nano Banana 2.1"
+short_description = "Image generation and conversational editing at 1K, 2K and 4K."
+
+[release]
+date = "2026-10-06"
+basis = "model"
+source_url = "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/nano-banana-2-1"
+
+[providers.google]
+provider = "google"
+id = "gemini-nano-banana-2.1"
+url = "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1"
+source_url = "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1"
+pricing = { type = "per_token", input = 1.5, image_input = 1.5, text_output = 7.5, output = 30, source_url = "https://ai.google.dev/gemini-api/docs/pricing" }
+qualifications = [
+  { source_url = "https://ai.google.dev/gemini-api/docs/pricing", notes = "Rates are USD per million tokens. Input covers text, images and video; text output includes thinking. Search grounding is separately priced at $14 per 1000 requests after the shared allowance; the allowance is not included in the token prices." },
+  { source_url = "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/nano-banana-2-1", notes = "Google documents 1120 tokens per input image and output image tokens of 1120 at 1K, 1680 at 2K and 3780 at 4K. These image counts exclude additional text, thinking, video and document tokens. Google Cloud does not support seed, temperature, topP, topK or logprobs for this model." },
+]
+
+[providers.google.capabilities]
+source_url = "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1"
+image_input = true
+reasoning = true
+tools = false
+structured_output = false
+
+[providers.google.limits]
+source_url = "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1"
+context_tokens = 131072
+max_output_tokens = 32768
+
+[[providers.google.endpoints]]
+id = "gemini-nano-banana-2.1"
+input = "text"
+source_url = "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1"
+
+[provider_coverage.google]
+disposition = "listed"
+source_url = "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1"
+
+[providers.openrouter]
+provider = "openrouter"
+id = "google/gemini-nano-banana-2.1"
+url = "https://openrouter.ai/google/gemini-nano-banana-2.1"
+source_url = "https://openrouter.ai/google/gemini-nano-banana-2.1"
+pricing = { type = "per_token", input = 1.5, image_input = 1.5, text_output = 7.5, output = 30, source_url = "https://openrouter.ai/api/v1/models" }
+qualifications = [
+  { source_url = "https://openrouter.ai/api/v1/models", notes = "The provider publishes 65536 context tokens and 58982 maximum completion tokens. These provider-specific limits differ from the native API. Image output is $30 per million image tokens; text/thinking output is a separate $7.50 meter. Web search is separately priced at $0.014 per request." },
+]
+
+[providers.openrouter.capabilities]
+source_url = "https://openrouter.ai/api/v1/models"
+image_input = true
+reasoning = true
+structured_output = true
+
+[providers.openrouter.limits]
+source_url = "https://openrouter.ai/api/v1/models"
+context_tokens = 65536
+max_output_tokens = 58982
+
+[[providers.openrouter.endpoints]]
+id = "google/gemini-nano-banana-2.1"
+input = "text"
+source_url = "https://openrouter.ai/google/gemini-nano-banana-2.1"
+
+[provider_coverage.openrouter]
+disposition = "listed"
+source_url = "https://openrouter.ai/google/gemini-nano-banana-2.1"
+
+[providers.vercel]
+provider = "vercel"
+id = "google/gemini-nano-banana-2.1"
+url = "https://vercel.com/ai-gateway/models/gemini-nano-banana-2.1"
+source_url = "https://vercel.com/ai-gateway/models/gemini-nano-banana-2.1"
+pricing = { type = "per_token", input = 1.5, text_output = 7.5, cached_input = 0.15, source_url = "https://ai-gateway.vercel.sh/v1/models" }
+qualifications = [
+  { source_url = "https://ai-gateway.vercel.sh/v1/models", notes = "Discovery publishes output-image price examples of $0.0336 at 1K, $0.0504 at 2K and $0.1134 at 4K, separately from text and thinking output tokens. No image-token rate is inferred from another provider. Search has a separate published $14 per 1000 rate. Provider parameter and structured-output support differs from the native model page." },
+]
+
+[providers.vercel.capabilities]
+source_url = "https://vercel.com/ai-gateway/models/gemini-nano-banana-2.1"
+image_input = true
+reasoning = true
+structured_output = true
+
+[providers.vercel.limits]
+source_url = "https://vercel.com/ai-gateway/models/gemini-nano-banana-2.1"
+context_tokens = 131072
+max_output_tokens = 32768
+
+[[providers.vercel.endpoints]]
+id = "google/gemini-nano-banana-2.1"
+input = "text"
+source_url = "https://vercel.com/ai-gateway/models/gemini-nano-banana-2.1"
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/gemini-nano-banana-2.1"
+
+[providers.fal]
+provider = "fal"
+id = "google/nano-banana-2.1"
+url = "https://fal.ai/nano-banana-2.1"
+source_url = "https://fal.ai/nano-banana-2.1"
+pricing = { type = "per_token", input = 1.764, image_input = 1.764, text_output = 8.823, output = 35.294, source_url = "https://fal.ai/models/google/nano-banana-2.1/edit" }
+qualifications = [
+  { source_url = "https://fal.ai/models/google/nano-banana-2.1/edit", notes = "Rates are USD per million tokens. Every output repeats the prompt and input token charges. Thinking is output text. Web search has no separate fee on this provider; retrieved content adds input tokens. The representative per-image examples are not flat prices or request cost limits." },
+  { source_url = "https://fal.ai/models/google/nano-banana-2.1/edit/api", notes = "Editing also accepts optional video_url or pdf_url context, each with a 15 MB file limit. The provider schema lists seed; the native Google Cloud contract does not support it, so portability or deterministic behavior is not claimed." },
+  { source_url = "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/nano-banana-2-1", notes = "The underlying model has 131072 input tokens and 32768 output tokens. Output image token counts are 1120 at 1K, 1680 at 2K and 3780 at 4K; input images use 1120 tokens each. These are model facts, not flat request prices." },
+]
+
+[providers.fal.capabilities]
+source_url = "https://fal.ai/nano-banana-2.1"
+image_input = true
+reasoning = true
+
+[providers.fal.limits]
+source_url = "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/nano-banana-2-1"
+context_tokens = 131072
+max_output_tokens = 32768
+
+[[providers.fal.endpoints]]
+id = "google/nano-banana-2.1"
+input = "text"
+source_url = "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=google/nano-banana-2.1"
+
+[providers.fal.endpoints.parameters]
+prompt = { type = "string", min_length = 3, max_length = 50000 }
+num_images = { type = "integer", minimum = 1, maximum = 4 }
+aspect_ratio = { type = "string", enum = [
+  "auto",
+  "21:9",
+  "16:9",
+  "3:2",
+  "4:3",
+  "5:4",
+  "1:1",
+  "4:5",
+  "3:4",
+  "2:3",
+  "9:16",
+  "4:1",
+  "1:4",
+  "8:1",
+  "1:8",
+] }
+resolution = { type = "string", enum = ["1K", "2K", "4K"] }
+thinking_level = { type = "string", enum = ["minimal", "medium", "high"] }
+output_format = { type = "string", enum = ["jpeg", "png", "webp"] }
+safety_tolerance = { type = "string", enum = ["1", "2", "3", "4", "5", "6"] }
+seed = { type = "integer" }
+system_prompt = { type = "string", max_length = 50000 }
+enable_web_search = { type = "boolean" }
+limit_generations = { type = "boolean" }
+sync_mode = { type = "boolean" }
+
+[[providers.fal.endpoints]]
+id = "google/nano-banana-2.1/edit"
+input = "image"
+source_url = "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=google/nano-banana-2.1/edit"
+
+[providers.fal.endpoints.parameters]
+prompt = { type = "string", min_length = 3, max_length = 50000 }
+num_images = { type = "integer", minimum = 1, maximum = 4 }
+aspect_ratio = { type = "string", enum = [
+  "auto",
+  "21:9",
+  "16:9",
+  "3:2",
+  "4:3",
+  "5:4",
+  "1:1",
+  "4:5",
+  "3:4",
+  "2:3",
+  "9:16",
+  "4:1",
+  "1:4",
+  "8:1",
+  "1:8",
+] }
+resolution = { type = "string", enum = ["1K", "2K", "4K"] }
+thinking_level = { type = "string", enum = ["minimal", "medium", "high"] }
+output_format = { type = "string", enum = ["jpeg", "png", "webp"] }
+safety_tolerance = { type = "string", enum = ["1", "2", "3", "4", "5", "6"] }
+seed = { type = "integer" }
+system_prompt = { type = "string", max_length = 50000 }
+enable_web_search = { type = "boolean" }
+limit_generations = { type = "boolean" }
+sync_mode = { type = "boolean" }
+image_urls = { type = "array", max_items = 14, source_url = "https://fal.ai/models/google/nano-banana-2.1/edit" }
+video_url = { type = "string" }
+pdf_url = { type = "string" }
+
+[provider_coverage.fal]
+disposition = "listed"
+source_url = "https://fal.ai/nano-banana-2.1"

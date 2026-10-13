@@ -1,0 +1,189 @@
+id = "openai/gpt-6.1-sol"
+section = "text.catalog"
+vendor = "openai"
+reference_provider = "openai"
+
+label = "GPT-6.1 Sol"
+multimodal = true
+image_input_mimes = ["image/png", "image/jpeg", "image/webp", "image/gif"]
+tool_call = true
+context_window = 1050000
+output_limit = 128000
+
+[release]
+date = "2026-09-29"
+basis = "model"
+source_url = "https://openai.com/index/devday-2026-recap/"
+
+[cost]
+input = 2
+output = 10
+cache_read = 0.1
+cache_write = 2.50
+
+[cost.long_context]
+input_tokens_above = 272000
+input_multiplier = 2
+output_multiplier = 1.5
+
+[providers.openai]
+provider = "openai"
+id = "gpt-6.1-sol"
+url = "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+source_url = "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+qualifications = [
+  { source_url = "https://developers.openai.com/api/docs/models/gpt-6.1-sol", notes = "Responses supports function calling. Chat Completions does not support tool calling. Reasoning none and minimal are not supported." },
+  { source_url = "https://developers.openai.com/api/docs/guides/images-vision", notes = "Image input is supported, but the published patch/tile multiplier and detail-level sizing tables do not name this exact model. No vision-tokenization formula is inferred from other models." },
+]
+
+[providers.openai.token_pricing]
+source_url = "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+unit = "usd_per_token"
+scope = "Standard synchronous global token rates; optional tools, regional processing and alternate service tiers are excluded. Cache writes use the default duration."
+input = "0.000002"
+output = "0.00001"
+input_cache_read = "0.0000001"
+input_cache_write = "0.0000025"
+tiers = [
+  { meter = "input", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.000002" },
+  { meter = "input", minimum_input_tokens = 272001, usd_per_token = "0.000004" },
+  { meter = "output", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.00001" },
+  { meter = "output", minimum_input_tokens = 272001, usd_per_token = "0.000015" },
+  { meter = "input_cache_read", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.0000001" },
+  { meter = "input_cache_read", minimum_input_tokens = 272001, usd_per_token = "0.0000002" },
+  { meter = "input_cache_write", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.0000025" },
+  { meter = "input_cache_write", minimum_input_tokens = 272001, usd_per_token = "0.000005" },
+]
+
+[providers.openai.capabilities]
+source_url = "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+streaming = true
+
+[providers.openai.limits]
+source_url = "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+context_tokens = 1050000
+max_output_tokens = 128000
+
+[[providers.openai.endpoints]]
+id = "gpt-6.1-sol"
+input = "text"
+source_url = "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+interface = "responses"
+capabilities = { source_url = "https://developers.openai.com/api/docs/models/gpt-6.1-sol", image_input = true, tools = true, reasoning = true, structured_output = true, streaming = true }
+parameters = { "reasoning.effort" = { type = "string", enum = [
+  "low",
+  "medium",
+  "high",
+  "xhigh",
+  "max",
+] } }
+
+[provider_coverage.openai]
+disposition = "listed"
+source_url = "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+
+[providers.openrouter]
+provider = "openrouter"
+id = "openai/gpt-6.1-sol"
+url = "https://openrouter.ai/openai/gpt-6.1-sol"
+source_url = "https://openrouter.ai/openai/gpt-6.1-sol"
+qualifications = [
+  { source_url = "https://openrouter.ai/api/v1/models", notes = "The provider reports its long-context override at minimum 272000 prompt tokens. This binding preserves that threshold rather than substituting another provider's 272001 boundary." },
+]
+
+[providers.openrouter.token_pricing]
+source_url = "https://openrouter.ai/openai/gpt-6.1-sol"
+unit = "usd_per_token"
+scope = "Standard synchronous global token rates; optional tools, regional processing and alternate service tiers are excluded. Cache writes use the default duration."
+input = "0.000002"
+output = "0.00001"
+input_cache_read = "0.0000001"
+input_cache_write = "0.0000025"
+tiers = [
+  { meter = "input", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.000002" },
+  { meter = "input", minimum_input_tokens = 272000, usd_per_token = "0.000004" },
+  { meter = "output", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.00001" },
+  { meter = "output", minimum_input_tokens = 272000, usd_per_token = "0.000015" },
+  { meter = "input_cache_read", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.0000001" },
+  { meter = "input_cache_read", minimum_input_tokens = 272000, usd_per_token = "0.0000002" },
+  { meter = "input_cache_write", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.0000025" },
+  { meter = "input_cache_write", minimum_input_tokens = 272000, usd_per_token = "0.000005" },
+]
+
+[providers.openrouter.capabilities]
+source_url = "https://openrouter.ai/openai/gpt-6.1-sol"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+streaming = true
+
+[providers.openrouter.limits]
+source_url = "https://openrouter.ai/openai/gpt-6.1-sol"
+context_tokens = 1050000
+max_output_tokens = 128000
+
+[[providers.openrouter.endpoints]]
+id = "openai/gpt-6.1-sol"
+input = "text"
+source_url = "https://openrouter.ai/openai/gpt-6.1-sol"
+
+[provider_coverage.openrouter]
+disposition = "listed"
+source_url = "https://openrouter.ai/openai/gpt-6.1-sol"
+
+[providers.vercel]
+provider = "vercel"
+id = "openai/gpt-6.1-sol"
+url = "https://vercel.com/ai-gateway/models/gpt-6.1-sol"
+source_url = "https://vercel.com/ai-gateway/models/gpt-6.1-sol"
+
+[providers.vercel.token_pricing]
+source_url = "https://vercel.com/ai-gateway/models/gpt-6.1-sol"
+unit = "usd_per_token"
+scope = "Standard synchronous global token rates; optional tools, regional processing and alternate service tiers are excluded. Cache writes use the default duration."
+input = "0.000002"
+output = "0.00001"
+input_cache_read = "0.0000001"
+input_cache_write = "0.0000025"
+tiers = [
+  { meter = "input", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.000002" },
+  { meter = "input", minimum_input_tokens = 272001, usd_per_token = "0.000004" },
+  { meter = "output", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.00001" },
+  { meter = "output", minimum_input_tokens = 272001, usd_per_token = "0.000015" },
+  { meter = "input_cache_read", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.0000001" },
+  { meter = "input_cache_read", minimum_input_tokens = 272001, usd_per_token = "0.0000002" },
+  { meter = "input_cache_write", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.0000025" },
+  { meter = "input_cache_write", minimum_input_tokens = 272001, usd_per_token = "0.000005" },
+]
+
+[providers.vercel.capabilities]
+source_url = "https://vercel.com/ai-gateway/models/gpt-6.1-sol"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+streaming = true
+
+[providers.vercel.limits]
+source_url = "https://vercel.com/ai-gateway/models/gpt-6.1-sol"
+context_tokens = 1050000
+max_output_tokens = 128000
+
+[[providers.vercel.endpoints]]
+id = "openai/gpt-6.1-sol"
+input = "text"
+source_url = "https://vercel.com/ai-gateway/models/gpt-6.1-sol"
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/gpt-6.1-sol"
+
+[provider_coverage.fal]
+disposition = "excluded"
+source_url = "https://fal.ai/models"
+reason = "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."

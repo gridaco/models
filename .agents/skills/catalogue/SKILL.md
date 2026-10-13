@@ -143,6 +143,32 @@ pricing shapes in use and their rules are in [`pricing.md`](./pricing.md).
 5. **Record qualifications** that do not fit the JSON (regular-price evidence,
    long-context bands, ambiguous units) in `catalogue/PROVENANCE.md`, with source URLs.
 
+## Reference pattern: text and image additions
+
+The GPT-6 Sol, GPT-6 Luna, GPT-6.1 Sol and Gemini Nano Banana 2.1 cards demonstrate
+a data-only addition across modalities. Use their structure, not their values, as
+the starting point for another model:
+
+- Read the exact native model contract before copying a predecessor. GPT tool
+  support varies by API and reasoning effort; Nano Banana 2.1 has different
+  resolutions and billing meters from Nano Banana 2.
+- Keep each provider's prices, thresholds, limits and parameter differences.
+  A token-priced image example is not a fixed image price. A supported vision
+  input does not establish a tokenization formula.
+- Preserve unknown facts as sourced qualifications. Do not infer another
+  model's image-token multiplier or another provider's regular rates.
+- Add only verified service bindings. A consumer's planned launch is not public
+  availability; add its binding after its published discovery and contracts
+  confirm the offering.
+- Regenerate and validate the catalogue, run `uv run pytest` and the pinned
+  formatter, and review the complete diff. Submit the cards, generated output
+  and provenance together. After merge, verify the automatic release contains
+  those cards. Publishing this catalogue does not deploy a consuming service.
+
+Free validation verifies the catalogue contract, not hosted inference behavior.
+Record behavioral uncertainties for a separately approved, bounded paid test;
+do not make catalogue checks consume provider credits.
+
 ## After any update
 
 - [ ] Every new or changed fact has a first-party source, cited in the PR description

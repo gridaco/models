@@ -1,0 +1,190 @@
+id = "openai/gpt-6-luna"
+section = "text.catalog"
+vendor = "openai"
+reference_provider = "openai"
+
+label = "GPT-6 Luna"
+multimodal = true
+image_input_mimes = ["image/png", "image/jpeg", "image/webp", "image/gif"]
+tool_call = true
+context_window = 1050000
+output_limit = 128000
+
+[release]
+date = "2026-09-22"
+basis = "model"
+source_url = "https://openai.com/index/introducing-gpt-6-sol-and-luna/"
+
+[cost]
+input = 0.1
+output = 0.5
+cache_read = 0.01
+cache_write = 0.125
+
+[cost.long_context]
+input_tokens_above = 272000
+input_multiplier = 2
+output_multiplier = 1.5
+
+[providers.openai]
+provider = "openai"
+id = "gpt-6-luna"
+url = "https://developers.openai.com/api/docs/models/gpt-6-luna"
+source_url = "https://developers.openai.com/api/docs/models/gpt-6-luna"
+qualifications = [
+  { source_url = "https://developers.openai.com/api/docs/models/gpt-6-luna", notes = "Responses supports function calling. Chat Completions supports function calling only when reasoning_effort is explicitly none; the default reasoning effort is medium." },
+  { source_url = "https://developers.openai.com/api/docs/guides/images-vision", notes = "Image input is supported, but the published patch/tile multiplier and detail-level sizing tables do not name this exact model. No vision-tokenization formula is inferred from other models." },
+]
+
+[providers.openai.token_pricing]
+source_url = "https://developers.openai.com/api/docs/models/gpt-6-luna"
+unit = "usd_per_token"
+scope = "Standard synchronous global token rates; optional tools, regional processing and alternate service tiers are excluded. Cache writes use the default duration."
+input = "0.0000001"
+output = "0.0000005"
+input_cache_read = "0.00000001"
+input_cache_write = "0.000000125"
+tiers = [
+  { meter = "input", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.0000001" },
+  { meter = "input", minimum_input_tokens = 272001, usd_per_token = "0.0000002" },
+  { meter = "output", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.0000005" },
+  { meter = "output", minimum_input_tokens = 272001, usd_per_token = "0.00000075" },
+  { meter = "input_cache_read", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.00000001" },
+  { meter = "input_cache_read", minimum_input_tokens = 272001, usd_per_token = "0.00000002" },
+  { meter = "input_cache_write", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.000000125" },
+  { meter = "input_cache_write", minimum_input_tokens = 272001, usd_per_token = "0.00000025" },
+]
+
+[providers.openai.capabilities]
+source_url = "https://developers.openai.com/api/docs/models/gpt-6-luna"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+streaming = true
+
+[providers.openai.limits]
+source_url = "https://developers.openai.com/api/docs/models/gpt-6-luna"
+context_tokens = 1050000
+max_output_tokens = 128000
+
+[[providers.openai.endpoints]]
+id = "gpt-6-luna"
+input = "text"
+source_url = "https://developers.openai.com/api/docs/models/gpt-6-luna"
+interface = "responses"
+capabilities = { source_url = "https://developers.openai.com/api/docs/models/gpt-6-luna", image_input = true, tools = true, reasoning = true, structured_output = true, streaming = true }
+parameters = { "reasoning.effort" = { type = "string", enum = [
+  "none",
+  "low",
+  "medium",
+  "high",
+  "xhigh",
+  "max",
+] } }
+
+[provider_coverage.openai]
+disposition = "listed"
+source_url = "https://developers.openai.com/api/docs/models/gpt-6-luna"
+
+[providers.openrouter]
+provider = "openrouter"
+id = "openai/gpt-6-luna"
+url = "https://openrouter.ai/openai/gpt-6-luna"
+source_url = "https://openrouter.ai/openai/gpt-6-luna"
+qualifications = [
+  { source_url = "https://openrouter.ai/api/v1/models", notes = "The provider reports its long-context override at minimum 272000 prompt tokens. This binding preserves that threshold rather than substituting another provider's 272001 boundary." },
+]
+
+[providers.openrouter.token_pricing]
+source_url = "https://openrouter.ai/openai/gpt-6-luna"
+unit = "usd_per_token"
+scope = "Standard synchronous global token rates; optional tools, regional processing and alternate service tiers are excluded. Cache writes use the default duration."
+input = "0.0000001"
+output = "0.0000005"
+input_cache_read = "0.00000001"
+input_cache_write = "0.000000125"
+tiers = [
+  { meter = "input", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.0000001" },
+  { meter = "input", minimum_input_tokens = 272000, usd_per_token = "0.0000002" },
+  { meter = "output", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.0000005" },
+  { meter = "output", minimum_input_tokens = 272000, usd_per_token = "0.00000075" },
+  { meter = "input_cache_read", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.00000001" },
+  { meter = "input_cache_read", minimum_input_tokens = 272000, usd_per_token = "0.00000002" },
+  { meter = "input_cache_write", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.000000125" },
+  { meter = "input_cache_write", minimum_input_tokens = 272000, usd_per_token = "0.00000025" },
+]
+
+[providers.openrouter.capabilities]
+source_url = "https://openrouter.ai/openai/gpt-6-luna"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+streaming = true
+
+[providers.openrouter.limits]
+source_url = "https://openrouter.ai/openai/gpt-6-luna"
+context_tokens = 1050000
+max_output_tokens = 128000
+
+[[providers.openrouter.endpoints]]
+id = "openai/gpt-6-luna"
+input = "text"
+source_url = "https://openrouter.ai/openai/gpt-6-luna"
+
+[provider_coverage.openrouter]
+disposition = "listed"
+source_url = "https://openrouter.ai/openai/gpt-6-luna"
+
+[providers.vercel]
+provider = "vercel"
+id = "openai/gpt-6-luna"
+url = "https://vercel.com/ai-gateway/models/gpt-6-luna"
+source_url = "https://vercel.com/ai-gateway/models/gpt-6-luna"
+
+[providers.vercel.token_pricing]
+source_url = "https://vercel.com/ai-gateway/models/gpt-6-luna"
+unit = "usd_per_token"
+scope = "Standard synchronous global token rates; optional tools, regional processing and alternate service tiers are excluded. Cache writes use the default duration."
+input = "0.0000001"
+output = "0.0000005"
+input_cache_read = "0.00000001"
+input_cache_write = "0.000000125"
+tiers = [
+  { meter = "input", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.0000001" },
+  { meter = "input", minimum_input_tokens = 272001, usd_per_token = "0.0000002" },
+  { meter = "output", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.0000005" },
+  { meter = "output", minimum_input_tokens = 272001, usd_per_token = "0.00000075" },
+  { meter = "input_cache_read", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.00000001" },
+  { meter = "input_cache_read", minimum_input_tokens = 272001, usd_per_token = "0.00000002" },
+  { meter = "input_cache_write", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.000000125" },
+  { meter = "input_cache_write", minimum_input_tokens = 272001, usd_per_token = "0.00000025" },
+]
+
+[providers.vercel.capabilities]
+source_url = "https://vercel.com/ai-gateway/models/gpt-6-luna"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+streaming = true
+
+[providers.vercel.limits]
+source_url = "https://vercel.com/ai-gateway/models/gpt-6-luna"
+context_tokens = 1050000
+max_output_tokens = 128000
+
+[[providers.vercel.endpoints]]
+id = "openai/gpt-6-luna"
+input = "text"
+source_url = "https://vercel.com/ai-gateway/models/gpt-6-luna"
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/gpt-6-luna"
+
+[provider_coverage.fal]
+disposition = "excluded"
+source_url = "https://fal.ai/models"
+reason = "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."
