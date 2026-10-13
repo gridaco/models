@@ -63,9 +63,13 @@ file, commit, branch name, or PR:
 
 - the name, URL, path, file, PR, or tooling of a private repository or service;
 - how a consumer routes requests (which provider for which model, fallback order);
-- negotiated, wholesale, or account-specific prices; margins, markups, credit conversions;
+- negotiated, wholesale, or account-specific prices; internal margins, funding fees, credit conversions;
 - provider account details, contract or rights reviews;
-- hostnames, account IDs, credential or environment variable names, budgets, roadmap.
+- private hostnames, account IDs, credential or environment variable names, budgets, roadmap.
+
+Published service contracts, public API URLs and advertised regular prices are public
+provider facts, including Grida's. Record them without disclosing supplier selection,
+internal tariff calculations or funding policy.
 
 Restate a need in neutral, public terms ("per-second video pricing keyed by resolution").
 When in doubt, leave it out and ask.
@@ -81,14 +85,24 @@ doesn't belong in the contract.
   See `$catalogue` and `$provenance`.
 - **Never fabricate.** If a value cannot be verified, leave it out and say so. Do not
   estimate a price, round a limit, or infer a release day.
-- **Published prices only.** No negotiated, wholesale, account-specific, or internal prices.
-  No markup, credit conversion, or margin.
+- **Published regular prices only.** Use sourced, non-promotional provider rates even
+  during an active promotion. Do not maintain promotional prices or expiry tracking.
+  No negotiated, wholesale, account-specific, or internal prices; no internal markup, credit
+  conversion, or internal margin. A provider's publicly advertised rate is eligible even
+  when its internal economics are unknown. Never infer an unknown regular rate.
 - **Preserve IDs exactly.** Model and provider IDs keep their exact spelling and casing.
   Authored field names are `lower_snake_case`.
 - **Additive by default.** Add fields; do not rename or repurpose them. A breaking change
   needs a new schema version, decided with the user.
 - **Facts are independent of products.** Being catalogued is not the same as being offered
-  by a Grida product.
+  by a Grida product. Keep existing entries when reviewing provider coverage; deleting a
+  model or expanding an offering requires a separate review.
+- **Provider coverage is explicit.** Qualify the native lab API as `reference_provider`
+  where it exists. It is a presentation reference, never a routing default. Record
+  OpenRouter, Vercel and fal (media only) where verified, and Grida where it serves the
+  model. Record source-backed absence or exclusion in `provider_coverage`; unfinished
+  research is not evidence of absence. Open weights do not imply a native hosted API.
+  See the catalogue skill for coverage and public price rules.
 
 ## Skills
 

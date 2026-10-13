@@ -77,7 +77,9 @@ history. Never fill in an approximate day.
 A JSON value cannot hold its own caveats. Write a note in
 [`catalogue/PROVENANCE.md`](../../../catalogue/PROVENANCE.md) when a fact needs one. For example:
 
-- A promotion: the steady-state price that was recorded, and the promotion's end date.
+- Regular-price evidence: the provider's source establishing its non-promotional rate,
+  or a verification gap when only a promotional rate is published. Do not track discounted
+  prices, promotion end dates, or expiry rechecks.
 - A pricing band, such as long-context multipliers, with its threshold and source.
 - A capability shared by a model family, with the page that states it.
 - A conflict between sources, and why one was chosen.

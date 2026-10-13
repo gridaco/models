@@ -24,12 +24,14 @@ import datetime
 import json
 import math
 import sys
+from decimal import Decimal, InvalidOperation
 from fractions import Fraction
 from pathlib import Path
 from typing import Any, Iterator
 from urllib.parse import urlsplit
 
 from jsonschema import Draft202012Validator
+from jsonschema.exceptions import SchemaError
 
 import build
 import cards
@@ -91,10 +93,12 @@ def is_calendar_date(value: str) -> bool:
 
 
 SOURCED_OBJECTS = (
+    "distribution",
     "output_token_calculator",
     "vision_tokenization",
     "capabilities",
     "token_pricing",
+    "published_pricing",
     "limits",
 )
 
@@ -228,8 +232,125 @@ def token_pricing_errors(pricing: dict[str, Any], where: str) -> Iterator[str]:
                 yield f"{where}: overlapping input-token tiers for {meter}"
 
 
+def distribution_errors(distribution: dict[str, Any], where: str) -> Iterator[str]:
+    code = distribution.get("code")
+    artifacts = []
+    if isinstance(code, dict):
+        code_where = f"{where}/code"
+        yield from source_url_errors(code.get("repository_url"), f"{code_where}/repository_url")
+        artifacts.append((code_where, code))
+    weights = distribution.get("weights", [])
+    seen_ids: set[str] = set()
+    seen_urls: dict[str, list[str | None]] = {}
+    if isinstance(weights, list):
+        for index, weight in enumerate(weights):
+            if not isinstance(weight, dict):
+                continue
+            weight_where = f"{where}/weights/{index}"
+            artifacts.append((weight_where, weight))
+            url, variant = weight.get("url"), weight.get("id")
+            yield from source_url_errors(url, f"{weight_where}/url")
+            if isinstance(variant, str):
+                if variant in seen_ids:
+                    yield f"{weight_where}: duplicate weight variant {variant!r}"
+                seen_ids.add(variant)
+            else:
+                variant = None
+            if isinstance(url, str):
+                previous = seen_urls.setdefault(url, [])
+                if previous and (variant is None or None in previous or variant in previous):
+                    yield f"{weight_where}: duplicate weight URL without distinct variant IDs"
+                previous.append(variant)
+    for artifact_where, artifact in artifacts:
+        license = artifact.get("license")
+        if isinstance(license, dict):
+            yield from source_url_errors(license.get("url"), f"{artifact_where}/license/url")
+
+
+def published_pricing_errors(pricing: dict[str, Any], where: str) -> Iterator[str]:
+    """Preserve exact public meter amounts without accepting malformed bands."""
+    seen_ids = set()
+    components = pricing.get("components", [])
+    if not isinstance(components, list):
+        return
+    for index, component in enumerate(components):
+        if not isinstance(component, dict):
+            continue
+        component_where = f"{where}/components/{index}"
+        identifier = component.get("id")
+        if isinstance(identifier, str):
+            if identifier in seen_ids:
+                yield f"{component_where}: duplicate price component id {identifier!r}"
+            seen_ids.add(identifier)
+        condition = component.get("when")
+        if isinstance(condition, dict):
+            try:
+                json.dumps(condition, allow_nan=False)
+                Draft202012Validator.check_schema(condition)
+            except (SchemaError, TypeError, ValueError):
+                yield f"{component_where}: when must be a valid JSON Schema predicate"
+        rounding = component.get("quantity_rounding")
+        if isinstance(rounding, dict):
+            if rounding.get("mode") == "none" and rounding.get("increment") is not None:
+                yield f"{component_where}: no rounding requires a null increment"
+            if rounding.get("mode") == "ceil" and rounding.get("increment") is None:
+                yield f"{component_where}: ceil rounding requires an increment"
+        band = component.get("quantity_range")
+        if isinstance(band, dict) and band.get("max") is not None:
+            try:
+                minimum, maximum = Decimal(band.get("min")), Decimal(band.get("max"))
+            except (InvalidOperation, TypeError, ValueError):
+                continue  # the schema reports malformed numbers
+            if minimum.is_finite() and maximum.is_finite() and minimum >= maximum:
+                yield f"{component_where}: exclusive range max must exceed min"
+
+
+def provider_fact_errors(facts: dict[str, Any]) -> Iterator[str]:
+    for section, table in facts.items():
+        if not isinstance(table, dict):
+            continue
+        entries = [(section, table)] if section in NON_TABLE_SECTIONS else [
+            (f"{section}/{key}", card) for key, card in table.items()
+        ]
+        for where, card in entries:
+            if not isinstance(card, dict):
+                continue
+            providers = card.get("providers", {})
+            providers = providers if isinstance(providers, dict) else {}
+            for name, binding in providers.items():
+                if not isinstance(binding, dict):
+                    continue
+                if binding.get("provider") != name:
+                    yield f"{where}/providers/{name}: binding.provider is {binding.get('provider')!r}"
+                if not binding.get("id"):
+                    yield f"{where}/providers/{name}: binding has no id"
+                if "source_url" in binding:
+                    yield from source_url_errors(binding["source_url"], f"{where}/providers/{name}")
+            direct = card.get("provider")
+            reference = card.get("reference_provider")
+            if isinstance(reference, str) and reference not in providers and reference != direct:
+                yield f"{where}: reference_provider has no provider binding or direct provider"
+            coverage = card.get("provider_coverage", {})
+            if not isinstance(coverage, dict):
+                continue
+            for provider, record in coverage.items():
+                if not isinstance(record, dict):
+                    continue
+                record_where = f"{where}/provider_coverage/{provider}"
+                yield from source_url_errors(record.get("source_url"), record_where)
+                listed = provider in providers or provider == direct
+                disposition = record.get("disposition")
+                if disposition == "listed" and not listed:
+                    yield f"{record_where}: listed provider has no binding or direct provider"
+                if isinstance(disposition, str) and disposition in {"not_listed", "excluded"} and listed:
+                    yield f"{record_where}: absent or excluded provider still has a binding"
+
+
 def published_fact_errors(facts: dict[str, Any]) -> Iterator[str]:
     for where, value in fact_objects(facts):
+        for key in ("source_url", "request_schema_url", "result_schema_url"):
+            if key in value:
+                yield from source_url_errors(value[key], f"{where}/{key}")
         endpoints = value.get("endpoints", [])
         seen_endpoint_ids = set()
         if isinstance(endpoints, list):
@@ -249,10 +370,14 @@ def published_fact_errors(facts: dict[str, Any]) -> Iterator[str]:
             if "source_js_url" in sourced:
                 yield from source_url_errors(sourced["source_js_url"], f"{sourced_where}/source_js_url")
             yield from numeric_range_errors(sourced, sourced_where)
-            if name == "output_token_calculator":
+            if name == "distribution":
+                yield from distribution_errors(sourced, sourced_where)
+            elif name == "output_token_calculator":
                 yield from calculator_errors(sourced, sourced_where)
             elif name == "token_pricing":
                 yield from token_pricing_errors(sourced, sourced_where)
+            elif name == "published_pricing":
+                yield from published_pricing_errors(sourced, sourced_where)
         if "parameters" in value or "image_constraints" in value:
             yield from source_url_errors(value.get("source_url"), where)
         parameters = value.get("parameters", {})
@@ -315,14 +440,8 @@ def invariant_errors(facts: dict[str, Any]) -> Iterator[str]:
                 if not isinstance(providers, dict) or not providers:
                     yield f"{where}: has no provider bindings"
                     continue
-                for name, binding in providers.items():
-                    if not isinstance(binding, dict):
-                        continue
-                    if binding.get("provider") != name:
-                        yield f"{where}/providers/{name}: binding.provider is {binding.get('provider')!r}"
-                    if not binding.get("id"):
-                        yield f"{where}/providers/{name}: binding has no id"
 
+    yield from provider_fact_errors(facts)
     yield from published_fact_errors(facts)
 
     for exception in sorted(KNOWN_EXCEPTIONS - used_exceptions):
