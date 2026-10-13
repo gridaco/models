@@ -112,3 +112,60 @@ not an assertion that a consumer supports every variant.
 
 `vendor`, including on text cards, identifies the model's lab in `labs.json`.
 It is independent of a model ID's namespace and its serving provider.
+
+## Published calculators and serving facts
+
+Optional additions record the facts at the scope their source describes. A card's
+`output_token_calculator` and `vision_tokenization` describe the model. A binding's
+`capabilities`, `limits`, and `token_pricing` describe what its provider serves.
+Endpoint `parameters` and `image_constraints` describe one exact input variant.
+Do not flatten a provider's limits or price bands into intrinsic model facts.
+Missing fields mean unrecorded facts, never unsupported features or zero prices.
+
+- **Output calculators.** `output_token_calculator` carries a first-party
+  `source_url`, an optional `source_js_url` for the published calculator asset,
+  `area_offset`, `area_divisor`, `short_axis_rounding`, `token_rounding`, and
+  `quality_axes` (quality name to its positive integer axis). This shape describes
+  the published formula `ceil(K × round(K × min(width, height) / max(width, height))
+× (area_offset + width × height) / area_divisor)`. `nearest_ties_even` rounds the
+  short axis; `ceil` rounds output tokens. `examples` records sourced width,
+  height, quality, and `output_tokens` and/or `usd`. An optional `usd_precision`
+  records the number of decimal places in a published rounded price. A rounded
+  price is evidence of that price, not a basis for inventing an exact token count.
+  The checker reproduces any recorded token count from the formula and rejects
+  duplicate size/quality examples.
+- **Vision tokenization.** `vision_tokenization` is a sourced set of the rules the
+  vendor actually publishes: `patch_size_px`, `token_multiplier`,
+  `detail_patch_budgets`, `detail_token_budgets`, `detail_maximum_edges`,
+  `maximum_patch_count`, `maximum_tokens_per_image`, `tokens_per_image`, and
+  `token_rounding`, when applicable. Patch counts, token budgets, and edge limits
+  retain distinct meanings. `token_counts_approximate: true` preserves a source's
+  qualification that its token examples or budgets are approximate. Omit rules
+  that have not been published.
+- **Capabilities and limits.** A sourced `capabilities` object may record boolean
+  `image_input`, `tools`, `reasoning`, `structured_output`, and `streaming`. A
+  provider's sourced `limits` may record positive `context_tokens` and
+  `max_output_tokens`. Neither object chooses a consumer's supported features.
+- **Token pricing.** `token_pricing` records `unit: "usd_per_token"`, a
+  `source_url`, and exact decimal strings for `input`, `output`,
+  `input_cache_read`, and `input_cache_write` where published. Optional `tiers`
+  carry `meter`, an inclusive `minimum_input_tokens`, an exclusive
+  `maximum_input_tokens`, and `usd_per_token`. An omitted or null maximum means
+  no published upper bound. Bands may differ by meter and cannot overlap for the
+  same meter. These are provider list prices, not converted application prices.
+- **Endpoint parameters.** `parameters` maps exact provider field names, including
+  dotted paths such as `image_size.width`, to their published `type`, `enum`,
+  numeric `minimum`/`maximum`/`multiple_of`, array `min_items`/`max_items`, or text
+  `min_length`/`max_length`. Endpoint `source_url` covers these facts; a parameter
+  may override `source_url` when one bound is published on a different page.
+  This is partial descriptive metadata, not a complete request JSON Schema. For
+  example, string presets and custom-size object fields may be recorded
+  separately. No defaults or consumer choices are included.
+- **Image envelopes.** `image_constraints` keeps `step`, `min_edge`, `max_edge`,
+  `min_pixels`, `max_pixels`, and `aspect_ratio: { min, max }` at endpoint scope,
+  under that endpoint's source. Each field is optional; do not infer the rest.
+
+Single-provider cards and `three_d.rig_check.operation` may also carry
+`endpoints`, with the same shape as a binding's endpoint variants. New sourced
+objects have strict field vocabularies; pre-existing card and price shapes remain
+unchanged in schema version 1.
