@@ -7,12 +7,20 @@ Supplements [`SKILL.md`](./SKILL.md). Load this when you add or change a price.
 - **Published list price, in the provider's unit.** Record what the provider's public
   pricing page says, in the unit it bills: per million tokens, per image, per second, per
   run, per 1,000 characters, or provider credits with their published USD rate. Do not
-  convert units or currencies.
+  convert currencies. Exact decimal unit normalization is allowed when both the source
+  unit and contract unit are explicit; it must not round or change billing semantics.
 - **A price belongs to a binding.** The same model can cost different amounts on different
-  providers. On canonical entries (image, video), each binding carries its own `pricing`.
-- **Steady state, not promotion.** See the lifecycle rules in [`SKILL.md`](./SKILL.md).
-- **No usable unit, no binding.** If a provider shows a placeholder price (for example,
-  $0/MTok for video), leave the binding out.
+  providers. Each binding or endpoint carries its own price without changing intrinsic
+  model facts. Public Grida service prices are eligible; its supplier selection, funding
+  fees, credit conversions and margin are not catalogue data.
+- **Regular, non-promotional rates only, even during an active promotion.** Do not
+  maintain promotional prices, expiry dates, or a promotion calendar. Verify the regular
+  rate from that provider's own source; a discounted feed or another provider's rate is
+  insufficient. See the lifecycle rules in [`SKILL.md`](./SKILL.md).
+- **No usable unit, no price.** If a provider shows a placeholder price (for example,
+  $0/MTok for video), leave that price out. A verified endpoint can still have a binding;
+  document unknown regular rates. Use a sourced exclusion only for a contract that cannot
+  be reliably listed, not to hide unfinished research.
 - **Estimates are not prices.** `avg_cost_usd` and `cost_usd` are coarse per-request
   estimates, not published facts. Keep them consistent with the published rates and never
   cite them as a source.
@@ -21,6 +29,19 @@ Supplements [`SKILL.md`](./SKILL.md). Load this when you add or change a price.
 
 These are the `pricing.type` values in the current authored data. Before adding a new
 shape, check whether an existing one can express the price without loss.
+
+`published_pricing` is an additive provider-neutral shape for publicly advertised
+USD meter components, conditions, request-wide quantity bands, and quantity
+rounding. Its contract is in
+[`catalogue/README.md`](../../../catalogue/README.md#published-service-prices-and-contracts).
+Use it only from the service's own public evidence. Its source is the advertised
+price, not assumptions about that service's suppliers or margins.
+
+`token_pricing` records exact decimal USD-per-token rates. Keep cache-write TTLs
+distinct: `input_cache_write_1h` records the one-hour rate when published;
+`scope` qualifies the standard tier and the base cache-write duration. A
+cache-storage-per-hour amount is a different unit and must not be inserted as
+a per-token write price.
 
 ### Text
 
@@ -90,7 +111,10 @@ silent output, omit those keys rather than copying another provider's rates.
 
 1. Open the provider's own pricing page or model page (see [`providers.md`](./providers.md)).
 2. Record the date you checked it in the PR description.
-3. If the page qualifies the price (region, tier, batch discount, promotion end date), note
-   the qualification and URL in `PROVENANCE.md`.
+3. Verify that the quoted rate is regular and non-promotional. Record its source and
+   applicable conditions (region, service tier, batch mode, billing unit) in
+   `PROVENANCE.md` when needed. Do not record promotional rates or end dates. If public
+   sources establish only a promotional rate, leave the regular price unrecorded and
+   document the verification gap; do not guess it.
 4. If two first-party pages disagree, follow "When sources disagree" in
    [`SKILL.md`](./SKILL.md).

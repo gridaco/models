@@ -4,8 +4,8 @@ description: >
   Research, add, update, deprecate, or remove AI model catalogue entries —
   text, image, video, audio, 3D, image tools, and embedding models — with
   their capabilities, limits, provider bindings, and published prices.
-  Covers what an entry is, per-provider ID rules, pricing shapes, lifecycle
-  rules (steady-state pricing, deprecate vs. delete), and the verification
+  Covers what an entry is, per-provider ID rules, regular pricing, native
+  reference and provider coverage, public distribution, and the verification
   checklist. Use when bumping a model version, adding a model or provider
   binding, updating a price, or auditing entries against provider docs.
   Release dates are covered by $provenance.
@@ -37,13 +37,19 @@ An entry is a set of facts about one model, each traceable to a source:
 
 - **Identity:** `id`, `label`, `vendor`, family.
 - **Release:** see `$provenance`.
+- **Distribution:** official code and weight links, exact weight variants, access
+  conditions, and separately sourced code/weight licenses. Use the model-level
+  `distribution` shape in [`catalogue/README.md`](../../../catalogue/README.md#model-distribution).
+  Leave unknown facts omitted. Available weights do not establish a native hosted API;
+  public downloads do not establish an open-source classification or unrestricted use.
 - **Capabilities:** modalities, accepted image MIME types, tool calling, audio, transparent
   background, and so on. Never derive one capability from another (for example, image MIME
   types from `multimodal`); record each from its own source.
 - **Limits:** context window and output limit (text); sizes, size constraints, aspect ratios
   (image); durations and aspect ratios (video).
-- **Bindings:** for each provider that serves it, the provider's exact ID, its published
-  price, and optionally a URL and a deprecation flag.
+- **Bindings:** exact call IDs, sourced regular prices when known, and provider-specific
+  contracts. A native `reference_provider` is a presentation choice. Explicit
+  `provider_coverage` distinguishes listed providers from source-backed absence/exclusion.
 
 Facts are independent of products. Adding a verified fact does not list the model in any
 Grida product, and removing a product listing does not delete the fact.
@@ -52,12 +58,12 @@ Grida product, and removing a product listing does not delete the fact.
 
 The same model has different IDs, availability, and prices on different providers.
 
-- **Text, audio, image tools, 3D:** one entry per provider endpoint. The `id` is in that
-  provider's format, and the provider or namespace fixes the route.
+- **Text, audio, image tools, 3D:** retain existing endpoint-shaped IDs and direct-provider
+  facts. Add `providers` bindings without rewriting those existing identities.
 - **Image and video:** one canonical entry (`vendor/model`, e.g. `google/veo-3.1`) holding the
   model's intrinsic facts, plus a `providers` record keyed by provider. Each binding has its
-  own call ID and price. Bindings carry no preference order; choosing a provider is a
-  consumer's decision.
+  own call ID and price. `reference_provider` identifies the verified native API to show
+  first; choosing which provider to call remains a consumer decision.
 
 Preserve IDs exactly as the provider spells them. Never case-convert or normalize them.
 Per-provider ID formats, pricing pages, and known quirks are in
@@ -68,20 +74,22 @@ Per-provider ID formats, pricing pages, and known quirks are in
 The catalogue states what is true and useful **now**. Its shape must never record how
 recently someone got round to updating it.
 
-- **Price the steady state, not the promotion.** If a vendor runs an introductory or
-  time-limited rate, record the price that applies after it ends, and note the promotion and
-  its end date in `PROVENANCE.md`. Otherwise the promotion ending is a silent cost increase.
-  Recheck when the date passes: a promotion can become permanent, which changes the fact.
-- **Deprecate an entry that is still a real choice.** Mark it deprecated (Grida's
-  `legacy: true`) when someone might reasonably still pick it: same price as its successor,
-  or better at something.
-- **Delete an entry whose successor is strictly dominant:** never worse on any axis, better
-  on at least one. An entry nobody should choose is noise in every picker.
-- **A binding needs a usable, verified price.** If a provider exposes no billable unit for a
-  model (for example, a $0/MTok placeholder for video), leave that binding out rather than
-  inventing a price.
-- **Catalogue only what is used.** Do not add a capability, endpoint variant, or field for a
-  case nobody serves yet. Add it when the second case arrives.
+- **Regular, non-promotional prices only.** Record the provider's sourced regular rate,
+  even when an introductory or time-limited discount is active when adding or updating a
+  model. Do not track promotional rates, end dates, or expiry rechecks. A discounted live
+  feed does not establish the regular price; do not infer it from a discount percentage or
+  another provider's rate. If the regular rate cannot be verified, report the missing
+  evidence and leave the price unrecorded.
+- **Preserve existing entries during coverage work.** Do not delete a model because a
+  successor exists or because a consumer does not currently serve it. Lifecycle and
+  offering changes need separate review. Do not introduce product policy fields.
+- **Unknown prices remain unknown.** Verified endpoint existence can be recorded without
+  a price. A $0/MTok video placeholder is not a usable unit; omit that price and record
+  the qualification. If the contract itself cannot be represented reliably, use a
+  source-backed exclusion rather than inventing capabilities or amounts.
+- **Coverage is source-backed.** Add the native API and verified OpenRouter, Vercel and
+  fal media bindings. Add Grida only where its public service actually offers the model.
+  An unserved catalogue entry remains useful; do not invent a Grida binding.
 
 Removing an entry is a contract change for consumers: some embed the catalogue at build
 time and only see the change in their next release. Say so in the PR.
@@ -98,12 +106,16 @@ time and only see the change in their next release. Say so in the PR.
 - When two first-party sources conflict, first check they describe the same thing (variant,
   provider, region, tier, resolution, date). If they truly conflict, decide which wins and
   why (more specific page, dated changelog), record it in `catalogue/PROVENANCE.md`, and
-  never average. If it can't be resolved from public sources, leave the value and ask.
+  never average. If it cannot be resolved from public sources, leave the disputed fact
+  unrecorded and document the gap. Aggregate behavioral questions for a separately
+  approved probe; do not make paid inference calls as part of catalogue maintenance.
 
 ## Pricing
 
-Record the provider's published list price in the provider's own billing unit. Never
-convert to credits, add margin, or substitute a negotiated or account-specific rate. The
+Record the provider's advertised regular price in its published billing unit. Public
+Grida prices are provider facts too; they do not authorize disclosing internal economics
+or deriving a different price from another provider. Never convert to credits, add an
+internal margin, or substitute a negotiated/account-specific rate. The
 pricing shapes in use and their rules are in [`pricing.md`](./pricing.md).
 
 ## Workflow
@@ -128,17 +140,21 @@ pricing shapes in use and their rules are in [`pricing.md`](./pricing.md).
    homepage, and its official logo (see [`models/README.md`](../../../models/README.md#a-lab)).
    Fields are `lower_snake_case`; IDs keep their exact spelling. Run
    `uv run scripts/build.py`, then `uv run scripts/check.py`.
-5. **Record qualifications** that do not fit the JSON (promotions, long-context bands,
-   ambiguous units) in `catalogue/PROVENANCE.md`, with source URLs.
+5. **Record qualifications** that do not fit the JSON (regular-price evidence,
+   long-context bands, ambiguous units) in `catalogue/PROVENANCE.md`, with source URLs.
 
 ## After any update
 
 - [ ] Every new or changed fact has a first-party source, cited in the PR description
 - [ ] No value was estimated, rounded, or copied from an aggregator without verification
-- [ ] Prices are published list prices in the provider's own unit, at the steady state
+- [ ] Prices are sourced regular, non-promotional rates in the provider's own unit;
+      promotional rates and expiry tracking are excluded
 - [ ] IDs are exact; field names are `lower_snake_case`
+- [ ] Distribution links are official; code and weight licenses/access are independently
+      sourced, with no inferred hosted API or license permissions
 - [ ] Every entry has a complete `release` (`$provenance`)
-- [ ] Deprecated vs. deleted was decided by the lifecycle rules above
+- [ ] Native reference, canonical provider coverage and any exclusions are sourced; existing
+      model identities and unserved entries are preserved
 - [ ] `catalogue/models.json` was regenerated with `uv run scripts/build.py`, not edited by hand
 - [ ] `uv run scripts/check.py` passes
 - [ ] Nothing from a private source made it into the diff, the commit, or the PR (see `AGENTS.md`)
