@@ -326,6 +326,14 @@ def provider_fact_errors(facts: dict[str, Any]) -> Iterator[str]:
                     yield f"{where}/providers/{name}: binding has no id"
                 if "source_url" in binding:
                     yield from source_url_errors(binding["source_url"], f"{where}/providers/{name}")
+                qualifications = binding.get("qualifications", [])
+                if isinstance(qualifications, list):
+                    for index, qualification in enumerate(qualifications):
+                        if isinstance(qualification, dict):
+                            yield from source_url_errors(
+                                qualification.get("source_url"),
+                                f"{where}/providers/{name}/qualifications/{index}",
+                            )
             direct = card.get("provider")
             reference = card.get("reference_provider")
             if isinstance(reference, str) and reference not in providers and reference != direct:

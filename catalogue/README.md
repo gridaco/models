@@ -122,7 +122,9 @@ Every family, including embedding and the rig-check operation, may add a
 `providers` record without changing its existing ID or direct-provider fields.
 Each binding has exact `provider` and `id` values, an optional first-party
 `source_url`, and independently sourced serving facts. A verified binding can
-omit an unknown regular price; omission never means free inference.
+omit an unknown regular price; omission never means free inference. Optional
+`qualifications` records nonempty `{ source_url, notes }` entries for unresolved
+pricing or specification facts, without inventing a replacement value.
 
 Optional `reference_provider` names a real native API binding, or the existing
 direct `provider` when that card describes the native API already. Consumers may
@@ -135,7 +137,9 @@ a native hosted API. This field records a sourced reference, not a provider regi
 - `listed` requires a binding or matching direct provider.
 - `not_listed` records verified absence from that provider's published catalogue.
 - `excluded` records an incompatible or unverifiable specification, identity or
-  pricing contract that makes a reliable listing inappropriate.
+  pricing contract that makes a reliable listing inappropriate, or an explicit
+  modality scope such as fal media-only coverage. A scope exclusion is not a claim
+  that the provider has no such model.
 
 The last two require a public, source-backed `reason` and cannot coexist with a
 binding for that provider. Do not use an exclusion for routing preference or
