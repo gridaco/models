@@ -80,21 +80,24 @@ consumes a projection of it.
 
 ## What is in a catalogue entry
 
-| Kind                   | Examples                                                                                      |
-| ---------------------- | --------------------------------------------------------------------------------------------- |
-| **Identity**           | Canonical ID (`vendor/model`), label, vendor, family (text, image, video, audio, 3D, …)       |
-| **Release provenance** | First broad public release date, its basis, and the first-party source URL                    |
-| **Capabilities**       | Modalities, accepted image formats, tool calling, audio, transparent background               |
-| **Limits**             | Context window, output limit, sizes, aspect ratios, durations, size constraints               |
-| **Provider bindings**  | The exact ID a provider uses for the model (Vercel AI Gateway, fal, OpenRouter, Replicate, …) |
-| **Published prices**   | Public list prices per provider, in the provider's own billing unit                           |
+| Kind                      | Examples                                                                                |
+| ------------------------- | --------------------------------------------------------------------------------------- |
+| **Identity**              | Canonical ID (`vendor/model`), label, vendor, family (text, image, video, audio, 3D, …) |
+| **Release provenance**    | First broad public release date, its basis, and the first-party source URL              |
+| **Capabilities**          | Modalities, accepted image formats, tool calling, audio, transparent background         |
+| **Limits**                | Context window, output limit, sizes, aspect ratios, durations, size constraints         |
+| **Provider bindings**     | Exact provider IDs, a native API reference, and sourced coverage/exclusion reasons      |
+| **Model distribution**    | Official code and weight links, exact variants, access conditions and separate licenses |
+| **Published prices**      | Public list prices per provider, in the provider's own billing unit                     |
+| **Published calculators** | Sourced output-token formulae, examples, and image-input tokenization rules             |
 
 ## What it is not
 
 - **Not a router or SDK.** A provider binding records that an endpoint exists and what it
   costs. It does not implement a client or grant permission to call it.
-- **Not billing.** The catalogue holds published list prices. Credits, markups, tariffs, and
-  negotiated or account-specific rates belong to their owners, not here.
+- **Not billing execution.** The catalogue holds publicly advertised regular prices,
+  including Grida's public service price. Funding fees, credit conversion, margins,
+  supplier selection and negotiated/account-specific rates stay with their owners.
 - **Not a live mirror.** Nothing is scraped into this repository automatically. Discovery
   tools such as [models.dev](https://models.dev) give leads; a person verifies each fact
   against a first-party source.
@@ -110,10 +113,13 @@ with a JSON Schema, readable from any language. Its shape and rules are document
 ## Principles
 
 - **Every fact has a source.** Prices, limits, and release dates cite a first-party page.
-- **The catalogue states what is true now.** Price the steady state, not the promotion.
-  Deprecate a model someone might still pick; remove one whose successor is strictly better.
-- **An ID is never portable.** The same model has different IDs, availability, and prices on
-  different providers. Bindings are recorded per provider.
+- **Regular prices, without promotion tracking.** Record sourced, non-promotional
+  provider rates even during an active discount. Do not maintain discounted prices or
+  promotion expiry dates. Existing models remain available for consumer review; provider
+  coverage changes do not silently remove them.
+- **An ID is never portable.** The same model has different IDs, availability, parameters
+  and prices on different providers. Bindings retain those differences. A sourced native
+  `reference_provider` is presented first; it does not choose a consumer's route.
 - **Additive by default.** Consumers depend on the shape. Fields are added; breaking changes
   get a new schema version.
 

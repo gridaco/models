@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://grida.co/schemas/ai-model-facts-v1.json",
   "title": "Canonical model facts, authoring envelope version 1",
-  "description": "Structural interchange schema. Generated TypeScript satisfies declarations additionally check each modality's detailed capability and pricing vocabulary.",
+  "description": "Structural interchange schema with sourced, additive model and serving-provider facts.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -62,7 +62,26 @@
       "type": "object",
       "additionalProperties": {
         "type": "object",
-        "required": ["id", "label"]
+        "required": ["id", "label"],
+        "properties": {
+          "distribution": {
+            "$ref": "#/$defs/distribution"
+          },
+          "providers": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/$defs/provider_binding"
+            }
+          },
+          "reference_provider": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Native API binding to present first as a model reference; not a routing choice."
+          },
+          "provider_coverage": {
+            "$ref": "#/$defs/provider_coverage"
+          }
+        }
       }
     },
     "three_d.rig_check.operation": {
@@ -75,6 +94,7 @@
         "provider": {
           "const": "tripo"
         },
+        "distribution": false,
         "binding_id": {
           "const": "rig-check"
         },
@@ -84,6 +104,74 @@
           "items": {
             "type": "string"
           }
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vendor": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Lab ID resolving in labs.json; independent of the serving provider."
+        },
+        "release": {
+          "type": "object",
+          "required": ["date", "basis", "source_url"],
+          "additionalProperties": false,
+          "properties": {
+            "date": {
+              "type": ["string", "null"],
+              "format": "date"
+            },
+            "basis": {
+              "enum": ["model", "provider_endpoint"]
+            },
+            "source_url": {
+              "type": "string",
+              "pattern": "^https://"
+            }
+          },
+          "if": {
+            "properties": {
+              "date": {
+                "type": "null"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "basis": {
+                "const": "provider_endpoint"
+              }
+            }
+          }
+        },
+        "capabilities": {
+          "$ref": "#/$defs/capabilities"
+        },
+        "token_pricing": {
+          "$ref": "#/$defs/token_pricing"
+        },
+        "endpoints": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/provider_endpoint"
+          }
+        },
+        "providers": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/provider_binding"
+          }
+        },
+        "reference_provider": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Native API binding to present first as a model reference; not a routing choice."
+        },
+        "provider_coverage": {
+          "$ref": "#/$defs/provider_coverage"
         }
       }
     }
@@ -144,18 +232,43 @@
         "providers": {
           "type": "object",
           "additionalProperties": {
-            "type": "object",
-            "required": ["provider", "id"],
-            "properties": {
-              "provider": {
-                "type": "string"
-              },
-              "id": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
+            "$ref": "#/$defs/provider_binding"
           }
+        },
+        "vendor": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Lab ID resolving in labs.json; independent of the serving provider."
+        },
+        "distribution": {
+          "$ref": "#/$defs/distribution"
+        },
+        "output_token_calculator": {
+          "$ref": "#/$defs/output_token_calculator"
+        },
+        "vision_tokenization": {
+          "$ref": "#/$defs/vision_tokenization"
+        },
+        "capabilities": {
+          "$ref": "#/$defs/capabilities"
+        },
+        "token_pricing": {
+          "$ref": "#/$defs/token_pricing"
+        },
+        "endpoints": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/provider_endpoint"
+          }
+        },
+        "reference_provider": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Native API binding to present first as a model reference; not a routing choice."
+        },
+        "provider_coverage": {
+          "$ref": "#/$defs/provider_coverage"
         }
       }
     },
@@ -220,6 +333,771 @@
                   "type": "number",
                   "minimum": 0
                 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "provider_endpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "input", "source_url"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "input": {
+          "enum": ["text", "image", "video", "audio", "task", "multi_image", "asset"]
+        },
+        "source_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://[^/]+(?:/|$)"
+        },
+        "capabilities": {
+          "$ref": "#/$defs/capabilities"
+        },
+        "token_pricing": {
+          "$ref": "#/$defs/token_pricing"
+        },
+        "parameters": {
+          "$ref": "#/$defs/parameters"
+        },
+        "image_constraints": {
+          "$ref": "#/$defs/image_constraints"
+        },
+        "limits": {
+          "$ref": "#/$defs/limits"
+        },
+        "operation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "interface": {
+          "type": "string",
+          "minLength": 1
+        },
+        "published_pricing": {
+          "$ref": "#/$defs/published_pricing"
+        },
+        "request_schema_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://[^/]+(?:/|$)"
+        },
+        "result_schema_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://[^/]+(?:/|$)"
+        }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_url"],
+      "minProperties": 2,
+      "properties": {
+        "source_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://[^/]+(?:/|$)"
+        },
+        "image_input": {
+          "type": "boolean"
+        },
+        "tools": {
+          "type": "boolean"
+        },
+        "reasoning": {
+          "type": "boolean"
+        },
+        "structured_output": {
+          "type": "boolean"
+        },
+        "streaming": {
+          "type": "boolean"
+        }
+      }
+    },
+    "output_token_calculator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_url",
+        "area_offset",
+        "area_divisor",
+        "short_axis_rounding",
+        "token_rounding",
+        "quality_axes"
+      ],
+      "properties": {
+        "source_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://[^/]+(?:/|$)"
+        },
+        "area_offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "area_divisor": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "short_axis_rounding": {
+          "enum": ["nearest_ties_even"]
+        },
+        "token_rounding": {
+          "enum": ["ceil"]
+        },
+        "quality_axes": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$"
+          },
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "examples": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/output_token_example"
+          }
+        },
+        "source_js_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://[^/]+(?:/|$)"
+        }
+      }
+    },
+    "output_token_example": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "height", "quality", "source_url"],
+      "anyOf": [
+        {
+          "required": ["output_tokens"]
+        },
+        {
+          "required": ["usd"]
+        }
+      ],
+      "dependentRequired": {
+        "usd_precision": ["usd"]
+      },
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "quality": {
+          "type": "string",
+          "minLength": 1
+        },
+        "output_tokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "usd": {
+          "type": "number",
+          "minimum": 0
+        },
+        "usd_precision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 12
+        },
+        "source_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://[^/]+(?:/|$)"
+        }
+      }
+    },
+    "vision_tokenization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_url"],
+      "minProperties": 2,
+      "properties": {
+        "source_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://[^/]+(?:/|$)"
+        },
+        "patch_size_px": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "token_multiplier": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "detail_patch_budgets": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$"
+          },
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "detail_token_budgets": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$"
+          },
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "maximum_patch_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maximum_tokens_per_image": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "tokens_per_image": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "detail_maximum_edges": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$"
+          },
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "token_rounding": {
+          "enum": ["ceil"]
+        },
+        "token_counts_approximate": {
+          "type": "boolean"
+        }
+      }
+    },
+    "token_pricing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_url", "unit"],
+      "anyOf": [
+        {
+          "required": ["input"]
+        },
+        {
+          "required": ["output"]
+        },
+        {
+          "required": ["input_cache_read"]
+        },
+        {
+          "required": ["input_cache_write"]
+        },
+        {
+          "required": ["tiers"]
+        }
+      ],
+      "properties": {
+        "source_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://[^/]+(?:/|$)"
+        },
+        "unit": {
+          "const": "usd_per_token"
+        },
+        "input": {
+          "type": "string",
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "description": "Exact non-negative decimal amount; no exponent notation."
+        },
+        "output": {
+          "type": "string",
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "description": "Exact non-negative decimal amount; no exponent notation."
+        },
+        "input_cache_read": {
+          "type": "string",
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "description": "Exact non-negative decimal amount; no exponent notation."
+        },
+        "input_cache_write": {
+          "type": "string",
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "description": "Exact non-negative decimal amount; no exponent notation."
+        },
+        "tiers": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/token_price_tier"
+          }
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "input_cache_write_1h": {
+          "type": "string",
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "description": "Exact non-negative decimal amount; no exponent notation."
+        }
+      }
+    },
+    "token_price_tier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["meter", "minimum_input_tokens", "usd_per_token"],
+      "properties": {
+        "meter": {
+          "enum": [
+            "input",
+            "output",
+            "input_cache_read",
+            "input_cache_write",
+            "input_cache_write_1h"
+          ]
+        },
+        "minimum_input_tokens": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Inclusive lower input-token bound."
+        },
+        "maximum_input_tokens": {
+          "type": ["integer", "null"],
+          "minimum": 1,
+          "description": "Exclusive upper input-token bound; null or omission means no published upper bound."
+        },
+        "usd_per_token": {
+          "type": "string",
+          "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+          "description": "Exact non-negative decimal amount; no exponent notation."
+        }
+      }
+    },
+    "parameter": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "type": {
+          "enum": ["string", "number", "integer", "boolean", "array", "object", "null"]
+        },
+        "enum": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "minimum": {
+          "type": "number"
+        },
+        "maximum": {
+          "type": "number"
+        },
+        "multiple_of": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "min_items": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max_items": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "min_length": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max_length": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://[^/]+(?:/|$)"
+        }
+      }
+    },
+    "parameters": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "pattern": "^[a-zA-Z][a-zA-Z0-9_]*(?:\\.[a-zA-Z][a-zA-Z0-9_]*)*$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/parameter"
+      }
+    },
+    "image_constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "step": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "min_edge": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_edge": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "min_pixels": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_pixels": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "aspect_ratio": {
+          "type": "object",
+          "additionalProperties": false,
+          "minProperties": 1,
+          "properties": {
+            "min": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "max": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          }
+        }
+      }
+    },
+    "distribution": {
+      "description": "Official code and weight distribution facts. Availability does not establish a hosted API or permissions beyond the linked licenses.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_url"],
+      "anyOf": [
+        {
+          "required": ["code"]
+        },
+        {
+          "required": ["weights"]
+        }
+      ],
+      "properties": {
+        "source_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://[^/]+(?:/|$)"
+        },
+        "code": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["repository_url"],
+          "properties": {
+            "repository_url": {
+              "type": "string",
+              "format": "uri",
+              "pattern": "^https://[^/]+(?:/|$)"
+            },
+            "license": {
+              "$ref": "#/$defs/artifact_license"
+            }
+          }
+        },
+        "weights": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["url"],
+            "properties": {
+              "id": {
+                "description": "The exact published weight variant identifier, when available.",
+                "type": "string",
+                "minLength": 1
+              },
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https://[^/]+(?:/|$)"
+              },
+              "license": {
+                "$ref": "#/$defs/artifact_license"
+              },
+              "access": {
+                "description": "Public download or gated access as documented by the publisher; independent of license permissions.",
+                "enum": ["public", "gated"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "artifact_license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "url"],
+      "properties": {
+        "name": {
+          "description": "The publisher's license name, including custom licenses; do not infer an SPDX identifier.",
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://[^/]+(?:/|$)"
+        }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_url"],
+      "minProperties": 2,
+      "properties": {
+        "source_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://[^/]+(?:/|$)"
+        },
+        "context_tokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_output_tokens": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "provider_coverage": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["disposition", "source_url"],
+        "properties": {
+          "disposition": {
+            "enum": ["listed", "not_listed", "excluded"]
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://[^/]+(?:/|$)"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "if": {
+          "properties": {
+            "disposition": {
+              "enum": ["not_listed", "excluded"]
+            }
+          }
+        },
+        "then": {
+          "required": ["reason"]
+        }
+      }
+    },
+    "published_price_component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["meter", "unit", "usd_per_unit"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "meter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "usd_per_unit": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]+)?$"
+        },
+        "per_quantity": {
+          "type": "string",
+          "pattern": "^(?=.*[1-9])(0|[1-9][0-9]*)(\\.[0-9]+)?$"
+        },
+        "when": {
+          "type": "object",
+          "description": "Public JSON Schema predicate restricting the request parameters to which this component applies."
+        },
+        "quantity_rounding": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode"],
+          "properties": {
+            "mode": {
+              "enum": ["none", "ceil"]
+            },
+            "increment": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "pattern": "^(?=.*[1-9])(0|[1-9][0-9]*)(\\.[0-9]+)?$"
+                }
+              ]
+            }
+          },
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "ceil"
+              }
+            }
+          },
+          "then": {
+            "required": ["increment"],
+            "properties": {
+              "increment": {
+                "type": "string",
+                "pattern": "^(?=.*[1-9])(0|[1-9][0-9]*)(\\.[0-9]+)?$"
+              }
+            }
+          }
+        },
+        "quantity_range": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["meter", "min"],
+          "properties": {
+            "meter": {
+              "type": "string",
+              "minLength": 1
+            },
+            "min": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]+)?$"
+            },
+            "max": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "pattern": "^(?=.*[1-9])(0|[1-9][0-9]*)(\\.[0-9]+)?$"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "published_pricing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_url", "currency", "components"],
+      "properties": {
+        "source_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://[^/]+(?:/|$)"
+        },
+        "currency": {
+          "const": "USD"
+        },
+        "components": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/published_price_component"
+          }
+        }
+      }
+    },
+    "provider_binding": {
+      "type": "object",
+      "required": ["provider", "id"],
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "distribution": false,
+        "endpoints": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/provider_endpoint"
+          }
+        },
+        "capabilities": {
+          "$ref": "#/$defs/capabilities"
+        },
+        "token_pricing": {
+          "$ref": "#/$defs/token_pricing"
+        },
+        "limits": {
+          "$ref": "#/$defs/limits"
+        },
+        "source_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://[^/]+(?:/|$)"
+        },
+        "published_pricing": {
+          "$ref": "#/$defs/published_pricing"
+        },
+        "qualifications": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["source_url", "notes"],
+            "properties": {
+              "source_url": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https://[^/]+(?:/|$)"
+              },
+              "notes": {
+                "type": "string",
+                "minLength": 1
               }
             }
           }

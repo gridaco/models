@@ -322,3 +322,221 @@ def test_models_json_schema_must_be_this_schema():
         facts["$schema"] = "https://example.com/other.json"
 
     assert any("$schema" in e for e in mutated(mutate))
+
+
+def test_provider_endpoint_needs_source_and_input():
+    def mutate(facts):
+        first("image.models", facts)["providers"]["fal"]["endpoints"] = [{"id": "test/route"}]
+    assert any("required property" in e for e in mutated(mutate))
+
+
+def test_provider_endpoints_cannot_repeat():
+    def mutate(facts):
+        endpoint = {"id": "test/route", "input": "text", "source_url": "https://example.com/api"}
+        first("image.models", facts)["providers"]["fal"]["endpoints"] = [endpoint, endpoint.copy()]
+    assert any("duplicate endpoint" in e for e in mutated(mutate))
+
+
+def test_existing_binding_without_endpoints_remains_valid():
+    assert check.check(MODELS_JSON, SCHEMA) == []
+
+
+# Additive published calculators, serving facts, and endpoint parameters.
+
+SOURCE = "https://provider.example/models/example/api"
+CALCULATOR = {
+    "source_url": SOURCE,
+    "area_offset": 2000000,
+    "area_divisor": 4000000,
+    "short_axis_rounding": "nearest_ties_even",
+    "token_rounding": "ceil",
+    "quality_axes": {"low": 16, "medium": 48, "high": 96},
+    "examples": [{"width": 1024, "height": 1024, "quality": "low", "output_tokens": 196, "source_url": SOURCE}],
+}
+TOKEN_PRICING = {
+    "source_url": SOURCE,
+    "unit": "usd_per_token",
+    "input": "0.000005",
+    "output": "0.00003",
+    "tiers": [
+        {"meter": "input", "minimum_input_tokens": 0, "maximum_input_tokens": 272000, "usd_per_token": "0.000005"},
+        {"meter": "input", "minimum_input_tokens": 272000, "usd_per_token": "0.00001"},
+    ],
+}
+ENDPOINT = {
+    "id": "provider/example/edit", "input": "image", "source_url": SOURCE,
+    "parameters": {
+        "image_size.width": {"type": "integer", "minimum": 16, "maximum": 3840, "multiple_of": 16},
+        "quality": {"type": "string", "enum": ["low", "medium", "high"]},
+        "image_urls": {"type": "array", "min_items": 1, "max_items": 16},
+    },
+    "image_constraints": {"step": 16, "min_pixels": 655360, "max_pixels": 8294400, "aspect_ratio": {"max": 3}},
+}
+
+
+def enriched(mutate=lambda card: None):
+    facts = copy.deepcopy(MODELS_JSON)
+    card = first("image.models", facts)
+    card.update({
+        "output_token_calculator": copy.deepcopy(CALCULATOR),
+        "vision_tokenization": {"source_url": SOURCE, "patch_size_px": 32, "token_multiplier": 1.2,
+                                "detail_patch_budgets": {"high": 25088}, "detail_maximum_edges": {"low": 512},
+                                "maximum_tokens_per_image": 4784, "token_rounding": "ceil"},
+        "capabilities": {"source_url": SOURCE, "reasoning": True, "structured_output": False},
+    })
+    binding = card["providers"]["fal"]
+    binding.update({"token_pricing": copy.deepcopy(TOKEN_PRICING),
+                    "limits": {"source_url": SOURCE, "context_tokens": 272000, "max_output_tokens": 32000},
+                    "endpoints": [copy.deepcopy(ENDPOINT)]})
+    mutate(card)
+    return check.check(facts, SCHEMA)
+
+
+def test_additive_sourced_facts_validate_together():
+    assert enriched() == []
+
+
+@pytest.mark.parametrize("field", ["output_token_calculator", "vision_tokenization", "capabilities"])
+def test_new_card_facts_require_sources(field):
+    assert any("source_url" in error for error in enriched(lambda card: card[field].pop("source_url")))
+
+
+def test_new_binding_facts_require_sources():
+    assert any("source_url" in error for error in enriched(lambda card: card["providers"]["fal"]["token_pricing"].pop("source_url")))
+
+
+@pytest.mark.parametrize("url", ["https://", "https://operator:secret@provider.example/api", "http://provider.example/api"])
+def test_new_fact_urls_are_absolute_https_without_credentials(url):
+    assert any("source_url" in error for error in enriched(lambda card: card["capabilities"].update(source_url=url)))
+
+
+def test_calculator_cannot_carry_arbitrary_consumer_fields():
+    assert any("additional" in error.lower() for error in enriched(lambda card: card["output_token_calculator"].update(preference_order=["fast", "quality"])))
+
+
+def test_calculator_axes_must_be_positive():
+    assert any("quality_axes" in error for error in enriched(lambda card: card["output_token_calculator"]["quality_axes"].update(low=0)))
+
+
+def test_calculator_divisor_cannot_be_zero():
+    assert any("area_divisor" in error for error in enriched(lambda card: card["output_token_calculator"].update(area_divisor=0)))
+
+
+def test_calculator_example_quality_must_have_an_axis():
+    assert any("quality has no" in error for error in enriched(lambda card: card["output_token_calculator"]["examples"][0].update(quality="unknown")))
+
+
+def test_calculator_examples_are_unique_per_size_and_quality():
+    def mutate(card):
+        calc = card["output_token_calculator"]
+        calc["examples"].append(copy.deepcopy(calc["examples"][0]))
+    assert any("duplicate size/quality" in error for error in enriched(mutate))
+
+
+def test_verified_output_token_example_must_match_calculator():
+    assert any("does not match calculator" in error for error in enriched(lambda card: card["output_token_calculator"]["examples"][0].update(output_tokens=197)))
+
+
+def test_rounded_price_example_never_requires_inferred_tokens():
+    def mutate(card):
+        example = card["output_token_calculator"]["examples"][0]
+        example.pop("output_tokens")
+        example.update(usd=0.006, usd_precision=3)
+    assert enriched(mutate) == []
+
+
+def test_example_requires_a_documented_token_or_price_value():
+    assert any("examples" in error for error in enriched(lambda card: card["output_token_calculator"]["examples"][0].pop("output_tokens")))
+
+
+def test_example_precision_requires_price():
+    assert any("usd" in error for error in enriched(lambda card: card["output_token_calculator"]["examples"][0].update(usd_precision=3)))
+
+
+def test_vision_rules_cannot_be_empty_source_only():
+    assert any("vision_tokenization" in error for error in enriched(lambda card: card.update(vision_tokenization={"source_url": SOURCE})))
+
+
+def test_vision_quantities_must_be_positive():
+    assert any("maximum_tokens_per_image" in error for error in enriched(lambda card: card["vision_tokenization"].update(maximum_tokens_per_image=0)))
+
+
+def test_serving_capabilities_must_be_boolean():
+    assert any("capabilities" in error for error in enriched(lambda card: card["capabilities"].update(reasoning="yes")))
+
+
+def test_provider_limits_must_be_positive():
+    assert any("context_tokens" in error for error in enriched(lambda card: card["providers"]["fal"]["limits"].update(context_tokens=0)))
+
+
+def test_token_rates_preserve_exact_decimal_strings():
+    assert any("token_pricing" in error for error in enriched(lambda card: card["providers"]["fal"]["token_pricing"].update(input=0.000005)))
+
+
+def test_token_price_unit_is_explicit_and_fixed():
+    assert any("token_pricing" in error for error in enriched(lambda card: card["providers"]["fal"]["token_pricing"].update(unit="usd_per_million_tokens")))
+
+
+def test_tiers_use_half_open_bounds_and_allow_unbounded_last_band():
+    assert enriched() == []
+
+
+def test_token_tiers_cannot_overlap_for_the_same_meter():
+    assert any("overlapping" in error for error in enriched(lambda card: card["providers"]["fal"]["token_pricing"]["tiers"][1].update(minimum_input_tokens=271999)))
+
+
+def test_token_tier_cannot_be_empty_or_reversed():
+    assert any("exclusive maximum" in error for error in enriched(lambda card: card["providers"]["fal"]["token_pricing"]["tiers"][0].update(maximum_input_tokens=0)))
+
+
+def test_token_tiers_may_overlap_between_distinct_meters():
+    def mutate(card):
+        pricing = card["providers"]["fal"]["token_pricing"]
+        pricing["tiers"].append({"meter": "output", "minimum_input_tokens": 0, "usd_per_token": "0.00003"})
+    assert enriched(mutate) == []
+
+
+def test_endpoint_dotted_native_parameter_names_are_preserved():
+    assert enriched() == []
+
+
+def test_endpoint_parameters_must_have_ordered_ranges():
+    assert any("minimum exceeds maximum" in error for error in enriched(lambda card: card["providers"]["fal"]["endpoints"][0]["parameters"]["image_size.width"].update(minimum=4000)))
+
+
+def test_endpoint_reference_count_range_cannot_be_reversed():
+    assert any("min_items exceeds max_items" in error for error in enriched(lambda card: card["providers"]["fal"]["endpoints"][0]["parameters"]["image_urls"].update(min_items=17)))
+
+
+def test_endpoint_image_constraint_range_cannot_be_reversed():
+    assert any("min_pixels exceeds max_pixels" in error for error in enriched(lambda card: card["providers"]["fal"]["endpoints"][0]["image_constraints"].update(min_pixels=9000000)))
+
+
+def test_parameter_enum_must_not_repeat_values():
+    assert any("non-unique" in error for error in enriched(lambda card: card["providers"]["fal"]["endpoints"][0]["parameters"]["quality"].update(enum=["low", "low"])))
+
+
+def test_nonfinite_published_numbers_are_rejected():
+    assert any("finite" in error for error in enriched(lambda card: card["providers"]["fal"]["endpoints"][0]["parameters"]["image_size.width"].update(maximum=float("inf"))))
+
+
+def test_endpoint_fact_fields_cannot_hold_arbitrary_consumer_settings():
+    assert any("additional" in error.lower() for error in enriched(lambda card: card["providers"]["fal"]["endpoints"][0]["parameters"]["quality"].update(default="high")))
+
+
+def test_single_provider_card_can_record_sourced_endpoint_variants():
+    facts = copy.deepcopy(MODELS_JSON)
+    first("three_d.models", facts)["endpoints"] = [copy.deepcopy(ENDPOINT)]
+    assert check.check(facts, SCHEMA) == []
+
+
+def test_single_provider_endpoint_ids_cannot_repeat():
+    facts = copy.deepcopy(MODELS_JSON)
+    first("three_d.models", facts)["endpoints"] = [copy.deepcopy(ENDPOINT), copy.deepcopy(ENDPOINT)]
+    assert any("duplicate endpoint" in error for error in check.check(facts, SCHEMA))
+
+
+def test_singleton_operation_can_record_sourced_endpoint_parameters():
+    facts = copy.deepcopy(MODELS_JSON)
+    facts["three_d.rig_check.operation"]["endpoints"] = [copy.deepcopy(ENDPOINT)]
+    assert check.check(facts, SCHEMA) == []
