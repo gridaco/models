@@ -232,3 +232,23 @@ def test_malformed_coverage_disposition_reports_errors_without_crashing(disposit
 @pytest.mark.parametrize("number", [float("nan"), float("inf"), -float("inf")])
 def test_price_conditions_are_finite_json(number):
     assert price_mutation(lambda price: price["components"][0].update(when={"properties": {"quantity": {"maximum": number}}}))
+
+
+@pytest.mark.parametrize("qualification", [
+    {"notes": "Regular rate is not established"},
+    {"source_url": SOURCE},
+    {"source_url": "https://token:secret@example.com", "notes": "Unknown rate"},
+    {"source_url": SOURCE, "notes": "Unknown rate", "guessed_price": 1},
+])
+def test_unknown_provider_fact_qualifications_need_a_public_source(qualification):
+    def edit(card):
+        add_binding(card)
+        card["providers"]["example"]["qualifications"] = [qualification]
+    assert mutate(edit)
+
+
+def test_verified_provider_can_qualify_missing_regular_price():
+    def edit(card):
+        add_binding(card)
+        card["providers"]["example"]["qualifications"] = [{"source_url": SOURCE, "notes": "The public endpoint is documented but no regular rate is published."}]
+    assert mutate(edit) == []
