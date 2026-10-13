@@ -1,3 +1,4 @@
+reference_provider = "byteplus"
 id = "bytedance/seedream-5.0-pro"
 section = "image.models"
 null_keys = ["styles", "sizes"]
@@ -40,3 +41,92 @@ url = "https://fal.ai/models/bytedance/seedream/v5/pro/text-to-image"
 min_pixels = 1_048_576
 max_pixels = 4_194_304
 aspect_ratio = { max = 16 }
+
+[[providers.fal.endpoints]]
+id = "bytedance/seedream/v5/pro/edit"
+input = "image"
+source_url = "https://fal.ai/models/bytedance/seedream/v5/pro/edit/api"
+
+[providers.fal.endpoints.parameters]
+"enable_safety_checker" = { "type" = "boolean" }
+"enhance_prompt_mode" = { "enum" = ["standard", "fast"], "type" = "string" }
+"image_size" = { "enum" = [
+  "square_hd",
+  "square",
+  "portrait_4_3",
+  "portrait_16_9",
+  "landscape_4_3",
+  "landscape_16_9",
+  "auto_1K",
+  "auto_2K",
+] }
+"image_size.height" = { "maximum" = 14142, "type" = "integer", "minimum" = 1 }
+"image_size.width" = { "maximum" = 14142, "type" = "integer", "minimum" = 1 }
+"image_urls" = { "type" = "array", "max_items" = 10 }
+"num_images" = { "maximum" = 6, "type" = "integer", "minimum" = 1 }
+"output_format" = { "enum" = ["jpeg", "png"], "type" = "string" }
+"prompt" = { "type" = "string" }
+
+[providers.fal.endpoints.image_constraints]
+max_pixels = 4194304
+min_pixels = 1048576
+aspect_ratio = { "min" = 0.0625, "max" = 16 }
+
+[[providers.fal.endpoints]]
+id = "bytedance/seedream/v5/pro/text-to-image"
+input = "text"
+source_url = "https://fal.ai/models/bytedance/seedream/v5/pro/text-to-image/api"
+
+[providers.fal.endpoints.parameters]
+"enable_safety_checker" = { "type" = "boolean" }
+"enhance_prompt_mode" = { "enum" = ["standard", "fast"], "type" = "string" }
+"image_size" = { "enum" = [
+  "square_hd",
+  "square",
+  "portrait_4_3",
+  "portrait_16_9",
+  "landscape_4_3",
+  "landscape_16_9",
+  "auto_1K",
+  "auto_2K",
+] }
+"image_size.height" = { "maximum" = 14142, "type" = "integer", "minimum" = 1 }
+"image_size.width" = { "maximum" = 14142, "type" = "integer", "minimum" = 1 }
+"num_images" = { "maximum" = 6, "type" = "integer", "minimum" = 1 }
+"output_format" = { "enum" = ["jpeg", "png"], "type" = "string" }
+"prompt" = { "type" = "string" }
+
+[providers.fal.endpoints.image_constraints]
+max_pixels = 4194304
+min_pixels = 1048576
+aspect_ratio = { "min" = 0.0625, "max" = 16 }
+
+[providers.byteplus]
+provider = "byteplus"
+id = "dola-seedream-5-0-pro-260628"
+source_url = "https://docs.byteplus.com/en/docs/ModelArk/model-pricing"
+url = "https://docs.byteplus.com/en/docs/ModelArk/model-pricing"
+pricing = { "type" = "per_image_tiered", "threshold_pixels" = 2610000, "tiers" = { "generation_at_or_below_threshold" = 0.045, "generation_above_threshold" = 0.09, "layer_decomposition_at_or_below_threshold" = 0.0225, "layer_decomposition_above_threshold" = 0.045 }, "included_input_images" = 1, "usd_per_additional_input_image" = 0.003, "source_url" = "https://docs.byteplus.com/en/docs/ModelArk/model-pricing" }
+
+[provider_coverage]
+openrouter = { "disposition" = "listed", "source_url" = "https://openrouter.ai/bytedance-seed/seedream-5-0-pro" }
+vercel = { "disposition" = "listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models" }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/bytedance/seedream/v5/pro/text-to-image" }
+byteplus = { "disposition" = "listed", "source_url" = "https://docs.byteplus.com/en/docs/ModelArk/model-pricing" }
+
+[providers.grida]
+provider = "grida"
+id = "bytedance/seedream-5.0-pro"
+url = "https://gateway.grida.ai/v1/models"
+endpoints = [
+  { "id" = "image.bytedance.seedream-5.0-pro.references", "operation" = "image.bytedance.seedream-5.0-pro.references", "input" = "multi_image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bytedance.seedream-5.0-pro.references.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_6", "interface" = "images.edits", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.0675" },
+  ] } },
+  { "id" = "image.bytedance.seedream-5.0-pro.text", "operation" = "image.bytedance.seedream-5.0-pro.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bytedance.seedream-5.0-pro.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_6", "interface" = "images.generations", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.0675" },
+  ] } },
+]
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"

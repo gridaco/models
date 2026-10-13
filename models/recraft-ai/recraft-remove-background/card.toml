@@ -1,3 +1,4 @@
+reference_provider = "recraft"
 id = "recraft-ai/recraft-remove-background"
 section = "image_tools.models"
 null_keys = ["release.date"]
@@ -10,3 +11,17 @@ cost_usd = 0.01
 [release]
 basis = "provider_endpoint"
 source_url = "https://replicate.com/recraft-ai/recraft-remove-background/versions"
+
+
+[providers.recraft]
+provider = "recraft"
+id = "/v1/images/removeBackground"
+source_url = "https://www.recraft.ai/docs/api-reference/tools/remove-background"
+url = "https://www.recraft.ai/docs/api-reference/tools/remove-background"
+pricing = { "type" = "per_run_flat", "usd" = 0.01, "source_url" = "https://www.recraft.ai/docs/api-reference/tools/remove-background" }
+
+[provider_coverage]
+openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/models", "reason" = "No matching model/version is listed in the inspected public model catalogue." }
+vercel = { "disposition" = "not_listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models", "reason" = "No matching model/version is listed in the inspected public Gateway model catalogue." }
+fal = { "disposition" = "not_listed", "source_url" = "https://fal.ai/models", "reason" = "No matching model/version is listed in the inspected public media catalogue." }
+recraft = { "disposition" = "listed", "source_url" = "https://www.recraft.ai/docs/api-reference/tools/remove-background" }

@@ -1,3 +1,4 @@
+reference_provider = "google"
 id = "google/veo-3.1"
 section = "video.models"
 
@@ -56,3 +57,64 @@ url = "https://openrouter.ai/google/veo-3.1"
 [providers.openrouter.pricing]
 type = "per_second"
 usd_per_second = { 720p = { audio = 0.4 }, 1080p = { audio = 0.4 } }
+
+[[providers.fal.endpoints]]
+id = "fal-ai/veo3.1"
+input = "text"
+source_url = "https://fal.ai/models/fal-ai/veo3.1/api"
+
+[providers.fal.endpoints.parameters]
+"aspect_ratio" = { "enum" = ["16:9", "9:16"], "type" = "string" }
+"auto_fix" = { "type" = "boolean" }
+"duration" = { "enum" = ["4s", "6s", "8s"], "type" = "string" }
+"generate_audio" = { "type" = "boolean" }
+"prompt" = { "type" = "string", "max_length" = 20000 }
+"resolution" = { "enum" = ["720p", "1080p", "4k"], "type" = "string" }
+"safety_tolerance" = { "enum" = ["1", "2", "3", "4", "5", "6"], "type" = "string" }
+"seed" = { "type" = "integer" }
+
+[[providers.fal.endpoints]]
+id = "fal-ai/veo3.1/image-to-video"
+input = "image"
+source_url = "https://fal.ai/models/fal-ai/veo3.1/image-to-video/api"
+
+[providers.fal.endpoints.parameters]
+"aspect_ratio" = { "enum" = ["auto", "16:9", "9:16"], "type" = "string" }
+"auto_fix" = { "type" = "boolean" }
+"duration" = { "enum" = ["4s", "6s", "8s"], "type" = "string" }
+"generate_audio" = { "type" = "boolean" }
+"image_url" = { "type" = "string" }
+"prompt" = { "type" = "string", "max_length" = 20000 }
+"resolution" = { "enum" = ["720p", "1080p", "4k"], "type" = "string" }
+"safety_tolerance" = { "enum" = ["1", "2", "3", "4", "5", "6"], "type" = "string" }
+"seed" = { "type" = "integer" }
+
+[providers.google]
+provider = "google"
+id = "veo-3.1-generate-preview"
+source_url = "https://ai.google.dev/gemini-api/docs/pricing"
+url = "https://ai.google.dev/gemini-api/docs/pricing"
+pricing = { "type" = "per_second", "usd_per_second" = { "720p" = { "audio" = 0.4 }, "1080p" = { "audio" = 0.4 }, "4k" = { "audio" = 0.6 } }, "source_url" = "https://ai.google.dev/gemini-api/docs/pricing" }
+
+[provider_coverage]
+openrouter = { "disposition" = "listed", "source_url" = "https://openrouter.ai/google/veo-3.1" }
+vercel = { "disposition" = "listed", "source_url" = "https://vercel.com/ai-gateway/models/veo-3.1-generate-001" }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/fal-ai/veo3.1/image-to-video" }
+google = { "disposition" = "listed", "source_url" = "https://ai.google.dev/gemini-api/docs/pricing" }
+
+[providers.grida]
+provider = "grida"
+id = "google/veo-3.1"
+url = "https://gateway.grida.ai/v1/models"
+endpoints = [
+  { "id" = "video.google.veo-3.1.image", "operation" = "video.google.veo-3.1.image", "input" = "image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.google.veo-3.1.image.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result", "interface" = "videos", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.4" },
+  ] } },
+  { "id" = "video.google.veo-3.1.text", "operation" = "video.google.veo-3.1.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.google.veo-3.1.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result", "interface" = "videos", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.4" },
+  ] } },
+]
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"

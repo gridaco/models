@@ -1,3 +1,4 @@
+reference_provider = "meta"
 id = "meta/muse-image-1.0"
 section = "image.models"
 null_keys = ["styles", "sizes", "constraints"]
@@ -27,3 +28,27 @@ id = "meta/muse-image/text-to-image"
 pricing = { type = "per_image_flat", usd = 0.01 }
 avg_cost_usd = 0.01
 url = "https://fal.ai/models/meta/muse-image/text-to-image"
+
+[providers.meta]
+provider = "meta"
+id = "muse-image-1.0"
+source_url = "https://dev.meta.ai/docs/image-generation"
+url = "https://dev.meta.ai/docs/image-generation"
+pricing = { "type" = "per_image_flat", "usd" = 0.01, "billing_quantity" = "successfully_generated_returned_images", "source_url" = "https://dev.meta.ai/docs/image-generation" }
+
+
+[providers.openrouter]
+provider = "openrouter"
+id = "meta/muse-image"
+url = "https://openrouter.ai/meta/muse-image"
+source_url = "https://openrouter.ai/api/v1/models/meta/muse-image/endpoints"
+pricing = { "type" = "per_token", "image_input" = 2.39520958083832, "output" = 2.39520958083832, "source_url" = "https://openrouter.ai/api/v1/models/meta/muse-image/endpoints" }
+qualifications = [
+  { "source_url" = "https://openrouter.ai/api/v1/images/models/meta/muse-image/endpoints", "notes" = "The model is listed in image discovery, but image-specific endpoint metadata is empty. Published token meters come from general endpoint metadata; image parameter parity is not inferred." },
+]
+
+[provider_coverage]
+openrouter = { "disposition" = "listed", "source_url" = "https://openrouter.ai/api/v1/models/meta/muse-image/endpoints" }
+vercel = { "disposition" = "listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models" }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/meta/muse-image/text-to-image" }
+meta = { "disposition" = "listed", "source_url" = "https://dev.meta.ai/docs/image-generation" }

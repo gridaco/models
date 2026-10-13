@@ -1,3 +1,4 @@
+reference_provider = "xai"
 id = "xai/grok-imagine-video-1.5"
 section = "video.models"
 
@@ -47,3 +48,80 @@ usd_per_input_image = 0.01
 480p = { audio = 0.08 }
 720p = { audio = 0.14 }
 1080p = { audio = 0.25 }
+
+[[providers.fal.endpoints]]
+id = "xai/grok-imagine-video/v1.5/image-to-video"
+input = "image"
+source_url = "https://fal.ai/models/xai/grok-imagine-video/v1.5/image-to-video/api"
+
+[providers.fal.endpoints.parameters]
+"duration" = { "minimum" = 1, "maximum" = 15, "type" = "integer" }
+"enable_safety_checker" = { "type" = "boolean" }
+"image_url" = { "type" = "string" }
+"prompt" = { "max_length" = 4096, "type" = "string" }
+"resolution" = { "type" = "string", "enum" = ["480p", "720p", "1080p"] }
+
+[providers.xai]
+provider = "xai"
+id = "grok-imagine-video-1.5"
+source_url = "https://docs.x.ai/developers/models/grok-imagine-video-1.5"
+url = "https://docs.x.ai/developers/models/grok-imagine-video-1.5"
+pricing = { "type" = "per_second", "usd_per_second" = { "480p" = 0.08, "720p" = 0.14, "1080p" = 0.25 }, "input_image_usd" = 0.01, "source_url" = "https://docs.x.ai/developers/models/grok-imagine-video-1.5" }
+
+[provider_coverage]
+openrouter = { "disposition" = "listed", "source_url" = "https://openrouter.ai/api/v1/videos/models" }
+vercel = { "disposition" = "listed", "source_url" = "https://vercel.com/ai-gateway/models/grok-imagine-video-1.5" }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/xai/grok-imagine-video/v1.5/image-to-video" }
+xai = { "disposition" = "listed", "source_url" = "https://docs.x.ai/developers/models/grok-imagine-video-1.5" }
+
+[providers.openrouter]
+provider = "openrouter"
+id = "x-ai/grok-imagine-video-1.5"
+source_url = "https://openrouter.ai/api/v1/videos/models"
+url = "https://openrouter.ai/api/v1/videos/models"
+pricing = { "type" = "provider_skus", "skus" = { "cents_per_image_input" = "1", "cents_per_video_output_second_480p" = "8", "cents_per_video_output_second_720p" = "14", "cents_per_video_output_second_1080p" = "25" }, "source_unit_notes" = "duration_seconds: USD/second; video_tokens: USD/token; cents_per: cents per named unit", "source_url" = "https://openrouter.ai/api/v1/videos/models" }
+endpoints = [
+  { "id" = "x-ai/grok-imagine-video-1.5", "source_url" = "https://openrouter.ai/api/v1/videos/models", "parameters" = { "resolution" = { "enum" = [
+    "480p",
+    "720p",
+    "1080p",
+  ] }, "duration" = { "type" = "integer", "enum" = [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+  ] }, "aspect_ratio" = { "type" = "string", "enum" = [
+    "16:9",
+    "9:16",
+    "1:1",
+    "4:3",
+    "3:4",
+    "3:2",
+    "2:3",
+  ] } }, "input" = "text" },
+]
+
+[providers.grida]
+provider = "grida"
+id = "xai/grok-imagine-video-1.5"
+url = "https://gateway.grida.ai/v1/models"
+endpoints = [
+  { "id" = "video.xai.grok-imagine-video-1.5.image", "operation" = "video.xai.grok-imagine-video-1.5.image", "input" = "image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.xai.grok-imagine-video-1.5.image.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result", "interface" = "videos", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+  ] } },
+]
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"

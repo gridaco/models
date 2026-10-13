@@ -1,3 +1,4 @@
+reference_provider = "google"
 id = "google/veo-3.1-lite"
 section = "video.models"
 
@@ -43,3 +44,84 @@ type = "per_second"
 [providers.fal.pricing.usd_per_second]
 720p = { audio = 0.05, silent = 0.03 }
 1080p = { audio = 0.08, silent = 0.05 }
+
+[[providers.fal.endpoints]]
+id = "fal-ai/veo3.1/lite"
+input = "text"
+source_url = "https://fal.ai/models/fal-ai/veo3.1/lite/api"
+
+[providers.fal.endpoints.parameters]
+"aspect_ratio" = { "enum" = ["16:9", "9:16"], "type" = "string" }
+"auto_fix" = { "type" = "boolean" }
+"duration" = { "enum" = ["4s", "6s", "8s"], "type" = "string" }
+"generate_audio" = { "type" = "boolean" }
+"prompt" = { "type" = "string", "max_length" = 20000 }
+"resolution" = { "enum" = ["720p", "1080p"], "type" = "string" }
+"safety_tolerance" = { "enum" = ["1", "2", "3", "4", "5", "6"], "type" = "string" }
+"seed" = { "type" = "integer" }
+
+[[providers.fal.endpoints]]
+id = "fal-ai/veo3.1/lite/image-to-video"
+input = "image"
+source_url = "https://fal.ai/models/fal-ai/veo3.1/lite/image-to-video/api"
+
+[providers.fal.endpoints.parameters]
+"aspect_ratio" = { "enum" = ["auto", "16:9", "9:16"], "type" = "string" }
+"auto_fix" = { "type" = "boolean" }
+"duration" = { "enum" = ["4s", "6s", "8s"], "type" = "string" }
+"generate_audio" = { "type" = "boolean" }
+"image_url" = { "type" = "string" }
+"prompt" = { "type" = "string", "max_length" = 20000 }
+"resolution" = { "enum" = ["720p", "1080p"], "type" = "string" }
+"safety_tolerance" = { "enum" = ["1", "2", "3", "4", "5", "6"], "type" = "string" }
+"seed" = { "type" = "integer" }
+
+[providers.google]
+provider = "google"
+id = "veo-3.1-lite-generate-preview"
+source_url = "https://ai.google.dev/gemini-api/docs/pricing"
+url = "https://ai.google.dev/gemini-api/docs/pricing"
+pricing = { "type" = "per_second", "usd_per_second" = { "720p" = { "audio" = 0.05 }, "1080p" = { "audio" = 0.08 } }, "source_url" = "https://ai.google.dev/gemini-api/docs/pricing" }
+
+[provider_coverage]
+openrouter = { "disposition" = "listed", "source_url" = "https://openrouter.ai/api/v1/videos/models" }
+vercel = { "disposition" = "listed", "source_url" = "https://vercel.com/ai-gateway/models/veo-3.1-lite-generate-001" }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/fal-ai/veo3.1/lite/image-to-video" }
+google = { "disposition" = "listed", "source_url" = "https://ai.google.dev/gemini-api/docs/pricing" }
+
+[providers.openrouter]
+provider = "openrouter"
+id = "google/veo-3.1-lite"
+source_url = "https://openrouter.ai/api/v1/videos/models"
+url = "https://openrouter.ai/api/v1/videos/models"
+pricing = { "type" = "provider_skus", "skus" = { "duration_seconds_with_audio" = "0.08", "duration_seconds_without_audio" = "0.05", "duration_seconds_with_audio_720p" = "0.05", "duration_seconds_without_audio_720p" = "0.03" }, "source_unit_notes" = "duration_seconds: USD/second; video_tokens: USD/token; cents_per: cents per named unit", "source_url" = "https://openrouter.ai/api/v1/videos/models" }
+endpoints = [
+  { "id" = "google/veo-3.1-lite", "source_url" = "https://openrouter.ai/api/v1/videos/models", "parameters" = { "resolution" = { "enum" = [
+    "720p",
+    "1080p",
+  ] }, "duration" = { "type" = "integer", "enum" = [
+    8,
+    4,
+    6,
+  ] }, "aspect_ratio" = { "type" = "string", "enum" = [
+    "16:9",
+    "9:16",
+  ] } }, "input" = "text" },
+]
+
+[providers.grida]
+provider = "grida"
+id = "google/veo-3.1-lite"
+url = "https://gateway.grida.ai/v1/models"
+endpoints = [
+  { "id" = "video.google.veo-3.1-lite.image", "operation" = "video.google.veo-3.1-lite.image", "input" = "image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.google.veo-3.1-lite.image.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result", "interface" = "videos", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.05" },
+  ] } },
+  { "id" = "video.google.veo-3.1-lite.text", "operation" = "video.google.veo-3.1-lite.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.google.veo-3.1-lite.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result", "interface" = "videos", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.05" },
+  ] } },
+]
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"

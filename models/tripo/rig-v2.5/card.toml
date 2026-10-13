@@ -1,3 +1,4 @@
+reference_provider = "tripo"
 id = "tripo/rig-v2.5"
 section = "three_d.rigging.models"
 null_keys = ["release.date"]
@@ -23,3 +24,42 @@ source_url = "https://developers.tripo3d.ai/en/pricing"
 [release]
 basis = "provider_endpoint"
 source_url = "https://developers.tripo3d.ai/en/docs/animations-rig"
+
+[[endpoints]]
+id = "/animations/rig"
+input = "task"
+source_url = "https://developers.tripo3d.ai/en/docs/animations-rig"
+
+[endpoints.parameters]
+"input" = { "type" = "string" }
+"model" = { "type" = "string", "enum" = ["v2.5-20260210"] }
+"out_format" = { "type" = "string", "enum" = ["glb", "fbx"] }
+"rig_type" = { "type" = "string", "enum" = [
+  "quadruped",
+  "hexapod",
+  "octopod",
+  "avian",
+  "serpentine",
+  "aquatic",
+] }
+"spec" = { "type" = "string", "enum" = ["tripo", "mixamo"] }
+
+[provider_coverage]
+openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/models", "reason" = "No matching model/version is listed in the inspected public model catalogue." }
+vercel = { "disposition" = "not_listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models", "reason" = "No matching model/version is listed in the inspected public Gateway model catalogue." }
+fal = { "disposition" = "not_listed", "source_url" = "https://fal.ai/models", "reason" = "No matching model/version is listed in the inspected public media catalogue." }
+tripo = { "disposition" = "listed", "source_url" = "https://developers.tripo3d.ai/en/docs/animations-rig" }
+
+[providers.grida]
+provider = "grida"
+id = "tripo/rig-v2.5"
+url = "https://gateway.grida.ai/v1/endpoints"
+endpoints = [
+  { "id" = "three-d.tripo.rig-v2.5.mesh", "operation" = "three-d.tripo.rig-v2.5.mesh", "input" = "asset", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.tripo.rig-v2.5.mesh.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/glb_result", "interface" = "endpoints", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/endpoints", "currency" = "USD", "components" = [
+    { "id" = "provider_credits", "meter" = "provider_credits", "unit" = "provider_credit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+  ] } },
+]
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/endpoints"

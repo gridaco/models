@@ -1,3 +1,4 @@
+reference_provider = "bfl"
 id = "bfl/flux-2-pro"
 section = "image.models"
 null_keys = ["styles", "sizes"]
@@ -33,6 +34,89 @@ references = { id = "black-forest-labs/flux.2-pro", max = 8 }
 [providers.fal]
 provider = "fal"
 id = "fal-ai/flux-2-pro"
-pricing = { type = "per_image_flat", usd = 0.03 }
+pricing = { type = "per_image_flat", usd = 0.03, included_megapixels = 1, included_megapixels_scope = "output", usd_per_additional_megapixel = 0.015, input_megapixels_billed = true, megapixel_rounding = "ceil", source_url = "https://fal.ai/models/fal-ai/flux-2-pro/edit" }
 avg_cost_usd = 0.03
 url = "https://fal.ai/models/fal-ai/flux-2-pro"
+
+[[providers.fal.endpoints]]
+id = "fal-ai/flux-2-pro"
+input = "text"
+source_url = "https://fal.ai/models/fal-ai/flux-2-pro/api"
+
+[providers.fal.endpoints.parameters]
+"enable_safety_checker" = { "type" = "boolean" }
+"image_size" = { "enum" = [
+  "square_hd",
+  "square",
+  "portrait_4_3",
+  "portrait_16_9",
+  "landscape_4_3",
+  "landscape_16_9",
+] }
+"image_size.height" = { "maximum" = 2560, "type" = "integer", "minimum" = 256, "multiple_of" = 16 }
+"image_size.width" = { "maximum" = 2560, "type" = "integer", "minimum" = 256, "multiple_of" = 16 }
+"output_format" = { "enum" = ["jpeg", "png"], "type" = "string" }
+"prompt" = { "type" = "string" }
+"safety_tolerance" = { "enum" = ["1", "2", "3", "4", "5"], "type" = "string" }
+"seed" = { "type" = "integer" }
+
+[providers.fal.endpoints.image_constraints]
+max_edge = 2560
+min_edge = 256
+max_pixels = 4194304
+step = 16
+
+[[providers.fal.endpoints]]
+id = "fal-ai/flux-2-pro/edit"
+input = "image"
+source_url = "https://fal.ai/models/fal-ai/flux-2-pro/edit/api"
+
+[providers.fal.endpoints.parameters]
+"enable_safety_checker" = { "type" = "boolean" }
+"image_size" = { "enum" = [
+  "auto",
+  "square_hd",
+  "square",
+  "portrait_4_3",
+  "portrait_16_9",
+  "landscape_4_3",
+  "landscape_16_9",
+] }
+"image_size.height" = { "maximum" = 14142, "type" = "integer", "minimum" = 1 }
+"image_size.width" = { "maximum" = 14142, "type" = "integer", "minimum" = 1 }
+"image_urls" = { "type" = "array", "max_items" = 9, "source_url" = "https://fal.ai/models/fal-ai/flux-2-pro/edit" }
+"output_format" = { "enum" = ["jpeg", "png"], "type" = "string" }
+"prompt" = { "type" = "string" }
+"safety_tolerance" = { "enum" = ["1", "2", "3", "4", "5"], "type" = "string" }
+"seed" = { "type" = "integer" }
+
+
+[providers.bfl]
+provider = "bfl"
+id = "flux-2-pro"
+source_url = "https://bfl.ai/pricing"
+url = "https://bfl.ai/pricing"
+pricing = { "type" = "per_image_flat", "usd" = 0.03, "included_megapixels" = 1, "included_megapixels_scope" = "output", "usd_per_additional_megapixel" = 0.015, "input_megapixels_billed" = true, "megapixel_rounding" = "ceil", "pixels_per_megapixel" = 1048576, "multiple_reference_images_megapixels_each" = 1, "source_url" = "https://bfl.ai/pricing", "input_max_megapixels" = 4 }
+
+[provider_coverage]
+openrouter = { "disposition" = "listed", "source_url" = "https://openrouter.ai/black-forest-labs/flux.2-pro" }
+vercel = { "disposition" = "listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models" }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/fal-ai/flux-2-pro" }
+bfl = { "disposition" = "listed", "source_url" = "https://bfl.ai/pricing" }
+
+[providers.grida]
+provider = "grida"
+id = "bfl/flux-2-pro"
+url = "https://gateway.grida.ai/v1/models"
+endpoints = [
+  { "id" = "image.bfl.flux-2-pro.references", "operation" = "image.bfl.flux-2-pro.references", "input" = "multi_image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bfl.flux-2-pro.references.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_1", "interface" = "images.edits", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.03" },
+  ] } },
+  { "id" = "image.bfl.flux-2-pro.text", "operation" = "image.bfl.flux-2-pro.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bfl.flux-2-pro.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_1", "interface" = "images.generations", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.03" },
+  ] } },
+]
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"

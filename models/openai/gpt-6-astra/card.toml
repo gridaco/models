@@ -1,5 +1,7 @@
 id = "openai/gpt-6-astra"
 section = "text.catalog"
+vendor = "openai"
+reference_provider = "openai"
 
 label = "GPT-6 Astra"
 multimodal = true
@@ -11,7 +13,7 @@ output_limit = 128_000
 [release]
 date = "2026-09-04"
 basis = "provider_endpoint"
-source_url = "https://vercel.com/ai-gateway/models/gpt-6-astra"
+source_url = "https://ai-gateway.vercel.sh/v1/models"
 
 [cost]
 input = 10
@@ -23,3 +25,170 @@ cache_write = 12.5
 input_tokens_above = 272_000
 input_multiplier = 2
 output_multiplier = 1.5
+
+[providers.vercel]
+provider = "vercel"
+id = "openai/gpt-6-astra"
+url = "https://ai-gateway.vercel.sh/v1/models"
+endpoints = [
+  { id = "openai/gpt-6-astra", input = "text", source_url = "https://ai-gateway.vercel.sh/v1/models" },
+]
+
+[providers.vercel.token_pricing]
+source_url = "https://vercel.com/ai-gateway/models/gpt-6-astra"
+unit = "usd_per_token"
+scope = "Standard global token rates; alternate service tiers, optional tools and regional premiums are excluded. Cache-write rates, where present, use the default cache duration."
+input = "0.00001"
+output = "0.00005"
+input_cache_read = "0.000001"
+input_cache_write = "0.0000125"
+tiers = [
+  { "meter" = "input", "minimum_input_tokens" = 0, "usd_per_token" = "0.00001", "maximum_input_tokens" = 272001 },
+  { "meter" = "input", "minimum_input_tokens" = 272001, "usd_per_token" = "0.00002" },
+  { "meter" = "output", "minimum_input_tokens" = 0, "usd_per_token" = "0.00005", "maximum_input_tokens" = 272001 },
+  { "meter" = "output", "minimum_input_tokens" = 272001, "usd_per_token" = "0.000075" },
+  { "meter" = "input_cache_read", "minimum_input_tokens" = 0, "usd_per_token" = "0.000001", "maximum_input_tokens" = 272001 },
+  { "meter" = "input_cache_read", "minimum_input_tokens" = 272001, "usd_per_token" = "0.000002" },
+  { "meter" = "input_cache_write", "minimum_input_tokens" = 0, "usd_per_token" = "0.0000125", "maximum_input_tokens" = 272001 },
+  { "meter" = "input_cache_write", "minimum_input_tokens" = 272001, "usd_per_token" = "0.000025" },
+]
+
+[providers.vercel.capabilities]
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.vercel.limits]
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+context_tokens = 1050000
+max_output_tokens = 128000
+
+[vision_tokenization]
+source_url = "https://developers.openai.com/api/docs/guides/images-vision"
+patch_size_px = 32
+token_multiplier = 1.2
+token_rounding = "ceil"
+maximum_patch_count = 30000
+detail_patch_budgets = { "high" = 2500 }
+detail_maximum_edges = { "low" = 512, "high" = 65535, "original" = 65535, "auto" = 65535 }
+
+[providers.openai]
+provider = "openai"
+id = "gpt-6-astra"
+url = "https://developers.openai.com/api/docs/models/gpt-6-astra"
+source_url = "https://developers.openai.com/api/docs/models/gpt-6-astra"
+endpoints = [
+  { id = "gpt-6-astra", input = "text", source_url = "https://developers.openai.com/api/docs/models/gpt-6-astra" },
+]
+
+[providers.openai.token_pricing]
+source_url = "https://developers.openai.com/api/docs/models/gpt-6-astra"
+unit = "usd_per_token"
+scope = "Standard synchronous text token rates; optional tools and other service tiers are excluded."
+input = "0.00001"
+output = "0.00005"
+input_cache_read = "0.000001"
+input_cache_write = "0.0000125"
+tiers = [
+  { meter = "input", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.00001" },
+  { meter = "input", minimum_input_tokens = 272001, usd_per_token = "0.00002" },
+  { meter = "output", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.00005" },
+  { meter = "output", minimum_input_tokens = 272001, usd_per_token = "0.000075" },
+  { meter = "input_cache_read", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.000001" },
+  { meter = "input_cache_read", minimum_input_tokens = 272001, usd_per_token = "0.000002" },
+  { meter = "input_cache_write", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.0000125" },
+  { meter = "input_cache_write", minimum_input_tokens = 272001, usd_per_token = "0.0000250" },
+]
+
+[providers.openai.capabilities]
+source_url = "https://developers.openai.com/api/docs/models/gpt-6-astra"
+image_input = true
+reasoning = true
+tools = true
+structured_output = true
+streaming = true
+
+[providers.openai.limits]
+source_url = "https://developers.openai.com/api/docs/models/gpt-6-astra"
+context_tokens = 1050000
+max_output_tokens = 128000
+
+[providers.openrouter]
+provider = "openrouter"
+id = "openai/gpt-6-astra"
+url = "https://openrouter.ai/openai/gpt-6-astra"
+source_url = "https://openrouter.ai/openai/gpt-6-astra"
+endpoints = [
+  { id = "openai/gpt-6-astra", input = "text", source_url = "https://openrouter.ai/api/v1/models" },
+]
+
+[providers.openrouter.token_pricing]
+source_url = "https://openrouter.ai/openai/gpt-6-astra"
+unit = "usd_per_token"
+scope = "Standard route token rates; optional tools, regional premiums and alternate service tiers are excluded."
+input = "0.00001"
+output = "0.00005"
+input_cache_read = "0.000001"
+input_cache_write = "0.0000125"
+tiers = [
+  { meter = "input", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.00001" },
+  { meter = "input", minimum_input_tokens = 272000, usd_per_token = "0.00002" },
+  { meter = "output", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.00005" },
+  { meter = "output", minimum_input_tokens = 272000, usd_per_token = "0.000075" },
+  { meter = "input_cache_read", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.000001" },
+  { meter = "input_cache_read", minimum_input_tokens = 272000, usd_per_token = "0.000002" },
+  { meter = "input_cache_write", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.0000125" },
+  { meter = "input_cache_write", minimum_input_tokens = 272000, usd_per_token = "0.000025" },
+]
+
+[providers.openrouter.capabilities]
+source_url = "https://openrouter.ai/api/v1/models"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.openrouter.limits]
+source_url = "https://openrouter.ai/api/v1/models"
+context_tokens = 1050000
+max_output_tokens = 128000
+
+[provider_coverage.openai]
+disposition = "listed"
+source_url = "https://developers.openai.com/api/docs/models/gpt-6-astra"
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/gpt-6-astra"
+
+[provider_coverage.openrouter]
+disposition = "listed"
+source_url = "https://openrouter.ai/openai/gpt-6-astra"
+
+[providers.grida]
+provider = "grida"
+id = "openai/gpt-6-astra"
+url = "https://gateway.grida.ai/v1/models"
+endpoints = [
+  { "id" = "openai/gpt-6-astra", "input" = "text", "source_url" = "https://gateway.grida.ai/v1/models", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "input_tokens.0", "meter" = "input_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "0", "max" = "272001" }, "usd_per_unit" = "0.00001" },
+    { "id" = "input_tokens.1", "meter" = "input_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "272001" }, "usd_per_unit" = "0.00002" },
+    { "id" = "cached_input_tokens.0", "meter" = "cached_input_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "0", "max" = "272001" }, "usd_per_unit" = "0.000001" },
+    { "id" = "cached_input_tokens.1", "meter" = "cached_input_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "272001" }, "usd_per_unit" = "0.000002" },
+    { "id" = "output_tokens.0", "meter" = "output_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "0", "max" = "272001" }, "usd_per_unit" = "0.00005" },
+    { "id" = "output_tokens.1", "meter" = "output_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "272001" }, "usd_per_unit" = "0.000075" },
+  ] } },
+]
+capabilities = { "source_url" = "https://gateway.grida.ai/v1/models", "image_input" = true, "tools" = true, "reasoning" = true, "structured_output" = true }
+limits = { "source_url" = "https://gateway.grida.ai/v1/models", "context_tokens" = 1050000, "max_output_tokens" = 128000 }
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"
+
+[provider_coverage.fal]
+disposition = "excluded"
+source_url = "https://fal.ai/models"
+reason = "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."

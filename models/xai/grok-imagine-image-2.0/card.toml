@@ -1,3 +1,4 @@
+reference_provider = "xai"
 id = "xai/grok-imagine-image-2.0"
 section = "image.models"
 null_keys = ["styles", "sizes"]
@@ -68,3 +69,91 @@ type = "per_image_tiered"
 "medium/1024x1024" = 0.06
 "low/2048x2048" = 0.06
 "medium/2048x2048" = 0.08
+
+[[providers.fal.endpoints]]
+id = "xai/grok-imagine-image/v2.0/edit"
+input = "image"
+source_url = "https://fal.ai/models/xai/grok-imagine-image/v2.0/edit/api"
+
+[providers.fal.endpoints.parameters]
+"aspect_ratio" = { "type" = "string", "enum" = [
+  "auto",
+  "2:1",
+  "20:9",
+  "19.5:9",
+  "16:9",
+  "4:3",
+  "3:2",
+  "1:1",
+  "2:3",
+  "3:4",
+  "9:16",
+  "9:19.5",
+  "9:20",
+  "1:2",
+] }
+"enable_safety_checker" = { "type" = "boolean" }
+"image_urls" = { "type" = "array", "max_items" = 5 }
+"num_images" = { "maximum" = 4, "minimum" = 1, "type" = "integer" }
+"output_format" = { "type" = "string", "enum" = ["jpeg", "png", "webp"] }
+"prompt" = { "max_length" = 8000, "type" = "string" }
+"quality" = { "type" = "string", "enum" = ["low", "medium"] }
+"resolution" = { "type" = "string", "enum" = ["1k", "2k"] }
+
+[[providers.fal.endpoints]]
+id = "xai/grok-imagine-image/v2.0/text-to-image"
+input = "text"
+source_url = "https://fal.ai/models/xai/grok-imagine-image/v2.0/text-to-image/api"
+
+[providers.fal.endpoints.parameters]
+"aspect_ratio" = { "type" = "string", "enum" = [
+  "2:1",
+  "20:9",
+  "19.5:9",
+  "16:9",
+  "4:3",
+  "3:2",
+  "1:1",
+  "2:3",
+  "3:4",
+  "9:16",
+  "9:19.5",
+  "9:20",
+  "1:2",
+] }
+"enable_safety_checker" = { "type" = "boolean" }
+"num_images" = { "maximum" = 4, "minimum" = 1, "type" = "integer" }
+"output_format" = { "type" = "string", "enum" = ["jpeg", "png", "webp"] }
+"prompt" = { "max_length" = 8000, "type" = "string" }
+"quality" = { "type" = "string", "enum" = ["low", "medium"] }
+"resolution" = { "type" = "string", "enum" = ["1k", "2k"] }
+
+[providers.xai]
+provider = "xai"
+id = "grok-imagine-image-2.0"
+source_url = "https://docs.x.ai/developers/models/grok-imagine-image-2.0"
+url = "https://docs.x.ai/developers/models/grok-imagine-image-2.0"
+pricing = { "type" = "per_image_tiered", "tiers" = { "low/1k" = 0.04, "low/1.5k" = 0.05, "low/2k" = 0.06, "medium/1k" = 0.06, "medium/1.5k" = 0.07, "medium/2k" = 0.08 }, "input_image_usd" = 0.01, "source_url" = "https://docs.x.ai/developers/models/grok-imagine-image-2.0" }
+
+[provider_coverage]
+openrouter = { "disposition" = "listed", "source_url" = "https://openrouter.ai/x-ai/grok-imagine-image-2.0" }
+vercel = { "disposition" = "listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models" }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/xai/grok-imagine-image/v2.0/text-to-image" }
+xai = { "disposition" = "listed", "source_url" = "https://docs.x.ai/developers/models/grok-imagine-image-2.0" }
+
+[providers.grida]
+provider = "grida"
+id = "xai/grok-imagine-image-2.0"
+url = "https://gateway.grida.ai/v1/models"
+endpoints = [
+  { "id" = "image.xai.grok-imagine-image-2.0.references", "operation" = "image.xai.grok-imagine-image-2.0.references", "input" = "multi_image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.xai.grok-imagine-image-2.0.references.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4", "interface" = "images.edits", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+  ] } },
+  { "id" = "image.xai.grok-imagine-image-2.0.text", "operation" = "image.xai.grok-imagine-image-2.0.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.xai.grok-imagine-image-2.0.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4", "interface" = "images.generations", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+  ] } },
+]
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"

@@ -1,3 +1,4 @@
+reference_provider = "byteplus"
 id = "bytedance/seedream-4.5"
 section = "image.models"
 null_keys = ["styles", "sizes"]
@@ -36,3 +37,16 @@ id = "fal-ai/bytedance/seedream/v4.5/text-to-image"
 pricing = { type = "per_image_flat", usd = 0.04 }
 avg_cost_usd = 0.04
 url = "https://fal.ai/models/fal-ai/bytedance/seedream/v4.5/text-to-image"
+
+[providers.byteplus]
+provider = "byteplus"
+id = "seedream-4-5-251128"
+source_url = "https://docs.byteplus.com/en/docs/ModelArk/model-pricing"
+url = "https://docs.byteplus.com/en/docs/ModelArk/model-pricing"
+pricing = { "type" = "per_image_flat", "usd" = 0.04, "source_url" = "https://docs.byteplus.com/en/docs/ModelArk/model-pricing" }
+
+[provider_coverage]
+openrouter = { "disposition" = "listed", "source_url" = "https://openrouter.ai/bytedance-seed/seedream-4.5" }
+vercel = { "disposition" = "listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models" }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/fal-ai/bytedance/seedream/v4.5/text-to-image" }
+byteplus = { "disposition" = "listed", "source_url" = "https://docs.byteplus.com/en/docs/ModelArk/model-pricing" }

@@ -101,9 +101,8 @@ https://platform.claude.com/docs/en/models/sonnet-5-5/whats-new-sonnet-5-5
 
 ## `"anthropic/claude-sonnet-5": {`
 
-$2/$10 is the standard rate, not a live discount: it launched as an
-introductory rate and Anthropic made it permanent, cancelling the
-announced step up to $3/$15. Do not restore the higher card.
+$2/$10 per million input/output tokens is Anthropic's published regular rate.
+Do not substitute an obsolete higher rate.
 https://platform.claude.com/docs/en/about-claude/pricing
 
 ## `"anthropic/claude-fable-5.1": {`
@@ -134,11 +133,12 @@ https://platform.claude.com/docs/en/models/opus-5-5/migration-guide
 Google's cache model is read + hourly storage (no one-time write
 premium that matches `cacheWrite` semantics), so the field is omitted.
 
-Steady-state rates. Google is promoting $0.75 in / $3.75 out / $0.075
-cacheRead through 2026-12-31; these are the prices that apply from
-2027-01-01. Checking Google's page before then will show the lower
-set — that is the promotion, not a correction. Gemini 3.8 Flash is GA,
-and this exact id is live on both Vercel AI Gateway and OpenRouter.
+The intrinsic cost records Google's published regular rates: $1.50 input,
+$7.50 output, and $0.15 cached input per million tokens. Promotional rates
+and their expiry dates are excluded. This evidence applies to Google's
+rates; each serving provider's regular prices need its own evidence.
+Gemini 3.8 Flash is GA, and this exact id is listed on both Vercel AI Gateway
+and OpenRouter.
 https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash
 https://ai.google.dev/gemini-api/docs/pricing
 https://vercel.com/ai-gateway/models/gemini-3.8-flash
@@ -391,9 +391,11 @@ Represented as flat at the 1MP baseline. Verified 2026-09-02.
 OpenRouter `supported_parameters.input_references` 0–8
 (2026-09-02). As on Flux 2 Pro.
 
-## `constraints: { min_edge: 256, max_edge: 1440 },`
+## `constraints: null,`
 
-Same envelope as Flux 2 Pro pending a vendor spec for Max.
+The inherited Flux 2 Pro edge envelope was unverified for Max and is withdrawn.
+See the 2026-10-13 media qualifications below for the independently sourced
+fal endpoint bounds.
 
 ## `providers: {`
 
@@ -571,8 +573,8 @@ https://vercel.com/ai-gateway/models/veo-3.1-generate-001
 
 ## `fal: {`
 
-fal.ai — image-to-video endpoint (capability is keyed into the id;
-t2v is a separate `fal-ai/veo3.1` endpoint, not catalogued). Rate
+fal.ai — image-to-video endpoint `fal-ai/veo3.1/image-to-video`; the
+separate text-to-video endpoint `fal-ai/veo3.1` is also catalogued. Rate
 matrix is identical to the Vercel AI Gateway's: $0.40/s audio and
 $0.20/s silent at 720p/1080p, $0.60/$0.40 at 4K.
 https://fal.ai/models/fal-ai/veo3.1/image-to-video
@@ -605,7 +607,7 @@ Google — Veo 3.1 Lite
 The budget Veo: 720p/1080p only, 4/6/8s, native audio. Rates
 identical on Vercel AI Gateway and fal (verified 2026-09-02). Vercel AI Gateway
 supports both text and image input (FAQ verified 2026-09-07); the fal binding
-below requires an image. Hosted GG's narrower wire is a host concern.
+requires an image.
 
 ## `"alibaba/wan-3.0": {`
 
@@ -702,3 +704,299 @@ https://fal.ai/models/xai/grok-imagine-video/v1.5/image-to-video
 VERIFY before prod: models.dev lists no per-1M price for
 gemini-embedding-2 yet; using the gemini-embedding-001 family
 input rate ($0.15 / 1M) as a conservative stand-in.
+
+## Text labs and Vercel endpoints (2026-10-13)
+
+Text cards identify the lab named by their existing first-party release source:
+OpenAI, Anthropic, or Google. Their exact serving IDs are verified against
+[Vercel's public model discovery](https://ai-gateway.vercel.sh/v1/models),
+which lists all 17 recorded text models. These identifiers record availability,
+not a routing preference. Existing model release dates are unchanged. Standard
+serving prices, bands and limits are qualified separately below.
+
+## fal input variants (2026-10-13)
+
+Bindings list the text and image variants documented on their exact fal API
+pages. Each endpoint includes its own source URL; existing `references` fields
+remain unchanged. GPT Image 2's ID is corrected to `openai/gpt-image-2` from
+[fal's API example](https://fal.ai/models/openai/gpt-image-2/api); the overview's
+hand-written quick start still shows `fal-ai/gpt-image-2`, which disagrees with
+the generated API documentation. The generated endpoint-specific API example
+is the more specific source. This correction does not change prices.
+
+## Tripo rig check
+
+[Tripo's rig-check documentation](https://developers.tripo3d.ai/en/docs/animations-rig-check)
+identifies the operation and lab but does not establish its first public release
+day. It carries `basis: provider_endpoint` and `date: null`, as do the rigging
+endpoints; a consumer must not substitute its own integration date.
+
+## Media endpoint parameters and limits (2026-10-13)
+
+The recorded fal image, video and 3D variants now include native parameter facts
+from their endpoint-specific API pages and public OpenAPI documents. Each
+endpoint's `source_url` identifies that variant; a parameter with a different
+source carries its own `source_url`. Names such as `image_size.width` denote
+native nested fields. An `image_size` preset enum is the published string-option
+list, not a complete validator for its string-or-object input.
+
+Model-specific `x-fal` size metadata takes precedence over generic `ImageSize`
+component bounds. The generic component alone does not establish a model's
+intrinsic envelope. Area and aspect bounds are recorded only where the exact
+endpoint publishes them. In particular:
+
+- [Seedream 5.0 Lite's input schema](https://fal.ai/models/bytedance/seedream/v5/lite/text-to-image/api)
+  explicitly states a 2560×1440 to 4096×4096 total-area range. Its below-floor
+  scaling behavior is separate from that supported output range.
+- Seedream edit's ten references and Grok Image edit's five references come from
+  their exact endpoint schema descriptions, which are more specific than the
+  missing JSON `maxItems` keywords. Nano Banana 2 and Pro's fourteen-reference
+  limits come from their respective [Nano Banana 2 edit overview](https://fal.ai/models/fal-ai/nano-banana-2/edit)
+  and [Nano Banana Pro edit overview](https://fal.ai/models/fal-ai/nano-banana-pro/edit).
+- [Flux Pro's edit overview](https://fal.ai/models/fal-ai/flux-2-pro/edit) publishes
+  nine references and 9MP total input. Flux Max's corresponding reference count
+  is unspecified. Neither edit schema publishes the generation variant's
+  `x-fal` dimension extension, so those generation bounds are not copied to edit.
+- Flux and Recraft do not publish a `num_images` parameter in these endpoint
+  schemas. Unpublished seed bounds and reference counts remain absent. A missing
+  fact does not establish unlimited input or an intrinsic model limit.
+
+### Intrinsic envelope corrections
+
+[BytePlus's Seedance 2.0 documentation](https://docs.byteplus.com/en/docs/modelark/seedance-2-0)
+and its [video-generation tutorial](https://docs.byteplus.com/id/docs/modelark/video-generation-tutorial)
+establish the 4–15-second duration range and six aspect ratios: 21:9, 16:9, 4:3,
+1:1, 3:4 and 9:16. The old five-second minimum and incomplete ratio list are
+corrected. The exact fal text and image variants independently agree.
+
+Gemini 3 Pro Image's inherited 1536-pixel edge limit is withdrawn. Its
+[fal generation schema](https://fal.ai/models/fal-ai/nano-banana-pro/api) and
+[edit schema](https://fal.ai/models/fal-ai/nano-banana-pro/edit/api) document
+1K/2K/4K resolution choices. Those tier labels do not establish a universal
+per-edge maximum: dimensions also depend on aspect ratio. No replacement
+intrinsic envelope is inferred from another model's output-size table.
+
+Flux Max's copied Pro edge envelope is also withdrawn. The
+[lab overview](https://docs.bfl.ml/flux_2/flux2_overview) says up to 4MP without
+establishing an exact pixel conversion. The
+[fal generation schema](https://fal.ai/models/fal-ai/flux-2-max/api) independently
+publishes 256–2560 per edge, steps of 16, and 4,194,304 total pixels. These are
+provider-endpoint facts, not a conversion of the lab's 4MP statement.
+
+### Variable fal image prices
+
+The existing baseline `usd`, `type` and average-cost fields are unchanged.
+Additive fields describe the published variable portions of those schedules:
+
+- [Flux Pro](https://fal.ai/models/fal-ai/flux-2-pro/edit) bills $0.03 for the first
+  output megapixel and $0.015 per additional input/output megapixel, rounded up.
+  Its examples price 1024×1024 at $0.03 and 1920×1080 at $0.045. The first-unit
+  scope is `output`; no precise universal pixels-per-megapixel conversion is
+  inferred from those examples.
+- [Flux Max](https://fal.ai/models/fal-ai/flux-2-max/edit) bills $0.07 for the first
+  processed megapixel and $0.03 for each additional megapixel, including inputs.
+  Its first-unit scope is `processed`. No rounding rule is copied from Pro.
+- [Nano Banana 2](https://fal.ai/models/fal-ai/nano-banana-2) retains $0.08 per image.
+  Published multipliers are 0.75× for 0.5K, 1.5× for 2K and 2× for 4K. Web search
+  adds $0.015 and high thinking adds $0.002 when used. The
+  [edit page](https://fal.ai/models/fal-ai/nano-banana-2/edit) states the same terms.
+- [Nano Banana Pro](https://fal.ai/models/fal-ai/nano-banana-pro) retains $0.15 per
+  image; 4K costs 2× and web search adds $0.015 when used. Its
+  [edit page](https://fal.ai/models/fal-ai/nano-banana-pro/edit) agrees. No additional
+  thinking fee or special 2K multiplier is inferred.
+
+### Native 3D operation facts
+
+Tripo generation, rigging and rig-check variants carry their own native API paths,
+version enums and parameter facts. The sources are Tripo's separate
+[P text-generation](https://developers.tripo3d.ai/en/docs/generation-text-to-model/p),
+[P image-generation](https://developers.tripo3d.ai/en/docs/generation-image-to-model/p),
+[P multiview](https://developers.tripo3d.ai/en/docs/generation-multiview-to-model/p),
+[standard text-generation](https://developers.tripo3d.ai/en/docs/generation-text-to-model/standard),
+[standard image-generation](https://developers.tripo3d.ai/en/docs/generation-image-to-model/standard),
+[standard multiview](https://developers.tripo3d.ai/en/docs/generation-multiview-to-model/standard),
+[rigging](https://developers.tripo3d.ai/en/docs/animations-rig) and
+[rig-check](https://developers.tripo3d.ai/en/docs/animations-rig-check) pages.
+Multiview is image input; its native path distinguishes the operation. Its
+task-ID, four-slot legacy and named-view input forms do not justify one universal
+array cardinality. H3.1's 2,000,000-face detailed bound does not replace its
+1,500,000-face standard bound. No new seed limits or undocumented output-format
+parameter are invented. The `fast` texture option requires the documented
+`v3.5-20260815` texture version.
+
+The fal [Hunyuan image](https://fal.ai/models/fal-ai/hunyuan-3d/v3.1/pro/image-to-3d/api),
+[Hunyuan text](https://fal.ai/models/fal-ai/hunyuan-3d/v3.1/pro/text-to-3d/api) and
+[TRELLIS.2](https://fal.ai/models/fal-ai/trellis-2/api) endpoints likewise record
+their native input types, enums and bounds. Hunyuan's image-dimension prose
+describes the reference input; it is not an output-image envelope. TRELLIS.2's
+resolution, mesh, texture, sampling, guidance and UV parameters retain their
+published units and bounds. These partial parameter maps do not claim to replace
+the providers' complete request schemas or cross-field validation rules.
+
+## Published image output calculators and examples (2026-10-13)
+
+The GPT Image 2 and GPT Image 2.5 cards record the calculator in
+[OpenAI's image generation guide](https://developers.openai.com/api/docs/guides/image-generation),
+including its [published JavaScript](https://developers.openai.com/_astro/GptImageTokenCalculator.react.DukR73TZ.js).
+That source supplies the quality coefficients, area constants, ties-to-even
+short-axis rounding and final upward token rounding. The examples are estimates
+from that calculator, not measured usage or guaranteed whole-request prices.
+They exclude text/image inputs, reasoning and partial-image output charges.
+Exact output-token examples were verified with the calculator rather than inferred
+by dividing a rounded USD price by the token rate.
+
+The GPT Image 2.5 cards also retain all six published size rows from fal's
+[Flare](https://fal.ai/models/openai/gpt-image-2.5/flare/text-to-image) and
+[Sunburst](https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image)
+price tables. Their `1920x1080` row conflicts with the documented requirement that
+both dimensions be divisible by 16: 1080 is not. That quoted USD example remains
+source-backed, but has no `output_tokens` value. OpenAI's calculator UI rejects
+that size; calling only its unvalidated arithmetic function is not evidence of
+an admissible request. Example dimensions must therefore be checked against the
+model and endpoint constraints before use.
+
+[fal's GPT Image 2 page](https://fal.ai/models/openai/gpt-image-2) bills text and
+image tokens, so its binding now records token rates instead of treating the
+rounded per-image examples as a fixed tariff. All three fal GPT Image bindings
+publish the same six native token rates and say total cost rounds upward to
+`$0.0001`, recorded as `rounding_usd`. A rounded example is not an exact total
+request maximum. OpenAI's separately published cached-input rates apply to its
+Responses image-generation tool, not direct Images API requests; recording a
+provider's cache price does not promise a cache hit or cached billing on every API.
+
+The six fal image endpoints' option bounds come from their endpoint-specific
+public OpenAPI schemas. Image 2 allows at most four outputs; Image 2.5 allows ten.
+Prompt bounds are character counts, not bytes or tokens. The shared generic
+`ImageSize` definition permits larger dimensions, but the model-specific size
+description and OpenAI guide impose the stricter 3840px edge, pixel-area,
+16px-step and aspect constraints recorded on the endpoints. No undocumented
+minimum number of reference images is inferred from an array being required.
+
+## Vision tokenization parameters (2026-10-13)
+
+[OpenAI's vision guide](https://developers.openai.com/api/docs/guides/images-vision)
+explicitly lists GPT-5.5, GPT-5.6 Sol/Terra/Luna and GPT-6 Astra as 32px patch
+models with a 1.2 token multiplier. It also supplies detail-specific resizing
+limits and the separate 30,000-patch rejection threshold. Low detail fits within
+512px on each side; a 256-patch allowance can be derived from that square, but is
+not recorded as an independently published patch budget. The guide does not
+qualify GPT-5.5 Pro's patch formula, so that card has no invented formula.
+
+[Claude's vision guide](https://platform.claude.com/docs/en/build-with-claude/vision)
+identifies 28px visual-token patches, a 2576px long edge and a 4784 visual-token
+ceiling for Claude 4.7 and later. These are processing limits: oversized native
+images may be downscaled before tokenization.
+
+[Google's media-resolution guide](https://ai.google.dev/gemini-api/docs/media-resolution)
+labels the Gemini 3 family token counts approximate. The cards preserve that
+qualification and each resolution's published budget, including the 2240-token
+`ultra_high` budget. That maximum is not a fixed billable count for every image.
+These parameters describe provider tokenization. Preflight estimates do not
+establish final charges.
+
+## Text provider references and regular pricing (2026-10-13)
+
+All 17 text cards retain independent native, Vercel and OpenRouter bindings.
+The native model pages establish exact IDs and synchronous limits. Claude's
+[pricing table](https://platform.claude.com/docs/en/about-claude/pricing) separates
+five-minute and one-hour cache writes. Google's
+[Standard pricing](https://ai.google.dev/gemini-api/docs/pricing) excludes optional
+cache storage, grounding and alternate service tiers. Native and intermediary
+limits and input-length bands intentionally remain distinct; a native reference
+is a presentation choice, not a routing preference.
+
+[Vercel's model feed](https://ai-gateway.vercel.sh/v1/models) supplies serving
+limits and supported capabilities. Prices were checked against each model's
+public page for regular-rate qualification. The
+[Gemini 3.7 Flash](https://vercel.com/ai-gateway/models/gemini-3.7-flash) and
+[Gemini 3.8 Flash](https://vercel.com/ai-gateway/models/gemini-3.8-flash) pages
+publish explicit list tiers of $1.50 input, $7.50 output and $0.15 cached input
+per million tokens. These replace discounted feed values; they are not inferred
+by reversing a percentage. OpenRouter's corresponding model pages independently
+publish the same list rates. Standard/global pricing excludes regional premiums,
+optional tools and alternate service tiers.
+
+[OpenRouter's model feed](https://openrouter.ai/api/v1/models) supplies its exact
+IDs, modalities, limits and capabilities. Each model page qualifies the rates;
+provider input-length boundaries are preserved exactly. The
+[GPT-5.6 Sol endpoint listing](https://openrouter.ai/api/v1/models/openai/gpt-5.6-sol/endpoints)
+independently establishes the recorded Standard rates and tiers. Time-based
+cache-storage rates are not per-token cache-write prices.
+
+The native [GPT-5.6 Sol page](https://developers.openai.com/api/docs/models/gpt-5.6-sol)
+and [OpenAI pricing](https://developers.openai.com/api/docs/pricing) qualify the
+visible native rate as promotional without publishing a regular replacement.
+That binding therefore omits pricing; unknown does not mean free. Its Vercel and
+OpenRouter prices remain independently sourced. No discount schedule is tracked.
+GPT-5.5 Pro has no invented native cache discount or unverified native
+long-context price; intermediary bands remain separate provider facts.
+
+## TRELLIS.2 distribution (2026-10-13)
+
+Microsoft's [official repository](https://github.com/microsoft/TRELLIS.2) links
+the [TRELLIS.2-4B weights](https://huggingface.co/microsoft/TRELLIS.2-4B).
+The [code license](https://github.com/microsoft/TRELLIS.2/blob/main/LICENSE)
+and the weight model card both identify MIT; these are recorded separately.
+The Hugging Face model metadata reports `gated: false`, so the published weight
+access is recorded as public. Dependency licenses remain separate from these
+artifact licenses. Distribution links do not establish a hosted inference API,
+free inference or permission for every possible use.
+
+## Provider coverage and non-text differences (2026-10-13)
+
+All existing cards are retained. Provider coverage was checked against
+[OpenRouter discovery](https://openrouter.ai/api/v1/models) and its image, video
+and embedding feeds, [Vercel discovery](https://ai-gateway.vercel.sh/v1/models),
+and fal's endpoint catalogue. Exact aliases matter: OpenRouter's Muse and Lyria
+preview IDs differ from canonical card IDs. `not_listed` records absence from
+those inspected public listings, not a promise that a provider will never offer
+an equivalent endpoint. fal coverage is restricted to media.
+
+Native references now identify actual lab APIs, including BytePlus for ByteDance,
+Google Developer API, Meta, BFL, Recraft, xAI and Alibaba. Open weights do not
+invent a lab-hosted API. Native and reseller prices retain their own meters:
+
+- OpenRouter GPT Image 2 uses separate text-input, image-input and image-output
+  token meters. Its 2.5 endpoints now list transparency; its Image 2 endpoint
+  lists only `auto` and `opaque`.
+- Seedance video-token SKUs replace an inaccurate OpenRouter per-second estimate.
+  Input-video, resolution and audio variants remain distinct. BytePlus's current
+  [pricing page](https://docs.byteplus.com/en/docs/ModelArk/model-pricing)
+  publishes Seedream Pro's 2.61-million-pixel threshold; older indexed material
+  differs. The dated native model ID is retained.
+- Google's [regular embedding prices](https://ai.google.dev/gemini-api/docs/pricing)
+  distinguish text, image, audio and video inputs. A provider that only publishes
+  some meters does not inherit the others by assumption.
+- [BFL pricing](https://bfl.ai/pricing) distinguishes first versus additional/input
+  megapixels, ceiling rounding, pixel units and capped input sizes. Its flat
+  FLUX 1.1 image price is not fal's megapixel price. Native xAI input-image charges
+  and Alibaba's documented International-region regular rates remain qualified.
+
+fal Tripo P2, native Tencent Hunyuan and native Bria retain verified endpoints
+without an invented regular USD price. Bria's hosted checkpoint is not pinned by
+its API reference. OpenRouter Muse's image-specific endpoint metadata is empty;
+its general endpoint token meters do not establish image parameter parity.
+These gaps are explicit qualifications, not zero-price defaults or passed paid
+behavior tests. Real-ESRGAN's official code link is distribution metadata, not
+an invented native hosted provider.
+
+## Grida public service bindings (2026-10-13)
+
+Grida bindings cover its existing 40 models and the rig-check operation; the
+other 21 retained model cards do not claim Grida availability. Public
+[model discovery](https://gateway.grida.ai/v1/models),
+[endpoint discovery](https://gateway.grida.ai/v1/endpoints), and
+[operation schemas](https://gateway.grida.ai/schemas/operations.json) establish
+service identities and contracts. Discovery requires authentication. Synchronous
+image, asynchronous video and specialized operation interfaces stay explicit;
+these bindings do not imply another provider's parameter compatibility.
+
+`published_pricing` records advertised USD per named quantity, including bands,
+conditions and rounding. Provider-specific normalized quantities are not raw
+image counts or guaranteed per-request totals. Source unit identifiers are
+preserved. Grida's Gemini 3.7/3.8 Flash bindings omit prices: the inspected
+discovery does not independently establish a regular, non-promotional schedule.
+Another provider's regular rates are not evidence of Grida's advertised rates.
+Other recorded service rates match the inspected discovery.
+This catalogue describes public service facts without supplier selection or
+private financial policy.

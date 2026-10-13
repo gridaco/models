@@ -1,3 +1,4 @@
+reference_provider = "tencent"
 id = "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d"
 section = "three_d.models"
 
@@ -20,3 +21,57 @@ source_url = "https://cloud.tencent.com/document/product/1804/120694"
 type = "per_generation_base_plus_surcharges"
 base_usd = 0.375
 surcharges_usd = { pbr = 0.15, multi_view = 0.15, custom_face_count = 0.15 }
+
+[[endpoints]]
+id = "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d"
+input = "image"
+source_url = "https://fal.ai/models/fal-ai/hunyuan-3d/v3.1/pro/image-to-3d/api"
+
+[endpoints.parameters]
+"back_image_url" = { "type" = "string" }
+"bottom_image_url" = { "type" = "string" }
+"enable_pbr" = { "type" = "boolean" }
+"face_count" = { "minimum" = 40000, "type" = "integer", "maximum" = 1500000 }
+"generate_type" = { "enum" = ["Normal", "Geometry"], "type" = "string" }
+"input_image_url" = { "type" = "string" }
+"left_front_image_url" = { "type" = "string" }
+"left_image_url" = { "type" = "string" }
+"right_front_image_url" = { "type" = "string" }
+"right_image_url" = { "type" = "string" }
+"top_image_url" = { "type" = "string" }
+
+[provider_coverage]
+openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/models", "reason" = "No matching model/version is listed in the inspected public model catalogue." }
+vercel = { "disposition" = "not_listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models", "reason" = "No matching model/version is listed in the inspected public Gateway model catalogue." }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/fal-ai/hunyuan-3d/v3.1/pro/image-to-3d" }
+tencent = { "disposition" = "listed", "source_url" = "https://www.tencentcloud.com/document/api/1284/75540" }
+
+[providers.tencent]
+provider = "tencent"
+id = "SubmitHunyuanTo3DProJob"
+source_url = "https://www.tencentcloud.com/document/api/1284/75540"
+url = "https://www.tencentcloud.com/document/api/1284/75540"
+endpoints = [
+  { "id" = "SubmitHunyuanTo3DProJob", "source_url" = "https://www.tencentcloud.com/document/api/1284/75540", "parameters" = { "Model" = { "type" = "string", "enum" = [
+    "3.1",
+  ] }, "Version" = { "type" = "string", "enum" = [
+    "2023-09-01",
+  ] } }, "input" = "image" },
+]
+qualifications = [
+  { "source_url" = "https://www.tencentcloud.com/document/api/1284/75540", "notes" = "The native API supports version 3.1. Its regular USD price is not established by this API reference; no reseller price is substituted." },
+]
+
+[providers.grida]
+provider = "grida"
+id = "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d"
+url = "https://gateway.grida.ai/v1/endpoints"
+endpoints = [
+  { "id" = "three-d.fal-ai.hunyuan-3d.v3.1.pro.image-to-3d.image", "operation" = "three-d.fal-ai.hunyuan-3d.v3.1.pro.image-to-3d.image", "input" = "image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.fal-ai.hunyuan-3d.v3.1.pro.image-to-3d.image.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/glb_result", "interface" = "endpoints", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/endpoints", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.015" },
+  ] } },
+]
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/endpoints"

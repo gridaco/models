@@ -1,3 +1,4 @@
+reference_provider = "openai"
 id = "openai/gpt-image-2"
 section = "image.models"
 null_keys = ["providers.vercel.transparent_background", "styles"]
@@ -22,24 +23,68 @@ id = "openai/gpt-image-2"
 pricing = { type = "per_token", input = 5, output = 30 }
 avg_cost_usd = 0.053
 
-[providers.openrouter]
-provider = "openrouter"
-id = "openai/gpt-image-2"
-pricing = { type = "per_token", input = 8, output = 8 }
-avg_cost_usd = 0.05
-url = "https://openrouter.ai/openai/gpt-image-2"
-transparent_background = false
-references = { id = "openai/gpt-image-2", max = 16 }
-
 [providers.fal]
+endpoints = [
+  { "id" = "openai/gpt-image-2", "input" = "text", "source_url" = "https://fal.ai/models/openai/gpt-image-2/api", "parameters" = { "prompt" = { "type" = "string", "min_length" = 2, "max_length" = 32000 }, "num_images" = { "type" = "integer", "minimum" = 1, "maximum" = 4 }, "quality" = { "type" = "string", "enum" = [
+    "auto",
+    "low",
+    "medium",
+    "high",
+  ] }, "background" = { "type" = "string", "enum" = [
+    "auto",
+    "transparent",
+    "opaque",
+  ] }, "output_format" = { "type" = "string", "enum" = [
+    "jpeg",
+    "png",
+    "webp",
+  ] }, "image_size" = { "enum" = [
+    "square_hd",
+    "square",
+    "portrait_4_3",
+    "portrait_16_9",
+    "landscape_4_3",
+    "landscape_16_9",
+    "auto",
+  ] }, "image_size.width" = { "type" = "integer", "minimum" = 1, "maximum" = 3840, "multiple_of" = 16 }, "image_size.height" = { "type" = "integer", "minimum" = 1, "maximum" = 3840, "multiple_of" = 16 } }, "image_constraints" = { "min_pixels" = 655360, "max_pixels" = 8294400, "step" = 16, "max_edge" = 3840, "aspect_ratio" = { "max" = 3 } } },
+  { "id" = "openai/gpt-image-2/edit", "input" = "image", "source_url" = "https://fal.ai/models/openai/gpt-image-2/edit/api", "parameters" = { "prompt" = { "type" = "string", "min_length" = 2, "max_length" = 32000 }, "num_images" = { "type" = "integer", "minimum" = 1, "maximum" = 4 }, "quality" = { "type" = "string", "enum" = [
+    "auto",
+    "low",
+    "medium",
+    "high",
+  ] }, "background" = { "type" = "string", "enum" = [
+    "auto",
+    "transparent",
+    "opaque",
+  ] }, "output_format" = { "type" = "string", "enum" = [
+    "jpeg",
+    "png",
+    "webp",
+  ] }, "image_urls" = { "type" = "array", "max_items" = 16 }, "image_size" = { "enum" = [
+    "square_hd",
+    "square",
+    "portrait_4_3",
+    "portrait_16_9",
+    "landscape_4_3",
+    "landscape_16_9",
+    "auto",
+  ] }, "image_size.width" = { "type" = "integer", "minimum" = 1, "maximum" = 3840, "multiple_of" = 16 }, "image_size.height" = { "type" = "integer", "minimum" = 1, "maximum" = 3840, "multiple_of" = 16 } }, "image_constraints" = { "min_pixels" = 655360, "max_pixels" = 8294400, "step" = 16, "max_edge" = 3840, "aspect_ratio" = { "max" = 3 } } },
+]
 provider = "fal"
-id = "fal-ai/gpt-image-2"
+id = "openai/gpt-image-2"
 avg_cost_usd = 0.053
 url = "https://fal.ai/models/openai/gpt-image-2"
 
 [providers.fal.pricing]
-type = "per_image_tiered"
-tiers = { "low/1024x1024" = 0.006, "medium/1024x1024" = 0.053, "high/1024x1024" = 0.211 }
+source_url = "https://fal.ai/models/openai/gpt-image-2"
+rounding_usd = 0.0001
+type = "per_token"
+input = 5
+cached_input = 1.25
+image_input = 8
+cached_image_input = 2
+text_output = 10
+output = 30
 
 [constraints]
 step = 16
@@ -68,3 +113,83 @@ cached_input = 1.25
 image_input = 8
 cached_image_input = 2
 output = 30
+
+[output_token_calculator]
+source_url = "https://developers.openai.com/api/docs/guides/image-generation"
+source_js_url = "https://developers.openai.com/_astro/GptImageTokenCalculator.react.DukR73TZ.js"
+area_offset = 2000000
+area_divisor = 4000000
+short_axis_rounding = "nearest_ties_even"
+token_rounding = "ceil"
+quality_axes = { "low" = 16, "medium" = 48, "high" = 96 }
+examples = [
+  { "width" = 1024, "height" = 1024, "quality" = "low", "output_tokens" = 196, "usd" = 0.00588, "usd_precision" = 5, "source_url" = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { "width" = 1024, "height" = 1536, "quality" = "low", "output_tokens" = 158, "usd" = 0.00474, "usd_precision" = 5, "source_url" = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { "width" = 1536, "height" = 1024, "quality" = "low", "output_tokens" = 158, "usd" = 0.00474, "usd_precision" = 5, "source_url" = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { "width" = 1024, "height" = 1024, "quality" = "medium", "output_tokens" = 1756, "usd" = 0.05268, "usd_precision" = 5, "source_url" = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { "width" = 1024, "height" = 1536, "quality" = "medium", "output_tokens" = 1372, "usd" = 0.04116, "usd_precision" = 5, "source_url" = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { "width" = 1536, "height" = 1024, "quality" = "medium", "output_tokens" = 1372, "usd" = 0.04116, "usd_precision" = 5, "source_url" = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { "width" = 1024, "height" = 1024, "quality" = "high", "output_tokens" = 7024, "usd" = 0.21072, "usd_precision" = 5, "source_url" = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { "width" = 1024, "height" = 1536, "quality" = "high", "output_tokens" = 5488, "usd" = 0.16464, "usd_precision" = 5, "source_url" = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { "width" = 1536, "height" = 1024, "quality" = "high", "output_tokens" = 5488, "usd" = 0.16464, "usd_precision" = 5, "source_url" = "https://developers.openai.com/api/docs/guides/image-generation" },
+]
+
+[providers.openai]
+provider = "openai"
+id = "gpt-image-2"
+source_url = "https://developers.openai.com/api/docs/models/gpt-image-2"
+url = "https://developers.openai.com/api/docs/models/gpt-image-2"
+pricing = { "input" = 5, "cached_input" = 1.25, "image_input" = 8, "cached_image_input" = 2, "output" = 30, "type" = "per_token", "source_url" = "https://developers.openai.com/api/docs/models/gpt-image-2" }
+
+[provider_coverage]
+openrouter = { "disposition" = "listed", "source_url" = "https://openrouter.ai/api/v1/images/models/openai/gpt-image-2/endpoints" }
+vercel = { "disposition" = "listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models" }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/openai/gpt-image-2" }
+openai = { "disposition" = "listed", "source_url" = "https://developers.openai.com/api/docs/models/gpt-image-2" }
+
+[providers.openrouter]
+provider = "openrouter"
+id = "openai/gpt-image-2"
+source_url = "https://openrouter.ai/api/v1/images/models/openai/gpt-image-2/endpoints"
+url = "https://openrouter.ai/api/v1/images/models/openai/gpt-image-2/endpoints"
+pricing = { "type" = "per_token", "image_input" = 8.0, "input" = 5.0, "output" = 30.0, "source_url" = "https://openrouter.ai/api/v1/images/models/openai/gpt-image-2/endpoints" }
+transparent_background = false
+references = { "id" = "openai/gpt-image-2", "max" = 16 }
+endpoints = [
+  { "id" = "openai/gpt-image-2", "source_url" = "https://openrouter.ai/api/v1/images/models/openai/gpt-image-2/endpoints", "parameters" = { "aspect_ratio" = { "enum" = [
+    "1:1",
+    "3:2",
+    "2:3",
+    "4:3",
+    "3:4",
+    "16:9",
+    "9:16",
+    "21:9",
+    "auto",
+  ] }, "quality" = { "enum" = [
+    "auto",
+    "low",
+    "medium",
+    "high",
+  ] }, "background" = { "enum" = [
+    "auto",
+    "opaque",
+  ] }, "n" = { "type" = "integer", "minimum" = 1, "maximum" = 10 }, "input_references" = { "type" = "integer", "minimum" = 0, "maximum" = 16 }, "output_compression" = { "type" = "integer", "minimum" = 0, "maximum" = 100 } }, "input" = "text" },
+]
+
+[providers.grida]
+provider = "grida"
+id = "openai/gpt-image-2"
+url = "https://gateway.grida.ai/v1/models"
+endpoints = [
+  { "id" = "image.openai.gpt-image-2.references", "operation" = "image.openai.gpt-image-2.references", "input" = "multi_image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.openai.gpt-image-2.references.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4", "interface" = "images.edits", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "1" },
+  ] } },
+  { "id" = "image.openai.gpt-image-2.text", "operation" = "image.openai.gpt-image-2.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.openai.gpt-image-2.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4", "interface" = "images.generations", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "1" },
+  ] } },
+]
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"

@@ -1,3 +1,4 @@
+reference_provider = "elevenlabs"
 id = "eleven_text_to_sound_v2"
 section = "audio.sound_effects.models"
 null_keys = ["avg_cost_usd"]
@@ -27,3 +28,16 @@ duration = { mode = "automatic_or_fixed", min_seconds = 0.5, max_seconds = 30 }
 type = "provider_credits"
 automatic_duration_credits = 100
 specified_duration_credits_per_second = 11
+
+[providers.fal]
+provider = "fal"
+id = "fal-ai/elevenlabs/sound-effects/v2"
+source_url = "https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2"
+url = "https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2"
+pricing = { "type" = "per_second", "usd" = 0.002, "source_url" = "https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2" }
+
+[provider_coverage]
+openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/models", "reason" = "No matching model/version is listed in the inspected public model catalogue." }
+vercel = { "disposition" = "not_listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models", "reason" = "No matching model/version is listed in the inspected public Gateway model catalogue." }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2" }
+elevenlabs = { "disposition" = "listed", "source_url" = "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert" }

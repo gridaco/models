@@ -1,3 +1,4 @@
+reference_provider = "bfl"
 id = "bfl/flux-pro-1.1"
 section = "image.models"
 null_keys = ["styles", "sizes"]
@@ -21,3 +22,23 @@ provider = "vercel"
 id = "bfl/flux-pro-1.1"
 pricing = { type = "per_image_flat", usd = 0.04 }
 avg_cost_usd = 0.04
+
+[providers.bfl]
+provider = "bfl"
+id = "flux-pro-1.1"
+source_url = "https://docs.bfl.ai/quick_start/pricing"
+url = "https://docs.bfl.ai/quick_start/pricing"
+pricing = { "type" = "per_image_flat", "usd" = 0.04, "source_url" = "https://docs.bfl.ai/quick_start/pricing" }
+
+[providers.fal]
+provider = "fal"
+id = "fal-ai/flux-pro/v1.1"
+source_url = "https://fal.ai/models/fal-ai/flux-pro/v1.1"
+url = "https://fal.ai/models/fal-ai/flux-pro/v1.1"
+pricing = { "type" = "per_megapixel", "usd" = 0.04, "rounding" = "ceil", "source_url" = "https://fal.ai/models/fal-ai/flux-pro/v1.1" }
+
+[provider_coverage]
+openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/images/models", "reason" = "No matching model/version is listed in the inspected public image model catalogue." }
+vercel = { "disposition" = "listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models" }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/fal-ai/flux-pro/v1.1" }
+bfl = { "disposition" = "listed", "source_url" = "https://docs.bfl.ai/quick_start/pricing" }

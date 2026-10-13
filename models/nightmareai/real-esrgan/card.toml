@@ -10,3 +10,12 @@ cost_usd = 0.002
 date = "2021-07-22"
 basis = "model"
 source_url = "https://github.com/xinntao/Real-ESRGAN/releases/tag/v0.1.0"
+
+[provider_coverage]
+openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/models", "reason" = "No matching model/version is listed in the inspected public model catalogue." }
+vercel = { "disposition" = "not_listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models", "reason" = "No matching model/version is listed in the inspected public Gateway model catalogue." }
+fal = { "disposition" = "not_listed", "source_url" = "https://fal.ai/models", "reason" = "This card identifies a specific hosted implementation; no identical implementation/version was verified in the public media catalogue." }
+
+[distribution]
+source_url = "https://github.com/xinntao/Real-ESRGAN"
+code = { "repository_url" = "https://github.com/xinntao/Real-ESRGAN" }
