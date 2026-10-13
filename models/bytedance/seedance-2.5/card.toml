@@ -17,9 +17,6 @@ basis = "model"
 source_url = "https://seed.bytedance.com/en/blog/one-take-creation-flexible-referencing-introducing-seedance-2-5"
 
 [providers.fal]
-endpoints = [
-  { id = "bytedance/seedance-2.5/image-to-video", input = "image", source_url = "https://fal.ai/models/bytedance/seedance-2.5/image-to-video/api" },
-]
 provider = "fal"
 id = "bytedance/seedance-2.5/image-to-video"
 input = "image"
@@ -33,3 +30,48 @@ type = "per_second"
 480p = { audio = 0.2205 }
 720p = { audio = 0.473 }
 1080p = { audio = 1.164 }
+
+[[providers.fal.endpoints]]
+id = "bytedance/seedance-2.5/image-to-video"
+input = "image"
+source_url = "https://fal.ai/models/bytedance/seedance-2.5/image-to-video/api"
+
+[providers.fal.endpoints.parameters]
+"aspect_ratio" = { "type" = "string", "enum" = ["auto"] }
+"bitrate_mode" = { "type" = "string", "enum" = ["standard", "high"] }
+"codec" = { "type" = "string", "enum" = ["auto", "H264", "H265"] }
+"draft" = { "type" = "boolean" }
+"duration" = { "type" = "string", "enum" = [
+  "auto",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "11",
+  "12",
+  "13",
+  "14",
+  "15",
+  "16",
+  "17",
+  "18",
+  "19",
+  "20",
+  "21",
+  "22",
+  "23",
+  "24",
+  "25",
+  "26",
+  "27",
+  "28",
+  "29",
+  "30",
+] }
+"generate_audio" = { "type" = "boolean" }
+"image_url" = { "type" = "string" }
+"prompt" = { "type" = "string" }
+"resolution" = { "type" = "string", "enum" = ["480p", "720p", "1080p"] }

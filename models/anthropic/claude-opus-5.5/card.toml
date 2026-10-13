@@ -23,3 +23,29 @@ url = "https://ai-gateway.vercel.sh/v1/models"
 endpoints = [
   { id = "anthropic/claude-opus-5.5", input = "text", source_url = "https://ai-gateway.vercel.sh/v1/models" },
 ]
+
+[providers.vercel.token_pricing]
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+unit = "usd_per_token"
+input = "0.000004"
+output = "0.00002"
+input_cache_read = "0.0000002"
+input_cache_write = "0.000005"
+
+[providers.vercel.capabilities]
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.vercel.limits]
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+context_tokens = 1000000
+max_output_tokens = 128000
+
+[vision_tokenization]
+source_url = "https://platform.claude.com/docs/en/build-with-claude/vision"
+patch_size_px = 28
+maximum_tokens_per_image = 4784
+detail_maximum_edges = { "default" = 2576 }

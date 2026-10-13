@@ -22,3 +22,27 @@ url = "https://ai-gateway.vercel.sh/v1/models"
 endpoints = [
   { id = "openai/gpt-5.5-pro", input = "text", source_url = "https://ai-gateway.vercel.sh/v1/models" },
 ]
+
+[providers.vercel.token_pricing]
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+unit = "usd_per_token"
+input = "0.00003"
+output = "0.00018"
+tiers = [
+  { "meter" = "input", "minimum_input_tokens" = 0, "usd_per_token" = "0.00003", "maximum_input_tokens" = 272000 },
+  { "meter" = "input", "minimum_input_tokens" = 272000, "usd_per_token" = "0.00006" },
+  { "meter" = "output", "minimum_input_tokens" = 0, "usd_per_token" = "0.00018", "maximum_input_tokens" = 272000 },
+  { "meter" = "output", "minimum_input_tokens" = 272000, "usd_per_token" = "0.00027" },
+]
+
+[providers.vercel.capabilities]
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.vercel.limits]
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+context_tokens = 1000000
+max_output_tokens = 128000

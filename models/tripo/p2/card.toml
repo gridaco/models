@@ -25,3 +25,77 @@ usd_per_credit = 0.01
 texture_credits = { standard = 10, detailed = 20, extreme = 30 }
 source_url = "https://developers.tripo3d.ai/en/pricing"
 base_credits = { text = 100, image = 100, multiview = 100 }
+
+[[endpoints]]
+id = "/generation/text-to-model"
+input = "text"
+source_url = "https://developers.tripo3d.ai/en/docs/generation-text-to-model/p"
+
+[endpoints.parameters]
+"auto_size" = { "type" = "boolean" }
+"export_orientation" = { "type" = "string", "enum" = ["+x", "-x", "-y", "+y"] }
+"export_uv" = { "type" = "boolean" }
+"face_limit" = { "type" = "integer", "minimum" = 48, "maximum" = 50000 }
+"image_seed" = { "type" = "integer" }
+"model" = { "type" = "string", "enum" = ["P2-20260801"] }
+"model_seed" = { "type" = "integer" }
+"negative_prompt" = { "type" = "string", "max_length" = 255 }
+"pbr" = { "type" = "boolean" }
+"prompt" = { "type" = "string", "max_length" = 1024 }
+"quad" = { "type" = "boolean" }
+"texture" = { "type" = "boolean" }
+"texture_quality" = { "type" = "string", "enum" = ["fast", "standard", "detailed", "extreme"] }
+"texture_seed" = { "type" = "integer" }
+"texture_version" = { "type" = "string", "enum" = [
+  "v3.5-20260815",
+  "v3.0-20250812",
+  "v2.5-20250123",
+] }
+
+[[endpoints]]
+id = "/generation/image-to-model"
+input = "image"
+source_url = "https://developers.tripo3d.ai/en/docs/generation-image-to-model/p"
+
+[endpoints.parameters]
+"auto_size" = { "type" = "boolean" }
+"export_orientation" = { "type" = "string", "enum" = ["+x", "-x", "-y", "+y"] }
+"export_uv" = { "type" = "boolean" }
+"face_limit" = { "type" = "integer", "minimum" = 48, "maximum" = 50000 }
+"input" = { "type" = "string" }
+"model" = { "type" = "string", "enum" = ["P2-20260801"] }
+"model_seed" = { "type" = "integer" }
+"pbr" = { "type" = "boolean" }
+"quad" = { "type" = "boolean" }
+"texture" = { "type" = "boolean" }
+"texture_quality" = { "type" = "string", "enum" = ["fast", "standard", "detailed", "extreme"] }
+"texture_seed" = { "type" = "integer" }
+"texture_version" = { "type" = "string", "enum" = [
+  "v3.5-20260815",
+  "v3.0-20250812",
+  "v2.5-20250123",
+] }
+
+[[endpoints]]
+id = "/generation/multiview-to-model"
+input = "image"
+source_url = "https://developers.tripo3d.ai/en/docs/generation-multiview-to-model/p"
+
+[endpoints.parameters]
+"auto_size" = { "type" = "boolean" }
+"export_orientation" = { "type" = "string", "enum" = ["+x", "-x", "-y", "+y"] }
+"export_uv" = { "type" = "boolean" }
+"face_limit" = { "type" = "integer", "minimum" = 48, "maximum" = 50000 }
+"inputs" = { "type" = "array" }
+"model" = { "type" = "string", "enum" = ["P2-20260801"] }
+"model_seed" = { "type" = "integer" }
+"pbr" = { "type" = "boolean" }
+"quad" = { "type" = "boolean" }
+"texture" = { "type" = "boolean" }
+"texture_quality" = { "type" = "string", "enum" = ["fast", "standard", "detailed", "extreme"] }
+"texture_seed" = { "type" = "integer" }
+"texture_version" = { "type" = "string", "enum" = [
+  "v3.5-20260815",
+  "v3.0-20250812",
+  "v2.5-20250123",
+] }

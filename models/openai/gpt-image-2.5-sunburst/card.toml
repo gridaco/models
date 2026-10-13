@@ -36,8 +36,54 @@ references = { id = "openai/gpt-image-2.5-sunburst", max = 16 }
 
 [providers.fal]
 endpoints = [
-  { id = "openai/gpt-image-2.5/sunburst/edit", input = "image", source_url = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/edit/api" },
-  { id = "openai/gpt-image-2.5/sunburst/text-to-image", input = "text", source_url = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image/api" },
+  { "id" = "openai/gpt-image-2.5/sunburst/edit", "input" = "image", "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/edit/api", "parameters" = { "prompt" = { "type" = "string", "min_length" = 1, "max_length" = 32000 }, "num_images" = { "type" = "integer", "minimum" = 1, "maximum" = 10 }, "quality" = { "type" = "string", "enum" = [
+    "auto",
+    "low",
+    "medium",
+    "high",
+    "xhigh",
+    "max",
+  ] }, "background" = { "type" = "string", "enum" = [
+    "auto",
+    "transparent",
+    "opaque",
+  ] }, "output_format" = { "type" = "string", "enum" = [
+    "jpeg",
+    "png",
+    "webp",
+  ] }, "image_urls" = { "type" = "array", "max_items" = 16 }, "output_compression" = { "type" = "integer", "minimum" = 0, "maximum" = 100 }, "image_size" = { "enum" = [
+    "square_hd",
+    "square",
+    "portrait_4_3",
+    "portrait_16_9",
+    "landscape_4_3",
+    "landscape_16_9",
+    "auto",
+  ] }, "image_size.width" = { "type" = "integer", "minimum" = 1, "maximum" = 3840, "multiple_of" = 16 }, "image_size.height" = { "type" = "integer", "minimum" = 1, "maximum" = 3840, "multiple_of" = 16 } }, "image_constraints" = { "min_pixels" = 655360, "max_pixels" = 8294400, "step" = 16, "max_edge" = 3840, "aspect_ratio" = { "max" = 3 } } },
+  { "id" = "openai/gpt-image-2.5/sunburst/text-to-image", "input" = "text", "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image/api", "parameters" = { "prompt" = { "type" = "string", "min_length" = 1, "max_length" = 32000 }, "num_images" = { "type" = "integer", "minimum" = 1, "maximum" = 10 }, "quality" = { "type" = "string", "enum" = [
+    "auto",
+    "low",
+    "medium",
+    "high",
+    "xhigh",
+    "max",
+  ] }, "background" = { "type" = "string", "enum" = [
+    "auto",
+    "transparent",
+    "opaque",
+  ] }, "output_format" = { "type" = "string", "enum" = [
+    "jpeg",
+    "png",
+    "webp",
+  ] }, "output_compression" = { "type" = "integer", "minimum" = 0, "maximum" = 100 }, "image_size" = { "enum" = [
+    "square_hd",
+    "square",
+    "portrait_4_3",
+    "portrait_16_9",
+    "landscape_4_3",
+    "landscape_16_9",
+    "auto",
+  ] }, "image_size.width" = { "type" = "integer", "minimum" = 1, "maximum" = 3840, "multiple_of" = 16 }, "image_size.height" = { "type" = "integer", "minimum" = 1, "maximum" = 3840, "multiple_of" = 16 } }, "image_constraints" = { "min_pixels" = 655360, "max_pixels" = 8294400, "step" = 16, "max_edge" = 3840, "aspect_ratio" = { "max" = 3 } } },
 ]
 provider = "fal"
 id = "openai/gpt-image-2.5/sunburst/text-to-image"
@@ -46,6 +92,8 @@ url = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image"
 references = { id = "openai/gpt-image-2.5/sunburst/edit", max = 16 }
 
 [providers.fal.pricing]
+source_url = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image"
+rounding_usd = 0.0001
 type = "per_token"
 input = 5
 cached_input = 1.25
@@ -60,3 +108,49 @@ max_edge = 3840
 min_pixels = 655_360
 max_pixels = 8_294_400
 aspect_ratio = { max = 3 }
+
+[output_token_calculator]
+source_url = "https://developers.openai.com/api/docs/guides/image-generation"
+source_js_url = "https://developers.openai.com/_astro/GptImageTokenCalculator.react.DukR73TZ.js"
+area_offset = 2000000
+area_divisor = 4000000
+short_axis_rounding = "nearest_ties_even"
+token_rounding = "ceil"
+quality_axes = { "low" = 16, "medium" = 24, "high" = 48, "xhigh" = 64, "max" = 96 }
+examples = [
+  { "width" = 1024, "height" = 768, "quality" = "low", "output_tokens" = 134, "usd" = 0.00402, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 1024, "height" = 1024, "quality" = "low", "output_tokens" = 196, "usd" = 0.00588, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 1024, "height" = 1536, "quality" = "low", "output_tokens" = 158, "usd" = 0.00474, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 1536, "height" = 1024, "quality" = "low", "output_tokens" = 158, "usd" = 0.00474, "usd_precision" = 5, "source_url" = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { "width" = 1920, "height" = 1080, "quality" = "low", "usd" = 0.00441, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 2560, "height" = 1440, "quality" = "low", "output_tokens" = 205, "usd" = 0.00615, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 3840, "height" = 2160, "quality" = "low", "output_tokens" = 371, "usd" = 0.01113, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 1024, "height" = 768, "quality" = "medium", "output_tokens" = 301, "usd" = 0.00903, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 1024, "height" = 1024, "quality" = "medium", "output_tokens" = 439, "usd" = 0.01317, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 1024, "height" = 1536, "quality" = "medium", "output_tokens" = 343, "usd" = 0.01029, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 1536, "height" = 1024, "quality" = "medium", "output_tokens" = 343, "usd" = 0.01029, "usd_precision" = 5, "source_url" = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { "width" = 1920, "height" = 1080, "quality" = "medium", "usd" = 0.01029, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 2560, "height" = 1440, "quality" = "medium", "output_tokens" = 478, "usd" = 0.01434, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 3840, "height" = 2160, "quality" = "medium", "output_tokens" = 865, "usd" = 0.02595, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 1024, "height" = 768, "quality" = "high", "output_tokens" = 1204, "usd" = 0.03612, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 1024, "height" = 1024, "quality" = "high", "output_tokens" = 1756, "usd" = 0.05268, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 1024, "height" = 1536, "quality" = "high", "output_tokens" = 1372, "usd" = 0.04116, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 1536, "height" = 1024, "quality" = "high", "output_tokens" = 1372, "usd" = 0.04116, "usd_precision" = 5, "source_url" = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { "width" = 1920, "height" = 1080, "quality" = "high", "usd" = 0.0396, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 2560, "height" = 1440, "quality" = "high", "output_tokens" = 1843, "usd" = 0.05529, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 3840, "height" = 2160, "quality" = "high", "output_tokens" = 3336, "usd" = 0.10008, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 1024, "height" = 768, "quality" = "xhigh", "output_tokens" = 2140, "usd" = 0.0642, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 1024, "height" = 1024, "quality" = "xhigh", "output_tokens" = 3122, "usd" = 0.09366, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 1024, "height" = 1536, "quality" = "xhigh", "output_tokens" = 2459, "usd" = 0.07377, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 1536, "height" = 1024, "quality" = "xhigh", "output_tokens" = 2459, "usd" = 0.07377, "usd_precision" = 5, "source_url" = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { "width" = 1920, "height" = 1080, "quality" = "xhigh", "usd" = 0.07041, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 2560, "height" = 1440, "quality" = "xhigh", "output_tokens" = 3276, "usd" = 0.09828, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 3840, "height" = 2160, "quality" = "xhigh", "output_tokens" = 5930, "usd" = 0.1779, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 1024, "height" = 768, "quality" = "max", "output_tokens" = 4815, "usd" = 0.14445, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 1024, "height" = 1024, "quality" = "max", "output_tokens" = 7024, "usd" = 0.21072, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 1024, "height" = 1536, "quality" = "max", "output_tokens" = 5488, "usd" = 0.16464, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 1536, "height" = 1024, "quality" = "max", "output_tokens" = 5488, "usd" = 0.16464, "usd_precision" = 5, "source_url" = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { "width" = 1920, "height" = 1080, "quality" = "max", "usd" = 0.1584, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 2560, "height" = 1440, "quality" = "max", "output_tokens" = 7370, "usd" = 0.2211, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+  { "width" = 3840, "height" = 2160, "quality" = "max", "output_tokens" = 13342, "usd" = 0.40026, "usd_precision" = 5, "source_url" = "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image" },
+]

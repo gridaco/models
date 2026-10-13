@@ -31,12 +31,65 @@ url = "https://openrouter.ai/bytedance-seed/seedream-5-0-lite"
 references = { id = "bytedance-seed/seedream-5-0-lite", max = 14 }
 
 [providers.fal]
-endpoints = [
-  { id = "bytedance/seedream/v5/lite/text-to-image", input = "text", source_url = "https://fal.ai/models/bytedance/seedream/v5/lite/text-to-image/api" },
-  { id = "fal-ai/bytedance/seedream/v5/lite/edit", input = "image", source_url = "https://fal.ai/models/fal-ai/bytedance/seedream/v5/lite/edit/api" },
-]
 provider = "fal"
 id = "bytedance/seedream/v5/lite/text-to-image"
 pricing = { type = "per_image_flat", usd = 0.035 }
 avg_cost_usd = 0.035
 url = "https://fal.ai/models/bytedance/seedream/v5/lite/text-to-image"
+
+[[providers.fal.endpoints]]
+id = "bytedance/seedream/v5/lite/text-to-image"
+input = "text"
+source_url = "https://fal.ai/models/bytedance/seedream/v5/lite/text-to-image/api"
+
+[providers.fal.endpoints.parameters]
+"enable_safety_checker" = { "type" = "boolean" }
+"image_size" = { "enum" = [
+  "square_hd",
+  "square",
+  "portrait_4_3",
+  "portrait_16_9",
+  "landscape_4_3",
+  "landscape_16_9",
+  "auto_2K",
+  "auto_3K",
+  "auto_4K",
+] }
+"image_size.height" = { "maximum" = 14142, "type" = "integer", "minimum" = 1 }
+"image_size.width" = { "maximum" = 14142, "type" = "integer", "minimum" = 1 }
+"max_images" = { "maximum" = 6, "minimum" = 1, "type" = "integer" }
+"num_images" = { "maximum" = 6, "minimum" = 1, "type" = "integer" }
+"prompt" = { "type" = "string" }
+
+[providers.fal.endpoints.image_constraints]
+min_pixels = 3686400
+max_pixels = 16777216
+
+[[providers.fal.endpoints]]
+id = "fal-ai/bytedance/seedream/v5/lite/edit"
+input = "image"
+source_url = "https://fal.ai/models/fal-ai/bytedance/seedream/v5/lite/edit/api"
+
+[providers.fal.endpoints.parameters]
+"enable_safety_checker" = { "type" = "boolean" }
+"image_size" = { "enum" = [
+  "square_hd",
+  "square",
+  "portrait_4_3",
+  "portrait_16_9",
+  "landscape_4_3",
+  "landscape_16_9",
+  "auto_2K",
+  "auto_3K",
+  "auto_4K",
+] }
+"image_size.height" = { "maximum" = 14142, "type" = "integer", "minimum" = 1 }
+"image_size.width" = { "maximum" = 14142, "type" = "integer", "minimum" = 1 }
+"image_urls" = { "type" = "array", "max_items" = 10 }
+"max_images" = { "maximum" = 6, "minimum" = 1, "type" = "integer" }
+"num_images" = { "maximum" = 6, "minimum" = 1, "type" = "integer" }
+"prompt" = { "type" = "string" }
+
+[providers.fal.endpoints.image_constraints]
+min_pixels = 3686400
+max_pixels = 16777216

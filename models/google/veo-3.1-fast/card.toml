@@ -32,10 +32,6 @@ type = "per_second"
 4k = { audio = 0.35, silent = 0.3 }
 
 [providers.fal]
-endpoints = [
-  { id = "fal-ai/veo3.1/fast", input = "text", source_url = "https://fal.ai/models/fal-ai/veo3.1/fast/api" },
-  { id = "fal-ai/veo3.1/fast/image-to-video", input = "image", source_url = "https://fal.ai/models/fal-ai/veo3.1/fast/image-to-video/api" },
-]
 provider = "fal"
 id = "fal-ai/veo3.1/fast/image-to-video"
 input = "image"
@@ -49,3 +45,34 @@ type = "per_second"
 720p = { audio = 0.15, silent = 0.1 }
 1080p = { audio = 0.15, silent = 0.1 }
 4k = { audio = 0.35, silent = 0.3 }
+
+[[providers.fal.endpoints]]
+id = "fal-ai/veo3.1/fast"
+input = "text"
+source_url = "https://fal.ai/models/fal-ai/veo3.1/fast/api"
+
+[providers.fal.endpoints.parameters]
+"aspect_ratio" = { "enum" = ["16:9", "9:16"], "type" = "string" }
+"auto_fix" = { "type" = "boolean" }
+"duration" = { "enum" = ["4s", "6s", "8s"], "type" = "string" }
+"generate_audio" = { "type" = "boolean" }
+"prompt" = { "type" = "string", "max_length" = 20000 }
+"resolution" = { "enum" = ["720p", "1080p", "4k"], "type" = "string" }
+"safety_tolerance" = { "enum" = ["1", "2", "3", "4", "5", "6"], "type" = "string" }
+"seed" = { "type" = "integer" }
+
+[[providers.fal.endpoints]]
+id = "fal-ai/veo3.1/fast/image-to-video"
+input = "image"
+source_url = "https://fal.ai/models/fal-ai/veo3.1/fast/image-to-video/api"
+
+[providers.fal.endpoints.parameters]
+"aspect_ratio" = { "enum" = ["auto", "16:9", "9:16"], "type" = "string" }
+"auto_fix" = { "type" = "boolean" }
+"duration" = { "enum" = ["4s", "6s", "8s"], "type" = "string" }
+"generate_audio" = { "type" = "boolean" }
+"image_url" = { "type" = "string" }
+"prompt" = { "type" = "string", "max_length" = 20000 }
+"resolution" = { "enum" = ["720p", "1080p", "4k"], "type" = "string" }
+"safety_tolerance" = { "enum" = ["1", "2", "3", "4", "5", "6"], "type" = "string" }
+"seed" = { "type" = "integer" }

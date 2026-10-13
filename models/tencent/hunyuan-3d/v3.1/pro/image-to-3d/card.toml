@@ -20,3 +20,21 @@ source_url = "https://cloud.tencent.com/document/product/1804/120694"
 type = "per_generation_base_plus_surcharges"
 base_usd = 0.375
 surcharges_usd = { pbr = 0.15, multi_view = 0.15, custom_face_count = 0.15 }
+
+[[endpoints]]
+id = "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d"
+input = "image"
+source_url = "https://fal.ai/models/fal-ai/hunyuan-3d/v3.1/pro/image-to-3d/api"
+
+[endpoints.parameters]
+"back_image_url" = { "type" = "string" }
+"bottom_image_url" = { "type" = "string" }
+"enable_pbr" = { "type" = "boolean" }
+"face_count" = { "minimum" = 40000, "type" = "integer", "maximum" = 1500000 }
+"generate_type" = { "enum" = ["Normal", "Geometry"], "type" = "string" }
+"input_image_url" = { "type" = "string" }
+"left_front_image_url" = { "type" = "string" }
+"left_image_url" = { "type" = "string" }
+"right_front_image_url" = { "type" = "string" }
+"right_image_url" = { "type" = "string" }
+"top_image_url" = { "type" = "string" }

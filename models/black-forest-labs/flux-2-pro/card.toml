@@ -31,12 +31,60 @@ url = "https://openrouter.ai/black-forest-labs/flux.2-pro"
 references = { id = "black-forest-labs/flux.2-pro", max = 8 }
 
 [providers.fal]
-endpoints = [
-  { id = "fal-ai/flux-2-pro", input = "text", source_url = "https://fal.ai/models/fal-ai/flux-2-pro/api" },
-  { id = "fal-ai/flux-2-pro/edit", input = "image", source_url = "https://fal.ai/models/fal-ai/flux-2-pro/edit/api" },
-]
 provider = "fal"
 id = "fal-ai/flux-2-pro"
-pricing = { type = "per_image_flat", usd = 0.03 }
+pricing = { type = "per_image_flat", usd = 0.03, included_megapixels = 1, included_megapixels_scope = "output", usd_per_additional_megapixel = 0.015, input_megapixels_billed = true, megapixel_rounding = "ceil", source_url = "https://fal.ai/models/fal-ai/flux-2-pro/edit" }
 avg_cost_usd = 0.03
 url = "https://fal.ai/models/fal-ai/flux-2-pro"
+
+[[providers.fal.endpoints]]
+id = "fal-ai/flux-2-pro"
+input = "text"
+source_url = "https://fal.ai/models/fal-ai/flux-2-pro/api"
+
+[providers.fal.endpoints.parameters]
+"enable_safety_checker" = { "type" = "boolean" }
+"image_size" = { "enum" = [
+  "square_hd",
+  "square",
+  "portrait_4_3",
+  "portrait_16_9",
+  "landscape_4_3",
+  "landscape_16_9",
+] }
+"image_size.height" = { "maximum" = 2560, "type" = "integer", "minimum" = 256, "multiple_of" = 16 }
+"image_size.width" = { "maximum" = 2560, "type" = "integer", "minimum" = 256, "multiple_of" = 16 }
+"output_format" = { "enum" = ["jpeg", "png"], "type" = "string" }
+"prompt" = { "type" = "string" }
+"safety_tolerance" = { "enum" = ["1", "2", "3", "4", "5"], "type" = "string" }
+"seed" = { "type" = "integer" }
+
+[providers.fal.endpoints.image_constraints]
+max_edge = 2560
+min_edge = 256
+max_pixels = 4194304
+step = 16
+
+[[providers.fal.endpoints]]
+id = "fal-ai/flux-2-pro/edit"
+input = "image"
+source_url = "https://fal.ai/models/fal-ai/flux-2-pro/edit/api"
+
+[providers.fal.endpoints.parameters]
+"enable_safety_checker" = { "type" = "boolean" }
+"image_size" = { "enum" = [
+  "auto",
+  "square_hd",
+  "square",
+  "portrait_4_3",
+  "portrait_16_9",
+  "landscape_4_3",
+  "landscape_16_9",
+] }
+"image_size.height" = { "maximum" = 14142, "type" = "integer", "minimum" = 1 }
+"image_size.width" = { "maximum" = 14142, "type" = "integer", "minimum" = 1 }
+"image_urls" = { "type" = "array", "max_items" = 9, "source_url" = "https://fal.ai/models/fal-ai/flux-2-pro/edit" }
+"output_format" = { "enum" = ["jpeg", "png"], "type" = "string" }
+"prompt" = { "type" = "string" }
+"safety_tolerance" = { "enum" = ["1", "2", "3", "4", "5"], "type" = "string" }
+"seed" = { "type" = "integer" }

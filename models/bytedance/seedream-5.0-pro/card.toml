@@ -30,10 +30,6 @@ url = "https://openrouter.ai/bytedance-seed/seedream-5-0-pro"
 references = { id = "bytedance-seed/seedream-5-0-pro", max = 14 }
 
 [providers.fal]
-endpoints = [
-  { id = "bytedance/seedream/v5/pro/edit", input = "image", source_url = "https://fal.ai/models/bytedance/seedream/v5/pro/edit/api" },
-  { id = "bytedance/seedream/v5/pro/text-to-image", input = "text", source_url = "https://fal.ai/models/bytedance/seedream/v5/pro/text-to-image/api" },
-]
 provider = "fal"
 id = "bytedance/seedream/v5/pro/text-to-image"
 pricing = { type = "per_image_flat", usd = 0.0675 }
@@ -44,3 +40,62 @@ url = "https://fal.ai/models/bytedance/seedream/v5/pro/text-to-image"
 min_pixels = 1_048_576
 max_pixels = 4_194_304
 aspect_ratio = { max = 16 }
+
+[[providers.fal.endpoints]]
+id = "bytedance/seedream/v5/pro/edit"
+input = "image"
+source_url = "https://fal.ai/models/bytedance/seedream/v5/pro/edit/api"
+
+[providers.fal.endpoints.parameters]
+"enable_safety_checker" = { "type" = "boolean" }
+"enhance_prompt_mode" = { "enum" = ["standard", "fast"], "type" = "string" }
+"image_size" = { "enum" = [
+  "square_hd",
+  "square",
+  "portrait_4_3",
+  "portrait_16_9",
+  "landscape_4_3",
+  "landscape_16_9",
+  "auto_1K",
+  "auto_2K",
+] }
+"image_size.height" = { "maximum" = 14142, "type" = "integer", "minimum" = 1 }
+"image_size.width" = { "maximum" = 14142, "type" = "integer", "minimum" = 1 }
+"image_urls" = { "type" = "array", "max_items" = 10 }
+"num_images" = { "maximum" = 6, "type" = "integer", "minimum" = 1 }
+"output_format" = { "enum" = ["jpeg", "png"], "type" = "string" }
+"prompt" = { "type" = "string" }
+
+[providers.fal.endpoints.image_constraints]
+max_pixels = 4194304
+min_pixels = 1048576
+aspect_ratio = { "min" = 0.0625, "max" = 16 }
+
+[[providers.fal.endpoints]]
+id = "bytedance/seedream/v5/pro/text-to-image"
+input = "text"
+source_url = "https://fal.ai/models/bytedance/seedream/v5/pro/text-to-image/api"
+
+[providers.fal.endpoints.parameters]
+"enable_safety_checker" = { "type" = "boolean" }
+"enhance_prompt_mode" = { "enum" = ["standard", "fast"], "type" = "string" }
+"image_size" = { "enum" = [
+  "square_hd",
+  "square",
+  "portrait_4_3",
+  "portrait_16_9",
+  "landscape_4_3",
+  "landscape_16_9",
+  "auto_1K",
+  "auto_2K",
+] }
+"image_size.height" = { "maximum" = 14142, "type" = "integer", "minimum" = 1 }
+"image_size.width" = { "maximum" = 14142, "type" = "integer", "minimum" = 1 }
+"num_images" = { "maximum" = 6, "type" = "integer", "minimum" = 1 }
+"output_format" = { "enum" = ["jpeg", "png"], "type" = "string" }
+"prompt" = { "type" = "string" }
+
+[providers.fal.endpoints.image_constraints]
+max_pixels = 4194304
+min_pixels = 1048576
+aspect_ratio = { "min" = 0.0625, "max" = 16 }

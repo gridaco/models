@@ -31,12 +31,75 @@ url = "https://openrouter.ai/google/gemini-3.1-flash-image"
 references = { id = "google/gemini-3.1-flash-image", max = 14 }
 
 [providers.fal]
-endpoints = [
-  { id = "fal-ai/nano-banana-2", input = "text", source_url = "https://fal.ai/models/fal-ai/nano-banana-2/api" },
-  { id = "fal-ai/nano-banana-2/edit", input = "image", source_url = "https://fal.ai/models/fal-ai/nano-banana-2/edit/api" },
-]
 provider = "fal"
 id = "fal-ai/nano-banana-2"
-pricing = { type = "per_image_flat", usd = 0.08 }
+pricing = { type = "per_image_flat", usd = 0.08, resolution_multipliers = { "0.5K" = 0.75, "2K" = 1.5, "4K" = 2 }, web_search_usd = 0.015, high_thinking_usd = 0.002, source_url = "https://fal.ai/models/fal-ai/nano-banana-2" }
 avg_cost_usd = 0.08
 url = "https://fal.ai/models/fal-ai/nano-banana-2"
+
+[[providers.fal.endpoints]]
+id = "fal-ai/nano-banana-2"
+input = "text"
+source_url = "https://fal.ai/models/fal-ai/nano-banana-2/api"
+
+[providers.fal.endpoints.parameters]
+"aspect_ratio" = { "enum" = [
+  "auto",
+  "21:9",
+  "16:9",
+  "3:2",
+  "4:3",
+  "5:4",
+  "1:1",
+  "4:5",
+  "3:4",
+  "2:3",
+  "9:16",
+  "4:1",
+  "1:4",
+  "8:1",
+  "1:8",
+], "type" = "string" }
+"enable_web_search" = { "type" = "boolean" }
+"limit_generations" = { "type" = "boolean" }
+"num_images" = { "minimum" = 1, "maximum" = 4, "type" = "integer" }
+"output_format" = { "enum" = ["jpeg", "png", "webp"], "type" = "string" }
+"prompt" = { "min_length" = 3, "type" = "string", "max_length" = 50000 }
+"resolution" = { "enum" = ["0.5K", "1K", "2K", "4K"], "type" = "string" }
+"safety_tolerance" = { "enum" = ["1", "2", "3", "4", "5", "6"], "type" = "string" }
+"seed" = { "type" = "integer" }
+"system_prompt" = { "type" = "string", "max_length" = 50000 }
+
+[[providers.fal.endpoints]]
+id = "fal-ai/nano-banana-2/edit"
+input = "image"
+source_url = "https://fal.ai/models/fal-ai/nano-banana-2/edit/api"
+
+[providers.fal.endpoints.parameters]
+"aspect_ratio" = { "enum" = [
+  "auto",
+  "21:9",
+  "16:9",
+  "3:2",
+  "4:3",
+  "5:4",
+  "1:1",
+  "4:5",
+  "3:4",
+  "2:3",
+  "9:16",
+  "4:1",
+  "1:4",
+  "8:1",
+  "1:8",
+], "type" = "string" }
+"enable_web_search" = { "type" = "boolean" }
+"image_urls" = { "type" = "array", "max_items" = 14, "source_url" = "https://fal.ai/models/fal-ai/nano-banana-2/edit" }
+"limit_generations" = { "type" = "boolean" }
+"num_images" = { "minimum" = 1, "maximum" = 4, "type" = "integer" }
+"output_format" = { "enum" = ["jpeg", "png", "webp"], "type" = "string" }
+"prompt" = { "min_length" = 3, "type" = "string", "max_length" = 50000 }
+"resolution" = { "enum" = ["0.5K", "1K", "2K", "4K"], "type" = "string" }
+"safety_tolerance" = { "enum" = ["1", "2", "3", "4", "5", "6"], "type" = "string" }
+"seed" = { "type" = "integer" }
+"system_prompt" = { "type" = "string", "max_length" = 50000 }

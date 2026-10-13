@@ -4,8 +4,8 @@ section = "video.models"
 label = "Seedance 2.0"
 short_description = "ByteDance's video model — image-to-video with reference modes, up to 4K, at roughly two-thirds the price of Seedance 2.5."
 vendor = "bytedance"
-aspect_ratios = ["16:9", "9:16", "1:1"]
-min_duration = 5
+aspect_ratios = ["21:9", "16:9", "4:3", "1:1", "3:4", "9:16"]
+min_duration = 4
 max_duration = 15
 audio = true
 speed_label = "slow"
@@ -17,10 +17,6 @@ basis = "model"
 source_url = "https://seed.bytedance.com/en/blog/seedance-2-0-%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83"
 
 [providers.fal]
-endpoints = [
-  { id = "bytedance/seedance-2.0/image-to-video", input = "image", source_url = "https://fal.ai/models/bytedance/seedance-2.0/image-to-video/api" },
-  { id = "bytedance/seedance-2.0/text-to-video", input = "text", source_url = "https://fal.ai/models/bytedance/seedance-2.0/text-to-video/api" },
-]
 provider = "fal"
 id = "bytedance/seedance-2.0/image-to-video"
 input = "image"
@@ -41,3 +37,76 @@ url = "https://openrouter.ai/bytedance/seedance-2.0"
 [providers.openrouter.pricing]
 type = "per_second"
 usd_per_second = { 480p = { audio = 0.06726 }, 720p = { audio = 0.06726 } }
+
+[[providers.fal.endpoints]]
+id = "bytedance/seedance-2.0/image-to-video"
+input = "image"
+source_url = "https://fal.ai/models/bytedance/seedance-2.0/image-to-video/api"
+
+[providers.fal.endpoints.parameters]
+"aspect_ratio" = { "type" = "string", "enum" = [
+  "auto",
+  "21:9",
+  "16:9",
+  "4:3",
+  "1:1",
+  "3:4",
+  "9:16",
+] }
+"bitrate_mode" = { "enum" = ["standard", "high"], "type" = "string" }
+"codec" = { "enum" = ["auto", "H264", "H265"], "type" = "string" }
+"duration" = { "enum" = [
+  "auto",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "11",
+  "12",
+  "13",
+  "14",
+  "15",
+], "type" = "string" }
+"generate_audio" = { "type" = "boolean" }
+"image_url" = { "type" = "string" }
+"prompt" = { "type" = "string" }
+"resolution" = { "enum" = ["480p", "720p", "1080p", "4k"], "type" = "string" }
+
+[[providers.fal.endpoints]]
+id = "bytedance/seedance-2.0/text-to-video"
+input = "text"
+source_url = "https://fal.ai/models/bytedance/seedance-2.0/text-to-video/api"
+
+[providers.fal.endpoints.parameters]
+"aspect_ratio" = { "type" = "string", "enum" = [
+  "auto",
+  "21:9",
+  "16:9",
+  "4:3",
+  "1:1",
+  "3:4",
+  "9:16",
+] }
+"bitrate_mode" = { "enum" = ["standard", "high"], "type" = "string" }
+"codec" = { "enum" = ["auto", "H264", "H265"], "type" = "string" }
+"duration" = { "enum" = [
+  "auto",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "11",
+  "12",
+  "13",
+  "14",
+  "15",
+], "type" = "string" }
+"generate_audio" = { "type" = "boolean" }
+"prompt" = { "type" = "string" }
+"resolution" = { "enum" = ["480p", "720p", "1080p", "4k"], "type" = "string" }

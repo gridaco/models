@@ -33,8 +33,50 @@ references = { id = "openai/gpt-image-2", max = 16 }
 
 [providers.fal]
 endpoints = [
-  { id = "openai/gpt-image-2", input = "text", source_url = "https://fal.ai/models/openai/gpt-image-2/api" },
-  { id = "openai/gpt-image-2/edit", input = "image", source_url = "https://fal.ai/models/openai/gpt-image-2/edit/api" },
+  { "id" = "openai/gpt-image-2", "input" = "text", "source_url" = "https://fal.ai/models/openai/gpt-image-2/api", "parameters" = { "prompt" = { "type" = "string", "min_length" = 2, "max_length" = 32000 }, "num_images" = { "type" = "integer", "minimum" = 1, "maximum" = 4 }, "quality" = { "type" = "string", "enum" = [
+    "auto",
+    "low",
+    "medium",
+    "high",
+  ] }, "background" = { "type" = "string", "enum" = [
+    "auto",
+    "transparent",
+    "opaque",
+  ] }, "output_format" = { "type" = "string", "enum" = [
+    "jpeg",
+    "png",
+    "webp",
+  ] }, "image_size" = { "enum" = [
+    "square_hd",
+    "square",
+    "portrait_4_3",
+    "portrait_16_9",
+    "landscape_4_3",
+    "landscape_16_9",
+    "auto",
+  ] }, "image_size.width" = { "type" = "integer", "minimum" = 1, "maximum" = 3840, "multiple_of" = 16 }, "image_size.height" = { "type" = "integer", "minimum" = 1, "maximum" = 3840, "multiple_of" = 16 } }, "image_constraints" = { "min_pixels" = 655360, "max_pixels" = 8294400, "step" = 16, "max_edge" = 3840, "aspect_ratio" = { "max" = 3 } } },
+  { "id" = "openai/gpt-image-2/edit", "input" = "image", "source_url" = "https://fal.ai/models/openai/gpt-image-2/edit/api", "parameters" = { "prompt" = { "type" = "string", "min_length" = 2, "max_length" = 32000 }, "num_images" = { "type" = "integer", "minimum" = 1, "maximum" = 4 }, "quality" = { "type" = "string", "enum" = [
+    "auto",
+    "low",
+    "medium",
+    "high",
+  ] }, "background" = { "type" = "string", "enum" = [
+    "auto",
+    "transparent",
+    "opaque",
+  ] }, "output_format" = { "type" = "string", "enum" = [
+    "jpeg",
+    "png",
+    "webp",
+  ] }, "image_urls" = { "type" = "array", "max_items" = 16 }, "image_size" = { "enum" = [
+    "square_hd",
+    "square",
+    "portrait_4_3",
+    "portrait_16_9",
+    "landscape_4_3",
+    "landscape_16_9",
+    "auto",
+  ] }, "image_size.width" = { "type" = "integer", "minimum" = 1, "maximum" = 3840, "multiple_of" = 16 }, "image_size.height" = { "type" = "integer", "minimum" = 1, "maximum" = 3840, "multiple_of" = 16 } }, "image_constraints" = { "min_pixels" = 655360, "max_pixels" = 8294400, "step" = 16, "max_edge" = 3840, "aspect_ratio" = { "max" = 3 } } },
 ]
 provider = "fal"
 id = "openai/gpt-image-2"
@@ -42,8 +84,15 @@ avg_cost_usd = 0.053
 url = "https://fal.ai/models/openai/gpt-image-2"
 
 [providers.fal.pricing]
-type = "per_image_tiered"
-tiers = { "low/1024x1024" = 0.006, "medium/1024x1024" = 0.053, "high/1024x1024" = 0.211 }
+source_url = "https://fal.ai/models/openai/gpt-image-2"
+rounding_usd = 0.0001
+type = "per_token"
+input = 5
+cached_input = 1.25
+image_input = 8
+cached_image_input = 2
+text_output = 10
+output = 30
 
 [constraints]
 step = 16
@@ -72,3 +121,23 @@ cached_input = 1.25
 image_input = 8
 cached_image_input = 2
 output = 30
+
+[output_token_calculator]
+source_url = "https://developers.openai.com/api/docs/guides/image-generation"
+source_js_url = "https://developers.openai.com/_astro/GptImageTokenCalculator.react.DukR73TZ.js"
+area_offset = 2000000
+area_divisor = 4000000
+short_axis_rounding = "nearest_ties_even"
+token_rounding = "ceil"
+quality_axes = { "low" = 16, "medium" = 48, "high" = 96 }
+examples = [
+  { "width" = 1024, "height" = 1024, "quality" = "low", "output_tokens" = 196, "usd" = 0.00588, "usd_precision" = 5, "source_url" = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { "width" = 1024, "height" = 1536, "quality" = "low", "output_tokens" = 158, "usd" = 0.00474, "usd_precision" = 5, "source_url" = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { "width" = 1536, "height" = 1024, "quality" = "low", "output_tokens" = 158, "usd" = 0.00474, "usd_precision" = 5, "source_url" = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { "width" = 1024, "height" = 1024, "quality" = "medium", "output_tokens" = 1756, "usd" = 0.05268, "usd_precision" = 5, "source_url" = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { "width" = 1024, "height" = 1536, "quality" = "medium", "output_tokens" = 1372, "usd" = 0.04116, "usd_precision" = 5, "source_url" = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { "width" = 1536, "height" = 1024, "quality" = "medium", "output_tokens" = 1372, "usd" = 0.04116, "usd_precision" = 5, "source_url" = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { "width" = 1024, "height" = 1024, "quality" = "high", "output_tokens" = 7024, "usd" = 0.21072, "usd_precision" = 5, "source_url" = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { "width" = 1024, "height" = 1536, "quality" = "high", "output_tokens" = 5488, "usd" = 0.16464, "usd_precision" = 5, "source_url" = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { "width" = 1536, "height" = 1024, "quality" = "high", "output_tokens" = 5488, "usd" = 0.16464, "usd_precision" = 5, "source_url" = "https://developers.openai.com/api/docs/guides/image-generation" },
+]

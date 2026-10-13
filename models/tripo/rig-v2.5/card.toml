@@ -23,3 +23,22 @@ source_url = "https://developers.tripo3d.ai/en/pricing"
 [release]
 basis = "provider_endpoint"
 source_url = "https://developers.tripo3d.ai/en/docs/animations-rig"
+
+[[endpoints]]
+id = "/animations/rig"
+input = "task"
+source_url = "https://developers.tripo3d.ai/en/docs/animations-rig"
+
+[endpoints.parameters]
+"input" = { "type" = "string" }
+"model" = { "type" = "string", "enum" = ["v2.5-20260210"] }
+"out_format" = { "type" = "string", "enum" = ["glb", "fbx"] }
+"rig_type" = { "type" = "string", "enum" = [
+  "quadruped",
+  "hexapod",
+  "octopod",
+  "avian",
+  "serpentine",
+  "aquatic",
+] }
+"spec" = { "type" = "string", "enum" = ["tripo", "mixamo"] }

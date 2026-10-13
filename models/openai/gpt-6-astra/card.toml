@@ -32,3 +32,42 @@ url = "https://ai-gateway.vercel.sh/v1/models"
 endpoints = [
   { id = "openai/gpt-6-astra", input = "text", source_url = "https://ai-gateway.vercel.sh/v1/models" },
 ]
+
+[providers.vercel.token_pricing]
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+unit = "usd_per_token"
+input = "0.00001"
+output = "0.00005"
+input_cache_read = "0.000001"
+input_cache_write = "0.0000125"
+tiers = [
+  { "meter" = "input", "minimum_input_tokens" = 0, "usd_per_token" = "0.00001", "maximum_input_tokens" = 272001 },
+  { "meter" = "input", "minimum_input_tokens" = 272001, "usd_per_token" = "0.00002" },
+  { "meter" = "output", "minimum_input_tokens" = 0, "usd_per_token" = "0.00005", "maximum_input_tokens" = 272001 },
+  { "meter" = "output", "minimum_input_tokens" = 272001, "usd_per_token" = "0.000075" },
+  { "meter" = "input_cache_read", "minimum_input_tokens" = 0, "usd_per_token" = "0.000001", "maximum_input_tokens" = 272001 },
+  { "meter" = "input_cache_read", "minimum_input_tokens" = 272001, "usd_per_token" = "0.000002" },
+  { "meter" = "input_cache_write", "minimum_input_tokens" = 0, "usd_per_token" = "0.0000125", "maximum_input_tokens" = 272001 },
+  { "meter" = "input_cache_write", "minimum_input_tokens" = 272001, "usd_per_token" = "0.000025" },
+]
+
+[providers.vercel.capabilities]
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.vercel.limits]
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+context_tokens = 1050000
+max_output_tokens = 128000
+
+[vision_tokenization]
+source_url = "https://developers.openai.com/api/docs/guides/images-vision"
+patch_size_px = 32
+token_multiplier = 1.2
+token_rounding = "ceil"
+maximum_patch_count = 30000
+detail_patch_budgets = { "high" = 2500 }
+detail_maximum_edges = { "low" = 512, "high" = 65535, "original" = 65535, "auto" = 65535 }

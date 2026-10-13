@@ -20,3 +20,40 @@ source_url = "https://huggingface.co/microsoft/TRELLIS.2-4B"
 type = "per_generation_by_resolution"
 default_resolution = "1024"
 usd_by_resolution = { 512 = 0.25, 1024 = 0.3, 1536 = 0.35 }
+
+[[endpoints]]
+id = "fal-ai/trellis-2"
+input = "image"
+source_url = "https://fal.ai/models/fal-ai/trellis-2/api"
+
+[endpoints.parameters]
+"decimation_target" = { "type" = "integer", "maximum" = 2000000, "minimum" = 5000 }
+"image_url" = { "type" = "string" }
+"remesh" = { "type" = "boolean" }
+"remesh_band" = { "type" = "number", "maximum" = 4, "minimum" = 0 }
+"remesh_project" = { "type" = "number", "maximum" = 1, "minimum" = 0 }
+"resolution" = { "enum" = [512, 1024, 1536], "type" = "integer" }
+"seed" = { "type" = "integer" }
+"shape_slat_guidance_interval_end" = { "type" = "number", "maximum" = 1, "minimum" = 0 }
+"shape_slat_guidance_interval_start" = { "type" = "number", "maximum" = 1, "minimum" = 0 }
+"shape_slat_guidance_rescale" = { "type" = "number", "maximum" = 1, "minimum" = 0 }
+"shape_slat_guidance_strength" = { "type" = "number", "maximum" = 10, "minimum" = 0 }
+"shape_slat_rescale_t" = { "type" = "number", "maximum" = 6, "minimum" = 1 }
+"shape_slat_sampling_steps" = { "type" = "integer", "maximum" = 50, "minimum" = 1 }
+"ss_guidance_interval_end" = { "type" = "number", "maximum" = 1, "minimum" = 0 }
+"ss_guidance_interval_start" = { "type" = "number", "maximum" = 1, "minimum" = 0 }
+"ss_guidance_rescale" = { "type" = "number", "maximum" = 1, "minimum" = 0 }
+"ss_guidance_strength" = { "type" = "number", "maximum" = 10, "minimum" = 0 }
+"ss_rescale_t" = { "type" = "number", "maximum" = 6, "minimum" = 1 }
+"ss_sampling_steps" = { "type" = "integer", "maximum" = 50, "minimum" = 1 }
+"tex_slat_guidance_interval_end" = { "type" = "number", "maximum" = 1, "minimum" = 0 }
+"tex_slat_guidance_interval_start" = { "type" = "number", "maximum" = 1, "minimum" = 0 }
+"tex_slat_guidance_rescale" = { "type" = "number", "maximum" = 1, "minimum" = 0 }
+"tex_slat_guidance_strength" = { "type" = "number", "maximum" = 10, "minimum" = 0 }
+"tex_slat_rescale_t" = { "type" = "number", "maximum" = 6, "minimum" = 1 }
+"tex_slat_sampling_steps" = { "type" = "integer", "maximum" = 50, "minimum" = 1 }
+"texture_size" = { "enum" = [1024, 2048, 4096], "type" = "integer" }
+"uv_unwrap_angle_threshold_deg" = { "type" = "number", "maximum" = 180, "minimum" = 0 }
+"uv_unwrap_global_iterations" = { "type" = "integer", "maximum" = 10, "minimum" = 1 }
+"uv_unwrap_refine_iterations" = { "type" = "integer", "maximum" = 10, "minimum" = 0 }
+"uv_unwrap_smooth_strength" = { "type" = "number", "maximum" = 10, "minimum" = 0 }

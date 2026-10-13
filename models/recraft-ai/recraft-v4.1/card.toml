@@ -31,11 +31,27 @@ url = "https://openrouter.ai/recraft/recraft-v4.1"
 references = { id = "recraft/recraft-v4.1", max = 1 }
 
 [providers.fal]
-endpoints = [
-  { id = "fal-ai/recraft/v4.1/text-to-image", input = "text", source_url = "https://fal.ai/models/fal-ai/recraft/v4.1/text-to-image/api" },
-]
 provider = "fal"
 id = "fal-ai/recraft/v4.1/text-to-image"
 pricing = { type = "per_image_flat", usd = 0.035 }
 avg_cost_usd = 0.035
 url = "https://fal.ai/models/fal-ai/recraft/v4.1/text-to-image"
+
+[[providers.fal.endpoints]]
+id = "fal-ai/recraft/v4.1/text-to-image"
+input = "text"
+source_url = "https://fal.ai/models/fal-ai/recraft/v4.1/text-to-image/api"
+
+[providers.fal.endpoints.parameters]
+"enable_safety_checker" = { "type" = "boolean" }
+"image_size" = { "enum" = [
+  "square_hd",
+  "square",
+  "portrait_4_3",
+  "portrait_16_9",
+  "landscape_4_3",
+  "landscape_16_9",
+] }
+"image_size.height" = { "maximum" = 14142, "type" = "integer", "minimum" = 1 }
+"image_size.width" = { "maximum" = 14142, "type" = "integer", "minimum" = 1 }
+"prompt" = { "min_length" = 1, "type" = "string", "max_length" = 10000 }

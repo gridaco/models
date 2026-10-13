@@ -46,10 +46,6 @@ type = "per_image_tiered"
 "medium/2048x2048" = 0.08
 
 [providers.fal]
-endpoints = [
-  { id = "xai/grok-imagine-image/v2.0/edit", input = "image", source_url = "https://fal.ai/models/xai/grok-imagine-image/v2.0/edit/api" },
-  { id = "xai/grok-imagine-image/v2.0/text-to-image", input = "text", source_url = "https://fal.ai/models/xai/grok-imagine-image/v2.0/text-to-image/api" },
-]
 provider = "fal"
 id = "xai/grok-imagine-image/v2.0/text-to-image"
 avg_cost_usd = 0.06
@@ -72,3 +68,61 @@ type = "per_image_tiered"
 "medium/1024x1024" = 0.06
 "low/2048x2048" = 0.06
 "medium/2048x2048" = 0.08
+
+[[providers.fal.endpoints]]
+id = "xai/grok-imagine-image/v2.0/edit"
+input = "image"
+source_url = "https://fal.ai/models/xai/grok-imagine-image/v2.0/edit/api"
+
+[providers.fal.endpoints.parameters]
+"aspect_ratio" = { "type" = "string", "enum" = [
+  "auto",
+  "2:1",
+  "20:9",
+  "19.5:9",
+  "16:9",
+  "4:3",
+  "3:2",
+  "1:1",
+  "2:3",
+  "3:4",
+  "9:16",
+  "9:19.5",
+  "9:20",
+  "1:2",
+] }
+"enable_safety_checker" = { "type" = "boolean" }
+"image_urls" = { "type" = "array", "max_items" = 5 }
+"num_images" = { "maximum" = 4, "minimum" = 1, "type" = "integer" }
+"output_format" = { "type" = "string", "enum" = ["jpeg", "png", "webp"] }
+"prompt" = { "max_length" = 8000, "type" = "string" }
+"quality" = { "type" = "string", "enum" = ["low", "medium"] }
+"resolution" = { "type" = "string", "enum" = ["1k", "2k"] }
+
+[[providers.fal.endpoints]]
+id = "xai/grok-imagine-image/v2.0/text-to-image"
+input = "text"
+source_url = "https://fal.ai/models/xai/grok-imagine-image/v2.0/text-to-image/api"
+
+[providers.fal.endpoints.parameters]
+"aspect_ratio" = { "type" = "string", "enum" = [
+  "2:1",
+  "20:9",
+  "19.5:9",
+  "16:9",
+  "4:3",
+  "3:2",
+  "1:1",
+  "2:3",
+  "3:4",
+  "9:16",
+  "9:19.5",
+  "9:20",
+  "1:2",
+] }
+"enable_safety_checker" = { "type" = "boolean" }
+"num_images" = { "maximum" = 4, "minimum" = 1, "type" = "integer" }
+"output_format" = { "type" = "string", "enum" = ["jpeg", "png", "webp"] }
+"prompt" = { "max_length" = 8000, "type" = "string" }
+"quality" = { "type" = "string", "enum" = ["low", "medium"] }
+"resolution" = { "type" = "string", "enum" = ["1k", "2k"] }
