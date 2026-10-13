@@ -4922,6 +4922,1007 @@
           "reason": "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."
         }
       }
+    },
+    "openai/gpt-6-luna": {
+      "id": "openai/gpt-6-luna",
+      "vendor": "openai",
+      "reference_provider": "openai",
+      "label": "GPT-6 Luna",
+      "multimodal": true,
+      "image_input_mimes": [
+        "image/png",
+        "image/jpeg",
+        "image/webp",
+        "image/gif"
+      ],
+      "tool_call": true,
+      "context_window": 1050000,
+      "output_limit": 128000,
+      "release": {
+        "date": "2026-09-22",
+        "basis": "model",
+        "source_url": "https://openai.com/index/introducing-gpt-6-sol-and-luna/"
+      },
+      "cost": {
+        "input": 0.1,
+        "output": 0.5,
+        "cache_read": 0.01,
+        "cache_write": 0.125,
+        "long_context": {
+          "input_tokens_above": 272000,
+          "input_multiplier": 2,
+          "output_multiplier": 1.5
+        }
+      },
+      "providers": {
+        "openai": {
+          "provider": "openai",
+          "id": "gpt-6-luna",
+          "url": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+          "source_url": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+          "qualifications": [
+            {
+              "source_url": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+              "notes": "Responses supports function calling. Chat Completions supports function calling only when reasoning_effort is explicitly none; the default reasoning effort is medium."
+            },
+            {
+              "source_url": "https://developers.openai.com/api/docs/guides/images-vision",
+              "notes": "Image input is supported, but the published patch/tile multiplier and detail-level sizing tables do not name this exact model. No vision-tokenization formula is inferred from other models."
+            }
+          ],
+          "token_pricing": {
+            "source_url": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+            "unit": "usd_per_token",
+            "scope": "Standard synchronous global token rates; optional tools, regional processing and alternate service tiers are excluded. Cache writes use the default duration.",
+            "input": "0.0000001",
+            "output": "0.0000005",
+            "input_cache_read": "0.00000001",
+            "input_cache_write": "0.000000125",
+            "tiers": [
+              {
+                "meter": "input",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.0000001"
+              },
+              {
+                "meter": "input",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.0000002"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.0000005"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.00000075"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.00000001"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.00000002"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.000000125"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.00000025"
+              }
+            ]
+          },
+          "capabilities": {
+            "source_url": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true,
+            "streaming": true
+          },
+          "limits": {
+            "source_url": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+            "context_tokens": 1050000,
+            "max_output_tokens": 128000
+          },
+          "endpoints": [
+            {
+              "id": "gpt-6-luna",
+              "input": "text",
+              "source_url": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+              "interface": "responses",
+              "capabilities": {
+                "source_url": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+                "image_input": true,
+                "tools": true,
+                "reasoning": true,
+                "structured_output": true,
+                "streaming": true
+              },
+              "parameters": {
+                "reasoning.effort": {
+                  "type": "string",
+                  "enum": [
+                    "none",
+                    "low",
+                    "medium",
+                    "high",
+                    "xhigh",
+                    "max"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "openai/gpt-6-luna",
+          "url": "https://openrouter.ai/openai/gpt-6-luna",
+          "source_url": "https://openrouter.ai/openai/gpt-6-luna",
+          "qualifications": [
+            {
+              "source_url": "https://openrouter.ai/api/v1/models",
+              "notes": "The provider reports its long-context override at minimum 272000 prompt tokens. This binding preserves that threshold rather than substituting another provider's 272001 boundary."
+            }
+          ],
+          "token_pricing": {
+            "source_url": "https://openrouter.ai/openai/gpt-6-luna",
+            "unit": "usd_per_token",
+            "scope": "Standard synchronous global token rates; optional tools, regional processing and alternate service tiers are excluded. Cache writes use the default duration.",
+            "input": "0.0000001",
+            "output": "0.0000005",
+            "input_cache_read": "0.00000001",
+            "input_cache_write": "0.000000125",
+            "tiers": [
+              {
+                "meter": "input",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.0000001"
+              },
+              {
+                "meter": "input",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.0000002"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.0000005"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.00000075"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.00000001"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.00000002"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.000000125"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.00000025"
+              }
+            ]
+          },
+          "capabilities": {
+            "source_url": "https://openrouter.ai/openai/gpt-6-luna",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true,
+            "streaming": true
+          },
+          "limits": {
+            "source_url": "https://openrouter.ai/openai/gpt-6-luna",
+            "context_tokens": 1050000,
+            "max_output_tokens": 128000
+          },
+          "endpoints": [
+            {
+              "id": "openai/gpt-6-luna",
+              "input": "text",
+              "source_url": "https://openrouter.ai/openai/gpt-6-luna"
+            }
+          ]
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "openai/gpt-6-luna",
+          "url": "https://vercel.com/ai-gateway/models/gpt-6-luna",
+          "source_url": "https://vercel.com/ai-gateway/models/gpt-6-luna",
+          "token_pricing": {
+            "source_url": "https://vercel.com/ai-gateway/models/gpt-6-luna",
+            "unit": "usd_per_token",
+            "scope": "Standard synchronous global token rates; optional tools, regional processing and alternate service tiers are excluded. Cache writes use the default duration.",
+            "input": "0.0000001",
+            "output": "0.0000005",
+            "input_cache_read": "0.00000001",
+            "input_cache_write": "0.000000125",
+            "tiers": [
+              {
+                "meter": "input",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.0000001"
+              },
+              {
+                "meter": "input",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.0000002"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.0000005"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.00000075"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.00000001"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.00000002"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.000000125"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.00000025"
+              }
+            ]
+          },
+          "capabilities": {
+            "source_url": "https://vercel.com/ai-gateway/models/gpt-6-luna",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true,
+            "streaming": true
+          },
+          "limits": {
+            "source_url": "https://vercel.com/ai-gateway/models/gpt-6-luna",
+            "context_tokens": 1050000,
+            "max_output_tokens": 128000
+          },
+          "endpoints": [
+            {
+              "id": "openai/gpt-6-luna",
+              "input": "text",
+              "source_url": "https://vercel.com/ai-gateway/models/gpt-6-luna"
+            }
+          ]
+        }
+      },
+      "provider_coverage": {
+        "openai": {
+          "disposition": "listed",
+          "source_url": "https://developers.openai.com/api/docs/models/gpt-6-luna"
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/openai/gpt-6-luna"
+        },
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/gpt-6-luna"
+        },
+        "fal": {
+          "disposition": "excluded",
+          "source_url": "https://fal.ai/models",
+          "reason": "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."
+        }
+      }
+    },
+    "openai/gpt-6-sol": {
+      "id": "openai/gpt-6-sol",
+      "vendor": "openai",
+      "reference_provider": "openai",
+      "label": "GPT-6 Sol",
+      "multimodal": true,
+      "image_input_mimes": [
+        "image/png",
+        "image/jpeg",
+        "image/webp",
+        "image/gif"
+      ],
+      "tool_call": true,
+      "context_window": 1050000,
+      "output_limit": 128000,
+      "release": {
+        "date": "2026-09-22",
+        "basis": "model",
+        "source_url": "https://openai.com/index/introducing-gpt-6-sol-and-luna/"
+      },
+      "cost": {
+        "input": 2,
+        "output": 10,
+        "cache_read": 0.2,
+        "cache_write": 2.5,
+        "long_context": {
+          "input_tokens_above": 272000,
+          "input_multiplier": 2,
+          "output_multiplier": 1.5
+        }
+      },
+      "providers": {
+        "openai": {
+          "provider": "openai",
+          "id": "gpt-6-sol",
+          "url": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+          "source_url": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+          "qualifications": [
+            {
+              "source_url": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+              "notes": "Responses supports function calling. Chat Completions supports function calling only when reasoning_effort is explicitly none; the default reasoning effort is medium."
+            },
+            {
+              "source_url": "https://developers.openai.com/api/docs/guides/images-vision",
+              "notes": "Image input is supported, but the published patch/tile multiplier and detail-level sizing tables do not name this exact model. No vision-tokenization formula is inferred from other models."
+            }
+          ],
+          "token_pricing": {
+            "source_url": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+            "unit": "usd_per_token",
+            "scope": "Standard synchronous global token rates; optional tools, regional processing and alternate service tiers are excluded. Cache writes use the default duration.",
+            "input": "0.000002",
+            "output": "0.00001",
+            "input_cache_read": "0.0000002",
+            "input_cache_write": "0.0000025",
+            "tiers": [
+              {
+                "meter": "input",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.000002"
+              },
+              {
+                "meter": "input",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.000004"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.00001"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.000015"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.0000002"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.0000004"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.0000025"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.000005"
+              }
+            ]
+          },
+          "capabilities": {
+            "source_url": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true,
+            "streaming": true
+          },
+          "limits": {
+            "source_url": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+            "context_tokens": 1050000,
+            "max_output_tokens": 128000
+          },
+          "endpoints": [
+            {
+              "id": "gpt-6-sol",
+              "input": "text",
+              "source_url": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+              "interface": "responses",
+              "capabilities": {
+                "source_url": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+                "image_input": true,
+                "tools": true,
+                "reasoning": true,
+                "structured_output": true,
+                "streaming": true
+              },
+              "parameters": {
+                "reasoning.effort": {
+                  "type": "string",
+                  "enum": [
+                    "none",
+                    "low",
+                    "medium",
+                    "high",
+                    "xhigh",
+                    "max"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "openai/gpt-6-sol",
+          "url": "https://openrouter.ai/openai/gpt-6-sol",
+          "source_url": "https://openrouter.ai/openai/gpt-6-sol",
+          "qualifications": [
+            {
+              "source_url": "https://openrouter.ai/api/v1/models",
+              "notes": "The provider reports its long-context override at minimum 272000 prompt tokens. This binding preserves that threshold rather than substituting another provider's 272001 boundary."
+            }
+          ],
+          "token_pricing": {
+            "source_url": "https://openrouter.ai/openai/gpt-6-sol",
+            "unit": "usd_per_token",
+            "scope": "Standard synchronous global token rates; optional tools, regional processing and alternate service tiers are excluded. Cache writes use the default duration.",
+            "input": "0.000002",
+            "output": "0.00001",
+            "input_cache_read": "0.0000002",
+            "input_cache_write": "0.0000025",
+            "tiers": [
+              {
+                "meter": "input",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.000002"
+              },
+              {
+                "meter": "input",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.000004"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.00001"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.000015"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.0000002"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.0000004"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.0000025"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.000005"
+              }
+            ]
+          },
+          "capabilities": {
+            "source_url": "https://openrouter.ai/openai/gpt-6-sol",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true,
+            "streaming": true
+          },
+          "limits": {
+            "source_url": "https://openrouter.ai/openai/gpt-6-sol",
+            "context_tokens": 1050000,
+            "max_output_tokens": 128000
+          },
+          "endpoints": [
+            {
+              "id": "openai/gpt-6-sol",
+              "input": "text",
+              "source_url": "https://openrouter.ai/openai/gpt-6-sol"
+            }
+          ]
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "openai/gpt-6-sol",
+          "url": "https://vercel.com/ai-gateway/models/gpt-6-sol",
+          "source_url": "https://vercel.com/ai-gateway/models/gpt-6-sol",
+          "token_pricing": {
+            "source_url": "https://vercel.com/ai-gateway/models/gpt-6-sol",
+            "unit": "usd_per_token",
+            "scope": "Standard synchronous global token rates; optional tools, regional processing and alternate service tiers are excluded. Cache writes use the default duration.",
+            "input": "0.000002",
+            "output": "0.00001",
+            "input_cache_read": "0.0000002",
+            "input_cache_write": "0.0000025",
+            "tiers": [
+              {
+                "meter": "input",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.000002"
+              },
+              {
+                "meter": "input",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.000004"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.00001"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.000015"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.0000002"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.0000004"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.0000025"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.000005"
+              }
+            ]
+          },
+          "capabilities": {
+            "source_url": "https://vercel.com/ai-gateway/models/gpt-6-sol",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true,
+            "streaming": true
+          },
+          "limits": {
+            "source_url": "https://vercel.com/ai-gateway/models/gpt-6-sol",
+            "context_tokens": 1050000,
+            "max_output_tokens": 128000
+          },
+          "endpoints": [
+            {
+              "id": "openai/gpt-6-sol",
+              "input": "text",
+              "source_url": "https://vercel.com/ai-gateway/models/gpt-6-sol"
+            }
+          ]
+        }
+      },
+      "provider_coverage": {
+        "openai": {
+          "disposition": "listed",
+          "source_url": "https://developers.openai.com/api/docs/models/gpt-6-sol"
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/openai/gpt-6-sol"
+        },
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/gpt-6-sol"
+        },
+        "fal": {
+          "disposition": "excluded",
+          "source_url": "https://fal.ai/models",
+          "reason": "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."
+        }
+      }
+    },
+    "openai/gpt-6.1-sol": {
+      "id": "openai/gpt-6.1-sol",
+      "vendor": "openai",
+      "reference_provider": "openai",
+      "label": "GPT-6.1 Sol",
+      "multimodal": true,
+      "image_input_mimes": [
+        "image/png",
+        "image/jpeg",
+        "image/webp",
+        "image/gif"
+      ],
+      "tool_call": true,
+      "context_window": 1050000,
+      "output_limit": 128000,
+      "release": {
+        "date": "2026-09-29",
+        "basis": "model",
+        "source_url": "https://openai.com/index/devday-2026-recap/"
+      },
+      "cost": {
+        "input": 2,
+        "output": 10,
+        "cache_read": 0.1,
+        "cache_write": 2.5,
+        "long_context": {
+          "input_tokens_above": 272000,
+          "input_multiplier": 2,
+          "output_multiplier": 1.5
+        }
+      },
+      "providers": {
+        "openai": {
+          "provider": "openai",
+          "id": "gpt-6.1-sol",
+          "url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+          "source_url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+          "qualifications": [
+            {
+              "source_url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+              "notes": "Responses supports function calling. Chat Completions does not support tool calling. Reasoning none and minimal are not supported."
+            },
+            {
+              "source_url": "https://developers.openai.com/api/docs/guides/images-vision",
+              "notes": "Image input is supported, but the published patch/tile multiplier and detail-level sizing tables do not name this exact model. No vision-tokenization formula is inferred from other models."
+            }
+          ],
+          "token_pricing": {
+            "source_url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+            "unit": "usd_per_token",
+            "scope": "Standard synchronous global token rates; optional tools, regional processing and alternate service tiers are excluded. Cache writes use the default duration.",
+            "input": "0.000002",
+            "output": "0.00001",
+            "input_cache_read": "0.0000001",
+            "input_cache_write": "0.0000025",
+            "tiers": [
+              {
+                "meter": "input",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.000002"
+              },
+              {
+                "meter": "input",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.000004"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.00001"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.000015"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.0000001"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.0000002"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.0000025"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.000005"
+              }
+            ]
+          },
+          "capabilities": {
+            "source_url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true,
+            "streaming": true
+          },
+          "limits": {
+            "source_url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+            "context_tokens": 1050000,
+            "max_output_tokens": 128000
+          },
+          "endpoints": [
+            {
+              "id": "gpt-6.1-sol",
+              "input": "text",
+              "source_url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+              "interface": "responses",
+              "capabilities": {
+                "source_url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+                "image_input": true,
+                "tools": true,
+                "reasoning": true,
+                "structured_output": true,
+                "streaming": true
+              },
+              "parameters": {
+                "reasoning.effort": {
+                  "type": "string",
+                  "enum": [
+                    "low",
+                    "medium",
+                    "high",
+                    "xhigh",
+                    "max"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "openai/gpt-6.1-sol",
+          "url": "https://openrouter.ai/openai/gpt-6.1-sol",
+          "source_url": "https://openrouter.ai/openai/gpt-6.1-sol",
+          "qualifications": [
+            {
+              "source_url": "https://openrouter.ai/api/v1/models",
+              "notes": "The provider reports its long-context override at minimum 272000 prompt tokens. This binding preserves that threshold rather than substituting another provider's 272001 boundary."
+            }
+          ],
+          "token_pricing": {
+            "source_url": "https://openrouter.ai/openai/gpt-6.1-sol",
+            "unit": "usd_per_token",
+            "scope": "Standard synchronous global token rates; optional tools, regional processing and alternate service tiers are excluded. Cache writes use the default duration.",
+            "input": "0.000002",
+            "output": "0.00001",
+            "input_cache_read": "0.0000001",
+            "input_cache_write": "0.0000025",
+            "tiers": [
+              {
+                "meter": "input",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.000002"
+              },
+              {
+                "meter": "input",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.000004"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.00001"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.000015"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.0000001"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.0000002"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.0000025"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.000005"
+              }
+            ]
+          },
+          "capabilities": {
+            "source_url": "https://openrouter.ai/openai/gpt-6.1-sol",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true,
+            "streaming": true
+          },
+          "limits": {
+            "source_url": "https://openrouter.ai/openai/gpt-6.1-sol",
+            "context_tokens": 1050000,
+            "max_output_tokens": 128000
+          },
+          "endpoints": [
+            {
+              "id": "openai/gpt-6.1-sol",
+              "input": "text",
+              "source_url": "https://openrouter.ai/openai/gpt-6.1-sol"
+            }
+          ]
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "openai/gpt-6.1-sol",
+          "url": "https://vercel.com/ai-gateway/models/gpt-6.1-sol",
+          "source_url": "https://vercel.com/ai-gateway/models/gpt-6.1-sol",
+          "token_pricing": {
+            "source_url": "https://vercel.com/ai-gateway/models/gpt-6.1-sol",
+            "unit": "usd_per_token",
+            "scope": "Standard synchronous global token rates; optional tools, regional processing and alternate service tiers are excluded. Cache writes use the default duration.",
+            "input": "0.000002",
+            "output": "0.00001",
+            "input_cache_read": "0.0000001",
+            "input_cache_write": "0.0000025",
+            "tiers": [
+              {
+                "meter": "input",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.000002"
+              },
+              {
+                "meter": "input",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.000004"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.00001"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.000015"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.0000001"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.0000002"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.0000025"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.000005"
+              }
+            ]
+          },
+          "capabilities": {
+            "source_url": "https://vercel.com/ai-gateway/models/gpt-6.1-sol",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true,
+            "streaming": true
+          },
+          "limits": {
+            "source_url": "https://vercel.com/ai-gateway/models/gpt-6.1-sol",
+            "context_tokens": 1050000,
+            "max_output_tokens": 128000
+          },
+          "endpoints": [
+            {
+              "id": "openai/gpt-6.1-sol",
+              "input": "text",
+              "source_url": "https://vercel.com/ai-gateway/models/gpt-6.1-sol"
+            }
+          ]
+        }
+      },
+      "provider_coverage": {
+        "openai": {
+          "disposition": "listed",
+          "source_url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/openai/gpt-6.1-sol"
+        },
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/gpt-6.1-sol"
+        },
+        "fal": {
+          "disposition": "excluded",
+          "source_url": "https://fal.ai/models",
+          "reason": "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."
+        }
+      }
     }
   },
   "image.models": {
@@ -7089,6 +8090,385 @@
         "google": {
           "disposition": "listed",
           "source_url": "https://ai.google.dev/gemini-api/docs/pricing"
+        }
+      },
+      "styles": null,
+      "sizes": null
+    },
+    "google/gemini-nano-banana-2.1": {
+      "id": "google/gemini-nano-banana-2.1",
+      "vendor": "google",
+      "reference_provider": "google",
+      "label": "Gemini Nano Banana 2.1",
+      "short_description": "Image generation and conversational editing at 1K, 2K and 4K.",
+      "release": {
+        "date": "2026-10-06",
+        "basis": "model",
+        "source_url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/nano-banana-2-1"
+      },
+      "providers": {
+        "google": {
+          "provider": "google",
+          "id": "gemini-nano-banana-2.1",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+          "source_url": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+          "pricing": {
+            "type": "per_token",
+            "input": 1.5,
+            "image_input": 1.5,
+            "text_output": 7.5,
+            "output": 30,
+            "source_url": "https://ai.google.dev/gemini-api/docs/pricing"
+          },
+          "qualifications": [
+            {
+              "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+              "notes": "Rates are USD per million tokens. Input covers text, images and video; text output includes thinking. Search grounding is separately priced at $14 per 1000 requests after the shared allowance; the allowance is not included in the token prices."
+            },
+            {
+              "source_url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/nano-banana-2-1",
+              "notes": "Google documents 1120 tokens per input image and output image tokens of 1120 at 1K, 1680 at 2K and 3780 at 4K. These image counts exclude additional text, thinking, video and document tokens. Google Cloud does not support seed, temperature, topP, topK or logprobs for this model."
+            }
+          ],
+          "capabilities": {
+            "source_url": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+            "image_input": true,
+            "reasoning": true,
+            "tools": false,
+            "structured_output": false
+          },
+          "limits": {
+            "source_url": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+            "context_tokens": 131072,
+            "max_output_tokens": 32768
+          },
+          "endpoints": [
+            {
+              "id": "gemini-nano-banana-2.1",
+              "input": "text",
+              "source_url": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "google/gemini-nano-banana-2.1",
+          "url": "https://openrouter.ai/google/gemini-nano-banana-2.1",
+          "source_url": "https://openrouter.ai/google/gemini-nano-banana-2.1",
+          "pricing": {
+            "type": "per_token",
+            "input": 1.5,
+            "image_input": 1.5,
+            "text_output": 7.5,
+            "output": 30,
+            "source_url": "https://openrouter.ai/api/v1/models"
+          },
+          "qualifications": [
+            {
+              "source_url": "https://openrouter.ai/api/v1/models",
+              "notes": "The provider publishes 65536 context tokens and 58982 maximum completion tokens. These provider-specific limits differ from the native API. Image output is $30 per million image tokens; text/thinking output is a separate $7.50 meter. Web search is separately priced at $0.014 per request."
+            }
+          ],
+          "capabilities": {
+            "source_url": "https://openrouter.ai/api/v1/models",
+            "image_input": true,
+            "reasoning": true,
+            "structured_output": true
+          },
+          "limits": {
+            "source_url": "https://openrouter.ai/api/v1/models",
+            "context_tokens": 65536,
+            "max_output_tokens": 58982
+          },
+          "endpoints": [
+            {
+              "id": "google/gemini-nano-banana-2.1",
+              "input": "text",
+              "source_url": "https://openrouter.ai/google/gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "google/gemini-nano-banana-2.1",
+          "url": "https://vercel.com/ai-gateway/models/gemini-nano-banana-2.1",
+          "source_url": "https://vercel.com/ai-gateway/models/gemini-nano-banana-2.1",
+          "pricing": {
+            "type": "per_token",
+            "input": 1.5,
+            "text_output": 7.5,
+            "cached_input": 0.15,
+            "source_url": "https://ai-gateway.vercel.sh/v1/models"
+          },
+          "qualifications": [
+            {
+              "source_url": "https://ai-gateway.vercel.sh/v1/models",
+              "notes": "Discovery publishes output-image price examples of $0.0336 at 1K, $0.0504 at 2K and $0.1134 at 4K, separately from text and thinking output tokens. No image-token rate is inferred from another provider. Search has a separate published $14 per 1000 rate. Provider parameter and structured-output support differs from the native model page."
+            }
+          ],
+          "capabilities": {
+            "source_url": "https://vercel.com/ai-gateway/models/gemini-nano-banana-2.1",
+            "image_input": true,
+            "reasoning": true,
+            "structured_output": true
+          },
+          "limits": {
+            "source_url": "https://vercel.com/ai-gateway/models/gemini-nano-banana-2.1",
+            "context_tokens": 131072,
+            "max_output_tokens": 32768
+          },
+          "endpoints": [
+            {
+              "id": "google/gemini-nano-banana-2.1",
+              "input": "text",
+              "source_url": "https://vercel.com/ai-gateway/models/gemini-nano-banana-2.1"
+            }
+          ]
+        },
+        "fal": {
+          "provider": "fal",
+          "id": "google/nano-banana-2.1",
+          "url": "https://fal.ai/nano-banana-2.1",
+          "source_url": "https://fal.ai/nano-banana-2.1",
+          "pricing": {
+            "type": "per_token",
+            "input": 1.764,
+            "image_input": 1.764,
+            "text_output": 8.823,
+            "output": 35.294,
+            "source_url": "https://fal.ai/models/google/nano-banana-2.1/edit"
+          },
+          "qualifications": [
+            {
+              "source_url": "https://fal.ai/models/google/nano-banana-2.1/edit",
+              "notes": "Rates are USD per million tokens. Every output repeats the prompt and input token charges. Thinking is output text. Web search has no separate fee on this provider; retrieved content adds input tokens. The representative per-image examples are not flat prices or request cost limits."
+            },
+            {
+              "source_url": "https://fal.ai/models/google/nano-banana-2.1/edit/api",
+              "notes": "Editing also accepts optional video_url or pdf_url context, each with a 15 MB file limit. The provider schema lists seed; the native Google Cloud contract does not support it, so portability or deterministic behavior is not claimed."
+            },
+            {
+              "source_url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/nano-banana-2-1",
+              "notes": "The underlying model has 131072 input tokens and 32768 output tokens. Output image token counts are 1120 at 1K, 1680 at 2K and 3780 at 4K; input images use 1120 tokens each. These are model facts, not flat request prices."
+            }
+          ],
+          "capabilities": {
+            "source_url": "https://fal.ai/nano-banana-2.1",
+            "image_input": true,
+            "reasoning": true
+          },
+          "limits": {
+            "source_url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/nano-banana-2-1",
+            "context_tokens": 131072,
+            "max_output_tokens": 32768
+          },
+          "endpoints": [
+            {
+              "id": "google/nano-banana-2.1",
+              "input": "text",
+              "source_url": "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=google/nano-banana-2.1",
+              "parameters": {
+                "prompt": {
+                  "type": "string",
+                  "min_length": 3,
+                  "max_length": 50000
+                },
+                "num_images": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 4
+                },
+                "aspect_ratio": {
+                  "type": "string",
+                  "enum": [
+                    "auto",
+                    "21:9",
+                    "16:9",
+                    "3:2",
+                    "4:3",
+                    "5:4",
+                    "1:1",
+                    "4:5",
+                    "3:4",
+                    "2:3",
+                    "9:16",
+                    "4:1",
+                    "1:4",
+                    "8:1",
+                    "1:8"
+                  ]
+                },
+                "resolution": {
+                  "type": "string",
+                  "enum": [
+                    "1K",
+                    "2K",
+                    "4K"
+                  ]
+                },
+                "thinking_level": {
+                  "type": "string",
+                  "enum": [
+                    "minimal",
+                    "medium",
+                    "high"
+                  ]
+                },
+                "output_format": {
+                  "type": "string",
+                  "enum": [
+                    "jpeg",
+                    "png",
+                    "webp"
+                  ]
+                },
+                "safety_tolerance": {
+                  "type": "string",
+                  "enum": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6"
+                  ]
+                },
+                "seed": {
+                  "type": "integer"
+                },
+                "system_prompt": {
+                  "type": "string",
+                  "max_length": 50000
+                },
+                "enable_web_search": {
+                  "type": "boolean"
+                },
+                "limit_generations": {
+                  "type": "boolean"
+                },
+                "sync_mode": {
+                  "type": "boolean"
+                }
+              }
+            },
+            {
+              "id": "google/nano-banana-2.1/edit",
+              "input": "image",
+              "source_url": "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=google/nano-banana-2.1/edit",
+              "parameters": {
+                "prompt": {
+                  "type": "string",
+                  "min_length": 3,
+                  "max_length": 50000
+                },
+                "num_images": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 4
+                },
+                "aspect_ratio": {
+                  "type": "string",
+                  "enum": [
+                    "auto",
+                    "21:9",
+                    "16:9",
+                    "3:2",
+                    "4:3",
+                    "5:4",
+                    "1:1",
+                    "4:5",
+                    "3:4",
+                    "2:3",
+                    "9:16",
+                    "4:1",
+                    "1:4",
+                    "8:1",
+                    "1:8"
+                  ]
+                },
+                "resolution": {
+                  "type": "string",
+                  "enum": [
+                    "1K",
+                    "2K",
+                    "4K"
+                  ]
+                },
+                "thinking_level": {
+                  "type": "string",
+                  "enum": [
+                    "minimal",
+                    "medium",
+                    "high"
+                  ]
+                },
+                "output_format": {
+                  "type": "string",
+                  "enum": [
+                    "jpeg",
+                    "png",
+                    "webp"
+                  ]
+                },
+                "safety_tolerance": {
+                  "type": "string",
+                  "enum": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6"
+                  ]
+                },
+                "seed": {
+                  "type": "integer"
+                },
+                "system_prompt": {
+                  "type": "string",
+                  "max_length": 50000
+                },
+                "enable_web_search": {
+                  "type": "boolean"
+                },
+                "limit_generations": {
+                  "type": "boolean"
+                },
+                "sync_mode": {
+                  "type": "boolean"
+                },
+                "image_urls": {
+                  "type": "array",
+                  "max_items": 14,
+                  "source_url": "https://fal.ai/models/google/nano-banana-2.1/edit"
+                },
+                "video_url": {
+                  "type": "string"
+                },
+                "pdf_url": {
+                  "type": "string"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "provider_coverage": {
+        "google": {
+          "disposition": "listed",
+          "source_url": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1"
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/google/gemini-nano-banana-2.1"
+        },
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/gemini-nano-banana-2.1"
+        },
+        "fal": {
+          "disposition": "listed",
+          "source_url": "https://fal.ai/nano-banana-2.1"
         }
       },
       "styles": null,

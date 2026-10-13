@@ -1000,3 +1000,56 @@ Another provider's regular rates are not evidence of Grida's advertised rates.
 Other recorded service rates match the inspected discovery.
 This catalogue describes public service facts without supplier selection or
 private financial policy.
+
+## GPT-6 Sol, Luna and GPT-6.1 Sol (2026-10-13)
+
+OpenAI's [Sol and Luna announcement](https://openai.com/index/introducing-gpt-6-sol-and-luna/)
+and [DevDay announcement](https://openai.com/index/devday-2026-recap/) establish
+their September 22 and September 29 releases. The native model pages for
+[Sol](https://developers.openai.com/api/docs/models/gpt-6-sol),
+[Luna](https://developers.openai.com/api/docs/models/gpt-6-luna) and
+[6.1 Sol](https://developers.openai.com/api/docs/models/gpt-6.1-sol) establish
+standard regular prices, cache meters and reasoning/API differences. The new
+prices are regular rates, not the preceding generation's promotion.
+
+All three support tools in Responses. Native Chat Completions supports tools
+only with explicit `none` reasoning for Sol and Luna, and does not support tools
+for 6.1 Sol. A model-level `tools: true` is therefore not a promise about every
+API interface. Native endpoint records describe Responses; qualifications retain
+the Chat Completions restrictions.
+
+[Vercel discovery](https://ai-gateway.vercel.sh/v1/models) preserves the native
+long-context boundary of 272001 input tokens, while
+[OpenRouter discovery](https://openrouter.ai/api/v1/models) reports its override
+at 272000. Provider bindings preserve that difference. Cache writes and reads
+are separate meters; 6.1 Sol's cached-input rate is half Sol's.
+
+OpenAI's [vision guide](https://developers.openai.com/api/docs/guides/images-vision)
+confirms image formats but does not name these three models in its multiplier
+and detail-sizing tables. Their image-input capability is recorded, but no
+image-tokenization formula is copied from Astra or GPT-5.6.
+
+## Gemini Nano Banana 2.1 (2026-10-13)
+
+The [native model specification](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/nano-banana-2-1)
+records October 6 availability, 14 reference images, 1K/2K/4K outputs and the
+image-token table. Unlike Nano Banana 2, 512px output is not offered.
+[Google pricing](https://ai.google.dev/gemini-api/docs/pricing) separates input,
+text/thinking output, image output and search grounding.
+
+[fal's editing page](https://fal.ai/models/google/nano-banana-2.1/edit) publishes
+token rates for both generation and editing. Its small-prompt image examples are
+not flat charges: prompt and input tokens repeat for each generated image,
+thinking adds text-output tokens, and search results add input tokens. The
+[generation schema](https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=google/nano-banana-2.1)
+and [editing schema](https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=google/nano-banana-2.1/edit)
+retain exact controls. fal lists `seed`, while native Google Cloud declares it
+unsupported; no deterministic behavior or parameter portability is inferred.
+
+[Vercel discovery](https://ai-gateway.vercel.sh/v1/models) lists resolution-based
+output-image price examples and text-token rates. No image-token rate is inferred
+from Google's price. [OpenRouter discovery](https://openrouter.ai/api/v1/models)
+publishes separate image-output token pricing and different context/output
+limits, which remain provider-specific. None of the four new cards claims Grida
+availability before the public service offers them. No paid inference was used
+to establish these facts.
