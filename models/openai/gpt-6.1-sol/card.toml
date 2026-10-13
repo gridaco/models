@@ -187,3 +187,26 @@ source_url = "https://vercel.com/ai-gateway/models/gpt-6.1-sol"
 disposition = "excluded"
 source_url = "https://fal.ai/models"
 reason = "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."
+
+[providers.grida]
+provider = "grida"
+id = "openai/gpt-6.1-sol"
+url = "https://gateway.grida.ai/v1/models"
+endpoints = [
+  { "id" = "openai/gpt-6.1-sol", "input" = "text", "source_url" = "https://gateway.grida.ai/v1/models", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "input_tokens.0", "meter" = "input_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "0", "max" = "272001" }, "usd_per_unit" = "0.000002" },
+    { "id" = "input_tokens.1", "meter" = "input_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "272001" }, "usd_per_unit" = "0.000004" },
+    { "id" = "cached_input_tokens.0", "meter" = "cached_input_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "0", "max" = "272001" }, "usd_per_unit" = "0.0000001" },
+    { "id" = "cached_input_tokens.1", "meter" = "cached_input_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "272001" }, "usd_per_unit" = "0.0000002" },
+    { "id" = "output_tokens.0", "meter" = "output_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "0", "max" = "272001" }, "usd_per_unit" = "0.00001" },
+    { "id" = "output_tokens.1", "meter" = "output_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "272001" }, "usd_per_unit" = "0.000015" },
+    { "id" = "cache_write_tokens.0", "meter" = "cache_write_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "0", "max" = "272001" }, "usd_per_unit" = "0.0000025" },
+    { "id" = "cache_write_tokens.1", "meter" = "cache_write_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "quantity_range" = { "meter" = "total_input_tokens", "min" = "272001" }, "usd_per_unit" = "0.000005" },
+  ] } },
+]
+capabilities = { "source_url" = "https://gateway.grida.ai/v1/models", "image_input" = false, "tools" = true, "reasoning" = true, "structured_output" = true }
+limits = { "source_url" = "https://gateway.grida.ai/v1/models", "context_tokens" = 1050000, "max_output_tokens" = 128000 }
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"
