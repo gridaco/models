@@ -121,15 +121,21 @@ source_url = "https://vercel.com/ai-gateway/models/gemini-3.7-flash"
 disposition = "listed"
 source_url = "https://openrouter.ai/google/gemini-3.7-flash"
 
+[provider_coverage.fal]
+disposition = "excluded"
+source_url = "https://fal.ai/models"
+reason = "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."
+
 [providers.grida]
 provider = "grida"
 id = "google/gemini-3.7-flash"
 url = "https://gateway.grida.ai/v1/models"
 endpoints = [
-  { id = "google/gemini-3.7-flash", input = "text", source_url = "https://gateway.grida.ai/v1/models" },
-]
-qualifications = [
-  { source_url = "https://gateway.grida.ai/v1/models", notes = "A regular, non-promotional token schedule has not been independently established from the inspected public discovery; published_pricing is omitted rather than inferred from another provider." },
+  { "id" = "google/gemini-3.7-flash", "input" = "text", "source_url" = "https://gateway.grida.ai/v1/models", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "input_tokens", "meter" = "input_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.0000015" },
+    { "id" = "cached_input_tokens", "meter" = "cached_input_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.00000015" },
+    { "id" = "output_tokens", "meter" = "output_tokens", "unit" = "token", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.0000075" },
+  ] } },
 ]
 capabilities = { "source_url" = "https://gateway.grida.ai/v1/models", "image_input" = true, "tools" = true, "reasoning" = true, "structured_output" = true }
 limits = { "source_url" = "https://gateway.grida.ai/v1/models", "context_tokens" = 1000000, "max_output_tokens" = 65535 }
@@ -137,8 +143,3 @@ limits = { "source_url" = "https://gateway.grida.ai/v1/models", "context_tokens"
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/models"
-
-[provider_coverage.fal]
-disposition = "excluded"
-source_url = "https://fal.ai/models"
-reason = "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."

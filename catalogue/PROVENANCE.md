@@ -1053,3 +1053,22 @@ publishes separate image-output token pricing and different context/output
 limits, which remain provider-specific. None of the four new cards claims Grida
 availability before the public service offers them. No paid inference was used
 to establish these facts.
+
+## Grida provider discovery — 2026-10-14
+
+Authenticated [Grida model discovery](https://gateway.grida.ai/v1/models),
+[operation schemas](https://gateway.grida.ai/schemas/operations.json) and the
+[public API reference](https://gateway.grida.ai/llms.txt) were checked together.
+They confirm Grida bindings for GPT-6 Sol, GPT-6 Luna, GPT-6.1 Sol and Gemini Nano
+Banana 2.1. The three text bindings are text-only on Grida; native image-input
+capabilities remain recorded separately. Nano Banana 2.1 exposes generation and
+reference editing through distinct schema-linked operations.
+
+Grida discovery also publishes separate cache-write price components for
+GPT-5.6 Sol/Terra/Luna and GPT-6 Astra, and regular token schedules for Gemini
+3.7 Flash and 3.8 Flash. These replace the earlier Grida price qualifications.
+All prices here are the advertised USD schedule, with exact billing meters and
+input-length bands; no inference cost is reconstructed from an example output.
+This verifies public discovery and contract metadata, not exhaustive inference
+behavior. Other providers' records, model release dates and intrinsic facts are
+unchanged.

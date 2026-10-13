@@ -202,3 +202,20 @@ pdf_url = { type = "string" }
 [provider_coverage.fal]
 disposition = "listed"
 source_url = "https://fal.ai/nano-banana-2.1"
+
+[providers.grida]
+provider = "grida"
+id = "google/gemini-nano-banana-2.1"
+url = "https://gateway.grida.ai/v1/models"
+endpoints = [
+  { "id" = "image.google.gemini-nano-banana-2.1.references", "operation" = "image.google.gemini-nano-banana-2.1.references", "input" = "multi_image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.google.gemini-nano-banana-2.1.references.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4", "interface" = "images.edits", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_standard_cost_mills", "meter" = "fal_standard_cost_mills", "unit" = "mill", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.001" },
+  ] } },
+  { "id" = "image.google.gemini-nano-banana-2.1.text", "operation" = "image.google.gemini-nano-banana-2.1.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.google.gemini-nano-banana-2.1.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4", "interface" = "images.generations", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_standard_cost_mills", "meter" = "fal_standard_cost_mills", "unit" = "mill", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.001" },
+  ] } },
+]
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"
