@@ -2,7 +2,7 @@
 name: catalogue
 description: >
   Research, add, update, deprecate, or remove AI model catalogue entries —
-  text, image, video, audio, 3D, image tools, and embedding models — with
+  text, decision, image, video, audio, 3D, image tools, and embedding models — with
   their capabilities, limits, provider bindings, and published prices.
   Covers what an entry is, per-provider ID rules, regular pricing, native
   reference and provider coverage, public distribution, and the verification
@@ -142,6 +142,16 @@ pricing shapes in use and their rules are in [`pricing.md`](./pricing.md).
    `uv run scripts/build.py`, then `uv run scripts/check.py`.
 5. **Record qualifications** that do not fit the JSON (regular-price evidence,
    long-context bands, ambiguous units) in `catalogue/PROVENANCE.md`, with source URLs.
+
+## Decision offerings
+
+Decision endpoints are distinct offerings even when they share the underlying chat
+model. Author them in `decision.models`, with `underlying_model` pointing at that
+canonical model. Qualify each provider's exact `interface`, question vocabulary,
+input envelope and decision-only rates. Do not copy chat cache/output prices, tools,
+reasoning parameters or limits. Put contract differences on sourced
+`decision_contract` records and unresolved conflicts in provenance. See
+[`catalogue/README.md`](../../../catalogue/README.md#decision-offerings).
 
 ## Reference pattern: text and image additions
 

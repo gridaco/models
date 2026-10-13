@@ -36,7 +36,16 @@ MODELS_SCHEMA = ROOT / "catalogue" / "schemas" / "models.schema.json"
 
 
 def sections() -> list[str]:
-    """The models.json sections, in the order the schema requires them."""
+    """Declared family sections, with optional families after existing required ones."""
+    with MODELS_SCHEMA.open(encoding="utf-8") as f:
+        schema = json.load(f)
+        return schema["required"] + [
+            name for name in schema["properties"]
+            if name != "$schema" and name not in schema["required"]
+        ]
+
+
+def required_sections() -> list[str]:
     with MODELS_SCHEMA.open(encoding="utf-8") as f:
         return json.load(f)["required"]
 
@@ -53,7 +62,7 @@ def build() -> tuple[dict[Path, bytes], list[str]]:
     labs = load_labs(MODELS)
     names = sections()
     outputs = {
-        MODELS_JSON: dumps(assemble(cards, names, schema_id())).encode(),
+        MODELS_JSON: dumps(assemble(cards, names, schema_id(), required_sections())).encode(),
         LABS: dumps(assemble_labs(labs)).encode(),
     }
     for lab in labs:

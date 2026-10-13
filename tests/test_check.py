@@ -134,7 +134,7 @@ def test_hand_edited_labs_are_reported_out_of_date():
 
 
 def test_cards_round_trip_every_null():
-    assembled = cards.assemble(CARDS, SECTIONS, check.build.schema_id())
+    assembled = cards.assemble(CARDS, SECTIONS, check.build.schema_id(), check.build.required_sections())
     assert assembled == MODELS_JSON
 
 
@@ -544,3 +544,84 @@ def test_singleton_operation_can_record_sourced_endpoint_parameters():
     facts = copy.deepcopy(MODELS_JSON)
     facts["three_d.rig_check.operation"]["endpoints"] = [copy.deepcopy(ENDPOINT)]
     assert check.check(facts, SCHEMA) == []
+
+
+# Optional decision offerings use their own interface and do not inherit chat facts.
+
+def decision_fixture():
+    return {
+        "id": "openai/decision-example", "label": "Decision example", "vendor": "openai",
+        "underlying_model": "openai/gpt-6-luna",
+        "release": {"date": None, "basis": "provider_endpoint", "source_url": "https://example.com/decisions"},
+        "reference_provider": "openai",
+        "providers": {
+            "openai": {
+                "id": "native-model", "provider": "openai", "source_url": "https://example.com/decisions",
+                "decision_contract": {
+                    "source_url": "https://example.com/decisions", "question_types": ["predicate", "choice", "score"],
+                    "minimum_choices": 2, "maximum_choices": 255, "typed_choice_values": True,
+                },
+            },
+        },
+    }
+
+
+def decision_facts():
+    facts = copy.deepcopy(MODELS_JSON)
+    facts["decision.models"] = {"openai/decision-example": decision_fixture()}
+    return facts
+
+
+def test_optional_decision_family_preserves_prior_snapshots():
+    facts = copy.deepcopy(MODELS_JSON)
+    facts.pop("decision.models", None)
+    assert check.check(facts, SCHEMA) == []
+    assert "decision.models" not in check.build.required_sections()
+
+
+def test_decision_card_has_independent_identity_and_provider_contract():
+    assert check.check(decision_facts(), SCHEMA) == []
+
+
+@pytest.mark.parametrize("field", ["context_window", "output_limit", "cost", "tool_call", "multimodal"])
+def test_decision_card_rejects_inherited_chat_fields(field):
+    facts = decision_facts()
+    facts["decision.models"]["openai/decision-example"][field] = 1
+    assert any(field in e for e in check.check(facts, SCHEMA))
+
+
+def test_decision_card_requires_a_vendor_underlying_model_and_binding():
+    for field in ("vendor", "underlying_model", "providers"):
+        facts = decision_facts()
+        facts["decision.models"]["openai/decision-example"].pop(field)
+        assert check.check(facts, SCHEMA)
+    facts = decision_facts()
+    facts["decision.models"]["openai/decision-example"]["providers"] = {}
+    assert any("no provider bindings" in e for e in check.check(facts, SCHEMA))
+
+
+def test_decision_contract_bounds_and_source_are_checked():
+    facts = decision_facts()
+    contract = facts["decision.models"]["openai/decision-example"]["providers"]["openai"]["decision_contract"]
+    contract["minimum_choices"] = 256
+    assert any("minimum_choices exceeds maximum_choices" in e for e in check.check(facts, SCHEMA))
+    contract["minimum_choices"] = 2
+    contract["source_url"] = "https://user:password@example.com/decisions"
+    assert any("without credentials" in e for e in check.check(facts, SCHEMA))
+
+
+def test_decision_contract_rejects_unknown_vocabulary():
+    facts = decision_facts()
+    contract = facts["decision.models"]["openai/decision-example"]["providers"]["openai"]["decision_contract"]
+    contract["question_types"] = ["chat"]
+    assert any("question_types" in e for e in check.check(facts, SCHEMA))
+
+
+def test_optional_family_is_generated_only_when_authored():
+    required = check.build.required_sections()
+    old = [c for c in CARDS if c.data.get("section") != "decision.models"]
+    assert "decision.models" not in cards.assemble(old, SECTIONS, check.build.schema_id(), required)
+    example = cards.Card("openai/decision-example", "card.toml", {"section": "decision.models", **decision_fixture()})
+    assert list(cards.layout_errors(old + [example], SECTIONS)) == []
+    assembled = cards.assemble(old + [example], SECTIONS, check.build.schema_id(), required)
+    assert assembled["decision.models"]["openai/decision-example"] == decision_fixture()

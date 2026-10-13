@@ -174,6 +174,13 @@
           "$ref": "#/$defs/provider_coverage"
         }
       }
+    },
+    "decision.models": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "#/$defs/decision_card"
+      }
     }
   },
   "$defs": {
@@ -391,6 +398,9 @@
           "type": "string",
           "format": "uri",
           "pattern": "^https://[^/]+(?:/|$)"
+        },
+        "decision_contract": {
+          "$ref": "#/$defs/decision_contract"
         }
       }
     },
@@ -1101,6 +1111,106 @@
               }
             }
           }
+        },
+        "decision_contract": {
+          "$ref": "#/$defs/decision_contract"
+        }
+      }
+    },
+    "decision_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_url"],
+      "minProperties": 2,
+      "properties": {
+        "source_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://[^/]+(?:/|$)"
+        },
+        "question_types": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": ["predicate", "noul", "choice", "score"]
+          }
+        },
+        "input_forms": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": ["string", "user_messages", "state"]
+          }
+        },
+        "question_container": {
+          "enum": ["array", "named_object"]
+        },
+        "image_input_forms": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": ["data_url", "http_url", "file_id"]
+          }
+        },
+        "image_details": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": ["low", "high", "auto", "original"]
+          }
+        },
+        "typed_choice_values": {
+          "type": "boolean"
+        },
+        "partial_refusals": {
+          "type": "boolean"
+        },
+        "maximum_questions": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maximum_images": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "minimum_choices": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maximum_choices": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "minimum_score_levels": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maximum_score_levels": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "decision_card": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/card"
+        }
+      ],
+      "required": ["vendor", "underlying_model", "providers"],
+      "unevaluatedProperties": false,
+      "properties": {
+        "underlying_model": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Canonical catalogue identity of the underlying model; this offering has its own interface and rates."
+        },
+        "decision_contract": {
+          "$ref": "#/$defs/decision_contract"
         }
       }
     }

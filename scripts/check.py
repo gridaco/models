@@ -51,7 +51,7 @@ POLICY_KEYS = ("listed", "listed_reason", "status", "legacy", "deprecated", "def
 
 # Families whose cards hold intrinsic facts plus per-provider bindings.
 # A primary-provider choice on such a card is product policy.
-MULTI_PROVIDER_SECTIONS = ("image.models", "video.models")
+MULTI_PROVIDER_SECTIONS = ("image.models", "video.models", "decision.models")
 
 # Known violations carried over unchanged from the source data. Each entry is
 # (section, card id, key). An exception that no longer matches the data is
@@ -94,6 +94,7 @@ def is_calendar_date(value: str) -> bool:
 
 SOURCED_OBJECTS = (
     "distribution",
+    "decision_contract",
     "output_token_calculator",
     "vision_tokenization",
     "capabilities",
@@ -160,6 +161,8 @@ def numeric_range_errors(value: dict[str, Any], where: str) -> Iterator[str]:
         ("minimum", "maximum"), ("min_items", "max_items"),
         ("min_length", "max_length"), ("min_edge", "max_edge"),
         ("min_pixels", "max_pixels"), ("min", "max"),
+        ("minimum_choices", "maximum_choices"),
+        ("minimum_score_levels", "maximum_score_levels"),
     ]:
         lo, hi = value.get(lower), value.get(upper)
         if isinstance(lo, (int, float)) and isinstance(hi, (int, float)) and lo > hi:
