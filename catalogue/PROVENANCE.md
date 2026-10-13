@@ -1072,3 +1072,51 @@ input-length bands; no inference cost is reconstructed from an example output.
 This verifies public discovery and contract metadata, not exhaustive inference
 behavior. Other providers' records, model release dates and intrinsic facts are
 unchanged.
+
+## GPT-6 Luna Decisions
+
+`openai/gpt-6-luna-decisions` is a decision offering, separate from
+`openai/gpt-6-luna` text generation. OpenAI's
+[changelog](https://developers.openai.com/api/docs/changelog) dates the public beta
+of `gpt-6-luna` through `/v1/decisions` to 2026-10-06; this is a
+`provider_endpoint` release, not a second underlying model launch.
+
+The [native guide](https://developers.openai.com/api/docs/guides/decisions)
+establishes predicate/choice/score semantics and input-only pricing at $0.10/M.
+It explicitly excludes cache-read, cache-write and output charges while retaining
+regional premiums and long-context input multipliers. The linked
+[Standard pricing table](https://developers.openai.com/api/docs/pricing) gives
+GPT-6 Luna's doubled input rate above 272000 tokens. No chat cache/output rates,
+tools, generation limits or reasoning parameters are copied into the decision
+card. Probability estimates are not application-specific calibration guarantees;
+thresholds require the consumer's own labeled examples.
+
+The native image documents conflict: the
+[API reference](https://developers.openai.com/api/reference/resources/decisions/methods/create)
+accepts both inline and hosted HTTP(S) images, while the guide accepts only inline
+images. Both agree on inline images, user-message input and no file IDs. The
+binding leaves `image_input_forms` unrecorded and retains this qualification
+instead of claiming a resolved complete transport contract. The exact reference
+establishes typed boolean/string choices and 2–255 choices; score-level limits
+are omitted where the native reference does not establish them.
+
+[Vercel's compatible endpoint](https://vercel.com/docs/ai-gateway/sdks-and-apis/openai-decisions)
+requires inline images, accepts 1–255 choices and 2–10 score levels, and rejects
+boolean/string spelling collisions. Refused questions retain their positions and
+are normally input-billed. Its public
+[endpoint discovery](https://ai-gateway.vercel.sh/v1/models/openai/gpt-6-luna-decisions/endpoints)
+records a 1050000-token context, $0.10/M input, zero completion cost and no implicit
+caching, but no decision-specific long-context bands. Generic text-only and
+reasoning metadata conflict with the exact Decisions contract; the latter defines
+serving capabilities. Native price bands are not substituted for missing provider
+bands.
+
+[OpenRouter's model page](https://openrouter.ai/openai/gpt-6-luna-decisions)
+records $0.10/M input, zero output/cache-read rates, 1050000 context tokens and up
+to 200 questions. Its [alpha interface](https://openrouter.ai/docs/api/api-reference/alphadecisions/submit-a-decisions-request)
+uses `state`, named question objects, `criteria` and `noul`, rather than OpenAI's
+wire envelope. Its [multimodal guide](https://openrouter.ai/docs/guides/community/multimodal-decisions)
+establishes data URLs in top-level state-array image parts, no fetched remote
+URLs and 128 images for this exact model. Cache-write prices and long-context
+bands are omitted without independent decision-specific evidence. A binding does
+not establish native OpenAI SDK compatibility.

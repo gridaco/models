@@ -17337,5 +17337,281 @@
         }
       }
     }
+  },
+  "decision.models": {
+    "openai/gpt-6-luna-decisions": {
+      "id": "openai/gpt-6-luna-decisions",
+      "vendor": "openai",
+      "label": "GPT-6 Luna Decisions",
+      "underlying_model": "openai/gpt-6-luna",
+      "reference_provider": "openai",
+      "release": {
+        "date": "2026-10-06",
+        "basis": "provider_endpoint",
+        "source_url": "https://developers.openai.com/api/docs/changelog"
+      },
+      "decision_contract": {
+        "source_url": "https://developers.openai.com/api/docs/guides/decisions",
+        "question_types": [
+          "predicate",
+          "choice",
+          "score"
+        ],
+        "input_forms": [
+          "string",
+          "user_messages"
+        ],
+        "question_container": "array"
+      },
+      "providers": {
+        "openai": {
+          "provider": "openai",
+          "id": "gpt-6-luna",
+          "url": "https://developers.openai.com/api/docs/guides/decisions",
+          "source_url": "https://developers.openai.com/api/reference/resources/decisions/methods/create",
+          "qualifications": [
+            {
+              "source_url": "https://developers.openai.com/api/docs/guides/decisions",
+              "notes": "Decisions is a distinct offering of GPT-6 Luna. The decision price is input-only: no output-token, cache-read or cache-write charges. Regional processing premiums and long-context input multipliers still apply."
+            },
+            {
+              "source_url": "https://developers.openai.com/api/docs/pricing",
+              "notes": "The Standard pricing table defines short context as at most 272000 input tokens and long context above that boundary; GPT-6 Luna's input multiplier is two. The recorded tiers cover global Standard processing, excluding regional and other processing-tier modifiers."
+            },
+            {
+              "source_url": "https://developers.openai.com/api/docs/guides/decisions",
+              "notes": "The guide requires inline base64 image data URLs and rejects hosted URLs, while the exact Decisions API reference also documents publicly accessible HTTP(S) image URLs. Inline images agree across both sources; external-URL support is unresolved and no complete image-input-forms list is recorded on this binding."
+            },
+            {
+              "source_url": "https://developers.openai.com/api/reference/resources/decisions/methods/create",
+              "notes": "Predicates estimate the probability of a statement; choice answers retain typed values and per-option probabilities; scores are probability-weighted averages of ordered level indices. A refusal replaces only that question's answer, not the whole response. These are estimates, not application-specific calibration guarantees."
+            }
+          ],
+          "token_pricing": {
+            "source_url": "https://developers.openai.com/api/docs/guides/decisions",
+            "unit": "usd_per_token",
+            "scope": "Global Standard Decisions processing; regional processing and other processing tiers excluded. No cache-read, cache-write or output charges.",
+            "input": "0.0000001",
+            "output": "0",
+            "input_cache_read": "0",
+            "input_cache_write": "0",
+            "tiers": [
+              {
+                "meter": "input",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.0000001"
+              },
+              {
+                "meter": "input",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.0000002"
+              }
+            ]
+          },
+          "capabilities": {
+            "source_url": "https://developers.openai.com/api/docs/guides/decisions",
+            "image_input": true
+          },
+          "decision_contract": {
+            "source_url": "https://developers.openai.com/api/reference/resources/decisions/methods/create",
+            "question_types": [
+              "predicate",
+              "choice",
+              "score"
+            ],
+            "input_forms": [
+              "string",
+              "user_messages"
+            ],
+            "question_container": "array",
+            "image_details": [
+              "low",
+              "high",
+              "auto",
+              "original"
+            ],
+            "maximum_images": 128,
+            "minimum_choices": 2,
+            "maximum_choices": 255,
+            "typed_choice_values": true,
+            "partial_refusals": true
+          },
+          "endpoints": [
+            {
+              "id": "gpt-6-luna",
+              "input": "text",
+              "interface": "decisions",
+              "source_url": "https://developers.openai.com/api/reference/resources/decisions/methods/create"
+            }
+          ]
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "openai/gpt-6-luna-decisions",
+          "url": "https://vercel.com/ai-gateway/models/gpt-6-luna-decisions",
+          "source_url": "https://vercel.com/docs/ai-gateway/sdks-and-apis/openai-decisions",
+          "qualifications": [
+            {
+              "source_url": "https://vercel.com/docs/ai-gateway/sdks-and-apis/openai-decisions",
+              "notes": "This compatible contract accepts one to 255 choices, rejects a boolean and its string spelling in the same question, and accepts inline data URLs only. These differ from the native reference. Scores use two to ten ordered levels; answers preserve question order, and refused questions are billed for input normally."
+            },
+            {
+              "source_url": "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6-luna-decisions/endpoints",
+              "notes": "The endpoint feed reports a 1050000-token context and input price of 0.0000001 USD/token, with zero completion cost and no implicit caching. It publishes no decision-specific long-context bands. Native OpenAI bands are not substituted for unrecorded provider bands."
+            },
+            {
+              "source_url": "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6-luna-decisions/endpoints",
+              "notes": "The generic discovery architecture advertises text-only input and ordinary generation/reasoning parameters, conflicting with the exact Decisions contract's text/image inputs and bounded questions. Contract-specific facts here follow the Decisions documentation; chat parameters are not inherited from generic metadata."
+            }
+          ],
+          "token_pricing": {
+            "source_url": "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6-luna-decisions/endpoints",
+            "unit": "usd_per_token",
+            "scope": "Published decision endpoint base input/completion rates; unrecorded long-context or regional bands are not inferred.",
+            "input": "0.0000001",
+            "output": "0"
+          },
+          "capabilities": {
+            "source_url": "https://vercel.com/docs/ai-gateway/sdks-and-apis/openai-decisions",
+            "image_input": true
+          },
+          "limits": {
+            "source_url": "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6-luna-decisions/endpoints",
+            "context_tokens": 1050000
+          },
+          "decision_contract": {
+            "source_url": "https://vercel.com/docs/ai-gateway/sdks-and-apis/openai-decisions",
+            "question_types": [
+              "predicate",
+              "choice",
+              "score"
+            ],
+            "input_forms": [
+              "string",
+              "user_messages"
+            ],
+            "question_container": "array",
+            "image_input_forms": [
+              "data_url"
+            ],
+            "image_details": [
+              "low",
+              "high",
+              "auto",
+              "original"
+            ],
+            "maximum_images": 128,
+            "minimum_choices": 1,
+            "maximum_choices": 255,
+            "minimum_score_levels": 2,
+            "maximum_score_levels": 10,
+            "typed_choice_values": false,
+            "partial_refusals": true
+          },
+          "endpoints": [
+            {
+              "id": "openai/gpt-6-luna-decisions",
+              "input": "text",
+              "interface": "decisions",
+              "source_url": "https://vercel.com/docs/ai-gateway/sdks-and-apis/openai-decisions"
+            }
+          ]
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "openai/gpt-6-luna-decisions",
+          "url": "https://openrouter.ai/openai/gpt-6-luna-decisions",
+          "source_url": "https://openrouter.ai/openai/gpt-6-luna-decisions",
+          "qualifications": [
+            {
+              "source_url": "https://openrouter.ai/docs/api/api-reference/alphadecisions/submit-a-decisions-request",
+              "notes": "The alpha Decisions interface uses state and questions keyed by name, criteria, noul/choice/score vocabulary, and answers keyed by name. It is not the native OpenAI input/questions-array wire format; endpoint existence does not establish OpenAI SDK compatibility."
+            },
+            {
+              "source_url": "https://openrouter.ai/docs/guides/community/multimodal-decisions",
+              "notes": "Images are data-URL image_url parts directly within the state array, not Responses input_image parts or nested objects. Remote HTTP(S) image URLs are not fetched; at most 128 images are allowed for this model. The provider's guide documents PNG, JPEG and WebP inputs."
+            },
+            {
+              "source_url": "https://openrouter.ai/openai/gpt-6-luna-decisions",
+              "notes": "The page publishes input/output prices and a free cache-read rate; it does not establish cache-write pricing or long-context bands for this decision offering. Those unknown rates are omitted rather than copied from chat pricing."
+            }
+          ],
+          "token_pricing": {
+            "source_url": "https://openrouter.ai/openai/gpt-6-luna-decisions",
+            "unit": "usd_per_token",
+            "scope": "Published base decision input/output/cache-read rates; unrecorded cache-write and context/region modifiers are not inferred.",
+            "input": "0.0000001",
+            "output": "0",
+            "input_cache_read": "0"
+          },
+          "capabilities": {
+            "source_url": "https://openrouter.ai/openai/gpt-6-luna-decisions",
+            "image_input": true
+          },
+          "limits": {
+            "source_url": "https://openrouter.ai/openai/gpt-6-luna-decisions",
+            "context_tokens": 1050000
+          },
+          "decision_contract": {
+            "source_url": "https://openrouter.ai/docs/guides/community/multimodal-decisions",
+            "question_types": [
+              "noul",
+              "choice",
+              "score"
+            ],
+            "input_forms": [
+              "state"
+            ],
+            "question_container": "named_object",
+            "image_input_forms": [
+              "data_url"
+            ],
+            "image_details": [
+              "auto",
+              "low",
+              "high"
+            ],
+            "maximum_images": 128
+          },
+          "endpoints": [
+            {
+              "id": "openai/gpt-6-luna-decisions",
+              "input": "text",
+              "interface": "openrouter_alpha_decisions",
+              "source_url": "https://openrouter.ai/docs/api/api-reference/alphadecisions/submit-a-decisions-request",
+              "parameters": {
+                "questions": {
+                  "type": "object"
+                }
+              },
+              "decision_contract": {
+                "source_url": "https://openrouter.ai/openai/gpt-6-luna-decisions",
+                "maximum_questions": 200
+              }
+            }
+          ]
+        }
+      },
+      "provider_coverage": {
+        "openai": {
+          "disposition": "listed",
+          "source_url": "https://developers.openai.com/api/reference/resources/decisions/methods/create"
+        },
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/docs/ai-gateway/sdks-and-apis/openai-decisions"
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/openai/gpt-6-luna-decisions"
+        },
+        "fal": {
+          "disposition": "excluded",
+          "source_url": "https://fal.ai/models",
+          "reason": "Catalogue coverage includes fal for media models only; no decision API compatibility is claimed."
+        }
+      }
+    }
   }
 }
