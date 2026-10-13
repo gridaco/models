@@ -146,7 +146,7 @@ pricing shapes in use and their rules are in [`pricing.md`](./pricing.md).
 ## Reference pattern: text and image additions
 
 The GPT-6 Sol, GPT-6 Luna, GPT-6.1 Sol and Gemini Nano Banana 2.1 cards demonstrate
-a data-only addition across modalities. Use their structure, not their values, as
+a data-only addition across modalities ([reference PR #13](https://github.com/gridaco/models/pull/13)). Use their structure, not their values, as
 the starting point for another model:
 
 - Read the exact native model contract before copying a predecessor. GPT tool
