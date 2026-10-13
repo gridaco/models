@@ -994,8 +994,9 @@ these bindings do not imply another provider's parameter compatibility.
 `published_pricing` records advertised USD per named quantity, including bands,
 conditions and rounding. Provider-specific normalized quantities are not raw
 image counts or guaranteed per-request totals. Source unit identifiers are
-preserved. Grida's two Gemini Flash regular-price entries are the proposed next
-published schedule; release coordination must precede describing those rates as
-already live. Other recorded service rates match the inspected discovery.
+preserved. Grida's Gemini 3.7/3.8 Flash bindings omit prices: the inspected
+discovery does not independently establish a regular, non-promotional schedule.
+Another provider's regular rates are not evidence of Grida's advertised rates.
+Other recorded service rates match the inspected discovery.
 This catalogue describes public service facts without supplier selection or
 private financial policy.
