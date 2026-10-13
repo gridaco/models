@@ -34,6 +34,7 @@ section is a table of cards keyed by card ID:
 
 | section                           | cards                                        |
 | --------------------------------- | -------------------------------------------- |
+| `decision.models` (optional)      | Bounded classification and scoring offerings |
 | `text.catalog`                    | Language models                              |
 | `image.models`                    | Image generation, with per-provider bindings |
 | `video.models`                    | Video generation, with per-provider bindings |
@@ -263,3 +264,31 @@ Single-provider cards and `three_d.rig_check.operation` may also carry
 `endpoints`, with the same shape as a binding's endpoint variants. New sourced
 objects have strict field vocabularies; pre-existing card and price shapes remain
 unchanged in schema version 1.
+
+## Decision offerings
+
+The optional `decision.models` section describes bounded decision offerings separately
+from text generation. Existing version 1 snapshots remain valid without the section;
+the generator emits it only when a card is authored there. A decision card uses the
+common identity, vendor, release and provider fields, and requires `underlying_model`
+(the canonical identity of the underlying model) and nonempty provider bindings.
+This relationship does not inherit that model's chat capabilities, limits or prices.
+Decision cards reject chat-only top-level fields such as `context_window`, `output_limit`
+and `cost`; use sourced provider limits and prices for this offering's exact interface.
+
+Optional `decision_contract` on a card, binding or endpoint records sourced descriptive
+facts: `question_types` (exact wire vocabulary, such as `predicate` or `noul`),
+`input_forms` (`string`, `user_messages`, or `state`), `question_container`
+(`array` or `named_object`), `image_input_forms` (`data_url`, `http_url`, or `file_id`),
+`image_details`, `maximum_questions`, `maximum_images`, choice and score bounds
+(`minimum_choices`, `maximum_choices`, `minimum_score_levels`, `maximum_score_levels`),
+`typed_choice_values`, and `partial_refusals`. Every object requires a first-party
+`source_url`; omitted fields are unrecorded, not unsupported. Minimum and maximum
+pairs cannot be inverted. Typed choice values distinguish a boolean from its string
+spelling; a false value records that the provider rejects such a collision.
+
+The endpoint's `interface` and source link remain authoritative for the full wire
+contract and answer semantics. Provider vocabularies, image envelopes and pricing
+remain independent even when the underlying model is identical. No ZDR eligibility,
+probability calibration guarantee or output-generation pricing is inferred from
+this family membership.
