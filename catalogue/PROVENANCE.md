@@ -1120,3 +1120,16 @@ establishes data URLs in top-level state-array image parts, no fetched remote
 URLs and 128 images for this exact model. Cache-write prices and long-context
 bands are omitted without independent decision-specific evidence. A binding does
 not establish native OpenAI SDK compatibility.
+
+Grida's [model discovery](https://gateway.grida.ai/v1/models),
+[Decisions schema](https://gateway.grida.ai/schemas/decisions.json) and
+[public API reference](https://gateway.grida.ai/llms.txt) establish its separate
+`openai/gpt-6-luna-decisions` offering. It accepts the native question-array
+envelope with predicate, choice and score questions, string or user-message
+input, and inline PNG/JPEG/WebP images. Its subset allows 32 questions, eight
+images, 2–255 choices and 2–10 score levels; it rejects boolean/string spelling
+collisions and preserves per-question refusals. Published pricing is input-only
+USD 0.10 per million tokens, with no output or cache charges. The binding records
+that public contract without borrowing another provider's limits or price bands.
+Model release provenance, intrinsic facts and other providers' bindings are
+unchanged.

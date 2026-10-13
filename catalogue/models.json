@@ -17591,6 +17591,76 @@
               }
             }
           ]
+        },
+        "grida": {
+          "provider": "grida",
+          "id": "openai/gpt-6-luna-decisions",
+          "url": "https://gateway.grida.ai/v1/models",
+          "endpoints": [
+            {
+              "id": "openai/gpt-6-luna-decisions",
+              "input": "text",
+              "interface": "decisions",
+              "source_url": "https://gateway.grida.ai/v1/models",
+              "request_schema_url": "https://gateway.grida.ai/schemas/decisions.json#/$defs/DecisionRequest",
+              "result_schema_url": "https://gateway.grida.ai/schemas/decisions.json#/$defs/Decision",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "input_tokens",
+                    "meter": "input_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.0000001"
+                  }
+                ]
+              }
+            }
+          ],
+          "capabilities": {
+            "source_url": "https://gateway.grida.ai/v1/models",
+            "image_input": true
+          },
+          "limits": {
+            "source_url": "https://gateway.grida.ai/v1/models",
+            "context_tokens": 1050000
+          },
+          "decision_contract": {
+            "source_url": "https://gateway.grida.ai/v1/models",
+            "question_types": [
+              "predicate",
+              "choice",
+              "score"
+            ],
+            "input_forms": [
+              "string",
+              "user_messages"
+            ],
+            "question_container": "array",
+            "image_input_forms": [
+              "data_url"
+            ],
+            "image_details": [
+              "low",
+              "high",
+              "auto",
+              "original"
+            ],
+            "maximum_questions": 32,
+            "maximum_images": 8,
+            "minimum_choices": 2,
+            "maximum_choices": 255,
+            "minimum_score_levels": 2,
+            "maximum_score_levels": 10,
+            "typed_choice_values": false,
+            "partial_refusals": true
+          }
         }
       },
       "provider_coverage": {
@@ -17610,6 +17680,10 @@
           "disposition": "excluded",
           "source_url": "https://fal.ai/models",
           "reason": "Catalogue coverage includes fal for media models only; no decision API compatibility is claimed."
+        },
+        "grida": {
+          "disposition": "listed",
+          "source_url": "https://gateway.grida.ai/v1/models"
         }
       }
     }
