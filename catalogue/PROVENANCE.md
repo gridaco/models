@@ -891,8 +891,8 @@ images may be downscaled before tokenization.
 labels the Gemini 3 family token counts approximate. The cards preserve that
 qualification and each resolution's published budget, including the 2240-token
 `ultra_high` budget. That maximum is not a fixed billable count for every image.
-These parameters describe provider tokenization, not a consumer's authorization
-buffers or a claim that preflight estimates equal final charges.
+These parameters describe provider tokenization. Preflight estimates do not
+establish final charges.
 
 ## Vercel standard token pricing and capabilities (2026-10-13)
 
