@@ -1249,8 +1249,12 @@ discovery; Vercel's separately listed preview is not represented as stable 1.1.
 [Muse Image](https://fal.ai/models/meta/muse-image/text-to-image/api) uses ratios
 at its fixed approximate pixel count; a ratio is not an exact size contract.
 [Qwen Image 3.0](https://fal.ai/models/alibaba/qwen-image-3/text-to-image/api)
-is the Standard model, distinct from Pro. Native pricing is in CNY and is not
-converted to USD here. fal's regular 1K/2K rates do not document the precise
+retains its published endpoint ID and generic title. The generation and
+[editing API](https://fal.ai/models/alibaba/qwen-image-3/edit/api) About sections
+name Qwen Image 3 Pro; the earlier Standard identification was unsupported.
+Equivalence with the separate native Standard endpoint or its prices is not
+claimed. The native binding retains its own regional CNY qualification without
+a USD conversion. fal's regular 1K/2K rates do not document the precise
 custom-size price breakpoint; no breakpoint is inferred.
 [Ideogram 4.5 generation](https://fal.ai/models/ideogram/v4.5/api) and
 [editing](https://fal.ai/models/ideogram/v4.5/edit/api) have distinct dimension
@@ -1262,3 +1266,19 @@ request/result schemas are unavailable in the public OpenAPI feed. Endpoint
 identities are recorded without inventing edit fields or a result envelope.
 Missing prices remain unknown, never zero. Current provider coverage follows
 exact discovery identities, not similar predecessor names.
+
+## Grida media discovery — 2026-10-15
+
+Authenticated [Grida model discovery](https://gateway.grida.ai/v1/models) and
+[public operation schemas](https://gateway.grida.ai/schemas/operations.json)
+confirm generation and editing bindings for Qwen Image 3.0, Muse Image 1.0 and
+Ideogram 4.5; text-to-video and image-to-video bindings for MiniMax H3, FLUX 3
+Video and Gemini Omni 1.1 Flash; and additional text-to-video operations for
+Seedance 2.5 and Grok Imagine Video 1.5. Existing operations are retained.
+
+The bindings preserve each advertised operation ID, interface, request/result
+schema URL and USD price component from that discovery. These are public Grida
+service contracts, not claims of parameter or pricing parity with another
+provider. Reference limits, dimension rules and supported video options are
+defined by the linked operation-specific schemas. No native model release
+dates or other providers' listed prices change.

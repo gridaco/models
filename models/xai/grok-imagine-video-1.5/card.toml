@@ -150,6 +150,9 @@ endpoints = [
   { "id" = "video.xai.grok-imagine-video-1.5.image", "operation" = "video.xai.grok-imagine-video-1.5.image", "input" = "image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.xai.grok-imagine-video-1.5.image.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result", "interface" = "videos", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
     { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
   ] } },
+  { "id" = "video.xai.grok-imagine-video-1.5.text", "operation" = "video.xai.grok-imagine-video-1.5.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.xai.grok-imagine-video-1.5.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result", "interface" = "videos", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+  ] } },
 ]
 
 [provider_coverage.grida]
