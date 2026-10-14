@@ -1133,3 +1133,132 @@ USD 0.10 per million tokens, with no output or cache charges. The binding record
 that public contract without borrowing another provider's limits or price bands.
 Model release provenance, intrinsic facts and other providers' bindings are
 unchanged.
+
+## Video endpoint and provider qualifications (2026-10-15)
+
+### Seedance 2.5 and Grok Imagine Video 1.5 text variants
+
+The existing image variants and their published service contracts are retained.
+The fal text variants are separate exact endpoints with their own parameters and
+published billing facts: [Seedance 2.5](https://fal.ai/models/bytedance/seedance-2.5/text-to-video/api)
+and [Grok 1.5](https://fal.ai/models/xai/grok-imagine-video/v1.5/text-to-video/api).
+
+Seedance's [detailed text page](https://fal.ai/models/bytedance/seedance-2.5/text-to-video)
+defines output tokens as width × height × duration × 24 / 1024. At 480p and 720p,
+the rate is USD 0.0214 per 1,000 output tokens. Its per-second examples are
+approximations rather than a billing meter, and its summary calls the 1080p
+token rate approximate. The exact-priced component is therefore limited to the
+two resolutions whose rate is stated without qualification. The OpenAPI schema
+includes 1080p even though the detailed page's older input table lists only
+480p and 720p; endpoint parameters follow the exact OpenAPI schema. Defaults
+and adaptive output options are not inferred as fixed billable output sizes.
+
+The same detailed fal page publishes these output dimensions for explicit
+framing. The formula uses 24 frames/second and divides pixel-frames by 1024;
+multiply the resulting output-token count by USD 0.0214/1,000 for these tiers.
+Do not infer a fixed dimension for `auto` or extrapolate this table to 1080p.
+
+| Aspect ratio | 480p width × height | 720p width × height |
+| ------------ | ------------------- | ------------------- |
+| `21:9`       | 992 × 432           | 1470 × 630          |
+| `16:9`       | 864 × 496           | 1280 × 720          |
+| `4:3`        | 752 × 560           | 1112 × 834          |
+| `1:1`        | 640 × 640           | 960 × 960           |
+| `3:4`        | 560 × 752           | 834 × 1112          |
+| `9:16`       | 496 × 864           | 720 × 1280          |
+
+Grok text generation has no input-image charge. Its independently sourced
+output-second rates are USD 0.08 at 480p, 0.14 at 720p and 0.25 at 1080p on
+the [text endpoint page](https://fal.ai/models/xai/grok-imagine-video/v1.5/text-to-video).
+The existing image endpoint's image surcharge is not copied to text generation.
+
+### MiniMax H3 and fal H3 Max
+
+MiniMax H3's model release is grounded in the [July 31 vendor announcement](https://www.minimax.io/blog/minimax-h3).
+H3 Max is a distinct fal post-trained variant, grounded in fal's
+[August 27 announcement](https://blog.fal.ai/introducing-h3-max-by-fal/).
+The `minimax/h3-max` namespace on fal is its exact serving endpoint namespace,
+not evidence that the variant's developer is MiniMax. The public catalogue
+identity is `fal/h3-max`, with fal as its native reference.
+
+MiniMax [native API contracts](https://platform.minimax.io/docs/api-reference/video-generation-v2-create)
+support H3 at 4–15 seconds, 768P/2K and H3 Max at 5–15 seconds, 480P/768P.
+Their [native pricing](https://platform.minimax.io/docs/pricing/overview)
+is independent of fal's prices. Native reference video and extra image charges
+are explicitly qualified rather than treated as included output pricing.
+
+The exact fal [H3 text](https://fal.ai/models/minimax/h3/text-to-video/api)
+and [image](https://fal.ai/models/minimax/h3/image-to-video/api) schemas instead
+accept integer 5–15-second durations and 480P/768P/2K/4K. The first and last
+images are optional independently, and the output canvas follows the supplied
+frame. The actual frame endpoint is `minimax/h3/image-to-video`.
+
+fal's [H3 Max text schema](https://fal.ai/models/minimax/h3-max/text-to-video/api)
+accepts fractional duration 0.92–15 seconds and warns that outputs can run
+about 0.7 seconds longer. This warning does not establish an exact output
+duration maximum, charged-duration rounding rule or requested-duration meter.
+Its prompt expansion values are examples, not a schema enum. The regular
+fal rates are explicitly stated on the [model page](https://fal.ai/models/minimax/h3-max/text-to-video):
+USD 0.05/0.08/0.16 per output second at 480P/768P/1080P. Temporary discounted
+rates are excluded from the catalogue.
+
+The [official H3 repository](https://github.com/MiniMax-AI/MiniMax-H3)
+and [weight repository](https://huggingface.co/MiniMaxAI/MiniMax-H3) are retained
+as distribution facts. Their [Community License](https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/LICENSE)
+has specific use and territorial restrictions; public download availability
+does not imply unrestricted use or grant hosted API rights.
+
+### FLUX 3 Video
+
+The [BFL August 4 announcement](https://bfl.ai/blog/flux-3-video) establishes
+the first broad release of FLUX 3 Video, independently of later FLUX 3 Image
+and Action variants. The native call ID remains `flux-3-video`; modes are
+request parameters, not invented separate native endpoint IDs.
+
+[BFL pricing](https://docs.bfl.ai/quick_start/pricing) records output-second
+prices by mode and resolution, with native 2K/4K rates distinct from the
+[OpenRouter discovery SKUs](https://openrouter.ai/api/v1/videos/models).
+Both records retain their provider's facts rather than flattening them into
+one supposedly universal price. fal's [text](https://fal.ai/models/blackforestlabs/flux-3/text-to-video)
+and [image](https://fal.ai/models/blackforestlabs/flux-3/image-to-video) routes
+serve only 720p/1080p, priced at USD 0.17/0.29 per output second.
+
+[Vercel discovery](https://ai-gateway.vercel.sh/v1/models) lists `bfl/flux-3-video`
+with capability metadata but an empty pricing object. The binding is recorded
+without inventing a unit or price. Vercel's supported resolution spellings,
+`hd` and `fhd`, retain their original form.
+
+### Gemini Omni 1.1 Flash
+
+The stable model's release comes from Google's [August 27 announcement](https://blog.google/innovation-and-ai/technology/developers-tools/build-with-gemini-omni-1-1-flash/).
+The [native model page](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash)
+and [standard pricing](https://ai.google.dev/gemini-api/docs/pricing)
+identify `gemini-omni-1.1-flash` and token billing: USD 1.50/9.00/17.50 per
+million input/text-output/video-output tokens. Google's 5,792 video-output
+tokens per second at 720p are not a formula for every resolution.
+
+The exact versioned fal [text](https://fal.ai/models/google/gemini-omni-flash/v1.1/text-to-video)
+and [image](https://fal.ai/models/google/gemini-omni-flash/v1.1/image-to-video)
+endpoints use output-second pricing instead: USD 0.03/0.10/0.15/0.30 at
+360p/720p/1080p/4k. Their schemas accept integer durations 3–10 seconds.
+The stable variant is absent from OpenRouter video discovery and Vercel model
+discovery; Vercel's separately listed preview is not represented as stable 1.1.
+
+## Image endpoint qualifications (2026-10-15)
+
+[Muse Image](https://fal.ai/models/meta/muse-image/text-to-image/api) uses ratios
+at its fixed approximate pixel count; a ratio is not an exact size contract.
+[Qwen Image 3.0](https://fal.ai/models/alibaba/qwen-image-3/text-to-image/api)
+is the Standard model, distinct from Pro. Native pricing is in CNY and is not
+converted to USD here. fal's regular 1K/2K rates do not document the precise
+custom-size price breakpoint; no breakpoint is inferred.
+[Ideogram 4.5 generation](https://fal.ai/models/ideogram/v4.5/api) and
+[editing](https://fal.ai/models/ideogram/v4.5/edit/api) have distinct dimension
+and source-image contracts. The exact launch day remains unknown, using
+undated provider-endpoint provenance; native price parity is not inferred.
+[Reve 2.1's fal tutorial](https://fal.ai/learn/tools/how-to-use-reve-2-1)
+establishes a regular USD 0.25/generated-image price, but the exact endpoint
+request/result schemas are unavailable in the public OpenAPI feed. Endpoint
+identities are recorded without inventing edit fields or a result envelope.
+Missing prices remain unknown, never zero. Current provider coverage follows
+exact discovery identities, not similar predecessor names.

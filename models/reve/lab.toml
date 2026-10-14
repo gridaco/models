@@ -1,0 +1,9 @@
+name = "Reve"
+url = "https://reve.com/"
+
+# Official inline wordmark extracted from the blog header; paths are unchanged and an XML namespace is added for a standalone SVG.
+[logo]
+file = "logo.svg"
+kind = "wordmark"
+source_url = "https://blog.reve.com/"
+retrieved = "2026-10-15"

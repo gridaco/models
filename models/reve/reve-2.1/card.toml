@@ -1,0 +1,30 @@
+id = "reve/reve-2.1"
+section = "image.models"
+vendor = "reve"
+label = "Reve 2.1"
+short_description = "Native 4K generation and editing with layout and typography understanding."
+
+[release]
+date = "2026-07-09"
+basis = "model"
+source_url = "https://blog.reve.com/posts/launching-reve-2.1/"
+
+[providers.fal]
+provider = "fal"
+id = "reve/2.1/text-to-image"
+pricing = { type = "per_image_flat", usd = 0.25, source_url = "https://fal.ai/learn/tools/how-to-use-reve-2-1" }
+url = "https://fal.ai/reve-2.1"
+source_url = "https://fal.ai/reve-2.1"
+qualifications = [
+  { "source_url" = "https://fal.ai/reve-2.1", "notes" = "The provider landing page advertises generation, single-image edit and multi-reference remix. The exact endpoint schema could not be retrieved from the published endpoint documentation. Detailed parameter names, result envelope and limits are not inferred; regular per-image pricing is sourced independently from the provider tutorial." },
+]
+endpoints = [
+  { "id" = "reve/2.1/text-to-image", "input" = "text", "source_url" = "https://fal.ai/reve-2.1" },
+  { "id" = "reve/2.1/edit", "input" = "image", "source_url" = "https://fal.ai/reve-2.1" },
+  { "id" = "reve/2.1/remix", "input" = "multi_image", "source_url" = "https://fal.ai/reve-2.1" },
+]
+
+[provider_coverage]
+openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/models", "reason" = "The published model discovery list does not contain this exact model." }
+vercel = { "disposition" = "not_listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models", "reason" = "The published model discovery list does not contain this exact model." }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/reve-2.1" }

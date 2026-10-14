@@ -1,0 +1,9 @@
+name = "MiniMax"
+url = "https://www.minimax.io/"
+
+# Official lockup served by the homepage header, retained unchanged.
+[logo]
+file = "logo.webp"
+kind = "lockup"
+source_url = "https://www.minimax.io/assets/logo/minimax-horizontal-brand-black.webp"
+retrieved = "2026-10-15"

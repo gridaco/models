@@ -22,12 +22,34 @@ id = "meta/muse-image-1.0"
 pricing = { type = "per_image_flat", usd = 0.01 }
 avg_cost_usd = 0.01
 
+
 [providers.fal]
 provider = "fal"
 id = "meta/muse-image/text-to-image"
-pricing = { type = "per_image_flat", usd = 0.01 }
-avg_cost_usd = 0.01
+source_url = "https://fal.ai/models/meta/muse-image/text-to-image/api"
 url = "https://fal.ai/models/meta/muse-image/text-to-image"
+pricing = { "type" = "per_image_flat", "usd" = 0.01, "source_url" = "https://fal.ai/models/meta/muse-image/text-to-image" }
+avg_cost_usd = 0.01
+references = { "id" = "meta/muse-image/edit", "max" = 10 }
+qualifications = [
+  { "source_url" = "https://fal.ai/models/meta/muse-image/text-to-image/api", "notes" = "Aspect ratios select shape at a fixed model resolution of approximately 2.5 megapixels; they do not specify output pixel dimensions." },
+]
+endpoints = [
+  { "id" = "meta/muse-image/text-to-image", "input" = "text", "source_url" = "https://fal.ai/models/meta/muse-image/text-to-image/api", "parameters" = { "num_images" = { "minimum" = 1, "maximum" = 10, "type" = "integer" }, "output_format" = { "enum" = [
+    "jpeg",
+    "png",
+    "webp",
+  ], "type" = "string" }, "sync_mode" = { "type" = "boolean" }, "prompt" = { "min_length" = 1, "type" = "string" }, "aspect_ratio" = { "type" = "string" } }, "image_constraints" = { "aspect_ratio" = { "min" = 0.0625, "max" = 16 } }, "published_pricing" = { "source_url" = "https://fal.ai/models/meta/muse-image/text-to-image", "currency" = "USD", "components" = [
+    { "meter" = "generated_images", "unit" = "image", "usd_per_unit" = "0.01" },
+  ] } },
+  { "id" = "meta/muse-image/edit", "input" = "multi_image", "source_url" = "https://fal.ai/models/meta/muse-image/edit/api", "parameters" = { "num_images" = { "minimum" = 1, "maximum" = 10, "type" = "integer" }, "output_format" = { "enum" = [
+    "jpeg",
+    "png",
+    "webp",
+  ], "type" = "string" }, "sync_mode" = { "type" = "boolean" }, "image_urls" = { "type" = "array", "min_items" = 1, "max_items" = 10 }, "prompt" = { "min_length" = 1, "type" = "string" }, "aspect_ratio" = { "type" = "string" } }, "image_constraints" = { "aspect_ratio" = { "min" = 0.0625, "max" = 16 } }, "published_pricing" = { "source_url" = "https://fal.ai/models/meta/muse-image/edit", "currency" = "USD", "components" = [
+    { "meter" = "generated_images", "unit" = "image", "usd_per_unit" = "0.01" },
+  ] } },
+]
 
 [providers.meta]
 provider = "meta"

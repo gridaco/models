@@ -73,6 +73,18 @@
       "retrieved": "2026-10-12"
     }
   },
+  "fal": {
+    "id": "fal",
+    "name": "fal",
+    "url": "https://fal.ai/",
+    "logo": {
+      "path": "logos/fal.svg",
+      "media_type": "image/svg+xml",
+      "kind": "wordmark",
+      "source_url": "https://fal.ai/",
+      "retrieved": "2026-10-15"
+    }
+  },
   "google": {
     "id": "google",
     "name": "Google",
@@ -85,6 +97,11 @@
       "guidelines_url": "https://about.google/brand-resource-center/",
       "retrieved": "2026-10-12"
     }
+  },
+  "ideogram": {
+    "id": "ideogram",
+    "name": "Ideogram",
+    "url": "https://ideogram.ai/"
   },
   "meta": {
     "id": "meta",
@@ -112,6 +129,18 @@
       "retrieved": "2026-10-12"
     }
   },
+  "minimax": {
+    "id": "minimax",
+    "name": "MiniMax",
+    "url": "https://www.minimax.io/",
+    "logo": {
+      "path": "logos/minimax.webp",
+      "media_type": "image/webp",
+      "kind": "lockup",
+      "source_url": "https://www.minimax.io/assets/logo/minimax-horizontal-brand-black.webp",
+      "retrieved": "2026-10-15"
+    }
+  },
   "openai": {
     "id": "openai",
     "name": "OpenAI",
@@ -135,6 +164,18 @@
       "kind": "symbol",
       "source_url": "https://cdn.prod.website-files.com/655727fe69827d9a402de12c/6a0dafb5b8eead82b93ff59f_sign%2040x40%20(1).svg",
       "retrieved": "2026-10-12"
+    }
+  },
+  "reve": {
+    "id": "reve",
+    "name": "Reve",
+    "url": "https://reve.com/",
+    "logo": {
+      "path": "logos/reve.svg",
+      "media_type": "image/svg+xml",
+      "kind": "wordmark",
+      "source_url": "https://blog.reve.com/",
+      "retrieved": "2026-10-15"
     }
   },
   "tencent": {

@@ -23,6 +23,9 @@ id = "bytedance/seedance-2.5/image-to-video"
 input = "image"
 avg_cost_usd = 2.37
 url = "https://fal.ai/models/bytedance/seedance-2.5/image-to-video"
+qualifications = [
+  { source_url = "https://fal.ai/models/bytedance/seedance-2.5/text-to-video", notes = "The detailed text-to-video documentation requires end_user_id for B2B access. Its OpenAPI schema describes the same field as optional and nullable; that schema alone does not waive the documented B2B requirement." },
+]
 
 [providers.fal.pricing]
 type = "per_second"
@@ -76,6 +79,69 @@ source_url = "https://fal.ai/models/bytedance/seedance-2.5/image-to-video/api"
 "image_url" = { "type" = "string" }
 "prompt" = { "type" = "string" }
 "resolution" = { "type" = "string", "enum" = ["480p", "720p", "1080p"] }
+
+
+[[providers.fal.endpoints]]
+id = "bytedance/seedance-2.5/text-to-video"
+input = "text"
+source_url = "https://fal.ai/models/bytedance/seedance-2.5/text-to-video/api"
+parameters = { "codec" = { "type" = "string", "enum" = [
+  "auto",
+  "H264",
+  "H265",
+] }, "resolution" = { "type" = "string", "enum" = [
+  "480p",
+  "720p",
+  "1080p",
+] }, "prompt" = { "type" = "string" }, "generate_audio" = { "type" = "boolean" }, "bitrate_mode" = { "type" = "string", "enum" = [
+  "standard",
+  "high",
+] }, "duration" = { "type" = "string", "enum" = [
+  "auto",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "11",
+  "12",
+  "13",
+  "14",
+  "15",
+  "16",
+  "17",
+  "18",
+  "19",
+  "20",
+  "21",
+  "22",
+  "23",
+  "24",
+  "25",
+  "26",
+  "27",
+  "28",
+  "29",
+  "30",
+] }, "end_user_id" = { "type" = "string" }, "draft" = { "type" = "boolean" }, "aspect_ratio" = { "type" = "string", "enum" = [
+  "auto",
+  "21:9",
+  "16:9",
+  "4:3",
+  "1:1",
+  "3:4",
+  "9:16",
+] } }
+published_pricing = { "source_url" = "https://fal.ai/models/bytedance/seedance-2.5/text-to-video", "currency" = "USD", "components" = [
+  { "id" = "output_tokens_480p_720p", "meter" = "output_tokens", "unit" = "token", "per_quantity" = "1000", "usd_per_unit" = "0.0214", "when" = { "properties" = { "resolution" = { "enum" = [
+    "480p",
+    "720p",
+  ] } }, "required" = [
+    "resolution",
+  ] } },
+] }
 
 [providers.vercel]
 provider = "vercel"

@@ -1,0 +1,101 @@
+id = "fal/h3-max"
+section = "video.models"
+label = "H3 Max"
+vendor = "fal"
+short_description = "fal-developed post-trained MiniMax H3 variant with faster video generation and native audio."
+url = "https://blog.fal.ai/introducing-h3-max-by-fal/"
+audio = true
+reference_provider = "fal"
+max_duration = 15
+
+[release]
+date = "2026-08-27"
+basis = "model"
+source_url = "https://blog.fal.ai/introducing-h3-max-by-fal/"
+
+[providers.fal]
+provider = "fal"
+id = "minimax/h3-max/text-to-video"
+input = "text-or-image"
+url = "https://fal.ai/models/minimax/h3-max/text-to-video"
+source_url = "https://fal.ai/models/minimax/h3-max/text-to-video"
+pricing = { "type" = "per_second", "usd_per_second" = { "480P" = { "audio" = 0.05 }, "768P" = { "audio" = 0.08 }, "1080P" = { "audio" = 0.16 } }, "source_url" = "https://fal.ai/models/minimax/h3-max/text-to-video" }
+endpoints = [
+  { "id" = "minimax/h3-max/text-to-video", "input" = "text", "source_url" = "https://fal.ai/models/minimax/h3-max/text-to-video/api", "parameters" = { "resolution" = { "type" = "string", "enum" = [
+    "480P",
+    "768P",
+    "1080P",
+  ] }, "duration" = { "minimum" = 0.92, "type" = "number", "maximum" = 15 }, "prompt_expansion_mode" = { "type" = "string" }, "enable_safety_checker" = { "type" = "boolean" }, "seed" = { "type" = "integer" }, "sync_mode" = { "type" = "boolean" }, "prompt" = { "max_length" = 50000, "min_length" = 1, "type" = "string" }, "aspect_ratio" = { "type" = "string", "enum" = [
+    "21:9",
+    "16:9",
+    "4:3",
+    "1:1",
+    "3:4",
+    "9:16",
+  ] }, "target_audio_url" = { "min_length" = 1, "type" = "string" } } },
+  { "id" = "minimax/h3-max/image-to-video", "input" = "image", "source_url" = "https://fal.ai/models/minimax/h3-max/image-to-video/api", "parameters" = { "end_image_url" = { "type" = "string" }, "resolution" = { "type" = "string", "enum" = [
+    "480P",
+    "768P",
+    "1080P",
+  ] }, "duration" = { "minimum" = 0.92, "type" = "number", "maximum" = 15 }, "prompt_expansion_mode" = { "type" = "string" }, "enable_safety_checker" = { "type" = "boolean" }, "seed" = { "type" = "integer" }, "image_url" = { "type" = "string" }, "sync_mode" = { "type" = "boolean" }, "prompt" = { "max_length" = 50000, "min_length" = 1, "type" = "string" }, "target_audio_url" = { "min_length" = 1, "type" = "string" } } },
+]
+qualifications = [
+  { "source_url" = "https://fal.ai/models/minimax/h3-max/text-to-video", "notes" = "Rates are the explicitly stated regular prices, independently of an active temporary discount." },
+  { "source_url" = "https://fal.ai/models/minimax/h3-max/text-to-video/api", "notes" = "The duration parameter spans 0.92–15 seconds; output may last about 0.7 seconds longer. This is not a precise billable-duration ceiling or rounding guarantee. Prompt-expansion mode examples are not a published enum." },
+]
+
+[providers.minimax]
+provider = "minimax"
+id = "MiniMax-H3-Max"
+input = "text-or-image"
+url = "https://platform.minimax.io/docs/api-reference/video-generation-v2-create"
+source_url = "https://platform.minimax.io/docs/api-reference/video-generation-v2-create"
+endpoints = [
+  { "id" = "MiniMax-H3-Max", "input" = "text", "source_url" = "https://platform.minimax.io/docs/api-reference/video-generation-v2-create", "parameters" = { "duration" = { "type" = "integer", "minimum" = 5, "maximum" = 15 }, "resolution" = { "type" = "string", "enum" = [
+    "480P",
+    "768P",
+  ] }, "extra.prompt_expansion_mode" = { "type" = "string" } } },
+]
+pricing = { type = "per_second", usd_per_second = { "480P" = { audio = 0.05 }, "768P" = { audio = 0.08 } }, source_url = "https://platform.minimax.io/docs/pricing/overview" }
+qualifications = [
+  { source_url = "https://platform.minimax.io/docs/pricing/overview", notes = "Native reference input video is billed separately at USD 0.0553/s for 480P or USD 0.143/s for 768P. The first two reference images are included; additional reference images cost USD 0.074 each. These charges are distinct from text-only and first/last-frame output pricing." },
+]
+
+[providers.vercel]
+provider = "vercel"
+id = "minimax/minimax-h3-max"
+input = "text-or-image"
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+url = "https://ai-gateway.vercel.sh/v1/models"
+endpoints = [
+  { "id" = "minimax/minimax-h3-max", "input" = "text", "source_url" = "https://ai-gateway.vercel.sh/v1/models", "parameters" = { "duration" = { "enum" = [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+  ] }, "resolution" = { "enum" = [
+    "480p",
+    "768p",
+  ] }, "aspect_ratio" = { "enum" = [
+    "21:9",
+    "16:9",
+    "4:3",
+    "1:1",
+    "3:4",
+    "9:16",
+  ] } } },
+]
+pricing = { "type" = "per_second", "usd_per_second" = { "480p" = { "audio" = 0.05 }, "768p" = { "audio" = 0.08 } }, "source_url" = "https://ai-gateway.vercel.sh/v1/models" }
+
+[provider_coverage]
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/minimax/h3-max/text-to-video" }
+minimax = { "disposition" = "listed", "source_url" = "https://platform.minimax.io/docs/api-reference/video-generation-v2-create" }
+vercel = { "disposition" = "listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models" }
+openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/videos/models", "reason" = "The exact variant is absent from the published video model discovery response. Other variants do not establish its availability." }
