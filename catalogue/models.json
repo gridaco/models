@@ -6637,6 +6637,10 @@
           },
           "qualifications": [
             {
+              "source_url": "https://fal.ai/models/alibaba/qwen-image-3/text-to-image/api",
+              "notes": "The endpoint ID and public title omit a variant suffix, while the generation and editing API About sections name Qwen Image 3 Pro. The provider identity is preserved as published; equivalence with the separate native Standard endpoint or its prices is not claimed."
+            },
+            {
               "source_url": "https://fal.ai/models/alibaba/qwen-image-3/edit/api",
               "notes": "Reference images require each dimension between 384 and 2048 pixels, a maximum 10 MB per image, and JPEG, non-alpha PNG or WebP. The source quotes 1K/2K prices without an exact custom-size pixel breakpoint."
             }
@@ -6780,6 +6784,65 @@
               }
             }
           ]
+        },
+        "grida": {
+          "provider": "grida",
+          "id": "alibaba/qwen-image-3.0",
+          "url": "https://gateway.grida.ai/v1/models",
+          "endpoints": [
+            {
+              "id": "image.alibaba.qwen-image-3.0.text",
+              "operation": "image.alibaba.qwen-image-3.0.text",
+              "input": "text",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/image.alibaba.qwen-image-3.0.text.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4",
+              "interface": "images.generations",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_output_units",
+                    "meter": "fal_output_units",
+                    "unit": "provider_unit",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.01"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "image.alibaba.qwen-image-3.0.references",
+              "operation": "image.alibaba.qwen-image-3.0.references",
+              "input": "multi_image",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/image.alibaba.qwen-image-3.0.references.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4",
+              "interface": "images.edits",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_output_units",
+                    "meter": "fal_output_units",
+                    "unit": "provider_unit",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.01"
+                  }
+                ]
+              }
+            }
+          ]
         }
       },
       "provider_coverage": {
@@ -6800,6 +6863,10 @@
         "alibaba": {
           "disposition": "listed",
           "source_url": "https://help.aliyun.com/en/model-studio/qwen-image-3-0"
+        },
+        "grida": {
+          "disposition": "listed",
+          "source_url": "https://gateway.grida.ai/v1/models"
         }
       }
     },
@@ -9878,6 +9945,65 @@
               }
             }
           ]
+        },
+        "grida": {
+          "provider": "grida",
+          "id": "ideogram/ideogram-4.5",
+          "url": "https://gateway.grida.ai/v1/models",
+          "endpoints": [
+            {
+              "id": "image.ideogram.ideogram-4.5.text",
+              "operation": "image.ideogram.ideogram-4.5.text",
+              "input": "text",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/image.ideogram.ideogram-4.5.text.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4",
+              "interface": "images.generations",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_output_units",
+                    "meter": "fal_output_units",
+                    "unit": "provider_unit",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.001"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "image.ideogram.ideogram-4.5.references",
+              "operation": "image.ideogram.ideogram-4.5.references",
+              "input": "multi_image",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/image.ideogram.ideogram-4.5.references.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4",
+              "interface": "images.edits",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_output_units",
+                    "meter": "fal_output_units",
+                    "unit": "provider_unit",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.001"
+                  }
+                ]
+              }
+            }
+          ]
         }
       },
       "provider_coverage": {
@@ -9898,6 +10024,10 @@
         "ideogram": {
           "disposition": "listed",
           "source_url": "https://developer.ideogram.ai/ideogram-api/api-overview"
+        },
+        "grida": {
+          "disposition": "listed",
+          "source_url": "https://gateway.grida.ai/v1/models"
         }
       }
     },
@@ -10081,6 +10211,65 @@
               "notes": "The model is listed in image discovery, but image-specific endpoint metadata is empty. Published token meters come from general endpoint metadata; image parameter parity is not inferred."
             }
           ]
+        },
+        "grida": {
+          "provider": "grida",
+          "id": "meta/muse-image-1.0",
+          "url": "https://gateway.grida.ai/v1/models",
+          "endpoints": [
+            {
+              "id": "image.meta.muse-image-1.0.text",
+              "operation": "image.meta.muse-image-1.0.text",
+              "input": "text",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/image.meta.muse-image-1.0.text.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4",
+              "interface": "images.generations",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_output_units",
+                    "meter": "fal_output_units",
+                    "unit": "provider_unit",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.01"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "image.meta.muse-image-1.0.references",
+              "operation": "image.meta.muse-image-1.0.references",
+              "input": "multi_image",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/image.meta.muse-image-1.0.references.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4",
+              "interface": "images.edits",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_output_units",
+                    "meter": "fal_output_units",
+                    "unit": "provider_unit",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.01"
+                  }
+                ]
+              }
+            }
+          ]
         }
       },
       "provider_coverage": {
@@ -10099,6 +10288,10 @@
         "meta": {
           "disposition": "listed",
           "source_url": "https://dev.meta.ai/docs/image-generation"
+        },
+        "grida": {
+          "disposition": "listed",
+          "source_url": "https://gateway.grida.ai/v1/models"
         }
       },
       "styles": null,
@@ -13793,6 +13986,65 @@
               "notes": "The model is listed, but its pricing object is empty. No regular price or billing unit is inferred."
             }
           ]
+        },
+        "grida": {
+          "provider": "grida",
+          "id": "bfl/flux-3-video",
+          "url": "https://gateway.grida.ai/v1/models",
+          "endpoints": [
+            {
+              "id": "video.bfl.flux-3-video.text",
+              "operation": "video.bfl.flux-3-video.text",
+              "input": "text",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/video.bfl.flux-3-video.text.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result",
+              "interface": "videos",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_output_units",
+                    "meter": "fal_output_units",
+                    "unit": "provider_unit",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.085"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "video.bfl.flux-3-video.image",
+              "operation": "video.bfl.flux-3-video.image",
+              "input": "image",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/video.bfl.flux-3-video.image.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result",
+              "interface": "videos",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_output_units",
+                    "meter": "fal_output_units",
+                    "unit": "provider_unit",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.085"
+                  }
+                ]
+              }
+            }
+          ]
         }
       },
       "provider_coverage": {
@@ -13811,6 +14063,10 @@
         "vercel": {
           "disposition": "listed",
           "source_url": "https://ai-gateway.vercel.sh/v1/models"
+        },
+        "grida": {
+          "disposition": "listed",
+          "source_url": "https://gateway.grida.ai/v1/models"
         }
       }
     },
@@ -14642,6 +14898,32 @@
                   }
                 ]
               }
+            },
+            {
+              "id": "video.bytedance.seedance-2.5.text",
+              "operation": "video.bytedance.seedance-2.5.text",
+              "input": "text",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/video.bytedance.seedance-2.5.text.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result",
+              "interface": "videos",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_output_units",
+                    "meter": "fal_output_units",
+                    "unit": "provider_unit",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.0214"
+                  }
+                ]
+              }
             }
           ]
         }
@@ -15079,6 +15361,65 @@
               }
             }
           ]
+        },
+        "grida": {
+          "provider": "grida",
+          "id": "google/gemini-omni-1.1-flash",
+          "url": "https://gateway.grida.ai/v1/models",
+          "endpoints": [
+            {
+              "id": "video.google.gemini-omni-1.1-flash.text",
+              "operation": "video.google.gemini-omni-1.1-flash.text",
+              "input": "text",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/video.google.gemini-omni-1.1-flash.text.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result",
+              "interface": "videos",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_output_units",
+                    "meter": "fal_output_units",
+                    "unit": "provider_unit",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.03"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "video.google.gemini-omni-1.1-flash.image",
+              "operation": "video.google.gemini-omni-1.1-flash.image",
+              "input": "image",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/video.google.gemini-omni-1.1-flash.image.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result",
+              "interface": "videos",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_output_units",
+                    "meter": "fal_output_units",
+                    "unit": "provider_unit",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.03"
+                  }
+                ]
+              }
+            }
+          ]
         }
       },
       "provider_coverage": {
@@ -15099,6 +15440,10 @@
           "disposition": "not_listed",
           "source_url": "https://ai-gateway.vercel.sh/v1/models",
           "reason": "The published discovery lists Gemini Omni Flash Preview, but not the stable Gemini Omni 1.1 Flash identity. Preview is not treated as the stable variant."
+        },
+        "grida": {
+          "disposition": "listed",
+          "source_url": "https://gateway.grida.ai/v1/models"
         }
       }
     },
@@ -16352,6 +16697,65 @@
             },
             "source_url": "https://ai-gateway.vercel.sh/v1/models"
           }
+        },
+        "grida": {
+          "provider": "grida",
+          "id": "minimax/h3",
+          "url": "https://gateway.grida.ai/v1/models",
+          "endpoints": [
+            {
+              "id": "video.minimax.h3.text",
+              "operation": "video.minimax.h3.text",
+              "input": "text",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/video.minimax.h3.text.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result",
+              "interface": "videos",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_output_units",
+                    "meter": "fal_output_units",
+                    "unit": "provider_unit",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.05"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "video.minimax.h3.image",
+              "operation": "video.minimax.h3.image",
+              "input": "image",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/video.minimax.h3.image.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result",
+              "interface": "videos",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_output_units",
+                    "meter": "fal_output_units",
+                    "unit": "provider_unit",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.05"
+                  }
+                ]
+              }
+            }
+          ]
         }
       },
       "provider_coverage": {
@@ -16371,6 +16775,10 @@
           "disposition": "not_listed",
           "source_url": "https://openrouter.ai/api/v1/videos/models",
           "reason": "The exact variant is absent from the published video model discovery response. Other variants do not establish its availability."
+        },
+        "grida": {
+          "disposition": "listed",
+          "source_url": "https://gateway.grida.ai/v1/models"
         }
       }
     },
@@ -16659,6 +17067,32 @@
               "input": "image",
               "source_url": "https://gateway.grida.ai/schemas/operations.json",
               "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/video.xai.grok-imagine-video-1.5.image.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result",
+              "interface": "videos",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_output_units",
+                    "meter": "fal_output_units",
+                    "unit": "provider_unit",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.01"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "video.xai.grok-imagine-video-1.5.text",
+              "operation": "video.xai.grok-imagine-video-1.5.text",
+              "input": "text",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/video.xai.grok-imagine-video-1.5.text.input",
               "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result",
               "interface": "videos",
               "published_pricing": {

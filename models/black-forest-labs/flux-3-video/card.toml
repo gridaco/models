@@ -221,3 +221,20 @@ bfl = { "disposition" = "listed", "source_url" = "https://api.bfl.ai/openapi.jso
 fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/blackforestlabs/flux-3/text-to-video" }
 openrouter = { "disposition" = "listed", "source_url" = "https://openrouter.ai/api/v1/videos/models" }
 vercel = { "disposition" = "listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models" }
+
+[providers.grida]
+provider = "grida"
+id = "bfl/flux-3-video"
+url = "https://gateway.grida.ai/v1/models"
+endpoints = [
+  { "id" = "video.bfl.flux-3-video.text", "operation" = "video.bfl.flux-3-video.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.bfl.flux-3-video.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result", "interface" = "videos", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.085" },
+  ] } },
+  { "id" = "video.bfl.flux-3-video.image", "operation" = "video.bfl.flux-3-video.image", "input" = "image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.bfl.flux-3-video.image.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result", "interface" = "videos", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.085" },
+  ] } },
+]
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"

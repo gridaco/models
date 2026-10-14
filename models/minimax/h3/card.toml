@@ -116,3 +116,20 @@ minimax = { "disposition" = "listed", "source_url" = "https://platform.minimax.i
 fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/minimax/h3/text-to-video" }
 vercel = { "disposition" = "listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models" }
 openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/videos/models", "reason" = "The exact variant is absent from the published video model discovery response. Other variants do not establish its availability." }
+
+[providers.grida]
+provider = "grida"
+id = "minimax/h3"
+url = "https://gateway.grida.ai/v1/models"
+endpoints = [
+  { "id" = "video.minimax.h3.text", "operation" = "video.minimax.h3.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.minimax.h3.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result", "interface" = "videos", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.05" },
+  ] } },
+  { "id" = "video.minimax.h3.image", "operation" = "video.minimax.h3.image", "input" = "image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.minimax.h3.image.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result", "interface" = "videos", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.05" },
+  ] } },
+]
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"

@@ -58,3 +58,20 @@ google = { "disposition" = "listed", "source_url" = "https://ai.google.dev/gemin
 fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/google/gemini-omni-flash/v1.1/text-to-video" }
 openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/videos/models", "reason" = "The exact variant is absent from the published video model discovery response. Other variants do not establish its availability." }
 vercel = { "disposition" = "not_listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models", "reason" = "The published discovery lists Gemini Omni Flash Preview, but not the stable Gemini Omni 1.1 Flash identity. Preview is not treated as the stable variant." }
+
+[providers.grida]
+provider = "grida"
+id = "google/gemini-omni-1.1-flash"
+url = "https://gateway.grida.ai/v1/models"
+endpoints = [
+  { "id" = "video.google.gemini-omni-1.1-flash.text", "operation" = "video.google.gemini-omni-1.1-flash.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.google.gemini-omni-1.1-flash.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result", "interface" = "videos", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.03" },
+  ] } },
+  { "id" = "video.google.gemini-omni-1.1-flash.image", "operation" = "video.google.gemini-omni-1.1-flash.image", "input" = "image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.google.gemini-omni-1.1-flash.image.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result", "interface" = "videos", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.03" },
+  ] } },
+]
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"

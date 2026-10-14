@@ -28,6 +28,7 @@ url = "https://fal.ai/models/alibaba/qwen-image-3/text-to-image"
 pricing = { "type" = "per_image_tiered", "tiers" = { "1K" = 0.04, "2K" = 0.075 }, "source_url" = "https://fal.ai/models/alibaba/qwen-image-3/text-to-image" }
 references = { "id" = "alibaba/qwen-image-3/edit", "max" = 3 }
 qualifications = [
+  { "source_url" = "https://fal.ai/models/alibaba/qwen-image-3/text-to-image/api", "notes" = "The endpoint ID and public title omit a variant suffix, while the generation and editing API About sections name Qwen Image 3 Pro. The provider identity is preserved as published; equivalence with the separate native Standard endpoint or its prices is not claimed." },
   { "source_url" = "https://fal.ai/models/alibaba/qwen-image-3/edit/api", "notes" = "Reference images require each dimension between 384 and 2048 pixels, a maximum 10 MB per image, and JPEG, non-alpha PNG or WebP. The source quotes 1K/2K prices without an exact custom-size pixel breakpoint." },
 ]
 endpoints = [
@@ -62,3 +63,20 @@ openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.
 vercel = { "disposition" = "not_listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models", "reason" = "The published model discovery list does not contain this exact model." }
 fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/alibaba/qwen-image-3/text-to-image" }
 alibaba = { "disposition" = "listed", "source_url" = "https://help.aliyun.com/en/model-studio/qwen-image-3-0" }
+
+[providers.grida]
+provider = "grida"
+id = "alibaba/qwen-image-3.0"
+url = "https://gateway.grida.ai/v1/models"
+endpoints = [
+  { "id" = "image.alibaba.qwen-image-3.0.text", "operation" = "image.alibaba.qwen-image-3.0.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.alibaba.qwen-image-3.0.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4", "interface" = "images.generations", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+  ] } },
+  { "id" = "image.alibaba.qwen-image-3.0.references", "operation" = "image.alibaba.qwen-image-3.0.references", "input" = "multi_image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.alibaba.qwen-image-3.0.references.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4", "interface" = "images.edits", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+  ] } },
+]
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"

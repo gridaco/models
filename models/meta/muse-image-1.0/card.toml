@@ -74,3 +74,20 @@ openrouter = { "disposition" = "listed", "source_url" = "https://openrouter.ai/a
 vercel = { "disposition" = "listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models" }
 fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/meta/muse-image/text-to-image" }
 meta = { "disposition" = "listed", "source_url" = "https://dev.meta.ai/docs/image-generation" }
+
+[providers.grida]
+provider = "grida"
+id = "meta/muse-image-1.0"
+url = "https://gateway.grida.ai/v1/models"
+endpoints = [
+  { "id" = "image.meta.muse-image-1.0.text", "operation" = "image.meta.muse-image-1.0.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.meta.muse-image-1.0.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4", "interface" = "images.generations", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+  ] } },
+  { "id" = "image.meta.muse-image-1.0.references", "operation" = "image.meta.muse-image-1.0.references", "input" = "multi_image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.meta.muse-image-1.0.references.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4", "interface" = "images.edits", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+  ] } },
+]
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"
