@@ -1,0 +1,132 @@
+id = "ideogram/ideogram-4.5"
+section = "image.models"
+vendor = "ideogram"
+reference_provider = "ideogram"
+label = "Ideogram 4.5"
+short_description = "Image generation and precise editing with typography and reference-image control."
+null_keys = ["release.date"]
+
+[release]
+basis = "provider_endpoint"
+source_url = "https://fal.ai/models/ideogram/v4.5/api"
+
+[providers.ideogram]
+provider = "ideogram"
+id = "ideogram-4-5"
+url = "https://developer.ideogram.ai/ideogram-api/api-overview"
+source_url = "https://developer.ideogram.ai/ideogram-api/api-overview"
+qualifications = [
+  { "source_url" = "https://ideogram.ai/pricing/?tool=ideogram", "notes" = "Native pricing distinguishes generation with and without source images and Precise Edit. The current pricing page returns dynamically loaded values; exact native regular rates are not copied from fal or an indexed snippet. Exact public launch day has not been established." },
+]
+endpoints = [
+  { "id" = "/v2/image/generate/ideogram-4-5", "input" = "text", "source_url" = "https://developer.ideogram.ai/api-reference/images/generate/ideogram-4-5" },
+  { "id" = "/v2/image/precise-edit/ideogram-4-5", "input" = "multi_image", "source_url" = "https://developer.ideogram.ai/api-reference/images/precise-edit/ideogram-4-5", "parameters" = { "prompt" = { "type" = "string", "min_length" = 1, "max_length" = 10000 }, "reference_images" = { "type" = "array", "max_items" = 4 } } },
+]
+
+[providers.fal]
+provider = "fal"
+id = "ideogram/v4.5"
+url = "https://fal.ai/models/ideogram/v4.5"
+source_url = "https://fal.ai/models/ideogram/v4.5/api"
+references = { "id" = "ideogram/v4.5/edit", "max" = 5 }
+pricing = { "type" = "per_image_tiered", "tiers" = { "text/low" = 0.03, "text/medium" = 0.06, "text/high" = 0.22, "edit/very_low" = 0.008, "edit/low" = 0.03, "edit/medium" = 0.06, "edit/high" = 0.22 }, "source_url" = "https://fal.ai/models/ideogram/v4.5" }
+qualifications = [
+  { "source_url" = "https://fal.ai/models/ideogram/v4.5/api", "notes" = "Generation accepts only the documented 36 exact output sizes or fal presets, and charges by quality independently of image size." },
+  { "source_url" = "https://fal.ai/models/ideogram/v4.5/edit/api", "notes" = "Editing requires a primary image_url separate from up to four reference_image_urls. With a mask, at most three references are permitted. High-precision and masked edits require automatic output geometry; custom dimensions are valid only for unmasked regular edits." },
+]
+endpoints = [
+  { "id" = "ideogram/v4.5", "input" = "text", "source_url" = "https://fal.ai/models/ideogram/v4.5/api", "parameters" = { "seed" = { "type" = "integer" }, "sync_mode" = { "type" = "boolean" }, "num_images" = { "minimum" = 1, "maximum" = 8, "type" = "integer" }, "enable_prompt_expansion" = { "type" = "boolean" }, "quality" = { "enum" = [
+    "low",
+    "medium",
+    "high",
+  ], "type" = "string" }, "prompt" = { "type" = "string", "max_length" = 10000, "min_length" = 1 }, "image_size" = { "enum" = [
+    "square_hd",
+    "square",
+    "portrait_4_3",
+    "portrait_16_9",
+    "landscape_4_3",
+    "landscape_16_9",
+    { "width" = 1024, "height" = 1024 },
+    { "width" = 1024, "height" = 3072 },
+    { "width" = 1120, "height" = 896 },
+    { "width" = 1152, "height" = 2944 },
+    { "width" = 1152, "height" = 864 },
+    { "width" = 1248, "height" = 3328 },
+    { "width" = 1248, "height" = 832 },
+    { "width" = 1280, "height" = 3072 },
+    { "width" = 1280, "height" = 720 },
+    { "width" = 1280, "height" = 800 },
+    { "width" = 1296, "height" = 3168 },
+    { "width" = 1440, "height" = 2560 },
+    { "width" = 1440, "height" = 2880 },
+    { "width" = 1440, "height" = 720 },
+    { "width" = 1600, "height" = 2560 },
+    { "width" = 1664, "height" = 2496 },
+    { "width" = 1728, "height" = 2304 },
+    { "width" = 1792, "height" = 2240 },
+    { "width" = 2048, "height" = 2048 },
+    { "width" = 2240, "height" = 1792 },
+    { "width" = 2304, "height" = 1728 },
+    { "width" = 2496, "height" = 1664 },
+    { "width" = 2560, "height" = 1440 },
+    { "width" = 2560, "height" = 1600 },
+    { "width" = 2880, "height" = 1440 },
+    { "width" = 2944, "height" = 1152 },
+    { "width" = 3072, "height" = 1024 },
+    { "width" = 3072, "height" = 1280 },
+    { "width" = 3168, "height" = 1296 },
+    { "width" = 3328, "height" = 1248 },
+    { "width" = 720, "height" = 1280 },
+    { "width" = 720, "height" = 1440 },
+    { "width" = 800, "height" = 1280 },
+    { "width" = 832, "height" = 1248 },
+    { "width" = 864, "height" = 1152 },
+    { "width" = 896, "height" = 1120 },
+  ] } }, "published_pricing" = { "source_url" = "https://fal.ai/models/ideogram/v4.5", "currency" = "USD", "components" = [
+    { "id" = "low", "meter" = "generated_images", "unit" = "image", "usd_per_unit" = "0.03", "when" = { "required" = [
+      "quality",
+    ], "properties" = { "quality" = { "const" = "low" } } } },
+    { "id" = "medium", "meter" = "generated_images", "unit" = "image", "usd_per_unit" = "0.06", "when" = { "required" = [
+      "quality",
+    ], "properties" = { "quality" = { "const" = "medium" } } } },
+    { "id" = "high", "meter" = "generated_images", "unit" = "image", "usd_per_unit" = "0.22", "when" = { "required" = [
+      "quality",
+    ], "properties" = { "quality" = { "const" = "high" } } } },
+  ] } },
+  { "id" = "ideogram/v4.5/edit", "input" = "multi_image", "source_url" = "https://fal.ai/models/ideogram/v4.5/edit/api", "parameters" = { "image_size" = { "enum" = [
+    "auto",
+    "square",
+    "square_hd",
+    "portrait_4_3",
+    "landscape_4_3",
+    "portrait_16_9",
+    "landscape_16_9",
+  ], "type" = "string" }, "seed" = { "type" = "integer" }, "mask_url" = { "type" = "string" }, "reference_image_urls" = { "max_items" = 4, "type" = "array" }, "edit_precision" = { "enum" = [
+    "regular",
+    "high",
+  ], "type" = "string" }, "num_images" = { "minimum" = 1, "maximum" = 8, "type" = "integer" }, "image_url" = { "type" = "string" }, "quality" = { "enum" = [
+    "very_low",
+    "low",
+    "medium",
+    "high",
+  ], "type" = "string" }, "prompt" = { "type" = "string", "max_length" = 10000, "min_length" = 1 }, "sync_mode" = { "type" = "boolean" }, "image_size.width" = { "type" = "integer", "minimum" = 256, "multiple_of" = 32 }, "image_size.height" = { "type" = "integer", "minimum" = 256, "multiple_of" = 32 } }, "published_pricing" = { "source_url" = "https://fal.ai/models/ideogram/v4.5/edit", "currency" = "USD", "components" = [
+    { "id" = "very_low", "meter" = "generated_images", "unit" = "image", "usd_per_unit" = "0.008", "when" = { "required" = [
+      "quality",
+    ], "properties" = { "quality" = { "const" = "very_low" } } } },
+    { "id" = "low", "meter" = "generated_images", "unit" = "image", "usd_per_unit" = "0.03", "when" = { "required" = [
+      "quality",
+    ], "properties" = { "quality" = { "const" = "low" } } } },
+    { "id" = "medium", "meter" = "generated_images", "unit" = "image", "usd_per_unit" = "0.06", "when" = { "required" = [
+      "quality",
+    ], "properties" = { "quality" = { "const" = "medium" } } } },
+    { "id" = "high", "meter" = "generated_images", "unit" = "image", "usd_per_unit" = "0.22", "when" = { "required" = [
+      "quality",
+    ], "properties" = { "quality" = { "const" = "high" } } } },
+  ] } },
+]
+
+[provider_coverage]
+openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/models", "reason" = "The published model discovery list does not contain this exact model." }
+vercel = { "disposition" = "not_listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models", "reason" = "The published model discovery list does not contain this exact model." }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/ideogram/v4.5" }
+ideogram = { "disposition" = "listed", "source_url" = "https://developer.ideogram.ai/ideogram-api/api-overview" }

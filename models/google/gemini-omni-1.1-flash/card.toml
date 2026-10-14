@@ -1,0 +1,60 @@
+id = "google/gemini-omni-1.1-flash"
+section = "video.models"
+label = "Gemini Omni 1.1 Flash"
+vendor = "google"
+short_description = "Production Gemini video generation with native audio and first/last-frame control."
+url = "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash"
+audio = true
+reference_provider = "google"
+min_duration = 3
+max_duration = 10
+
+[release]
+date = "2026-08-27"
+basis = "model"
+source_url = "https://blog.google/innovation-and-ai/technology/developers-tools/build-with-gemini-omni-1-1-flash/"
+
+[providers.google]
+provider = "google"
+id = "gemini-omni-1.1-flash"
+input = "text-or-image"
+url = "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash"
+source_url = "https://ai.google.dev/gemini-api/docs/pricing"
+pricing = { "type" = "per_token", "input" = 1.5, "output_text" = 9.0, "output_video" = 17.5, "unit" = "USD_per_million_tokens", "source_url" = "https://ai.google.dev/gemini-api/docs/pricing" }
+qualifications = [
+  { "source_url" = "https://ai.google.dev/gemini-api/docs/pricing", "notes" = "Native standard video billing is token-based. Google documents 5792 output tokens per second at 720p, not a general per-second rate for every resolution." },
+]
+
+[providers.fal]
+provider = "fal"
+id = "google/gemini-omni-flash/v1.1/text-to-video"
+input = "text-or-image"
+url = "https://fal.ai/models/google/gemini-omni-flash/v1.1/text-to-video"
+source_url = "https://fal.ai/models/google/gemini-omni-flash/v1.1/text-to-video"
+pricing = { "type" = "per_second", "usd_per_second" = { "360p" = { "audio" = 0.03 }, "720p" = { "audio" = 0.1 }, "1080p" = { "audio" = 0.15 }, "4k" = { "audio" = 0.3 } }, "source_url" = "https://fal.ai/models/google/gemini-omni-flash/v1.1/text-to-video" }
+endpoints = [
+  { "id" = "google/gemini-omni-flash/v1.1/text-to-video", "input" = "text", "source_url" = "https://fal.ai/models/google/gemini-omni-flash/v1.1/text-to-video/api", "parameters" = { "duration" = { "maximum" = 10, "minimum" = 3, "type" = "integer" }, "aspect_ratio" = { "type" = "string", "enum" = [
+    "16:9",
+    "9:16",
+  ] }, "prompt" = { "max_length" = 20000, "type" = "string" }, "resolution" = { "type" = "string", "enum" = [
+    "360p",
+    "720p",
+    "1080p",
+    "4k",
+  ] } } },
+  { "id" = "google/gemini-omni-flash/v1.1/image-to-video", "input" = "image", "source_url" = "https://fal.ai/models/google/gemini-omni-flash/v1.1/image-to-video/api", "parameters" = { "duration" = { "maximum" = 10, "minimum" = 3, "type" = "integer" }, "end_image_url" = { "type" = "string" }, "aspect_ratio" = { "type" = "string", "enum" = [
+    "16:9",
+    "9:16",
+  ] }, "prompt" = { "max_length" = 20000, "type" = "string" }, "image_url" = { "type" = "string" }, "resolution" = { "type" = "string", "enum" = [
+    "360p",
+    "720p",
+    "1080p",
+    "4k",
+  ] } } },
+]
+
+[provider_coverage]
+google = { "disposition" = "listed", "source_url" = "https://ai.google.dev/gemini-api/docs/pricing" }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/google/gemini-omni-flash/v1.1/text-to-video" }
+openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/videos/models", "reason" = "The exact variant is absent from the published video model discovery response. Other variants do not establish its availability." }
+vercel = { "disposition" = "not_listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models", "reason" = "The published discovery lists Gemini Omni Flash Preview, but not the stable Gemini Omni 1.1 Flash identity. Preview is not treated as the stable variant." }

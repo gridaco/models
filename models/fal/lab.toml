@@ -1,0 +1,9 @@
+name = "fal"
+url = "https://fal.ai/"
+
+# Official wordmark extracted unchanged from the homepage header SVG.
+[logo]
+file = "logo.svg"
+kind = "wordmark"
+source_url = "https://fal.ai/"
+retrieved = "2026-10-15"

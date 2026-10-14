@@ -1,0 +1,223 @@
+id = "bfl/flux-3-video"
+section = "video.models"
+label = "FLUX 3 Video"
+vendor = "black-forest-labs"
+short_description = "Video generation from text or images with synchronized audio and clips up to 20 seconds."
+url = "https://bfl.ai/models/flux-3-video"
+audio = true
+reference_provider = "bfl"
+min_duration = 5
+max_duration = 20
+
+[release]
+date = "2026-08-04"
+basis = "model"
+source_url = "https://bfl.ai/blog/flux-3-video"
+
+[providers.bfl]
+provider = "bfl"
+id = "flux-3-video"
+input = "text-or-image"
+url = "https://docs.bfl.ai/flux_3/flux3_video"
+source_url = "https://api.bfl.ai/openapi.json"
+pricing = { "type" = "per_second_by_mode", "usd_per_second" = { "t2v" = { "hd" = 0.17, "fhd" = 0.29, "qhd" = 0.4, "uhd" = 0.8 }, "i2v" = { "hd" = 0.17, "fhd" = 0.29, "qhd" = 0.4, "uhd" = 0.8 }, "v2v" = { "hd" = 0.41, "fhd" = 0.53, "qhd" = 0.65, "uhd" = 0.95 } }, "source_url" = "https://docs.bfl.ai/quick_start/pricing" }
+endpoints = [
+  { id = "flux-3-video", input = "text", source_url = "https://api.bfl.ai/openapi.json", parameters = { mode = { type = "string", enum = [
+    "t2v",
+    "i2v",
+    "v2v",
+    "draft_enhance",
+  ] }, duration = { enum = [
+    "auto",
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+  ] }, aspect_ratio = { type = "string", enum = [
+    "auto",
+    "21:9",
+    "2:1",
+    "16:9",
+    "4:3",
+    "1:1",
+    "3:4",
+    "9:16",
+    "9:21",
+  ] }, resolution = { type = "string", enum = [
+    "hd",
+    "fhd",
+    "qhd",
+    "uhd",
+  ] } } },
+]
+
+[providers.fal]
+provider = "fal"
+id = "blackforestlabs/flux-3/text-to-video"
+input = "text-or-image"
+url = "https://fal.ai/models/blackforestlabs/flux-3/text-to-video"
+source_url = "https://fal.ai/models/blackforestlabs/flux-3/text-to-video"
+pricing = { "type" = "per_second", "usd_per_second" = { "720p" = { "audio" = 0.17 }, "1080p" = { "audio" = 0.29 } }, "source_url" = "https://fal.ai/models/blackforestlabs/flux-3/text-to-video" }
+endpoints = [
+  { "id" = "blackforestlabs/flux-3/text-to-video", "input" = "text", "source_url" = "https://fal.ai/models/blackforestlabs/flux-3/text-to-video/api", "parameters" = { "duration" = { "enum" = [
+    "auto",
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+  ] }, "resolution" = { "enum" = [
+    "720p",
+    "1080p",
+  ], "type" = "string" }, "prompt" = { "type" = "string" }, "generate_audio" = { "type" = "boolean" }, "safety_tolerance" = { "type" = "integer", "maximum" = 4, "minimum" = 0 }, "aspect_ratio" = { "enum" = [
+    "auto",
+    "21:9",
+    "2:1",
+    "16:9",
+    "4:3",
+    "1:1",
+    "3:4",
+    "9:16",
+  ], "type" = "string" } } },
+  { "id" = "blackforestlabs/flux-3/image-to-video", "input" = "image", "source_url" = "https://fal.ai/models/blackforestlabs/flux-3/image-to-video/api", "parameters" = { "duration" = { "enum" = [
+    "auto",
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+  ] }, "resolution" = { "enum" = [
+    "720p",
+    "1080p",
+  ], "type" = "string" }, "prompt" = { "type" = "string" }, "generate_audio" = { "type" = "boolean" }, "image_url" = { "type" = "string" }, "safety_tolerance" = { "type" = "integer", "maximum" = 4, "minimum" = 0 }, "aspect_ratio" = { "enum" = [
+    "auto",
+    "21:9",
+    "2:1",
+    "16:9",
+    "4:3",
+    "1:1",
+    "3:4",
+    "9:16",
+  ], "type" = "string" } } },
+]
+
+[providers.openrouter]
+provider = "openrouter"
+id = "black-forest-labs/flux-3-video"
+input = "text-or-image"
+url = "https://openrouter.ai/api/v1/videos/models"
+source_url = "https://openrouter.ai/api/v1/videos/models"
+pricing = { "type" = "provider_skus", "skus" = { "cents_per_second_output" = "17", "cents_per_second_output_2k" = "28", "cents_per_second_output_4k" = "41", "cents_per_second_output_720p" = "17", "cents_per_second_output_1080p" = "29", "cents_per_second_video_continuation_2k" = "31", "cents_per_second_video_continuation_4k" = "45", "cents_per_second_video_continuation_720p" = "41", "cents_per_second_video_continuation_1080p" = "53" }, "source_unit_notes" = "cents_per: cents per named output/continuation unit", "source_url" = "https://openrouter.ai/api/v1/videos/models" }
+endpoints = [
+  { "id" = "black-forest-labs/flux-3-video", "input" = "text", "source_url" = "https://openrouter.ai/api/v1/videos/models", "parameters" = { "duration" = { "type" = "integer", "enum" = [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+  ] }, "resolution" = { "type" = "string", "enum" = [
+    "720p",
+    "1080p",
+    "2K",
+    "4K",
+  ] }, "aspect_ratio" = { "type" = "string", "enum" = [
+    "21:9",
+    "16:9",
+    "4:3",
+    "1:1",
+    "3:4",
+    "9:16",
+  ] } } },
+]
+
+[providers.vercel]
+provider = "vercel"
+id = "bfl/flux-3-video"
+input = "text-or-image"
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+url = "https://ai-gateway.vercel.sh/v1/models"
+endpoints = [
+  { "id" = "bfl/flux-3-video", "input" = "text", "source_url" = "https://ai-gateway.vercel.sh/v1/models", "parameters" = { "duration" = { "enum" = [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+  ] }, "resolution" = { "enum" = [
+    "hd",
+    "fhd",
+  ] }, "aspect_ratio" = { "enum" = [
+    "21:9",
+    "2:1",
+    "16:9",
+    "4:3",
+    "1:1",
+    "3:4",
+    "9:16",
+  ] } } },
+]
+qualifications = [
+  { "source_url" = "https://ai-gateway.vercel.sh/v1/models", "notes" = "The model is listed, but its pricing object is empty. No regular price or billing unit is inferred." },
+]
+
+[provider_coverage]
+bfl = { "disposition" = "listed", "source_url" = "https://api.bfl.ai/openapi.json" }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/blackforestlabs/flux-3/text-to-video" }
+openrouter = { "disposition" = "listed", "source_url" = "https://openrouter.ai/api/v1/videos/models" }
+vercel = { "disposition" = "listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models" }

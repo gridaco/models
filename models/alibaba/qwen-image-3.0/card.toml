@@ -1,0 +1,64 @@
+id = "alibaba/qwen-image-3.0"
+section = "image.models"
+vendor = "alibaba"
+reference_provider = "alibaba"
+label = "Qwen Image 3.0"
+short_description = "Image generation and editing with multilingual text rendering."
+
+[release]
+date = "2026-08-04"
+basis = "model"
+source_url = "https://help.aliyun.com/en/model-studio/newly-released-models"
+
+[providers.alibaba]
+provider = "alibaba"
+id = "qwen-image-3.0"
+url = "https://help.aliyun.com/en/model-studio/qwen-image-3-0"
+source_url = "https://help.aliyun.com/en/model-studio/qwen-image-3-0"
+capabilities = { "source_url" = "https://help.aliyun.com/en/model-studio/qwen-image-3-0", "image_input" = true }
+qualifications = [
+  { "source_url" = "https://help.aliyun.com/en/model-studio/qwen-image-3-0", "notes" = "Native regular prices are quoted in CNY per input and generated image, with regional rates. No USD conversion is made. Qwen Image 3.0 Standard is distinct from qwen-image-3.0-pro." },
+]
+
+[providers.fal]
+provider = "fal"
+id = "alibaba/qwen-image-3/text-to-image"
+source_url = "https://fal.ai/models/alibaba/qwen-image-3/text-to-image/api"
+url = "https://fal.ai/models/alibaba/qwen-image-3/text-to-image"
+pricing = { "type" = "per_image_tiered", "tiers" = { "1K" = 0.04, "2K" = 0.075 }, "source_url" = "https://fal.ai/models/alibaba/qwen-image-3/text-to-image" }
+references = { "id" = "alibaba/qwen-image-3/edit", "max" = 3 }
+qualifications = [
+  { "source_url" = "https://fal.ai/models/alibaba/qwen-image-3/edit/api", "notes" = "Reference images require each dimension between 384 and 2048 pixels, a maximum 10 MB per image, and JPEG, non-alpha PNG or WebP. The source quotes 1K/2K prices without an exact custom-size pixel breakpoint." },
+]
+endpoints = [
+  { "id" = "alibaba/qwen-image-3/text-to-image", "input" = "text", "source_url" = "https://fal.ai/models/alibaba/qwen-image-3/text-to-image/api", "parameters" = { "seed" = { "type" = "integer" }, "enable_prompt_expansion" = { "type" = "boolean" }, "output_format" = { "enum" = [
+    "jpeg",
+    "png",
+    "webp",
+  ], "type" = "string" }, "prompt" = { "max_length" = 5000, "min_length" = 1, "type" = "string" }, "sync_mode" = { "type" = "boolean" }, "negative_prompt" = { "max_length" = 500, "type" = "string" }, "image_size" = { "enum" = [
+    "square_hd",
+    "square",
+    "portrait_4_3",
+    "portrait_16_9",
+    "landscape_4_3",
+    "landscape_16_9",
+  ], "type" = "string" }, "num_images" = { "maximum" = 6, "minimum" = 1, "type" = "integer" }, "enable_safety_checker" = { "type" = "boolean" }, "image_size.width" = { "type" = "integer", "minimum" = 1, "maximum" = 14142 }, "image_size.height" = { "type" = "integer", "minimum" = 1, "maximum" = 14142 } }, "image_constraints" = { "min_pixels" = 262144, "max_pixels" = 4194304 } },
+  { "id" = "alibaba/qwen-image-3/edit", "input" = "multi_image", "source_url" = "https://fal.ai/models/alibaba/qwen-image-3/edit/api", "parameters" = { "seed" = { "type" = "integer" }, "enable_prompt_expansion" = { "type" = "boolean" }, "output_format" = { "enum" = [
+    "jpeg",
+    "png",
+    "webp",
+  ], "type" = "string" }, "prompt" = { "max_length" = 5000, "min_length" = 1, "type" = "string" }, "sync_mode" = { "type" = "boolean" }, "negative_prompt" = { "max_length" = 500, "type" = "string" }, "image_size" = { "enum" = [
+    "square_hd",
+    "square",
+    "portrait_4_3",
+    "portrait_16_9",
+    "landscape_4_3",
+    "landscape_16_9",
+  ], "type" = "string" }, "image_urls" = { "type" = "array", "min_items" = 1, "max_items" = 3 }, "num_images" = { "maximum" = 6, "minimum" = 1, "type" = "integer" }, "enable_safety_checker" = { "type" = "boolean" }, "image_size.width" = { "type" = "integer", "minimum" = 1, "maximum" = 14142 }, "image_size.height" = { "type" = "integer", "minimum" = 1, "maximum" = 14142 } }, "image_constraints" = { "min_pixels" = 262144, "max_pixels" = 4194304 } },
+]
+
+[provider_coverage]
+openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/models", "reason" = "The published model discovery list does not contain this exact model." }
+vercel = { "disposition" = "not_listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models", "reason" = "The published model discovery list does not contain this exact model." }
+fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/alibaba/qwen-image-3/text-to-image" }
+alibaba = { "disposition" = "listed", "source_url" = "https://help.aliyun.com/en/model-studio/qwen-image-3-0" }

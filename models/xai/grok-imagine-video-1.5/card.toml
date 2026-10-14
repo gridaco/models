@@ -61,6 +61,36 @@ source_url = "https://fal.ai/models/xai/grok-imagine-video/v1.5/image-to-video/a
 "prompt" = { "max_length" = 4096, "type" = "string" }
 "resolution" = { "type" = "string", "enum" = ["480p", "720p", "1080p"] }
 
+
+[[providers.fal.endpoints]]
+id = "xai/grok-imagine-video/v1.5/text-to-video"
+input = "text"
+source_url = "https://fal.ai/models/xai/grok-imagine-video/v1.5/text-to-video/api"
+parameters = { "prompt" = { "type" = "string", "max_length" = 4096 }, "aspect_ratio" = { "type" = "string", "enum" = [
+  "16:9",
+  "4:3",
+  "3:2",
+  "1:1",
+  "2:3",
+  "3:4",
+  "9:16",
+] }, "enable_safety_checker" = { "type" = "boolean" }, "duration" = { "type" = "integer", "maximum" = 15, "minimum" = 1 }, "resolution" = { "type" = "string", "enum" = [
+  "480p",
+  "720p",
+  "1080p",
+] } }
+published_pricing = { "source_url" = "https://fal.ai/models/xai/grok-imagine-video/v1.5/text-to-video", "currency" = "USD", "components" = [
+  { "id" = "output_seconds_480p", "meter" = "output_seconds", "unit" = "second", "per_quantity" = "1", "usd_per_unit" = "0.08", "when" = { "properties" = { "resolution" = { "const" = "480p" } }, "required" = [
+    "resolution",
+  ] } },
+  { "id" = "output_seconds_720p", "meter" = "output_seconds", "unit" = "second", "per_quantity" = "1", "usd_per_unit" = "0.14", "when" = { "properties" = { "resolution" = { "const" = "720p" } }, "required" = [
+    "resolution",
+  ] } },
+  { "id" = "output_seconds_1080p", "meter" = "output_seconds", "unit" = "second", "per_quantity" = "1", "usd_per_unit" = "0.25", "when" = { "properties" = { "resolution" = { "const" = "1080p" } }, "required" = [
+    "resolution",
+  ] } },
+] }
+
 [providers.xai]
 provider = "xai"
 id = "grok-imagine-video-1.5"
