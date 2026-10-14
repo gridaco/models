@@ -1153,6 +1153,20 @@ includes 1080p even though the detailed page's older input table lists only
 480p and 720p; endpoint parameters follow the exact OpenAPI schema. Defaults
 and adaptive output options are not inferred as fixed billable output sizes.
 
+The same detailed fal page publishes these output dimensions for explicit
+framing. The formula uses 24 frames/second and divides pixel-frames by 1024;
+multiply the resulting output-token count by USD 0.0214/1,000 for these tiers.
+Do not infer a fixed dimension for `auto` or extrapolate this table to 1080p.
+
+| Aspect ratio | 480p width × height | 720p width × height |
+| ------------ | ------------------- | ------------------- |
+| `21:9`       | 992 × 432           | 1470 × 630          |
+| `16:9`       | 864 × 496           | 1280 × 720          |
+| `4:3`        | 752 × 560           | 1112 × 834          |
+| `1:1`        | 640 × 640           | 960 × 960           |
+| `3:4`        | 560 × 752           | 834 × 1112          |
+| `9:16`       | 496 × 864           | 720 × 1280          |
+
 Grok text generation has no input-image charge. Its independently sourced
 output-second rates are USD 0.08 at 480p, 0.14 at 720p and 0.25 at 1080p on
 the [text endpoint page](https://fal.ai/models/xai/grok-imagine-video/v1.5/text-to-video).
