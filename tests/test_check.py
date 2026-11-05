@@ -441,6 +441,52 @@ def test_verified_output_token_example_must_match_calculator():
     assert any("does not match calculator" in error for error in enriched(lambda card: card["output_token_calculator"]["examples"][0].update(output_tokens=197)))
 
 
+def scaled_calculator(card, multiplier="4.2", tokens=823):
+    calc = card["output_token_calculator"]
+    calc["quality_multipliers"] = {"low": multiplier, "medium": "1", "high": "1"}
+    calc["result_rounding"] = "nearest_ties_up"
+    calc["examples"][0]["output_tokens"] = tokens
+
+
+def test_calculator_applies_multiplier_after_base_ceiling():
+    assert enriched(scaled_calculator) == []
+
+
+def test_calculator_multiplier_rounds_half_ties_up():
+    # Base low square output is 196; 196 * 0.125 is 24.5, not ties-to-even 24.
+    assert enriched(lambda card: scaled_calculator(card, "0.125", 25)) == []
+    assert any("does not match calculator" in error for error in enriched(lambda card: scaled_calculator(card, "0.125", 24)))
+
+
+@pytest.mark.parametrize("multiplier", ["0", "-1", "nan", "1e3", 4.2])
+def test_calculator_multiplier_requires_positive_decimal_string(multiplier):
+    assert enriched(lambda card: scaled_calculator(card, multiplier))
+
+
+@pytest.mark.parametrize("missing", ["result_rounding", "quality_multipliers"])
+def test_calculator_multiplier_and_rounding_are_a_pair(missing):
+    def mutate(card):
+        scaled_calculator(card)
+        card["output_token_calculator"].pop(missing)
+    assert enriched(mutate)
+
+
+@pytest.mark.parametrize("change", ["missing", "extra"])
+def test_calculator_multiplier_qualities_match_axes(change):
+    def mutate(card):
+        scaled_calculator(card)
+        multipliers = card["output_token_calculator"]["quality_multipliers"]
+        if change == "missing":
+            multipliers.pop("medium")
+        else:
+            multipliers["unknown"] = "1"
+    assert any("match quality_axes" in error for error in enriched(mutate))
+
+
+def test_calculator_rejects_unscaled_example_for_scaled_formula():
+    assert any("does not match calculator" in error for error in enriched(lambda card: scaled_calculator(card, tokens=196)))
+
+
 def test_rounded_price_example_never_requires_inferred_tokens():
     def mutate(card):
         example = card["output_token_calculator"]["examples"][0]

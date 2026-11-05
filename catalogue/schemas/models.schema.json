@@ -485,7 +485,26 @@
           "type": "string",
           "format": "uri",
           "pattern": "^https://[^/]+(?:/|$)"
+        },
+        "quality_multipliers": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$"
+          },
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+            "description": "Exact positive decimal multiplier; no exponent notation."
+          }
+        },
+        "result_rounding": {
+          "enum": ["nearest_ties_up"]
         }
+      },
+      "dependentRequired": {
+        "quality_multipliers": ["result_rounding"],
+        "result_rounding": ["quality_multipliers"]
       }
     },
     "output_token_example": {
