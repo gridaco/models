@@ -146,7 +146,7 @@ endpoints = [
     "low",
     "medium",
     "high",
-  ] }, frame_count = { type = "integer", minimum = 2, maximum = 64 }, frame_duration_ms = { type = "integer", minimum = 20, maximum = 2000 } } },
+  ] }, frame_count = { type = "integer", minimum = 2, maximum = 16 }, frame_duration_ms = { type = "integer", minimum = 20, maximum = 2000 } } },
   { id = "v1/images/edits", input = "image", interface = "images.edits", source_url = "https://developers.openai.com/api/docs/guides/image-generation", parameters = { output_format = { type = "string", enum = [
     "png",
     "jpeg",
@@ -159,6 +159,8 @@ endpoints = [
 ]
 qualifications = [
   { source_url = "https://developers.openai.com/api/docs/guides/image-generation", notes = "GIF output is generation-only; the native guide does not support GIF output on edits. SVG output is generated through a separately billed authoring model. Raster token pricing does not include those authoring-model tokens." },
+  { source_url = "https://developers.openai.com/api/reference/resources/images/methods/generate", notes = "Transparent backgrounds require PNG or WebP output. A listed GIF or SVG format does not establish transparent-background support for that format." },
+  { source_url = "https://developers.openai.com/api/reference/resources/images/methods/generate", notes = "The exact generation API reference limits frame_count to 2–16. The model-specific image guide describes 2–64; this binding records the narrower API-reference maximum rather than treating the two sources as equivalent." },
 ]
 
 [providers.openai.pricing]

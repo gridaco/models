@@ -1356,15 +1356,20 @@ image-price examples. The calculator estimates raster output only; it excludes
 text/image input and partial-image charges.
 
 - https://developers.openai.com/api/docs/guides/image-generation
+- https://developers.openai.com/api/reference/resources/images/methods/generate
 - https://developers.openai.com/_astro/GptImageTokenCalculator.react.SM_UvXcs.js
 
 Provider format differences are intentional. The native guide permits GIF only
-on generation, with 2–64 frames. fal generation permits GIF and SVG, whereas its
+on generation, with 2–64 frames. The exact native generation API reference instead
+lists 2–16; the native binding uses that narrower endpoint maximum and retains
+the guide discrepancy as a qualification. fal generation permits GIF and SVG, whereas its
 edit schema lists GIF but no SVG, with 2–16 frames. Both native and fal describe
 20–2,000 ms frame durations rounded to 10 ms; all frames/outputs share the request
 pixel budget. OpenRouter lists PNG/JPEG/WebP only. The catalogue preserves each
 provider's documented surface rather than claiming format parity. SVG includes
-separately billed authoring-model tokens, not just the raster token rates.
+separately billed authoring-model tokens, not just the raster token rates. The
+native background contract requires PNG or WebP for transparency; format support
+alone does not establish transparent GIF or SVG output.
 
 - https://fal.ai/models/openai/gpt-image-2.6/flare/text-to-image/api
 - https://fal.ai/models/openai/gpt-image-2.6/flare/edit/api
