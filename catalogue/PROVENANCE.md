@@ -1393,8 +1393,11 @@ became broadly available on that day.
 Native, Vercel and OpenRouter publish per-image resolution tiers. The native price
 includes reference images and prompts at no extra charge. fal's page and billing
 metadata instead name a $0.048 megapixel unit; that source does not establish
-quantity rounding, all resolution-tier rates or reference billing scope. These
-are not silently replaced with BFL's flat per-image tiers. fal's exact API schema
+quantity rounding or all resolution-tier rates. The edit page explicitly states
+one flat price per image regardless of reference count, establishing that
+references add no separate charge. This does not establish identical prices
+across resolutions, and missing rates are not silently replaced with BFL's flat
+per-image tiers. fal's exact API schema
 lists `768sq`, `1k`, `1.5k`, `2k`, `4k`; its narrative table instead lists `512sq`
 and omits `1.5k`. The exact endpoint schema supplies the fal parameter list.
 
@@ -1403,4 +1406,5 @@ and omits `1.5k`. The exact endpoint schema supplies the fal parameter list.
 - https://openrouter.ai/api/v1/images/models/black-forest-labs/flux-3-image/endpoints
 - https://fal.ai/models/blackforestlabs/flux-3/text-to-image
 - https://fal.ai/models/blackforestlabs/flux-3/text-to-image/api
+- https://fal.ai/models/blackforestlabs/flux-3/edit-image
 - https://fal.ai/models/blackforestlabs/flux-3/edit-image/api
