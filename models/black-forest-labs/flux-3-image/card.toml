@@ -1,0 +1,179 @@
+id = "bfl/flux-3-image"
+section = "image.models"
+vendor = "black-forest-labs"
+reference_provider = "bfl"
+label = "FLUX 3 Image"
+short_description = "Image generation and editing with up to ten reference images."
+
+[release]
+date = "2026-10-05"
+basis = "provider_endpoint"
+source_url = "https://vercel.com/ai-gateway/models/flux-3-image"
+
+[pricing]
+type = "per_image_tiered"
+source_url = "https://bfl.ai/pricing?category=flux+3+image"
+
+[pricing.tiers]
+768sq = 0.041
+1k = 0.048
+"1.5k" = 0.07
+2k = 0.1
+4k = 0.607
+
+[providers]
+
+[providers.bfl]
+provider = "bfl"
+id = "flux-3-image"
+source_url = "https://docs.bfl.ml/api-reference/utility/generate-an-image-with-flux-3"
+url = "https://docs.bfl.ml/api-reference/utility/generate-an-image-with-flux-3"
+
+[providers.bfl.references]
+id = "flux-3-image"
+max = 10
+
+[providers.bfl.pricing]
+type = "per_image_tiered"
+source_url = "https://bfl.ai/pricing?category=flux+3+image"
+
+[providers.bfl.pricing.tiers]
+768sq = 0.041
+1k = 0.048
+"1.5k" = 0.07
+2k = 0.1
+4k = 0.607
+
+[providers.vercel]
+provider = "vercel"
+id = "bfl/flux-3-image"
+source_url = "https://vercel.com/ai-gateway/models/flux-3-image"
+url = "https://vercel.com/ai-gateway/models/flux-3-image"
+
+[providers.vercel.references]
+id = "bfl/flux-3-image"
+max = 10
+
+[providers.vercel.pricing]
+type = "per_image_tiered"
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+
+[providers.vercel.pricing.tiers]
+768x768 = 0.041
+1024x1024 = 0.048
+1536x1536 = 0.07
+2048x2048 = 0.1
+4096x4096 = 0.607
+
+[providers.openrouter]
+provider = "openrouter"
+id = "black-forest-labs/flux-3-image"
+source_url = "https://openrouter.ai/api/v1/images/models/black-forest-labs/flux-3-image/endpoints"
+url = "https://openrouter.ai/api/v1/images/models/black-forest-labs/flux-3-image/endpoints"
+
+[providers.openrouter.references]
+id = "black-forest-labs/flux-3-image"
+max = 10
+
+[providers.openrouter.pricing]
+type = "per_image_tiered"
+source_url = "https://openrouter.ai/api/v1/images/models/black-forest-labs/flux-3-image/endpoints"
+
+[providers.openrouter.pricing.tiers]
+768 = 0.041
+1k = 0.048
+"1.5k" = 0.07
+2k = 0.1
+4k = 0.607
+
+[providers.fal]
+provider = "fal"
+id = "blackforestlabs/flux-3/text-to-image"
+source_url = "https://fal.ai/models/blackforestlabs/flux-3/text-to-image/api"
+url = "https://fal.ai/models/blackforestlabs/flux-3/text-to-image"
+qualifications = [
+  { source_url = "https://fal.ai/models/blackforestlabs/flux-3/text-to-image/api", notes = "The exact API schema lists 768sq, 1k, 1.5k, 2k and 4k. Narrative documentation instead lists 512sq and omits 1.5k; the exact endpoint schema supplies this binding parameter list." },
+  { source_url = "https://fal.ai/models/blackforestlabs/flux-3/text-to-image", notes = "The page publishes $0.048 for a 1K (1 MP) image and endpoint billing metadata names megapixels. Larger resolution-tier rates and quantity rounding are not established by this source; native-provider flat tier prices are not substituted." },
+  { source_url = "https://fal.ai/models/blackforestlabs/flux-3/edit-image", notes = "The edit documentation explicitly states one flat price per image regardless of the number of references. This establishes that reference count adds no separate charge; it does not establish identical prices across output resolutions." },
+]
+endpoints = [
+  { id = "blackforestlabs/flux-3/text-to-image", input = "text", source_url = "https://fal.ai/models/blackforestlabs/flux-3/text-to-image/api", parameters = { version = { type = "string" }, sync_mode = { type = "boolean" }, resolution = { enum = [
+    "768sq",
+    "1k",
+    "1.5k",
+    "2k",
+    "4k",
+  ], type = "string" }, output_format = { enum = [
+    "jpeg",
+    "png",
+  ], type = "string" }, safety_tolerance = { minimum = 0, maximum = 4, type = "integer" }, aspect_ratio = { enum = [
+    "auto",
+    "21:9",
+    "2:1",
+    "16:9",
+    "3:2",
+    "7:5",
+    "4:3",
+    "5:4",
+    "1:1",
+    "4:5",
+    "3:4",
+    "5:7",
+    "2:3",
+    "9:16",
+    "1:2",
+  ], type = "string" }, enable_prompt_expansion = { type = "boolean" }, prompt = { type = "string" } } },
+  { id = "blackforestlabs/flux-3/edit-image", input = "multi_image", source_url = "https://fal.ai/models/blackforestlabs/flux-3/edit-image/api", parameters = { version = { type = "string" }, sync_mode = { type = "boolean" }, resolution = { enum = [
+    "768sq",
+    "1k",
+    "1.5k",
+    "2k",
+    "4k",
+  ], type = "string" }, output_format = { enum = [
+    "jpeg",
+    "png",
+  ], type = "string" }, safety_tolerance = { minimum = 0, maximum = 4, type = "integer" }, image_urls = { max_items = 10, type = "array", min_items = 1 }, aspect_ratio = { enum = [
+    "auto",
+    "21:9",
+    "2:1",
+    "16:9",
+    "3:2",
+    "7:5",
+    "4:3",
+    "5:4",
+    "1:1",
+    "4:5",
+    "3:4",
+    "5:7",
+    "2:3",
+    "9:16",
+    "1:2",
+  ], type = "string" }, enable_prompt_expansion = { type = "boolean" }, prompt = { type = "string" } } },
+]
+
+[providers.fal.references]
+id = "blackforestlabs/flux-3/edit-image"
+max = 10
+
+[providers.fal.pricing]
+type = "per_megapixel"
+usd = 0.048
+source_url = "https://fal.ai/models/blackforestlabs/flux-3/text-to-image"
+
+[provider_coverage]
+
+[provider_coverage.bfl]
+disposition = "listed"
+source_url = "https://docs.bfl.ml/api-reference/utility/generate-an-image-with-flux-3"
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/flux-3-image"
+
+[provider_coverage.openrouter]
+disposition = "listed"
+source_url = "https://openrouter.ai/api/v1/images/models/black-forest-labs/flux-3-image/endpoints"
+
+[provider_coverage.fal]
+disposition = "listed"
+source_url = "https://fal.ai/models/blackforestlabs/flux-3/text-to-image/api"

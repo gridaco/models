@@ -1,0 +1,185 @@
+id = "openai/gpt-6.1-terra"
+section = "text.catalog"
+vendor = "openai"
+reference_provider = "openai"
+label = "GPT-6.1 Terra"
+multimodal = true
+image_input_mimes = ["image/png", "image/jpeg", "image/webp", "image/gif"]
+tool_call = true
+context_window = 1050000
+output_limit = 128000
+
+[release]
+date = "2026-10-26"
+basis = "model"
+source_url = "https://developers.openai.com/api/docs/changelog"
+
+[cost]
+input = 1
+output = 5
+cache_read = 0.05
+cache_write = 1.25
+
+[cost.long_context]
+input_tokens_above = 272000
+input_multiplier = 2
+output_multiplier = 1.5
+
+[providers]
+
+[providers.openai]
+provider = "openai"
+id = "gpt-6.1-terra"
+url = "https://developers.openai.com/api/docs/models/gpt-6.1-terra"
+source_url = "https://developers.openai.com/api/docs/models/gpt-6.1-terra"
+qualifications = [
+  { source_url = "https://developers.openai.com/api/docs/models/gpt-6.1-terra", notes = "The total context window is 1,050,000 tokens, but the separately published maximum input is 922,000 tokens; the output maximum is 128,000. Context size does not authorize a larger input." },
+  { source_url = "https://developers.openai.com/api/docs/models/gpt-6.1-terra", notes = "Responses supports function calling. Chat Completions does not support tool calling. Reasoning none is supported; minimal is not listed." },
+  { source_url = "https://developers.openai.com/api/docs/guides/images-vision", notes = "Image input is supported, but the published patch/tile multiplier and detail-level sizing tables do not name this exact model. No vision-tokenization formula is inferred from other models." },
+]
+endpoints = [
+  { id = "gpt-6.1-terra", input = "text", source_url = "https://developers.openai.com/api/docs/models/gpt-6.1-terra", interface = "responses", capabilities = { source_url = "https://developers.openai.com/api/docs/models/gpt-6.1-terra", image_input = true, tools = true, reasoning = true, structured_output = true, streaming = true }, parameters = { "reasoning.effort" = { type = "string", enum = [
+    "none",
+    "low",
+    "medium",
+    "high",
+    "xhigh",
+    "max",
+  ] } } },
+]
+
+[providers.openai.token_pricing]
+source_url = "https://developers.openai.com/api/docs/models/gpt-6.1-terra"
+unit = "usd_per_token"
+scope = "Regular Standard synchronous global token rates; 30-minute cache writes. Optional tools, alternate service tiers, 12-hour retention and regional processing are excluded."
+input = "0.000001"
+output = "0.000005"
+input_cache_read = "0.00000005"
+input_cache_write = "0.00000125"
+tiers = [
+  { meter = "input", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.000001" },
+  { meter = "input", minimum_input_tokens = 272001, usd_per_token = "0.000002" },
+  { meter = "output", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.000005" },
+  { meter = "output", minimum_input_tokens = 272001, usd_per_token = "0.0000075" },
+  { meter = "input_cache_read", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.00000005" },
+  { meter = "input_cache_read", minimum_input_tokens = 272001, usd_per_token = "0.0000001" },
+  { meter = "input_cache_write", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.00000125" },
+  { meter = "input_cache_write", minimum_input_tokens = 272001, usd_per_token = "0.0000025" },
+]
+
+[providers.openai.capabilities]
+source_url = "https://developers.openai.com/api/docs/models/gpt-6.1-terra"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+streaming = true
+
+[providers.openai.limits]
+source_url = "https://developers.openai.com/api/docs/models/gpt-6.1-terra"
+context_tokens = 1050000
+max_output_tokens = 128000
+
+[providers.openrouter]
+provider = "openrouter"
+id = "openai/gpt-6.1-terra"
+url = "https://openrouter.ai/openai/gpt-6.1-terra"
+source_url = "https://openrouter.ai/openai/gpt-6.1-terra"
+qualifications = [
+  { source_url = "https://openrouter.ai/api/v1/models", notes = "The provider reports its long-context override at minimum 272000 prompt tokens. This binding preserves that threshold rather than substituting another provider's 272001 boundary." },
+]
+endpoints = [
+  { id = "openai/gpt-6.1-terra", input = "text", source_url = "https://openrouter.ai/openai/gpt-6.1-terra" },
+]
+
+[providers.openrouter.token_pricing]
+source_url = "https://openrouter.ai/openai/gpt-6.1-terra"
+unit = "usd_per_token"
+scope = "Regular Standard synchronous global token rates; 30-minute cache writes. Optional tools, alternate service tiers, 12-hour retention and regional processing are excluded."
+input = "0.000001"
+output = "0.000005"
+input_cache_read = "0.00000005"
+input_cache_write = "0.00000125"
+tiers = [
+  { meter = "input", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.000001" },
+  { meter = "input", minimum_input_tokens = 272000, usd_per_token = "0.000002" },
+  { meter = "output", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.000005" },
+  { meter = "output", minimum_input_tokens = 272000, usd_per_token = "0.0000075" },
+  { meter = "input_cache_read", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.00000005" },
+  { meter = "input_cache_read", minimum_input_tokens = 272000, usd_per_token = "0.0000001" },
+  { meter = "input_cache_write", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.00000125" },
+  { meter = "input_cache_write", minimum_input_tokens = 272000, usd_per_token = "0.0000025" },
+]
+
+[providers.openrouter.capabilities]
+source_url = "https://openrouter.ai/openai/gpt-6.1-terra"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+streaming = true
+
+[providers.openrouter.limits]
+source_url = "https://openrouter.ai/openai/gpt-6.1-terra"
+context_tokens = 1050000
+max_output_tokens = 128000
+
+[providers.vercel]
+provider = "vercel"
+id = "openai/gpt-6.1-terra"
+url = "https://vercel.com/ai-gateway/models/gpt-6.1-terra"
+source_url = "https://vercel.com/ai-gateway/models/gpt-6.1-terra"
+endpoints = [
+  { id = "openai/gpt-6.1-terra", input = "text", source_url = "https://vercel.com/ai-gateway/models/gpt-6.1-terra" },
+]
+
+[providers.vercel.token_pricing]
+source_url = "https://vercel.com/ai-gateway/models/gpt-6.1-terra"
+unit = "usd_per_token"
+scope = "Regular Standard synchronous global token rates; 30-minute cache writes. Optional tools, alternate service tiers, 12-hour retention and regional processing are excluded."
+input = "0.000001"
+output = "0.000005"
+input_cache_read = "0.00000005"
+input_cache_write = "0.00000125"
+tiers = [
+  { meter = "input", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.000001" },
+  { meter = "input", minimum_input_tokens = 272001, usd_per_token = "0.000002" },
+  { meter = "output", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.000005" },
+  { meter = "output", minimum_input_tokens = 272001, usd_per_token = "0.0000075" },
+  { meter = "input_cache_read", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.00000005" },
+  { meter = "input_cache_read", minimum_input_tokens = 272001, usd_per_token = "0.0000001" },
+  { meter = "input_cache_write", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.00000125" },
+  { meter = "input_cache_write", minimum_input_tokens = 272001, usd_per_token = "0.0000025" },
+]
+
+[providers.vercel.capabilities]
+source_url = "https://vercel.com/ai-gateway/models/gpt-6.1-terra"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+streaming = true
+
+[providers.vercel.limits]
+source_url = "https://vercel.com/ai-gateway/models/gpt-6.1-terra"
+context_tokens = 1050000
+max_output_tokens = 128000
+
+[provider_coverage]
+
+[provider_coverage.openai]
+disposition = "listed"
+source_url = "https://developers.openai.com/api/docs/models/gpt-6.1-terra"
+
+[provider_coverage.openrouter]
+disposition = "listed"
+source_url = "https://openrouter.ai/openai/gpt-6.1-terra"
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/gpt-6.1-terra"
+
+[provider_coverage.fal]
+disposition = "excluded"
+source_url = "https://fal.ai/models"
+reason = "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."
