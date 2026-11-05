@@ -175,6 +175,20 @@ def numeric_range_errors(value: dict[str, Any], where: str) -> Iterator[str]:
 def calculator_errors(calculator: dict[str, Any], where: str) -> Iterator[str]:
     axes = calculator.get("quality_axes", {})
     axes = axes if isinstance(axes, dict) else {}
+    multipliers = calculator.get("quality_multipliers")
+    valid_multipliers: dict[str, Fraction] = {}
+    if isinstance(multipliers, dict):
+        if multipliers.keys() != axes.keys():
+            yield f"{where}/quality_multipliers: qualities must match quality_axes exactly"
+        for quality, raw in multipliers.items():
+            try:
+                number = Fraction(raw) if isinstance(raw, str) else Fraction(0)
+            except (ValueError, ZeroDivisionError):
+                number = Fraction(0)
+            if number <= 0:
+                yield f"{where}/quality_multipliers/{quality}: multiplier must be a positive decimal string"
+            else:
+                valid_multipliers[quality] = number
     seen = set()
     examples = calculator.get("examples", [])
     if not isinstance(examples, list):
@@ -206,6 +220,9 @@ def calculator_errors(calculator: dict[str, Any], where: str) -> Iterator[str]:
             short_axis = round(Fraction(axis * min(width, height), max(width, height)))
             numerator = axis * short_axis * (offset + width * height)
             expected = -(-numerator // divisor)
+            if quality in valid_multipliers and calculator.get("result_rounding") == "nearest_ties_up":
+                scaled = expected * valid_multipliers[quality]
+                expected = (scaled.numerator * 2 + scaled.denominator) // (scaled.denominator * 2)
             if output_tokens != expected:
                 yield f"{example_where}: output_tokens {output_tokens} does not match calculator {expected}"
 

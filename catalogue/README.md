@@ -226,7 +226,12 @@ Missing fields mean unrecorded facts, never unsupported features or zero prices.
   records the number of decimal places in a published rounded price. A rounded
   price is evidence of that price, not a basis for inventing an exact token count.
   The checker reproduces any recorded token count from the formula and rejects
-  duplicate size/quality examples.
+  duplicate size/quality examples. Optional `quality_multipliers` supplies exact positive
+  decimal strings for every quality axis, together with `result_rounding:
+"nearest_ties_up"`. Apply the multiplier after the base output-token ceiling, then
+  round to the nearest integer with half ties upward. This preserves the GPT Image
+  2.6 calculator's second step; older calculators omit both fields and keep their
+  original formula. The multiplier map must match the quality-axis keys exactly.
 - **Vision tokenization.** `vision_tokenization` is a sourced set of the rules the
   vendor actually publishes: `patch_size_px`, `token_multiplier`,
   `detail_patch_budgets`, `detail_token_budgets`, `detail_maximum_edges`,
