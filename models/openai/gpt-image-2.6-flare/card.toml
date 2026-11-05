@@ -111,7 +111,7 @@ id = "openai/gpt-image-2.6/flare/text-to-image"
 url = "https://fal.ai/models/openai/gpt-image-2.6/flare/text-to-image"
 source_url = "https://fal.ai/models/openai/gpt-image-2.6/flare/text-to-image/api"
 qualifications = [
-  { source_url = "https://fal.ai/models/openai/gpt-image-2.6/flare/text-to-image/api", notes = "The generation schema lists GIF and SVG output; its edit schema lists GIF but no SVG. GIF frame_count is 2–16 and frame_duration_ms is 20–2,000, rounded to 10 ms. All GIF frames/outputs share the request pixel budget. The native image guide documents GIF generation only and a different frame range; provider parity is not inferred." },
+  { source_url = "https://fal.ai/models/openai/gpt-image-2.6/flare/text-to-image/api", notes = "The generation schema lists GIF and SVG output; its edit schema lists GIF but no SVG. GIF frame_count is 2–16 and frame_duration_ms is 20–2,000, rounded to 10 ms. All GIF frames/outputs share the request pixel budget. Native API GIF access is preview-gated; provider access and parameter parity are not inferred." },
   { source_url = "https://developers.openai.com/api/docs/guides/image-generation", notes = "SVG output includes separate authoring-model token charges and is not priced as raster output alone. Complexity has no separate fee." },
 ]
 
@@ -147,20 +147,21 @@ endpoints = [
     "medium",
     "high",
   ] }, frame_count = { type = "integer", minimum = 2, maximum = 16 }, frame_duration_ms = { type = "integer", minimum = 20, maximum = 2000 } } },
-  { id = "v1/images/edits", input = "image", interface = "images.edits", source_url = "https://developers.openai.com/api/docs/guides/image-generation", parameters = { output_format = { type = "string", enum = [
+  { id = "v1/images/edits", input = "image", interface = "images.edits", source_url = "https://developers.openai.com/api/reference/resources/images/methods/edit", parameters = { output_format = { type = "string", enum = [
     "png",
     "jpeg",
     "webp",
+    "gif",
   ] }, complexity = { type = "string", enum = [
     "low",
     "medium",
     "high",
-  ] } } },
+  ] }, frame_count = { type = "integer", minimum = 2, maximum = 16 }, frame_duration_ms = { type = "integer", minimum = 20, maximum = 2000 } } },
 ]
 qualifications = [
-  { source_url = "https://developers.openai.com/api/docs/guides/image-generation", notes = "GIF output is generation-only; the native guide does not support GIF output on edits. SVG output is generated through a separately billed authoring model. Raster token pricing does not include those authoring-model tokens." },
+  { source_url = "https://developers.openai.com/api/docs/guides/image-generation", notes = "The native guide documents GIF output on generation and editing, with still images accepted as edit references. SVG output is generation-only and uses a separately billed authoring model; raster prices do not include those authoring-model tokens." },
   { source_url = "https://developers.openai.com/api/reference/resources/images/methods/generate", notes = "Transparent backgrounds require PNG or WebP output. A listed GIF or SVG format does not establish transparent-background support for that format." },
-  { source_url = "https://developers.openai.com/api/reference/resources/images/methods/generate", notes = "The exact generation API reference limits frame_count to 2–16. The model-specific image guide describes 2–64; this binding records the narrower API-reference maximum rather than treating the two sources as equivalent." },
+  { source_url = "https://developers.openai.com/api/reference/resources/images/methods/edit", notes = "GIF output requires access to the selected model's GIF preview. Both native endpoints and the image guide list 2–16 frames. GIF output cannot be combined with masks, streaming, partial images or custom output compression. The guide documents 20–2,000 ms frame durations; the API reference describes encoded-delay behavior separately." },
 ]
 
 [providers.openai.pricing]

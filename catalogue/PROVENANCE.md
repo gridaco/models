@@ -1359,17 +1359,20 @@ text/image input and partial-image charges.
 - https://developers.openai.com/api/reference/resources/images/methods/generate
 - https://developers.openai.com/_astro/GptImageTokenCalculator.react.SM_UvXcs.js
 
-Provider format differences are intentional. The native guide permits GIF only
-on generation, with 2–64 frames. The exact native generation API reference instead
-lists 2–16; the native binding uses that narrower endpoint maximum and retains
-the guide discrepancy as a qualification. fal generation permits GIF and SVG, whereas its
-edit schema lists GIF but no SVG, with 2–16 frames. Both native and fal describe
-20–2,000 ms frame durations rounded to 10 ms; all frames/outputs share the request
-pixel budget. OpenRouter lists PNG/JPEG/WebP only. The catalogue preserves each
-provider's documented surface rather than claiming format parity. SVG includes
-separately billed authoring-model tokens, not just the raster token rates. The
-native background contract requires PNG or WebP for transparency; format support
-alone does not establish transparent GIF or SVG output.
+Provider format differences are intentional. The native guide and exact API
+references document GIF on generation and editing, with 2–16 frames. Native GIF
+output requires access to the selected model's GIF preview; documentation alone
+does not establish account eligibility. GIF cannot be combined with masks,
+streaming, partial images or custom output compression. The guide documents
+20–2,000 ms frame durations rounded to 10 ms; the API reference separately
+explains encoded-delay behavior. All frames/outputs share the request pixel
+budget. fal generation permits GIF and SVG, whereas its edit schema lists GIF
+but no SVG, also with 2–16 frames. OpenRouter lists PNG/JPEG/WebP only. Each
+binding preserves its own documented surface without inferring access or parity.
+SVG includes separately billed authoring-model tokens, not just raster token
+rates. Transparent backgrounds require PNG or WebP.
+
+- https://developers.openai.com/api/reference/resources/images/methods/edit
 
 - https://fal.ai/models/openai/gpt-image-2.6/flare/text-to-image/api
 - https://fal.ai/models/openai/gpt-image-2.6/flare/edit/api
