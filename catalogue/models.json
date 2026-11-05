@@ -6801,6 +6801,10 @@
           "qualifications": [
             {
               "source_url": "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
+              "notes": "The total context window is 1,050,000 tokens, but the separately published maximum input is 922,000 tokens; the output maximum is 128,000. Context size does not authorize a larger input."
+            },
+            {
+              "source_url": "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
               "notes": "Responses supports function calling. Chat Completions does not support tool calling. Reasoning none is supported; minimal is not listed."
             },
             {
@@ -7954,9 +7958,9 @@
       "label": "FLUX 3 Image",
       "short_description": "Image generation and editing with up to ten reference images.",
       "release": {
-        "date": "2026-10-01",
-        "basis": "model",
-        "source_url": "https://bfl.ai/pricing"
+        "date": "2026-10-05",
+        "basis": "provider_endpoint",
+        "source_url": "https://vercel.com/ai-gateway/models/flux-3-image"
       },
       "pricing": {
         "type": "per_image_tiered",

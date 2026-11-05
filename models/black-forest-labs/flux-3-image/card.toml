@@ -6,9 +6,9 @@ label = "FLUX 3 Image"
 short_description = "Image generation and editing with up to ten reference images."
 
 [release]
-date = "2026-10-01"
-basis = "model"
-source_url = "https://bfl.ai/pricing"
+date = "2026-10-05"
+basis = "provider_endpoint"
+source_url = "https://vercel.com/ai-gateway/models/flux-3-image"
 
 [pricing]
 type = "per_image_tiered"

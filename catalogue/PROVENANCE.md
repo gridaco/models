@@ -1289,7 +1289,7 @@ dates or other providers' listed prices change.
 
 OpenAI's October 26 changelog establishes broad availability of the exact model.
 The native model page supplies the 1,050,000-token context, 128,000-token output
-limit, supported reasoning efforts and Standard token rates. Thirty-minute cache
+limit, a separate 922,000-token maximum input, supported reasoning efforts and Standard token rates. Thirty-minute cache
 writes are a separate meter. The request-wide long-context boundary is strictly
 more than 272,000 input tokens on OpenAI and Vercel; OpenRouter's feed instead
 starts its override at 272,000. Each binding retains its own boundary.
@@ -1375,10 +1375,11 @@ separately billed authoring-model tokens, not just the raster token rates.
 
 ### `bfl/flux-3-image`
 
-BFL's published launch-pricing terms identify October 1 as the public image
-launch; the earlier FLUX 3 announcement describes image access as forthcoming,
-not broad availability. Vercel's October 5 listing is later provider availability
-and does not replace the model release date.
+The earlier FLUX 3 announcement describes image access as forthcoming, not broad
+availability. A durable native launch date is not established by the current
+pricing page. The recorded October 5 date therefore uses `provider_endpoint`
+basis and Vercel's explicitly dated listing; it does not claim the model first
+became broadly available on that day.
 
 - https://bfl.ai/pricing
 - https://bfl.ai/blog/flux-3
