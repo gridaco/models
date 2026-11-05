@@ -1282,3 +1282,119 @@ service contracts, not claims of parameter or pricing parity with another
 provider. Reference limits, dimension rules and supported video options are
 defined by the linked operation-specific schemas. No native model release
 dates or other providers' listed prices change.
+
+## November 2026 family additions
+
+### `openai/gpt-6.1-terra`
+
+OpenAI's October 26 changelog establishes broad availability of the exact model.
+The native model page supplies the 1,050,000-token context, 128,000-token output
+limit, supported reasoning efforts and Standard token rates. Thirty-minute cache
+writes are a separate meter. The request-wide long-context boundary is strictly
+more than 272,000 input tokens on OpenAI and Vercel; OpenRouter's feed instead
+starts its override at 272,000. Each binding retains its own boundary.
+
+- https://developers.openai.com/api/docs/changelog
+- https://developers.openai.com/api/docs/models/gpt-6.1-terra
+- https://vercel.com/ai-gateway/models/gpt-6.1-terra
+- https://ai-gateway.vercel.sh/v1/models
+- https://openrouter.ai/api/v1/models
+
+Tool calling on the native API requires Responses. Image input is supported, but
+the image-tokenization tables do not identify this exact model; no multiplier is
+borrowed from Sol or a previous Terra model.
+https://developers.openai.com/api/docs/guides/images-vision
+
+### `google/gemini-4-argon`
+
+The October 13 changelog establishes general availability, following an earlier
+restricted rollout. Native Standard regular rates are $4 input, $20 output and
+$0.20 implicit-cache reads per million tokens. The native pricing page explicitly
+publishes those regular rates. Vercel's model-page backing-model records independently
+publish `inputListCostTiers`, `outputListCostTiers` and
+`cachedInputListCostTiers` with those amounts and `priceType: "list"` for its
+Google and Vertex offerings. The catalogue records these list amounts rather than
+the introductory rates in current model feeds. No rate is reconstructed from a
+discount percentage. OpenRouter's verified binding remains without a regular
+price because its feed does not separately establish one.
+
+- https://ai.google.dev/gemini-api/docs/changelog
+- https://ai.google.dev/gemini-api/docs/pricing
+- https://vercel.com/ai-gateway/models/gemini-4-argon
+- https://openrouter.ai/api/v1/models
+
+The native input, thinking and output share a 1,048,576-token window. Default
+synchronous output is 65,536; larger generations use continuation hops or
+background execution. The native card records that default output ceiling, while
+provider discovery limits retain their published values with this qualification.
+The media-resolution table explicitly covers Gemini 4 and Gemini 3 and marks its
+image-token counts as approximate. Explicit caching is not supported.
+
+- https://ai.google.dev/gemini-api/docs/models/gemini-4-argon
+- https://ai.google.dev/gemini-api/docs/latest-model
+- https://ai.google.dev/gemini-api/docs/media-resolution
+
+### `openai/gpt-image-2.6-flare` and `openai/gpt-image-2.6-sunburst`
+
+The November 4 API changelog establishes release of both variants. Native token
+rates remain distinct for text input, image input and image output. fal separately
+publishes its text-output meter and rounds total cost upward to $0.0001.
+
+- https://developers.openai.com/api/docs/changelog
+- https://developers.openai.com/api/docs/models/gpt-image-2.6-flare
+- https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst
+- https://fal.ai/models/openai/gpt-image-2.6/flare/text-to-image
+- https://fal.ai/models/openai/gpt-image-2.6/sunburst/text-to-image
+
+The current official output calculator uses the same base grid axes as GPT Image
+2.5, then multiplies the **already-ceiled** base token count by 4.2 for `low`, 3.3
+for `medium`, and 1 for the other qualities. Its final JavaScript `Math.round`
+step rounds positive half ties upward. This second step is recorded explicitly;
+copying the 2.5 formula alone would understate low and medium output tokens. Square
+examples are reproduced from the published calculator, not inferred from rounded
+image-price examples. The calculator estimates raster output only; it excludes
+text/image input and partial-image charges.
+
+- https://developers.openai.com/api/docs/guides/image-generation
+- https://developers.openai.com/_astro/GptImageTokenCalculator.react.SM_UvXcs.js
+
+Provider format differences are intentional. The native guide permits GIF only
+on generation, with 2–64 frames. fal generation permits GIF and SVG, whereas its
+edit schema lists GIF but no SVG, with 2–16 frames. Both native and fal describe
+20–2,000 ms frame durations rounded to 10 ms; all frames/outputs share the request
+pixel budget. OpenRouter lists PNG/JPEG/WebP only. The catalogue preserves each
+provider's documented surface rather than claiming format parity. SVG includes
+separately billed authoring-model tokens, not just the raster token rates.
+
+- https://fal.ai/models/openai/gpt-image-2.6/flare/text-to-image/api
+- https://fal.ai/models/openai/gpt-image-2.6/flare/edit/api
+- https://fal.ai/models/openai/gpt-image-2.6/sunburst/text-to-image/api
+- https://fal.ai/models/openai/gpt-image-2.6/sunburst/edit/api
+- https://openrouter.ai/api/v1/images/models/openai/gpt-image-2.6-flare/endpoints
+- https://openrouter.ai/api/v1/images/models/openai/gpt-image-2.6-sunburst/endpoints
+
+### `bfl/flux-3-image`
+
+BFL's published launch-pricing terms identify October 1 as the public image
+launch; the earlier FLUX 3 announcement describes image access as forthcoming,
+not broad availability. Vercel's October 5 listing is later provider availability
+and does not replace the model release date.
+
+- https://bfl.ai/pricing
+- https://bfl.ai/blog/flux-3
+- https://vercel.com/ai-gateway/models/flux-3-image
+
+Native, Vercel and OpenRouter publish per-image resolution tiers. The native price
+includes reference images and prompts at no extra charge. fal's page and billing
+metadata instead name a $0.048 megapixel unit; that source does not establish
+quantity rounding, all resolution-tier rates or reference billing scope. These
+are not silently replaced with BFL's flat per-image tiers. fal's exact API schema
+lists `768sq`, `1k`, `1.5k`, `2k`, `4k`; its narrative table instead lists `512sq`
+and omits `1.5k`. The exact endpoint schema supplies the fal parameter list.
+
+- https://bfl.ai/pricing?category=flux+3+image
+- https://ai-gateway.vercel.sh/v1/models
+- https://openrouter.ai/api/v1/images/models/black-forest-labs/flux-3-image/endpoints
+- https://fal.ai/models/blackforestlabs/flux-3/text-to-image
+- https://fal.ai/models/blackforestlabs/flux-3/text-to-image/api
+- https://fal.ai/models/blackforestlabs/flux-3/edit-image/api

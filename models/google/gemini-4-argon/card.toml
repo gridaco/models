@@ -1,0 +1,142 @@
+id = "google/gemini-4-argon"
+section = "text.catalog"
+vendor = "google"
+reference_provider = "google"
+label = "Gemini 4 Argon"
+multimodal = true
+image_input_mimes = ["image/png", "image/jpeg", "image/webp", "image/heic", "image/heif"]
+tool_call = true
+context_window = 1048576
+output_limit = 65536
+
+[cost]
+input = 4
+output = 20
+cache_read = 0.2
+
+[release]
+date = "2026-10-13"
+basis = "model"
+source_url = "https://ai.google.dev/gemini-api/docs/changelog"
+
+[vision_tokenization]
+source_url = "https://ai.google.dev/gemini-api/docs/media-resolution"
+maximum_tokens_per_image = 2240
+token_counts_approximate = true
+
+[vision_tokenization.detail_token_budgets]
+unspecified = 1120
+low = 280
+medium = 560
+high = 1120
+ultra_high = 2240
+
+[providers]
+
+[providers.google]
+provider = "google"
+id = "gemini-4-argon"
+url = "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon"
+source_url = "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon"
+endpoints = [
+  { id = "gemini-4-argon", input = "text", source_url = "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon" },
+]
+qualifications = [
+  { source_url = "https://ai.google.dev/gemini-api/docs/latest-model", notes = "Native default synchronous output is 65,536 tokens within the unified 1,048,576-token input/thinking/output window. Longer output uses continuation hops/background execution; provider discovery limits must not be interpreted as a single synchronous hop." },
+]
+
+[providers.google.limits]
+source_url = "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon"
+context_tokens = 1048576
+max_output_tokens = 65536
+
+[providers.google.capabilities]
+source_url = "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.google.token_pricing]
+source_url = "https://ai.google.dev/gemini-api/docs/pricing"
+unit = "usd_per_token"
+scope = "Regular Standard global token rates. Implicit caching only. Introductory discounts, grounding tools and alternate service tiers are excluded."
+input = "0.000004"
+output = "0.00002"
+input_cache_read = "0.0000002"
+
+[providers.vercel]
+provider = "vercel"
+id = "google/gemini-4-argon"
+url = "https://vercel.com/ai-gateway/models/gemini-4-argon"
+source_url = "https://vercel.com/ai-gateway/models/gemini-4-argon"
+endpoints = [
+  { id = "google/gemini-4-argon", input = "text", source_url = "https://vercel.com/ai-gateway/models/gemini-4-argon" },
+]
+qualifications = [
+  { source_url = "https://ai.google.dev/gemini-api/docs/latest-model", notes = "Native default synchronous output is 65,536 tokens within the unified 1,048,576-token input/thinking/output window. Longer output uses continuation hops/background execution; provider discovery limits must not be interpreted as a single synchronous hop." },
+]
+
+[providers.vercel.limits]
+source_url = "https://vercel.com/ai-gateway/models/gemini-4-argon"
+context_tokens = 1000000
+max_output_tokens = 1000000
+
+[providers.vercel.capabilities]
+source_url = "https://vercel.com/ai-gateway/models/gemini-4-argon"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.vercel.token_pricing]
+source_url = "https://vercel.com/ai-gateway/models/gemini-4-argon"
+unit = "usd_per_token"
+scope = "Regular Standard global token rates. Implicit caching only. Introductory discounts, grounding tools and alternate service tiers are excluded."
+input = "0.000004"
+output = "0.00002"
+input_cache_read = "0.0000002"
+
+[providers.openrouter]
+provider = "openrouter"
+id = "google/gemini-4-argon"
+url = "https://openrouter.ai/google/gemini-4-argon"
+source_url = "https://openrouter.ai/google/gemini-4-argon"
+endpoints = [
+  { id = "google/gemini-4-argon", input = "text", source_url = "https://openrouter.ai/google/gemini-4-argon" },
+]
+qualifications = [
+  { source_url = "https://openrouter.ai/api/v1/models", notes = "The live feed quotes introductory token rates. A separate regular price is not established by this provider source, so token prices are omitted; omission does not mean free inference." },
+  { source_url = "https://ai.google.dev/gemini-api/docs/latest-model", notes = "Native default synchronous output is 65,536 tokens within the unified 1,048,576-token input/thinking/output window. Longer output uses continuation hops/background execution; provider discovery limits must not be interpreted as a single synchronous hop." },
+]
+
+[providers.openrouter.limits]
+source_url = "https://openrouter.ai/google/gemini-4-argon"
+context_tokens = 1048576
+max_output_tokens = 943718
+
+[providers.openrouter.capabilities]
+source_url = "https://openrouter.ai/google/gemini-4-argon"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+
+[provider_coverage]
+
+[provider_coverage.google]
+disposition = "listed"
+source_url = "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon"
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/gemini-4-argon"
+
+[provider_coverage.openrouter]
+disposition = "listed"
+source_url = "https://openrouter.ai/google/gemini-4-argon"
+
+[provider_coverage.fal]
+disposition = "excluded"
+source_url = "https://fal.ai/models"
+reason = "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."

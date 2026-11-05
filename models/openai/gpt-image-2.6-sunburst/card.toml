@@ -1,0 +1,274 @@
+reference_provider = "openai"
+id = "openai/gpt-image-2.6-sunburst"
+section = "image.models"
+null_keys = ["styles"]
+label = "GPT Image 2.6 Sunburst"
+short_description = "Image generation and editing for detailed visual work."
+vendor = "openai"
+transparent_background = true
+sizes = [[1024, 1024, "1:1"], [1024, 1536, "2:3"], [1536, 1024, "3:2"]]
+
+[quality]
+options = ["auto", "low", "medium", "high", "xhigh", "max"]
+
+[pricing]
+type = "per_token"
+input = 5
+cached_input = 1.25
+image_input = 8
+cached_image_input = 2
+output = 30
+source_url = "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst"
+
+[release]
+date = "2026-11-04"
+basis = "model"
+source_url = "https://developers.openai.com/api/docs/changelog"
+
+[providers]
+
+[providers.vercel]
+provider = "vercel"
+id = "openai/gpt-image-2.6-sunburst"
+url = "https://vercel.com/ai-gateway/models/gpt-image-2.6-sunburst"
+
+[providers.vercel.pricing]
+type = "per_token"
+input = 5
+cached_input = 1.25
+output = 30
+
+[providers.fal]
+endpoints = [
+  { id = "openai/gpt-image-2.6/sunburst/text-to-image", input = "text", source_url = "https://fal.ai/models/openai/gpt-image-2.6/sunburst/text-to-image/api", parameters = { image_size = { enum = [
+    "square_hd",
+    "square",
+    "portrait_4_3",
+    "portrait_16_9",
+    "landscape_4_3",
+    "landscape_16_9",
+    "auto",
+  ] }, "image_size.width" = { type = "integer", minimum = 1, maximum = 3840, multiple_of = 16 }, "image_size.height" = { type = "integer", minimum = 1, maximum = 3840, multiple_of = 16 }, background = { enum = [
+    "auto",
+    "transparent",
+    "opaque",
+  ], type = "string" }, output_compression = { type = "integer", maximum = 100, minimum = 0 }, prompt = { max_length = 32000, type = "string", min_length = 1 }, enable_safety_checker = { type = "boolean" }, frame_count = { type = "integer", maximum = 16, minimum = 2 }, output_format = { enum = [
+    "jpeg",
+    "png",
+    "webp",
+    "gif",
+    "svg",
+  ], type = "string" }, num_images = { type = "integer", maximum = 10, minimum = 1 }, sync_mode = { type = "boolean" }, reasoning_effort = { type = "string", enum = [
+    "low",
+    "medium",
+    "high",
+  ] }, svg_model = { enum = [
+    "gpt-6-astra",
+    "gpt-5.5",
+    "gpt-5.4",
+    "gpt-5.6-terra",
+    "gpt-6-luna",
+  ], type = "string" }, quality = { type = "string", enum = [
+    "auto",
+    "low",
+    "medium",
+    "high",
+    "xhigh",
+    "max",
+  ] }, frame_duration_ms = { type = "integer", maximum = 2000, minimum = 20 } }, image_constraints = { step = 16, max_edge = 3840, min_pixels = 655360, max_pixels = 8294400, aspect_ratio = { max = 3 } } },
+  { id = "openai/gpt-image-2.6/sunburst/edit", input = "image", source_url = "https://fal.ai/models/openai/gpt-image-2.6/sunburst/edit/api", parameters = { background = { enum = [
+    "auto",
+    "transparent",
+    "opaque",
+  ], type = "string" }, output_format = { enum = [
+    "jpeg",
+    "png",
+    "webp",
+    "gif",
+  ], type = "string" }, prompt = { max_length = 32000, type = "string", min_length = 1 }, mask_url = { type = "string" }, frame_count = { type = "integer", maximum = 16, minimum = 2 }, markup_image_url = { type = "string" }, image_size = { enum = [
+    "square_hd",
+    "square",
+    "portrait_4_3",
+    "portrait_16_9",
+    "landscape_4_3",
+    "landscape_16_9",
+    "auto",
+  ] }, "image_size.width" = { type = "integer", minimum = 1, maximum = 3840, multiple_of = 16 }, "image_size.height" = { type = "integer", minimum = 1, maximum = 3840, multiple_of = 16 }, output_compression = { type = "integer", maximum = 100, minimum = 0 }, enable_safety_checker = { type = "boolean" }, image_urls = { type = "array", max_items = 16 }, num_images = { type = "integer", maximum = 10, minimum = 1 }, sync_mode = { type = "boolean" }, reasoning_effort = { type = "string", enum = [
+    "low",
+    "medium",
+    "high",
+  ] }, frame_duration_ms = { type = "integer", maximum = 2000, minimum = 20 }, quality = { type = "string", enum = [
+    "auto",
+    "low",
+    "medium",
+    "high",
+    "xhigh",
+    "max",
+  ] } }, image_constraints = { step = 16, max_edge = 3840, min_pixels = 655360, max_pixels = 8294400, aspect_ratio = { max = 3 } } },
+]
+provider = "fal"
+id = "openai/gpt-image-2.6/sunburst/text-to-image"
+url = "https://fal.ai/models/openai/gpt-image-2.6/sunburst/text-to-image"
+source_url = "https://fal.ai/models/openai/gpt-image-2.6/sunburst/text-to-image/api"
+qualifications = [
+  { source_url = "https://fal.ai/models/openai/gpt-image-2.6/sunburst/text-to-image/api", notes = "The generation schema lists GIF and SVG output; its edit schema lists GIF but no SVG. GIF frame_count is 2–16 and frame_duration_ms is 20–2,000, rounded to 10 ms. All GIF frames/outputs share the request pixel budget. The native image guide documents GIF generation only and a different frame range; provider parity is not inferred." },
+  { source_url = "https://developers.openai.com/api/docs/guides/image-generation", notes = "SVG output includes separate authoring-model token charges and is not priced as raster output alone. Complexity has no separate fee." },
+]
+
+[providers.fal.references]
+id = "openai/gpt-image-2.6/sunburst/edit"
+max = 16
+
+[providers.fal.pricing]
+source_url = "https://fal.ai/models/openai/gpt-image-2.6/sunburst/text-to-image"
+rounding_usd = 0.0001
+type = "per_token"
+input = 5
+cached_input = 1.25
+image_input = 8
+cached_image_input = 2
+text_output = 10
+output = 30
+
+[providers.openai]
+provider = "openai"
+id = "gpt-image-2.6-sunburst"
+source_url = "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst"
+url = "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst"
+endpoints = [
+  { id = "v1/images/generations", input = "text", interface = "images.generations", source_url = "https://developers.openai.com/api/docs/guides/image-generation", parameters = { output_format = { type = "string", enum = [
+    "png",
+    "jpeg",
+    "webp",
+    "gif",
+    "svg",
+  ] }, complexity = { type = "string", enum = [
+    "low",
+    "medium",
+    "high",
+  ] }, frame_count = { type = "integer", minimum = 2, maximum = 64 }, frame_duration_ms = { type = "integer", minimum = 20, maximum = 2000 } } },
+  { id = "v1/images/edits", input = "image", interface = "images.edits", source_url = "https://developers.openai.com/api/docs/guides/image-generation", parameters = { output_format = { type = "string", enum = [
+    "png",
+    "jpeg",
+    "webp",
+  ] }, complexity = { type = "string", enum = [
+    "low",
+    "medium",
+    "high",
+  ] } } },
+]
+qualifications = [
+  { source_url = "https://developers.openai.com/api/docs/guides/image-generation", notes = "GIF output is generation-only; the native guide does not support GIF output on edits. SVG output is generated through a separately billed authoring model. Raster token pricing does not include those authoring-model tokens." },
+]
+
+[providers.openai.pricing]
+type = "per_token"
+input = 5
+cached_input = 1.25
+output = 30
+image_input = 8
+cached_image_input = 2
+source_url = "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst"
+
+[providers.openrouter]
+provider = "openrouter"
+id = "openai/gpt-image-2.6-sunburst"
+source_url = "https://openrouter.ai/api/v1/images/models/openai/gpt-image-2.6-sunburst/endpoints"
+url = "https://openrouter.ai/api/v1/images/models/openai/gpt-image-2.6-sunburst/endpoints"
+transparent_background = true
+endpoints = [
+  { id = "openai/gpt-image-2.6-sunburst", source_url = "https://openrouter.ai/api/v1/images/models/openai/gpt-image-2.6-sunburst/endpoints", parameters = { aspect_ratio = { enum = [
+    "1:1",
+    "3:2",
+    "2:3",
+    "4:3",
+    "3:4",
+    "16:9",
+    "9:16",
+    "21:9",
+    "auto",
+  ] }, quality = { enum = [
+    "auto",
+    "low",
+    "medium",
+    "high",
+    "xhigh",
+    "max",
+  ] }, background = { enum = [
+    "auto",
+    "transparent",
+    "opaque",
+  ] }, n = { type = "integer", minimum = 1, maximum = 10 }, input_references = { type = "integer", minimum = 0, maximum = 16 }, output_compression = { type = "integer", minimum = 0, maximum = 100 }, output_format = { type = "string", enum = [
+    "png",
+    "jpeg",
+    "webp",
+  ] } }, input = "text" },
+]
+
+[providers.openrouter.pricing]
+type = "per_token"
+image_input = 8.0
+input = 5.0
+output = 30.0
+source_url = "https://openrouter.ai/api/v1/images/models/openai/gpt-image-2.6-sunburst/endpoints"
+
+[providers.openrouter.references]
+id = "openai/gpt-image-2.6-sunburst"
+max = 16
+
+[constraints]
+step = 16
+max_edge = 3840
+min_pixels = 655360
+max_pixels = 8294400
+
+[constraints.aspect_ratio]
+max = 3
+
+[output_token_calculator]
+source_url = "https://developers.openai.com/api/docs/guides/image-generation"
+source_js_url = "https://developers.openai.com/_astro/GptImageTokenCalculator.react.SM_UvXcs.js"
+area_offset = 2000000
+area_divisor = 4000000
+short_axis_rounding = "nearest_ties_even"
+token_rounding = "ceil"
+examples = [
+  { width = 1024, height = 1024, quality = "low", output_tokens = 823, source_url = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { width = 1024, height = 1024, quality = "medium", output_tokens = 1449, source_url = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { width = 1024, height = 1024, quality = "high", output_tokens = 1756, source_url = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { width = 1024, height = 1024, quality = "xhigh", output_tokens = 3122, source_url = "https://developers.openai.com/api/docs/guides/image-generation" },
+  { width = 1024, height = 1024, quality = "max", output_tokens = 7024, source_url = "https://developers.openai.com/api/docs/guides/image-generation" },
+]
+result_rounding = "nearest_ties_up"
+
+[output_token_calculator.quality_axes]
+low = 16
+medium = 24
+high = 48
+xhigh = 64
+max = 96
+
+[output_token_calculator.quality_multipliers]
+low = "4.2"
+medium = "3.3"
+high = "1"
+xhigh = "1"
+max = "1"
+
+[provider_coverage]
+
+[provider_coverage.openrouter]
+disposition = "listed"
+source_url = "https://openrouter.ai/api/v1/images/models/openai/gpt-image-2.6-sunburst/endpoints"
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/gpt-image-2.6-sunburst"
+
+[provider_coverage.fal]
+disposition = "listed"
+source_url = "https://fal.ai/models/openai/gpt-image-2.6/sunburst/text-to-image"
+
+[provider_coverage.openai]
+disposition = "listed"
+source_url = "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst"

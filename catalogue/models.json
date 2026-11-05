@@ -2612,6 +2612,179 @@
         }
       }
     },
+    "google/gemini-4-argon": {
+      "id": "google/gemini-4-argon",
+      "vendor": "google",
+      "reference_provider": "google",
+      "label": "Gemini 4 Argon",
+      "multimodal": true,
+      "image_input_mimes": [
+        "image/png",
+        "image/jpeg",
+        "image/webp",
+        "image/heic",
+        "image/heif"
+      ],
+      "tool_call": true,
+      "context_window": 1048576,
+      "output_limit": 65536,
+      "cost": {
+        "input": 4,
+        "output": 20,
+        "cache_read": 0.2
+      },
+      "release": {
+        "date": "2026-10-13",
+        "basis": "model",
+        "source_url": "https://ai.google.dev/gemini-api/docs/changelog"
+      },
+      "vision_tokenization": {
+        "source_url": "https://ai.google.dev/gemini-api/docs/media-resolution",
+        "maximum_tokens_per_image": 2240,
+        "token_counts_approximate": true,
+        "detail_token_budgets": {
+          "unspecified": 1120,
+          "low": 280,
+          "medium": 560,
+          "high": 1120,
+          "ultra_high": 2240
+        }
+      },
+      "providers": {
+        "google": {
+          "provider": "google",
+          "id": "gemini-4-argon",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon",
+          "source_url": "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon",
+          "endpoints": [
+            {
+              "id": "gemini-4-argon",
+              "input": "text",
+              "source_url": "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon"
+            }
+          ],
+          "qualifications": [
+            {
+              "source_url": "https://ai.google.dev/gemini-api/docs/latest-model",
+              "notes": "Native default synchronous output is 65,536 tokens within the unified 1,048,576-token input/thinking/output window. Longer output uses continuation hops/background execution; provider discovery limits must not be interpreted as a single synchronous hop."
+            }
+          ],
+          "limits": {
+            "source_url": "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon",
+            "context_tokens": 1048576,
+            "max_output_tokens": 65536
+          },
+          "capabilities": {
+            "source_url": "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true
+          },
+          "token_pricing": {
+            "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+            "unit": "usd_per_token",
+            "scope": "Regular Standard global token rates. Implicit caching only. Introductory discounts, grounding tools and alternate service tiers are excluded.",
+            "input": "0.000004",
+            "output": "0.00002",
+            "input_cache_read": "0.0000002"
+          }
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "google/gemini-4-argon",
+          "url": "https://vercel.com/ai-gateway/models/gemini-4-argon",
+          "source_url": "https://vercel.com/ai-gateway/models/gemini-4-argon",
+          "endpoints": [
+            {
+              "id": "google/gemini-4-argon",
+              "input": "text",
+              "source_url": "https://vercel.com/ai-gateway/models/gemini-4-argon"
+            }
+          ],
+          "qualifications": [
+            {
+              "source_url": "https://ai.google.dev/gemini-api/docs/latest-model",
+              "notes": "Native default synchronous output is 65,536 tokens within the unified 1,048,576-token input/thinking/output window. Longer output uses continuation hops/background execution; provider discovery limits must not be interpreted as a single synchronous hop."
+            }
+          ],
+          "limits": {
+            "source_url": "https://vercel.com/ai-gateway/models/gemini-4-argon",
+            "context_tokens": 1000000,
+            "max_output_tokens": 1000000
+          },
+          "capabilities": {
+            "source_url": "https://vercel.com/ai-gateway/models/gemini-4-argon",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true
+          },
+          "token_pricing": {
+            "source_url": "https://vercel.com/ai-gateway/models/gemini-4-argon",
+            "unit": "usd_per_token",
+            "scope": "Regular Standard global token rates. Implicit caching only. Introductory discounts, grounding tools and alternate service tiers are excluded.",
+            "input": "0.000004",
+            "output": "0.00002",
+            "input_cache_read": "0.0000002"
+          }
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "google/gemini-4-argon",
+          "url": "https://openrouter.ai/google/gemini-4-argon",
+          "source_url": "https://openrouter.ai/google/gemini-4-argon",
+          "endpoints": [
+            {
+              "id": "google/gemini-4-argon",
+              "input": "text",
+              "source_url": "https://openrouter.ai/google/gemini-4-argon"
+            }
+          ],
+          "qualifications": [
+            {
+              "source_url": "https://openrouter.ai/api/v1/models",
+              "notes": "The live feed quotes introductory token rates. A separate regular price is not established by this provider source, so token prices are omitted; omission does not mean free inference."
+            },
+            {
+              "source_url": "https://ai.google.dev/gemini-api/docs/latest-model",
+              "notes": "Native default synchronous output is 65,536 tokens within the unified 1,048,576-token input/thinking/output window. Longer output uses continuation hops/background execution; provider discovery limits must not be interpreted as a single synchronous hop."
+            }
+          ],
+          "limits": {
+            "source_url": "https://openrouter.ai/google/gemini-4-argon",
+            "context_tokens": 1048576,
+            "max_output_tokens": 943718
+          },
+          "capabilities": {
+            "source_url": "https://openrouter.ai/google/gemini-4-argon",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true
+          }
+        }
+      },
+      "provider_coverage": {
+        "google": {
+          "disposition": "listed",
+          "source_url": "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon"
+        },
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/gemini-4-argon"
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/google/gemini-4-argon"
+        },
+        "fal": {
+          "disposition": "excluded",
+          "source_url": "https://fal.ai/models",
+          "reason": "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."
+        }
+      }
+    },
     "openai/gpt-5.5": {
       "id": "openai/gpt-5.5",
       "vendor": "openai",
@@ -6587,6 +6760,340 @@
           "source_url": "https://gateway.grida.ai/v1/models"
         }
       }
+    },
+    "openai/gpt-6.1-terra": {
+      "id": "openai/gpt-6.1-terra",
+      "vendor": "openai",
+      "reference_provider": "openai",
+      "label": "GPT-6.1 Terra",
+      "multimodal": true,
+      "image_input_mimes": [
+        "image/png",
+        "image/jpeg",
+        "image/webp",
+        "image/gif"
+      ],
+      "tool_call": true,
+      "context_window": 1050000,
+      "output_limit": 128000,
+      "release": {
+        "date": "2026-10-26",
+        "basis": "model",
+        "source_url": "https://developers.openai.com/api/docs/changelog"
+      },
+      "cost": {
+        "input": 1,
+        "output": 5,
+        "cache_read": 0.05,
+        "cache_write": 1.25,
+        "long_context": {
+          "input_tokens_above": 272000,
+          "input_multiplier": 2,
+          "output_multiplier": 1.5
+        }
+      },
+      "providers": {
+        "openai": {
+          "provider": "openai",
+          "id": "gpt-6.1-terra",
+          "url": "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
+          "source_url": "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
+          "qualifications": [
+            {
+              "source_url": "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
+              "notes": "Responses supports function calling. Chat Completions does not support tool calling. Reasoning none is supported; minimal is not listed."
+            },
+            {
+              "source_url": "https://developers.openai.com/api/docs/guides/images-vision",
+              "notes": "Image input is supported, but the published patch/tile multiplier and detail-level sizing tables do not name this exact model. No vision-tokenization formula is inferred from other models."
+            }
+          ],
+          "endpoints": [
+            {
+              "id": "gpt-6.1-terra",
+              "input": "text",
+              "source_url": "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
+              "interface": "responses",
+              "capabilities": {
+                "source_url": "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
+                "image_input": true,
+                "tools": true,
+                "reasoning": true,
+                "structured_output": true,
+                "streaming": true
+              },
+              "parameters": {
+                "reasoning.effort": {
+                  "type": "string",
+                  "enum": [
+                    "none",
+                    "low",
+                    "medium",
+                    "high",
+                    "xhigh",
+                    "max"
+                  ]
+                }
+              }
+            }
+          ],
+          "token_pricing": {
+            "source_url": "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
+            "unit": "usd_per_token",
+            "scope": "Regular Standard synchronous global token rates; 30-minute cache writes. Optional tools, alternate service tiers, 12-hour retention and regional processing are excluded.",
+            "input": "0.000001",
+            "output": "0.000005",
+            "input_cache_read": "0.00000005",
+            "input_cache_write": "0.00000125",
+            "tiers": [
+              {
+                "meter": "input",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.000001"
+              },
+              {
+                "meter": "input",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.000002"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.000005"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.0000075"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.00000005"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.0000001"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.00000125"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.0000025"
+              }
+            ]
+          },
+          "capabilities": {
+            "source_url": "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true,
+            "streaming": true
+          },
+          "limits": {
+            "source_url": "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
+            "context_tokens": 1050000,
+            "max_output_tokens": 128000
+          }
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "openai/gpt-6.1-terra",
+          "url": "https://openrouter.ai/openai/gpt-6.1-terra",
+          "source_url": "https://openrouter.ai/openai/gpt-6.1-terra",
+          "qualifications": [
+            {
+              "source_url": "https://openrouter.ai/api/v1/models",
+              "notes": "The provider reports its long-context override at minimum 272000 prompt tokens. This binding preserves that threshold rather than substituting another provider's 272001 boundary."
+            }
+          ],
+          "endpoints": [
+            {
+              "id": "openai/gpt-6.1-terra",
+              "input": "text",
+              "source_url": "https://openrouter.ai/openai/gpt-6.1-terra"
+            }
+          ],
+          "token_pricing": {
+            "source_url": "https://openrouter.ai/openai/gpt-6.1-terra",
+            "unit": "usd_per_token",
+            "scope": "Regular Standard synchronous global token rates; 30-minute cache writes. Optional tools, alternate service tiers, 12-hour retention and regional processing are excluded.",
+            "input": "0.000001",
+            "output": "0.000005",
+            "input_cache_read": "0.00000005",
+            "input_cache_write": "0.00000125",
+            "tiers": [
+              {
+                "meter": "input",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.000001"
+              },
+              {
+                "meter": "input",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.000002"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.000005"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.0000075"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.00000005"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.0000001"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.00000125"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.0000025"
+              }
+            ]
+          },
+          "capabilities": {
+            "source_url": "https://openrouter.ai/openai/gpt-6.1-terra",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true,
+            "streaming": true
+          },
+          "limits": {
+            "source_url": "https://openrouter.ai/openai/gpt-6.1-terra",
+            "context_tokens": 1050000,
+            "max_output_tokens": 128000
+          }
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "openai/gpt-6.1-terra",
+          "url": "https://vercel.com/ai-gateway/models/gpt-6.1-terra",
+          "source_url": "https://vercel.com/ai-gateway/models/gpt-6.1-terra",
+          "endpoints": [
+            {
+              "id": "openai/gpt-6.1-terra",
+              "input": "text",
+              "source_url": "https://vercel.com/ai-gateway/models/gpt-6.1-terra"
+            }
+          ],
+          "token_pricing": {
+            "source_url": "https://vercel.com/ai-gateway/models/gpt-6.1-terra",
+            "unit": "usd_per_token",
+            "scope": "Regular Standard synchronous global token rates; 30-minute cache writes. Optional tools, alternate service tiers, 12-hour retention and regional processing are excluded.",
+            "input": "0.000001",
+            "output": "0.000005",
+            "input_cache_read": "0.00000005",
+            "input_cache_write": "0.00000125",
+            "tiers": [
+              {
+                "meter": "input",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.000001"
+              },
+              {
+                "meter": "input",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.000002"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.000005"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.0000075"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.00000005"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.0000001"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.00000125"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.0000025"
+              }
+            ]
+          },
+          "capabilities": {
+            "source_url": "https://vercel.com/ai-gateway/models/gpt-6.1-terra",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true,
+            "streaming": true
+          },
+          "limits": {
+            "source_url": "https://vercel.com/ai-gateway/models/gpt-6.1-terra",
+            "context_tokens": 1050000,
+            "max_output_tokens": 128000
+          }
+        }
+      },
+      "provider_coverage": {
+        "openai": {
+          "disposition": "listed",
+          "source_url": "https://developers.openai.com/api/docs/models/gpt-6.1-terra"
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/openai/gpt-6.1-terra"
+        },
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/gpt-6.1-terra"
+        },
+        "fal": {
+          "disposition": "excluded",
+          "source_url": "https://fal.ai/models",
+          "reason": "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."
+        }
+      }
     }
   },
   "image.models": {
@@ -7439,6 +7946,266 @@
       },
       "styles": null,
       "sizes": null
+    },
+    "bfl/flux-3-image": {
+      "id": "bfl/flux-3-image",
+      "vendor": "black-forest-labs",
+      "reference_provider": "bfl",
+      "label": "FLUX 3 Image",
+      "short_description": "Image generation and editing with up to ten reference images.",
+      "release": {
+        "date": "2026-10-01",
+        "basis": "model",
+        "source_url": "https://bfl.ai/pricing"
+      },
+      "pricing": {
+        "type": "per_image_tiered",
+        "source_url": "https://bfl.ai/pricing?category=flux+3+image",
+        "tiers": {
+          "768sq": 0.041,
+          "1k": 0.048,
+          "1.5k": 0.07,
+          "2k": 0.1,
+          "4k": 0.607
+        }
+      },
+      "providers": {
+        "bfl": {
+          "provider": "bfl",
+          "id": "flux-3-image",
+          "source_url": "https://docs.bfl.ml/api-reference/utility/generate-an-image-with-flux-3",
+          "url": "https://docs.bfl.ml/api-reference/utility/generate-an-image-with-flux-3",
+          "references": {
+            "id": "flux-3-image",
+            "max": 10
+          },
+          "pricing": {
+            "type": "per_image_tiered",
+            "source_url": "https://bfl.ai/pricing?category=flux+3+image",
+            "tiers": {
+              "768sq": 0.041,
+              "1k": 0.048,
+              "1.5k": 0.07,
+              "2k": 0.1,
+              "4k": 0.607
+            }
+          }
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "bfl/flux-3-image",
+          "source_url": "https://vercel.com/ai-gateway/models/flux-3-image",
+          "url": "https://vercel.com/ai-gateway/models/flux-3-image",
+          "references": {
+            "id": "bfl/flux-3-image",
+            "max": 10
+          },
+          "pricing": {
+            "type": "per_image_tiered",
+            "source_url": "https://ai-gateway.vercel.sh/v1/models",
+            "tiers": {
+              "768x768": 0.041,
+              "1024x1024": 0.048,
+              "1536x1536": 0.07,
+              "2048x2048": 0.1,
+              "4096x4096": 0.607
+            }
+          }
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "black-forest-labs/flux-3-image",
+          "source_url": "https://openrouter.ai/api/v1/images/models/black-forest-labs/flux-3-image/endpoints",
+          "url": "https://openrouter.ai/api/v1/images/models/black-forest-labs/flux-3-image/endpoints",
+          "references": {
+            "id": "black-forest-labs/flux-3-image",
+            "max": 10
+          },
+          "pricing": {
+            "type": "per_image_tiered",
+            "source_url": "https://openrouter.ai/api/v1/images/models/black-forest-labs/flux-3-image/endpoints",
+            "tiers": {
+              "768": 0.041,
+              "1k": 0.048,
+              "1.5k": 0.07,
+              "2k": 0.1,
+              "4k": 0.607
+            }
+          }
+        },
+        "fal": {
+          "provider": "fal",
+          "id": "blackforestlabs/flux-3/text-to-image",
+          "source_url": "https://fal.ai/models/blackforestlabs/flux-3/text-to-image/api",
+          "url": "https://fal.ai/models/blackforestlabs/flux-3/text-to-image",
+          "qualifications": [
+            {
+              "source_url": "https://fal.ai/models/blackforestlabs/flux-3/text-to-image/api",
+              "notes": "The exact API schema lists 768sq, 1k, 1.5k, 2k and 4k. Narrative documentation instead lists 512sq and omits 1.5k; the exact endpoint schema supplies this binding parameter list."
+            },
+            {
+              "source_url": "https://fal.ai/models/blackforestlabs/flux-3/text-to-image",
+              "notes": "The page publishes $0.048 for a 1K (1 MP) image and endpoint billing metadata names megapixels. Resolution-tier rates, quantity rounding and reference-image billing scope are not established by this source; native-provider flat tier prices are not substituted."
+            }
+          ],
+          "endpoints": [
+            {
+              "id": "blackforestlabs/flux-3/text-to-image",
+              "input": "text",
+              "source_url": "https://fal.ai/models/blackforestlabs/flux-3/text-to-image/api",
+              "parameters": {
+                "version": {
+                  "type": "string"
+                },
+                "sync_mode": {
+                  "type": "boolean"
+                },
+                "resolution": {
+                  "enum": [
+                    "768sq",
+                    "1k",
+                    "1.5k",
+                    "2k",
+                    "4k"
+                  ],
+                  "type": "string"
+                },
+                "output_format": {
+                  "enum": [
+                    "jpeg",
+                    "png"
+                  ],
+                  "type": "string"
+                },
+                "safety_tolerance": {
+                  "minimum": 0,
+                  "maximum": 4,
+                  "type": "integer"
+                },
+                "aspect_ratio": {
+                  "enum": [
+                    "auto",
+                    "21:9",
+                    "2:1",
+                    "16:9",
+                    "3:2",
+                    "7:5",
+                    "4:3",
+                    "5:4",
+                    "1:1",
+                    "4:5",
+                    "3:4",
+                    "5:7",
+                    "2:3",
+                    "9:16",
+                    "1:2"
+                  ],
+                  "type": "string"
+                },
+                "enable_prompt_expansion": {
+                  "type": "boolean"
+                },
+                "prompt": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "id": "blackforestlabs/flux-3/edit-image",
+              "input": "multi_image",
+              "source_url": "https://fal.ai/models/blackforestlabs/flux-3/edit-image/api",
+              "parameters": {
+                "version": {
+                  "type": "string"
+                },
+                "sync_mode": {
+                  "type": "boolean"
+                },
+                "resolution": {
+                  "enum": [
+                    "768sq",
+                    "1k",
+                    "1.5k",
+                    "2k",
+                    "4k"
+                  ],
+                  "type": "string"
+                },
+                "output_format": {
+                  "enum": [
+                    "jpeg",
+                    "png"
+                  ],
+                  "type": "string"
+                },
+                "safety_tolerance": {
+                  "minimum": 0,
+                  "maximum": 4,
+                  "type": "integer"
+                },
+                "image_urls": {
+                  "max_items": 10,
+                  "type": "array",
+                  "min_items": 1
+                },
+                "aspect_ratio": {
+                  "enum": [
+                    "auto",
+                    "21:9",
+                    "2:1",
+                    "16:9",
+                    "3:2",
+                    "7:5",
+                    "4:3",
+                    "5:4",
+                    "1:1",
+                    "4:5",
+                    "3:4",
+                    "5:7",
+                    "2:3",
+                    "9:16",
+                    "1:2"
+                  ],
+                  "type": "string"
+                },
+                "enable_prompt_expansion": {
+                  "type": "boolean"
+                },
+                "prompt": {
+                  "type": "string"
+                }
+              }
+            }
+          ],
+          "references": {
+            "id": "blackforestlabs/flux-3/edit-image",
+            "max": 10
+          },
+          "pricing": {
+            "type": "per_megapixel",
+            "usd": 0.048,
+            "source_url": "https://fal.ai/models/blackforestlabs/flux-3/text-to-image"
+          }
+        }
+      },
+      "provider_coverage": {
+        "bfl": {
+          "disposition": "listed",
+          "source_url": "https://docs.bfl.ml/api-reference/utility/generate-an-image-with-flux-3"
+        },
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/flux-3-image"
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/api/v1/images/models/black-forest-labs/flux-3-image/endpoints"
+        },
+        "fal": {
+          "disposition": "listed",
+          "source_url": "https://fal.ai/models/blackforestlabs/flux-3/text-to-image/api"
+        }
+      }
     },
     "bfl/flux-kontext-max": {
       "reference_provider": "bfl",
@@ -12633,6 +13400,1164 @@
         "grida": {
           "disposition": "listed",
           "source_url": "https://gateway.grida.ai/v1/models"
+        }
+      },
+      "styles": null
+    },
+    "openai/gpt-image-2.6-flare": {
+      "reference_provider": "openai",
+      "id": "openai/gpt-image-2.6-flare",
+      "label": "GPT Image 2.6 Flare",
+      "short_description": "Image generation and editing for fast iteration.",
+      "vendor": "openai",
+      "transparent_background": true,
+      "sizes": [
+        [
+          1024,
+          1024,
+          "1:1"
+        ],
+        [
+          1024,
+          1536,
+          "2:3"
+        ],
+        [
+          1536,
+          1024,
+          "3:2"
+        ]
+      ],
+      "quality": {
+        "options": [
+          "auto",
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ]
+      },
+      "pricing": {
+        "type": "per_token",
+        "input": 5,
+        "cached_input": 1.25,
+        "image_input": 8,
+        "cached_image_input": 2,
+        "output": 30,
+        "source_url": "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare"
+      },
+      "release": {
+        "date": "2026-11-04",
+        "basis": "model",
+        "source_url": "https://developers.openai.com/api/docs/changelog"
+      },
+      "providers": {
+        "vercel": {
+          "provider": "vercel",
+          "id": "openai/gpt-image-2.6-flare",
+          "url": "https://vercel.com/ai-gateway/models/gpt-image-2.6-flare",
+          "pricing": {
+            "type": "per_token",
+            "input": 5,
+            "cached_input": 1.25,
+            "output": 30
+          }
+        },
+        "fal": {
+          "endpoints": [
+            {
+              "id": "openai/gpt-image-2.6/flare/text-to-image",
+              "input": "text",
+              "source_url": "https://fal.ai/models/openai/gpt-image-2.6/flare/text-to-image/api",
+              "parameters": {
+                "enable_safety_checker": {
+                  "type": "boolean"
+                },
+                "prompt": {
+                  "max_length": 32000,
+                  "min_length": 1,
+                  "type": "string"
+                },
+                "sync_mode": {
+                  "type": "boolean"
+                },
+                "quality": {
+                  "enum": [
+                    "auto",
+                    "low",
+                    "medium",
+                    "high",
+                    "xhigh",
+                    "max"
+                  ],
+                  "type": "string"
+                },
+                "frame_duration_ms": {
+                  "maximum": 2000,
+                  "type": "integer",
+                  "minimum": 20
+                },
+                "frame_count": {
+                  "maximum": 16,
+                  "type": "integer",
+                  "minimum": 2
+                },
+                "background": {
+                  "enum": [
+                    "auto",
+                    "transparent",
+                    "opaque"
+                  ],
+                  "type": "string"
+                },
+                "reasoning_effort": {
+                  "enum": [
+                    "low",
+                    "medium",
+                    "high"
+                  ],
+                  "type": "string"
+                },
+                "image_size": {
+                  "enum": [
+                    "square_hd",
+                    "square",
+                    "portrait_4_3",
+                    "portrait_16_9",
+                    "landscape_4_3",
+                    "landscape_16_9",
+                    "auto"
+                  ]
+                },
+                "image_size.width": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 3840,
+                  "multiple_of": 16
+                },
+                "image_size.height": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 3840,
+                  "multiple_of": 16
+                },
+                "output_compression": {
+                  "maximum": 100,
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "num_images": {
+                  "maximum": 10,
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "output_format": {
+                  "enum": [
+                    "jpeg",
+                    "png",
+                    "webp",
+                    "gif",
+                    "svg"
+                  ],
+                  "type": "string"
+                },
+                "svg_model": {
+                  "enum": [
+                    "gpt-6-astra",
+                    "gpt-5.5",
+                    "gpt-5.4",
+                    "gpt-5.6-terra",
+                    "gpt-6-luna"
+                  ],
+                  "type": "string"
+                }
+              },
+              "image_constraints": {
+                "step": 16,
+                "max_edge": 3840,
+                "min_pixels": 655360,
+                "max_pixels": 8294400,
+                "aspect_ratio": {
+                  "max": 3
+                }
+              }
+            },
+            {
+              "id": "openai/gpt-image-2.6/flare/edit",
+              "input": "image",
+              "source_url": "https://fal.ai/models/openai/gpt-image-2.6/flare/edit/api",
+              "parameters": {
+                "prompt": {
+                  "max_length": 32000,
+                  "min_length": 1,
+                  "type": "string"
+                },
+                "sync_mode": {
+                  "type": "boolean"
+                },
+                "frame_duration_ms": {
+                  "maximum": 2000,
+                  "type": "integer",
+                  "minimum": 20
+                },
+                "image_size": {
+                  "enum": [
+                    "square_hd",
+                    "square",
+                    "portrait_4_3",
+                    "portrait_16_9",
+                    "landscape_4_3",
+                    "landscape_16_9",
+                    "auto"
+                  ]
+                },
+                "image_size.width": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 3840,
+                  "multiple_of": 16
+                },
+                "image_size.height": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 3840,
+                  "multiple_of": 16
+                },
+                "enable_safety_checker": {
+                  "type": "boolean"
+                },
+                "image_urls": {
+                  "max_items": 16,
+                  "type": "array"
+                },
+                "background": {
+                  "enum": [
+                    "auto",
+                    "transparent",
+                    "opaque"
+                  ],
+                  "type": "string"
+                },
+                "reasoning_effort": {
+                  "enum": [
+                    "low",
+                    "medium",
+                    "high"
+                  ],
+                  "type": "string"
+                },
+                "quality": {
+                  "enum": [
+                    "auto",
+                    "low",
+                    "medium",
+                    "high",
+                    "xhigh",
+                    "max"
+                  ],
+                  "type": "string"
+                },
+                "frame_count": {
+                  "maximum": 16,
+                  "type": "integer",
+                  "minimum": 2
+                },
+                "markup_image_url": {
+                  "type": "string"
+                },
+                "output_compression": {
+                  "maximum": 100,
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "num_images": {
+                  "maximum": 10,
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "output_format": {
+                  "enum": [
+                    "jpeg",
+                    "png",
+                    "webp",
+                    "gif"
+                  ],
+                  "type": "string"
+                },
+                "mask_url": {
+                  "type": "string"
+                }
+              },
+              "image_constraints": {
+                "step": 16,
+                "max_edge": 3840,
+                "min_pixels": 655360,
+                "max_pixels": 8294400,
+                "aspect_ratio": {
+                  "max": 3
+                }
+              }
+            }
+          ],
+          "provider": "fal",
+          "id": "openai/gpt-image-2.6/flare/text-to-image",
+          "url": "https://fal.ai/models/openai/gpt-image-2.6/flare/text-to-image",
+          "source_url": "https://fal.ai/models/openai/gpt-image-2.6/flare/text-to-image/api",
+          "qualifications": [
+            {
+              "source_url": "https://fal.ai/models/openai/gpt-image-2.6/flare/text-to-image/api",
+              "notes": "The generation schema lists GIF and SVG output; its edit schema lists GIF but no SVG. GIF frame_count is 2–16 and frame_duration_ms is 20–2,000, rounded to 10 ms. All GIF frames/outputs share the request pixel budget. The native image guide documents GIF generation only and a different frame range; provider parity is not inferred."
+            },
+            {
+              "source_url": "https://developers.openai.com/api/docs/guides/image-generation",
+              "notes": "SVG output includes separate authoring-model token charges and is not priced as raster output alone. Complexity has no separate fee."
+            }
+          ],
+          "references": {
+            "id": "openai/gpt-image-2.6/flare/edit",
+            "max": 16
+          },
+          "pricing": {
+            "source_url": "https://fal.ai/models/openai/gpt-image-2.6/flare/text-to-image",
+            "rounding_usd": 0.0001,
+            "type": "per_token",
+            "input": 5,
+            "cached_input": 1.25,
+            "image_input": 8,
+            "cached_image_input": 2,
+            "text_output": 10,
+            "output": 30
+          }
+        },
+        "openai": {
+          "provider": "openai",
+          "id": "gpt-image-2.6-flare",
+          "source_url": "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare",
+          "url": "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare",
+          "endpoints": [
+            {
+              "id": "v1/images/generations",
+              "input": "text",
+              "interface": "images.generations",
+              "source_url": "https://developers.openai.com/api/docs/guides/image-generation",
+              "parameters": {
+                "output_format": {
+                  "type": "string",
+                  "enum": [
+                    "png",
+                    "jpeg",
+                    "webp",
+                    "gif",
+                    "svg"
+                  ]
+                },
+                "complexity": {
+                  "type": "string",
+                  "enum": [
+                    "low",
+                    "medium",
+                    "high"
+                  ]
+                },
+                "frame_count": {
+                  "type": "integer",
+                  "minimum": 2,
+                  "maximum": 64
+                },
+                "frame_duration_ms": {
+                  "type": "integer",
+                  "minimum": 20,
+                  "maximum": 2000
+                }
+              }
+            },
+            {
+              "id": "v1/images/edits",
+              "input": "image",
+              "interface": "images.edits",
+              "source_url": "https://developers.openai.com/api/docs/guides/image-generation",
+              "parameters": {
+                "output_format": {
+                  "type": "string",
+                  "enum": [
+                    "png",
+                    "jpeg",
+                    "webp"
+                  ]
+                },
+                "complexity": {
+                  "type": "string",
+                  "enum": [
+                    "low",
+                    "medium",
+                    "high"
+                  ]
+                }
+              }
+            }
+          ],
+          "qualifications": [
+            {
+              "source_url": "https://developers.openai.com/api/docs/guides/image-generation",
+              "notes": "GIF output is generation-only; the native guide does not support GIF output on edits. SVG output is generated through a separately billed authoring model. Raster token pricing does not include those authoring-model tokens."
+            }
+          ],
+          "pricing": {
+            "type": "per_token",
+            "input": 5,
+            "cached_input": 1.25,
+            "output": 30,
+            "image_input": 8,
+            "cached_image_input": 2,
+            "source_url": "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare"
+          }
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "openai/gpt-image-2.6-flare",
+          "source_url": "https://openrouter.ai/api/v1/images/models/openai/gpt-image-2.6-flare/endpoints",
+          "url": "https://openrouter.ai/api/v1/images/models/openai/gpt-image-2.6-flare/endpoints",
+          "transparent_background": true,
+          "endpoints": [
+            {
+              "id": "openai/gpt-image-2.6-flare",
+              "source_url": "https://openrouter.ai/api/v1/images/models/openai/gpt-image-2.6-flare/endpoints",
+              "parameters": {
+                "aspect_ratio": {
+                  "enum": [
+                    "1:1",
+                    "3:2",
+                    "2:3",
+                    "4:3",
+                    "3:4",
+                    "16:9",
+                    "9:16",
+                    "21:9",
+                    "auto"
+                  ]
+                },
+                "quality": {
+                  "enum": [
+                    "auto",
+                    "low",
+                    "medium",
+                    "high",
+                    "xhigh",
+                    "max"
+                  ]
+                },
+                "background": {
+                  "enum": [
+                    "auto",
+                    "transparent",
+                    "opaque"
+                  ]
+                },
+                "n": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 10
+                },
+                "input_references": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 16
+                },
+                "output_compression": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "output_format": {
+                  "type": "string",
+                  "enum": [
+                    "png",
+                    "jpeg",
+                    "webp"
+                  ]
+                }
+              },
+              "input": "text"
+            }
+          ],
+          "pricing": {
+            "type": "per_token",
+            "image_input": 8.0,
+            "input": 5.0,
+            "output": 30.0,
+            "source_url": "https://openrouter.ai/api/v1/images/models/openai/gpt-image-2.6-flare/endpoints"
+          },
+          "references": {
+            "id": "openai/gpt-image-2.6-flare",
+            "max": 16
+          }
+        }
+      },
+      "constraints": {
+        "step": 16,
+        "max_edge": 3840,
+        "min_pixels": 655360,
+        "max_pixels": 8294400,
+        "aspect_ratio": {
+          "max": 3
+        }
+      },
+      "output_token_calculator": {
+        "source_url": "https://developers.openai.com/api/docs/guides/image-generation",
+        "source_js_url": "https://developers.openai.com/_astro/GptImageTokenCalculator.react.SM_UvXcs.js",
+        "area_offset": 2000000,
+        "area_divisor": 4000000,
+        "short_axis_rounding": "nearest_ties_even",
+        "token_rounding": "ceil",
+        "examples": [
+          {
+            "width": 1024,
+            "height": 1024,
+            "quality": "low",
+            "output_tokens": 823,
+            "source_url": "https://developers.openai.com/api/docs/guides/image-generation"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "quality": "medium",
+            "output_tokens": 1449,
+            "source_url": "https://developers.openai.com/api/docs/guides/image-generation"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "quality": "high",
+            "output_tokens": 1756,
+            "source_url": "https://developers.openai.com/api/docs/guides/image-generation"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "quality": "xhigh",
+            "output_tokens": 3122,
+            "source_url": "https://developers.openai.com/api/docs/guides/image-generation"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "quality": "max",
+            "output_tokens": 7024,
+            "source_url": "https://developers.openai.com/api/docs/guides/image-generation"
+          }
+        ],
+        "result_rounding": "nearest_ties_up",
+        "quality_axes": {
+          "low": 16,
+          "medium": 24,
+          "high": 48,
+          "xhigh": 64,
+          "max": 96
+        },
+        "quality_multipliers": {
+          "low": "4.2",
+          "medium": "3.3",
+          "high": "1",
+          "xhigh": "1",
+          "max": "1"
+        }
+      },
+      "provider_coverage": {
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/api/v1/images/models/openai/gpt-image-2.6-flare/endpoints"
+        },
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/gpt-image-2.6-flare"
+        },
+        "fal": {
+          "disposition": "listed",
+          "source_url": "https://fal.ai/models/openai/gpt-image-2.6/flare/text-to-image"
+        },
+        "openai": {
+          "disposition": "listed",
+          "source_url": "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare"
+        }
+      },
+      "styles": null
+    },
+    "openai/gpt-image-2.6-sunburst": {
+      "reference_provider": "openai",
+      "id": "openai/gpt-image-2.6-sunburst",
+      "label": "GPT Image 2.6 Sunburst",
+      "short_description": "Image generation and editing for detailed visual work.",
+      "vendor": "openai",
+      "transparent_background": true,
+      "sizes": [
+        [
+          1024,
+          1024,
+          "1:1"
+        ],
+        [
+          1024,
+          1536,
+          "2:3"
+        ],
+        [
+          1536,
+          1024,
+          "3:2"
+        ]
+      ],
+      "quality": {
+        "options": [
+          "auto",
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ]
+      },
+      "pricing": {
+        "type": "per_token",
+        "input": 5,
+        "cached_input": 1.25,
+        "image_input": 8,
+        "cached_image_input": 2,
+        "output": 30,
+        "source_url": "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst"
+      },
+      "release": {
+        "date": "2026-11-04",
+        "basis": "model",
+        "source_url": "https://developers.openai.com/api/docs/changelog"
+      },
+      "providers": {
+        "vercel": {
+          "provider": "vercel",
+          "id": "openai/gpt-image-2.6-sunburst",
+          "url": "https://vercel.com/ai-gateway/models/gpt-image-2.6-sunburst",
+          "pricing": {
+            "type": "per_token",
+            "input": 5,
+            "cached_input": 1.25,
+            "output": 30
+          }
+        },
+        "fal": {
+          "endpoints": [
+            {
+              "id": "openai/gpt-image-2.6/sunburst/text-to-image",
+              "input": "text",
+              "source_url": "https://fal.ai/models/openai/gpt-image-2.6/sunburst/text-to-image/api",
+              "parameters": {
+                "image_size": {
+                  "enum": [
+                    "square_hd",
+                    "square",
+                    "portrait_4_3",
+                    "portrait_16_9",
+                    "landscape_4_3",
+                    "landscape_16_9",
+                    "auto"
+                  ]
+                },
+                "image_size.width": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 3840,
+                  "multiple_of": 16
+                },
+                "image_size.height": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 3840,
+                  "multiple_of": 16
+                },
+                "background": {
+                  "enum": [
+                    "auto",
+                    "transparent",
+                    "opaque"
+                  ],
+                  "type": "string"
+                },
+                "output_compression": {
+                  "type": "integer",
+                  "maximum": 100,
+                  "minimum": 0
+                },
+                "prompt": {
+                  "max_length": 32000,
+                  "type": "string",
+                  "min_length": 1
+                },
+                "enable_safety_checker": {
+                  "type": "boolean"
+                },
+                "frame_count": {
+                  "type": "integer",
+                  "maximum": 16,
+                  "minimum": 2
+                },
+                "output_format": {
+                  "enum": [
+                    "jpeg",
+                    "png",
+                    "webp",
+                    "gif",
+                    "svg"
+                  ],
+                  "type": "string"
+                },
+                "num_images": {
+                  "type": "integer",
+                  "maximum": 10,
+                  "minimum": 1
+                },
+                "sync_mode": {
+                  "type": "boolean"
+                },
+                "reasoning_effort": {
+                  "type": "string",
+                  "enum": [
+                    "low",
+                    "medium",
+                    "high"
+                  ]
+                },
+                "svg_model": {
+                  "enum": [
+                    "gpt-6-astra",
+                    "gpt-5.5",
+                    "gpt-5.4",
+                    "gpt-5.6-terra",
+                    "gpt-6-luna"
+                  ],
+                  "type": "string"
+                },
+                "quality": {
+                  "type": "string",
+                  "enum": [
+                    "auto",
+                    "low",
+                    "medium",
+                    "high",
+                    "xhigh",
+                    "max"
+                  ]
+                },
+                "frame_duration_ms": {
+                  "type": "integer",
+                  "maximum": 2000,
+                  "minimum": 20
+                }
+              },
+              "image_constraints": {
+                "step": 16,
+                "max_edge": 3840,
+                "min_pixels": 655360,
+                "max_pixels": 8294400,
+                "aspect_ratio": {
+                  "max": 3
+                }
+              }
+            },
+            {
+              "id": "openai/gpt-image-2.6/sunburst/edit",
+              "input": "image",
+              "source_url": "https://fal.ai/models/openai/gpt-image-2.6/sunburst/edit/api",
+              "parameters": {
+                "background": {
+                  "enum": [
+                    "auto",
+                    "transparent",
+                    "opaque"
+                  ],
+                  "type": "string"
+                },
+                "output_format": {
+                  "enum": [
+                    "jpeg",
+                    "png",
+                    "webp",
+                    "gif"
+                  ],
+                  "type": "string"
+                },
+                "prompt": {
+                  "max_length": 32000,
+                  "type": "string",
+                  "min_length": 1
+                },
+                "mask_url": {
+                  "type": "string"
+                },
+                "frame_count": {
+                  "type": "integer",
+                  "maximum": 16,
+                  "minimum": 2
+                },
+                "markup_image_url": {
+                  "type": "string"
+                },
+                "image_size": {
+                  "enum": [
+                    "square_hd",
+                    "square",
+                    "portrait_4_3",
+                    "portrait_16_9",
+                    "landscape_4_3",
+                    "landscape_16_9",
+                    "auto"
+                  ]
+                },
+                "image_size.width": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 3840,
+                  "multiple_of": 16
+                },
+                "image_size.height": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 3840,
+                  "multiple_of": 16
+                },
+                "output_compression": {
+                  "type": "integer",
+                  "maximum": 100,
+                  "minimum": 0
+                },
+                "enable_safety_checker": {
+                  "type": "boolean"
+                },
+                "image_urls": {
+                  "type": "array",
+                  "max_items": 16
+                },
+                "num_images": {
+                  "type": "integer",
+                  "maximum": 10,
+                  "minimum": 1
+                },
+                "sync_mode": {
+                  "type": "boolean"
+                },
+                "reasoning_effort": {
+                  "type": "string",
+                  "enum": [
+                    "low",
+                    "medium",
+                    "high"
+                  ]
+                },
+                "frame_duration_ms": {
+                  "type": "integer",
+                  "maximum": 2000,
+                  "minimum": 20
+                },
+                "quality": {
+                  "type": "string",
+                  "enum": [
+                    "auto",
+                    "low",
+                    "medium",
+                    "high",
+                    "xhigh",
+                    "max"
+                  ]
+                }
+              },
+              "image_constraints": {
+                "step": 16,
+                "max_edge": 3840,
+                "min_pixels": 655360,
+                "max_pixels": 8294400,
+                "aspect_ratio": {
+                  "max": 3
+                }
+              }
+            }
+          ],
+          "provider": "fal",
+          "id": "openai/gpt-image-2.6/sunburst/text-to-image",
+          "url": "https://fal.ai/models/openai/gpt-image-2.6/sunburst/text-to-image",
+          "source_url": "https://fal.ai/models/openai/gpt-image-2.6/sunburst/text-to-image/api",
+          "qualifications": [
+            {
+              "source_url": "https://fal.ai/models/openai/gpt-image-2.6/sunburst/text-to-image/api",
+              "notes": "The generation schema lists GIF and SVG output; its edit schema lists GIF but no SVG. GIF frame_count is 2–16 and frame_duration_ms is 20–2,000, rounded to 10 ms. All GIF frames/outputs share the request pixel budget. The native image guide documents GIF generation only and a different frame range; provider parity is not inferred."
+            },
+            {
+              "source_url": "https://developers.openai.com/api/docs/guides/image-generation",
+              "notes": "SVG output includes separate authoring-model token charges and is not priced as raster output alone. Complexity has no separate fee."
+            }
+          ],
+          "references": {
+            "id": "openai/gpt-image-2.6/sunburst/edit",
+            "max": 16
+          },
+          "pricing": {
+            "source_url": "https://fal.ai/models/openai/gpt-image-2.6/sunburst/text-to-image",
+            "rounding_usd": 0.0001,
+            "type": "per_token",
+            "input": 5,
+            "cached_input": 1.25,
+            "image_input": 8,
+            "cached_image_input": 2,
+            "text_output": 10,
+            "output": 30
+          }
+        },
+        "openai": {
+          "provider": "openai",
+          "id": "gpt-image-2.6-sunburst",
+          "source_url": "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst",
+          "url": "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst",
+          "endpoints": [
+            {
+              "id": "v1/images/generations",
+              "input": "text",
+              "interface": "images.generations",
+              "source_url": "https://developers.openai.com/api/docs/guides/image-generation",
+              "parameters": {
+                "output_format": {
+                  "type": "string",
+                  "enum": [
+                    "png",
+                    "jpeg",
+                    "webp",
+                    "gif",
+                    "svg"
+                  ]
+                },
+                "complexity": {
+                  "type": "string",
+                  "enum": [
+                    "low",
+                    "medium",
+                    "high"
+                  ]
+                },
+                "frame_count": {
+                  "type": "integer",
+                  "minimum": 2,
+                  "maximum": 64
+                },
+                "frame_duration_ms": {
+                  "type": "integer",
+                  "minimum": 20,
+                  "maximum": 2000
+                }
+              }
+            },
+            {
+              "id": "v1/images/edits",
+              "input": "image",
+              "interface": "images.edits",
+              "source_url": "https://developers.openai.com/api/docs/guides/image-generation",
+              "parameters": {
+                "output_format": {
+                  "type": "string",
+                  "enum": [
+                    "png",
+                    "jpeg",
+                    "webp"
+                  ]
+                },
+                "complexity": {
+                  "type": "string",
+                  "enum": [
+                    "low",
+                    "medium",
+                    "high"
+                  ]
+                }
+              }
+            }
+          ],
+          "qualifications": [
+            {
+              "source_url": "https://developers.openai.com/api/docs/guides/image-generation",
+              "notes": "GIF output is generation-only; the native guide does not support GIF output on edits. SVG output is generated through a separately billed authoring model. Raster token pricing does not include those authoring-model tokens."
+            }
+          ],
+          "pricing": {
+            "type": "per_token",
+            "input": 5,
+            "cached_input": 1.25,
+            "output": 30,
+            "image_input": 8,
+            "cached_image_input": 2,
+            "source_url": "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst"
+          }
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "openai/gpt-image-2.6-sunburst",
+          "source_url": "https://openrouter.ai/api/v1/images/models/openai/gpt-image-2.6-sunburst/endpoints",
+          "url": "https://openrouter.ai/api/v1/images/models/openai/gpt-image-2.6-sunburst/endpoints",
+          "transparent_background": true,
+          "endpoints": [
+            {
+              "id": "openai/gpt-image-2.6-sunburst",
+              "source_url": "https://openrouter.ai/api/v1/images/models/openai/gpt-image-2.6-sunburst/endpoints",
+              "parameters": {
+                "aspect_ratio": {
+                  "enum": [
+                    "1:1",
+                    "3:2",
+                    "2:3",
+                    "4:3",
+                    "3:4",
+                    "16:9",
+                    "9:16",
+                    "21:9",
+                    "auto"
+                  ]
+                },
+                "quality": {
+                  "enum": [
+                    "auto",
+                    "low",
+                    "medium",
+                    "high",
+                    "xhigh",
+                    "max"
+                  ]
+                },
+                "background": {
+                  "enum": [
+                    "auto",
+                    "transparent",
+                    "opaque"
+                  ]
+                },
+                "n": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 10
+                },
+                "input_references": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 16
+                },
+                "output_compression": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "output_format": {
+                  "type": "string",
+                  "enum": [
+                    "png",
+                    "jpeg",
+                    "webp"
+                  ]
+                }
+              },
+              "input": "text"
+            }
+          ],
+          "pricing": {
+            "type": "per_token",
+            "image_input": 8.0,
+            "input": 5.0,
+            "output": 30.0,
+            "source_url": "https://openrouter.ai/api/v1/images/models/openai/gpt-image-2.6-sunburst/endpoints"
+          },
+          "references": {
+            "id": "openai/gpt-image-2.6-sunburst",
+            "max": 16
+          }
+        }
+      },
+      "constraints": {
+        "step": 16,
+        "max_edge": 3840,
+        "min_pixels": 655360,
+        "max_pixels": 8294400,
+        "aspect_ratio": {
+          "max": 3
+        }
+      },
+      "output_token_calculator": {
+        "source_url": "https://developers.openai.com/api/docs/guides/image-generation",
+        "source_js_url": "https://developers.openai.com/_astro/GptImageTokenCalculator.react.SM_UvXcs.js",
+        "area_offset": 2000000,
+        "area_divisor": 4000000,
+        "short_axis_rounding": "nearest_ties_even",
+        "token_rounding": "ceil",
+        "examples": [
+          {
+            "width": 1024,
+            "height": 1024,
+            "quality": "low",
+            "output_tokens": 823,
+            "source_url": "https://developers.openai.com/api/docs/guides/image-generation"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "quality": "medium",
+            "output_tokens": 1449,
+            "source_url": "https://developers.openai.com/api/docs/guides/image-generation"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "quality": "high",
+            "output_tokens": 1756,
+            "source_url": "https://developers.openai.com/api/docs/guides/image-generation"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "quality": "xhigh",
+            "output_tokens": 3122,
+            "source_url": "https://developers.openai.com/api/docs/guides/image-generation"
+          },
+          {
+            "width": 1024,
+            "height": 1024,
+            "quality": "max",
+            "output_tokens": 7024,
+            "source_url": "https://developers.openai.com/api/docs/guides/image-generation"
+          }
+        ],
+        "result_rounding": "nearest_ties_up",
+        "quality_axes": {
+          "low": 16,
+          "medium": 24,
+          "high": 48,
+          "xhigh": 64,
+          "max": 96
+        },
+        "quality_multipliers": {
+          "low": "4.2",
+          "medium": "3.3",
+          "high": "1",
+          "xhigh": "1",
+          "max": "1"
+        }
+      },
+      "provider_coverage": {
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/api/v1/images/models/openai/gpt-image-2.6-sunburst/endpoints"
+        },
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/gpt-image-2.6-sunburst"
+        },
+        "fal": {
+          "disposition": "listed",
+          "source_url": "https://fal.ai/models/openai/gpt-image-2.6/sunburst/text-to-image"
+        },
+        "openai": {
+          "disposition": "listed",
+          "source_url": "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst"
         }
       },
       "styles": null
