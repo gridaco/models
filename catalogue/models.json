@@ -744,6 +744,129 @@
             "context_tokens": 1000000,
             "max_output_tokens": 128000
           }
+        },
+        "grida": {
+          "provider": "grida",
+          "id": "anthropic/claude-haiku-5.5",
+          "url": "https://gateway.grida.ai/v1/models",
+          "endpoints": [
+            {
+              "id": "anthropic/claude-haiku-5.5",
+              "input": "text",
+              "source_url": "https://gateway.grida.ai/v1/models",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "input_tokens.0",
+                    "meter": "input_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "quantity_range": {
+                      "meter": "total_input_tokens",
+                      "min": "0",
+                      "max": "100001"
+                    },
+                    "usd_per_unit": "0.0000001"
+                  },
+                  {
+                    "id": "input_tokens.1",
+                    "meter": "input_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "quantity_range": {
+                      "meter": "total_input_tokens",
+                      "min": "100001"
+                    },
+                    "usd_per_unit": "0.0000005"
+                  },
+                  {
+                    "id": "cached_input_tokens.0",
+                    "meter": "cached_input_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "quantity_range": {
+                      "meter": "total_input_tokens",
+                      "min": "0",
+                      "max": "100001"
+                    },
+                    "usd_per_unit": "0.00000001"
+                  },
+                  {
+                    "id": "cached_input_tokens.1",
+                    "meter": "cached_input_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "quantity_range": {
+                      "meter": "total_input_tokens",
+                      "min": "100001"
+                    },
+                    "usd_per_unit": "0.00000005"
+                  },
+                  {
+                    "id": "output_tokens.0",
+                    "meter": "output_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "quantity_range": {
+                      "meter": "total_input_tokens",
+                      "min": "0",
+                      "max": "100001"
+                    },
+                    "usd_per_unit": "0.0000005"
+                  },
+                  {
+                    "id": "output_tokens.1",
+                    "meter": "output_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "quantity_range": {
+                      "meter": "total_input_tokens",
+                      "min": "100001"
+                    },
+                    "usd_per_unit": "0.0000025"
+                  }
+                ]
+              }
+            }
+          ],
+          "capabilities": {
+            "source_url": "https://gateway.grida.ai/v1/models",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true
+          },
+          "limits": {
+            "source_url": "https://gateway.grida.ai/v1/models",
+            "context_tokens": 1000000,
+            "max_output_tokens": 128000
+          }
         }
       },
       "vision_tokenization": {
@@ -771,6 +894,10 @@
           "disposition": "excluded",
           "source_url": "https://fal.ai/models",
           "reason": "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."
+        },
+        "grida": {
+          "disposition": "listed",
+          "source_url": "https://gateway.grida.ai/v1/models"
         }
       }
     },
@@ -1352,6 +1479,69 @@
             "context_tokens": 1000000,
             "max_output_tokens": 128000
           }
+        },
+        "grida": {
+          "provider": "grida",
+          "id": "anthropic/claude-opus-5.5",
+          "url": "https://gateway.grida.ai/v1/models",
+          "endpoints": [
+            {
+              "id": "anthropic/claude-opus-5.5",
+              "input": "text",
+              "source_url": "https://gateway.grida.ai/v1/models",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "input_tokens",
+                    "meter": "input_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.000004"
+                  },
+                  {
+                    "id": "cached_input_tokens",
+                    "meter": "cached_input_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.0000002"
+                  },
+                  {
+                    "id": "output_tokens",
+                    "meter": "output_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.00002"
+                  }
+                ]
+              }
+            }
+          ],
+          "capabilities": {
+            "source_url": "https://gateway.grida.ai/v1/models",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true
+          },
+          "limits": {
+            "source_url": "https://gateway.grida.ai/v1/models",
+            "context_tokens": 1000000,
+            "max_output_tokens": 128000
+          }
         }
       },
       "vision_tokenization": {
@@ -1379,6 +1569,10 @@
           "disposition": "excluded",
           "source_url": "https://fal.ai/models",
           "reason": "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."
+        },
+        "grida": {
+          "disposition": "listed",
+          "source_url": "https://gateway.grida.ai/v1/models"
         }
       }
     },
@@ -1735,6 +1929,69 @@
             "context_tokens": 1000000,
             "max_output_tokens": 128000
           }
+        },
+        "grida": {
+          "provider": "grida",
+          "id": "anthropic/claude-sonnet-5.5",
+          "url": "https://gateway.grida.ai/v1/models",
+          "endpoints": [
+            {
+              "id": "anthropic/claude-sonnet-5.5",
+              "input": "text",
+              "source_url": "https://gateway.grida.ai/v1/models",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "input_tokens",
+                    "meter": "input_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.000002"
+                  },
+                  {
+                    "id": "cached_input_tokens",
+                    "meter": "cached_input_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.0000001"
+                  },
+                  {
+                    "id": "output_tokens",
+                    "meter": "output_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.00001"
+                  }
+                ]
+              }
+            }
+          ],
+          "capabilities": {
+            "source_url": "https://gateway.grida.ai/v1/models",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true
+          },
+          "limits": {
+            "source_url": "https://gateway.grida.ai/v1/models",
+            "context_tokens": 1000000,
+            "max_output_tokens": 128000
+          }
         }
       },
       "vision_tokenization": {
@@ -1762,6 +2019,10 @@
           "disposition": "excluded",
           "source_url": "https://fal.ai/models",
           "reason": "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."
+        },
+        "grida": {
+          "disposition": "listed",
+          "source_url": "https://gateway.grida.ai/v1/models"
         }
       }
     },
@@ -2763,6 +3024,69 @@
             "reasoning": true,
             "structured_output": true
           }
+        },
+        "grida": {
+          "provider": "grida",
+          "id": "google/gemini-4-argon",
+          "url": "https://gateway.grida.ai/v1/models",
+          "endpoints": [
+            {
+              "id": "google/gemini-4-argon",
+              "input": "text",
+              "source_url": "https://gateway.grida.ai/v1/models",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "input_tokens",
+                    "meter": "input_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.000004"
+                  },
+                  {
+                    "id": "cached_input_tokens",
+                    "meter": "cached_input_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.0000002"
+                  },
+                  {
+                    "id": "output_tokens",
+                    "meter": "output_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.00002"
+                  }
+                ]
+              }
+            }
+          ],
+          "capabilities": {
+            "source_url": "https://gateway.grida.ai/v1/models",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true
+          },
+          "limits": {
+            "source_url": "https://gateway.grida.ai/v1/models",
+            "context_tokens": 1000000,
+            "max_output_tokens": 65536
+          }
         }
       },
       "provider_coverage": {
@@ -2782,6 +3106,10 @@
           "disposition": "excluded",
           "source_url": "https://fal.ai/models",
           "reason": "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."
+        },
+        "grida": {
+          "disposition": "listed",
+          "source_url": "https://gateway.grida.ai/v1/models"
         }
       }
     },
@@ -7077,6 +7405,160 @@
             "context_tokens": 1050000,
             "max_output_tokens": 128000
           }
+        },
+        "grida": {
+          "provider": "grida",
+          "id": "openai/gpt-6.1-terra",
+          "url": "https://gateway.grida.ai/v1/models",
+          "endpoints": [
+            {
+              "id": "openai/gpt-6.1-terra",
+              "input": "text",
+              "source_url": "https://gateway.grida.ai/v1/models",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "input_tokens.0",
+                    "meter": "input_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "quantity_range": {
+                      "meter": "total_input_tokens",
+                      "min": "0",
+                      "max": "272001"
+                    },
+                    "usd_per_unit": "0.000001"
+                  },
+                  {
+                    "id": "input_tokens.1",
+                    "meter": "input_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "quantity_range": {
+                      "meter": "total_input_tokens",
+                      "min": "272001"
+                    },
+                    "usd_per_unit": "0.000002"
+                  },
+                  {
+                    "id": "cached_input_tokens.0",
+                    "meter": "cached_input_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "quantity_range": {
+                      "meter": "total_input_tokens",
+                      "min": "0",
+                      "max": "272001"
+                    },
+                    "usd_per_unit": "0.00000005"
+                  },
+                  {
+                    "id": "cached_input_tokens.1",
+                    "meter": "cached_input_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "quantity_range": {
+                      "meter": "total_input_tokens",
+                      "min": "272001"
+                    },
+                    "usd_per_unit": "0.0000001"
+                  },
+                  {
+                    "id": "output_tokens.0",
+                    "meter": "output_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "quantity_range": {
+                      "meter": "total_input_tokens",
+                      "min": "0",
+                      "max": "272001"
+                    },
+                    "usd_per_unit": "0.000005"
+                  },
+                  {
+                    "id": "output_tokens.1",
+                    "meter": "output_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "quantity_range": {
+                      "meter": "total_input_tokens",
+                      "min": "272001"
+                    },
+                    "usd_per_unit": "0.0000075"
+                  },
+                  {
+                    "id": "cache_write_tokens.0",
+                    "meter": "cache_write_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "quantity_range": {
+                      "meter": "total_input_tokens",
+                      "min": "0",
+                      "max": "272001"
+                    },
+                    "usd_per_unit": "0.00000125"
+                  },
+                  {
+                    "id": "cache_write_tokens.1",
+                    "meter": "cache_write_tokens",
+                    "unit": "token",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "quantity_range": {
+                      "meter": "total_input_tokens",
+                      "min": "272001"
+                    },
+                    "usd_per_unit": "0.0000025"
+                  }
+                ]
+              }
+            }
+          ],
+          "capabilities": {
+            "source_url": "https://gateway.grida.ai/v1/models",
+            "image_input": false,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true
+          },
+          "limits": {
+            "source_url": "https://gateway.grida.ai/v1/models",
+            "context_tokens": 1050000,
+            "max_output_tokens": 128000
+          }
         }
       },
       "provider_coverage": {
@@ -7096,6 +7578,10 @@
           "disposition": "excluded",
           "source_url": "https://fal.ai/models",
           "reason": "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."
+        },
+        "grida": {
+          "disposition": "listed",
+          "source_url": "https://gateway.grida.ai/v1/models"
         }
       }
     }
@@ -8194,6 +8680,65 @@
             "usd": 0.048,
             "source_url": "https://fal.ai/models/blackforestlabs/flux-3/text-to-image"
           }
+        },
+        "grida": {
+          "provider": "grida",
+          "id": "bfl/flux-3-image",
+          "url": "https://gateway.grida.ai/v1/models",
+          "endpoints": [
+            {
+              "id": "image.bfl.flux-3-image.text",
+              "operation": "image.bfl.flux-3-image.text",
+              "input": "text",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bfl.flux-3-image.text.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_1",
+              "interface": "images.generations",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_output_units",
+                    "meter": "fal_output_units",
+                    "unit": "provider_unit",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.048"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "image.bfl.flux-3-image.references",
+              "operation": "image.bfl.flux-3-image.references",
+              "input": "multi_image",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bfl.flux-3-image.references.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_1",
+              "interface": "images.edits",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_output_units",
+                    "meter": "fal_output_units",
+                    "unit": "provider_unit",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.048"
+                  }
+                ]
+              }
+            }
+          ]
         }
       },
       "provider_coverage": {
@@ -8212,6 +8757,10 @@
         "fal": {
           "disposition": "listed",
           "source_url": "https://fal.ai/models/blackforestlabs/flux-3/text-to-image/api"
+        },
+        "grida": {
+          "disposition": "listed",
+          "source_url": "https://gateway.grida.ai/v1/models"
         }
       }
     },
@@ -13919,6 +14468,65 @@
             "id": "openai/gpt-image-2.6-flare",
             "max": 16
           }
+        },
+        "grida": {
+          "provider": "grida",
+          "id": "openai/gpt-image-2.6-flare",
+          "url": "https://gateway.grida.ai/v1/models",
+          "endpoints": [
+            {
+              "id": "image.openai.gpt-image-2.6-flare.text",
+              "operation": "image.openai.gpt-image-2.6-flare.text",
+              "input": "text",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/image.openai.gpt-image-2.6-flare.text.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/Image26Response_10",
+              "interface": "images.generations",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_output_units",
+                    "meter": "fal_output_units",
+                    "unit": "provider_unit",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "1"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "image.openai.gpt-image-2.6-flare.references",
+              "operation": "image.openai.gpt-image-2.6-flare.references",
+              "input": "multi_image",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/image.openai.gpt-image-2.6-flare.references.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_10",
+              "interface": "images.edits",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_output_units",
+                    "meter": "fal_output_units",
+                    "unit": "provider_unit",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "1"
+                  }
+                ]
+              }
+            }
+          ]
         }
       },
       "constraints": {
@@ -14006,6 +14614,10 @@
         "openai": {
           "disposition": "listed",
           "source_url": "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare"
+        },
+        "grida": {
+          "disposition": "listed",
+          "source_url": "https://gateway.grida.ai/v1/models"
         }
       },
       "styles": null
@@ -14517,6 +15129,65 @@
             "id": "openai/gpt-image-2.6-sunburst",
             "max": 16
           }
+        },
+        "grida": {
+          "provider": "grida",
+          "id": "openai/gpt-image-2.6-sunburst",
+          "url": "https://gateway.grida.ai/v1/models",
+          "endpoints": [
+            {
+              "id": "image.openai.gpt-image-2.6-sunburst.text",
+              "operation": "image.openai.gpt-image-2.6-sunburst.text",
+              "input": "text",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/image.openai.gpt-image-2.6-sunburst.text.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/Image26Response_10",
+              "interface": "images.generations",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_output_units",
+                    "meter": "fal_output_units",
+                    "unit": "provider_unit",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "1"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "image.openai.gpt-image-2.6-sunburst.references",
+              "operation": "image.openai.gpt-image-2.6-sunburst.references",
+              "input": "multi_image",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/image.openai.gpt-image-2.6-sunburst.references.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_10",
+              "interface": "images.edits",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_output_units",
+                    "meter": "fal_output_units",
+                    "unit": "provider_unit",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "1"
+                  }
+                ]
+              }
+            }
+          ]
         }
       },
       "constraints": {
@@ -14604,6 +15275,10 @@
         "openai": {
           "disposition": "listed",
           "source_url": "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst"
+        },
+        "grida": {
+          "disposition": "listed",
+          "source_url": "https://gateway.grida.ai/v1/models"
         }
       },
       "styles": null
