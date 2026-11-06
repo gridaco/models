@@ -1477,3 +1477,19 @@ availability, not parameter parity across providers.
 - https://openrouter.ai/google/gemini-omni-1.2-flash
 - https://ai-gateway.vercel.sh/v1/models
 - https://vercel.com/ai-gateway/models/gemini-omni-1.2-flash
+
+## Grida Gemini Omni 1.2 Flash discovery — 2026-11-06
+
+[Grida model discovery](https://gateway.grida.ai/v1/models) and its
+[public operation schemas](https://gateway.grida.ai/schemas/operations.json)
+confirm `google/gemini-omni-1.2-flash` with separate text-to-video and
+image-to-video operations through the videos interface. Both accept integer
+durations 3–15 seconds at 360p, 720p, 1080p and 4K. The image operation accepts
+a first frame; an end frame, video editing and conversational extension are not
+part of these published Grida operations.
+
+The binding preserves each operation ID, request/result schema URL and advertised
+USD price component from discovery. Provider-normalized billing units are not
+relabelled as video seconds; the selected operation schema and the
+[API reference](https://gateway.grida.ai/llms.txt) define the request contract.
+Native model facts and other providers' bindings remain unchanged.
