@@ -1411,3 +1411,21 @@ and omits `1.5k`. The exact endpoint schema supplies the fal parameter list.
 - https://fal.ai/models/blackforestlabs/flux-3/text-to-image/api
 - https://fal.ai/models/blackforestlabs/flux-3/edit-image
 - https://fal.ai/models/blackforestlabs/flux-3/edit-image/api
+
+## Grida family-model discovery — 2026-11-06
+
+Authenticated [Grida model discovery](https://gateway.grida.ai/v1/models) and
+[public operation schemas](https://gateway.grida.ai/schemas/operations.json)
+confirm GPT-6.1 Terra, Gemini 4 Argon, Claude Opus 5.5, Claude Sonnet 5.5 and
+Claude Haiku 5.5, plus generation and editing for GPT Image 2.6 Flare,
+GPT Image 2.6 Sunburst and FLUX 3 Image.
+
+Each binding preserves Grida's advertised capabilities, limits, operation IDs,
+request/result schema URLs and USD price components. GPT-6.1 Terra is text-only
+on this service; tool calling is available through Responses, not Chat
+Completions. GPT Image 2.6 supports GIF generation with 2–16 frames; editing
+returns static images. FLUX 3 Image is offered at `1k` with one output per
+request. The linked schemas and [API reference](https://gateway.grida.ai/llms.txt)
+provide the exact request restrictions. These are Grida's published service
+contracts, not claims of parameter or pricing parity with another provider.
+Native release dates and other providers' facts remain unchanged.

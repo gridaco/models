@@ -275,3 +275,20 @@ source_url = "https://fal.ai/models/openai/gpt-image-2.6/sunburst/text-to-image"
 [provider_coverage.openai]
 disposition = "listed"
 source_url = "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst"
+
+[providers.grida]
+provider = "grida"
+id = "openai/gpt-image-2.6-sunburst"
+url = "https://gateway.grida.ai/v1/models"
+endpoints = [
+  { "id" = "image.openai.gpt-image-2.6-sunburst.text", "operation" = "image.openai.gpt-image-2.6-sunburst.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.openai.gpt-image-2.6-sunburst.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/Image26Response_10", "interface" = "images.generations", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "1" },
+  ] } },
+  { "id" = "image.openai.gpt-image-2.6-sunburst.references", "operation" = "image.openai.gpt-image-2.6-sunburst.references", "input" = "multi_image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.openai.gpt-image-2.6-sunburst.references.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_10", "interface" = "images.edits", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "1" },
+  ] } },
+]
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"
