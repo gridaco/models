@@ -1,0 +1,92 @@
+id = "google/gemini-omni-1.2-flash"
+section = "video.models"
+label = "Gemini Omni 1.2 Flash"
+vendor = "google"
+short_description = "Video generation with native audio, clips up to 15 seconds, and first/last-frame interpolation."
+url = "https://aistudio.google.com/docs/models/gemini-omni-flash"
+audio = true
+reference_provider = "google"
+min_duration = 3
+max_duration = 15
+
+[release]
+date = "2026-11-05"
+basis = "model"
+source_url = "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/"
+
+[providers.google]
+provider = "google"
+id = "gemini-omni-1.2-flash"
+input = "text-or-image"
+url = "https://aistudio.google.com/docs/models/gemini-omni-flash"
+source_url = "https://aistudio.google.com/docs/models/gemini-omni-flash"
+limits = { source_url = "https://aistudio.google.com/docs/models/gemini-omni-flash", context_tokens = 131072, max_output_tokens = 65536 }
+pricing = { type = "per_token", input = 1.5, output_text = 9.0, output_video = 12.0, unit = "USD_per_million_tokens", source_url = "https://aistudio.google.com/docs/pricing" }
+qualifications = [
+  { source_url = "https://aistudio.google.com/docs/pricing", notes = "Native Standard video billing is token-based, not a universal per-second rate. Google publishes 1931 output tokens/second at 360p, 5792 at 720p, 8688 at 1080p with upsampling, and 17376 at 4K with upsampling. Input and text/thinking output tokens are separate meters." },
+  { source_url = "https://aistudio.google.com/docs/models/gemini-omni-flash", notes = "Generation and editing support 3–15 seconds; first/last-frame interpolation and each extension turn support 3–10 seconds. Native video input, conversation editing and extension are distinct from a text/image generation endpoint." },
+]
+
+[providers.fal]
+provider = "fal"
+id = "google/gemini-omni-flash/v1.2/text-to-video"
+input = "text-or-image"
+url = "https://fal.ai/models/google/gemini-omni-flash/v1.2/text-to-video"
+source_url = "https://fal.ai/models/google/gemini-omni-flash/v1.2/text-to-video"
+pricing = { type = "per_second", usd_per_second = { "360p" = { audio = 0.0273 }, "720p" = { audio = 0.0819 }, "1080p" = { audio = 0.1229 }, "4k" = { audio = 0.2457 } }, source_url = "https://fal.ai/models/google/gemini-omni-flash/v1.2/text-to-video" }
+qualifications = [
+  { source_url = "https://fal.ai/models/google/gemini-omni-flash/v1.2/text-to-video", notes = "Per-second output video rates include native audio." },
+  { source_url = "https://fal.ai/models/google/gemini-omni-flash/v1.2/image-to-video", notes = "Input images are not billed separately. Output video uses the same resolution-specific per-second rates as text-to-video." },
+  { source_url = "https://fal.ai/models/google/gemini-omni-flash/v1.2/image-to-video/api", notes = "The image endpoint requires a first image. When end_image_url is provided, duration is capped at 10 seconds, even though single-frame generation supports up to 15 seconds." },
+]
+
+[[providers.fal.endpoints]]
+id = "google/gemini-omni-flash/v1.2/text-to-video"
+input = "text"
+source_url = "https://fal.ai/models/google/gemini-omni-flash/v1.2/text-to-video/api"
+
+[providers.fal.endpoints.parameters]
+prompt = { type = "string", max_length = 20000 }
+duration = { type = "integer", minimum = 3, maximum = 15 }
+aspect_ratio = { type = "string", enum = ["16:9", "9:16"] }
+resolution = { type = "string", enum = ["360p", "720p", "1080p", "4k"] }
+
+[[providers.fal.endpoints]]
+id = "google/gemini-omni-flash/v1.2/image-to-video"
+input = "image"
+source_url = "https://fal.ai/models/google/gemini-omni-flash/v1.2/image-to-video/api"
+
+[providers.fal.endpoints.parameters]
+prompt = { type = "string", max_length = 20000 }
+image_url = { type = "string" }
+end_image_url = { type = "string" }
+duration = { type = "integer", minimum = 3, maximum = 15 }
+aspect_ratio = { type = "string", enum = ["16:9", "9:16"] }
+resolution = { type = "string", enum = ["360p", "720p", "1080p", "4k"] }
+
+[providers.openrouter]
+provider = "openrouter"
+id = "google/gemini-omni-1.2-flash"
+input = "text-or-image"
+url = "https://openrouter.ai/google/gemini-omni-1.2-flash"
+source_url = "https://openrouter.ai/api/v1/videos/models"
+pricing = { type = "per_second", usd_per_second = { "360p" = { audio = 0.023172 }, "720p" = { audio = 0.069504 }, "1080p" = { audio = 0.104256 }, "4K" = { audio = 0.208512 } }, source_url = "https://openrouter.ai/google/gemini-omni-1.2-flash" }
+qualifications = [
+  { source_url = "https://openrouter.ai/api/v1/videos/models", notes = "Video discovery lists durations 3–15 seconds, 16:9 and 9:16 output, native audio, and first/last-frame inputs. Video-output prices are distinct from the model page's input and text-output token prices." },
+]
+
+[providers.vercel]
+provider = "vercel"
+id = "google/gemini-omni-1.2-flash"
+input = "text-or-image"
+url = "https://vercel.com/ai-gateway/models/gemini-omni-1.2-flash"
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+qualifications = [
+  { source_url = "https://ai-gateway.vercel.sh/v1/models", notes = "Discovery confirms video output and text/image/video input for this exact identity. Its input and text-output token prices do not establish a video-output rate; no video price is recorded." },
+]
+
+[provider_coverage]
+google = { disposition = "listed", source_url = "https://aistudio.google.com/docs/models/gemini-omni-flash" }
+fal = { disposition = "listed", source_url = "https://fal.ai/models/google/gemini-omni-flash/v1.2/text-to-video" }
+openrouter = { disposition = "listed", source_url = "https://openrouter.ai/api/v1/videos/models" }
+vercel = { disposition = "listed", source_url = "https://ai-gateway.vercel.sh/v1/models" }
