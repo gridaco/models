@@ -1429,3 +1429,51 @@ request. The linked schemas and [API reference](https://gateway.grida.ai/llms.tx
 provide the exact request restrictions. These are Grida's published service
 contracts, not claims of parameter or pricing parity with another provider.
 Native release dates and other providers' facts remain unchanged.
+
+## Gemini Omni 1.2 Flash — 2026-11-06
+
+`google/gemini-omni-1.2-flash` launched broadly on November 5, 2026. The
+announcement establishes the exact model's release, while the native model page
+establishes 3–15-second output at 360p, 720p, 1080p and 4K. First/last-frame
+interpolation remains limited to 3–10 seconds; the maximum generation duration
+does not apply to every conditioning mode. Existing Omni 1.1 facts are preserved.
+
+- https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/
+- https://aistudio.google.com/docs/models/gemini-omni-flash
+
+Native Standard rates are $1.50 input, $9 text output and $12 video output per
+million tokens. The published video token counts per second are 1,931 at 360p,
+5,792 at 720p, 8,688 at 1080p with upsampling and 17,376 at 4K with upsampling.
+These facts are not a universal per-second invoice rate: input and text/thinking
+output remain separately metered. Native and provider output limits are not
+inferred from one another.
+
+- https://aistudio.google.com/docs/pricing
+
+fal independently publishes regular output-second prices of $0.0273 at 360p,
+$0.0819 at 720p, $0.1229 at 1080p and $0.2457 at 4K, including native audio.
+Its image endpoint states that input images are not billed. Both exact endpoint
+schemas accept integer durations 3–15, but an end frame caps duration at 10
+seconds. The optional end-frame restriction is recorded as a qualification
+because endpoint parameter bounds alone do not express conditional limits.
+Video editing and other native conversational features are not inferred from
+these two generation endpoints.
+
+- https://fal.ai/models/google/gemini-omni-flash/v1.2/text-to-video
+- https://fal.ai/models/google/gemini-omni-flash/v1.2/text-to-video/api
+- https://fal.ai/models/google/gemini-omni-flash/v1.2/image-to-video
+- https://fal.ai/models/google/gemini-omni-flash/v1.2/image-to-video/api
+
+OpenRouter's video discovery and model page independently publish with-audio
+output-second prices of $0.023172, $0.069504, $0.104256 and $0.208512 for 360p,
+720p, 1080p and 4K respectively. The page reports no pricing discount. Its
+input/text-output token prices are not substituted for video output prices.
+Vercel lists the exact 1.2 identity and video-output modality, but the checked
+discovery and model page do not establish a video-output price; its binding
+therefore has no recorded video price. These bindings establish endpoint
+availability, not parameter parity across providers.
+
+- https://openrouter.ai/api/v1/videos/models
+- https://openrouter.ai/google/gemini-omni-1.2-flash
+- https://ai-gateway.vercel.sh/v1/models
+- https://vercel.com/ai-gateway/models/gemini-omni-1.2-flash
