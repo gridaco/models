@@ -527,6 +527,34 @@ Recraft — V3
 $0.04/img raster on every provider (re-verified 2026-09-02; Recraft's
 own pricing table agrees).
 
+## Lyria 3 and Lyria 3 Pro — fal serving contracts
+
+The existing `google/lyria-3` and `google/lyria-3-pro` top-level `provider`,
+`input` and `output` fields describe their Replicate offering. They are not
+universal claims that every provider accepts ten images or emits 48 kHz audio.
+The fal bindings retain their independently sourced facts:
+
+- [Lyria 3 API](https://fal.ai/models/fal-ai/lyria3/api) and
+  [Lyria 3 Pro API](https://fal.ai/models/fal-ai/lyria3/pro/api) require a prompt
+  and accept one optional `image_url`. Their published input schemas also expose
+  `enable_safety_checker`; they do not expose separate duration, seed,
+  output-count or lyrics fields. Tempo, structure and lyrics may be described in
+  the prompt, which does not guarantee exact control.
+- Both API pages describe MP3 at **44.1 kHz / 192 kbps**, rather than the
+  Replicate-specific 48 kHz fields retained on the card. The standard model is a
+  30-second clip; Pro is described as up to approximately three minutes. These
+  output descriptions do not establish caller-selectable durations.
+- Both schema pages declare an `audio` File object but show a URL string in their
+  output examples; the [Pro playground](https://fal.ai/models/fal-ai/lyria3/pro)
+  also shows a File object. The bindings record this discrepancy without
+  declaring either example a complete behavioral guarantee. Optional `lyrics`
+  may contain descriptions and other generated text, not a timed transcript.
+- The existing regular fal prices remain unchanged:
+  [Lyria 3](https://fal.ai/models/fal-ai/lyria3) publishes **$0.04 per audio**,
+  and [Pro](https://fal.ai/models/fal-ai/lyria3/pro) publishes **$0.08 per audio**.
+  They are per-output charges, not duration multipliers. Adding these serving
+  facts does not change model identities, release dates or other providers.
+
 ## `pricing: { type: "per_run_flat", usd: 0.04 },`
 
 Source: replicate.com/google/lyria-3 — "$0.04 per output audio file"

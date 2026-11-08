@@ -38,9 +38,25 @@ pricing = { "type" = "per_run_flat", "usd" = 0.04, "source_url" = "https://ai.go
 [providers.fal]
 provider = "fal"
 id = "fal-ai/lyria3"
+input = "text-or-image"
 source_url = "https://fal.ai/models/fal-ai/lyria3"
 url = "https://fal.ai/models/fal-ai/lyria3"
 pricing = { "type" = "per_run_flat", "usd" = 0.04, "source_url" = "https://fal.ai/models/fal-ai/lyria3" }
+qualifications = [
+  { source_url = "https://fal.ai/models/fal-ai/lyria3/api", notes = "The request requires a text prompt and accepts one optional image_url. There is no separate duration, seed, output-count or lyrics parameter in the published input schema; lyrics, tempo and structure are described in the prompt." },
+  { source_url = "https://fal.ai/models/fal-ai/lyria3/api", notes = "The fal endpoint returns 30-second MP3 audio at 44.1 kHz / 192 kbps, with optional generated lyrics. These serving facts differ from the existing Replicate-specific input and output fields on this card." },
+  { source_url = "https://fal.ai/models/fal-ai/lyria3/api", notes = "The output schema declares audio as a File object with a URL, but its JSON example uses a URL string. This documentation discrepancy leaves the exact response representation unresolved." },
+]
+
+[[providers.fal.endpoints]]
+id = "fal-ai/lyria3"
+input = "text"
+source_url = "https://fal.ai/models/fal-ai/lyria3/api"
+
+[providers.fal.endpoints.parameters]
+prompt = { type = "string" }
+image_url = { type = "string" }
+enable_safety_checker = { type = "boolean" }
 
 [providers.openrouter]
 provider = "openrouter"
