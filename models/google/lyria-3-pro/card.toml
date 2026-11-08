@@ -70,3 +70,17 @@ openrouter = { "disposition" = "listed", "source_url" = "https://openrouter.ai/g
 vercel = { "disposition" = "not_listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models", "reason" = "No matching model/version is listed in the inspected public Gateway model catalogue." }
 fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/fal-ai/lyria3/pro" }
 google = { "disposition" = "listed", "source_url" = "https://ai.google.dev/gemini-api/docs/pricing" }
+
+[providers.grida]
+provider = "grida"
+id = "google/lyria-3-pro"
+url = "https://gateway.grida.ai/v1/models"
+endpoints = [
+  { "id" = "music.google.lyria-3-pro.generate", "operation" = "music.google.lyria-3-pro.generate", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/music.google.lyria-3-pro.generate.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_audio_result", "interface" = "endpoints", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "generation", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.08" },
+  ] } },
+]
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"
