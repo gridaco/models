@@ -1,0 +1,149 @@
+id = "google/gemini-4-carbon"
+section = "text.catalog"
+vendor = "google"
+reference_provider = "google"
+label = "Gemini 4 Carbon"
+multimodal = true
+image_input_mimes = ["image/png", "image/jpeg", "image/webp", "image/heic", "image/heif"]
+tool_call = true
+context_window = 1048576
+output_limit = 65536
+
+[cost]
+input = 4
+output = 20
+cache_read = 0.2
+
+[release]
+date = "2026-11-10"
+basis = "model"
+source_url = "https://aistudio.google.com/docs/changelog"
+
+[vision_tokenization]
+source_url = "https://aistudio.google.com/docs/media-resolution"
+maximum_tokens_per_image = 2240
+token_counts_approximate = true
+
+[vision_tokenization.detail_token_budgets]
+unspecified = 1120
+low = 280
+medium = 560
+high = 1120
+ultra_high = 2240
+
+[providers.google]
+provider = "google"
+id = "gemini-4-carbon"
+url = "https://aistudio.google.com/docs/models/gemini-4-carbon"
+source_url = "https://aistudio.google.com/docs/models/gemini-4-carbon"
+endpoints = [
+  { id = "gemini-4-carbon", input = "text", source_url = "https://aistudio.google.com/docs/models/gemini-4-carbon" },
+]
+qualifications = [
+  { source_url = "https://aistudio.google.com/docs/long-decode", notes = "Native foreground generation permits 65,536 tokens per streaming hop and 32,768 per non-streaming hop. Longer responses require background execution or continuation within the unified 1,048,576-token input/thinking/output window; a discovery ceiling does not establish a single synchronous hop." },
+  { source_url = "https://aistudio.google.com/docs/whats-new-gemini-4-carbon", notes = "Text, image, video, audio and PDF inputs produce text. Thinking levels are low, medium and high, with medium as the default. Implicit caching is enabled for eligible prompts of at least 4,096 tokens; explicit caching is unsupported. Sampling parameters temperature, top_p and top_k are ignored." },
+  { source_url = "https://aistudio.google.com/docs/terms", notes = "Paid-service prompts and responses are not used to improve Google's products, but limited logging for safety and other stated purposes remains. This does not establish zero retention; storage and logging depend on the API and applicable settings." },
+]
+
+[providers.google.limits]
+source_url = "https://aistudio.google.com/docs/models/gemini-4-carbon"
+context_tokens = 1048576
+max_output_tokens = 65536
+
+[providers.google.capabilities]
+source_url = "https://aistudio.google.com/docs/models/gemini-4-carbon"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.google.token_pricing]
+source_url = "https://aistudio.google.com/docs/pricing"
+unit = "usd_per_token"
+scope = "Regular Standard global token rates. Implicit caching only. Introductory discounts, grounding tools and alternate service tiers are excluded."
+input = "0.000004"
+output = "0.00002"
+input_cache_read = "0.0000002"
+
+[providers.vercel]
+provider = "vercel"
+id = "google/gemini-4-carbon"
+url = "https://vercel.com/ai-gateway/models/gemini-4-carbon"
+source_url = "https://vercel.com/ai-gateway/models/gemini-4-carbon"
+endpoints = [
+  { id = "google/gemini-4-carbon", input = "text", source_url = "https://vercel.com/ai-gateway/models/gemini-4-carbon" },
+]
+qualifications = [
+  { source_url = "https://aistudio.google.com/docs/long-decode", notes = "Native foreground generation permits 65,536 tokens per streaming hop and 32,768 per non-streaming hop. Longer responses require background execution or continuation within the unified input/thinking/output window; the provider's 1,000,000-token discovery ceiling does not establish a single synchronous hop." },
+]
+
+[providers.vercel.limits]
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+context_tokens = 1000000
+max_output_tokens = 1000000
+
+[providers.vercel.capabilities]
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.vercel.token_pricing]
+source_url = "https://vercel.com/ai-gateway/models/gemini-4-carbon"
+unit = "usd_per_token"
+scope = "Regular Standard global list token rates from the provider's explicit list-price fields. Implicit caching only. Introductory discounts, grounding tools, alternate service tiers and regional premiums are excluded."
+input = "0.000004"
+output = "0.00002"
+input_cache_read = "0.0000002"
+
+[providers.openrouter]
+provider = "openrouter"
+id = "google/gemini-4-carbon"
+url = "https://openrouter.ai/google/gemini-4-carbon"
+source_url = "https://openrouter.ai/google/gemini-4-carbon"
+endpoints = [
+  { id = "google/gemini-4-carbon", input = "text", source_url = "https://openrouter.ai/google/gemini-4-carbon" },
+]
+qualifications = [
+  { source_url = "https://openrouter.ai/api/v1/models", notes = "The model page's completion ceiling differs from the live feed's top_provider.max_completion_tokens of 943,718. This binding records the feed's explicit serving limit rather than treating a rounded 1M claim as a synchronous guarantee." },
+  { source_url = "https://aistudio.google.com/docs/long-decode", notes = "Native foreground generation permits 65,536 tokens per streaming hop and 32,768 per non-streaming hop. Longer responses require background execution or continuation within the unified input/thinking/output window; provider discovery ceilings do not establish a single synchronous hop." },
+  { source_url = "https://openrouter.ai/api/v1/models", notes = "Discovery includes an input_cache_write amount, but its applicable caching operation, TTL and billing unit are not established for this implicit-only model. No per-token cache-write price is recorded; omission does not mean zero cost." },
+]
+
+[providers.openrouter.limits]
+source_url = "https://openrouter.ai/api/v1/models"
+context_tokens = 1048576
+max_output_tokens = 943718
+
+[providers.openrouter.capabilities]
+source_url = "https://openrouter.ai/api/v1/models"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.openrouter.token_pricing]
+source_url = "https://openrouter.ai/google/gemini-4-carbon"
+unit = "usd_per_token"
+scope = "Regular Standard route token rates explicitly shown alongside discounted prices on the provider page. Optional tools, alternate service tiers and regional premiums are excluded."
+input = "0.000004"
+output = "0.00002"
+input_cache_read = "0.0000002"
+
+[provider_coverage.google]
+disposition = "listed"
+source_url = "https://aistudio.google.com/docs/models/gemini-4-carbon"
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/gemini-4-carbon"
+
+[provider_coverage.openrouter]
+disposition = "listed"
+source_url = "https://openrouter.ai/google/gemini-4-carbon"
+
+[provider_coverage.fal]
+disposition = "excluded"
+source_url = "https://fal.ai/models"
+reason = "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."
