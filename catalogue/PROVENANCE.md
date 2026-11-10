@@ -1622,3 +1622,20 @@ https://aistudio.google.com/docs/whats-new-gemini-4-carbon
 https://aistudio.google.com/docs/media-resolution
 https://aistudio.google.com/docs/image-understanding
 https://aistudio.google.com/docs/terms
+
+## Grida Gemini 4 Carbon discovery — 2026-11-11
+
+[Grida model discovery](https://gateway.grida.ai/v1/models) and the
+[public API reference](https://gateway.grida.ai/llms.txt) confirm
+`google/gemini-4-carbon` through Chat Completions and Responses, with text and
+image input, tools, reasoning and structured output. Grida publishes a
+1,000,000-token context window and a 32,768-token output cap, including thinking.
+The same synchronous output cap applies with and without streaming.
+
+The binding preserves discovery's regular USD-per-token components: $0.000004
+uncached input, $0.0000002 cached input and $0.00002 output. Each component has a
+one-token quantity and no quantity rounding. Low, medium and high reasoning
+are supported, with medium as the upstream default. Explicit cache controls,
+sampling controls, file/audio/video inputs and continuation are outside this
+published Grida offering. Native model facts and other provider bindings remain
+unchanged.
