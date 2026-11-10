@@ -1574,3 +1574,51 @@ Adaptive thinking remains always on, with high as the default effort; sampling,
 assistant-prefill and forced tool selection are outside the advertised contract.
 The public reference discloses the model's 30-day retention requirement.
 Native model facts and the other provider bindings remain unchanged.
+
+## `"google/gemini-4-carbon": {`
+
+Google's November 10, 2026 changelog establishes broad GA for the exact
+`gemini-4-carbon` model. The October 28 announcement describes restricted
+Fairwind access, which is not the catalogue's broad-public release date.
+https://aistudio.google.com/docs/changelog
+https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/
+
+Regular Standard global rates are independently published as $4 input,
+$20 output (including thinking) and $0.20 cached input per million tokens.
+Google states those regular values directly; Vercel's model page separately
+publishes `inputListCostTiers`, `outputListCostTiers` and
+`cachedInputListCostTiers` with `priceType: "list"`, amounts 4, 20 and 0.2,
+and a single unbounded band starting at zero for each meter. OpenRouter's
+provider rows explicitly show the same regular rates alongside discounted
+prices. No regular price is inferred by reversing a promotion. The card
+excludes introductory prices, alternate service tiers, regional premiums
+and optional grounding charges. Implicit caching has no sourced per-token
+write charge; the unresolved OpenRouter write field remains qualified.
+https://aistudio.google.com/docs/pricing
+https://vercel.com/ai-gateway/models/gemini-4-carbon
+https://openrouter.ai/google/gemini-4-carbon
+https://openrouter.ai/api/v1/models
+
+The unified window is 1,048,576 input, thinking and output tokens. Native
+foreground hops permit 65,536 tokens with streaming and 32,768 without it.
+Long decode uses background execution or continuation, reprocessing earlier
+output as input on later hops; the reported 1M provider ceiling is not a
+single synchronous-call guarantee. The intrinsic/native output field
+records the 65,536-token streaming-hop limit, while provider bindings
+preserve their own discovery limits and these qualifications.
+https://aistudio.google.com/docs/models/gemini-4-carbon
+https://aistudio.google.com/docs/long-decode
+https://ai-gateway.vercel.sh/v1/models
+
+Thinking supports low, medium and high, defaulting to medium. Sampling
+controls are ignored. Eligible prompts use implicit caching; explicit
+cache creation is unsupported. Text, images, video, audio and PDF input
+produce text; Vercel's listed modalities are independently narrower.
+The Gemini 4/3 media-resolution table supplies approximate image budgets
+of 280/560/1120/2240 tokens, with 1120 as the unspecified default. The image
+formats come from Google's image-understanding guide. Paid-service data
+terms do not establish zero retention.
+https://aistudio.google.com/docs/whats-new-gemini-4-carbon
+https://aistudio.google.com/docs/media-resolution
+https://aistudio.google.com/docs/image-understanding
+https://aistudio.google.com/docs/terms
