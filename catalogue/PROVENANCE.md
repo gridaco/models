@@ -105,6 +105,43 @@ $2/$10 per million input/output tokens is Anthropic's published regular rate.
 Do not substitute an obsolete higher rate.
 https://platform.claude.com/docs/en/about-claude/pricing
 
+## `"anthropic/claude-fable-5.2": {`
+
+Anthropic dates the exact `claude-fable-5-2` model to November 9, 2026.
+Its standard synchronous global rates are $8 input, $40 output, $0.20
+cache read, $10 five-minute cache write and $16 one-hour cache write per
+million tokens. These are published regular rates, independently verified
+for Vercel and OpenRouter against each provider's model page and public
+model feed. Vercel does not publish a separate one-hour write rate in its
+model feed, so that binding leaves it unrecorded. Batch, fast-mode,
+regional premiums and optional tool charges are outside these token rates.
+https://platform.claude.com/docs/en/models/fable-5-2/overview
+https://vercel.com/ai-gateway/models/claude-fable-5.2
+https://ai-gateway.vercel.sh/v1/models
+https://openrouter.ai/anthropic/claude-fable-5.2
+https://openrouter.ai/api/v1/models
+
+The 1,000,000-token context and 128,000-token output limits are unchanged
+from Fable 5.1. Native image support uses the documented high-resolution
+vision tier for Claude 4.7 and later: 28-pixel patches, a 2,576-pixel long
+edge and at most 4,784 visual tokens. JPEG, PNG, GIF and WebP are supported;
+only the first animation frame is used.
+https://platform.claude.com/docs/en/build-with-claude/vision
+
+Adaptive thinking is always on, with `low`, `medium`, `high`, `xhigh` and
+`max` efforts and `high` as the API default. Thinking tokens count toward
+the output limit. Forced tool choice (`any`/`tool`) is rejected; automatic
+tool use and structured outputs remain supported, with structured-output
+availability qualified for organizations using customer-managed encryption
+keys. The native overview advises omitting sampling controls. Both Fable
+5.1 and 5.2 require 30-day data retention; zero data retention requires
+express Anthropic authorization. Prefix checking of preserved thinking applies to all
+accounts. Fable 5.1 cannot read Fable 5.2 thinking blocks, and the earlier
+`computer_20251124` tool is rejected outside Amazon Bedrock. Existing Fable
+cards remain catalogued independently.
+https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2
+https://platform.claude.com/docs/en/models/fable-5-2/migration-guide
+
 ## `"anthropic/claude-fable-5.1": {`
 
 Same input/output/cacheWrite card as Claude Fable 5, with cache reads
