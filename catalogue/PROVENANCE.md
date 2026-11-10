@@ -1558,3 +1558,19 @@ USD price component from discovery. Provider-normalized billing units are not
 relabelled as video seconds; the selected operation schema and the
 [API reference](https://gateway.grida.ai/llms.txt) define the request contract.
 Native model facts and other providers' bindings remain unchanged.
+
+## Grida Claude Fable 5.2 discovery — 2026-11-10
+
+[Grida model discovery](https://gateway.grida.ai/v1/models) and the
+[public API reference](https://gateway.grida.ai/llms.txt) confirm
+`anthropic/claude-fable-5.2` through Chat Completions and Responses, with text
+and image input, tools, reasoning and structured output. The published limits
+are 1,000,000 context tokens and 128,000 output tokens, including reasoning.
+
+The binding preserves discovery's USD-per-token components: $0.000008 uncached
+input, $0.0000002 cached input and $0.00004 output. Each component has a one-token
+quantity and no quantity rounding. Explicit cache controls are not offered.
+Adaptive thinking remains always on, with high as the default effort; sampling,
+assistant-prefill and forced tool selection are outside the advertised contract.
+The public reference discloses the model's 30-day retention requirement.
+Native model facts and the other provider bindings remain unchanged.
