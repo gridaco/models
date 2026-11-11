@@ -1,0 +1,77 @@
+reference_provider = "elevenlabs"
+id = "scribe_v2_realtime"
+section = "audio.transcription.models"
+label = "Scribe v2 Realtime"
+short_description = "Streaming speech recognition with manual or VAD commits."
+vendor = "elevenlabs"
+source_url = "https://elevenlabs.io/docs/overview/models"
+languages_label = "90+"
+
+[release]
+date = "2025-11-11"
+basis = "model"
+source_url = "https://elevenlabs.io/blog/introducing-scribe-v2-realtime"
+
+[input]
+type = "audio"
+streaming = true
+
+[output]
+type = "text"
+formats = ["json"]
+source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime"
+
+[transcription]
+word_timestamps = true
+commit_strategies = ["manual", "vad"]
+
+[providers]
+
+[providers.elevenlabs]
+provider = "elevenlabs"
+id = "scribe_v2_realtime"
+source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime"
+url = "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime"
+qualifications = [
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "Realtime transcription accepts PCM at 8–48 kHz and mu-law audio. It transcribes audio to text and is distinct from the Eleven Realtime voice-agent models." },
+  { source_url = "https://elevenlabs.io/pricing/api", notes = "The recorded rate is base transcription only. Keyterm prompting, transcript editing and the v3 Live keyterm library have additional published charges. Optional feature surcharges and minimum durations must be checked before pricing a request." },
+]
+
+[providers.elevenlabs.published_pricing]
+source_url = "https://elevenlabs.io/pricing/api"
+currency = "USD"
+components = [{ meter = "input_audio_duration", unit = "hour", usd_per_unit = "0.22" }]
+
+[providers.vercel]
+provider = "vercel"
+id = "elevenlabs/scribe-v2-realtime"
+source_url = "https://vercel.com/ai-gateway/models/scribe-v2-realtime"
+url = "https://vercel.com/ai-gateway/models/scribe-v2-realtime"
+qualifications = [
+  { source_url = "https://vercel.com/ai-gateway/models/scribe-v2-realtime", notes = "The live model feed leaves pricing empty, but the model page publishes USD 0.39 per input audio hour. The model page is the price source; do not interpret the empty feed object as free inference." },
+]
+
+[providers.vercel.published_pricing]
+source_url = "https://vercel.com/ai-gateway/models/scribe-v2-realtime"
+currency = "USD"
+components = [{ meter = "input_audio_duration", unit = "hour", usd_per_unit = "0.39" }]
+
+[provider_coverage]
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/scribe-v2-realtime"
+
+[provider_coverage.openrouter]
+disposition = "not_listed"
+source_url = "https://openrouter.ai/api/v1/models?output_modalities=all"
+reason = "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+
+[provider_coverage.fal]
+disposition = "not_listed"
+source_url = "https://fal.ai/api/models?keywords=elevenlabs&size=100"
+reason = "No matching exact model/version is listed in the complete ElevenLabs search results."
+
+[provider_coverage.elevenlabs]
+disposition = "listed"
+source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime"

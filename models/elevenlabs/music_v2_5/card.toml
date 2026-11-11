@@ -1,0 +1,116 @@
+reference_provider = "elevenlabs"
+id = "music_v2_5"
+section = "audio.music.models"
+label = "Eleven Music v2.5"
+short_description = "Music generation with improved quality and prompt adherence over Music v2."
+vendor = "elevenlabs"
+source_url = "https://elevenlabs.io/docs/overview/models"
+
+[release]
+date = "2026-09-11"
+basis = "model"
+source_url = "https://elevenlabs.io/blog/music-v2-5-model"
+
+[input]
+type = "text"
+composition_plan = true
+
+[output]
+default_format = "mp3"
+formats = ["alaw", "mp3", "opus", "pcm", "ulaw"]
+sample_rate_hz = 48000
+bit_rate_kbps = 192
+format_options = [
+  "mp3_48000_128",
+  "mp3_48000_192",
+  "mp3_48000_240",
+  "mp3_48000_320",
+  "mp3_22050_32",
+  "mp3_24000_48",
+  "mp3_44100_32",
+  "mp3_44100_64",
+  "mp3_44100_96",
+  "mp3_44100_128",
+  "mp3_44100_192",
+  "pcm_8000",
+  "pcm_16000",
+  "pcm_22050",
+  "pcm_24000",
+  "pcm_32000",
+  "pcm_44100",
+  "pcm_48000",
+  "ulaw_8000",
+  "alaw_8000",
+  "opus_48000_32",
+  "opus_48000_64",
+  "opus_48000_96",
+  "opus_48000_128",
+  "opus_48000_192",
+]
+source_url = "https://elevenlabs.io/docs/api-reference/music/compose"
+
+[output.duration]
+mode = "automatic_or_fixed"
+min_seconds = 3
+max_seconds = 600
+
+[providers]
+
+[providers.elevenlabs]
+provider = "elevenlabs"
+id = "music_v2_5"
+source_url = "https://elevenlabs.io/docs/api-reference/music/compose"
+url = "https://elevenlabs.io/docs/api-reference/music/compose"
+qualifications = [
+  { source_url = "https://elevenlabs.io/docs/api-reference/music/compose", notes = "Prompt and composition_plan are mutually exclusive. The 3–600 second envelope is the prompt-based music_length_ms range; it is not a limit on section-by-section compositions. The auto output format is mp3_44100_128 for v1 and mp3_48000_192 for v2 models." },
+  { source_url = "https://elevenlabs.io/pricing/api", notes = "The published music price is USD 0.15 per generated minute, normalized exactly to USD 0.0025 per second. No whole-minute rounding is inferred from the native price display." },
+  { source_url = "https://elevenlabs.io/docs/api-reference/music/compose", notes = "Music v2 and v2.5 use chunk-based composition plans and always enforce section durations. The v1 MusicPrompt plan and its respect_sections_durations behavior are not interchangeable with these models." },
+]
+
+[providers.elevenlabs.pricing]
+type = "per_second"
+usd = 0.0025
+source_url = "https://elevenlabs.io/pricing/api"
+
+[providers.vercel]
+provider = "vercel"
+id = "elevenlabs/music-v2.5"
+source_url = "https://vercel.com/ai-gateway/models/music-v2.5"
+url = "https://vercel.com/ai-gateway/models/music-v2.5"
+
+[providers.vercel.pricing]
+type = "per_second"
+usd = 0.0025
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+
+[providers.fal]
+provider = "fal"
+id = "elevenlabs/music/v2.5"
+source_url = "https://fal.ai/models/elevenlabs/music/v2.5"
+url = "https://fal.ai/models/elevenlabs/music/v2.5"
+
+[providers.fal.published_pricing]
+source_url = "https://fal.ai/models/elevenlabs/music/v2.5"
+currency = "USD"
+components = [
+  { meter = "output_audio_duration", unit = "minute", usd_per_unit = "0.6", quantity_rounding = { mode = "ceil", increment = "1" } },
+]
+
+[provider_coverage]
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/music-v2.5"
+
+[provider_coverage.openrouter]
+disposition = "not_listed"
+source_url = "https://openrouter.ai/api/v1/models?output_modalities=all"
+reason = "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+
+[provider_coverage.fal]
+disposition = "listed"
+source_url = "https://fal.ai/models/elevenlabs/music/v2.5"
+
+[provider_coverage.elevenlabs]
+disposition = "listed"
+source_url = "https://elevenlabs.io/docs/api-reference/music/compose"

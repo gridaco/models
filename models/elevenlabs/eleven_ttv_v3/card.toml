@@ -1,0 +1,55 @@
+reference_provider = "elevenlabs"
+id = "eleven_ttv_v3"
+section = "audio.voice_design.models"
+label = "Voice Design v3"
+short_description = "Create voice candidates from a text description and preview text."
+vendor = "elevenlabs"
+source_url = "https://elevenlabs.io/docs/overview/models"
+
+[release]
+date = "2025-06-25"
+basis = "model"
+source_url = "https://elevenlabs.io/blog/voice-design-v3"
+
+[input]
+type = "text"
+voice_description = true
+min_preview_characters = 100
+max_preview_characters = 1000
+
+[output]
+type = "voice_previews"
+source_url = "https://elevenlabs.io/docs/api-reference/text-to-voice/design"
+
+[providers]
+
+[providers.elevenlabs]
+provider = "elevenlabs"
+id = "eleven_ttv_v3"
+source_url = "https://elevenlabs.io/docs/api-reference/text-to-voice/design"
+url = "https://elevenlabs.io/docs/api-reference/text-to-voice/design"
+qualifications = [
+  { source_url = "https://elevenlabs.io/docs/api-reference/text-to-voice/design", notes = "The endpoint returns generated voice IDs and preview audio, with an option to stream previews separately. This creates a voice; it is not an ordinary TTS model binding." },
+  { source_url = "https://elevenlabs.io/docs/eleven-creative/voices/voice-design", notes = "Voice design is metered by preview text characters rather than the number of candidates. A version-specific regular USD rate is not established by this page, so pricing is omitted." },
+]
+
+[provider_coverage]
+
+[provider_coverage.vercel]
+disposition = "not_listed"
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+reason = "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+
+[provider_coverage.openrouter]
+disposition = "not_listed"
+source_url = "https://openrouter.ai/api/v1/models?output_modalities=all"
+reason = "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+
+[provider_coverage.fal]
+disposition = "not_listed"
+source_url = "https://fal.ai/api/models?keywords=elevenlabs&size=100"
+reason = "No matching exact model/version is listed in the complete ElevenLabs search results."
+
+[provider_coverage.elevenlabs]
+disposition = "listed"
+source_url = "https://elevenlabs.io/docs/api-reference/text-to-voice/design"

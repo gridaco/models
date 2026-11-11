@@ -20889,6 +20889,392 @@
           "source_url": "https://gateway.grida.ai/v1/models"
         }
       }
+    },
+    "music_v1": {
+      "reference_provider": "elevenlabs",
+      "id": "music_v1",
+      "label": "Eleven Music v1",
+      "short_description": "Generate music with vocals or instrumentals from prompts and composition plans.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "release": {
+        "date": "2025-08-05",
+        "basis": "model",
+        "source_url": "https://elevenlabs.io/blog/eleven-music-is-here"
+      },
+      "input": {
+        "type": "text",
+        "composition_plan": true
+      },
+      "output": {
+        "default_format": "mp3",
+        "formats": [
+          "alaw",
+          "mp3",
+          "opus",
+          "pcm",
+          "ulaw"
+        ],
+        "sample_rate_hz": 44100,
+        "bit_rate_kbps": 128,
+        "format_options": [
+          "mp3_48000_128",
+          "mp3_48000_192",
+          "mp3_48000_240",
+          "mp3_48000_320",
+          "mp3_22050_32",
+          "mp3_24000_48",
+          "mp3_44100_32",
+          "mp3_44100_64",
+          "mp3_44100_96",
+          "mp3_44100_128",
+          "mp3_44100_192",
+          "pcm_8000",
+          "pcm_16000",
+          "pcm_22050",
+          "pcm_24000",
+          "pcm_32000",
+          "pcm_44100",
+          "pcm_48000",
+          "ulaw_8000",
+          "alaw_8000",
+          "opus_48000_32",
+          "opus_48000_64",
+          "opus_48000_96",
+          "opus_48000_128",
+          "opus_48000_192"
+        ],
+        "source_url": "https://elevenlabs.io/docs/api-reference/music/compose",
+        "duration": {
+          "mode": "automatic_or_fixed",
+          "min_seconds": 3,
+          "max_seconds": 600
+        }
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "music_v1",
+          "source_url": "https://elevenlabs.io/docs/api-reference/music/compose",
+          "url": "https://elevenlabs.io/docs/api-reference/music/compose",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/music/compose",
+              "notes": "Prompt and composition_plan are mutually exclusive. The 3–600 second envelope is the prompt-based music_length_ms range; it is not a limit on section-by-section compositions. The auto output format is mp3_44100_128 for v1 and mp3_48000_192 for v2 models."
+            },
+            {
+              "source_url": "https://elevenlabs.io/pricing/api",
+              "notes": "The published music price is USD 0.15 per generated minute, normalized exactly to USD 0.0025 per second. No whole-minute rounding is inferred from the native price display."
+            }
+          ],
+          "pricing": {
+            "type": "per_second",
+            "usd": 0.0025,
+            "source_url": "https://elevenlabs.io/pricing/api"
+          }
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "not_listed",
+          "source_url": "https://ai-gateway.vercel.sh/v1/models",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "openrouter": {
+          "disposition": "not_listed",
+          "source_url": "https://openrouter.ai/api/v1/models?output_modalities=all",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "fal": {
+          "disposition": "excluded",
+          "source_url": "https://fal.ai/models/fal-ai/elevenlabs/music/api",
+          "reason": "The unversioned endpoint does not identify the exact underlying native model version or expose a model_id selector. It cannot be reliably assigned to this versioned card."
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/api-reference/music/compose"
+        }
+      }
+    },
+    "music_v2": {
+      "reference_provider": "elevenlabs",
+      "id": "music_v2",
+      "label": "Eleven Music v2",
+      "short_description": "Generate music with chunk-based composition, audio references and inpainting.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "release": {
+        "date": "2026-05-26",
+        "basis": "model",
+        "source_url": "https://elevenlabs.io/blog/introducing-music-v2"
+      },
+      "input": {
+        "type": "text",
+        "composition_plan": true
+      },
+      "output": {
+        "default_format": "mp3",
+        "formats": [
+          "alaw",
+          "mp3",
+          "opus",
+          "pcm",
+          "ulaw"
+        ],
+        "sample_rate_hz": 48000,
+        "bit_rate_kbps": 192,
+        "format_options": [
+          "mp3_48000_128",
+          "mp3_48000_192",
+          "mp3_48000_240",
+          "mp3_48000_320",
+          "mp3_22050_32",
+          "mp3_24000_48",
+          "mp3_44100_32",
+          "mp3_44100_64",
+          "mp3_44100_96",
+          "mp3_44100_128",
+          "mp3_44100_192",
+          "pcm_8000",
+          "pcm_16000",
+          "pcm_22050",
+          "pcm_24000",
+          "pcm_32000",
+          "pcm_44100",
+          "pcm_48000",
+          "ulaw_8000",
+          "alaw_8000",
+          "opus_48000_32",
+          "opus_48000_64",
+          "opus_48000_96",
+          "opus_48000_128",
+          "opus_48000_192"
+        ],
+        "source_url": "https://elevenlabs.io/docs/api-reference/music/compose",
+        "duration": {
+          "mode": "automatic_or_fixed",
+          "min_seconds": 3,
+          "max_seconds": 600
+        }
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "music_v2",
+          "source_url": "https://elevenlabs.io/docs/api-reference/music/compose",
+          "url": "https://elevenlabs.io/docs/api-reference/music/compose",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/music/compose",
+              "notes": "Prompt and composition_plan are mutually exclusive. The 3–600 second envelope is the prompt-based music_length_ms range; it is not a limit on section-by-section compositions. The auto output format is mp3_44100_128 for v1 and mp3_48000_192 for v2 models."
+            },
+            {
+              "source_url": "https://elevenlabs.io/pricing/api",
+              "notes": "The published music price is USD 0.15 per generated minute, normalized exactly to USD 0.0025 per second. No whole-minute rounding is inferred from the native price display."
+            },
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/music/compose",
+              "notes": "Music v2 and v2.5 use chunk-based composition plans and always enforce section durations. The v1 MusicPrompt plan and its respect_sections_durations behavior are not interchangeable with these models."
+            }
+          ],
+          "pricing": {
+            "type": "per_second",
+            "usd": 0.0025,
+            "source_url": "https://elevenlabs.io/pricing/api"
+          }
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "elevenlabs/music-v2",
+          "source_url": "https://vercel.com/ai-gateway/models/music-v2",
+          "url": "https://vercel.com/ai-gateway/models/music-v2",
+          "pricing": {
+            "type": "per_second",
+            "usd": 0.0025,
+            "source_url": "https://ai-gateway.vercel.sh/v1/models"
+          }
+        },
+        "fal": {
+          "provider": "fal",
+          "id": "elevenlabs/music/v2",
+          "source_url": "https://fal.ai/models/elevenlabs/music/v2",
+          "url": "https://fal.ai/models/elevenlabs/music/v2",
+          "published_pricing": {
+            "source_url": "https://fal.ai/models/elevenlabs/music/v2",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "output_audio_duration",
+                "unit": "minute",
+                "usd_per_unit": "0.6",
+                "quantity_rounding": {
+                  "mode": "ceil",
+                  "increment": "1"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/music-v2"
+        },
+        "openrouter": {
+          "disposition": "not_listed",
+          "source_url": "https://openrouter.ai/api/v1/models?output_modalities=all",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "fal": {
+          "disposition": "listed",
+          "source_url": "https://fal.ai/models/elevenlabs/music/v2"
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/api-reference/music/compose"
+        }
+      }
+    },
+    "music_v2_5": {
+      "reference_provider": "elevenlabs",
+      "id": "music_v2_5",
+      "label": "Eleven Music v2.5",
+      "short_description": "Music generation with improved quality and prompt adherence over Music v2.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "release": {
+        "date": "2026-09-11",
+        "basis": "model",
+        "source_url": "https://elevenlabs.io/blog/music-v2-5-model"
+      },
+      "input": {
+        "type": "text",
+        "composition_plan": true
+      },
+      "output": {
+        "default_format": "mp3",
+        "formats": [
+          "alaw",
+          "mp3",
+          "opus",
+          "pcm",
+          "ulaw"
+        ],
+        "sample_rate_hz": 48000,
+        "bit_rate_kbps": 192,
+        "format_options": [
+          "mp3_48000_128",
+          "mp3_48000_192",
+          "mp3_48000_240",
+          "mp3_48000_320",
+          "mp3_22050_32",
+          "mp3_24000_48",
+          "mp3_44100_32",
+          "mp3_44100_64",
+          "mp3_44100_96",
+          "mp3_44100_128",
+          "mp3_44100_192",
+          "pcm_8000",
+          "pcm_16000",
+          "pcm_22050",
+          "pcm_24000",
+          "pcm_32000",
+          "pcm_44100",
+          "pcm_48000",
+          "ulaw_8000",
+          "alaw_8000",
+          "opus_48000_32",
+          "opus_48000_64",
+          "opus_48000_96",
+          "opus_48000_128",
+          "opus_48000_192"
+        ],
+        "source_url": "https://elevenlabs.io/docs/api-reference/music/compose",
+        "duration": {
+          "mode": "automatic_or_fixed",
+          "min_seconds": 3,
+          "max_seconds": 600
+        }
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "music_v2_5",
+          "source_url": "https://elevenlabs.io/docs/api-reference/music/compose",
+          "url": "https://elevenlabs.io/docs/api-reference/music/compose",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/music/compose",
+              "notes": "Prompt and composition_plan are mutually exclusive. The 3–600 second envelope is the prompt-based music_length_ms range; it is not a limit on section-by-section compositions. The auto output format is mp3_44100_128 for v1 and mp3_48000_192 for v2 models."
+            },
+            {
+              "source_url": "https://elevenlabs.io/pricing/api",
+              "notes": "The published music price is USD 0.15 per generated minute, normalized exactly to USD 0.0025 per second. No whole-minute rounding is inferred from the native price display."
+            },
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/music/compose",
+              "notes": "Music v2 and v2.5 use chunk-based composition plans and always enforce section durations. The v1 MusicPrompt plan and its respect_sections_durations behavior are not interchangeable with these models."
+            }
+          ],
+          "pricing": {
+            "type": "per_second",
+            "usd": 0.0025,
+            "source_url": "https://elevenlabs.io/pricing/api"
+          }
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "elevenlabs/music-v2.5",
+          "source_url": "https://vercel.com/ai-gateway/models/music-v2.5",
+          "url": "https://vercel.com/ai-gateway/models/music-v2.5",
+          "pricing": {
+            "type": "per_second",
+            "usd": 0.0025,
+            "source_url": "https://ai-gateway.vercel.sh/v1/models"
+          }
+        },
+        "fal": {
+          "provider": "fal",
+          "id": "elevenlabs/music/v2.5",
+          "source_url": "https://fal.ai/models/elevenlabs/music/v2.5",
+          "url": "https://fal.ai/models/elevenlabs/music/v2.5",
+          "published_pricing": {
+            "source_url": "https://fal.ai/models/elevenlabs/music/v2.5",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "output_audio_duration",
+                "unit": "minute",
+                "usd_per_unit": "0.6",
+                "quantity_rounding": {
+                  "mode": "ceil",
+                  "increment": "1"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/music-v2.5"
+        },
+        "openrouter": {
+          "disposition": "not_listed",
+          "source_url": "https://openrouter.ai/api/v1/models?output_modalities=all",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "fal": {
+          "disposition": "listed",
+          "source_url": "https://fal.ai/models/elevenlabs/music/v2.5"
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/api-reference/music/compose"
+        }
+      }
     }
   },
   "audio.sound_effects.models": {
@@ -20899,13 +21285,15 @@
       "short_description": "Generate loopable sound effects up to 30 seconds from text.",
       "vendor": "elevenlabs",
       "provider": "elevenlabs",
-      "input": {
-        "type": "text"
-      },
       "duration_label": "0.5–30s",
       "output_format": "mp3",
       "sample_rate_label": "44.1 kHz",
       "url": "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "looping": true,
+      "input": {
+        "type": "text"
+      },
       "release": {
         "date": "2025-09-02",
         "basis": "model",
@@ -20914,9 +21302,46 @@
       "output": {
         "default_format": "mp3",
         "formats": [
-          "mp3"
+          "alaw",
+          "mp3",
+          "opus",
+          "pcm",
+          "ulaw",
+          "wav"
         ],
         "sample_rate_hz": 44100,
+        "bit_rate_kbps": 128,
+        "format_options": [
+          "alaw_8000",
+          "mp3_22050_32",
+          "mp3_24000_48",
+          "mp3_44100_128",
+          "mp3_44100_192",
+          "mp3_44100_32",
+          "mp3_44100_64",
+          "mp3_44100_96",
+          "opus_48000_128",
+          "opus_48000_192",
+          "opus_48000_32",
+          "opus_48000_64",
+          "opus_48000_96",
+          "pcm_16000",
+          "pcm_22050",
+          "pcm_24000",
+          "pcm_32000",
+          "pcm_44100",
+          "pcm_48000",
+          "pcm_8000",
+          "ulaw_8000",
+          "wav_16000",
+          "wav_22050",
+          "wav_24000",
+          "wav_32000",
+          "wav_44100",
+          "wav_48000",
+          "wav_8000"
+        ],
+        "source_url": "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert",
         "duration": {
           "mode": "automatic_or_fixed",
           "min_seconds": 0.5,
@@ -20924,9 +21349,9 @@
         }
       },
       "pricing": {
-        "type": "provider_credits",
-        "automatic_duration_credits": 100,
-        "specified_duration_credits_per_second": 11
+        "type": "per_second",
+        "usd": 0.002,
+        "source_url": "https://elevenlabs.io/pricing/api"
       },
       "providers": {
         "fal": {
@@ -20934,6 +21359,12 @@
           "id": "fal-ai/elevenlabs/sound-effects/v2",
           "source_url": "https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2",
           "url": "https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2",
+          "qualifications": [
+            {
+              "source_url": "https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2/api",
+              "notes": "The fal request schema documents text up to 450 characters and duration_seconds from 0.5 to 22 seconds. This differs from the native API's 30-second maximum; the smaller serving range is preserved as a qualification."
+            }
+          ],
           "pricing": {
             "type": "per_second",
             "usd": 0.002,
@@ -20948,15 +21379,31 @@
           "pricing": {
             "type": "per_second",
             "usd": 0.002,
-            "source_url": "https://vercel.com/ai-gateway/models/sound-effects-v2"
+            "source_url": "https://ai-gateway.vercel.sh/v1/models"
           }
+        },
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "eleven_text_to_sound_v2",
+          "source_url": "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert",
+          "url": "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/pricing/api",
+              "notes": "The published Sound Effects price is USD 0.12 per minute, normalized exactly to USD 0.002 per generated second. The former native provider-credit counts are not the current USD API tariff. No minimum charge or duration-rounding rule is inferred."
+            },
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert",
+              "notes": "The default is MP3 at 44.1 kHz / 128 kbps. PCM, WAV, Opus, mu-law and A-law options are also documented, with plan restrictions on some high-quality settings."
+            }
+          ]
         }
       },
       "provider_coverage": {
         "openrouter": {
           "disposition": "not_listed",
           "source_url": "https://openrouter.ai/api/v1/models?output_modalities=all",
-          "reason": "No matching sound-effects model/version is listed in the complete public model catalogue, including non-text output modalities."
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
         },
         "vercel": {
           "disposition": "listed",
@@ -20972,9 +21419,771 @@
         }
       },
       "avg_cost_usd": null
+    },
+    "eleven_text_to_sound_v3": {
+      "reference_provider": "elevenlabs",
+      "id": "eleven_text_to_sound_v3",
+      "label": "Eleven Sound Effects v3",
+      "short_description": "Generate loopable sound effects with multi-part prompts, music and vocals.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "looping": true,
+      "release": {
+        "date": "2026-11-02",
+        "basis": "model",
+        "source_url": "https://elevenlabs.io/docs/changelog/2026/11/2"
+      },
+      "input": {
+        "type": "text"
+      },
+      "output": {
+        "default_format": "mp3",
+        "formats": [
+          "alaw",
+          "mp3",
+          "opus",
+          "pcm",
+          "ulaw",
+          "wav"
+        ],
+        "sample_rate_hz": 44100,
+        "bit_rate_kbps": 128,
+        "format_options": [
+          "alaw_8000",
+          "mp3_22050_32",
+          "mp3_24000_48",
+          "mp3_44100_128",
+          "mp3_44100_192",
+          "mp3_44100_32",
+          "mp3_44100_64",
+          "mp3_44100_96",
+          "opus_48000_128",
+          "opus_48000_192",
+          "opus_48000_32",
+          "opus_48000_64",
+          "opus_48000_96",
+          "pcm_16000",
+          "pcm_22050",
+          "pcm_24000",
+          "pcm_32000",
+          "pcm_44100",
+          "pcm_48000",
+          "pcm_8000",
+          "ulaw_8000",
+          "wav_16000",
+          "wav_22050",
+          "wav_24000",
+          "wav_32000",
+          "wav_44100",
+          "wav_48000",
+          "wav_8000"
+        ],
+        "source_url": "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert",
+        "duration": {
+          "mode": "automatic_or_fixed",
+          "min_seconds": 0.5,
+          "max_seconds": 30
+        }
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "eleven_text_to_sound_v3",
+          "source_url": "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert",
+          "url": "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/docs/changelog/2026/11/2",
+              "notes": "The current model reference and November 2 changelog explicitly document looping with SFX v3. The developer launch article still says looping works only with v2; the card follows the current model reference and explicit changelog rather than that conflicting article."
+            },
+            {
+              "source_url": "https://elevenlabs.io/pricing/api",
+              "notes": "The published Sound Effects price is USD 0.12 per minute, normalized exactly to USD 0.002 per generated second. The former native provider-credit counts are not the current USD API tariff. No minimum charge or duration-rounding rule is inferred."
+            },
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert",
+              "notes": "The default is MP3 at 44.1 kHz / 128 kbps. PCM, WAV, Opus, mu-law and A-law options are also documented, with plan restrictions on some high-quality settings."
+            }
+          ]
+        },
+        "fal": {
+          "provider": "fal",
+          "id": "elevenlabs/sound-effects/v3",
+          "source_url": "https://fal.ai/models/elevenlabs/sound-effects/v3",
+          "url": "https://fal.ai/models/elevenlabs/sound-effects/v3",
+          "pricing": {
+            "type": "per_second",
+            "usd": 0.002,
+            "source_url": "https://fal.ai/models/elevenlabs/sound-effects/v3"
+          }
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "not_listed",
+          "source_url": "https://ai-gateway.vercel.sh/v1/models",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "openrouter": {
+          "disposition": "not_listed",
+          "source_url": "https://openrouter.ai/api/v1/models?output_modalities=all",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "fal": {
+          "disposition": "listed",
+          "source_url": "https://fal.ai/models/elevenlabs/sound-effects/v3"
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert"
+        }
+      },
+      "pricing": {
+        "type": "per_second",
+        "usd": 0.002,
+        "source_url": "https://elevenlabs.io/pricing/api"
+      }
     }
   },
   "audio.text_to_speech.models": {
+    "eleven_flash_v2": {
+      "reference_provider": "elevenlabs",
+      "id": "eleven_flash_v2",
+      "label": "Eleven Flash v2",
+      "short_description": "Low-latency English speech synthesis.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "languages_label": "English",
+      "release": {
+        "date": "2024-12-18",
+        "basis": "model",
+        "source_url": "https://elevenlabs.io/blog/meet-flash"
+      },
+      "input": {
+        "type": "text",
+        "max_characters": 30000
+      },
+      "output": {
+        "default_format": "mp3",
+        "formats": [
+          "alaw",
+          "mp3",
+          "opus",
+          "pcm",
+          "ulaw",
+          "wav"
+        ],
+        "sample_rate_hz": 44100,
+        "bit_rate_kbps": 128,
+        "format_options": [
+          "alaw_8000",
+          "mp3_22050_32",
+          "mp3_24000_48",
+          "mp3_44100_128",
+          "mp3_44100_192",
+          "mp3_44100_32",
+          "mp3_44100_64",
+          "mp3_44100_96",
+          "opus_48000_128",
+          "opus_48000_192",
+          "opus_48000_32",
+          "opus_48000_64",
+          "opus_48000_96",
+          "pcm_16000",
+          "pcm_22050",
+          "pcm_24000",
+          "pcm_32000",
+          "pcm_44100",
+          "pcm_48000",
+          "pcm_8000",
+          "ulaw_8000",
+          "wav_16000",
+          "wav_22050",
+          "wav_24000",
+          "wav_32000",
+          "wav_44100",
+          "wav_48000",
+          "wav_8000"
+        ],
+        "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "eleven_flash_v2",
+          "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert",
+          "url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert",
+              "notes": "The sample rate and bitrate describe the default MP3 output. Other codec/rate/bitrate combinations are selectable; higher-quality output can require a paid plan. These native format options do not establish another provider's support."
+            }
+          ]
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "elevenlabs/eleven-flash-v2",
+          "source_url": "https://vercel.com/ai-gateway/models/eleven-flash-v2",
+          "url": "https://vercel.com/ai-gateway/models/eleven-flash-v2",
+          "qualifications": [
+            {
+              "source_url": "https://vercel.com/ai-gateway/models/eleven-flash-v2",
+              "notes": "This provider documents a 30,000-character request limit. Provider limits are independent of the native dialogue API and other bindings."
+            }
+          ],
+          "pricing": {
+            "type": "per_1000_characters",
+            "usd": 0.04,
+            "source_url": "https://vercel.com/ai-gateway/models/eleven-flash-v2"
+          }
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "elevenlabs/eleven-flash-v2",
+          "source_url": "https://openrouter.ai/elevenlabs/eleven-flash-v2",
+          "url": "https://openrouter.ai/elevenlabs/eleven-flash-v2",
+          "qualifications": [
+            {
+              "source_url": "https://openrouter.ai/elevenlabs/eleven-flash-v2",
+              "notes": "This provider documents a 30,000-character request limit. Provider limits are independent of the native dialogue API and other bindings."
+            }
+          ],
+          "pricing": {
+            "type": "per_1000_characters",
+            "usd": 0.04,
+            "source_url": "https://openrouter.ai/elevenlabs/eleven-flash-v2"
+          }
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/eleven-flash-v2"
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/elevenlabs/eleven-flash-v2"
+        },
+        "fal": {
+          "disposition": "not_listed",
+          "source_url": "https://fal.ai/api/models?keywords=elevenlabs&size=100",
+          "reason": "No matching exact model/version is listed in the complete ElevenLabs search results."
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
+        }
+      },
+      "pricing": {
+        "type": "per_1000_characters",
+        "usd": 0.04,
+        "source_url": "https://elevenlabs.io/pricing/api"
+      }
+    },
+    "eleven_flash_v2_5": {
+      "reference_provider": "elevenlabs",
+      "id": "eleven_flash_v2_5",
+      "label": "Eleven Flash v2.5",
+      "short_description": "Low-latency speech in 32 languages.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "languages_label": "32",
+      "release": {
+        "date": "2024-12-18",
+        "basis": "model",
+        "source_url": "https://elevenlabs.io/blog/meet-flash"
+      },
+      "input": {
+        "type": "text",
+        "max_characters": 40000
+      },
+      "output": {
+        "default_format": "mp3",
+        "formats": [
+          "alaw",
+          "mp3",
+          "opus",
+          "pcm",
+          "ulaw",
+          "wav"
+        ],
+        "sample_rate_hz": 44100,
+        "bit_rate_kbps": 128,
+        "format_options": [
+          "alaw_8000",
+          "mp3_22050_32",
+          "mp3_24000_48",
+          "mp3_44100_128",
+          "mp3_44100_192",
+          "mp3_44100_32",
+          "mp3_44100_64",
+          "mp3_44100_96",
+          "opus_48000_128",
+          "opus_48000_192",
+          "opus_48000_32",
+          "opus_48000_64",
+          "opus_48000_96",
+          "pcm_16000",
+          "pcm_22050",
+          "pcm_24000",
+          "pcm_32000",
+          "pcm_44100",
+          "pcm_48000",
+          "pcm_8000",
+          "ulaw_8000",
+          "wav_16000",
+          "wav_22050",
+          "wav_24000",
+          "wav_32000",
+          "wav_44100",
+          "wav_48000",
+          "wav_8000"
+        ],
+        "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "eleven_flash_v2_5",
+          "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert",
+          "url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert",
+              "notes": "The sample rate and bitrate describe the default MP3 output. Other codec/rate/bitrate combinations are selectable; higher-quality output can require a paid plan. These native format options do not establish another provider's support."
+            }
+          ]
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "elevenlabs/eleven-flash-v2.5",
+          "source_url": "https://vercel.com/ai-gateway/models/eleven-flash-v2.5",
+          "url": "https://vercel.com/ai-gateway/models/eleven-flash-v2.5",
+          "qualifications": [
+            {
+              "source_url": "https://vercel.com/ai-gateway/models/eleven-flash-v2.5",
+              "notes": "This provider documents a 40,000-character request limit. Provider limits are independent of the native dialogue API and other bindings."
+            }
+          ],
+          "pricing": {
+            "type": "per_1000_characters",
+            "usd": 0.04,
+            "source_url": "https://vercel.com/ai-gateway/models/eleven-flash-v2.5"
+          }
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "elevenlabs/eleven-flash-v2.5",
+          "source_url": "https://openrouter.ai/elevenlabs/eleven-flash-v2.5",
+          "url": "https://openrouter.ai/elevenlabs/eleven-flash-v2.5",
+          "qualifications": [
+            {
+              "source_url": "https://openrouter.ai/elevenlabs/eleven-flash-v2.5",
+              "notes": "This provider documents a 40,000-character request limit. Provider limits are independent of the native dialogue API and other bindings."
+            }
+          ],
+          "pricing": {
+            "type": "per_1000_characters",
+            "usd": 0.04,
+            "source_url": "https://openrouter.ai/elevenlabs/eleven-flash-v2.5"
+          }
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/eleven-flash-v2.5"
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/elevenlabs/eleven-flash-v2.5"
+        },
+        "fal": {
+          "disposition": "not_listed",
+          "source_url": "https://fal.ai/api/models?keywords=elevenlabs&size=100",
+          "reason": "No matching exact model/version is listed in the complete ElevenLabs search results."
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
+        }
+      },
+      "pricing": {
+        "type": "per_1000_characters",
+        "usd": 0.04,
+        "source_url": "https://elevenlabs.io/pricing/api"
+      }
+    },
+    "eleven_multilingual_v2": {
+      "reference_provider": "elevenlabs",
+      "id": "eleven_multilingual_v2",
+      "label": "Eleven Multilingual v2",
+      "short_description": "Consistent multilingual narration for long-form speech.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "languages_label": "29",
+      "release": {
+        "date": "2023-08-22",
+        "basis": "model",
+        "source_url": "https://elevenlabs.io/blog/eleven-multilingual-v2"
+      },
+      "input": {
+        "type": "text",
+        "max_characters": 10000
+      },
+      "output": {
+        "default_format": "mp3",
+        "formats": [
+          "alaw",
+          "mp3",
+          "opus",
+          "pcm",
+          "ulaw",
+          "wav"
+        ],
+        "sample_rate_hz": 44100,
+        "bit_rate_kbps": 128,
+        "format_options": [
+          "alaw_8000",
+          "mp3_22050_32",
+          "mp3_24000_48",
+          "mp3_44100_128",
+          "mp3_44100_192",
+          "mp3_44100_32",
+          "mp3_44100_64",
+          "mp3_44100_96",
+          "opus_48000_128",
+          "opus_48000_192",
+          "opus_48000_32",
+          "opus_48000_64",
+          "opus_48000_96",
+          "pcm_16000",
+          "pcm_22050",
+          "pcm_24000",
+          "pcm_32000",
+          "pcm_44100",
+          "pcm_48000",
+          "pcm_8000",
+          "ulaw_8000",
+          "wav_16000",
+          "wav_22050",
+          "wav_24000",
+          "wav_32000",
+          "wav_44100",
+          "wav_48000",
+          "wav_8000"
+        ],
+        "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "eleven_multilingual_v2",
+          "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert",
+          "url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert",
+              "notes": "The sample rate and bitrate describe the default MP3 output. Other codec/rate/bitrate combinations are selectable; higher-quality output can require a paid plan. These native format options do not establish another provider's support."
+            }
+          ]
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "elevenlabs/eleven-multilingual-v2",
+          "source_url": "https://vercel.com/ai-gateway/models/eleven-multilingual-v2",
+          "url": "https://vercel.com/ai-gateway/models/eleven-multilingual-v2",
+          "qualifications": [
+            {
+              "source_url": "https://vercel.com/ai-gateway/models/eleven-multilingual-v2",
+              "notes": "This provider documents a 10,000-character request limit. Provider limits are independent of the native dialogue API and other bindings."
+            }
+          ],
+          "pricing": {
+            "type": "per_1000_characters",
+            "usd": 0.08,
+            "source_url": "https://vercel.com/ai-gateway/models/eleven-multilingual-v2"
+          }
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "elevenlabs/eleven-multilingual-v2",
+          "source_url": "https://openrouter.ai/elevenlabs/eleven-multilingual-v2",
+          "url": "https://openrouter.ai/elevenlabs/eleven-multilingual-v2",
+          "pricing": {
+            "type": "per_1000_characters",
+            "usd": 0.08,
+            "source_url": "https://openrouter.ai/elevenlabs/eleven-multilingual-v2"
+          }
+        },
+        "fal": {
+          "provider": "fal",
+          "id": "fal-ai/elevenlabs/tts/multilingual-v2",
+          "source_url": "https://fal.ai/models/fal-ai/elevenlabs/tts/multilingual-v2",
+          "url": "https://fal.ai/models/fal-ai/elevenlabs/tts/multilingual-v2",
+          "pricing": {
+            "type": "per_1000_characters",
+            "usd": 0.1,
+            "source_url": "https://fal.ai/models/fal-ai/elevenlabs/tts/multilingual-v2"
+          }
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/eleven-multilingual-v2"
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/elevenlabs/eleven-multilingual-v2"
+        },
+        "fal": {
+          "disposition": "listed",
+          "source_url": "https://fal.ai/models/fal-ai/elevenlabs/tts/multilingual-v2"
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
+        }
+      },
+      "pricing": {
+        "type": "per_1000_characters",
+        "usd": 0.08,
+        "source_url": "https://elevenlabs.io/pricing/api"
+      }
+    },
+    "eleven_turbo_v2": {
+      "reference_provider": "elevenlabs",
+      "id": "eleven_turbo_v2",
+      "label": "Eleven Turbo v2",
+      "short_description": "First-generation low-latency English speech synthesis.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "languages_label": "English",
+      "release": {
+        "date": "2023-11-09",
+        "basis": "model",
+        "source_url": "https://elevenlabs.io/blog/turbo-v2-is-here"
+      },
+      "input": {
+        "type": "text"
+      },
+      "output": {
+        "default_format": "mp3",
+        "formats": [
+          "alaw",
+          "mp3",
+          "opus",
+          "pcm",
+          "ulaw",
+          "wav"
+        ],
+        "sample_rate_hz": 44100,
+        "bit_rate_kbps": 128,
+        "format_options": [
+          "alaw_8000",
+          "mp3_22050_32",
+          "mp3_24000_48",
+          "mp3_44100_128",
+          "mp3_44100_192",
+          "mp3_44100_32",
+          "mp3_44100_64",
+          "mp3_44100_96",
+          "opus_48000_128",
+          "opus_48000_192",
+          "opus_48000_32",
+          "opus_48000_64",
+          "opus_48000_96",
+          "pcm_16000",
+          "pcm_22050",
+          "pcm_24000",
+          "pcm_32000",
+          "pcm_44100",
+          "pcm_48000",
+          "pcm_8000",
+          "ulaw_8000",
+          "wav_16000",
+          "wav_22050",
+          "wav_24000",
+          "wav_32000",
+          "wav_44100",
+          "wav_48000",
+          "wav_8000"
+        ],
+        "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "eleven_turbo_v2",
+          "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert",
+          "url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert",
+              "notes": "The sample rate and bitrate describe the default MP3 output. Other codec/rate/bitrate combinations are selectable; higher-quality output can require a paid plan. These native format options do not establish another provider's support."
+            }
+          ]
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "elevenlabs/eleven-turbo-v2",
+          "source_url": "https://openrouter.ai/elevenlabs/eleven-turbo-v2",
+          "url": "https://openrouter.ai/elevenlabs/eleven-turbo-v2",
+          "pricing": {
+            "type": "per_1000_characters",
+            "usd": 0.04,
+            "source_url": "https://openrouter.ai/elevenlabs/eleven-turbo-v2"
+          }
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "not_listed",
+          "source_url": "https://ai-gateway.vercel.sh/v1/models",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/elevenlabs/eleven-turbo-v2"
+        },
+        "fal": {
+          "disposition": "not_listed",
+          "source_url": "https://fal.ai/api/models?keywords=elevenlabs&size=100",
+          "reason": "No matching exact model/version is listed in the complete ElevenLabs search results."
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
+        }
+      },
+      "pricing": {
+        "type": "per_1000_characters",
+        "usd": 0.04,
+        "source_url": "https://elevenlabs.io/pricing/api"
+      }
+    },
+    "eleven_turbo_v2_5": {
+      "reference_provider": "elevenlabs",
+      "id": "eleven_turbo_v2_5",
+      "label": "Eleven Turbo v2.5",
+      "short_description": "First-generation low-latency multilingual speech synthesis.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "languages_label": "32",
+      "release": {
+        "date": "2024-07-19",
+        "basis": "model",
+        "source_url": "https://elevenlabs.io/blog/introducing-turbo-v25"
+      },
+      "input": {
+        "type": "text"
+      },
+      "output": {
+        "default_format": "mp3",
+        "formats": [
+          "alaw",
+          "mp3",
+          "opus",
+          "pcm",
+          "ulaw",
+          "wav"
+        ],
+        "sample_rate_hz": 44100,
+        "bit_rate_kbps": 128,
+        "format_options": [
+          "alaw_8000",
+          "mp3_22050_32",
+          "mp3_24000_48",
+          "mp3_44100_128",
+          "mp3_44100_192",
+          "mp3_44100_32",
+          "mp3_44100_64",
+          "mp3_44100_96",
+          "opus_48000_128",
+          "opus_48000_192",
+          "opus_48000_32",
+          "opus_48000_64",
+          "opus_48000_96",
+          "pcm_16000",
+          "pcm_22050",
+          "pcm_24000",
+          "pcm_32000",
+          "pcm_44100",
+          "pcm_48000",
+          "pcm_8000",
+          "ulaw_8000",
+          "wav_16000",
+          "wav_22050",
+          "wav_24000",
+          "wav_32000",
+          "wav_44100",
+          "wav_48000",
+          "wav_8000"
+        ],
+        "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "eleven_turbo_v2_5",
+          "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert",
+          "url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert",
+              "notes": "The sample rate and bitrate describe the default MP3 output. Other codec/rate/bitrate combinations are selectable; higher-quality output can require a paid plan. These native format options do not establish another provider's support."
+            }
+          ]
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "elevenlabs/eleven-turbo-v2.5",
+          "source_url": "https://openrouter.ai/elevenlabs/eleven-turbo-v2.5",
+          "url": "https://openrouter.ai/elevenlabs/eleven-turbo-v2.5",
+          "pricing": {
+            "type": "per_1000_characters",
+            "usd": 0.04,
+            "source_url": "https://openrouter.ai/elevenlabs/eleven-turbo-v2.5"
+          }
+        },
+        "fal": {
+          "provider": "fal",
+          "id": "fal-ai/elevenlabs/tts/turbo-v2.5",
+          "source_url": "https://fal.ai/models/fal-ai/elevenlabs/tts/turbo-v2.5",
+          "url": "https://fal.ai/models/fal-ai/elevenlabs/tts/turbo-v2.5",
+          "pricing": {
+            "type": "per_1000_characters",
+            "usd": 0.05,
+            "source_url": "https://fal.ai/models/fal-ai/elevenlabs/tts/turbo-v2.5"
+          }
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "not_listed",
+          "source_url": "https://ai-gateway.vercel.sh/v1/models",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/elevenlabs/eleven-turbo-v2.5"
+        },
+        "fal": {
+          "disposition": "listed",
+          "source_url": "https://fal.ai/models/fal-ai/elevenlabs/tts/turbo-v2.5"
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
+        }
+      },
+      "pricing": {
+        "type": "per_1000_characters",
+        "usd": 0.04,
+        "source_url": "https://elevenlabs.io/pricing/api"
+      }
+    },
     "eleven_v3": {
       "reference_provider": "elevenlabs",
       "id": "eleven_v3",
@@ -20982,18 +22191,21 @@
       "short_description": "Generate expressive speech with bracketed audio and emotion tags.",
       "vendor": "elevenlabs",
       "provider": "elevenlabs",
+      "output_format": "mp3",
+      "sample_rate_label": "44.1 kHz · 128 kbps",
+      "url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "languages_label": "70+",
       "input": {
         "type": "text",
         "max_characters": 5000,
         "audio_tags": true
       },
-      "output_format": "mp3",
-      "sample_rate_label": "44.1 kHz · 128 kbps",
       "pricing": {
         "type": "per_1000_characters",
-        "usd": 0.1
+        "usd": 0.08,
+        "source_url": "https://elevenlabs.io/pricing/api"
       },
-      "url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert",
       "release": {
         "date": "2025-06-03",
         "basis": "model",
@@ -21002,10 +22214,46 @@
       "output": {
         "default_format": "mp3",
         "formats": [
-          "mp3"
+          "alaw",
+          "mp3",
+          "opus",
+          "pcm",
+          "ulaw",
+          "wav"
         ],
         "sample_rate_hz": 44100,
-        "bit_rate_kbps": 128
+        "bit_rate_kbps": 128,
+        "format_options": [
+          "alaw_8000",
+          "mp3_22050_32",
+          "mp3_24000_48",
+          "mp3_44100_128",
+          "mp3_44100_192",
+          "mp3_44100_32",
+          "mp3_44100_64",
+          "mp3_44100_96",
+          "opus_48000_128",
+          "opus_48000_192",
+          "opus_48000_32",
+          "opus_48000_64",
+          "opus_48000_96",
+          "pcm_16000",
+          "pcm_22050",
+          "pcm_24000",
+          "pcm_32000",
+          "pcm_44100",
+          "pcm_48000",
+          "pcm_8000",
+          "ulaw_8000",
+          "wav_16000",
+          "wav_22050",
+          "wav_24000",
+          "wav_32000",
+          "wav_44100",
+          "wav_48000",
+          "wav_8000"
+        ],
+        "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
       },
       "providers": {
         "fal": {
@@ -21013,6 +22261,30 @@
           "id": "fal-ai/elevenlabs/tts/eleven-v3",
           "source_url": "https://fal.ai/models/fal-ai/elevenlabs/tts/eleven-v3",
           "url": "https://fal.ai/models/fal-ai/elevenlabs/tts/eleven-v3",
+          "qualifications": [
+            {
+              "source_url": "https://fal.ai/models/fal-ai/elevenlabs/text-to-dialogue/eleven-v3",
+              "notes": "The separate multi-speaker dialogue endpoint also publishes USD 0.10 per 1,000 characters. Its inputs array of speaker/text turns differs from single-speaker TTS."
+            }
+          ],
+          "endpoints": [
+            {
+              "id": "fal-ai/elevenlabs/tts/eleven-v3",
+              "input": "text",
+              "source_url": "https://fal.ai/models/fal-ai/elevenlabs/tts/eleven-v3/api",
+              "parameters": {
+                "text": {
+                  "type": "string",
+                  "max_length": 5000
+                }
+              }
+            },
+            {
+              "id": "fal-ai/elevenlabs/text-to-dialogue/eleven-v3",
+              "input": "text",
+              "source_url": "https://fal.ai/models/fal-ai/elevenlabs/text-to-dialogue/eleven-v3/api"
+            }
+          ],
           "pricing": {
             "type": "per_1000_characters",
             "usd": 0.1,
@@ -21024,6 +22296,12 @@
           "id": "elevenlabs/eleven-v3",
           "source_url": "https://openrouter.ai/elevenlabs/eleven-v3",
           "url": "https://openrouter.ai/elevenlabs/eleven-v3",
+          "qualifications": [
+            {
+              "source_url": "https://openrouter.ai/elevenlabs/eleven-v3",
+              "notes": "This provider documents a 5,000-character request limit. Provider limits are independent of the native dialogue API and other bindings."
+            }
+          ],
           "pricing": {
             "type": "per_1000_characters",
             "usd": 0.08,
@@ -21035,11 +22313,33 @@
           "id": "elevenlabs/eleven-v3",
           "source_url": "https://vercel.com/ai-gateway/models/eleven-v3",
           "url": "https://vercel.com/ai-gateway/models/eleven-v3",
+          "qualifications": [
+            {
+              "source_url": "https://vercel.com/ai-gateway/models/eleven-v3",
+              "notes": "This provider documents a 5,000-character request limit. Provider limits are independent of the native dialogue API and other bindings."
+            }
+          ],
           "pricing": {
             "type": "per_1000_characters",
             "usd": 0.08,
             "source_url": "https://vercel.com/ai-gateway/models/eleven-v3"
           }
+        },
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "eleven_v3",
+          "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert",
+          "url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/text-to-dialogue/convert",
+              "notes": "The separate HTTP Text to Dialogue API accepts up to 10 unique voices and recommends at most 2,000 total text characters for reliable generation. This dialogue guidance is not the single-speaker model character limit."
+            },
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert",
+              "notes": "The sample rate and bitrate describe the default MP3 output. Other codec/rate/bitrate combinations are selectable; higher-quality output can require a paid plan. These native format options do not establish another provider's support."
+            }
+          ]
         }
       },
       "provider_coverage": {
@@ -21059,6 +22359,355 @@
           "disposition": "listed",
           "source_url": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
         }
+      }
+    },
+    "eleven_v3_conversational": {
+      "reference_provider": "elevenlabs",
+      "id": "eleven_v3_conversational",
+      "label": "Eleven v3 Conversational",
+      "short_description": "Expressive speech tuned for conversational agents.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "languages_label": "70+",
+      "release": {
+        "date": "2026-02-09",
+        "basis": "model",
+        "source_url": "https://elevenlabs.io/docs/changelog/2026/2/9"
+      },
+      "input": {
+        "type": "text",
+        "audio_tags": true,
+        "streaming": true
+      },
+      "output": {
+        "default_format": "mp3",
+        "formats": [
+          "mp3"
+        ],
+        "source_url": "https://elevenlabs.io/docs/eleven-api/guides/how-to/websockets/realtime-tdd"
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "eleven_v3_conversational",
+          "source_url": "https://elevenlabs.io/docs/eleven-api/guides/how-to/websockets/realtime-tdd",
+          "url": "https://elevenlabs.io/docs/eleven-api/guides/how-to/websockets/realtime-tdd",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/docs/eleven-api/guides/how-to/websockets/realtime-tdd",
+              "notes": "The native reference is the Text to Dialogue WebSocket, which streams dialogue lines and audio chunks. It is distinct from an OpenAI-compatible single-input speech endpoint; the guide demonstrates mp3_44100_128 output."
+            }
+          ]
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "elevenlabs/eleven-v3-conversational",
+          "source_url": "https://vercel.com/ai-gateway/models/eleven-v3-conversational",
+          "url": "https://vercel.com/ai-gateway/models/eleven-v3-conversational",
+          "qualifications": [
+            {
+              "source_url": "https://vercel.com/ai-gateway/models/eleven-v3-conversational",
+              "notes": "This provider documents a 5,000-character request limit. Provider limits are independent of the native dialogue API and other bindings."
+            }
+          ],
+          "pricing": {
+            "type": "per_1000_characters",
+            "usd": 0.04,
+            "source_url": "https://vercel.com/ai-gateway/models/eleven-v3-conversational"
+          }
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "elevenlabs/eleven-v3-conversational",
+          "source_url": "https://openrouter.ai/elevenlabs/eleven-v3-conversational",
+          "url": "https://openrouter.ai/elevenlabs/eleven-v3-conversational",
+          "pricing": {
+            "type": "per_1000_characters",
+            "usd": 0.04,
+            "source_url": "https://openrouter.ai/elevenlabs/eleven-v3-conversational"
+          }
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/eleven-v3-conversational"
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/elevenlabs/eleven-v3-conversational"
+        },
+        "fal": {
+          "disposition": "not_listed",
+          "source_url": "https://fal.ai/api/models?keywords=elevenlabs&size=100",
+          "reason": "No matching exact model/version is listed in the complete ElevenLabs search results."
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/eleven-api/guides/how-to/websockets/realtime-tdd"
+        }
+      },
+      "pricing": {
+        "type": "per_1000_characters",
+        "usd": 0.04,
+        "source_url": "https://elevenlabs.io/pricing/api"
+      }
+    },
+    "eleven_v4": {
+      "reference_provider": "elevenlabs",
+      "id": "eleven_v4",
+      "label": "Eleven v4",
+      "short_description": "Expressive multilingual speech and dialogue with audio tags.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "languages_label": "90+",
+      "release": {
+        "date": "2026-09-28",
+        "basis": "model",
+        "source_url": "https://elevenlabs.io/blog/eleven-v4"
+      },
+      "input": {
+        "type": "text",
+        "max_characters": 10000,
+        "audio_tags": true
+      },
+      "output": {
+        "default_format": "mp3",
+        "formats": [
+          "alaw",
+          "mp3",
+          "opus",
+          "pcm",
+          "ulaw",
+          "wav"
+        ],
+        "sample_rate_hz": 44100,
+        "bit_rate_kbps": 128,
+        "format_options": [
+          "alaw_8000",
+          "mp3_22050_32",
+          "mp3_24000_48",
+          "mp3_44100_128",
+          "mp3_44100_192",
+          "mp3_44100_32",
+          "mp3_44100_64",
+          "mp3_44100_96",
+          "opus_48000_128",
+          "opus_48000_192",
+          "opus_48000_32",
+          "opus_48000_64",
+          "opus_48000_96",
+          "pcm_16000",
+          "pcm_22050",
+          "pcm_24000",
+          "pcm_32000",
+          "pcm_44100",
+          "pcm_48000",
+          "pcm_8000",
+          "ulaw_8000",
+          "wav_16000",
+          "wav_22050",
+          "wav_24000",
+          "wav_32000",
+          "wav_44100",
+          "wav_48000",
+          "wav_8000"
+        ],
+        "source_url": "https://elevenlabs.io/docs/api-reference/text-to-dialogue/convert"
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "eleven_v4",
+          "source_url": "https://elevenlabs.io/docs/api-reference/text-to-dialogue/convert",
+          "url": "https://elevenlabs.io/docs/api-reference/text-to-dialogue/convert",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/text-to-dialogue/convert",
+              "notes": "The separate HTTP Text to Dialogue API accepts up to 10 unique voices and recommends at most 2,000 total text characters for reliable generation. This dialogue guidance is not the single-speaker model character limit."
+            },
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/text-to-dialogue/convert",
+              "notes": "The sample rate and bitrate describe the default MP3 output. Other codec/rate/bitrate combinations are selectable; higher-quality output can require a paid plan. These native format options do not establish another provider's support."
+            }
+          ]
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "elevenlabs/eleven-v4",
+          "source_url": "https://vercel.com/ai-gateway/models/eleven-v4",
+          "url": "https://vercel.com/ai-gateway/models/eleven-v4",
+          "qualifications": [
+            {
+              "source_url": "https://vercel.com/ai-gateway/models/eleven-v4",
+              "notes": "This provider documents a 10,000-character request limit. Provider limits are independent of the native dialogue API and other bindings."
+            }
+          ],
+          "pricing": {
+            "type": "per_1000_characters",
+            "usd": 0.08,
+            "source_url": "https://vercel.com/ai-gateway/models/eleven-v4"
+          }
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "elevenlabs/eleven-v4",
+          "source_url": "https://openrouter.ai/elevenlabs/eleven-v4",
+          "url": "https://openrouter.ai/elevenlabs/eleven-v4",
+          "pricing": {
+            "type": "per_1000_characters",
+            "usd": 0.08,
+            "source_url": "https://openrouter.ai/elevenlabs/eleven-v4"
+          }
+        },
+        "fal": {
+          "provider": "fal",
+          "id": "elevenlabs/tts/eleven-v4",
+          "source_url": "https://fal.ai/models/elevenlabs/tts/eleven-v4",
+          "url": "https://fal.ai/models/elevenlabs/tts/eleven-v4",
+          "qualifications": [
+            {
+              "source_url": "https://fal.ai/models/elevenlabs/tts/eleven-v4/api",
+              "notes": "The fal schema limits text to 5,000 characters per request. Preserve this serving limit rather than copying another provider's 10,000-character envelope."
+            }
+          ],
+          "pricing": {
+            "type": "per_1000_characters",
+            "usd": 0.08,
+            "source_url": "https://fal.ai/models/elevenlabs/tts/eleven-v4"
+          }
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/eleven-v4"
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/elevenlabs/eleven-v4"
+        },
+        "fal": {
+          "disposition": "listed",
+          "source_url": "https://fal.ai/models/elevenlabs/tts/eleven-v4"
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/api-reference/text-to-dialogue/convert"
+        }
+      },
+      "pricing": {
+        "type": "per_1000_characters",
+        "usd": 0.08,
+        "source_url": "https://elevenlabs.io/pricing/api"
+      }
+    },
+    "eleven_v4_turbo": {
+      "reference_provider": "elevenlabs",
+      "id": "eleven_v4_turbo",
+      "label": "Eleven v4 Turbo",
+      "short_description": "Expressive speech optimized for realtime dialogue.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "languages_label": "90+",
+      "release": {
+        "date": "2026-09-28",
+        "basis": "model",
+        "source_url": "https://elevenlabs.io/blog/eleven-v4"
+      },
+      "input": {
+        "type": "text",
+        "audio_tags": true,
+        "streaming": true
+      },
+      "output": {
+        "default_format": "mp3",
+        "formats": [
+          "mp3"
+        ],
+        "source_url": "https://elevenlabs.io/docs/eleven-api/guides/how-to/websockets/realtime-tdd"
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "eleven_v4_turbo",
+          "source_url": "https://elevenlabs.io/docs/eleven-api/guides/how-to/websockets/realtime-tdd",
+          "url": "https://elevenlabs.io/docs/eleven-api/guides/how-to/websockets/realtime-tdd",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/docs/eleven-api/guides/how-to/websockets/realtime-tdd",
+              "notes": "The native reference is the Text to Dialogue WebSocket, which streams dialogue lines and audio chunks. It is distinct from an OpenAI-compatible single-input speech endpoint; the guide demonstrates mp3_44100_128 output."
+            }
+          ]
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "elevenlabs/eleven-v4-turbo",
+          "source_url": "https://vercel.com/ai-gateway/models/eleven-v4-turbo",
+          "url": "https://vercel.com/ai-gateway/models/eleven-v4-turbo",
+          "qualifications": [
+            {
+              "source_url": "https://vercel.com/ai-gateway/models/eleven-v4-turbo",
+              "notes": "This provider documents a 10,000-character request limit. Provider limits are independent of the native dialogue API and other bindings."
+            }
+          ],
+          "pricing": {
+            "type": "per_1000_characters",
+            "usd": 0.04,
+            "source_url": "https://vercel.com/ai-gateway/models/eleven-v4-turbo"
+          }
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "elevenlabs/eleven-v4-turbo",
+          "source_url": "https://openrouter.ai/elevenlabs/eleven-v4-turbo",
+          "url": "https://openrouter.ai/elevenlabs/eleven-v4-turbo",
+          "pricing": {
+            "type": "per_1000_characters",
+            "usd": 0.04,
+            "source_url": "https://openrouter.ai/elevenlabs/eleven-v4-turbo"
+          }
+        },
+        "fal": {
+          "provider": "fal",
+          "id": "elevenlabs/tts/eleven-v4-turbo",
+          "source_url": "https://fal.ai/models/elevenlabs/tts/eleven-v4-turbo",
+          "url": "https://fal.ai/models/elevenlabs/tts/eleven-v4-turbo",
+          "qualifications": [
+            {
+              "source_url": "https://fal.ai/models/elevenlabs/tts/eleven-v4-turbo/api",
+              "notes": "The fal schema limits text to 5,000 characters per request. Preserve this serving limit rather than copying another provider's 10,000-character envelope."
+            }
+          ],
+          "pricing": {
+            "type": "per_1000_characters",
+            "usd": 0.04,
+            "source_url": "https://fal.ai/models/elevenlabs/tts/eleven-v4-turbo"
+          }
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/eleven-v4-turbo"
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/elevenlabs/eleven-v4-turbo"
+        },
+        "fal": {
+          "disposition": "listed",
+          "source_url": "https://fal.ai/models/elevenlabs/tts/eleven-v4-turbo"
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/eleven-api/guides/how-to/websockets/realtime-tdd"
+        }
+      },
+      "pricing": {
+        "type": "per_1000_characters",
+        "usd": 0.04,
+        "source_url": "https://elevenlabs.io/pricing/api"
       }
     }
   },
@@ -23939,6 +25588,1250 @@
         "grida": {
           "disposition": "listed",
           "source_url": "https://gateway.grida.ai/v1/models"
+        }
+      }
+    }
+  },
+  "audio.transcription.models": {
+    "scribe_v1": {
+      "reference_provider": "elevenlabs",
+      "id": "scribe_v1",
+      "label": "Scribe v1",
+      "short_description": "Batch transcription with timestamps, speaker labels and audio-event tags.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "languages_label": "99",
+      "release": {
+        "date": "2025-02-26",
+        "basis": "model",
+        "source_url": "https://elevenlabs.io/blog/meet-scribe"
+      },
+      "input": {
+        "type": "audio",
+        "streaming": false
+      },
+      "output": {
+        "type": "text",
+        "formats": [
+          "json"
+        ],
+        "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert"
+      },
+      "transcription": {
+        "word_timestamps": true,
+        "speaker_diarization": true,
+        "audio_event_tagging": true
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "scribe_v1",
+          "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "url": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/pricing/api",
+              "notes": "The current pricing table names Scribe v3, v2 and v2 Medical rather than this legacy version. No version-specific regular native price is recorded."
+            }
+          ]
+        },
+        "fal": {
+          "provider": "fal",
+          "id": "fal-ai/elevenlabs/speech-to-text",
+          "source_url": "https://fal.ai/models/fal-ai/elevenlabs/speech-to-text",
+          "url": "https://fal.ai/models/fal-ai/elevenlabs/speech-to-text",
+          "published_pricing": {
+            "source_url": "https://fal.ai/models/fal-ai/elevenlabs/speech-to-text",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "input_audio_duration",
+                "unit": "minute",
+                "usd_per_unit": "0.03"
+              }
+            ]
+          }
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "not_listed",
+          "source_url": "https://ai-gateway.vercel.sh/v1/models",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "openrouter": {
+          "disposition": "not_listed",
+          "source_url": "https://openrouter.ai/api/v1/models?output_modalities=all",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "fal": {
+          "disposition": "listed",
+          "source_url": "https://fal.ai/models/fal-ai/elevenlabs/speech-to-text"
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert"
+        }
+      }
+    },
+    "scribe_v2": {
+      "reference_provider": "elevenlabs",
+      "id": "scribe_v2",
+      "label": "Scribe v2",
+      "short_description": "Batch transcription with diarization, timestamps and vocabulary prompting.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "languages_label": "90+",
+      "release": {
+        "date": "2026-01-09",
+        "basis": "model",
+        "source_url": "https://elevenlabs.io/blog/introducing-scribe-v2"
+      },
+      "input": {
+        "type": "audio",
+        "streaming": false
+      },
+      "output": {
+        "type": "text",
+        "formats": [
+          "json"
+        ],
+        "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert"
+      },
+      "transcription": {
+        "word_timestamps": true,
+        "speaker_diarization": true,
+        "audio_event_tagging": true
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "scribe_v2",
+          "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "url": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/pricing/api",
+              "notes": "The recorded rate is base transcription only. Keyterm prompting, transcript editing and the v3 Live keyterm library have additional published charges. Optional feature surcharges and minimum durations must be checked before pricing a request."
+            },
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+              "notes": "The API currently describes percentage surcharges for keyterms and transcript editing, whereas the pricing page publishes separate hourly add-on amounts. Only the undisputed base hourly price is recorded; optional add-on totals remain unresolved."
+            }
+          ],
+          "published_pricing": {
+            "source_url": "https://elevenlabs.io/pricing/api",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "input_audio_duration",
+                "unit": "hour",
+                "usd_per_unit": "0.20"
+              }
+            ]
+          }
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "elevenlabs/scribe-v2",
+          "source_url": "https://vercel.com/ai-gateway/models/scribe-v2",
+          "url": "https://vercel.com/ai-gateway/models/scribe-v2",
+          "pricing": {
+            "type": "per_second",
+            "usd": 6.1112e-05,
+            "source_url": "https://ai-gateway.vercel.sh/v1/models"
+          }
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "elevenlabs/scribe-v2",
+          "source_url": "https://openrouter.ai/elevenlabs/scribe-v2",
+          "url": "https://openrouter.ai/elevenlabs/scribe-v2",
+          "published_pricing": {
+            "source_url": "https://openrouter.ai/api/v1/models/elevenlabs/scribe-v2/endpoints",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "input_audio_duration",
+                "unit": "second",
+                "usd_per_unit": "0.0000611111111111"
+              }
+            ]
+          }
+        },
+        "fal": {
+          "provider": "fal",
+          "id": "fal-ai/elevenlabs/speech-to-text/scribe-v2",
+          "source_url": "https://fal.ai/models/fal-ai/elevenlabs/speech-to-text/scribe-v2",
+          "url": "https://fal.ai/models/fal-ai/elevenlabs/speech-to-text/scribe-v2",
+          "qualifications": [
+            {
+              "source_url": "https://fal.ai/models/fal-ai/elevenlabs/speech-to-text/scribe-v2",
+              "notes": "The base rate is USD 0.008 per input audio minute. Using keyterms costs 30% more; the base rate alone is not the total for keyterm-enabled requests."
+            }
+          ],
+          "published_pricing": {
+            "source_url": "https://fal.ai/models/fal-ai/elevenlabs/speech-to-text/scribe-v2",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "input_audio_duration",
+                "unit": "minute",
+                "usd_per_unit": "0.008"
+              }
+            ]
+          }
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/scribe-v2"
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/elevenlabs/scribe-v2"
+        },
+        "fal": {
+          "disposition": "listed",
+          "source_url": "https://fal.ai/models/fal-ai/elevenlabs/speech-to-text/scribe-v2"
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert"
+        }
+      }
+    },
+    "scribe_v2_medical": {
+      "reference_provider": "elevenlabs",
+      "id": "scribe_v2_medical",
+      "label": "Scribe v2 Medical",
+      "short_description": "Batch transcription specialized for clinical and medical terminology.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "languages_label": "90+",
+      "release": {
+        "date": "2026-09-22",
+        "basis": "model",
+        "source_url": "https://elevenlabs.io/blog/scribe-v2-medical-generally-available"
+      },
+      "input": {
+        "type": "audio",
+        "streaming": false
+      },
+      "output": {
+        "type": "text",
+        "formats": [
+          "json"
+        ],
+        "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert"
+      },
+      "transcription": {
+        "word_timestamps": true,
+        "speaker_diarization": true,
+        "audio_event_tagging": true
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "scribe_v2_medical",
+          "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "url": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/pricing/api",
+              "notes": "The recorded rate is base transcription only. Keyterm prompting, transcript editing and the v3 Live keyterm library have additional published charges. Optional feature surcharges and minimum durations must be checked before pricing a request."
+            },
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+              "notes": "The API currently describes percentage surcharges for keyterms and transcript editing, whereas the pricing page publishes separate hourly add-on amounts. Only the undisputed base hourly price is recorded; optional add-on totals remain unresolved."
+            },
+            {
+              "source_url": "https://elevenlabs.io/docs/overview/models",
+              "notes": "This model produces draft clinical transcripts for review and correction by an authorized user. It is not intended to diagnose, recommend treatment, or make clinical decisions."
+            }
+          ],
+          "published_pricing": {
+            "source_url": "https://elevenlabs.io/pricing/api",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "input_audio_duration",
+                "unit": "hour",
+                "usd_per_unit": "0.20"
+              }
+            ]
+          }
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "elevenlabs/scribe-v2-medical",
+          "source_url": "https://openrouter.ai/elevenlabs/scribe-v2-medical",
+          "url": "https://openrouter.ai/elevenlabs/scribe-v2-medical",
+          "published_pricing": {
+            "source_url": "https://openrouter.ai/api/v1/models/elevenlabs/scribe-v2-medical/endpoints",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "input_audio_duration",
+                "unit": "second",
+                "usd_per_unit": "0.0000611111111111"
+              }
+            ]
+          }
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "not_listed",
+          "source_url": "https://ai-gateway.vercel.sh/v1/models",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/elevenlabs/scribe-v2-medical"
+        },
+        "fal": {
+          "disposition": "not_listed",
+          "source_url": "https://fal.ai/api/models?keywords=elevenlabs&size=100",
+          "reason": "No matching exact model/version is listed in the complete ElevenLabs search results."
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert"
+        }
+      }
+    },
+    "scribe_v2_realtime": {
+      "reference_provider": "elevenlabs",
+      "id": "scribe_v2_realtime",
+      "label": "Scribe v2 Realtime",
+      "short_description": "Streaming speech recognition with manual or VAD commits.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "languages_label": "90+",
+      "release": {
+        "date": "2025-11-11",
+        "basis": "model",
+        "source_url": "https://elevenlabs.io/blog/introducing-scribe-v2-realtime"
+      },
+      "input": {
+        "type": "audio",
+        "streaming": true
+      },
+      "output": {
+        "type": "text",
+        "formats": [
+          "json"
+        ],
+        "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime"
+      },
+      "transcription": {
+        "word_timestamps": true,
+        "commit_strategies": [
+          "manual",
+          "vad"
+        ]
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "scribe_v2_realtime",
+          "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+          "url": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/docs/overview/models",
+              "notes": "Realtime transcription accepts PCM at 8–48 kHz and mu-law audio. It transcribes audio to text and is distinct from the Eleven Realtime voice-agent models."
+            },
+            {
+              "source_url": "https://elevenlabs.io/pricing/api",
+              "notes": "The recorded rate is base transcription only. Keyterm prompting, transcript editing and the v3 Live keyterm library have additional published charges. Optional feature surcharges and minimum durations must be checked before pricing a request."
+            }
+          ],
+          "published_pricing": {
+            "source_url": "https://elevenlabs.io/pricing/api",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "input_audio_duration",
+                "unit": "hour",
+                "usd_per_unit": "0.22"
+              }
+            ]
+          }
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "elevenlabs/scribe-v2-realtime",
+          "source_url": "https://vercel.com/ai-gateway/models/scribe-v2-realtime",
+          "url": "https://vercel.com/ai-gateway/models/scribe-v2-realtime",
+          "qualifications": [
+            {
+              "source_url": "https://vercel.com/ai-gateway/models/scribe-v2-realtime",
+              "notes": "The live model feed leaves pricing empty, but the model page publishes USD 0.39 per input audio hour. The model page is the price source; do not interpret the empty feed object as free inference."
+            }
+          ],
+          "published_pricing": {
+            "source_url": "https://vercel.com/ai-gateway/models/scribe-v2-realtime",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "input_audio_duration",
+                "unit": "hour",
+                "usd_per_unit": "0.39"
+              }
+            ]
+          }
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/scribe-v2-realtime"
+        },
+        "openrouter": {
+          "disposition": "not_listed",
+          "source_url": "https://openrouter.ai/api/v1/models?output_modalities=all",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "fal": {
+          "disposition": "not_listed",
+          "source_url": "https://fal.ai/api/models?keywords=elevenlabs&size=100",
+          "reason": "No matching exact model/version is listed in the complete ElevenLabs search results."
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime"
+        }
+      }
+    },
+    "scribe_v3": {
+      "reference_provider": "elevenlabs",
+      "id": "scribe_v3",
+      "label": "Scribe v3",
+      "short_description": "Batch speech recognition with improved diarization and multilingual controls.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "languages_label": "90+",
+      "release": {
+        "date": "2026-11-10",
+        "basis": "model",
+        "source_url": "https://elevenlabs.io/blog/scribe-v3"
+      },
+      "input": {
+        "type": "audio",
+        "streaming": false
+      },
+      "output": {
+        "type": "text",
+        "formats": [
+          "json"
+        ],
+        "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert"
+      },
+      "transcription": {
+        "word_timestamps": true,
+        "speaker_diarization": true,
+        "audio_event_tagging": true
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "scribe_v3",
+          "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "url": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/pricing/api",
+              "notes": "The recorded rate is base transcription only. Keyterm prompting, transcript editing and the v3 Live keyterm library have additional published charges. Optional feature surcharges and minimum durations must be checked before pricing a request."
+            },
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+              "notes": "The API currently describes percentage surcharges for keyterms and transcript editing, whereas the pricing page publishes separate hourly add-on amounts. Only the undisputed base hourly price is recorded; optional add-on totals remain unresolved."
+            }
+          ],
+          "published_pricing": {
+            "source_url": "https://elevenlabs.io/pricing/api",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "input_audio_duration",
+                "unit": "hour",
+                "usd_per_unit": "0.20"
+              }
+            ]
+          }
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "not_listed",
+          "source_url": "https://ai-gateway.vercel.sh/v1/models",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "openrouter": {
+          "disposition": "not_listed",
+          "source_url": "https://openrouter.ai/api/v1/models?output_modalities=all",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "fal": {
+          "disposition": "not_listed",
+          "source_url": "https://fal.ai/api/models?keywords=elevenlabs&size=100",
+          "reason": "No matching exact model/version is listed in the complete ElevenLabs search results."
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert"
+        }
+      }
+    },
+    "scribe_v3_live": {
+      "reference_provider": "elevenlabs",
+      "id": "scribe_v3_live",
+      "label": "Scribe v3 Live",
+      "short_description": "Streaming speech recognition with turn prediction and realtime diarization.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "languages_label": "90+",
+      "release": {
+        "date": "2026-11-10",
+        "basis": "model",
+        "source_url": "https://elevenlabs.io/blog/scribe-v3"
+      },
+      "input": {
+        "type": "audio",
+        "streaming": true
+      },
+      "output": {
+        "type": "text",
+        "formats": [
+          "json"
+        ],
+        "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime"
+      },
+      "transcription": {
+        "word_timestamps": true,
+        "commit_strategies": [
+          "manual",
+          "vad",
+          "turn_prediction"
+        ],
+        "speaker_diarization": true,
+        "keyterm_library_max_terms": 10000
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "scribe_v3_live",
+          "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+          "url": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/docs/eleven-api/guides/how-to/speech-to-text/batch/keyterm-prompting",
+              "notes": "The dedicated keyterm-library guide and detailed model section specify 10,000 terms, while the overview feature summary says 100,000. The card uses the more specific documented 10,000-term contract; the larger summary figure is not assumed."
+            },
+            {
+              "source_url": "https://elevenlabs.io/docs/overview/models",
+              "notes": "Realtime transcription accepts PCM at 8–48 kHz and mu-law audio. It transcribes audio to text and is distinct from the Eleven Realtime voice-agent models."
+            },
+            {
+              "source_url": "https://elevenlabs.io/pricing/api",
+              "notes": "The recorded rate is base transcription only. Keyterm prompting, transcript editing and the v3 Live keyterm library have additional published charges. Optional feature surcharges and minimum durations must be checked before pricing a request."
+            }
+          ],
+          "published_pricing": {
+            "source_url": "https://elevenlabs.io/pricing/api",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "input_audio_duration",
+                "unit": "hour",
+                "usd_per_unit": "0.22"
+              }
+            ]
+          }
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "not_listed",
+          "source_url": "https://ai-gateway.vercel.sh/v1/models",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "openrouter": {
+          "disposition": "not_listed",
+          "source_url": "https://openrouter.ai/api/v1/models?output_modalities=all",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "fal": {
+          "disposition": "not_listed",
+          "source_url": "https://fal.ai/api/models?keywords=elevenlabs&size=100",
+          "reason": "No matching exact model/version is listed in the complete ElevenLabs search results."
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime"
+        }
+      }
+    }
+  },
+  "audio.realtime.models": {
+    "eleven_realtime_v1_max": {
+      "reference_provider": "elevenlabs",
+      "id": "eleven_realtime_v1_max",
+      "label": "Eleven Realtime v1 Max",
+      "short_description": "A complete voice agent optimized for complex tasks and tool use.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "languages_label": "90+",
+      "release": {
+        "date": "2026-11-02",
+        "basis": "model",
+        "source_url": "https://elevenlabs.io/docs/changelog/2026/11/2"
+      },
+      "input": {
+        "modalities": [
+          "text",
+          "audio"
+        ],
+        "streaming": true
+      },
+      "output": {
+        "modalities": [
+          "text",
+          "audio"
+        ],
+        "streaming": true,
+        "source_url": "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility"
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "eleven_realtime_v1_max",
+          "source_url": "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility",
+          "url": "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/pricing/api",
+              "notes": "Connected audio duration and input/output tokens are separate additive meters. Burst audio pricing applies above the published concurrency allowance; usage_tier is a pricing condition describing that allowance, not an API request parameter."
+            },
+            {
+              "source_url": "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility",
+              "notes": "These are complete voice-agent configurations exposed over an OpenAI-compatible WebSocket protocol. Their underlying component models are not public; do not describe them as fused audio models or standalone voice-conversion endpoints."
+            }
+          ],
+          "published_pricing": {
+            "source_url": "https://elevenlabs.io/pricing/api",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "connected_audio_duration",
+                "unit": "minute",
+                "usd_per_unit": "0.080",
+                "when": {
+                  "properties": {
+                    "usage_tier": {
+                      "const": "standard"
+                    }
+                  },
+                  "required": [
+                    "usage_tier"
+                  ]
+                }
+              },
+              {
+                "meter": "connected_audio_duration",
+                "unit": "minute",
+                "usd_per_unit": "0.160",
+                "when": {
+                  "properties": {
+                    "usage_tier": {
+                      "const": "burst"
+                    }
+                  },
+                  "required": [
+                    "usage_tier"
+                  ]
+                }
+              },
+              {
+                "meter": "input_tokens",
+                "unit": "token",
+                "usd_per_unit": "0.0000018"
+              },
+              {
+                "meter": "output_tokens",
+                "unit": "token",
+                "usd_per_unit": "0.000009"
+              }
+            ]
+          }
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "elevenlabs/eleven-realtime-v1-max",
+          "source_url": "https://vercel.com/ai-gateway/models/eleven-realtime-v1-max",
+          "url": "https://vercel.com/ai-gateway/models/eleven-realtime-v1-max",
+          "qualifications": [
+            {
+              "source_url": "https://ai-gateway.vercel.sh/v1/models",
+              "notes": "The catalog bills connected session seconds plus input/output tokens, with a distinct cached-input token rate. Preserve the exact published decimal duration rate rather than deriving it from a rounded hourly display."
+            }
+          ],
+          "published_pricing": {
+            "source_url": "https://ai-gateway.vercel.sh/v1/models",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "connected_session_duration",
+                "unit": "second",
+                "usd_per_unit": "0.0013334"
+              },
+              {
+                "meter": "input_tokens",
+                "unit": "token",
+                "usd_per_unit": "0.0000018"
+              },
+              {
+                "meter": "cached_input_tokens",
+                "unit": "token",
+                "usd_per_unit": "0.00000018"
+              },
+              {
+                "meter": "output_tokens",
+                "unit": "token",
+                "usd_per_unit": "0.000009"
+              }
+            ]
+          }
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/eleven-realtime-v1-max"
+        },
+        "openrouter": {
+          "disposition": "not_listed",
+          "source_url": "https://openrouter.ai/api/v1/models?output_modalities=all",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "fal": {
+          "disposition": "not_listed",
+          "source_url": "https://fal.ai/api/models?keywords=elevenlabs&size=100",
+          "reason": "No matching exact model/version is listed in the complete ElevenLabs search results."
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility"
+        }
+      }
+    },
+    "eleven_realtime_v1_mini": {
+      "reference_provider": "elevenlabs",
+      "id": "eleven_realtime_v1_mini",
+      "label": "Eleven Realtime v1 Mini",
+      "short_description": "A complete voice agent optimized for fast, natural conversation.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "languages_label": "90+",
+      "release": {
+        "date": "2026-11-02",
+        "basis": "model",
+        "source_url": "https://elevenlabs.io/docs/changelog/2026/11/2"
+      },
+      "input": {
+        "modalities": [
+          "text",
+          "audio"
+        ],
+        "streaming": true
+      },
+      "output": {
+        "modalities": [
+          "text",
+          "audio"
+        ],
+        "streaming": true,
+        "source_url": "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility"
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "eleven_realtime_v1_mini",
+          "source_url": "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility",
+          "url": "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/pricing/api",
+              "notes": "Connected audio duration and input/output tokens are separate additive meters. Burst audio pricing applies above the published concurrency allowance; usage_tier is a pricing condition describing that allowance, not an API request parameter."
+            },
+            {
+              "source_url": "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility",
+              "notes": "These are complete voice-agent configurations exposed over an OpenAI-compatible WebSocket protocol. Their underlying component models are not public; do not describe them as fused audio models or standalone voice-conversion endpoints."
+            }
+          ],
+          "published_pricing": {
+            "source_url": "https://elevenlabs.io/pricing/api",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "connected_audio_duration",
+                "unit": "minute",
+                "usd_per_unit": "0.080",
+                "when": {
+                  "properties": {
+                    "usage_tier": {
+                      "const": "standard"
+                    }
+                  },
+                  "required": [
+                    "usage_tier"
+                  ]
+                }
+              },
+              {
+                "meter": "connected_audio_duration",
+                "unit": "minute",
+                "usd_per_unit": "0.160",
+                "when": {
+                  "properties": {
+                    "usage_tier": {
+                      "const": "burst"
+                    }
+                  },
+                  "required": [
+                    "usage_tier"
+                  ]
+                }
+              },
+              {
+                "meter": "input_tokens",
+                "unit": "token",
+                "usd_per_unit": "0.0000002"
+              },
+              {
+                "meter": "output_tokens",
+                "unit": "token",
+                "usd_per_unit": "0.000006"
+              }
+            ]
+          }
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "elevenlabs/eleven-realtime-v1-mini",
+          "source_url": "https://vercel.com/ai-gateway/models/eleven-realtime-v1-mini",
+          "url": "https://vercel.com/ai-gateway/models/eleven-realtime-v1-mini",
+          "qualifications": [
+            {
+              "source_url": "https://ai-gateway.vercel.sh/v1/models",
+              "notes": "The catalog bills connected session seconds plus input/output tokens, with a distinct cached-input token rate. Preserve the exact published decimal duration rate rather than deriving it from a rounded hourly display."
+            }
+          ],
+          "published_pricing": {
+            "source_url": "https://ai-gateway.vercel.sh/v1/models",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "connected_session_duration",
+                "unit": "second",
+                "usd_per_unit": "0.0013334"
+              },
+              {
+                "meter": "input_tokens",
+                "unit": "token",
+                "usd_per_unit": "0.0000002"
+              },
+              {
+                "meter": "cached_input_tokens",
+                "unit": "token",
+                "usd_per_unit": "0.00000002"
+              },
+              {
+                "meter": "output_tokens",
+                "unit": "token",
+                "usd_per_unit": "0.000006"
+              }
+            ]
+          }
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/eleven-realtime-v1-mini"
+        },
+        "openrouter": {
+          "disposition": "not_listed",
+          "source_url": "https://openrouter.ai/api/v1/models?output_modalities=all",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "fal": {
+          "disposition": "not_listed",
+          "source_url": "https://fal.ai/api/models?keywords=elevenlabs&size=100",
+          "reason": "No matching exact model/version is listed in the complete ElevenLabs search results."
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility"
+        }
+      }
+    }
+  },
+  "audio.voice_design.models": {
+    "eleven_multilingual_ttv_v2": {
+      "reference_provider": "elevenlabs",
+      "id": "eleven_multilingual_ttv_v2",
+      "label": "Multilingual Voice Design v2",
+      "short_description": "Design multilingual voices from a text description.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "release": {
+        "basis": "provider_endpoint",
+        "source_url": "https://elevenlabs.io/docs/api-reference/text-to-voice/design",
+        "date": null
+      },
+      "input": {
+        "type": "text",
+        "voice_description": true,
+        "min_preview_characters": 100,
+        "max_preview_characters": 1000
+      },
+      "output": {
+        "type": "voice_previews",
+        "source_url": "https://elevenlabs.io/docs/api-reference/text-to-voice/design"
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "eleven_multilingual_ttv_v2",
+          "source_url": "https://elevenlabs.io/docs/api-reference/text-to-voice/design",
+          "url": "https://elevenlabs.io/docs/api-reference/text-to-voice/design",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/text-to-voice/design",
+              "notes": "The exact named model is documented, but no first-party source establishing its launch day was found. The release records this native endpoint with an unknown date rather than substituting a generic product launch."
+            },
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/text-to-voice/design",
+              "notes": "The endpoint returns generated voice IDs and preview audio, with an option to stream previews separately. This creates a voice; it is not an ordinary TTS model binding."
+            },
+            {
+              "source_url": "https://elevenlabs.io/docs/eleven-creative/voices/voice-design",
+              "notes": "Voice design is metered by preview text characters rather than the number of candidates. A version-specific regular USD rate is not established by this page, so pricing is omitted."
+            }
+          ]
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "not_listed",
+          "source_url": "https://ai-gateway.vercel.sh/v1/models",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "openrouter": {
+          "disposition": "not_listed",
+          "source_url": "https://openrouter.ai/api/v1/models?output_modalities=all",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "fal": {
+          "disposition": "not_listed",
+          "source_url": "https://fal.ai/api/models?keywords=elevenlabs&size=100",
+          "reason": "No matching exact model/version is listed in the complete ElevenLabs search results."
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/api-reference/text-to-voice/design"
+        }
+      }
+    },
+    "eleven_ttv_v3": {
+      "reference_provider": "elevenlabs",
+      "id": "eleven_ttv_v3",
+      "label": "Voice Design v3",
+      "short_description": "Create voice candidates from a text description and preview text.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "release": {
+        "date": "2025-06-25",
+        "basis": "model",
+        "source_url": "https://elevenlabs.io/blog/voice-design-v3"
+      },
+      "input": {
+        "type": "text",
+        "voice_description": true,
+        "min_preview_characters": 100,
+        "max_preview_characters": 1000
+      },
+      "output": {
+        "type": "voice_previews",
+        "source_url": "https://elevenlabs.io/docs/api-reference/text-to-voice/design"
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "eleven_ttv_v3",
+          "source_url": "https://elevenlabs.io/docs/api-reference/text-to-voice/design",
+          "url": "https://elevenlabs.io/docs/api-reference/text-to-voice/design",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/text-to-voice/design",
+              "notes": "The endpoint returns generated voice IDs and preview audio, with an option to stream previews separately. This creates a voice; it is not an ordinary TTS model binding."
+            },
+            {
+              "source_url": "https://elevenlabs.io/docs/eleven-creative/voices/voice-design",
+              "notes": "Voice design is metered by preview text characters rather than the number of candidates. A version-specific regular USD rate is not established by this page, so pricing is omitted."
+            }
+          ]
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "not_listed",
+          "source_url": "https://ai-gateway.vercel.sh/v1/models",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "openrouter": {
+          "disposition": "not_listed",
+          "source_url": "https://openrouter.ai/api/v1/models?output_modalities=all",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "fal": {
+          "disposition": "not_listed",
+          "source_url": "https://fal.ai/api/models?keywords=elevenlabs&size=100",
+          "reason": "No matching exact model/version is listed in the complete ElevenLabs search results."
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/api-reference/text-to-voice/design"
+        }
+      }
+    }
+  },
+  "audio.voice_conversion.models": {
+    "eleven_english_sts_v2": {
+      "reference_provider": "elevenlabs",
+      "id": "eleven_english_sts_v2",
+      "label": "English Voice Changer v2",
+      "short_description": "Convert recorded English speech to another voice.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "release": {
+        "basis": "provider_endpoint",
+        "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-speech/convert",
+        "date": null
+      },
+      "input": {
+        "type": "audio",
+        "max_duration_seconds": 300,
+        "source_url": "https://elevenlabs.io/docs/overview/capabilities/voice-changer"
+      },
+      "output": {
+        "default_format": "mp3",
+        "formats": [
+          "alaw",
+          "mp3",
+          "opus",
+          "pcm",
+          "ulaw",
+          "wav"
+        ],
+        "sample_rate_hz": 44100,
+        "bit_rate_kbps": 128,
+        "format_options": [
+          "alaw_8000",
+          "mp3_22050_32",
+          "mp3_24000_48",
+          "mp3_44100_128",
+          "mp3_44100_192",
+          "mp3_44100_32",
+          "mp3_44100_64",
+          "mp3_44100_96",
+          "opus_48000_128",
+          "opus_48000_192",
+          "opus_48000_32",
+          "opus_48000_64",
+          "opus_48000_96",
+          "pcm_16000",
+          "pcm_22050",
+          "pcm_24000",
+          "pcm_32000",
+          "pcm_44100",
+          "pcm_48000",
+          "pcm_8000",
+          "ulaw_8000",
+          "wav_16000",
+          "wav_22050",
+          "wav_24000",
+          "wav_32000",
+          "wav_44100",
+          "wav_48000",
+          "wav_8000"
+        ],
+        "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-speech/convert"
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "eleven_english_sts_v2",
+          "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-speech/convert",
+          "url": "https://elevenlabs.io/docs/api-reference/speech-to-speech/convert",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-speech/convert",
+              "notes": "The exact named model is documented, but no first-party source establishing its launch day was found. The release records this native endpoint with an unknown date rather than substituting a generic product launch."
+            },
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-speech/convert",
+              "notes": "Speech-to-speech conversion preserves the source performance while changing the target voice. This is distinct from a conversational speech-to-speech agent. Input accepts encoded audio or mono little-endian 16-bit PCM at 16 kHz."
+            }
+          ],
+          "published_pricing": {
+            "source_url": "https://elevenlabs.io/pricing/api",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "input_audio_duration",
+                "unit": "minute",
+                "usd_per_unit": "0.12"
+              }
+            ]
+          }
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "not_listed",
+          "source_url": "https://ai-gateway.vercel.sh/v1/models",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "openrouter": {
+          "disposition": "not_listed",
+          "source_url": "https://openrouter.ai/api/v1/models?output_modalities=all",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "fal": {
+          "disposition": "excluded",
+          "source_url": "https://fal.ai/models/fal-ai/elevenlabs/voice-changer/api",
+          "reason": "The unversioned endpoint does not identify the exact underlying native model version or expose a model_id selector. It cannot be reliably assigned to this versioned card."
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-speech/convert"
+        }
+      }
+    },
+    "eleven_multilingual_sts_v2": {
+      "reference_provider": "elevenlabs",
+      "id": "eleven_multilingual_sts_v2",
+      "label": "Multilingual Voice Changer v2",
+      "short_description": "Convert recorded speech to another voice in 29 languages.",
+      "vendor": "elevenlabs",
+      "source_url": "https://elevenlabs.io/docs/overview/models",
+      "release": {
+        "basis": "provider_endpoint",
+        "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-speech/convert",
+        "date": null
+      },
+      "input": {
+        "type": "audio",
+        "max_duration_seconds": 300,
+        "source_url": "https://elevenlabs.io/docs/overview/capabilities/voice-changer"
+      },
+      "output": {
+        "default_format": "mp3",
+        "formats": [
+          "alaw",
+          "mp3",
+          "opus",
+          "pcm",
+          "ulaw",
+          "wav"
+        ],
+        "sample_rate_hz": 44100,
+        "bit_rate_kbps": 128,
+        "format_options": [
+          "alaw_8000",
+          "mp3_22050_32",
+          "mp3_24000_48",
+          "mp3_44100_128",
+          "mp3_44100_192",
+          "mp3_44100_32",
+          "mp3_44100_64",
+          "mp3_44100_96",
+          "opus_48000_128",
+          "opus_48000_192",
+          "opus_48000_32",
+          "opus_48000_64",
+          "opus_48000_96",
+          "pcm_16000",
+          "pcm_22050",
+          "pcm_24000",
+          "pcm_32000",
+          "pcm_44100",
+          "pcm_48000",
+          "pcm_8000",
+          "ulaw_8000",
+          "wav_16000",
+          "wav_22050",
+          "wav_24000",
+          "wav_32000",
+          "wav_44100",
+          "wav_48000",
+          "wav_8000"
+        ],
+        "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-speech/convert"
+      },
+      "providers": {
+        "elevenlabs": {
+          "provider": "elevenlabs",
+          "id": "eleven_multilingual_sts_v2",
+          "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-speech/convert",
+          "url": "https://elevenlabs.io/docs/api-reference/speech-to-speech/convert",
+          "qualifications": [
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-speech/convert",
+              "notes": "The exact named model is documented, but no first-party source establishing its launch day was found. The release records this native endpoint with an unknown date rather than substituting a generic product launch."
+            },
+            {
+              "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-speech/convert",
+              "notes": "Speech-to-speech conversion preserves the source performance while changing the target voice. This is distinct from a conversational speech-to-speech agent. Input accepts encoded audio or mono little-endian 16-bit PCM at 16 kHz."
+            }
+          ],
+          "published_pricing": {
+            "source_url": "https://elevenlabs.io/pricing/api",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "input_audio_duration",
+                "unit": "minute",
+                "usd_per_unit": "0.12"
+              }
+            ]
+          }
+        }
+      },
+      "provider_coverage": {
+        "vercel": {
+          "disposition": "not_listed",
+          "source_url": "https://ai-gateway.vercel.sh/v1/models",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "openrouter": {
+          "disposition": "not_listed",
+          "source_url": "https://openrouter.ai/api/v1/models?output_modalities=all",
+          "reason": "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+        },
+        "fal": {
+          "disposition": "excluded",
+          "source_url": "https://fal.ai/models/fal-ai/elevenlabs/voice-changer/api",
+          "reason": "The unversioned endpoint does not identify the exact underlying native model version or expose a model_id selector. It cannot be reliably assigned to this versioned card."
+        },
+        "elevenlabs": {
+          "disposition": "listed",
+          "source_url": "https://elevenlabs.io/docs/api-reference/speech-to-speech/convert"
         }
       }
     }
