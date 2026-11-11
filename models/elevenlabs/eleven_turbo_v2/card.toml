@@ -1,0 +1,66 @@
+reference_provider = "elevenlabs"
+id = "eleven_turbo_v2"
+section = "audio.text_to_speech.models"
+label = "Eleven Turbo v2"
+short_description = "First-generation low-latency English speech synthesis."
+vendor = "elevenlabs"
+source_url = "https://elevenlabs.io/docs/overview/models"
+type = "speech"
+
+[release]
+date = "2023-11-09"
+basis = "model"
+source_url = "https://elevenlabs.io/blog/turbo-v2-is-here"
+
+[providers]
+
+[providers.elevenlabs]
+provider = "elevenlabs"
+id = "eleven_turbo_v2"
+source_url = "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
+url = "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
+qualifications = [
+  { source_url = "https://elevenlabs.io/docs/api-reference/text-to-speech/convert", notes = "The sample rate and bitrate describe the default MP3 output. Other codec/rate/bitrate combinations are selectable; higher-quality output can require a paid plan. These native format options do not establish another provider's support." },
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "The native model reference documents language coverage as English. This is native model information, not a cross-provider language guarantee." },
+]
+endpoints = [
+  { id = "/v1/text-to-speech/{voice_id}", input = "text", interface = "http", source_url = "https://elevenlabs.io/docs/api-reference/text-to-speech/convert", request_schema_url = "https://api.elevenlabs.io/openapi.json#/components/schemas/Body_text_to_speech_full", result_schema_url = "https://api.elevenlabs.io/openapi.json#/paths/~1v1~1text-to-speech~1%7Bvoice_id%7D/post/responses/200/content/audio~1mpeg/schema" },
+]
+
+[providers.openrouter]
+provider = "openrouter"
+id = "elevenlabs/eleven-turbo-v2"
+source_url = "https://openrouter.ai/elevenlabs/eleven-turbo-v2"
+url = "https://openrouter.ai/elevenlabs/eleven-turbo-v2"
+endpoints = [
+  { id = "/api/v1/audio/speech", input = "text", interface = "http", source_url = "https://openrouter.ai/openapi.json", request_schema_url = "https://openrouter.ai/openapi.json#/components/schemas/SpeechRequest", result_schema_url = "https://openrouter.ai/openapi.json#/paths/~1audio~1speech/post/responses/200/content/audio~1%2A/schema" },
+]
+
+[providers.openrouter.pricing]
+type = "per_1000_characters"
+usd = 0.04
+source_url = "https://openrouter.ai/elevenlabs/eleven-turbo-v2"
+
+[provider_coverage]
+
+[provider_coverage.vercel]
+disposition = "not_listed"
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+reason = "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+
+[provider_coverage.openrouter]
+disposition = "listed"
+source_url = "https://openrouter.ai/elevenlabs/eleven-turbo-v2"
+
+[provider_coverage.fal]
+disposition = "not_listed"
+source_url = "https://fal.ai/api/models?keywords=elevenlabs&size=100"
+reason = "No matching exact model/version is listed in the complete ElevenLabs search results."
+
+[provider_coverage.elevenlabs]
+disposition = "listed"
+source_url = "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
+
+[modalities]
+input = ["text"]
+output = ["audio"]

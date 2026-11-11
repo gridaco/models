@@ -1,0 +1,84 @@
+reference_provider = "elevenlabs"
+id = "eleven_realtime_v1_mini"
+section = "audio.realtime.models"
+label = "Eleven Realtime v1 Mini"
+short_description = "A complete voice agent optimized for fast, natural conversation."
+vendor = "elevenlabs"
+source_url = "https://elevenlabs.io/docs/overview/models"
+type = "realtime"
+
+[release]
+date = "2026-11-02"
+basis = "model"
+source_url = "https://elevenlabs.io/docs/changelog/2026/11/2"
+
+[providers]
+
+[providers.elevenlabs]
+provider = "elevenlabs"
+id = "eleven_realtime_v1_mini"
+source_url = "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility"
+url = "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility"
+qualifications = [
+  { source_url = "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility", notes = "These are complete voice-agent configurations exposed over an OpenAI-compatible WebSocket protocol. Their underlying component models are not public; do not describe them as fused audio models or standalone voice-conversion endpoints." },
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "The native model reference documents language coverage as 90+. This is native model information, not a cross-provider language guarantee." },
+  { source_url = "https://elevenlabs.io/pricing/api", notes = "Connected audio costs USD 0.08 per minute within the published concurrency allowance and USD 0.16 per minute above it, in addition to input/output tokens. Concurrency is session/account context, not an API request parameter; the duration conditions are retained here rather than encoded as a fabricated request selector." },
+]
+endpoints = [
+  { id = "/v1/convai/realtime", input = "audio", interface = "websocket", source_url = "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility" },
+]
+
+[providers.elevenlabs.token_pricing]
+source_url = "https://elevenlabs.io/pricing/api"
+unit = "usd_per_token"
+input = "0.0000002"
+output = "0.000006"
+scope = "Token meters only. Connected audio is charged separately under the published standard/burst concurrency rules; these token amounts are not the complete session price."
+
+[providers.vercel]
+provider = "vercel"
+id = "elevenlabs/eleven-realtime-v1-mini"
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+url = "https://vercel.com/ai-gateway/models/eleven-realtime-v1-mini"
+qualifications = [
+  { source_url = "https://ai-gateway.vercel.sh/v1/models", notes = "The catalog bills connected session seconds plus input/output tokens, with a distinct cached-input token rate. Preserve the exact published decimal duration rate rather than deriving it from a rounded hourly display." },
+]
+type = "realtime"
+
+[providers.vercel.published_pricing]
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+currency = "USD"
+components = [
+  { meter = "connected_session_duration", unit = "second", usd_per_unit = "0.0013334" },
+  { meter = "input_tokens", unit = "token", usd_per_unit = "0.0000002" },
+  { meter = "cached_input_tokens", unit = "token", usd_per_unit = "0.00000002" },
+  { meter = "output_tokens", unit = "token", usd_per_unit = "0.000006" },
+]
+
+[providers.vercel.modalities]
+input = ["text", "audio"]
+output = ["text", "audio"]
+
+[provider_coverage]
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/eleven-realtime-v1-mini"
+
+[provider_coverage.openrouter]
+disposition = "not_listed"
+source_url = "https://openrouter.ai/api/v1/models?output_modalities=all"
+reason = "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+
+[provider_coverage.fal]
+disposition = "not_listed"
+source_url = "https://fal.ai/api/models?keywords=elevenlabs&size=100"
+reason = "No matching exact model/version is listed in the complete ElevenLabs search results."
+
+[provider_coverage.elevenlabs]
+disposition = "listed"
+source_url = "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility"
+
+[modalities]
+input = ["text", "audio"]
+output = ["text", "audio"]

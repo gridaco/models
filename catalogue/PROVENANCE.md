@@ -600,13 +600,201 @@ Source: replicate.com/google/lyria-3 — "$0.04 per output audio file"
 
 Source: replicate.com/google/lyria-3-pro — "$0.08 per output audio file"
 
-## `pricing: {`
+## ElevenLabs model family and serving contracts
 
-API: 100 credits when duration is automatic, or 11 credits/s when set.
+Verified on 2026-11-11 against the native
+[model overview](https://elevenlabs.io/docs/overview/models),
+[Vercel catalogue](https://ai-gateway.vercel.sh/v1/models),
+[OpenRouter complete catalogue](https://openrouter.ai/api/v1/models?output_modalities=all)
+and [fal ElevenLabs results](https://fal.ai/api/models?keywords=elevenlabs&size=100).
+The cards cover the native model table, the still-available named legacy models,
+and every ElevenLabs model in the Vercel and OpenRouter feeds. Native underscore
+IDs and the existing `eleven_v3` / `eleven_text_to_sound_v2` identities are retained;
+each provider keeps its own exact call ID. Voice design, voice conversion,
+transcription and conversational voice agents are separate audio families.
 
-## `pricing: { type: "per_1000_characters", usd: 0.1 },`
+### Compatibility and native contracts
 
-Source: elevenlabs.io/pricing/api — $0.10 per 1,000 characters.
+Shared discovery metadata uses the Vercel Gateway `type` and `modalities`
+vocabulary. The audio sections organize entries; they do not introduce new
+request or event schemas. Native voice design and voice conversion have media
+modalities but no invented baseline type. Vercel bindings retain the exact
+`type` and `modalities` values from its published feed.
+
+Provider-specific language coverage, character limits, commit strategies,
+timestamps and format choices stay in their native binding's qualifications or
+authoritative contract. New audio cards do not define a shared `transcription`
+capability object, a display-language field or a copied output-format enum.
+The two pre-existing cards retain their released v1 direct-provider fields,
+with the sourced corrections below.
+
+Request and result schema URLs point directly into the official
+[ElevenLabs OpenAPI 3.1 document](https://api.elevenlabs.io/openapi.json),
+[OpenRouter OpenAPI 3.1 document](https://openrouter.ai/openapi.json), and fal's
+per-model queue OpenAPI documents, for example
+[v4](https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=elevenlabs%2Ftts%2Feleven-v4).
+The JSON Pointer targets were resolved against the actual published documents.
+Native schema keywords, enums and dialects are not rewritten as partial custom
+parameter metadata. fal's result schema links describe result retrieval, not
+the QueueStatus returned by queue submission.
+
+The official native
+[transcription](https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime)
+and [dialogue WebSocket](https://elevenlabs.io/docs/api-reference/text-to-dialogue/ttd-websocket)
+references publish their AsyncAPI contracts. Streaming messages remain defined
+there; the catalogue does not invent a shared event protocol. Voice conversion
+is described in the native reference but is absent from the public OpenAPI
+document inspected, so no machine-readable schema URL is guessed for that route.
+
+### Native prices and output corrections
+
+The [native API pricing page](https://elevenlabs.io/pricing/api) now publishes USD
+prices rather than the old sound-effects credit counts:
+
+- v4, v3 and Multilingual v2: **$0.08 per 1,000 characters**. v4 Turbo, v3
+  Conversational, Flash and Turbo: **$0.04 per 1,000 characters**. The native
+  `eleven_v3` card's former $0.10 rate is corrected; fal's independent $0.10 rate
+  remains unchanged.
+- Sound Effects: **$0.12 per minute**, normalized exactly to **$0.002 per second**.
+  Music: **$0.15 per minute**, normalized exactly to **$0.0025 per second**.
+  These amounts do not establish whole-minute rounding or a minimum charge.
+- Scribe v3, v2 and v2 Medical: **$0.20 per input hour**. Scribe v3 Live and v2
+  Realtime: **$0.22 per input hour**. Optional keyterms, transcript editing and
+  the v3 Live keyterm library add charges. The batch API's percentage surcharge
+  descriptions disagree with the price table's hourly add-ons, so only the
+  undisputed base rates are recorded. The table does not name legacy Scribe v1;
+  its version-specific native price remains unknown.
+- Voice Changer: **$0.12 per input minute**. Voice Design is metered by preview
+  text characters, but the [voice-design guide](https://elevenlabs.io/docs/eleven-creative/voices/voice-design)
+  does not establish a version-specific regular USD rate; none is invented.
+- Eleven Realtime: standard connected audio **$0.08/minute**, or **$0.16/minute**
+  above the published concurrency allowance, plus token meters. Mini input/output
+  is **$0.20/$6 per million tokens**; Max is **$1.80/$9**. Token prices remain
+  structured in `token_pricing`; connected-audio rates and the concurrency
+  condition remain sourced qualifications. No synthetic request parameter is
+  introduced to express session/account concurrency context, and the token
+  amounts alone are not the total session price.
+
+The native [TTS](https://elevenlabs.io/docs/api-reference/text-to-speech/convert),
+[dialogue](https://elevenlabs.io/docs/api-reference/text-to-dialogue/convert),
+[sound-effects](https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert)
+and [voice-conversion](https://elevenlabs.io/docs/api-reference/speech-to-speech/convert)
+references publish selectable MP3, PCM, WAV, Opus, mu-law and A-law formats.
+The existing v3 and Sound Effects v2 cards therefore no longer imply MP3-only
+output. Sample rate and bitrate describe the default output, not every selectable
+format; some high-quality combinations require particular plans.
+
+HTTP Text to Dialogue accepts up to ten voices and recommends at most 2,000
+total text characters for reliable generation. This is separate from the model's
+single-speaker character envelope. Conversational variants reference the
+[dialogue WebSocket](https://elevenlabs.io/docs/eleven-api/guides/how-to/websockets/realtime-tdd),
+whose guide demonstrates MP3 output; the HTTP format list is not silently copied
+to it. The [music API](https://elevenlabs.io/docs/api-reference/music/compose)
+defaults to 44.1 kHz / 128 kbps for v1 and 48 kHz / 192 kbps for v2 models.
+Its 3–600 second `music_length_ms` range applies to prompt-based generation,
+while v2 composition plans are chunk-based and enforce section durations.
+
+### Provider-specific prices, limits and identity gaps
+
+- Vercel and OpenRouter publish **$80/M characters** for v4, v3 and Multilingual
+  v2, and **$40/M characters** for their lower-latency variants. OpenRouter's
+  per-model endpoint metadata, for example
+  [v3](https://openrouter.ai/api/v1/models/elevenlabs/eleven-v3/endpoints),
+  confirms `pricing.discount: 0` for every added binding. Character units come
+  from each model page, not the generic `prompt` field name or a launch banner.
+- Vercel's feed records Scribe v2 at exactly **$0.000061112 per input second**;
+  retain that decimal rather than replacing it with the rounded $0.22/hour
+  display. OpenRouter's Scribe v2 and Medical endpoint metadata records exactly
+  **$0.0000611111111111 per input second**. Neither is a per-token price.
+- The Vercel feed leaves Scribe v2 Realtime pricing empty, but its
+  [model page](https://vercel.com/ai-gateway/models/scribe-v2-realtime) publishes
+  **$0.39 per hour of streamed audio**. The page supplies that price; an empty
+  feed object does not mean free inference.
+- Vercel's Music v2/v2.5 and Sound Effects v2 output-duration meters are
+  **$0.0025/s** and **$0.002/s** respectively. Its Realtime Mini/Max bindings add
+  **$0.0013334 per connected session second** to separate input, cached-input
+  and output token meters. Preserve the exact feed amounts and separate meters.
+- fal [v4](https://fal.ai/models/elevenlabs/tts/eleven-v4/api) and
+  [v4 Turbo](https://fal.ai/models/elevenlabs/tts/eleven-v4-turbo/api) accept only
+  **5,000 text characters** per request. Other providers' 10,000-character
+  envelopes must not override these serving limits. fal's old
+  [Sound Effects v2 schema](https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2/api)
+  restricts durations to **0.5–22 seconds**, while the native API and fal's v3
+  endpoint support up to 30 seconds. Both fal SFX schemas cap text at 450 characters.
+- fal [Music v2](https://fal.ai/models/elevenlabs/music/v2) and
+  [v2.5](https://fal.ai/models/elevenlabs/music/v2.5) cost **$0.60 per output
+  minute, rounded up to the next whole minute**. A 30-second output therefore
+  costs $0.60. This explicit rounding is preserved in `published_pricing`.
+- fal's named [Scribe v1](https://fal.ai/models/fal-ai/elevenlabs/speech-to-text)
+  costs **$0.03/minute**; its
+  [Scribe v2](https://fal.ai/models/fal-ai/elevenlabs/speech-to-text/scribe-v2)
+  costs **$0.008/minute**, with a 30% surcharge when using keyterms. The v3
+  [multi-speaker dialogue endpoint](https://fal.ai/models/fal-ai/elevenlabs/text-to-dialogue/eleven-v3)
+  is retained beside single-speaker TTS at its separately verified $0.10/1,000
+  characters, with its different input contract qualified.
+- fal's unversioned [voice changer](https://fal.ai/models/fal-ai/elevenlabs/voice-changer/api)
+  and [music endpoint](https://fal.ai/models/fal-ai/elevenlabs/music/api) do not
+  identify an exact native version or expose a model selector. The affected
+  versioned cards record identity exclusions rather than guessing a binding.
+  Utilities such as audio isolation, alignment and dubbing are not assigned
+  invented native model IDs.
+
+OpenRouter's [Models API documentation](https://openrouter.ai/docs/api/api-reference/models/list-all-models-and-their-properties)
+says the unfiltered endpoint defaults to text-output models. Audio absence
+checks use `output_modalities=all`; Sound Effects v2 remains absent, while the
+nine listed TTS models and two Scribe models have explicit bindings.
+
+The native model overview contains conflicting Scribe v3 Live keyterm-library
+limits: the feature summary says 100,000 terms, but the detailed section and
+[dedicated keyterm-library guide](https://elevenlabs.io/docs/eleven-api/guides/how-to/speech-to-text/batch/keyterm-prompting)
+specify 10,000. The card uses the more specific 10,000-term contract and qualifies
+the conflict. Similarly, the current model reference and November 2 changelog
+explicitly support SFX v3 looping, while the developer launch article still says
+v2-only. The explicit current reference and changelog are used for looping.
+The [voice-changer guide](https://elevenlabs.io/docs/overview/capabilities/voice-changer)
+limits input segments to five minutes; this audio limit is recorded separately
+from the unrelated character limits in the model overview's TTS table.
+
+### Release provenance
+
+| Models                     | First broad availability | First-party evidence                                                                     |
+| -------------------------- | ------------------------ | ---------------------------------------------------------------------------------------- |
+| Multilingual v2            | 2023-08-22               | [Announcement](https://elevenlabs.io/blog/eleven-multilingual-v2)                        |
+| Turbo v2                   | 2023-11-09               | [Announcement](https://elevenlabs.io/blog/turbo-v2-is-here)                              |
+| Turbo v2.5                 | 2024-07-19               | [Announcement](https://elevenlabs.io/blog/introducing-turbo-v25)                         |
+| Flash v2 / v2.5            | 2024-12-18               | [Announcement](https://elevenlabs.io/blog/meet-flash)                                    |
+| Scribe v1                  | 2025-02-26               | [Announcement](https://elevenlabs.io/blog/meet-scribe)                                   |
+| Eleven v3                  | 2025-06-03               | [Public preview](https://elevenlabs.io/blog/eleven-v3)                                   |
+| Voice Design v3            | 2025-06-25               | [Announcement](https://elevenlabs.io/blog/voice-design-v3)                               |
+| Music v1                   | 2025-08-05               | [Announcement](https://elevenlabs.io/blog/eleven-music-is-here)                          |
+| Scribe v2 Realtime         | 2025-11-11               | [Announcement](https://elevenlabs.io/blog/introducing-scribe-v2-realtime)                |
+| Scribe v2                  | 2026-01-09               | [Announcement](https://elevenlabs.io/blog/introducing-scribe-v2)                         |
+| Eleven v3 Conversational   | 2026-02-09               | [Named agent model addition](https://elevenlabs.io/docs/changelog/2026/2/9)              |
+| Music v2                   | 2026-05-26               | [Public product launch](https://elevenlabs.io/blog/introducing-music-v2)                 |
+| Music v2.5                 | 2026-09-11               | [Announcement](https://elevenlabs.io/blog/music-v2-5-model)                              |
+| Scribe v2 Medical          | 2026-09-22               | [General availability](https://elevenlabs.io/blog/scribe-v2-medical-generally-available) |
+| Eleven v4 / v4 Turbo       | 2026-09-28               | [Announcement](https://elevenlabs.io/blog/eleven-v4)                                     |
+| Eleven Realtime Mini / Max | 2026-11-02               | [Broad availability](https://elevenlabs.io/docs/changelog/2026/11/2)                     |
+| Sound Effects v3           | 2026-11-02               | [Broad availability](https://elevenlabs.io/docs/changelog/2026/11/2)                     |
+| Scribe v3 / v3 Live        | 2026-11-10               | [Announcement](https://elevenlabs.io/blog/scribe-v3)                                     |
+
+Music v2's public product launch precedes its
+[2026-06-15 API availability](https://elevenlabs.io/docs/changelog/2026/6/15).
+Music v2's earlier public product date is used. Realtime and Sound Effects v3
+require a different distinction: the
+[October 19 changelog](https://elevenlabs.io/docs/changelog/2026/10/19) describes
+a gradual Realtime rollout, while the
+[November 2 changelog](https://elevenlabs.io/docs/changelog/2026/11/2) explicitly
+opens both Realtime models and SFX v3 to every workspace. The earlier Realtime
+and SFX announcements do not prove broad access during that rollout, so their
+release dates use November 2. Provider onboarding dates and opaque `created`
+timestamps are not substituted for model availability.
+
+No exact variant launch day was established for `eleven_multilingual_ttv_v2`,
+`eleven_multilingual_sts_v2` or `eleven_english_sts_v2`. Their documented native
+endpoints carry `release.date: null` and `basis: "provider_endpoint"`; a generic
+Voice Design or Voice Changer product launch does not prove the exact v2 date.
+The existing Sound Effects v2 release provenance is preserved.
 
 ## `"tripo/rig-v2.5": {`
 

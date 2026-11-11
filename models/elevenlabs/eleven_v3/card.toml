@@ -1,16 +1,25 @@
 reference_provider = "elevenlabs"
 id = "eleven_v3"
 section = "audio.text_to_speech.models"
-
 label = "Eleven v3"
 short_description = "Generate expressive speech with bracketed audio and emotion tags."
 vendor = "elevenlabs"
 provider = "elevenlabs"
-input = { type = "text", max_characters = 5000, audio_tags = true }
 output_format = "mp3"
 sample_rate_label = "44.1 kHz · 128 kbps"
-pricing = { type = "per_1000_characters", usd = 0.1 }
 url = "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
+source_url = "https://elevenlabs.io/docs/overview/models"
+type = "speech"
+
+[input]
+type = "text"
+max_characters = 5000
+audio_tags = true
+
+[pricing]
+type = "per_1000_characters"
+usd = 0.08
+source_url = "https://elevenlabs.io/pricing/api"
 
 [release]
 date = "2025-06-03"
@@ -19,19 +28,101 @@ source_url = "https://elevenlabs.io/blog/eleven-v3"
 
 [output]
 default_format = "mp3"
-formats = ["mp3"]
-sample_rate_hz = 44_100
+formats = ["alaw", "mp3", "opus", "pcm", "ulaw", "wav"]
+sample_rate_hz = 44100
 bit_rate_kbps = 128
+
+[providers]
 
 [providers.fal]
 provider = "fal"
 id = "fal-ai/elevenlabs/tts/eleven-v3"
 source_url = "https://fal.ai/models/fal-ai/elevenlabs/tts/eleven-v3"
 url = "https://fal.ai/models/fal-ai/elevenlabs/tts/eleven-v3"
-pricing = { "type" = "per_1000_characters", "usd" = 0.1, "source_url" = "https://fal.ai/models/fal-ai/elevenlabs/tts/eleven-v3" }
+qualifications = [
+  { source_url = "https://fal.ai/models/fal-ai/elevenlabs/text-to-dialogue/eleven-v3", notes = "The separate multi-speaker dialogue endpoint also publishes USD 0.10 per 1,000 characters. Its inputs array of speaker/text turns differs from single-speaker TTS." },
+  { source_url = "https://fal.ai/models/fal-ai/elevenlabs/tts/eleven-v3/api", notes = "The linked OpenAPI contract describes the fal queue lifecycle: submission returns QueueStatus, while the linked result schema belongs to result retrieval. It does not imply that submission returns the final model output synchronously." },
+]
+endpoints = [
+  { id = "fal-ai/elevenlabs/tts/eleven-v3", input = "text", interface = "http", source_url = "https://fal.ai/models/fal-ai/elevenlabs/tts/eleven-v3/api", request_schema_url = "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=fal-ai%2Felevenlabs%2Ftts%2Feleven-v3#/components/schemas/ElevenlabsTtsElevenV3Input", result_schema_url = "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=fal-ai%2Felevenlabs%2Ftts%2Feleven-v3#/components/schemas/ElevenlabsTtsElevenV3Output" },
+  { id = "fal-ai/elevenlabs/text-to-dialogue/eleven-v3", input = "text", interface = "http", source_url = "https://fal.ai/models/fal-ai/elevenlabs/text-to-dialogue/eleven-v3/api", request_schema_url = "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=fal-ai%2Felevenlabs%2Ftext-to-dialogue%2Feleven-v3#/components/schemas/ElevenlabsTextToDialogueElevenV3Input", result_schema_url = "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=fal-ai%2Felevenlabs%2Ftext-to-dialogue%2Feleven-v3#/components/schemas/ElevenlabsTextToDialogueElevenV3Output" },
+]
+
+[providers.fal.pricing]
+type = "per_1000_characters"
+usd = 0.1
+source_url = "https://fal.ai/models/fal-ai/elevenlabs/tts/eleven-v3"
+
+[providers.openrouter]
+provider = "openrouter"
+id = "elevenlabs/eleven-v3"
+source_url = "https://openrouter.ai/elevenlabs/eleven-v3"
+url = "https://openrouter.ai/elevenlabs/eleven-v3"
+qualifications = [
+  { source_url = "https://openrouter.ai/elevenlabs/eleven-v3", notes = "This provider documents a 5,000-character request limit. Provider limits are independent of the native dialogue API and other bindings." },
+]
+endpoints = [
+  { id = "/api/v1/audio/speech", input = "text", interface = "http", source_url = "https://openrouter.ai/openapi.json", request_schema_url = "https://openrouter.ai/openapi.json#/components/schemas/SpeechRequest", result_schema_url = "https://openrouter.ai/openapi.json#/paths/~1audio~1speech/post/responses/200/content/audio~1%2A/schema" },
+]
+
+[providers.openrouter.pricing]
+type = "per_1000_characters"
+usd = 0.08
+source_url = "https://openrouter.ai/elevenlabs/eleven-v3"
+
+[providers.vercel]
+provider = "vercel"
+id = "elevenlabs/eleven-v3"
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+url = "https://vercel.com/ai-gateway/models/eleven-v3"
+qualifications = [
+  { source_url = "https://vercel.com/ai-gateway/models/eleven-v3", notes = "This provider documents a 5,000-character request limit. Provider limits are independent of the native dialogue API and other bindings." },
+]
+type = "speech"
+
+[providers.vercel.pricing]
+type = "per_1000_characters"
+usd = 0.08
+source_url = "https://vercel.com/ai-gateway/models/eleven-v3"
+
+[providers.vercel.modalities]
+input = ["text"]
+output = ["audio"]
+
+[providers.elevenlabs]
+provider = "elevenlabs"
+id = "eleven_v3"
+source_url = "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
+url = "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
+qualifications = [
+  { source_url = "https://elevenlabs.io/docs/api-reference/text-to-dialogue/convert", notes = "The separate HTTP Text to Dialogue API accepts up to 10 unique voices and recommends at most 2,000 total text characters for reliable generation. This dialogue guidance is not the single-speaker model character limit." },
+  { source_url = "https://elevenlabs.io/docs/api-reference/text-to-speech/convert", notes = "The sample rate and bitrate describe the default MP3 output. Other codec/rate/bitrate combinations are selectable; higher-quality output can require a paid plan. These native format options do not establish another provider's support." },
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "The native model reference documents language coverage as 70+. This is native model information, not a cross-provider language guarantee." },
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "The native model reference gives a 5,000-character model envelope. Endpoint-specific dialogue guidance and provider serving limits remain independent." },
+]
+endpoints = [
+  { id = "/v1/text-to-speech/{voice_id}", input = "text", interface = "http", source_url = "https://elevenlabs.io/docs/api-reference/text-to-speech/convert", request_schema_url = "https://api.elevenlabs.io/openapi.json#/components/schemas/Body_text_to_speech_full", result_schema_url = "https://api.elevenlabs.io/openapi.json#/paths/~1v1~1text-to-speech~1%7Bvoice_id%7D/post/responses/200/content/audio~1mpeg/schema" },
+  { id = "/v1/text-to-dialogue", input = "text", interface = "http", source_url = "https://elevenlabs.io/docs/api-reference/text-to-dialogue/convert", request_schema_url = "https://api.elevenlabs.io/openapi.json#/components/schemas/Body_Text_to_dialogue__multi_voice__v1_text_to_dialogue_post", result_schema_url = "https://api.elevenlabs.io/openapi.json#/paths/~1v1~1text-to-dialogue/post/responses/200/content/audio~1mpeg/schema" },
+]
 
 [provider_coverage]
-openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/models", "reason" = "No matching model/version is listed in the inspected public model catalogue." }
-vercel = { "disposition" = "not_listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models", "reason" = "No matching model/version is listed in the inspected public Gateway model catalogue." }
-fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/fal-ai/elevenlabs/tts/eleven-v3" }
-elevenlabs = { "disposition" = "listed", "source_url" = "https://elevenlabs.io/docs/api-reference/text-to-speech/convert" }
+
+[provider_coverage.openrouter]
+disposition = "listed"
+source_url = "https://openrouter.ai/elevenlabs/eleven-v3"
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/eleven-v3"
+
+[provider_coverage.fal]
+disposition = "listed"
+source_url = "https://fal.ai/models/fal-ai/elevenlabs/tts/eleven-v3"
+
+[provider_coverage.elevenlabs]
+disposition = "listed"
+source_url = "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
+
+[modalities]
+input = ["text"]
+output = ["audio"]

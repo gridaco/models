@@ -1,0 +1,80 @@
+reference_provider = "elevenlabs"
+id = "scribe_v2_realtime"
+section = "audio.transcription.models"
+label = "Scribe v2 Realtime"
+short_description = "Streaming speech recognition with manual or VAD commits."
+vendor = "elevenlabs"
+source_url = "https://elevenlabs.io/docs/overview/models"
+type = "transcription"
+
+[release]
+date = "2025-11-11"
+basis = "model"
+source_url = "https://elevenlabs.io/blog/introducing-scribe-v2-realtime"
+
+[providers]
+
+[providers.elevenlabs]
+provider = "elevenlabs"
+id = "scribe_v2_realtime"
+source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime"
+url = "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime"
+qualifications = [
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "Realtime transcription accepts PCM at 8–48 kHz and mu-law audio. It transcribes audio to text and is distinct from the Eleven Realtime voice-agent models." },
+  { source_url = "https://elevenlabs.io/pricing/api", notes = "The recorded rate is base transcription only. Keyterm prompting, transcript editing and the v3 Live keyterm library have additional published charges. Optional feature surcharges and minimum durations must be checked before pricing a request." },
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "The native model reference documents language coverage as 90+. This is native model information, not a cross-provider language guarantee." },
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "The native model reference documents word-level timestamps. The native request and event contracts define their exact parameters and result fields." },
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "The native commit_strategy values documented for this model are manual, vad. These are native streaming settings, not a shared transcription API vocabulary." },
+  { source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime", notes = "The official realtime reference publishes the native AsyncAPI contract. Its messages and parameters remain authoritative; no replacement shared event schema is defined by this card." },
+]
+endpoints = [
+  { id = "/v1/speech-to-text/realtime", input = "audio", interface = "websocket", source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime" },
+]
+
+[providers.elevenlabs.published_pricing]
+source_url = "https://elevenlabs.io/pricing/api"
+currency = "USD"
+components = [{ meter = "input_audio_duration", unit = "hour", usd_per_unit = "0.22" }]
+
+[providers.vercel]
+provider = "vercel"
+id = "elevenlabs/scribe-v2-realtime"
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+url = "https://vercel.com/ai-gateway/models/scribe-v2-realtime"
+qualifications = [
+  { source_url = "https://vercel.com/ai-gateway/models/scribe-v2-realtime", notes = "The live model feed leaves pricing empty, but the model page publishes USD 0.39 per input audio hour. The model page is the price source; do not interpret the empty feed object as free inference." },
+]
+type = "transcription"
+
+[providers.vercel.published_pricing]
+source_url = "https://vercel.com/ai-gateway/models/scribe-v2-realtime"
+currency = "USD"
+components = [{ meter = "input_audio_duration", unit = "hour", usd_per_unit = "0.39" }]
+
+[providers.vercel.modalities]
+input = ["audio"]
+output = ["text"]
+
+[provider_coverage]
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/scribe-v2-realtime"
+
+[provider_coverage.openrouter]
+disposition = "not_listed"
+source_url = "https://openrouter.ai/api/v1/models?output_modalities=all"
+reason = "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+
+[provider_coverage.fal]
+disposition = "not_listed"
+source_url = "https://fal.ai/api/models?keywords=elevenlabs&size=100"
+reason = "No matching exact model/version is listed in the complete ElevenLabs search results."
+
+[provider_coverage.elevenlabs]
+disposition = "listed"
+source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime"
+
+[modalities]
+input = ["audio"]
+output = ["text"]

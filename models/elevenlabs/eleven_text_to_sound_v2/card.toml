@@ -2,16 +2,19 @@ reference_provider = "elevenlabs"
 id = "eleven_text_to_sound_v2"
 section = "audio.sound_effects.models"
 null_keys = ["avg_cost_usd"]
-
 label = "Eleven Text to Sound v2"
 short_description = "Generate loopable sound effects up to 30 seconds from text."
 vendor = "elevenlabs"
 provider = "elevenlabs"
-input = { type = "text" }
 duration_label = "0.5–30s"
 output_format = "mp3"
 sample_rate_label = "44.1 kHz"
 url = "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert"
+source_url = "https://elevenlabs.io/docs/overview/models"
+type = "speech"
+
+[input]
+type = "text"
 
 [release]
 date = "2025-09-02"
@@ -20,24 +23,87 @@ source_url = "https://www.linkedin.com/posts/elevenlabsio_introducing-v2-of-our-
 
 [output]
 default_format = "mp3"
-formats = ["mp3"]
-sample_rate_hz = 44_100
-duration = { mode = "automatic_or_fixed", min_seconds = 0.5, max_seconds = 30 }
+formats = ["alaw", "mp3", "opus", "pcm", "ulaw", "wav"]
+sample_rate_hz = 44100
+
+[output.duration]
+mode = "automatic_or_fixed"
+min_seconds = 0.5
+max_seconds = 30
 
 [pricing]
-type = "provider_credits"
-automatic_duration_credits = 100
-specified_duration_credits_per_second = 11
+type = "per_second"
+usd = 0.002
+source_url = "https://elevenlabs.io/pricing/api"
+
+[providers]
 
 [providers.fal]
 provider = "fal"
 id = "fal-ai/elevenlabs/sound-effects/v2"
 source_url = "https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2"
 url = "https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2"
-pricing = { "type" = "per_second", "usd" = 0.002, "source_url" = "https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2" }
+qualifications = [
+  { source_url = "https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2/api", notes = "The fal request schema documents text up to 450 characters and duration_seconds from 0.5 to 22 seconds. This differs from the native API's 30-second maximum; the smaller serving range is preserved as a qualification." },
+  { source_url = "https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2/api", notes = "The linked OpenAPI contract describes the fal queue lifecycle: submission returns QueueStatus, while the linked result schema belongs to result retrieval. It does not imply that submission returns the final model output synchronously." },
+]
+endpoints = [
+  { id = "fal-ai/elevenlabs/sound-effects/v2", input = "text", interface = "http", source_url = "https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2/api", request_schema_url = "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=fal-ai%2Felevenlabs%2Fsound-effects%2Fv2#/components/schemas/ElevenlabsSoundEffectsV2Input", result_schema_url = "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=fal-ai%2Felevenlabs%2Fsound-effects%2Fv2#/components/schemas/ElevenlabsSoundEffectsV2Output" },
+]
+
+[providers.fal.pricing]
+type = "per_second"
+usd = 0.002
+source_url = "https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2"
+
+[providers.vercel]
+provider = "vercel"
+id = "elevenlabs/sound-effects-v2"
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+url = "https://vercel.com/ai-gateway/models/sound-effects-v2"
+type = "speech"
+
+[providers.vercel.pricing]
+type = "per_second"
+usd = 0.002
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+
+[providers.vercel.modalities]
+input = ["text"]
+output = ["audio"]
+
+[providers.elevenlabs]
+provider = "elevenlabs"
+id = "eleven_text_to_sound_v2"
+source_url = "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert"
+url = "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert"
+qualifications = [
+  { source_url = "https://elevenlabs.io/pricing/api", notes = "The published Sound Effects price is USD 0.12 per minute, normalized exactly to USD 0.002 per generated second. The former native provider-credit counts are not the current USD API tariff. No minimum charge or duration-rounding rule is inferred." },
+  { source_url = "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert", notes = "The default is MP3 at 44.1 kHz / 128 kbps. PCM, WAV, Opus, mu-law and A-law options are also documented, with plan restrictions on some high-quality settings." },
+]
+endpoints = [
+  { id = "/v1/sound-generation", input = "text", interface = "http", source_url = "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert", request_schema_url = "https://api.elevenlabs.io/openapi.json#/components/schemas/Body_Sound_Generation_v1_sound_generation_post", result_schema_url = "https://api.elevenlabs.io/openapi.json#/paths/~1v1~1sound-generation/post/responses/200/content/audio~1mpeg/schema" },
+]
 
 [provider_coverage]
-openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/models", "reason" = "No matching model/version is listed in the inspected public model catalogue." }
-vercel = { "disposition" = "not_listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models", "reason" = "No matching model/version is listed in the inspected public Gateway model catalogue." }
-fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2" }
-elevenlabs = { "disposition" = "listed", "source_url" = "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert" }
+
+[provider_coverage.openrouter]
+disposition = "not_listed"
+source_url = "https://openrouter.ai/api/v1/models?output_modalities=all"
+reason = "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/sound-effects-v2"
+
+[provider_coverage.fal]
+disposition = "listed"
+source_url = "https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2"
+
+[provider_coverage.elevenlabs]
+disposition = "listed"
+source_url = "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert"
+
+[modalities]
+input = ["text"]
+output = ["audio"]

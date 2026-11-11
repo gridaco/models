@@ -1,0 +1,59 @@
+reference_provider = "elevenlabs"
+id = "eleven_multilingual_sts_v2"
+section = "audio.voice_conversion.models"
+label = "Multilingual Voice Changer v2"
+short_description = "Convert recorded speech to another voice in 29 languages."
+vendor = "elevenlabs"
+source_url = "https://elevenlabs.io/docs/overview/models"
+null_keys = ["release.date"]
+
+[release]
+basis = "provider_endpoint"
+source_url = "https://elevenlabs.io/docs/api-reference/speech-to-speech/convert"
+
+[providers]
+
+[providers.elevenlabs]
+provider = "elevenlabs"
+id = "eleven_multilingual_sts_v2"
+source_url = "https://elevenlabs.io/docs/api-reference/speech-to-speech/convert"
+url = "https://elevenlabs.io/docs/api-reference/speech-to-speech/convert"
+qualifications = [
+  { source_url = "https://elevenlabs.io/docs/api-reference/speech-to-speech/convert", notes = "The exact named model is documented, but no first-party source establishing its launch day was found. The release records this native endpoint with an unknown date rather than substituting a generic product launch." },
+  { source_url = "https://elevenlabs.io/docs/api-reference/speech-to-speech/convert", notes = "Speech-to-speech conversion preserves the source performance while changing the target voice. This is distinct from a conversational speech-to-speech agent. Input accepts encoded audio or mono little-endian 16-bit PCM at 16 kHz." },
+  { source_url = "https://elevenlabs.io/docs/overview/capabilities/voice-changer", notes = "Native input segments are limited to five minutes. The native output_format parameter selects the codec, sample rate and bitrate; MP3 at 44.1 kHz / 128 kbps is the default." },
+  { source_url = "https://elevenlabs.io/docs/api-reference/speech-to-speech/convert", notes = "The public OpenAPI document inspected does not include the voice-conversion route. Its official API reference remains the contract source; no machine-readable schema URL is guessed." },
+]
+endpoints = [
+  { id = "/v1/speech-to-speech/{voice_id}", input = "audio", interface = "http", source_url = "https://elevenlabs.io/docs/api-reference/speech-to-speech/convert" },
+]
+
+[providers.elevenlabs.published_pricing]
+source_url = "https://elevenlabs.io/pricing/api"
+currency = "USD"
+components = [{ meter = "input_audio_duration", unit = "minute", usd_per_unit = "0.12" }]
+
+[provider_coverage]
+
+[provider_coverage.vercel]
+disposition = "not_listed"
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+reason = "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+
+[provider_coverage.openrouter]
+disposition = "not_listed"
+source_url = "https://openrouter.ai/api/v1/models?output_modalities=all"
+reason = "No matching exact model/version is listed in the complete public catalogue, including non-text modalities."
+
+[provider_coverage.fal]
+disposition = "excluded"
+source_url = "https://fal.ai/models/fal-ai/elevenlabs/voice-changer/api"
+reason = "The unversioned endpoint does not identify the exact underlying native model version or expose a model_id selector. It cannot be reliably assigned to this versioned card."
+
+[provider_coverage.elevenlabs]
+disposition = "listed"
+source_url = "https://elevenlabs.io/docs/api-reference/speech-to-speech/convert"
+
+[modalities]
+input = ["audio"]
+output = ["audio"]

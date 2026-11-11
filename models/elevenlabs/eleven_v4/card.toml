@@ -1,0 +1,103 @@
+reference_provider = "elevenlabs"
+id = "eleven_v4"
+section = "audio.text_to_speech.models"
+label = "Eleven v4"
+short_description = "Expressive multilingual speech and dialogue with audio tags."
+vendor = "elevenlabs"
+source_url = "https://elevenlabs.io/docs/overview/models"
+type = "speech"
+
+[release]
+date = "2026-09-28"
+basis = "model"
+source_url = "https://elevenlabs.io/blog/eleven-v4"
+
+[providers]
+
+[providers.elevenlabs]
+provider = "elevenlabs"
+id = "eleven_v4"
+source_url = "https://elevenlabs.io/docs/api-reference/text-to-dialogue/convert"
+url = "https://elevenlabs.io/docs/api-reference/text-to-dialogue/convert"
+qualifications = [
+  { source_url = "https://elevenlabs.io/docs/api-reference/text-to-dialogue/convert", notes = "The separate HTTP Text to Dialogue API accepts up to 10 unique voices and recommends at most 2,000 total text characters for reliable generation. This dialogue guidance is not the single-speaker model character limit." },
+  { source_url = "https://elevenlabs.io/docs/api-reference/text-to-dialogue/convert", notes = "The sample rate and bitrate describe the default MP3 output. Other codec/rate/bitrate combinations are selectable; higher-quality output can require a paid plan. These native format options do not establish another provider's support." },
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "The native model reference documents language coverage as 90+. This is native model information, not a cross-provider language guarantee." },
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "The native model reference gives a 10,000-character model envelope. Endpoint-specific dialogue guidance and provider serving limits remain independent." },
+]
+endpoints = [
+  { id = "/v1/text-to-dialogue", input = "text", interface = "http", source_url = "https://elevenlabs.io/docs/api-reference/text-to-dialogue/convert", request_schema_url = "https://api.elevenlabs.io/openapi.json#/components/schemas/Body_Text_to_dialogue__multi_voice__v1_text_to_dialogue_post", result_schema_url = "https://api.elevenlabs.io/openapi.json#/paths/~1v1~1text-to-dialogue/post/responses/200/content/audio~1mpeg/schema" },
+]
+
+[providers.vercel]
+provider = "vercel"
+id = "elevenlabs/eleven-v4"
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+url = "https://vercel.com/ai-gateway/models/eleven-v4"
+qualifications = [
+  { source_url = "https://vercel.com/ai-gateway/models/eleven-v4", notes = "This provider documents a 10,000-character request limit. Provider limits are independent of the native dialogue API and other bindings." },
+]
+type = "speech"
+
+[providers.vercel.pricing]
+type = "per_1000_characters"
+usd = 0.08
+source_url = "https://vercel.com/ai-gateway/models/eleven-v4"
+
+[providers.vercel.modalities]
+input = ["text"]
+output = ["audio"]
+
+[providers.openrouter]
+provider = "openrouter"
+id = "elevenlabs/eleven-v4"
+source_url = "https://openrouter.ai/elevenlabs/eleven-v4"
+url = "https://openrouter.ai/elevenlabs/eleven-v4"
+endpoints = [
+  { id = "/api/v1/audio/speech", input = "text", interface = "http", source_url = "https://openrouter.ai/openapi.json", request_schema_url = "https://openrouter.ai/openapi.json#/components/schemas/SpeechRequest", result_schema_url = "https://openrouter.ai/openapi.json#/paths/~1audio~1speech/post/responses/200/content/audio~1%2A/schema" },
+]
+
+[providers.openrouter.pricing]
+type = "per_1000_characters"
+usd = 0.08
+source_url = "https://openrouter.ai/elevenlabs/eleven-v4"
+
+[providers.fal]
+provider = "fal"
+id = "elevenlabs/tts/eleven-v4"
+source_url = "https://fal.ai/models/elevenlabs/tts/eleven-v4"
+url = "https://fal.ai/models/elevenlabs/tts/eleven-v4"
+qualifications = [
+  { source_url = "https://fal.ai/models/elevenlabs/tts/eleven-v4/api", notes = "The fal schema limits text to 5,000 characters per request. Preserve this serving limit rather than copying another provider's 10,000-character envelope." },
+  { source_url = "https://fal.ai/models/elevenlabs/tts/eleven-v4/api", notes = "The linked OpenAPI contract describes the fal queue lifecycle: submission returns QueueStatus, while the linked result schema belongs to result retrieval. It does not imply that submission returns the final model output synchronously." },
+]
+endpoints = [
+  { id = "elevenlabs/tts/eleven-v4", input = "text", interface = "http", source_url = "https://fal.ai/models/elevenlabs/tts/eleven-v4/api", request_schema_url = "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=elevenlabs%2Ftts%2Feleven-v4#/components/schemas/TtsElevenV4Input", result_schema_url = "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=elevenlabs%2Ftts%2Feleven-v4#/components/schemas/TtsElevenV4Output" },
+]
+
+[providers.fal.pricing]
+type = "per_1000_characters"
+usd = 0.08
+source_url = "https://fal.ai/models/elevenlabs/tts/eleven-v4"
+
+[provider_coverage]
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/eleven-v4"
+
+[provider_coverage.openrouter]
+disposition = "listed"
+source_url = "https://openrouter.ai/elevenlabs/eleven-v4"
+
+[provider_coverage.fal]
+disposition = "listed"
+source_url = "https://fal.ai/models/elevenlabs/tts/eleven-v4"
+
+[provider_coverage.elevenlabs]
+disposition = "listed"
+source_url = "https://elevenlabs.io/docs/api-reference/text-to-dialogue/convert"
+
+[modalities]
+input = ["text"]
+output = ["audio"]
