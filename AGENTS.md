@@ -92,6 +92,14 @@ doesn't belong in the contract.
   when its internal economics are unknown. Never infer an unknown regular rate.
 - **Preserve IDs exactly.** Model and provider IDs keep their exact spelling and casing.
   Authored field names are `lower_snake_case`.
+- **Follow the compatibility baseline.** Use Vercel AI Gateway's `type` and
+  `modalities` vocabulary for shared discovery metadata, and AI SDK interfaces
+  where they apply. Provider-specific request and response details belong on
+  their binding or endpoint, linked to the provider's JSON Schema, OpenAPI or
+  AsyncAPI contract. Preserve standard keywords and native field names inside
+  external schemas. Do not invent parallel parameter vocabularies or synthetic
+  API fields to express pricing conditions. See the catalogue's compatibility
+  boundary before proposing an extension; preserve released v1 fields.
 - **Additive by default.** Add fields; do not rename or repurpose them. A breaking change
   needs a new schema version, decided with the user.
 - **Facts are independent of products.** Being catalogued is not the same as being offered

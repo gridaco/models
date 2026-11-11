@@ -32,6 +32,45 @@ def test_catalogue_is_valid():
     assert check.check(MODELS_JSON, SCHEMA) == []
 
 
+OPTIONAL_AUDIO_SECTIONS = (
+    "audio.transcription.models",
+    "audio.realtime.models",
+    "audio.voice_design.models",
+    "audio.voice_conversion.models",
+)
+
+
+@pytest.mark.parametrize("section", OPTIONAL_AUDIO_SECTIONS)
+def test_optional_audio_families_preserve_prior_snapshots(section):
+    facts = copy.deepcopy(MODELS_JSON)
+    facts.pop(section, None)
+    assert check.check(facts, SCHEMA) == []
+    assert section not in check.build.required_sections()
+
+
+@pytest.mark.parametrize("section", OPTIONAL_AUDIO_SECTIONS)
+def test_optional_audio_cards_keep_release_and_provider_validation(section):
+    facts = copy.deepcopy(MODELS_JSON)
+    example = copy.deepcopy(next(iter(facts["audio.text_to_speech.models"].values())))
+    facts[section] = {example["id"]: example}
+    assert check.check(facts, SCHEMA) == []
+    example.pop("release")
+    assert any("release" in error for error in check.check(facts, SCHEMA))
+
+
+@pytest.mark.parametrize("section", OPTIONAL_AUDIO_SECTIONS)
+def test_optional_audio_families_are_generated_only_when_authored(section):
+    loaded = [c for c in CARDS if c.data.get("section") != section]
+    required = check.build.required_sections()
+    assert section not in cards.assemble(loaded, SECTIONS, check.build.schema_id(), required)
+    example = copy.deepcopy(card(loaded, "eleven_v3"))
+    example.data["section"] = section
+    loaded.append(example)
+    assert list(cards.layout_errors(loaded, SECTIONS)) == []
+    generated = cards.assemble(loaded, SECTIONS, check.build.schema_id(), required)
+    assert generated[section]["eleven_v3"]["id"] == "eleven_v3"
+
+
 def test_id_must_match_table_key():
     def mutate(facts):
         first("text.catalog", facts)["id"] = "vendor/renamed"
