@@ -46,6 +46,54 @@ def add_binding(card):
     }
 
 
+@pytest.mark.parametrize("scope", ["card", "binding"])
+@pytest.mark.parametrize("model_type", ["speech", "transcription", "evaluation"])
+def test_discovery_baseline_keeps_vercel_type_and_modality_vocabulary(scope, model_type):
+    def edit(card):
+        add_binding(card)
+        target = card if scope == "card" else card["providers"]["example"]
+        target.update(source_url=SOURCE, type=model_type, modalities={"input": ["audio"], "output": ["text"]})
+    assert mutate(edit) == []
+
+
+@pytest.mark.parametrize("scope", ["card", "binding"])
+@pytest.mark.parametrize("fields", [
+    {"type": "voice_design"},
+    {"modalities": {"input": ["audio"], "output": ["transcription"]}},
+    {"modalities": {"input": ["text", "text"], "output": ["audio"]}},
+    {"modalities": {"input": [], "output": ["audio"]}},
+    {"modalities": {"input": ["text"]}},
+    {"modalities": {"input": ["text"], "output": ["audio"], "streaming": True}},
+])
+def test_discovery_baseline_rejects_invented_types_and_malformed_modalities(scope, fields):
+    def edit(card):
+        add_binding(card)
+        target = card if scope == "card" else card["providers"]["example"]
+        target.update(source_url=SOURCE, **fields)
+    assert mutate(edit)
+
+
+@pytest.mark.parametrize("scope", ["card", "binding"])
+def test_discovery_baseline_requires_a_source_at_its_own_scope(scope):
+    def edit(card):
+        add_binding(card)
+        target = card if scope == "card" else card["providers"]["example"]
+        target["type"] = "speech"
+        target.pop("source_url", None)
+    assert mutate(edit)
+
+
+def test_embedding_discovery_uses_the_same_baseline_validation():
+    def edit(card):
+        card.update(source_url=SOURCE, type="embedding", modalities={"input": ["text"], "output": ["text"]})
+    assert mutate(edit, "embedding.models") == []
+
+    def invalid(card):
+        edit(card)
+        card["modalities"]["output"] = ["embedding"]
+    assert mutate(invalid, "embedding.models")
+
+
 @pytest.mark.parametrize("section", SECTIONS)
 def test_reference_and_coverage_are_valid_in_every_family_and_operation(section):
     assert mutate(add_binding, section) == []

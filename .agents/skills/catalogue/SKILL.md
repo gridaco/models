@@ -54,6 +54,28 @@ An entry is a set of facts about one model, each traceable to a source:
 Facts are independent of products. Adding a verified fact does not list the model in any
 Grida product, and removing a product listing does not delete the fact.
 
+## Compatibility boundary
+
+Use Vercel AI Gateway's sourced `type` and `modalities` vocabulary for common
+discovery metadata. AI SDK interfaces are the reference for shared execution
+concepts; catalogue metadata does not implement those interfaces. Section names
+organize cards and do not define new protocols. Omit a shared type when the
+baseline does not represent the offering.
+
+Keep native settings, limits, format enums and streaming events on the relevant
+binding or endpoint. Prefer verified `request_schema_url` / `result_schema_url`
+links into first-party JSON Schema or OpenAPI documents, and the official
+AsyncAPI reference for event protocols. Do not translate these contracts into a
+new shared capability object or expand the legacy `parameters` shorthand.
+Preserve the external document's dialect, keywords and exact native field names.
+
+Our own layer owns provenance, identity relationships and provider bindings.
+An offering absent from the baseline, such as a 3D operation, still follows its
+native contract. Introduce an extension only for an independently documented
+need not represented by the baseline or provider contract. Keep existing v1
+fields and price shapes compatible; link or qualify facts that do not fit rather
+than inventing a request field or silently changing units.
+
 ## IDs are never portable
 
 The same model has different IDs, availability, and prices on different providers.

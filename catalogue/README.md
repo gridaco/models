@@ -59,6 +59,46 @@ canonical (`vendor/model`) and hold a `providers` record of bindings keyed by pr
 Other families retain their existing IDs and direct-provider facts, and may also add
 `providers`; the same additions are supported on embeddings and the rig-check operation.
 
+## Compatibility boundary
+
+The default vocabulary for new common discovery metadata follows
+[Vercel AI Gateway](https://vercel.com/docs/ai-gateway/sdks-and-apis/rest-api):
+optional `type` (`language`, `embedding`, `reranking`, `image`, `video`, `speech`,
+`transcription`, `realtime`, `evaluation`) and `modalities: { input, output }` with nonempty,
+distinct `text`, `image`, `pdf`, `audio` or `video` values. Each requires a
+first-party `source_url` at the same card or binding scope. These fields describe
+discovery capabilities, not the request or response serialization. Model-level
+facts need native evidence; a provider's narrower or different offering stays on
+its binding. Omission means unrecorded, not unsupported.
+
+Vercel is a compatibility target, not a formal interchange standard. Its
+[AI SDK speech](https://ai-sdk.dev/docs/ai-sdk-core/speech) and
+[transcription](https://ai-sdk.dev/docs/ai-sdk-core/transcription) interfaces are
+the reference for common execution concepts. This catalogue does not implement
+them or inherit a capability merely because an SDK exposes it. Native music and
+sound generation fit the baseline's `speech` discovery class; their existing
+sections retain the more specific organization. Voice design and conversion
+remain distinct sections without inventing new baseline `type` values.
+
+Provider-specific parameters, output formats and events retain the provider's
+contract and belong on its binding or endpoint. Link authoritative
+[JSON Schema](https://json-schema.org/draft/2020-12),
+[OpenAPI](https://spec.openapis.org/oas/latest.html) or
+[AsyncAPI](https://www.asyncapi.com/docs/reference/specification/latest)
+documents; preserve their own dialect and keywords, such as `maxLength`, instead
+of recreating a parameter language. The four optional audio sections are
+organizational groupings, not four new request or result specifications.
+
+Our own layer records provenance, canonical identities, provider-ID relationships
+and documented extensions. An operation outside the baseline, such as Tripo
+rigging, still mirrors its native request and result schemas. A provider-specific
+feature does not become a new shared field just because the baseline omits it.
+Released v1 fields and existing price shapes remain compatible. New structured
+extensions need their own documented gap and review; when the current shape
+cannot faithfully express a fact, retain its source and qualification rather
+than inventing an API parameter. A catalog-layout migration requires a separately
+versioned change.
+
 ## Labs
 
 `labs.json` is an object keyed by lab ID. Each lab has `id` (equal to its key), `name` (the
@@ -184,6 +224,12 @@ credentials; schemas are not copied or fetched by the catalogue checker.
 Existing `parameters` remains partial descriptive metadata, not a substitute for
 the linked contract. A provider-specific capability difference stays on its binding
 or endpoint rather than overwriting the model's intrinsic facts.
+New bindings should use the linked native schema instead of extending that
+legacy shorthand. A schema link may identify a request/response schema inside an
+OpenAPI document by JSON Pointer; it retains the external document's dialect.
+For WebSocket protocols, the official AsyncAPI reference is authoritative even
+when no standalone schema document is published. Do not label an HTML reference
+page as a machine-readable request or result schema.
 
 ## Model distribution
 
