@@ -608,6 +608,37 @@ API: 100 credits when duration is automatic, or 11 credits/s when set.
 
 Source: elevenlabs.io/pricing/api — $0.10 per 1,000 characters.
 
+## ElevenLabs: Vercel and OpenRouter bindings
+
+The existing `eleven_v3` and `eleven_text_to_sound_v2` identities, native
+reference, release dates and direct-provider/fal facts are preserved. Provider
+coverage and the added binding prices were verified on 2026-11-11:
+
+- Vercel's [Eleven v3 page](https://vercel.com/ai-gateway/models/eleven-v3)
+  publishes `elevenlabs/eleven-v3` at **$80 per million input characters**,
+  exactly **$0.08 per 1,000 characters**, including audio tags. Its
+  [live catalogue](https://ai-gateway.vercel.sh/v1/models) independently
+  records `speech_input_character_cost: "0.00008"`.
+- OpenRouter's [Eleven v3 page](https://openrouter.ai/elevenlabs/eleven-v3)
+  publishes `elevenlabs/eleven-v3` at **$80 per million characters**, exactly
+  **$0.08 per 1,000 characters**. The
+  [endpoint metadata](https://openrouter.ai/api/v1/models/elevenlabs/eleven-v3/endpoints)
+  confirms `pricing.prompt: "0.00008"` and `pricing.discount: 0`; the model
+  page's character unit and the endpoint's zero discount establish the regular
+  per-character rate, rather than a per-token price. The lingering launch-offer
+  banner is not used as pricing evidence.
+- Vercel's [Sound Effects v2 page](https://vercel.com/ai-gateway/models/sound-effects-v2)
+  publishes `elevenlabs/sound-effects-v2` at **$0.12 per minute of generated
+  audio**. Its live catalogue explicitly bills generated seconds with
+  `speech_output_cost_per_second: "0.002"`, so the binding records
+  **$0.002 per second**, without imposing whole-minute rounding.
+- Sound Effects v2 remains absent from OpenRouter's
+  [complete catalogue](https://openrouter.ai/api/v1/models?output_modalities=all).
+  OpenRouter's [Models API documentation](https://openrouter.ai/docs/api/api-reference/models/list-all-models-and-their-properties)
+  says the unfiltered endpoint defaults to text-output models; absence checks
+  for audio must include the relevant modality or `output_modalities=all`.
+  The text-only default is not evidence that ElevenLabs speech is unavailable.
+
 ## `"tripo/rig-v2.5": {`
 
 Follow the documented compatibility table, not its contradictory biped example.

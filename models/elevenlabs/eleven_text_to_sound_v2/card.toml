@@ -36,8 +36,15 @@ source_url = "https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2"
 url = "https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2"
 pricing = { "type" = "per_second", "usd" = 0.002, "source_url" = "https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2" }
 
+[providers.vercel]
+provider = "vercel"
+id = "elevenlabs/sound-effects-v2"
+source_url = "https://vercel.com/ai-gateway/models/sound-effects-v2"
+url = "https://vercel.com/ai-gateway/models/sound-effects-v2"
+pricing = { "type" = "per_second", "usd" = 0.002, "source_url" = "https://vercel.com/ai-gateway/models/sound-effects-v2" }
+
 [provider_coverage]
-openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/models", "reason" = "No matching model/version is listed in the inspected public model catalogue." }
-vercel = { "disposition" = "not_listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models", "reason" = "No matching model/version is listed in the inspected public Gateway model catalogue." }
+openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/models?output_modalities=all", "reason" = "No matching sound-effects model/version is listed in the complete public model catalogue, including non-text output modalities." }
+vercel = { "disposition" = "listed", "source_url" = "https://vercel.com/ai-gateway/models/sound-effects-v2" }
 fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2" }
 elevenlabs = { "disposition" = "listed", "source_url" = "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert" }
