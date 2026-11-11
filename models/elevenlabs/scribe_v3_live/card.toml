@@ -5,27 +5,12 @@ label = "Scribe v3 Live"
 short_description = "Streaming speech recognition with turn prediction and realtime diarization."
 vendor = "elevenlabs"
 source_url = "https://elevenlabs.io/docs/overview/models"
-languages_label = "90+"
+type = "transcription"
 
 [release]
 date = "2026-11-10"
 basis = "model"
 source_url = "https://elevenlabs.io/blog/scribe-v3"
-
-[input]
-type = "audio"
-streaming = true
-
-[output]
-type = "text"
-formats = ["json"]
-source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime"
-
-[transcription]
-word_timestamps = true
-commit_strategies = ["manual", "vad", "turn_prediction"]
-speaker_diarization = true
-keyterm_library_max_terms = 10000
 
 [providers]
 
@@ -38,6 +23,13 @@ qualifications = [
   { source_url = "https://elevenlabs.io/docs/eleven-api/guides/how-to/speech-to-text/batch/keyterm-prompting", notes = "The dedicated keyterm-library guide and detailed model section specify 10,000 terms, while the overview feature summary says 100,000. The card uses the more specific documented 10,000-term contract; the larger summary figure is not assumed." },
   { source_url = "https://elevenlabs.io/docs/overview/models", notes = "Realtime transcription accepts PCM at 8–48 kHz and mu-law audio. It transcribes audio to text and is distinct from the Eleven Realtime voice-agent models." },
   { source_url = "https://elevenlabs.io/pricing/api", notes = "The recorded rate is base transcription only. Keyterm prompting, transcript editing and the v3 Live keyterm library have additional published charges. Optional feature surcharges and minimum durations must be checked before pricing a request." },
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "The native model reference documents language coverage as 90+. This is native model information, not a cross-provider language guarantee." },
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "The native model reference documents word-level timestamps, speaker diarization. The native request and event contracts define their exact parameters and result fields." },
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "The native commit_strategy values documented for this model are manual, vad, turn_prediction. These are native streaming settings, not a shared transcription API vocabulary." },
+  { source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime", notes = "The official realtime reference publishes the native AsyncAPI contract. Its messages and parameters remain authoritative; no replacement shared event schema is defined by this card." },
+]
+endpoints = [
+  { id = "/v1/speech-to-text/realtime", input = "audio", interface = "websocket", source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime" },
 ]
 
 [providers.elevenlabs.published_pricing]
@@ -65,3 +57,7 @@ reason = "No matching exact model/version is listed in the complete ElevenLabs s
 [provider_coverage.elevenlabs]
 disposition = "listed"
 source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime"
+
+[modalities]
+input = ["audio"]
+output = ["text"]

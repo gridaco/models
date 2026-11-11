@@ -613,6 +613,39 @@ IDs and the existing `eleven_v3` / `eleven_text_to_sound_v2` identities are reta
 each provider keeps its own exact call ID. Voice design, voice conversion,
 transcription and conversational voice agents are separate audio families.
 
+### Compatibility and native contracts
+
+Shared discovery metadata uses the Vercel Gateway `type` and `modalities`
+vocabulary. The audio sections organize entries; they do not introduce new
+request or event schemas. Native voice design and voice conversion have media
+modalities but no invented baseline type. Vercel bindings retain the exact
+`type` and `modalities` values from its published feed.
+
+Provider-specific language coverage, character limits, commit strategies,
+timestamps and format choices stay in their native binding's qualifications or
+authoritative contract. New audio cards do not define a shared `transcription`
+capability object, a display-language field or a copied output-format enum.
+The two pre-existing cards retain their released v1 direct-provider fields,
+with the sourced corrections below.
+
+Request and result schema URLs point directly into the official
+[ElevenLabs OpenAPI 3.1 document](https://api.elevenlabs.io/openapi.json),
+[OpenRouter OpenAPI 3.1 document](https://openrouter.ai/openapi.json), and fal's
+per-model queue OpenAPI documents, for example
+[v4](https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=elevenlabs%2Ftts%2Feleven-v4).
+The JSON Pointer targets were resolved against the actual published documents.
+Native schema keywords, enums and dialects are not rewritten as partial custom
+parameter metadata. fal's result schema links describe result retrieval, not
+the QueueStatus returned by queue submission.
+
+The official native
+[transcription](https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime)
+and [dialogue WebSocket](https://elevenlabs.io/docs/api-reference/text-to-dialogue/ttd-websocket)
+references publish their AsyncAPI contracts. Streaming messages remain defined
+there; the catalogue does not invent a shared event protocol. Voice conversion
+is described in the native reference but is absent from the public OpenAPI
+document inspected, so no machine-readable schema URL is guessed for that route.
+
 ### Native prices and output corrections
 
 The [native API pricing page](https://elevenlabs.io/pricing/api) now publishes USD
@@ -636,8 +669,11 @@ prices rather than the old sound-effects credit counts:
   does not establish a version-specific regular USD rate; none is invented.
 - Eleven Realtime: standard connected audio **$0.08/minute**, or **$0.16/minute**
   above the published concurrency allowance, plus token meters. Mini input/output
-  is **$0.20/$6 per million tokens**; Max is **$1.80/$9**. The component condition
-  `usage_tier` describes the published pricing allowance, not an API parameter.
+  is **$0.20/$6 per million tokens**; Max is **$1.80/$9**. Token prices remain
+  structured in `token_pricing`; connected-audio rates and the concurrency
+  condition remain sourced qualifications. No synthetic request parameter is
+  introduced to express session/account concurrency context, and the token
+  amounts alone are not the total session price.
 
 The native [TTS](https://elevenlabs.io/docs/api-reference/text-to-speech/convert),
 [dialogue](https://elevenlabs.io/docs/api-reference/text-to-dialogue/convert),

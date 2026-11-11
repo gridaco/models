@@ -5,26 +5,12 @@ label = "Scribe v3"
 short_description = "Batch speech recognition with improved diarization and multilingual controls."
 vendor = "elevenlabs"
 source_url = "https://elevenlabs.io/docs/overview/models"
-languages_label = "90+"
+type = "transcription"
 
 [release]
 date = "2026-11-10"
 basis = "model"
 source_url = "https://elevenlabs.io/blog/scribe-v3"
-
-[input]
-type = "audio"
-streaming = false
-
-[output]
-type = "text"
-formats = ["json"]
-source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/convert"
-
-[transcription]
-word_timestamps = true
-speaker_diarization = true
-audio_event_tagging = true
 
 [providers]
 
@@ -36,6 +22,11 @@ url = "https://elevenlabs.io/docs/api-reference/speech-to-text/convert"
 qualifications = [
   { source_url = "https://elevenlabs.io/pricing/api", notes = "The recorded rate is base transcription only. Keyterm prompting, transcript editing and the v3 Live keyterm library have additional published charges. Optional feature surcharges and minimum durations must be checked before pricing a request." },
   { source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/convert", notes = "The API currently describes percentage surcharges for keyterms and transcript editing, whereas the pricing page publishes separate hourly add-on amounts. Only the undisputed base hourly price is recorded; optional add-on totals remain unresolved." },
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "The native model reference documents language coverage as 90+. This is native model information, not a cross-provider language guarantee." },
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "The native model reference documents word-level timestamps, speaker diarization, audio-event tagging. The native request and event contracts define their exact parameters and result fields." },
+]
+endpoints = [
+  { id = "/v1/speech-to-text", input = "audio", interface = "http", source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/convert", request_schema_url = "https://api.elevenlabs.io/openapi.json#/components/schemas/Body_Speech_to_Text_v1_speech_to_text_post", result_schema_url = "https://api.elevenlabs.io/openapi.json#/paths/~1v1~1speech-to-text/post/responses/200/content/application~1json/schema" },
 ]
 
 [providers.elevenlabs.published_pricing]
@@ -63,3 +54,7 @@ reason = "No matching exact model/version is listed in the complete ElevenLabs s
 [provider_coverage.elevenlabs]
 disposition = "listed"
 source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/convert"
+
+[modalities]
+input = ["audio"]
+output = ["text"]

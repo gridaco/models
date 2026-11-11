@@ -5,21 +5,12 @@ label = "Eleven Realtime v1 Max"
 short_description = "A complete voice agent optimized for complex tasks and tool use."
 vendor = "elevenlabs"
 source_url = "https://elevenlabs.io/docs/overview/models"
-languages_label = "90+"
+type = "realtime"
 
 [release]
 date = "2026-11-02"
 basis = "model"
 source_url = "https://elevenlabs.io/docs/changelog/2026/11/2"
-
-[input]
-modalities = ["text", "audio"]
-streaming = true
-
-[output]
-modalities = ["text", "audio"]
-streaming = true
-source_url = "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility"
 
 [providers]
 
@@ -29,32 +20,30 @@ id = "eleven_realtime_v1_max"
 source_url = "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility"
 url = "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility"
 qualifications = [
-  { source_url = "https://elevenlabs.io/pricing/api", notes = "Connected audio duration and input/output tokens are separate additive meters. Burst audio pricing applies above the published concurrency allowance; usage_tier is a pricing condition describing that allowance, not an API request parameter." },
   { source_url = "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility", notes = "These are complete voice-agent configurations exposed over an OpenAI-compatible WebSocket protocol. Their underlying component models are not public; do not describe them as fused audio models or standalone voice-conversion endpoints." },
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "The native model reference documents language coverage as 90+. This is native model information, not a cross-provider language guarantee." },
+  { source_url = "https://elevenlabs.io/pricing/api", notes = "Connected audio costs USD 0.08 per minute within the published concurrency allowance and USD 0.16 per minute above it, in addition to input/output tokens. Concurrency is session/account context, not an API request parameter; the duration conditions are retained here rather than encoded as a fabricated request selector." },
+]
+endpoints = [
+  { id = "/v1/convai/realtime", input = "audio", interface = "websocket", source_url = "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility" },
 ]
 
-[providers.elevenlabs.published_pricing]
+[providers.elevenlabs.token_pricing]
 source_url = "https://elevenlabs.io/pricing/api"
-currency = "USD"
-components = [
-  { meter = "connected_audio_duration", unit = "minute", usd_per_unit = "0.080", when = { properties = { usage_tier = { const = "standard" } }, required = [
-    "usage_tier",
-  ] } },
-  { meter = "connected_audio_duration", unit = "minute", usd_per_unit = "0.160", when = { properties = { usage_tier = { const = "burst" } }, required = [
-    "usage_tier",
-  ] } },
-  { meter = "input_tokens", unit = "token", usd_per_unit = "0.0000018" },
-  { meter = "output_tokens", unit = "token", usd_per_unit = "0.000009" },
-]
+unit = "usd_per_token"
+input = "0.0000018"
+output = "0.000009"
+scope = "Token meters only. Connected audio is charged separately under the published standard/burst concurrency rules; these token amounts are not the complete session price."
 
 [providers.vercel]
 provider = "vercel"
 id = "elevenlabs/eleven-realtime-v1-max"
-source_url = "https://vercel.com/ai-gateway/models/eleven-realtime-v1-max"
+source_url = "https://ai-gateway.vercel.sh/v1/models"
 url = "https://vercel.com/ai-gateway/models/eleven-realtime-v1-max"
 qualifications = [
   { source_url = "https://ai-gateway.vercel.sh/v1/models", notes = "The catalog bills connected session seconds plus input/output tokens, with a distinct cached-input token rate. Preserve the exact published decimal duration rate rather than deriving it from a rounded hourly display." },
 ]
+type = "realtime"
 
 [providers.vercel.published_pricing]
 source_url = "https://ai-gateway.vercel.sh/v1/models"
@@ -65,6 +54,10 @@ components = [
   { meter = "cached_input_tokens", unit = "token", usd_per_unit = "0.00000018" },
   { meter = "output_tokens", unit = "token", usd_per_unit = "0.000009" },
 ]
+
+[providers.vercel.modalities]
+input = ["text", "audio"]
+output = ["text", "audio"]
 
 [provider_coverage]
 
@@ -85,3 +78,7 @@ reason = "No matching exact model/version is listed in the complete ElevenLabs s
 [provider_coverage.elevenlabs]
 disposition = "listed"
 source_url = "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility"
+
+[modalities]
+input = ["text", "audio"]
+output = ["text", "audio"]

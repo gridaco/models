@@ -5,26 +5,12 @@ label = "Scribe v2"
 short_description = "Batch transcription with diarization, timestamps and vocabulary prompting."
 vendor = "elevenlabs"
 source_url = "https://elevenlabs.io/docs/overview/models"
-languages_label = "90+"
+type = "transcription"
 
 [release]
 date = "2026-01-09"
 basis = "model"
 source_url = "https://elevenlabs.io/blog/introducing-scribe-v2"
-
-[input]
-type = "audio"
-streaming = false
-
-[output]
-type = "text"
-formats = ["json"]
-source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/convert"
-
-[transcription]
-word_timestamps = true
-speaker_diarization = true
-audio_event_tagging = true
 
 [providers]
 
@@ -36,6 +22,11 @@ url = "https://elevenlabs.io/docs/api-reference/speech-to-text/convert"
 qualifications = [
   { source_url = "https://elevenlabs.io/pricing/api", notes = "The recorded rate is base transcription only. Keyterm prompting, transcript editing and the v3 Live keyterm library have additional published charges. Optional feature surcharges and minimum durations must be checked before pricing a request." },
   { source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/convert", notes = "The API currently describes percentage surcharges for keyterms and transcript editing, whereas the pricing page publishes separate hourly add-on amounts. Only the undisputed base hourly price is recorded; optional add-on totals remain unresolved." },
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "The native model reference documents language coverage as 90+. This is native model information, not a cross-provider language guarantee." },
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "The native model reference documents word-level timestamps, speaker diarization, audio-event tagging. The native request and event contracts define their exact parameters and result fields." },
+]
+endpoints = [
+  { id = "/v1/speech-to-text", input = "audio", interface = "http", source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/convert", request_schema_url = "https://api.elevenlabs.io/openapi.json#/components/schemas/Body_Speech_to_Text_v1_speech_to_text_post", result_schema_url = "https://api.elevenlabs.io/openapi.json#/paths/~1v1~1speech-to-text/post/responses/200/content/application~1json/schema" },
 ]
 
 [providers.elevenlabs.published_pricing]
@@ -46,19 +37,27 @@ components = [{ meter = "input_audio_duration", unit = "hour", usd_per_unit = "0
 [providers.vercel]
 provider = "vercel"
 id = "elevenlabs/scribe-v2"
-source_url = "https://vercel.com/ai-gateway/models/scribe-v2"
+source_url = "https://ai-gateway.vercel.sh/v1/models"
 url = "https://vercel.com/ai-gateway/models/scribe-v2"
+type = "transcription"
 
 [providers.vercel.pricing]
 type = "per_second"
 usd = 6.1112e-05
 source_url = "https://ai-gateway.vercel.sh/v1/models"
 
+[providers.vercel.modalities]
+input = ["audio"]
+output = ["text"]
+
 [providers.openrouter]
 provider = "openrouter"
 id = "elevenlabs/scribe-v2"
 source_url = "https://openrouter.ai/elevenlabs/scribe-v2"
 url = "https://openrouter.ai/elevenlabs/scribe-v2"
+endpoints = [
+  { id = "/api/v1/audio/transcriptions", input = "audio", interface = "http", source_url = "https://openrouter.ai/openapi.json", request_schema_url = "https://openrouter.ai/openapi.json#/components/schemas/STTRequest", result_schema_url = "https://openrouter.ai/openapi.json#/components/schemas/STTResponse" },
+]
 
 [providers.openrouter.published_pricing]
 source_url = "https://openrouter.ai/api/v1/models/elevenlabs/scribe-v2/endpoints"
@@ -74,6 +73,10 @@ source_url = "https://fal.ai/models/fal-ai/elevenlabs/speech-to-text/scribe-v2"
 url = "https://fal.ai/models/fal-ai/elevenlabs/speech-to-text/scribe-v2"
 qualifications = [
   { source_url = "https://fal.ai/models/fal-ai/elevenlabs/speech-to-text/scribe-v2", notes = "The base rate is USD 0.008 per input audio minute. Using keyterms costs 30% more; the base rate alone is not the total for keyterm-enabled requests." },
+  { source_url = "https://fal.ai/models/fal-ai/elevenlabs/speech-to-text/scribe-v2/api", notes = "The linked OpenAPI contract describes the fal queue lifecycle: submission returns QueueStatus, while the linked result schema belongs to result retrieval. It does not imply that submission returns the final model output synchronously." },
+]
+endpoints = [
+  { id = "fal-ai/elevenlabs/speech-to-text/scribe-v2", input = "audio", interface = "http", source_url = "https://fal.ai/models/fal-ai/elevenlabs/speech-to-text/scribe-v2/api", request_schema_url = "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=fal-ai%2Felevenlabs%2Fspeech-to-text%2Fscribe-v2#/components/schemas/ElevenlabsSpeechToTextScribeV2Input", result_schema_url = "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=fal-ai%2Felevenlabs%2Fspeech-to-text%2Fscribe-v2#/components/schemas/ElevenlabsSpeechToTextScribeV2Output" },
 ]
 
 [providers.fal.published_pricing]
@@ -98,3 +101,7 @@ source_url = "https://fal.ai/models/fal-ai/elevenlabs/speech-to-text/scribe-v2"
 [provider_coverage.elevenlabs]
 disposition = "listed"
 source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/convert"
+
+[modalities]
+input = ["audio"]
+output = ["text"]

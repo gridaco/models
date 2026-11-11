@@ -5,22 +5,12 @@ label = "Eleven v3 Conversational"
 short_description = "Expressive speech tuned for conversational agents."
 vendor = "elevenlabs"
 source_url = "https://elevenlabs.io/docs/overview/models"
-languages_label = "70+"
+type = "speech"
 
 [release]
 date = "2026-02-09"
 basis = "model"
 source_url = "https://elevenlabs.io/docs/changelog/2026/2/9"
-
-[input]
-type = "text"
-audio_tags = true
-streaming = true
-
-[output]
-default_format = "mp3"
-formats = ["mp3"]
-source_url = "https://elevenlabs.io/docs/eleven-api/guides/how-to/websockets/realtime-tdd"
 
 [providers]
 
@@ -31,27 +21,39 @@ source_url = "https://elevenlabs.io/docs/eleven-api/guides/how-to/websockets/rea
 url = "https://elevenlabs.io/docs/eleven-api/guides/how-to/websockets/realtime-tdd"
 qualifications = [
   { source_url = "https://elevenlabs.io/docs/eleven-api/guides/how-to/websockets/realtime-tdd", notes = "The native reference is the Text to Dialogue WebSocket, which streams dialogue lines and audio chunks. It is distinct from an OpenAI-compatible single-input speech endpoint; the guide demonstrates mp3_44100_128 output." },
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "The native model reference documents language coverage as 70+. This is native model information, not a cross-provider language guarantee." },
+]
+endpoints = [
+  { id = "/v1/text-to-dialogue/stream-input", input = "text", interface = "websocket", source_url = "https://elevenlabs.io/docs/api-reference/text-to-dialogue/ttd-websocket" },
 ]
 
 [providers.vercel]
 provider = "vercel"
 id = "elevenlabs/eleven-v3-conversational"
-source_url = "https://vercel.com/ai-gateway/models/eleven-v3-conversational"
+source_url = "https://ai-gateway.vercel.sh/v1/models"
 url = "https://vercel.com/ai-gateway/models/eleven-v3-conversational"
 qualifications = [
   { source_url = "https://vercel.com/ai-gateway/models/eleven-v3-conversational", notes = "This provider documents a 5,000-character request limit. Provider limits are independent of the native dialogue API and other bindings." },
 ]
+type = "speech"
 
 [providers.vercel.pricing]
 type = "per_1000_characters"
 usd = 0.04
 source_url = "https://vercel.com/ai-gateway/models/eleven-v3-conversational"
 
+[providers.vercel.modalities]
+input = ["text"]
+output = ["audio"]
+
 [providers.openrouter]
 provider = "openrouter"
 id = "elevenlabs/eleven-v3-conversational"
 source_url = "https://openrouter.ai/elevenlabs/eleven-v3-conversational"
 url = "https://openrouter.ai/elevenlabs/eleven-v3-conversational"
+endpoints = [
+  { id = "/api/v1/audio/speech", input = "text", interface = "http", source_url = "https://openrouter.ai/openapi.json", request_schema_url = "https://openrouter.ai/openapi.json#/components/schemas/SpeechRequest", result_schema_url = "https://openrouter.ai/openapi.json#/paths/~1audio~1speech/post/responses/200/content/audio~1%2A/schema" },
+]
 
 [providers.openrouter.pricing]
 type = "per_1000_characters"
@@ -77,7 +79,6 @@ reason = "No matching exact model/version is listed in the complete ElevenLabs s
 disposition = "listed"
 source_url = "https://elevenlabs.io/docs/eleven-api/guides/how-to/websockets/realtime-tdd"
 
-[pricing]
-type = "per_1000_characters"
-usd = 0.04
-source_url = "https://elevenlabs.io/pricing/api"
+[modalities]
+input = ["text"]
+output = ["audio"]

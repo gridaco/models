@@ -5,26 +5,12 @@ label = "Scribe v1"
 short_description = "Batch transcription with timestamps, speaker labels and audio-event tags."
 vendor = "elevenlabs"
 source_url = "https://elevenlabs.io/docs/overview/models"
-languages_label = "99"
+type = "transcription"
 
 [release]
 date = "2025-02-26"
 basis = "model"
 source_url = "https://elevenlabs.io/blog/meet-scribe"
-
-[input]
-type = "audio"
-streaming = false
-
-[output]
-type = "text"
-formats = ["json"]
-source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/convert"
-
-[transcription]
-word_timestamps = true
-speaker_diarization = true
-audio_event_tagging = true
 
 [providers]
 
@@ -35,6 +21,11 @@ source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/convert"
 url = "https://elevenlabs.io/docs/api-reference/speech-to-text/convert"
 qualifications = [
   { source_url = "https://elevenlabs.io/pricing/api", notes = "The current pricing table names Scribe v3, v2 and v2 Medical rather than this legacy version. No version-specific regular native price is recorded." },
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "The native model reference documents language coverage as 99. This is native model information, not a cross-provider language guarantee." },
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "The native model reference documents word-level timestamps, speaker diarization, audio-event tagging. The native request and event contracts define their exact parameters and result fields." },
+]
+endpoints = [
+  { id = "/v1/speech-to-text", input = "audio", interface = "http", source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/convert", request_schema_url = "https://api.elevenlabs.io/openapi.json#/components/schemas/Body_Speech_to_Text_v1_speech_to_text_post", result_schema_url = "https://api.elevenlabs.io/openapi.json#/paths/~1v1~1speech-to-text/post/responses/200/content/application~1json/schema" },
 ]
 
 [providers.fal]
@@ -42,6 +33,12 @@ provider = "fal"
 id = "fal-ai/elevenlabs/speech-to-text"
 source_url = "https://fal.ai/models/fal-ai/elevenlabs/speech-to-text"
 url = "https://fal.ai/models/fal-ai/elevenlabs/speech-to-text"
+endpoints = [
+  { id = "fal-ai/elevenlabs/speech-to-text", input = "audio", interface = "http", source_url = "https://fal.ai/models/fal-ai/elevenlabs/speech-to-text/api", request_schema_url = "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=fal-ai%2Felevenlabs%2Fspeech-to-text#/components/schemas/ElevenlabsSpeechToTextInput", result_schema_url = "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=fal-ai%2Felevenlabs%2Fspeech-to-text#/components/schemas/ElevenlabsSpeechToTextOutput" },
+]
+qualifications = [
+  { source_url = "https://fal.ai/models/fal-ai/elevenlabs/speech-to-text/api", notes = "The linked OpenAPI contract describes the fal queue lifecycle: submission returns QueueStatus, while the linked result schema belongs to result retrieval. It does not imply that submission returns the final model output synchronously." },
+]
 
 [providers.fal.published_pricing]
 source_url = "https://fal.ai/models/fal-ai/elevenlabs/speech-to-text"
@@ -67,3 +64,7 @@ source_url = "https://fal.ai/models/fal-ai/elevenlabs/speech-to-text"
 [provider_coverage.elevenlabs]
 disposition = "listed"
 source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/convert"
+
+[modalities]
+input = ["audio"]
+output = ["text"]

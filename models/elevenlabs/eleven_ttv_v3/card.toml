@@ -11,16 +11,6 @@ date = "2025-06-25"
 basis = "model"
 source_url = "https://elevenlabs.io/blog/voice-design-v3"
 
-[input]
-type = "text"
-voice_description = true
-min_preview_characters = 100
-max_preview_characters = 1000
-
-[output]
-type = "voice_previews"
-source_url = "https://elevenlabs.io/docs/api-reference/text-to-voice/design"
-
 [providers]
 
 [providers.elevenlabs]
@@ -31,6 +21,9 @@ url = "https://elevenlabs.io/docs/api-reference/text-to-voice/design"
 qualifications = [
   { source_url = "https://elevenlabs.io/docs/api-reference/text-to-voice/design", notes = "The endpoint returns generated voice IDs and preview audio, with an option to stream previews separately. This creates a voice; it is not an ordinary TTS model binding." },
   { source_url = "https://elevenlabs.io/docs/eleven-creative/voices/voice-design", notes = "Voice design is metered by preview text characters rather than the number of candidates. A version-specific regular USD rate is not established by this page, so pricing is omitted." },
+]
+endpoints = [
+  { id = "/v1/text-to-voice/design", input = "text", interface = "http", source_url = "https://elevenlabs.io/docs/api-reference/text-to-voice/design", request_schema_url = "https://api.elevenlabs.io/openapi.json#/components/schemas/VoiceDesignRequestModel", result_schema_url = "https://api.elevenlabs.io/openapi.json#/components/schemas/VoicePreviewsResponseModel" },
 ]
 
 [provider_coverage]
@@ -53,3 +46,7 @@ reason = "No matching exact model/version is listed in the complete ElevenLabs s
 [provider_coverage.elevenlabs]
 disposition = "listed"
 source_url = "https://elevenlabs.io/docs/api-reference/text-to-voice/design"
+
+[modalities]
+input = ["text"]
+output = ["audio"]

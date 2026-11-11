@@ -5,53 +5,12 @@ label = "Eleven Flash v2.5"
 short_description = "Low-latency speech in 32 languages."
 vendor = "elevenlabs"
 source_url = "https://elevenlabs.io/docs/overview/models"
-languages_label = "32"
+type = "speech"
 
 [release]
 date = "2024-12-18"
 basis = "model"
 source_url = "https://elevenlabs.io/blog/meet-flash"
-
-[input]
-type = "text"
-max_characters = 40000
-
-[output]
-default_format = "mp3"
-formats = ["alaw", "mp3", "opus", "pcm", "ulaw", "wav"]
-sample_rate_hz = 44100
-bit_rate_kbps = 128
-format_options = [
-  "alaw_8000",
-  "mp3_22050_32",
-  "mp3_24000_48",
-  "mp3_44100_128",
-  "mp3_44100_192",
-  "mp3_44100_32",
-  "mp3_44100_64",
-  "mp3_44100_96",
-  "opus_48000_128",
-  "opus_48000_192",
-  "opus_48000_32",
-  "opus_48000_64",
-  "opus_48000_96",
-  "pcm_16000",
-  "pcm_22050",
-  "pcm_24000",
-  "pcm_32000",
-  "pcm_44100",
-  "pcm_48000",
-  "pcm_8000",
-  "ulaw_8000",
-  "wav_16000",
-  "wav_22050",
-  "wav_24000",
-  "wav_32000",
-  "wav_44100",
-  "wav_48000",
-  "wav_8000",
-]
-source_url = "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
 
 [providers]
 
@@ -62,21 +21,31 @@ source_url = "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
 url = "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
 qualifications = [
   { source_url = "https://elevenlabs.io/docs/api-reference/text-to-speech/convert", notes = "The sample rate and bitrate describe the default MP3 output. Other codec/rate/bitrate combinations are selectable; higher-quality output can require a paid plan. These native format options do not establish another provider's support." },
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "The native model reference documents language coverage as 32. This is native model information, not a cross-provider language guarantee." },
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "The native model reference gives a 40,000-character model envelope. Endpoint-specific dialogue guidance and provider serving limits remain independent." },
+]
+endpoints = [
+  { id = "/v1/text-to-speech/{voice_id}", input = "text", interface = "http", source_url = "https://elevenlabs.io/docs/api-reference/text-to-speech/convert", request_schema_url = "https://api.elevenlabs.io/openapi.json#/components/schemas/Body_text_to_speech_full", result_schema_url = "https://api.elevenlabs.io/openapi.json#/paths/~1v1~1text-to-speech~1%7Bvoice_id%7D/post/responses/200/content/audio~1mpeg/schema" },
 ]
 
 [providers.vercel]
 provider = "vercel"
 id = "elevenlabs/eleven-flash-v2.5"
-source_url = "https://vercel.com/ai-gateway/models/eleven-flash-v2.5"
+source_url = "https://ai-gateway.vercel.sh/v1/models"
 url = "https://vercel.com/ai-gateway/models/eleven-flash-v2.5"
 qualifications = [
   { source_url = "https://vercel.com/ai-gateway/models/eleven-flash-v2.5", notes = "This provider documents a 40,000-character request limit. Provider limits are independent of the native dialogue API and other bindings." },
 ]
+type = "speech"
 
 [providers.vercel.pricing]
 type = "per_1000_characters"
 usd = 0.04
 source_url = "https://vercel.com/ai-gateway/models/eleven-flash-v2.5"
+
+[providers.vercel.modalities]
+input = ["text"]
+output = ["audio"]
 
 [providers.openrouter]
 provider = "openrouter"
@@ -85,6 +54,9 @@ source_url = "https://openrouter.ai/elevenlabs/eleven-flash-v2.5"
 url = "https://openrouter.ai/elevenlabs/eleven-flash-v2.5"
 qualifications = [
   { source_url = "https://openrouter.ai/elevenlabs/eleven-flash-v2.5", notes = "This provider documents a 40,000-character request limit. Provider limits are independent of the native dialogue API and other bindings." },
+]
+endpoints = [
+  { id = "/api/v1/audio/speech", input = "text", interface = "http", source_url = "https://openrouter.ai/openapi.json", request_schema_url = "https://openrouter.ai/openapi.json#/components/schemas/SpeechRequest", result_schema_url = "https://openrouter.ai/openapi.json#/paths/~1audio~1speech/post/responses/200/content/audio~1%2A/schema" },
 ]
 
 [providers.openrouter.pricing]
@@ -111,7 +83,6 @@ reason = "No matching exact model/version is listed in the complete ElevenLabs s
 disposition = "listed"
 source_url = "https://elevenlabs.io/docs/api-reference/text-to-speech/convert"
 
-[pricing]
-type = "per_1000_characters"
-usd = 0.04
-source_url = "https://elevenlabs.io/pricing/api"
+[modalities]
+input = ["text"]
+output = ["audio"]

@@ -5,22 +5,12 @@ label = "Eleven v4 Turbo"
 short_description = "Expressive speech optimized for realtime dialogue."
 vendor = "elevenlabs"
 source_url = "https://elevenlabs.io/docs/overview/models"
-languages_label = "90+"
+type = "speech"
 
 [release]
 date = "2026-09-28"
 basis = "model"
 source_url = "https://elevenlabs.io/blog/eleven-v4"
-
-[input]
-type = "text"
-audio_tags = true
-streaming = true
-
-[output]
-default_format = "mp3"
-formats = ["mp3"]
-source_url = "https://elevenlabs.io/docs/eleven-api/guides/how-to/websockets/realtime-tdd"
 
 [providers]
 
@@ -31,27 +21,39 @@ source_url = "https://elevenlabs.io/docs/eleven-api/guides/how-to/websockets/rea
 url = "https://elevenlabs.io/docs/eleven-api/guides/how-to/websockets/realtime-tdd"
 qualifications = [
   { source_url = "https://elevenlabs.io/docs/eleven-api/guides/how-to/websockets/realtime-tdd", notes = "The native reference is the Text to Dialogue WebSocket, which streams dialogue lines and audio chunks. It is distinct from an OpenAI-compatible single-input speech endpoint; the guide demonstrates mp3_44100_128 output." },
+  { source_url = "https://elevenlabs.io/docs/overview/models", notes = "The native model reference documents language coverage as 90+. This is native model information, not a cross-provider language guarantee." },
+]
+endpoints = [
+  { id = "/v1/text-to-dialogue/stream-input", input = "text", interface = "websocket", source_url = "https://elevenlabs.io/docs/api-reference/text-to-dialogue/ttd-websocket" },
 ]
 
 [providers.vercel]
 provider = "vercel"
 id = "elevenlabs/eleven-v4-turbo"
-source_url = "https://vercel.com/ai-gateway/models/eleven-v4-turbo"
+source_url = "https://ai-gateway.vercel.sh/v1/models"
 url = "https://vercel.com/ai-gateway/models/eleven-v4-turbo"
 qualifications = [
   { source_url = "https://vercel.com/ai-gateway/models/eleven-v4-turbo", notes = "This provider documents a 10,000-character request limit. Provider limits are independent of the native dialogue API and other bindings." },
 ]
+type = "speech"
 
 [providers.vercel.pricing]
 type = "per_1000_characters"
 usd = 0.04
 source_url = "https://vercel.com/ai-gateway/models/eleven-v4-turbo"
 
+[providers.vercel.modalities]
+input = ["text"]
+output = ["audio"]
+
 [providers.openrouter]
 provider = "openrouter"
 id = "elevenlabs/eleven-v4-turbo"
 source_url = "https://openrouter.ai/elevenlabs/eleven-v4-turbo"
 url = "https://openrouter.ai/elevenlabs/eleven-v4-turbo"
+endpoints = [
+  { id = "/api/v1/audio/speech", input = "text", interface = "http", source_url = "https://openrouter.ai/openapi.json", request_schema_url = "https://openrouter.ai/openapi.json#/components/schemas/SpeechRequest", result_schema_url = "https://openrouter.ai/openapi.json#/paths/~1audio~1speech/post/responses/200/content/audio~1%2A/schema" },
+]
 
 [providers.openrouter.pricing]
 type = "per_1000_characters"
@@ -65,6 +67,10 @@ source_url = "https://fal.ai/models/elevenlabs/tts/eleven-v4-turbo"
 url = "https://fal.ai/models/elevenlabs/tts/eleven-v4-turbo"
 qualifications = [
   { source_url = "https://fal.ai/models/elevenlabs/tts/eleven-v4-turbo/api", notes = "The fal schema limits text to 5,000 characters per request. Preserve this serving limit rather than copying another provider's 10,000-character envelope." },
+  { source_url = "https://fal.ai/models/elevenlabs/tts/eleven-v4-turbo/api", notes = "The linked OpenAPI contract describes the fal queue lifecycle: submission returns QueueStatus, while the linked result schema belongs to result retrieval. It does not imply that submission returns the final model output synchronously." },
+]
+endpoints = [
+  { id = "elevenlabs/tts/eleven-v4-turbo", input = "text", interface = "http", source_url = "https://fal.ai/models/elevenlabs/tts/eleven-v4-turbo/api", request_schema_url = "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=elevenlabs%2Ftts%2Feleven-v4-turbo#/components/schemas/TtsElevenV4TurboInput", result_schema_url = "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=elevenlabs%2Ftts%2Feleven-v4-turbo#/components/schemas/TtsElevenV4TurboOutput" },
 ]
 
 [providers.fal.pricing]
@@ -90,7 +96,6 @@ source_url = "https://fal.ai/models/elevenlabs/tts/eleven-v4-turbo"
 disposition = "listed"
 source_url = "https://elevenlabs.io/docs/eleven-api/guides/how-to/websockets/realtime-tdd"
 
-[pricing]
-type = "per_1000_characters"
-usd = 0.04
-source_url = "https://elevenlabs.io/pricing/api"
+[modalities]
+input = ["text"]
+output = ["audio"]

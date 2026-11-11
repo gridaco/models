@@ -5,57 +5,12 @@ label = "Eleven Sound Effects v3"
 short_description = "Generate loopable sound effects with multi-part prompts, music and vocals."
 vendor = "elevenlabs"
 source_url = "https://elevenlabs.io/docs/overview/models"
-looping = true
+type = "speech"
 
 [release]
 date = "2026-11-02"
 basis = "model"
 source_url = "https://elevenlabs.io/docs/changelog/2026/11/2"
-
-[input]
-type = "text"
-
-[output]
-default_format = "mp3"
-formats = ["alaw", "mp3", "opus", "pcm", "ulaw", "wav"]
-sample_rate_hz = 44100
-bit_rate_kbps = 128
-format_options = [
-  "alaw_8000",
-  "mp3_22050_32",
-  "mp3_24000_48",
-  "mp3_44100_128",
-  "mp3_44100_192",
-  "mp3_44100_32",
-  "mp3_44100_64",
-  "mp3_44100_96",
-  "opus_48000_128",
-  "opus_48000_192",
-  "opus_48000_32",
-  "opus_48000_64",
-  "opus_48000_96",
-  "pcm_16000",
-  "pcm_22050",
-  "pcm_24000",
-  "pcm_32000",
-  "pcm_44100",
-  "pcm_48000",
-  "pcm_8000",
-  "ulaw_8000",
-  "wav_16000",
-  "wav_22050",
-  "wav_24000",
-  "wav_32000",
-  "wav_44100",
-  "wav_48000",
-  "wav_8000",
-]
-source_url = "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert"
-
-[output.duration]
-mode = "automatic_or_fixed"
-min_seconds = 0.5
-max_seconds = 30
 
 [providers]
 
@@ -69,12 +24,21 @@ qualifications = [
   { source_url = "https://elevenlabs.io/pricing/api", notes = "The published Sound Effects price is USD 0.12 per minute, normalized exactly to USD 0.002 per generated second. The former native provider-credit counts are not the current USD API tariff. No minimum charge or duration-rounding rule is inferred." },
   { source_url = "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert", notes = "The default is MP3 at 44.1 kHz / 128 kbps. PCM, WAV, Opus, mu-law and A-law options are also documented, with plan restrictions on some high-quality settings." },
 ]
+endpoints = [
+  { id = "/v1/sound-generation", input = "text", interface = "http", source_url = "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert", request_schema_url = "https://api.elevenlabs.io/openapi.json#/components/schemas/Body_Sound_Generation_v1_sound_generation_post", result_schema_url = "https://api.elevenlabs.io/openapi.json#/paths/~1v1~1sound-generation/post/responses/200/content/audio~1mpeg/schema" },
+]
 
 [providers.fal]
 provider = "fal"
 id = "elevenlabs/sound-effects/v3"
 source_url = "https://fal.ai/models/elevenlabs/sound-effects/v3"
 url = "https://fal.ai/models/elevenlabs/sound-effects/v3"
+endpoints = [
+  { id = "elevenlabs/sound-effects/v3", input = "text", interface = "http", source_url = "https://fal.ai/models/elevenlabs/sound-effects/v3/api", request_schema_url = "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=elevenlabs%2Fsound-effects%2Fv3#/components/schemas/SoundEffectsV3Input", result_schema_url = "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=elevenlabs%2Fsound-effects%2Fv3#/components/schemas/SoundEffectsV3Output" },
+]
+qualifications = [
+  { source_url = "https://fal.ai/models/elevenlabs/sound-effects/v3/api", notes = "The linked OpenAPI contract describes the fal queue lifecycle: submission returns QueueStatus, while the linked result schema belongs to result retrieval. It does not imply that submission returns the final model output synchronously." },
+]
 
 [providers.fal.pricing]
 type = "per_second"
@@ -101,7 +65,6 @@ source_url = "https://fal.ai/models/elevenlabs/sound-effects/v3"
 disposition = "listed"
 source_url = "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert"
 
-[pricing]
-type = "per_second"
-usd = 0.002
-source_url = "https://elevenlabs.io/pricing/api"
+[modalities]
+input = ["text"]
+output = ["audio"]
