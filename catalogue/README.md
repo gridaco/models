@@ -32,21 +32,25 @@ next breaking change.
 it is. The rest is an object of sections. Each section key is a dotted family path, and each
 section is a table of cards keyed by card ID:
 
-| section                           | cards                                        |
-| --------------------------------- | -------------------------------------------- |
-| `decision.models` (optional)      | Bounded classification and scoring offerings |
-| `text.catalog`                    | Language models                              |
-| `image.models`                    | Image generation, with per-provider bindings |
-| `video.models`                    | Video generation, with per-provider bindings |
-| `audio.music.models`              | Music generation                             |
-| `audio.sound_effects.models`      | Sound effects                                |
-| `audio.text_to_speech.models`     | Speech                                       |
-| `three_d.models`                  | 3D generation endpoints                      |
-| `three_d.model_generation.models` | 3D model generation                          |
-| `three_d.rigging.models`          | Rigging                                      |
-| `three_d.rig_check.operation`     | One operation, not a table                   |
-| `image_tools.models`              | Background removal and upscaling             |
-| `embedding.models`                | Embeddings                                   |
+| section                                    | cards                                        |
+| ------------------------------------------ | -------------------------------------------- |
+| `decision.models` (optional)               | Bounded classification and scoring offerings |
+| `text.catalog`                             | Language models                              |
+| `image.models`                             | Image generation, with per-provider bindings |
+| `video.models`                             | Video generation, with per-provider bindings |
+| `audio.music.models`                       | Music generation                             |
+| `audio.sound_effects.models`               | Sound effects                                |
+| `audio.text_to_speech.models`              | Speech                                       |
+| `audio.transcription.models` (optional)    | Batch and streaming speech recognition       |
+| `audio.realtime.models` (optional)         | Conversational speech-to-speech agents       |
+| `audio.voice_design.models` (optional)     | Voice creation from text descriptions        |
+| `audio.voice_conversion.models` (optional) | Voice conversion from recorded speech        |
+| `three_d.models`                           | 3D generation endpoints                      |
+| `three_d.model_generation.models`          | 3D model generation                          |
+| `three_d.rigging.models`                   | Rigging                                      |
+| `three_d.rig_check.operation`              | One operation, not a table                   |
+| `image_tools.models`                       | Background removal and upscaling             |
+| `embedding.models`                         | Embeddings                                   |
 
 Cards are listed in ID order within each section; the order carries no meaning. Every
 card has `id` (equal to its table key), `label`, and `release`

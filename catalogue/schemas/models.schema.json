@@ -46,6 +46,18 @@
     "audio.text_to_speech.models": {
       "$ref": "#/$defs/table"
     },
+    "audio.transcription.models": {
+      "$ref": "#/$defs/table"
+    },
+    "audio.realtime.models": {
+      "$ref": "#/$defs/table"
+    },
+    "audio.voice_design.models": {
+      "$ref": "#/$defs/table"
+    },
+    "audio.voice_conversion.models": {
+      "$ref": "#/$defs/table"
+    },
     "three_d.models": {
       "$ref": "#/$defs/table"
     },
