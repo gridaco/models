@@ -68,6 +68,14 @@ other files that changed since the previous release.
 The catalogue data is MIT licensed. Lab logos are trademarks of their owners and are not
 covered by that license.
 
+Snapshots describe public model facts, not a consuming application's live offering. For
+models currently served by Grida, see the [model directory](https://grida.co/ai/models) or
+[Gateway discovery](https://gateway.grida.ai/v1/models).
+
+When updating a consumer, handle unfamiliar optional display metadata gracefully rather
+than reject the whole catalogue. Execution and pricing fields still need explicit support.
+Coordinate breaking contract changes with consumer updates.
+
 ## Why
 
 Model metadata fragments quickly. The same model ID, context window, price, or release date
