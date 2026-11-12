@@ -118,13 +118,61 @@ byteplus = { "disposition" = "listed", "source_url" = "https://docs.byteplus.com
 provider = "grida"
 id = "bytedance/seedream-5.0-pro"
 url = "https://gateway.grida.ai/v1/models"
-endpoints = [
-  { "id" = "image.bytedance.seedream-5.0-pro.references", "operation" = "image.bytedance.seedream-5.0-pro.references", "input" = "multi_image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bytedance.seedream-5.0-pro.references.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_6", "interface" = "images.edits", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.0675" },
-  ] } },
-  { "id" = "image.bytedance.seedream-5.0-pro.text", "operation" = "image.bytedance.seedream-5.0-pro.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bytedance.seedream-5.0-pro.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_6", "interface" = "images.generations", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.0675" },
-  ] } },
+
+[[providers.grida.endpoints]]
+id = "image.bytedance.seedream-5.0-pro.references"
+operation = "image.bytedance.seedream-5.0-pro.references"
+input = "multi_image"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bytedance.seedream-5.0-pro.references.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_6"
+interface = "images.edits"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.0675" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.1"
+currency = "USD"
+scenario = "One 1024x1024 image, n=1, with a short text prompt and one reference image."
+coverage = "One 1024x1024 output and one reference image. Exact request-to-billed-unit mapping and reference-provider totals remain uncertain; additional outputs are excluded."
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Maintainer GG judgement of USD 0.10, informed by the current GG USD 0.0675 reported-unit tariff and reviewed native single-image examples. Final reference-provider pricing remains unconfirmed; this is not a verified provider quote or a one-request-equals-one-unit claim."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bytedance.seedream-5.0-pro.references.input",
+  "https://docs.byteplus.com/en/docs/ModelArk/model-pricing",
+]
+
+[[providers.grida.endpoints]]
+id = "image.bytedance.seedream-5.0-pro.text"
+operation = "image.bytedance.seedream-5.0-pro.text"
+input = "text"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bytedance.seedream-5.0-pro.text.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_6"
+interface = "images.generations"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.0675" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.1"
+currency = "USD"
+scenario = "One 1024x1024 image, n=1, with a short text prompt."
+coverage = "One 1024x1024 output. Exact request-to-billed-unit mapping and reference-provider totals remain uncertain; additional outputs are excluded."
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Maintainer GG judgement of USD 0.10, informed by the current GG USD 0.0675 reported-unit tariff and reviewed native single-image examples. Final reference-provider pricing remains unconfirmed; this is not a verified provider quote or a one-request-equals-one-unit claim."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bytedance.seedream-5.0-pro.text.input",
+  "https://docs.byteplus.com/en/docs/ModelArk/model-pricing",
 ]
 
 [provider_coverage.grida]

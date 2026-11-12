@@ -75,10 +75,33 @@ google = { "disposition" = "listed", "source_url" = "https://ai.google.dev/gemin
 provider = "grida"
 id = "google/lyria-3"
 url = "https://gateway.grida.ai/v1/models"
-endpoints = [
-  { "id" = "music.google.lyria-3.generate", "operation" = "music.google.lyria-3.generate", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/music.google.lyria-3.generate.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_audio_result", "interface" = "endpoints", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "generation", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.04" },
-  ] } },
+
+[[providers.grida.endpoints]]
+id = "music.google.lyria-3.generate"
+operation = "music.google.lyria-3.generate"
+input = "text"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/music.google.lyria-3.generate.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_audio_result"
+interface = "endpoints"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "generation", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.04" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.04"
+currency = "USD"
+scenario = "One billed music generation from a short text prompt."
+coverage = "One generation under GG's published per-generation price. Output duration and delivered-file count do not define extra billed generations; additional submissions are excluded."
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manually calculated directly from GG's published tariff: one generation at USD 0.04. No fixed song duration or native/reseller conversion is assumed."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/endpoints",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/music.google.lyria-3.generate.input",
+  "https://fal.ai/models/fal-ai/lyria3",
 ]
 
 [provider_coverage.grida]

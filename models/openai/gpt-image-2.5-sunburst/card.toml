@@ -197,13 +197,61 @@ endpoints = [
 provider = "grida"
 id = "openai/gpt-image-2.5-sunburst"
 url = "https://gateway.grida.ai/v1/models"
-endpoints = [
-  { "id" = "image.openai.gpt-image-2.5-sunburst.references", "operation" = "image.openai.gpt-image-2.5-sunburst.references", "input" = "multi_image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.openai.gpt-image-2.5-sunburst.references.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_10", "interface" = "images.edits", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "1" },
-  ] } },
-  { "id" = "image.openai.gpt-image-2.5-sunburst.text", "operation" = "image.openai.gpt-image-2.5-sunburst.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.openai.gpt-image-2.5-sunburst.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_10", "interface" = "images.generations", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "1" },
-  ] } },
+
+[[providers.grida.endpoints]]
+id = "image.openai.gpt-image-2.5-sunburst.references"
+operation = "image.openai.gpt-image-2.5-sunburst.references"
+input = "multi_image"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.openai.gpt-image-2.5-sunburst.references.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_10"
+interface = "images.edits"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "1" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.05"
+currency = "USD"
+scenario = "One 2048x2048 image at medium quality, n=1, with a short text prompt and one reference image."
+coverage = "One static PNG output at the stated size and medium quality, with one reference image. Prompt, reference and text-output token counts can vary; GIF frames and extra outputs are excluded."
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG estimate of USD 0.05, informed by the published 2048x2048 medium output calculation of USD 0.02676 before reference/prompt tokens. Rounded for a short prompt and one reference image; no exact GG billing-unit conversion or actual token count is asserted."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/image.openai.gpt-image-2.5-sunburst.references.input",
+  "https://fal.ai/models/openai/gpt-image-2.5/sunburst/edit",
+]
+
+[[providers.grida.endpoints]]
+id = "image.openai.gpt-image-2.5-sunburst.text"
+operation = "image.openai.gpt-image-2.5-sunburst.text"
+input = "text"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.openai.gpt-image-2.5-sunburst.text.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_10"
+interface = "images.generations"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "1" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.02"
+currency = "USD"
+scenario = "One 1024x1024 image at medium quality, n=1, with a short text prompt."
+coverage = "One static PNG output at the stated size and medium quality. Prompt, reference and text-output token counts can vary; GIF frames and extra outputs are excluded."
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG estimate of USD 0.02, informed by the published 1024x1024 medium output calculation of USD 0.01317 before input tokens. Rounded for a short prompt; no exact GG billing-unit conversion or actual token count is asserted."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/image.openai.gpt-image-2.5-sunburst.text.input",
+  "https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image",
 ]
 
 [provider_coverage.grida]

@@ -107,13 +107,61 @@ bfl = { "disposition" = "listed", "source_url" = "https://bfl.ai/pricing" }
 provider = "grida"
 id = "bfl/flux-2-max"
 url = "https://gateway.grida.ai/v1/models"
-endpoints = [
-  { "id" = "image.bfl.flux-2-max.references", "operation" = "image.bfl.flux-2-max.references", "input" = "multi_image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bfl.flux-2-max.references.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_1", "interface" = "images.edits", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.07" },
-  ] } },
-  { "id" = "image.bfl.flux-2-max.text", "operation" = "image.bfl.flux-2-max.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bfl.flux-2-max.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_1", "interface" = "images.generations", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.07" },
-  ] } },
+
+[[providers.grida.endpoints]]
+id = "image.bfl.flux-2-max.references"
+operation = "image.bfl.flux-2-max.references"
+input = "multi_image"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bfl.flux-2-max.references.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_1"
+interface = "images.edits"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.07" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.15"
+currency = "USD"
+scenario = "One 1024x1024 image, n=1, with a short text prompt and one reference image."
+coverage = "One 1024x1024 output and one 1024x1024 reference image. Actual billed megapixels and prompt usage may differ; additional outputs and references are excluded."
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG estimate using the reviewed USD 0.07 base and USD 0.03 additional-megapixel pricing reference, rounded to USD 0.15 for this configuration. Exact pixel-to-billed-unit rounding is not assumed."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bfl.flux-2-max.references.input",
+  "https://fal.ai/models/fal-ai/flux-2-max/edit",
+]
+
+[[providers.grida.endpoints]]
+id = "image.bfl.flux-2-max.text"
+operation = "image.bfl.flux-2-max.text"
+input = "text"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bfl.flux-2-max.text.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_1"
+interface = "images.generations"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.07" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.1"
+currency = "USD"
+scenario = "One 1024x1024 image, n=1, with a short text prompt."
+coverage = "One 1024x1024 output. Actual billed megapixels and prompt usage may differ; additional outputs and references are excluded."
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG estimate using the reviewed USD 0.07 base and USD 0.03 additional-megapixel pricing reference, rounded to USD 0.1 for this configuration. Exact pixel-to-billed-unit rounding is not assumed."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bfl.flux-2-max.text.input",
+  "https://fal.ai/models/fal-ai/flux-2-max",
 ]
 
 [provider_coverage.grida]

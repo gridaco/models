@@ -207,13 +207,61 @@ source_url = "https://fal.ai/nano-banana-2.1"
 provider = "grida"
 id = "google/gemini-nano-banana-2.1"
 url = "https://gateway.grida.ai/v1/models"
-endpoints = [
-  { "id" = "image.google.gemini-nano-banana-2.1.references", "operation" = "image.google.gemini-nano-banana-2.1.references", "input" = "multi_image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.google.gemini-nano-banana-2.1.references.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4", "interface" = "images.edits", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_standard_cost_mills", "meter" = "fal_standard_cost_mills", "unit" = "mill", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.001" },
-  ] } },
-  { "id" = "image.google.gemini-nano-banana-2.1.text", "operation" = "image.google.gemini-nano-banana-2.1.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.google.gemini-nano-banana-2.1.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4", "interface" = "images.generations", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_standard_cost_mills", "meter" = "fal_standard_cost_mills", "unit" = "mill", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.001" },
-  ] } },
+
+[[providers.grida.endpoints]]
+id = "image.google.gemini-nano-banana-2.1.references"
+operation = "image.google.gemini-nano-banana-2.1.references"
+input = "multi_image"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.google.gemini-nano-banana-2.1.references.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4"
+interface = "images.edits"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_standard_cost_mills", "meter" = "fal_standard_cost_mills", "unit" = "mill", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.001" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.06"
+currency = "USD"
+scenario = "One 1K image, n=1, with a short text prompt and one reference image."
+coverage = "One 1K output and a short prompt, plus one reference image. Input and thinking-token counts vary; web search and extra outputs are excluded."
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG estimate of USD 0.06, informed by reviewed 1K image-output examples near USD 0.04 before variable input and thinking tokens. The amount is rounded with a planning allowance for the selected input, not an exact token prediction."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/image.google.gemini-nano-banana-2.1.references.input",
+  "https://fal.ai/models/google/nano-banana-2.1/edit",
+]
+
+[[providers.grida.endpoints]]
+id = "image.google.gemini-nano-banana-2.1.text"
+operation = "image.google.gemini-nano-banana-2.1.text"
+input = "text"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.google.gemini-nano-banana-2.1.text.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4"
+interface = "images.generations"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_standard_cost_mills", "meter" = "fal_standard_cost_mills", "unit" = "mill", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.001" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.05"
+currency = "USD"
+scenario = "One 1K image, n=1, with a short text prompt."
+coverage = "One 1K output and a short prompt. Input and thinking-token counts vary; web search and extra outputs are excluded."
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG estimate of USD 0.05, informed by reviewed 1K image-output examples near USD 0.04 before variable input and thinking tokens. The amount is rounded with a planning allowance for the selected input, not an exact token prediction."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/image.google.gemini-nano-banana-2.1.text.input",
+  "https://fal.ai/models/google/nano-banana-2.1",
 ]
 
 [provider_coverage.grida]

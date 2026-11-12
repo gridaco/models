@@ -40,10 +40,33 @@ fal = { disposition = "not_listed", source_url = "https://fal.ai/models", reason
 provider = "grida"
 id = "three-d.tripo.rig-check"
 url = "https://gateway.grida.ai/v1/endpoints"
-endpoints = [
-  { "id" = "three-d.tripo.rig-check", "operation" = "three-d.tripo.rig-check", "input" = "asset", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.tripo.rig-check.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/rig_check_result", "interface" = "endpoints", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/endpoints", "currency" = "USD", "components" = [
-    { "id" = "provider_credits", "meter" = "provider_credits", "unit" = "provider_credit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
-  ] } },
+
+[[providers.grida.endpoints]]
+id = "three-d.tripo.rig-check"
+operation = "three-d.tripo.rig-check"
+input = "asset"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.tripo.rig-check.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/rig_check_result"
+interface = "endpoints"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/endpoints", "currency" = "USD", "components" = [
+  { "id" = "provider_credits", "meter" = "provider_credits", "unit" = "provider_credit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0"
+currency = "USD"
+scenario = "One rig-eligibility check on one GLB mesh."
+coverage = "One check with zero consumed provider credits. Subsequent paid rigging or generation is excluded."
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manually reviewed as the free rig-check operation: the published provider check consumes no credits, so applying GG's per-credit tariff to zero credits gives zero. This does not imply that paid rigging is free."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/endpoints",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.tripo.rig-check.input",
+  "https://developers.tripo3d.ai/en/pricing",
 ]
 
 [provider_coverage.grida]

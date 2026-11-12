@@ -135,13 +135,61 @@ ideogram = { "disposition" = "listed", "source_url" = "https://developer.ideogra
 provider = "grida"
 id = "ideogram/ideogram-4.5"
 url = "https://gateway.grida.ai/v1/models"
-endpoints = [
-  { "id" = "image.ideogram.ideogram-4.5.text", "operation" = "image.ideogram.ideogram-4.5.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.ideogram.ideogram-4.5.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4", "interface" = "images.generations", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.001" },
-  ] } },
-  { "id" = "image.ideogram.ideogram-4.5.references", "operation" = "image.ideogram.ideogram-4.5.references", "input" = "multi_image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.ideogram.ideogram-4.5.references.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4", "interface" = "images.edits", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.001" },
-  ] } },
+
+[[providers.grida.endpoints]]
+id = "image.ideogram.ideogram-4.5.text"
+operation = "image.ideogram.ideogram-4.5.text"
+input = "text"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.ideogram.ideogram-4.5.text.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4"
+interface = "images.generations"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.001" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.06"
+currency = "USD"
+scenario = "One square_hd image at medium quality, n=1, with a short text prompt."
+coverage = "One square_hd medium-quality output. Extra outputs and other quality tiers are excluded."
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG estimate of USD 0.06, informed by the reviewed medium-quality single-output reference. The scenario uses GG's supported medium quality rather than another provider's high-quality tier."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/image.ideogram.ideogram-4.5.text.input",
+  "https://fal.ai/models/ideogram/v4.5",
+]
+
+[[providers.grida.endpoints]]
+id = "image.ideogram.ideogram-4.5.references"
+operation = "image.ideogram.ideogram-4.5.references"
+input = "multi_image"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.ideogram.ideogram-4.5.references.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4"
+interface = "images.edits"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.001" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.06"
+currency = "USD"
+scenario = "One square_hd image at medium quality, n=1, with a short text prompt and one reference image."
+coverage = "One square_hd medium-quality output and one reference image. Extra outputs and other quality tiers are excluded."
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG estimate of USD 0.06, informed by the reviewed medium-quality single-output reference. The scenario uses GG's supported medium quality rather than another provider's high-quality tier."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/image.ideogram.ideogram-4.5.references.input",
+  "https://fal.ai/models/ideogram/v4.5/edit",
 ]
 
 [provider_coverage.grida]

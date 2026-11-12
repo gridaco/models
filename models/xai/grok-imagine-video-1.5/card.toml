@@ -146,13 +146,61 @@ endpoints = [
 provider = "grida"
 id = "xai/grok-imagine-video-1.5"
 url = "https://gateway.grida.ai/v1/models"
-endpoints = [
-  { "id" = "video.xai.grok-imagine-video-1.5.image", "operation" = "video.xai.grok-imagine-video-1.5.image", "input" = "image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.xai.grok-imagine-video-1.5.image.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result", "interface" = "videos", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
-  ] } },
-  { "id" = "video.xai.grok-imagine-video-1.5.text", "operation" = "video.xai.grok-imagine-video-1.5.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.xai.grok-imagine-video-1.5.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result", "interface" = "videos", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
-  ] } },
+
+[[providers.grida.endpoints]]
+id = "video.xai.grok-imagine-video-1.5.image"
+operation = "video.xai.grok-imagine-video-1.5.image"
+input = "image"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.xai.grok-imagine-video-1.5.image.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result"
+interface = "videos"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.75"
+currency = "USD"
+scenario = "One 5-second 720p video from one 16:9 input image, with standard GG settings."
+coverage = "One 5-second 720p clip and one 16:9 input image. Actual reported units can differ with input content; additional clips and other operations are excluded."
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG estimate rounded to USD 0.75, informed by the reviewed 720p output reference of USD 0.14 per second, or USD 0.70 for five seconds, plus the USD 0.01 single-reference example. It is not an exact conversion of GG reported units."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/video.xai.grok-imagine-video-1.5.image.input",
+  "https://fal.ai/models/xai/grok-imagine-video/v1.5/image-to-video",
+]
+
+[[providers.grida.endpoints]]
+id = "video.xai.grok-imagine-video-1.5.text"
+operation = "video.xai.grok-imagine-video-1.5.text"
+input = "text"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.xai.grok-imagine-video-1.5.text.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result"
+interface = "videos"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.7"
+currency = "USD"
+scenario = "One 5-second 720p video from a short text prompt, with standard GG settings."
+coverage = "One 5-second 720p clip. Actual reported units can differ with input content; additional clips and other operations are excluded."
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG estimate rounded to USD 0.7, informed by the reviewed 720p output reference of USD 0.14 per second, or USD 0.70 for five seconds. It is not an exact conversion of GG reported units."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/video.xai.grok-imagine-video-1.5.text.input",
+  "https://fal.ai/models/xai/grok-imagine-video/v1.5/text-to-video",
 ]
 
 [provider_coverage.grida]

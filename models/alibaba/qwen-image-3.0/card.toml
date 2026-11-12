@@ -68,13 +68,61 @@ alibaba = { "disposition" = "listed", "source_url" = "https://help.aliyun.com/en
 provider = "grida"
 id = "alibaba/qwen-image-3.0"
 url = "https://gateway.grida.ai/v1/models"
-endpoints = [
-  { "id" = "image.alibaba.qwen-image-3.0.text", "operation" = "image.alibaba.qwen-image-3.0.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.alibaba.qwen-image-3.0.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4", "interface" = "images.generations", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
-  ] } },
-  { "id" = "image.alibaba.qwen-image-3.0.references", "operation" = "image.alibaba.qwen-image-3.0.references", "input" = "multi_image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.alibaba.qwen-image-3.0.references.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4", "interface" = "images.edits", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
-  ] } },
+
+[[providers.grida.endpoints]]
+id = "image.alibaba.qwen-image-3.0.text"
+operation = "image.alibaba.qwen-image-3.0.text"
+input = "text"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.alibaba.qwen-image-3.0.text.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4"
+interface = "images.generations"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.05"
+currency = "USD"
+scenario = "One square_hd image, n=1, with a short text prompt."
+coverage = "One square_hd output; additional outputs are excluded."
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG estimate rounded from the reviewed USD 0.04 1K output reference to USD 0.05. The CNY native Standard schedule is not converted or substituted for this GG illustration."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/image.alibaba.qwen-image-3.0.text.input",
+  "https://fal.ai/models/alibaba/qwen-image-3/text-to-image",
+]
+
+[[providers.grida.endpoints]]
+id = "image.alibaba.qwen-image-3.0.references"
+operation = "image.alibaba.qwen-image-3.0.references"
+input = "multi_image"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.alibaba.qwen-image-3.0.references.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4"
+interface = "images.edits"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.05"
+currency = "USD"
+scenario = "One square_hd image, n=1, with a short text prompt and one reference image."
+coverage = "One square_hd output with one reference image; any separate reference-input charge is not independently quantified."
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG estimate rounded from the reviewed USD 0.04 1K output reference to USD 0.05. The CNY native Standard schedule is not converted or substituted for this GG illustration."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/image.alibaba.qwen-image-3.0.references.input",
+  "https://fal.ai/models/alibaba/qwen-image-3/edit",
 ]
 
 [provider_coverage.grida]
