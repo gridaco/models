@@ -8098,6 +8098,36 @@
               "source_url": "https://help.aliyun.com/en/model-studio/qwen-image-3-0",
               "notes": "Native regular prices are quoted in CNY per input and generated image, with regional rates. No USD conversion is made. Qwen Image 3.0 Standard is distinct from qwen-image-3.0-pro."
             }
+          ],
+          "illustrative_costs": [
+            {
+              "amount": "0.2",
+              "currency": "CNY",
+              "scenario": "Native Standard image editing in Beijing with one input image and one 1K output image.",
+              "coverage": "CNY input-image and generated-image charges only; exact native Standard variant and Beijing region. No USD conversion.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from the native Standard Beijing schedule: CNY 0.02 for one input image plus CNY 0.18 for one generated image.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://help.aliyun.com/en/model-studio/qwen-image-3-0"
+                ]
+              }
+            },
+            {
+              "amount": "0.247309",
+              "currency": "CNY",
+              "scenario": "Native Standard image editing in Singapore with one input image and one 1K output image.",
+              "coverage": "CNY input-image and generated-image charges only; International Singapore schedule. No USD conversion.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from the native Standard Singapore schedule: CNY 0.022483 for one input image plus CNY 0.224826 for one generated image.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://help.aliyun.com/en/model-studio/qwen-image-3-0"
+                ]
+              }
+            }
           ]
         },
         "fal": {
@@ -8527,6 +8557,22 @@
                 }
               }
             }
+          ],
+          "illustrative_costs": [
+            {
+              "amount": "0.1",
+              "currency": "USD",
+              "scenario": "One edited image with one billed output megapixel and one billed reference-image megapixel.",
+              "coverage": "Selected billed quantities, not inferred pixel dimensions. Includes the base allowance for the first processed megapixel plus one additional processed megapixel; both input and output count.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated for the fal edit endpoint: USD 0.07 includes the first processed megapixel, then one additional processed megapixel costs USD 0.03. Input and output both count toward the stated two billed megapixels.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://fal.ai/models/fal-ai/flux-2-max/edit"
+                ]
+              }
+            }
           ]
         },
         "bfl": {
@@ -8814,6 +8860,22 @@
                 "seed": {
                   "type": "integer"
                 }
+              }
+            }
+          ],
+          "illustrative_costs": [
+            {
+              "amount": "0.045",
+              "currency": "USD",
+              "scenario": "One edited image with one billed output megapixel and one billed reference-image megapixel.",
+              "coverage": "Selected billed quantities, not inferred pixel dimensions. Includes the first output-megapixel charge and one reference-image-megapixel charge; other references excluded.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated for the fal edit endpoint: USD 0.03 for the first output megapixel plus USD 0.015 for one billed reference-image megapixel.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://fal.ai/models/fal-ai/flux-2-pro/edit"
+                ]
               }
             }
           ]
@@ -9164,7 +9226,23 @@
             "type": "per_megapixel",
             "usd": 0.048,
             "source_url": "https://fal.ai/models/blackforestlabs/flux-3/text-to-image"
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.096",
+              "currency": "USD",
+              "scenario": "One image with two billed output megapixels.",
+              "coverage": "Output megapixel component only; no image-input fee or request-total claim. Pixel-to-billed-MP conversion is outside this scenario.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated as two billed output megapixels multiplied by the fal text-to-image rate of USD 0.048 per megapixel.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://fal.ai/models/blackforestlabs/flux-3/text-to-image"
+                ]
+              }
+            }
+          ]
         },
         "grida": {
           "provider": "grida",
@@ -9452,7 +9530,23 @@
             "usd": 0.04,
             "rounding": "ceil",
             "source_url": "https://fal.ai/models/fal-ai/flux-pro/v1.1"
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.08",
+              "currency": "USD",
+              "scenario": "One generated image with two billed megapixels.",
+              "coverage": "Fal output-megapixel component only, using two already-billed units. Other input or ancillary charges are excluded.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated as two billed output megapixels multiplied by the fal rate of USD 0.04 per megapixel.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://fal.ai/models/fal-ai/flux-pro/v1.1"
+                ]
+              }
+            }
+          ]
         }
       },
       "provider_coverage": {
@@ -10022,7 +10116,37 @@
             "included_input_images": 1,
             "usd_per_additional_input_image": 0.003,
             "source_url": "https://docs.byteplus.com/en/docs/ModelArk/model-pricing"
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.051",
+              "currency": "USD",
+              "scenario": "One image at or below 2.61 million output pixels, using three input images.",
+              "coverage": "Single-image generation charge 0.045 plus two additional input images at 0.003; first input image included. Excludes layer decomposition.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from the native single-image generation schedule: USD 0.045 for the selected output tier plus two additional input images at USD 0.003 each; the first input image is included.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://docs.byteplus.com/en/docs/ModelArk/model-pricing"
+                ]
+              }
+            },
+            {
+              "amount": "0.096",
+              "currency": "USD",
+              "scenario": "One image above 2.61 million output pixels, using three input images.",
+              "coverage": "Single-image generation charge 0.09 plus two additional input images at 0.003; first input image included. Excludes layer decomposition.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from the native single-image generation schedule: USD 0.09 for the selected output tier plus two additional input images at USD 0.003 each; the first input image is included.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://docs.byteplus.com/en/docs/ModelArk/model-pricing"
+                ]
+              }
+            }
+          ]
         },
         "grida": {
           "provider": "grida",
@@ -10340,7 +10464,37 @@
             "text_output": 12,
             "output": 120,
             "source_url": "https://ai.google.dev/gemini-api/docs/pricing"
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.134",
+              "currency": "USD",
+              "scenario": "One 1K/2K generated image at Standard pricing.",
+              "coverage": "Image-output component only. Source-published approximate/rounded price where applicable; excludes input tokens, text/thinking output and grounding charges.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Manually transcribed the native Standard image-output example for the stated resolution. The provider publishes USD 0.134 for that output component; any source rounding is retained rather than inferred as an exact complete request bill.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://aistudio.google.com/docs/pricing"
+                ]
+              }
+            },
+            {
+              "amount": "0.24",
+              "currency": "USD",
+              "scenario": "One 4K (up to 4096x4096) generated image at Standard pricing.",
+              "coverage": "Image-output component only. Source-published approximate/rounded price where applicable; excludes input tokens, text/thinking output and grounding charges.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Manually transcribed the native Standard image-output example for the stated resolution. The provider publishes USD 0.24 for that output component; any source rounding is retained rather than inferred as an exact complete request bill.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://aistudio.google.com/docs/pricing"
+                ]
+              }
+            }
+          ]
         },
         "grida": {
           "provider": "grida",
@@ -10668,7 +10822,51 @@
             "text_output": 3,
             "output": 60,
             "source_url": "https://ai.google.dev/gemini-api/docs/pricing"
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.045",
+              "currency": "USD",
+              "scenario": "One 0.5K (512px) generated image at Standard pricing.",
+              "coverage": "Image-output component only. Source-published approximate/rounded price where applicable; excludes input tokens, text/thinking output and grounding charges.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Manually transcribed the native Standard image-output example for the stated resolution. The provider publishes USD 0.045 for that output component; any source rounding is retained rather than inferred as an exact complete request bill.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://aistudio.google.com/docs/pricing"
+                ]
+              }
+            },
+            {
+              "amount": "0.101",
+              "currency": "USD",
+              "scenario": "One 2K (2048x2048) generated image at Standard pricing.",
+              "coverage": "Image-output component only. Source-published approximate/rounded price where applicable; excludes input tokens, text/thinking output and grounding charges.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Manually transcribed the native Standard image-output example for the stated resolution. The provider publishes USD 0.101 for that output component; any source rounding is retained rather than inferred as an exact complete request bill.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://aistudio.google.com/docs/pricing"
+                ]
+              }
+            },
+            {
+              "amount": "0.151",
+              "currency": "USD",
+              "scenario": "One 4K (4096x4096) generated image at Standard pricing.",
+              "coverage": "Image-output component only. Source-published approximate/rounded price where applicable; excludes input tokens, text/thinking output and grounding charges.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Manually transcribed the native Standard image-output example for the stated resolution. The provider publishes USD 0.151 for that output component; any source rounding is retained rather than inferred as an exact complete request bill.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://aistudio.google.com/docs/pricing"
+                ]
+              }
+            }
+          ]
         },
         "grida": {
           "provider": "grida",
@@ -10810,7 +11008,23 @@
             "text_output": 1.5,
             "output": 30,
             "source_url": "https://ai.google.dev/gemini-api/docs/pricing"
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.0336",
+              "currency": "USD",
+              "scenario": "One 1K (1024x1024) generated image at Standard pricing.",
+              "coverage": "Image-output component only. Source-published approximate/rounded price where applicable; excludes input tokens, text/thinking output and grounding charges.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Manually transcribed the native Standard image-output example for the stated resolution. The provider publishes USD 0.0336 for that output component; any source rounding is retained rather than inferred as an exact complete request bill.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://aistudio.google.com/docs/pricing"
+                ]
+              }
+            }
+          ]
         },
         "fal": {
           "provider": "fal",
@@ -10900,6 +11114,50 @@
               "id": "gemini-nano-banana-2.1",
               "input": "text",
               "source_url": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1"
+            }
+          ],
+          "illustrative_costs": [
+            {
+              "amount": "0.0336",
+              "currency": "USD",
+              "scenario": "One 1K (1024x1024) generated image at Standard pricing.",
+              "coverage": "Image-output component only. Source-published approximate/rounded price where applicable; excludes input tokens, text/thinking output and grounding charges.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Manually transcribed the native Standard image-output example for the stated resolution. The provider publishes USD 0.0336 for that output component; any source rounding is retained rather than inferred as an exact complete request bill.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://aistudio.google.com/docs/pricing"
+                ]
+              }
+            },
+            {
+              "amount": "0.0504",
+              "currency": "USD",
+              "scenario": "One 2K (2048x2048) generated image at Standard pricing.",
+              "coverage": "Image-output component only. Source-published approximate/rounded price where applicable; excludes input tokens, text/thinking output and grounding charges.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Manually transcribed the native Standard image-output example for the stated resolution. The provider publishes USD 0.0504 for that output component; any source rounding is retained rather than inferred as an exact complete request bill.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://aistudio.google.com/docs/pricing"
+                ]
+              }
+            },
+            {
+              "amount": "0.113",
+              "currency": "USD",
+              "scenario": "One 4K (4096x4096) generated image at Standard pricing.",
+              "coverage": "Image-output component only. Source-published approximate/rounded price where applicable; excludes input tokens, text/thinking output and grounding charges.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Manually transcribed the native Standard image-output example for the stated resolution. The provider publishes USD 0.113 for that output component; any source rounding is retained rather than inferred as an exact complete request bill.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://aistudio.google.com/docs/pricing"
+                ]
+              }
             }
           ]
         },
@@ -12162,7 +12420,51 @@
             "output": 8,
             "type": "per_token",
             "source_url": "https://developers.openai.com/api/docs/models/gpt-image-1-mini"
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.005",
+              "currency": "USD",
+              "scenario": "One 1024x1024 still image at low quality.",
+              "coverage": "Published image-output amount only; excludes text/image input tokens and other request components.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Manually transcribed the native model page's 1024x1024, low-quality image-output example. The source presents this as an approximate output cost, with input-token charges separate.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://developers.openai.com/api/docs/models/gpt-image-1-mini"
+                ]
+              }
+            },
+            {
+              "amount": "0.011",
+              "currency": "USD",
+              "scenario": "One 1024x1024 still image at medium quality.",
+              "coverage": "Published image-output amount only; excludes text/image input tokens and other request components.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Manually transcribed the native model page's 1024x1024, medium-quality image-output example. The source presents this as an approximate output cost, with input-token charges separate.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://developers.openai.com/api/docs/models/gpt-image-1-mini"
+                ]
+              }
+            },
+            {
+              "amount": "0.036",
+              "currency": "USD",
+              "scenario": "One 1024x1024 still image at high quality.",
+              "coverage": "Published image-output amount only; excludes text/image input tokens and other request components.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Manually transcribed the native model page's 1024x1024, high-quality image-output example. The source presents this as an approximate output cost, with input-token charges separate.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://developers.openai.com/api/docs/models/gpt-image-1-mini"
+                ]
+              }
+            }
+          ]
         },
         "fal": {
           "provider": "fal",
@@ -12351,7 +12653,51 @@
             "output": 32,
             "type": "per_token",
             "source_url": "https://developers.openai.com/api/docs/models/gpt-image-1.5"
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.009",
+              "currency": "USD",
+              "scenario": "One 1024x1024 still image at low quality.",
+              "coverage": "Published image-output amount only; excludes text/image input tokens and other request components.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Manually transcribed the native model page's 1024x1024, low-quality image-output example. The source presents this as an approximate output cost, with input-token charges separate.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://developers.openai.com/api/docs/models/gpt-image-1.5"
+                ]
+              }
+            },
+            {
+              "amount": "0.034",
+              "currency": "USD",
+              "scenario": "One 1024x1024 still image at medium quality.",
+              "coverage": "Published image-output amount only; excludes text/image input tokens and other request components.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Manually transcribed the native model page's 1024x1024, medium-quality image-output example. The source presents this as an approximate output cost, with input-token charges separate.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://developers.openai.com/api/docs/models/gpt-image-1.5"
+                ]
+              }
+            },
+            {
+              "amount": "0.133",
+              "currency": "USD",
+              "scenario": "One 1024x1024 still image at high quality.",
+              "coverage": "Published image-output amount only; excludes text/image input tokens and other request components.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Manually transcribed the native model page's 1024x1024, high-quality image-output example. The source presents this as an approximate output cost, with input-token charges separate.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://developers.openai.com/api/docs/models/gpt-image-1.5"
+                ]
+              }
+            }
+          ]
         },
         "fal": {
           "provider": "fal",
@@ -12649,7 +12995,39 @@
             "output": 30,
             "type": "per_token",
             "source_url": "https://developers.openai.com/api/docs/models/gpt-image-2"
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.05268",
+              "currency": "USD",
+              "scenario": "One 1024x1024 still image at medium quality (1756 published-calculator output tokens).",
+              "coverage": "Standard image-output component only. Excludes prompt/reference tokens, streaming partial images, Responses mainline usage, GIF/SVG work and other charges.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated with the provider's currently published model-family calculator: 1756 output-image tokens multiplied by USD 30 per million tokens equals USD 0.05268. The selected size and quality are explicit; this is not a measured run average.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://developers.openai.com/api/docs/models/gpt-image-2",
+                  "https://developers.openai.com/api/docs/guides/image-generation"
+                ]
+              }
+            },
+            {
+              "amount": "0.21072",
+              "currency": "USD",
+              "scenario": "One 1024x1024 still image at high quality (7024 published-calculator output tokens).",
+              "coverage": "Standard image-output component only. Excludes prompt/reference tokens, streaming partial images, Responses mainline usage, GIF/SVG work and other charges.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated with the provider's currently published model-family calculator: 7024 output-image tokens multiplied by USD 30 per million tokens equals USD 0.21072. The selected size and quality are explicit; this is not a measured run average.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://developers.openai.com/api/docs/models/gpt-image-2",
+                  "https://developers.openai.com/api/docs/guides/image-generation"
+                ]
+              }
+            }
+          ]
         },
         "openrouter": {
           "provider": "openrouter",
@@ -13194,7 +13572,39 @@
             "image_input": 8,
             "cached_image_input": 2,
             "source_url": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare"
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.01317",
+              "currency": "USD",
+              "scenario": "One 1024x1024 still image at medium quality (439 published-calculator output tokens).",
+              "coverage": "Standard image-output component only. Excludes prompt/reference tokens, streaming partial images, Responses mainline usage, GIF/SVG work and other charges.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated with the provider's currently published model-family calculator: 439 output-image tokens multiplied by USD 30 per million tokens equals USD 0.01317. The selected size and quality are explicit; this is not a measured run average.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+                  "https://developers.openai.com/api/docs/guides/image-generation"
+                ]
+              }
+            },
+            {
+              "amount": "0.05268",
+              "currency": "USD",
+              "scenario": "One 1024x1024 still image at high quality (1756 published-calculator output tokens).",
+              "coverage": "Standard image-output component only. Excludes prompt/reference tokens, streaming partial images, Responses mainline usage, GIF/SVG work and other charges.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated with the provider's currently published model-family calculator: 1756 output-image tokens multiplied by USD 30 per million tokens equals USD 0.05268. The selected size and quality are explicit; this is not a measured run average.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+                  "https://developers.openai.com/api/docs/guides/image-generation"
+                ]
+              }
+            }
+          ]
         },
         "openrouter": {
           "provider": "openrouter",
@@ -13952,7 +14362,39 @@
             "image_input": 8,
             "cached_image_input": 2,
             "source_url": "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst"
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.01317",
+              "currency": "USD",
+              "scenario": "One 1024x1024 still image at medium quality (439 published-calculator output tokens).",
+              "coverage": "Standard image-output component only. Excludes prompt/reference tokens, streaming partial images, Responses mainline usage, GIF/SVG work and other charges.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated with the provider's currently published model-family calculator: 439 output-image tokens multiplied by USD 30 per million tokens equals USD 0.01317. The selected size and quality are explicit; this is not a measured run average.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
+                  "https://developers.openai.com/api/docs/guides/image-generation"
+                ]
+              }
+            },
+            {
+              "amount": "0.05268",
+              "currency": "USD",
+              "scenario": "One 1024x1024 still image at high quality (1756 published-calculator output tokens).",
+              "coverage": "Standard image-output component only. Excludes prompt/reference tokens, streaming partial images, Responses mainline usage, GIF/SVG work and other charges.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated with the provider's currently published model-family calculator: 1756 output-image tokens multiplied by USD 30 per million tokens equals USD 0.05268. The selected size and quality are explicit; this is not a measured run average.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
+                  "https://developers.openai.com/api/docs/guides/image-generation"
+                ]
+              }
+            }
+          ]
         },
         "openrouter": {
           "provider": "openrouter",
@@ -14770,7 +15212,37 @@
             "cached_image_input": 2,
             "text_output": 10,
             "output": 30
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.0969",
+              "currency": "USD",
+              "scenario": "openai/gpt-image-2.6/flare/edit: one 2048x2048 medium-quality edit with 2944 output-image tokens, 1000 reference-image input tokens and 100 prompt tokens.",
+              "coverage": "Includes the selected image-output and reference/prompt input charges, with rounding the total up once per request to the next USD 0.0001. Excludes text output and any other unselected components.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "The fal edit page publishes this sample: USD 0.08832 image output + USD 0.008 reference-image input + USD 0.0005 prompt input = USD 0.09682, rounded upward once per request to the next USD 0.0001 increment, giving USD 0.0969.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://fal.ai/models/openai/gpt-image-2.6/flare/edit"
+                ]
+              }
+            },
+            {
+              "amount": "0.1069",
+              "currency": "USD",
+              "scenario": "openai/gpt-image-2.6/flare/edit: one 2048x2048 medium-quality edit with 2944 output-image tokens, 1000 reference-image input tokens, 100 prompt tokens and 1000 text-output tokens.",
+              "coverage": "Includes all four selected token components and rounding the total up once per request to the next USD 0.0001. This scenario does not predict how many text or image tokens a different request will produce.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "The fal edit page extends its sample by USD 0.01 for 1000 text-output tokens: USD 0.08832 + USD 0.008 + USD 0.0005 + USD 0.01 = USD 0.10682, rounded upward once per request to the next USD 0.0001 increment, giving USD 0.1069.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://fal.ai/models/openai/gpt-image-2.6/flare/edit"
+                ]
+              }
+            }
+          ]
         },
         "openai": {
           "provider": "openai",
@@ -14872,7 +15344,39 @@
             "image_input": 8,
             "cached_image_input": 2,
             "source_url": "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare"
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.04347",
+              "currency": "USD",
+              "scenario": "One 1024x1024 still image at medium quality (1449 published-calculator output tokens).",
+              "coverage": "Standard image-output component only. Excludes prompt/reference tokens, streaming partial images, Responses mainline usage, GIF/SVG work and other charges.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated with the provider's currently published model-family calculator: 1449 output-image tokens multiplied by USD 30 per million tokens equals USD 0.04347. The selected size and quality are explicit; this is not a measured run average.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare",
+                  "https://developers.openai.com/api/docs/guides/image-generation"
+                ]
+              }
+            },
+            {
+              "amount": "0.05268",
+              "currency": "USD",
+              "scenario": "One 1024x1024 still image at high quality (1756 published-calculator output tokens).",
+              "coverage": "Standard image-output component only. Excludes prompt/reference tokens, streaming partial images, Responses mainline usage, GIF/SVG work and other charges.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated with the provider's currently published model-family calculator: 1756 output-image tokens multiplied by USD 30 per million tokens equals USD 0.05268. The selected size and quality are explicit; this is not a measured run average.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare",
+                  "https://developers.openai.com/api/docs/guides/image-generation"
+                ]
+              }
+            }
+          ]
         },
         "openrouter": {
           "provider": "openrouter",
@@ -15431,7 +15935,37 @@
             "cached_image_input": 2,
             "text_output": 10,
             "output": 30
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.0969",
+              "currency": "USD",
+              "scenario": "openai/gpt-image-2.6/sunburst/edit: one 2048x2048 medium-quality edit with 2944 output-image tokens, 1000 reference-image input tokens and 100 prompt tokens.",
+              "coverage": "Includes the selected image-output and reference/prompt input charges, with rounding the total up once per request to the next USD 0.0001. Excludes text output and any other unselected components.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "The fal edit page publishes this sample: USD 0.08832 image output + USD 0.008 reference-image input + USD 0.0005 prompt input = USD 0.09682, rounded upward once per request to the next USD 0.0001 increment, giving USD 0.0969.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://fal.ai/models/openai/gpt-image-2.6/sunburst/edit"
+                ]
+              }
+            },
+            {
+              "amount": "0.1069",
+              "currency": "USD",
+              "scenario": "openai/gpt-image-2.6/sunburst/edit: one 2048x2048 medium-quality edit with 2944 output-image tokens, 1000 reference-image input tokens, 100 prompt tokens and 1000 text-output tokens.",
+              "coverage": "Includes all four selected token components and rounding the total up once per request to the next USD 0.0001. This scenario does not predict how many text or image tokens a different request will produce.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "The fal edit page extends its sample by USD 0.01 for 1000 text-output tokens: USD 0.08832 + USD 0.008 + USD 0.0005 + USD 0.01 = USD 0.10682, rounded upward once per request to the next USD 0.0001 increment, giving USD 0.1069.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://fal.ai/models/openai/gpt-image-2.6/sunburst/edit"
+                ]
+              }
+            }
+          ]
         },
         "openai": {
           "provider": "openai",
@@ -15533,7 +16067,39 @@
             "image_input": 8,
             "cached_image_input": 2,
             "source_url": "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst"
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.04347",
+              "currency": "USD",
+              "scenario": "One 1024x1024 still image at medium quality (1449 published-calculator output tokens).",
+              "coverage": "Standard image-output component only. Excludes prompt/reference tokens, streaming partial images, Responses mainline usage, GIF/SVG work and other charges.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated with the provider's currently published model-family calculator: 1449 output-image tokens multiplied by USD 30 per million tokens equals USD 0.04347. The selected size and quality are explicit; this is not a measured run average.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst",
+                  "https://developers.openai.com/api/docs/guides/image-generation"
+                ]
+              }
+            },
+            {
+              "amount": "0.05268",
+              "currency": "USD",
+              "scenario": "One 1024x1024 still image at high quality (1756 published-calculator output tokens).",
+              "coverage": "Standard image-output component only. Excludes prompt/reference tokens, streaming partial images, Responses mainline usage, GIF/SVG work and other charges.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated with the provider's currently published model-family calculator: 1756 output-image tokens multiplied by USD 30 per million tokens equals USD 0.05268. The selected size and quality are explicit; this is not a measured run average.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst",
+                  "https://developers.openai.com/api/docs/guides/image-generation"
+                ]
+              }
+            }
+          ]
         },
         "openrouter": {
           "provider": "openrouter",
@@ -15828,7 +16394,23 @@
             "type": "per_image_flat",
             "usd": 0.04,
             "source_url": "https://www.recraft.ai/docs/api-reference/pricing"
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.045",
+              "currency": "USD",
+              "scenario": "One raster image generated using style references that create one style.",
+              "coverage": "One raster image plus the separately published 0.005 style-creation request charge; excludes vector/Pro output variants.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from the native raster generation price of USD 0.04 and the separate USD 0.005 style-creation charge when generation uses style references.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://www.recraft.ai/docs/api-reference/pricing"
+                ]
+              }
+            }
+          ]
         }
       },
       "provider_coverage": {
@@ -15953,7 +16535,23 @@
             "type": "per_image_flat",
             "usd": 0.035,
             "source_url": "https://www.recraft.ai/docs/api-reference/pricing"
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.04",
+              "currency": "USD",
+              "scenario": "One raster image generated using style references that create one style.",
+              "coverage": "One raster image plus the separately published 0.005 style-creation request charge; excludes vector/Pro output variants.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from the native raster generation price of USD 0.035 and the separate USD 0.005 style-creation charge when generation uses style references.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://www.recraft.ai/docs/api-reference/pricing"
+                ]
+              }
+            }
+          ]
         },
         "grida": {
           "provider": "grida",
@@ -16285,7 +16883,24 @@
             },
             "input_image_usd": 0.01,
             "source_url": "https://docs.x.ai/developers/models/grok-imagine-image-2.0"
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.11",
+              "currency": "USD",
+              "scenario": "One 2K medium-quality image using three input reference images.",
+              "coverage": "Generated-image charge 0.08 plus three input images at 0.01 each; current default-region schedule. No batch or alternate-region assumptions.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from the native 2K medium-quality output price of USD 0.08 plus three input images at USD 0.01 each.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://docs.x.ai/developers/models/grok-imagine-image-2.0",
+                  "https://docs.x.ai/developers/pricing"
+                ]
+              }
+            }
+          ]
         },
         "grida": {
           "provider": "grida",
@@ -16574,7 +17189,23 @@
               "1080p": 0.2
             },
             "source_url": "https://www.alibabacloud.com/help/en/model-studio/wan3-0-video"
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.5",
+              "currency": "USD",
+              "scenario": "Five seconds of 720p video in Singapore International.",
+              "coverage": "Published output-video second charge only; exact Singapore schedule, without promotion or cross-region substitution.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from the native Singapore International 720p schedule: five generated video seconds multiplied by USD 0.10 per second.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://www.alibabacloud.com/help/en/model-studio/wan3-0-video"
+                ]
+              }
+            }
+          ]
         },
         "openrouter": {
           "provider": "openrouter",
@@ -16982,6 +17613,22 @@
                   ],
                   "type": "string"
                 }
+              }
+            }
+          ],
+          "illustrative_costs": [
+            {
+              "amount": "1.45",
+              "currency": "USD",
+              "scenario": "blackforestlabs/flux-3/text-to-video: five seconds of 1080p generated video.",
+              "coverage": "Exact fal output-video charge only; no claim that other input or request components are zero.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from the exact fal text-to-video endpoint: five generated 1080p seconds multiplied by USD 0.29 per second.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://fal.ai/models/blackforestlabs/flux-3/text-to-video"
+                ]
               }
             }
           ]
@@ -17460,7 +18107,23 @@
             },
             "billing_quantity": "usage.completion_tokens",
             "source_url": "https://docs.byteplus.com/en/docs/ModelArk/model-pricing"
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.76",
+              "currency": "USD",
+              "scenario": "Five seconds of 720p 16:9 video without input video.",
+              "coverage": "Provider-published estimated video price. Actual charge uses usage.completion_tokens; no input-video minimum-floor assumption.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Manually transcribed the native Dreamina Seedance 2.0 billing example for 720p, 16:9, five output seconds and no input video. The provider labels the amount as an estimate; actual usage.completion_tokens determines billing.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://docs.byteplus.com/en/docs/ModelArk/model-pricing"
+                ]
+              }
+            }
+          ]
         },
         "openrouter": {
           "provider": "openrouter",
@@ -17923,7 +18586,23 @@
             },
             "billing_quantity": "usage.completion_tokens",
             "source_url": "https://docs.byteplus.com/en/docs/ModelArk/model-pricing"
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "1.156",
+              "currency": "USD",
+              "scenario": "Five seconds of 720p 16:9 video without input video.",
+              "coverage": "Provider-published estimated video price. Actual charge uses usage.completion_tokens; no input-video minimum-floor assumption.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Manually transcribed the native Dreamina Seedance 2.5 billing example for 720p, 16:9, five output seconds and no input video. The provider labels the amount as an estimate; actual usage.completion_tokens determines billing.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://docs.byteplus.com/en/docs/ModelArk/model-pricing"
+                ]
+              }
+            }
+          ]
         },
         "openrouter": {
           "provider": "openrouter",
@@ -18277,6 +18956,22 @@
               "source_url": "https://platform.minimax.io/docs/pricing/overview",
               "notes": "Native reference input video is billed separately at USD 0.0553/s for 480P or USD 0.143/s for 768P. The first two reference images are included; additional reference images cost USD 0.074 each. These charges are distinct from text-only and first/last-frame output pricing."
             }
+          ],
+          "illustrative_costs": [
+            {
+              "amount": "0.4",
+              "currency": "USD",
+              "scenario": "Five seconds of 768P H3Max generated video.",
+              "coverage": "Native output-video component only. Input-video and additional reference-image charges are separate and excluded.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from the native MiniMax-H3-Max 768P output schedule: five generated seconds multiplied by USD 0.08 per second.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://platform.minimax.io/docs/pricing/overview"
+                ]
+              }
+            }
           ]
         },
         "vercel": {
@@ -18393,6 +19088,22 @@
             {
               "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
               "notes": "Native standard video billing is token-based. Google documents 5792 output tokens per second at 720p, not a general per-second rate for every resolution."
+            }
+          ],
+          "illustrative_costs": [
+            {
+              "amount": "1.0136",
+              "currency": "USD",
+              "scenario": "Ten seconds of 720p video at the published conversion of 57920 output-video tokens.",
+              "coverage": "Video-output portion only, at Standard pricing. Excludes input tokens, separately billed text output, extra thinking where outside stated quantity and other request components.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from the native 720p conversion of 5792 output-video tokens per second: ten seconds gives 57920 tokens, multiplied by USD 17.50 per million output-video tokens.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://aistudio.google.com/docs/pricing"
+                ]
+              }
             }
           ]
         },
@@ -18621,6 +19332,22 @@
             {
               "source_url": "https://aistudio.google.com/docs/models/gemini-omni-flash",
               "notes": "Generation and editing support 3–15 seconds; first/last-frame interpolation and each extension turn support 3–10 seconds. Native video input, conversation editing and extension are distinct from a text/image generation endpoint."
+            }
+          ],
+          "illustrative_costs": [
+            {
+              "amount": "0.69504",
+              "currency": "USD",
+              "scenario": "Ten seconds of 720p video at the published conversion of 57920 output-video tokens.",
+              "coverage": "Video-output portion only, at Standard pricing. Excludes input tokens, separately billed text output, extra thinking where outside stated quantity and other request components.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from the native 720p conversion of 5792 output-video tokens per second: ten seconds gives 57920 tokens, multiplied by USD 12 per million output-video tokens.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://aistudio.google.com/docs/pricing"
+                ]
+              }
             }
           ]
         },
@@ -19043,6 +19770,22 @@
                 }
               }
             }
+          ],
+          "illustrative_costs": [
+            {
+              "amount": "3.2",
+              "currency": "USD",
+              "scenario": "Eight seconds of 1080p video with audio.",
+              "coverage": "Fal generated-video component only, including generated audio at the selected 1080p rate. Other input or ancillary charges are excluded.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from this fal endpoint's 1080p-with-audio schedule: eight generated seconds multiplied by USD 0.40 per second.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://fal.ai/models/fal-ai/veo3.1"
+                ]
+              }
+            }
           ]
         },
         "openrouter": {
@@ -19346,6 +20089,22 @@
                 "seed": {
                   "type": "integer"
                 }
+              }
+            }
+          ],
+          "illustrative_costs": [
+            {
+              "amount": "1.2",
+              "currency": "USD",
+              "scenario": "Eight seconds of 1080p video with audio.",
+              "coverage": "Fal generated-video component only, including generated audio at the selected 1080p rate. Other input or ancillary charges are excluded.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from this fal endpoint's 1080p-with-audio schedule: eight generated seconds multiplied by USD 0.15 per second.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://fal.ai/models/fal-ai/veo3.1/fast"
+                ]
               }
             }
           ]
@@ -19675,6 +20434,22 @@
                 }
               }
             }
+          ],
+          "illustrative_costs": [
+            {
+              "amount": "0.64",
+              "currency": "USD",
+              "scenario": "Eight seconds of 1080p video with audio.",
+              "coverage": "Fal generated-video component only, including generated audio at the selected 1080p rate. Other input or ancillary charges are excluded.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from this fal endpoint's 1080p-with-audio schedule: eight generated seconds multiplied by USD 0.08 per second.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://fal.ai/models/fal-ai/veo3.1/lite"
+                ]
+              }
+            }
           ]
         },
         "google": {
@@ -19916,6 +20691,22 @@
             {
               "source_url": "https://platform.minimax.io/docs/pricing/overview",
               "notes": "The native API charges reference input video seconds separately; its first five reference images are included and each additional image costs USD 0.04. These are distinct from frame-conditioned and text-only output rates."
+            }
+          ],
+          "illustrative_costs": [
+            {
+              "amount": "0.4",
+              "currency": "USD",
+              "scenario": "Five seconds of 768P H3 generated video.",
+              "coverage": "Native output-video component only. Input-video and additional reference-image charges are separate and excluded.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from the native MiniMax-H3 768P output schedule: five generated seconds multiplied by USD 0.08 per second.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://platform.minimax.io/docs/pricing/overview"
+                ]
+              }
             }
           ]
         },
@@ -20385,6 +21176,22 @@
                       ]
                     }
                   }
+                ]
+              }
+            }
+          ],
+          "illustrative_costs": [
+            {
+              "amount": "0.73",
+              "currency": "USD",
+              "scenario": "xai/grok-imagine-video/v1.5/image-to-video: five seconds of 720p video using three reference images.",
+              "coverage": "Includes USD 0.70 for generated video and USD 0.03 for the selected reference images. Other operations or unselected charges are excluded.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from the exact fal image-to-video endpoint: five 720p output seconds at USD 0.14 per second plus three reference images at USD 0.01 each.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://fal.ai/models/xai/grok-imagine-video/v1.5/image-to-video"
                 ]
               }
             }
@@ -21070,7 +21877,37 @@
                 }
               }
             ]
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.6",
+              "currency": "USD",
+              "scenario": "Thirty seconds of billed output music.",
+              "coverage": "Generated music duration only, with fal rounding up to whole minutes at USD 0.60 per billed minute. The duration is a selected scenario, not an observed average.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from fal's explicit whole-minute ceiling: 30 output seconds are billed as one minute at USD 0.60 per minute.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://fal.ai/models/elevenlabs/music/v2"
+                ]
+              }
+            },
+            {
+              "amount": "1.2",
+              "currency": "USD",
+              "scenario": "Ninety seconds of billed output music.",
+              "coverage": "Generated music duration only, with fal rounding up to whole minutes at USD 0.60 per billed minute. The duration is a selected scenario, not an observed average.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from fal's explicit whole-minute ceiling: 90 output seconds are billed as two minutes at USD 0.60 per minute.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://fal.ai/models/elevenlabs/music/v2"
+                ]
+              }
+            }
+          ]
         }
       },
       "provider_coverage": {
@@ -21205,7 +22042,37 @@
                 }
               }
             ]
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.6",
+              "currency": "USD",
+              "scenario": "Thirty seconds of billed output music.",
+              "coverage": "Generated music duration only, with fal rounding up to whole minutes at USD 0.60 per billed minute. The duration is a selected scenario, not an observed average.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from fal's explicit whole-minute ceiling: 30 output seconds are billed as one minute at USD 0.60 per minute.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://fal.ai/models/elevenlabs/music/v2.5"
+                ]
+              }
+            },
+            {
+              "amount": "1.2",
+              "currency": "USD",
+              "scenario": "Ninety seconds of billed output music.",
+              "coverage": "Generated music duration only, with fal rounding up to whole minutes at USD 0.60 per billed minute. The duration is a selected scenario, not an observed average.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from fal's explicit whole-minute ceiling: 90 output seconds are billed as two minutes at USD 0.60 per minute.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://fal.ai/models/elevenlabs/music/v2.5"
+                ]
+              }
+            }
+          ]
         }
       },
       "provider_coverage": {
@@ -21311,7 +22178,23 @@
             "type": "per_second",
             "usd": 0.002,
             "source_url": "https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2"
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.02",
+              "currency": "USD",
+              "scenario": "Ten billed output-audio seconds for one sound-effect generation.",
+              "coverage": "Exact fal output-duration component at 0.002/second. Uses selected billed duration; no assertion about inferred or typical output length.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from the exact fal sound-effects endpoint: ten billed output-audio seconds multiplied by USD 0.002 per second.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2"
+                ]
+              }
+            }
+          ]
         },
         "vercel": {
           "provider": "vercel",
@@ -21458,7 +22341,23 @@
             "type": "per_second",
             "usd": 0.002,
             "source_url": "https://fal.ai/models/elevenlabs/sound-effects/v3"
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.02",
+              "currency": "USD",
+              "scenario": "Ten billed output-audio seconds for one sound-effect generation.",
+              "coverage": "Exact fal output-duration component at 0.002/second. Uses selected billed duration; no assertion about inferred or typical output length.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from the exact fal sound-effects endpoint: ten billed output-audio seconds multiplied by USD 0.002 per second.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://fal.ai/models/elevenlabs/sound-effects/v3"
+                ]
+              }
+            }
+          ]
         },
         "grida": {
           "provider": "grida",
@@ -23002,7 +23901,23 @@
             }
           ]
         }
-      }
+      },
+      "illustrative_costs": [
+        {
+          "amount": "0.525",
+          "currency": "USD",
+          "scenario": "One image-to-3D model with PBR enabled.",
+          "coverage": "Includes one fal generation and PBR. Multiview and custom-face-count options are off; their charges are excluded.",
+          "provenance": {
+            "maintenance": "manual",
+            "description": "Calculated from fal's published per-generation components: USD 0.375 base + USD 0.15 for PBR = USD 0.525.",
+            "reviewed_on": "2026-11-13",
+            "source_urls": [
+              "https://fal.ai/models/fal-ai/hunyuan-3d/v3.1/pro/image-to-3d"
+            ]
+          }
+        }
+      ]
     },
     "fal-ai/hunyuan-3d/v3.1/pro/text-to-3d": {
       "reference_provider": "tencent",
@@ -23158,7 +24073,23 @@
             }
           ]
         }
-      }
+      },
+      "illustrative_costs": [
+        {
+          "amount": "0.675",
+          "currency": "USD",
+          "scenario": "One text-to-3D model with PBR and custom face count enabled.",
+          "coverage": "Includes one fal generation, PBR and custom face count. No unsupported multiview option or other charge is assumed.",
+          "provenance": {
+            "maintenance": "manual",
+            "description": "Calculated from fal's published per-generation components: USD 0.375 base + USD 0.15 for PBR + USD 0.15 for custom face count = USD 0.675.",
+            "reviewed_on": "2026-11-13",
+            "source_urls": [
+              "https://fal.ai/models/fal-ai/hunyuan-3d/v3.1/pro/text-to-3d"
+            ]
+          }
+        }
+      ]
     },
     "fal-ai/trellis-2": {
       "id": "fal-ai/trellis-2",
@@ -23796,6 +24727,22 @@
               "source_url": "https://fal.ai/models/tripo3d/h3.1/multiview-to-3d/api",
               "input": "image"
             }
+          ],
+          "illustrative_costs": [
+            {
+              "amount": "0.65",
+              "currency": "USD",
+              "scenario": "tripo3d/h3.1/image-to-3d: one model with HD texture, detailed geometry and quad mesh.",
+              "coverage": "Includes the four selected fal image-generation components. Other optional charges are excluded.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from the fal image endpoint: USD 0.20 bare model + USD 0.20 HD texture + USD 0.20 detailed geometry + USD 0.05 quad mesh = USD 0.65.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://fal.ai/models/tripo3d/h3.1/image-to-3d"
+                ]
+              }
+            }
           ]
         },
         "grida": {
@@ -23907,7 +24854,23 @@
           "disposition": "listed",
           "source_url": "https://gateway.grida.ai/v1/endpoints"
         }
-      }
+      },
+      "illustrative_costs": [
+        {
+          "amount": "0.6",
+          "currency": "USD",
+          "scenario": "One image-to-3D H3.1 model with HD textures and detailed geometry.",
+          "coverage": "Includes the native image base, HD texture and detailed geometry. Quad mesh, smart low-poly and other add-ons are excluded.",
+          "provenance": {
+            "maintenance": "manual",
+            "description": "Calculated from the native H Series image base and published add-ons: 20 base credits + 20 HD-texture credits + 20 detailed-geometry credits = 60 credits, at the published USD 0.01 per credit.",
+            "reviewed_on": "2026-11-13",
+            "source_urls": [
+              "https://developers.tripo3d.ai/en/pricing"
+            ]
+          }
+        }
+      ]
     },
     "tripo/p1": {
       "reference_provider": "tripo",
@@ -24286,7 +25249,24 @@
           "disposition": "listed",
           "source_url": "https://gateway.grida.ai/v1/endpoints"
         }
-      }
+      },
+      "illustrative_costs": [
+        {
+          "amount": "0.4",
+          "currency": "USD",
+          "scenario": "One text-to-3D P1 model with texture=false and pbr=true, using standard texture quality.",
+          "coverage": "Includes the native generation base and the standard texture forced by PBR. Detailed/extreme texture and other add-ons are excluded.",
+          "provenance": {
+            "maintenance": "manual",
+            "description": "The native endpoint forces texture=true when pbr=true, even if texture=false is supplied. Calculated as 30 base credits + 10 standard-texture credits = 40 credits at the published USD 0.01 per credit.",
+            "reviewed_on": "2026-11-13",
+            "source_urls": [
+              "https://developers.tripo3d.ai/en/docs/generation-text-to-model/p",
+              "https://developers.tripo3d.ai/en/pricing"
+            ]
+          }
+        }
+      ]
     },
     "tripo/p2": {
       "reference_provider": "tripo",
@@ -24685,7 +25665,24 @@
           "disposition": "listed",
           "source_url": "https://gateway.grida.ai/v1/endpoints"
         }
-      }
+      },
+      "illustrative_costs": [
+        {
+          "amount": "1.1",
+          "currency": "USD",
+          "scenario": "One image-to-3D P2 model with texture=false and pbr=true, using standard texture quality.",
+          "coverage": "Includes the native generation base and the standard texture forced by PBR. Detailed/extreme texture and other add-ons are excluded.",
+          "provenance": {
+            "maintenance": "manual",
+            "description": "The native endpoint forces texture=true when pbr=true, even if texture=false is supplied. Calculated as 100 base credits + 10 standard-texture credits = 110 credits at the published USD 0.01 per credit.",
+            "reviewed_on": "2026-11-13",
+            "source_urls": [
+              "https://developers.tripo3d.ai/en/docs/generation-image-to-model/p",
+              "https://developers.tripo3d.ai/en/pricing"
+            ]
+          }
+        }
+      ]
     }
   },
   "three_d.rigging.models": {
@@ -25955,7 +26952,23 @@
                 "usd_per_unit": "0.008"
               }
             ]
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.052",
+              "currency": "USD",
+              "scenario": "Five billed minutes of Scribe v2 transcription with keyterm prompting.",
+              "coverage": "Includes base transcription and the 30% keyterm surcharge for five billed input-audio minutes. Other services or unselected charges are excluded.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from the exact fal Scribe v2 endpoint: five minutes at USD 0.008 gives USD 0.04 base transcription, plus its published 30% keyterm surcharge of USD 0.012.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://fal.ai/models/fal-ai/elevenlabs/speech-to-text/scribe-v2"
+                ]
+              }
+            }
+          ]
         }
       },
       "provider_coverage": {
@@ -26471,7 +27484,24 @@
             "input": "0.0000018",
             "output": "0.000009",
             "scope": "Token meters only. Connected audio is charged separately under the published standard/burst concurrency rules; these token amounts are not the complete session price."
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.4027",
+              "currency": "USD",
+              "scenario": "Five connected session minutes, 1000 uncached input tokens and 100 output tokens within standard concurrency.",
+              "coverage": "Native connected-duration and selected input/output token components only. Excludes cached tokens, burst concurrency, other services and taxes.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from native standard-concurrency rates: five connected minutes at USD 0.08 per minute, plus 1000 uncached input tokens at USD 1.80 per million and 100 output tokens at USD 9 per million.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://elevenlabs.io/pricing/api",
+                  "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility"
+                ]
+              }
+            }
+          ]
         },
         "vercel": {
           "provider": "vercel",
@@ -26601,7 +27631,24 @@
             "input": "0.0000002",
             "output": "0.000006",
             "scope": "Token meters only. Connected audio is charged separately under the published standard/burst concurrency rules; these token amounts are not the complete session price."
-          }
+          },
+          "illustrative_costs": [
+            {
+              "amount": "0.4008",
+              "currency": "USD",
+              "scenario": "Five connected session minutes, 1000 uncached input tokens and 100 output tokens within standard concurrency.",
+              "coverage": "Native connected-duration and selected input/output token components only. Excludes cached tokens, burst concurrency, other services and taxes.",
+              "provenance": {
+                "maintenance": "manual",
+                "description": "Calculated from native standard-concurrency rates: five connected minutes at USD 0.08 per minute, plus 1000 uncached input tokens at USD 0.20 per million and 100 output tokens at USD 6 per million.",
+                "reviewed_on": "2026-11-13",
+                "source_urls": [
+                  "https://elevenlabs.io/pricing/api",
+                  "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility"
+                ]
+              }
+            }
+          ]
         },
         "vercel": {
           "provider": "vercel",

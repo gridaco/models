@@ -125,3 +125,27 @@ endpoints = [
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/models"
+
+[[providers.google.illustrative_costs]]
+amount = "0.134"
+currency = "USD"
+scenario = "One 1K/2K generated image at Standard pricing."
+coverage = "Image-output component only. Source-published approximate/rounded price where applicable; excludes input tokens, text/thinking output and grounding charges."
+
+[providers.google.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manually transcribed the native Standard image-output example for the stated resolution. The provider publishes USD 0.134 for that output component; any source rounding is retained rather than inferred as an exact complete request bill."
+reviewed_on = "2026-11-13"
+source_urls = ["https://aistudio.google.com/docs/pricing"]
+
+[[providers.google.illustrative_costs]]
+amount = "0.24"
+currency = "USD"
+scenario = "One 4K (up to 4096x4096) generated image at Standard pricing."
+coverage = "Image-output component only. Source-published approximate/rounded price where applicable; excludes input tokens, text/thinking output and grounding charges."
+
+[providers.google.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manually transcribed the native Standard image-output example for the stated resolution. The provider publishes USD 0.24 for that output component; any source rounding is retained rather than inferred as an exact complete request bill."
+reviewed_on = "2026-11-13"
+source_urls = ["https://aistudio.google.com/docs/pricing"]

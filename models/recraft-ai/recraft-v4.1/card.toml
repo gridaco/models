@@ -83,3 +83,15 @@ endpoints = [
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/models"
+
+[[providers.recraft.illustrative_costs]]
+amount = "0.04"
+currency = "USD"
+scenario = "One raster image generated using style references that create one style."
+coverage = "One raster image plus the separately published 0.005 style-creation request charge; excludes vector/Pro output variants."
+
+[providers.recraft.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated from the native raster generation price of USD 0.035 and the separate USD 0.005 style-creation charge when generation uses style references."
+reviewed_on = "2026-11-13"
+source_urls = ["https://www.recraft.ai/docs/api-reference/pricing"]

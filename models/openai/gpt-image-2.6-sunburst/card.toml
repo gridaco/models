@@ -292,3 +292,57 @@ endpoints = [
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/models"
+
+[[providers.openai.illustrative_costs]]
+amount = "0.04347"
+currency = "USD"
+scenario = "One 1024x1024 still image at medium quality (1449 published-calculator output tokens)."
+coverage = "Standard image-output component only. Excludes prompt/reference tokens, streaming partial images, Responses mainline usage, GIF/SVG work and other charges."
+
+[providers.openai.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated with the provider's currently published model-family calculator: 1449 output-image tokens multiplied by USD 30 per million tokens equals USD 0.04347. The selected size and quality are explicit; this is not a measured run average."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst",
+  "https://developers.openai.com/api/docs/guides/image-generation",
+]
+
+[[providers.openai.illustrative_costs]]
+amount = "0.05268"
+currency = "USD"
+scenario = "One 1024x1024 still image at high quality (1756 published-calculator output tokens)."
+coverage = "Standard image-output component only. Excludes prompt/reference tokens, streaming partial images, Responses mainline usage, GIF/SVG work and other charges."
+
+[providers.openai.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated with the provider's currently published model-family calculator: 1756 output-image tokens multiplied by USD 30 per million tokens equals USD 0.05268. The selected size and quality are explicit; this is not a measured run average."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst",
+  "https://developers.openai.com/api/docs/guides/image-generation",
+]
+
+[[providers.fal.illustrative_costs]]
+amount = "0.0969"
+currency = "USD"
+scenario = "openai/gpt-image-2.6/sunburst/edit: one 2048x2048 medium-quality edit with 2944 output-image tokens, 1000 reference-image input tokens and 100 prompt tokens."
+coverage = "Includes the selected image-output and reference/prompt input charges, with rounding the total up once per request to the next USD 0.0001. Excludes text output and any other unselected components."
+
+[providers.fal.illustrative_costs.provenance]
+maintenance = "manual"
+description = "The fal edit page publishes this sample: USD 0.08832 image output + USD 0.008 reference-image input + USD 0.0005 prompt input = USD 0.09682, rounded upward once per request to the next USD 0.0001 increment, giving USD 0.0969."
+reviewed_on = "2026-11-13"
+source_urls = ["https://fal.ai/models/openai/gpt-image-2.6/sunburst/edit"]
+
+[[providers.fal.illustrative_costs]]
+amount = "0.1069"
+currency = "USD"
+scenario = "openai/gpt-image-2.6/sunburst/edit: one 2048x2048 medium-quality edit with 2944 output-image tokens, 1000 reference-image input tokens, 100 prompt tokens and 1000 text-output tokens."
+coverage = "Includes all four selected token components and rounding the total up once per request to the next USD 0.0001. This scenario does not predict how many text or image tokens a different request will produce."
+
+[providers.fal.illustrative_costs.provenance]
+maintenance = "manual"
+description = "The fal edit page extends its sample by USD 0.01 for 1000 text-output tokens: USD 0.08832 + USD 0.008 + USD 0.0005 + USD 0.01 = USD 0.10682, rounded upward once per request to the next USD 0.0001 increment, giving USD 0.1069."
+reviewed_on = "2026-11-13"
+source_urls = ["https://fal.ai/models/openai/gpt-image-2.6/sunburst/edit"]

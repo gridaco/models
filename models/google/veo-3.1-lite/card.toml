@@ -125,3 +125,15 @@ endpoints = [
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/models"
+
+[[providers.fal.illustrative_costs]]
+amount = "0.64"
+currency = "USD"
+scenario = "Eight seconds of 1080p video with audio."
+coverage = "Fal generated-video component only, including generated audio at the selected 1080p rate. Other input or ancillary charges are excluded."
+
+[providers.fal.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated from this fal endpoint's 1080p-with-audio schedule: eight generated seconds multiplied by USD 0.08 per second."
+reviewed_on = "2026-11-13"
+source_urls = ["https://fal.ai/models/fal-ai/veo3.1/lite"]

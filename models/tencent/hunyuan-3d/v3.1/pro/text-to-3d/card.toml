@@ -68,3 +68,15 @@ endpoints = [
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/endpoints"
+
+[[illustrative_costs]]
+amount = "0.675"
+currency = "USD"
+scenario = "One text-to-3D model with PBR and custom face count enabled."
+coverage = "Includes one fal generation, PBR and custom face count. No unsupported multiview option or other charge is assumed."
+
+[illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated from fal's published per-generation components: USD 0.375 base + USD 0.15 for PBR + USD 0.15 for custom face count = USD 0.675."
+reviewed_on = "2026-11-13"
+source_urls = ["https://fal.ai/models/fal-ai/hunyuan-3d/v3.1/pro/text-to-3d"]

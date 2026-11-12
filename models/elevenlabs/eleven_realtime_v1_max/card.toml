@@ -82,3 +82,18 @@ source_url = "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-co
 [modalities]
 input = ["text", "audio"]
 output = ["text", "audio"]
+
+[[providers.elevenlabs.illustrative_costs]]
+amount = "0.4027"
+currency = "USD"
+scenario = "Five connected session minutes, 1000 uncached input tokens and 100 output tokens within standard concurrency."
+coverage = "Native connected-duration and selected input/output token components only. Excludes cached tokens, burst concurrency, other services and taxes."
+
+[providers.elevenlabs.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated from native standard-concurrency rates: five connected minutes at USD 0.08 per minute, plus 1000 uncached input tokens at USD 1.80 per million and 100 output tokens at USD 9 per million."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://elevenlabs.io/pricing/api",
+  "https://elevenlabs.io/docs/eleven-agents/guides/openai-realtime-compatibility",
+]

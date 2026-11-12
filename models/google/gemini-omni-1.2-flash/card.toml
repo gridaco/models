@@ -107,3 +107,15 @@ endpoints = [
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/models"
+
+[[providers.google.illustrative_costs]]
+amount = "0.69504"
+currency = "USD"
+scenario = "Ten seconds of 720p video at the published conversion of 57920 output-video tokens."
+coverage = "Video-output portion only, at Standard pricing. Excludes input tokens, separately billed text output, extra thinking where outside stated quantity and other request components."
+
+[providers.google.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated from the native 720p conversion of 5792 output-video tokens per second: ten seconds gives 57920 tokens, multiplied by USD 12 per million output-video tokens."
+reviewed_on = "2026-11-13"
+source_urls = ["https://aistudio.google.com/docs/pricing"]

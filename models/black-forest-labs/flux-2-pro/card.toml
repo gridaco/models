@@ -120,3 +120,15 @@ endpoints = [
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/models"
+
+[[providers.fal.illustrative_costs]]
+amount = "0.045"
+currency = "USD"
+scenario = "One edited image with one billed output megapixel and one billed reference-image megapixel."
+coverage = "Selected billed quantities, not inferred pixel dimensions. Includes the first output-megapixel charge and one reference-image-megapixel charge; other references excluded."
+
+[providers.fal.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated for the fal edit endpoint: USD 0.03 for the first output megapixel plus USD 0.015 for one billed reference-image megapixel."
+reviewed_on = "2026-11-13"
+source_urls = ["https://fal.ai/models/fal-ai/flux-2-pro/edit"]

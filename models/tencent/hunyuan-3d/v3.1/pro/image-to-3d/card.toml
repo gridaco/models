@@ -75,3 +75,15 @@ endpoints = [
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/endpoints"
+
+[[illustrative_costs]]
+amount = "0.525"
+currency = "USD"
+scenario = "One image-to-3D model with PBR enabled."
+coverage = "Includes one fal generation and PBR. Multiview and custom-face-count options are off; their charges are excluded."
+
+[illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated from fal's published per-generation components: USD 0.375 base + USD 0.15 for PBR = USD 0.525."
+reviewed_on = "2026-11-13"
+source_urls = ["https://fal.ai/models/fal-ai/hunyuan-3d/v3.1/pro/image-to-3d"]
