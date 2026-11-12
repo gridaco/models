@@ -1378,6 +1378,35 @@
           "enum": ["USD", "CNY"],
           "description": "Original currency of this illustration; no currency conversion is implied."
         },
+        "unit": {
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "not": {
+            "pattern": "\\s"
+          },
+          "description": "Optional display denominator unit, paired with per_quantity. Image quantities count generated output images, not input references. This is not a billing meter."
+        },
+        "per_quantity": {
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]+)?$",
+          "allOf": [
+            {
+              "pattern": "[1-9]"
+            }
+          ],
+          "not": {
+            "pattern": "\\s"
+          },
+          "description": "Positive exact decimal quantity covered by amount, paired with unit. Trailing fractional zeros are preserved. The amount is the scenario total, not a normalized unit price."
+        },
+        "label": {
+          "type": "string",
+          "maxLength": 256,
+          "pattern": "\\S",
+          "description": "Optional short, manually authored configuration label. Presentation text only; never parsed into parameters or pricing rules."
+        },
         "scenario": {
           "type": "string",
           "pattern": "\\S",
@@ -1391,6 +1420,10 @@
         "provenance": {
           "$ref": "#/$defs/illustrative_cost_provenance"
         }
+      },
+      "dependentRequired": {
+        "unit": ["per_quantity"],
+        "per_quantity": ["unit"]
       }
     },
     "illustrative_cost_provenance": {

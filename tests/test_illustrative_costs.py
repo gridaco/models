@@ -176,9 +176,69 @@ def test_present_source_list_is_nonempty_unique_and_structured(sources):
     assert errors(lambda example: example["provenance"].update(source_urls=sources))
 
 
-@pytest.mark.parametrize("field", ["unit", "id", "basis", "parameters", "unknown"])
+@pytest.mark.parametrize("field", ["id", "basis", "parameters", "unknown"])
 def test_examples_do_not_accept_extra_meters_or_an_execution_dsl(field):
     assert errors(lambda example: example.update({field: "example"}))
+
+
+@pytest.mark.parametrize("scope", [
+    "binding", "binding_endpoint", "direct", "direct_endpoint", "operation", "operation_endpoint",
+    "embedding", "embedding_endpoint",
+])
+def test_optional_display_basis_and_label_are_valid_at_each_existing_scope(scope):
+    assert errors(lambda example: example.update(
+        unit="image", per_quantity="1", label="2048 × 2048 · Medium · 1 reference",
+    ), scope=scope) == []
+
+
+@pytest.mark.parametrize("unit,quantity", [
+    ("image", "1"), ("image", "2"), ("character", "500"), ("second", "10"),
+    ("second", "0.50"), ("image", "1.0"), ("output_unit", "9" * 64),
+])
+def test_display_quantity_preserves_total_and_decimal_spelling_without_normalization(unit, quantity):
+    facts, target = fixture()
+    example = target["illustrative_costs"][0]
+    example.update(unit=unit, per_quantity=quantity)
+    assert check.check(facts, SCHEMA) == []
+    assert example["amount"] == EXAMPLE["amount"]
+    assert example["per_quantity"] == quantity
+
+
+@pytest.mark.parametrize("basis", [{"unit": "image"}, {"per_quantity": "1"}])
+def test_display_unit_and_quantity_require_each_other(basis):
+    assert any("supplied together" in error for error in errors(
+        lambda example: example.update(basis)
+    ))
+
+
+@pytest.mark.parametrize("quantity", [
+    1, 0.5, True, None, "0", "0.0", "0.00", "-1", "+1", "01", ".5", "1.",
+    "1e3", "NaN", "Infinity", "1,000", " 1", "1 ", "1\n", "1\t", "9" * 65,
+])
+def test_display_quantity_is_a_bounded_positive_exact_decimal_string(quantity):
+    assert errors(lambda example: example.update(unit="image", per_quantity=quantity))
+
+
+@pytest.mark.parametrize("unit", [
+    "", " ", "Image", "image-output", "image/output", "image count", "_image", "1image",
+    "image\n", "image\t", "a" * 65, None, 1,
+])
+def test_display_unit_is_a_bounded_lowercase_token(unit):
+    assert errors(lambda example: example.update(unit=unit, per_quantity="1"))
+
+
+def test_display_unit_accepts_the_full_length_boundary():
+    assert errors(lambda example: example.update(unit="a" * 64, per_quantity="1")) == []
+
+
+@pytest.mark.parametrize("label", ["Medium", "1024 × 1024 · 1 reference", "x" * 256])
+def test_short_label_is_optional_presentation_text_without_a_display_basis(label):
+    assert errors(lambda example: example.update(label=label)) == []
+
+
+@pytest.mark.parametrize("label", ["", " ", "\t\n", "x" * 257, None, [], 1])
+def test_short_label_must_be_nonblank_and_bounded(label):
+    assert errors(lambda example: example.update(label=label))
 
 
 @pytest.mark.parametrize("field", ["source_url", "basis", "manual", "unknown"])
