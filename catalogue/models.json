@@ -21459,6 +21459,39 @@
             "usd": 0.002,
             "source_url": "https://fal.ai/models/elevenlabs/sound-effects/v3"
           }
+        },
+        "grida": {
+          "provider": "grida",
+          "id": "eleven_text_to_sound_v3",
+          "url": "https://gateway.grida.ai/v1/models",
+          "endpoints": [
+            {
+              "id": "speech.elevenlabs.sound-effects-v3.generate",
+              "operation": "speech.elevenlabs.sound-effects-v3.generate",
+              "input": "text",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/speech.elevenlabs.sound-effects-v3.generate.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/speech_audio_result",
+              "interface": "endpoints",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "audio_seconds",
+                    "meter": "audio_seconds",
+                    "unit": "second",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.002"
+                  }
+                ]
+              }
+            }
+          ]
         }
       },
       "provider_coverage": {
@@ -21479,6 +21512,10 @@
         "elevenlabs": {
           "disposition": "listed",
           "source_url": "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/convert"
+        },
+        "grida": {
+          "disposition": "listed",
+          "source_url": "https://gateway.grida.ai/v1/models"
         }
       },
       "modalities": {
@@ -22540,6 +22577,39 @@
             "usd": 0.08,
             "source_url": "https://fal.ai/models/elevenlabs/tts/eleven-v4"
           }
+        },
+        "grida": {
+          "provider": "grida",
+          "id": "eleven_v4",
+          "url": "https://gateway.grida.ai/v1/models",
+          "endpoints": [
+            {
+              "id": "speech.elevenlabs.eleven-v4.generate",
+              "operation": "speech.elevenlabs.eleven-v4.generate",
+              "input": "text",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/speech.elevenlabs.eleven-v4.generate.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/speech_audio_result",
+              "interface": "endpoints",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "speech_characters",
+                    "meter": "speech_characters",
+                    "unit": "character",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.00008"
+                  }
+                ]
+              }
+            }
+          ]
         }
       },
       "provider_coverage": {
@@ -22558,6 +22628,10 @@
         "elevenlabs": {
           "disposition": "listed",
           "source_url": "https://elevenlabs.io/docs/api-reference/text-to-dialogue/convert"
+        },
+        "grida": {
+          "disposition": "listed",
+          "source_url": "https://gateway.grida.ai/v1/models"
         }
       },
       "modalities": {
@@ -22684,6 +22758,39 @@
             "usd": 0.04,
             "source_url": "https://fal.ai/models/elevenlabs/tts/eleven-v4-turbo"
           }
+        },
+        "grida": {
+          "provider": "grida",
+          "id": "eleven_v4_turbo",
+          "url": "https://gateway.grida.ai/v1/models",
+          "endpoints": [
+            {
+              "id": "speech.elevenlabs.eleven-v4-turbo.generate",
+              "operation": "speech.elevenlabs.eleven-v4-turbo.generate",
+              "input": "text",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/speech.elevenlabs.eleven-v4-turbo.generate.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/speech_audio_result",
+              "interface": "endpoints",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "speech_characters",
+                    "meter": "speech_characters",
+                    "unit": "character",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.00004"
+                  }
+                ]
+              }
+            }
+          ]
         }
       },
       "provider_coverage": {
@@ -22702,6 +22809,10 @@
         "elevenlabs": {
           "disposition": "listed",
           "source_url": "https://elevenlabs.io/docs/eleven-api/guides/how-to/websockets/realtime-tdd"
+        },
+        "grida": {
+          "disposition": "listed",
+          "source_url": "https://gateway.grida.ai/v1/models"
         }
       },
       "modalities": {
