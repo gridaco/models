@@ -26653,10 +26653,10 @@
         "detailed",
         "extreme"
       ],
-      "label": "Tripo P2 Preview",
+      "label": "Tripo P2",
       "binding_id": "P2-20260801",
-      "preview": true,
-      "short_description": "Preview of next-generation low-poly mesh generation.",
+      "preview": false,
+      "short_description": "Next-generation low-poly mesh generation.",
       "face_limit": {
         "min": 48,
         "max": 50000
