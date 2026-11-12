@@ -58,6 +58,9 @@ amount = "0"
 currency = "USD"
 scenario = "One rig-eligibility check on one GLB mesh."
 coverage = "One check with zero consumed provider credits. Subsequent paid rigging or generation is excluded."
+unit = "task"
+per_quantity = "1"
+label = "Rig eligibility check"
 
 [providers.grida.endpoints.illustrative_costs.provenance]
 maintenance = "manual"

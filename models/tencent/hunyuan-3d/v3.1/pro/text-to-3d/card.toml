@@ -77,6 +77,9 @@ amount = "0.4"
 currency = "USD"
 scenario = "One textured GLB from a short text prompt using standard GG settings."
 coverage = "Default textured generation with PBR off and the fixed face-count setting. Any extra face-count billing is not independently quantified; no optional PBR or other operation is included."
+unit = "generation"
+per_quantity = "1"
+label = "Textured · Text prompt"
 
 [providers.grida.endpoints.illustrative_costs.provenance]
 maintenance = "manual"

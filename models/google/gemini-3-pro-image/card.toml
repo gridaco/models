@@ -131,6 +131,9 @@ amount = "0.15"
 currency = "USD"
 scenario = "One 1K image, n=1, with a short text prompt and one reference image."
 coverage = "One 1K output and one reference image. Web search is off; content-dependent input or other reported usage may change the total."
+unit = "image"
+per_quantity = "1"
+label = "1K · 1 reference"
 
 [providers.grida.endpoints.illustrative_costs.provenance]
 maintenance = "manual"
@@ -159,6 +162,9 @@ amount = "0.15"
 currency = "USD"
 scenario = "One 1K image, n=1, with a short text prompt."
 coverage = "One 1K output. Web search is off; content-dependent input or other reported usage may change the total."
+unit = "image"
+per_quantity = "1"
+label = "1K"
 
 [providers.grida.endpoints.illustrative_costs.provenance]
 maintenance = "manual"

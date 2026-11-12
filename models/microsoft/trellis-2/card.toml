@@ -99,6 +99,9 @@ amount = "0.3"
 currency = "USD"
 scenario = "One GLB from one image using GG's fixed 1024-resolution generation settings."
 coverage = "Manually selected GG estimate for the fixed 1024-resolution generation. Other resolutions are not exposed by this GG operation; original reported usage determines the charge."
+unit = "generation"
+per_quantity = "1"
+label = "1024 resolution · 1 image"
 
 [providers.grida.endpoints.illustrative_costs.provenance]
 maintenance = "manual"

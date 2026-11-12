@@ -92,6 +92,9 @@ amount = "0.04"
 currency = "USD"
 scenario = "One square_hd image, n=1, with a short text prompt."
 coverage = "One raster output from a short prompt; additional images and separate style-creation requests are excluded."
+unit = "image"
+per_quantity = "1"
+label = "Square HD"
 
 [providers.grida.endpoints.illustrative_costs.provenance]
 maintenance = "manual"

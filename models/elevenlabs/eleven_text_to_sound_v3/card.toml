@@ -91,6 +91,9 @@ amount = "0.02"
 currency = "USD"
 scenario = "One sound-effect generation with ten billed output seconds and loop=false."
 coverage = "Ten original billed generated-audio seconds at GG's published per-second price. Any difference between requested and billed duration changes the actual total."
+unit = "second"
+per_quantity = "10"
+label = "10s · Loop off"
 
 [providers.grida.endpoints.illustrative_costs.provenance]
 maintenance = "manual"

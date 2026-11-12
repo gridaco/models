@@ -244,6 +244,9 @@ amount = "0.9"
 currency = "USD"
 scenario = "One 5-second 720p video from a short text prompt, with standard GG settings."
 coverage = "One 5-second 720p clip. Actual reported units can differ with input content; additional clips and other operations are excluded."
+unit = "video"
+per_quantity = "1"
+label = "5s · 720p"
 
 [providers.grida.endpoints.illustrative_costs.provenance]
 maintenance = "manual"
@@ -272,6 +275,9 @@ amount = "0.9"
 currency = "USD"
 scenario = "One 5-second 720p video from one 16:9 input image, with standard GG settings."
 coverage = "One 5-second 720p clip and one 16:9 input image. Actual reported units can differ with input content; additional clips and other operations are excluded."
+unit = "video"
+per_quantity = "1"
+label = "5s · 720p · 1 reference"
 
 [providers.grida.endpoints.illustrative_costs.provenance]
 maintenance = "manual"

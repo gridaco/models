@@ -215,6 +215,9 @@ amount = "0.05"
 currency = "USD"
 scenario = "One 2048x2048 image at medium quality, n=1, with a short text prompt and one reference image."
 coverage = "One static PNG output at the stated size and medium quality, with one reference image. Prompt, reference and text-output token counts can vary; GIF frames and extra outputs are excluded."
+unit = "image"
+per_quantity = "1"
+label = "2048 × 2048 · Medium · 1 reference"
 
 [providers.grida.endpoints.illustrative_costs.provenance]
 maintenance = "manual"
@@ -243,6 +246,9 @@ amount = "0.02"
 currency = "USD"
 scenario = "One 1024x1024 image at medium quality, n=1, with a short text prompt."
 coverage = "One static PNG output at the stated size and medium quality. Prompt, reference and text-output token counts can vary; GIF frames and extra outputs are excluded."
+unit = "image"
+per_quantity = "1"
+label = "1024 × 1024 · Medium"
 
 [providers.grida.endpoints.illustrative_costs.provenance]
 maintenance = "manual"

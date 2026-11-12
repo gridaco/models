@@ -142,6 +142,9 @@ amount = "1.1"
 currency = "USD"
 scenario = "One GLB from one image, with texture=true, pbr=true and standard textures."
 coverage = "Illustrates 110 billed provider credits for the selected generation base and standard texture. GG charges actual original usage at its published tariff; detailed geometry, higher texture tiers and other add-ons are excluded."
+unit = "generation"
+per_quantity = "1"
+label = "Standard textures · 1 image"
 
 [providers.grida.endpoints.illustrative_costs.provenance]
 maintenance = "manual"
@@ -170,6 +173,9 @@ amount = "1.1"
 currency = "USD"
 scenario = "One GLB from two images (front and back), with texture=true, pbr=true and standard textures."
 coverage = "Illustrates 110 billed provider credits for the selected generation base and standard texture. GG charges actual original usage at its published tariff; detailed geometry, higher texture tiers and other add-ons are excluded."
+unit = "generation"
+per_quantity = "1"
+label = "Standard textures · 2 views"
 
 [providers.grida.endpoints.illustrative_costs.provenance]
 maintenance = "manual"
@@ -198,6 +204,9 @@ amount = "1.1"
 currency = "USD"
 scenario = "One GLB from a short text prompt, with texture=true, pbr=true and standard textures."
 coverage = "Illustrates 110 billed provider credits for the selected generation base and standard texture. GG charges actual original usage at its published tariff; detailed geometry, higher texture tiers and other add-ons are excluded."
+unit = "generation"
+per_quantity = "1"
+label = "Standard textures · Text prompt"
 
 [providers.grida.endpoints.illustrative_costs.provenance]
 maintenance = "manual"

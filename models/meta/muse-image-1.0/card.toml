@@ -97,6 +97,9 @@ amount = "0.01"
 currency = "USD"
 scenario = "One 1:1 image, n=1, with a short text prompt."
 coverage = "One 1:1 output; additional outputs are excluded."
+unit = "image"
+per_quantity = "1"
+label = "Square"
 
 [providers.grida.endpoints.illustrative_costs.provenance]
 maintenance = "manual"
@@ -125,6 +128,9 @@ amount = "0.01"
 currency = "USD"
 scenario = "One 1:1 image, n=1, with a short text prompt and one reference image."
 coverage = "One 1:1 output with one reference image; any separate reference-input charge is not independently quantified."
+unit = "image"
+per_quantity = "1"
+label = "Square · 1 reference"
 
 [providers.grida.endpoints.illustrative_costs.provenance]
 maintenance = "manual"

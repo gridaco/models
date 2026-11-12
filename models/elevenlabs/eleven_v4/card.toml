@@ -124,6 +124,9 @@ amount = "0.04"
 currency = "USD"
 scenario = "One speech generation from 500 billed input characters using the stock Rachel voice."
 coverage = "500 original billed input characters, including any audio tags if present, at GG's published character rate. This is not an output-duration estimate."
+unit = "character"
+per_quantity = "500"
+label = "500 characters · Rachel"
 
 [providers.grida.endpoints.illustrative_costs.provenance]
 maintenance = "manual"

@@ -8333,6 +8333,9 @@
                   "currency": "USD",
                   "scenario": "One square_hd image, n=1, with a short text prompt.",
                   "coverage": "One square_hd output; additional outputs are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "Square HD",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded from the reviewed USD 0.04 1K output reference to USD 0.05. The CNY native Standard schedule is not converted or substituted for this GG illustration.",
@@ -8377,6 +8380,9 @@
                   "currency": "USD",
                   "scenario": "One square_hd image, n=1, with a short text prompt and one reference image.",
                   "coverage": "One square_hd output with one reference image; any separate reference-input charge is not independently quantified.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "Square HD · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded from the reviewed USD 0.04 1K output reference to USD 0.05. The CNY native Standard schedule is not converted or substituted for this GG illustration.",
@@ -8666,6 +8672,9 @@
                   "currency": "USD",
                   "scenario": "One 1024x1024 image, n=1, with a short text prompt and one reference image.",
                   "coverage": "One 1024x1024 output and one 1024x1024 reference image. Actual billed megapixels and prompt usage may differ; additional outputs and references are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1024 × 1024 · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate using the reviewed USD 0.07 base and USD 0.03 additional-megapixel pricing reference, rounded to USD 0.15 for this configuration. Exact pixel-to-billed-unit rounding is not assumed.",
@@ -8710,6 +8719,9 @@
                   "currency": "USD",
                   "scenario": "One 1024x1024 image, n=1, with a short text prompt.",
                   "coverage": "One 1024x1024 output. Actual billed megapixels and prompt usage may differ; additional outputs and references are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1024 × 1024",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate using the reviewed USD 0.07 base and USD 0.03 additional-megapixel pricing reference, rounded to USD 0.1 for this configuration. Exact pixel-to-billed-unit rounding is not assumed.",
@@ -9007,6 +9019,9 @@
                   "currency": "USD",
                   "scenario": "One 1024x1024 image, n=1, with a short text prompt and one reference image.",
                   "coverage": "One 1024x1024 output and one 1024x1024 reference image. Actual billed megapixels and prompt usage may differ; additional outputs and references are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1024 × 1024 · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate using the reviewed USD 0.03 base and USD 0.015 additional-megapixel pricing reference, rounded to USD 0.08 for this configuration. Exact pixel-to-billed-unit rounding is not assumed.",
@@ -9051,6 +9066,9 @@
                   "currency": "USD",
                   "scenario": "One 1024x1024 image, n=1, with a short text prompt.",
                   "coverage": "One 1024x1024 output. Actual billed megapixels and prompt usage may differ; additional outputs and references are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1024 × 1024",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate using the reviewed USD 0.03 base and USD 0.015 additional-megapixel pricing reference, rounded to USD 0.05 for this configuration. Exact pixel-to-billed-unit rounding is not assumed.",
@@ -9388,6 +9406,9 @@
                   "currency": "USD",
                   "scenario": "One 1k image, n=1, with a short text prompt.",
                   "coverage": "One 1K output; additional outputs are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1K",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded from the reviewed USD 0.048 single-output 1K pricing reference to USD 0.05. It is not an exact conversion of a future GG usage record.",
@@ -9432,6 +9453,9 @@
                   "currency": "USD",
                   "scenario": "One 1k image, n=1, with a short text prompt and one reference image.",
                   "coverage": "One 1K output with one reference image; any separate reference-input charge is not independently quantified.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1K · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded from the reviewed USD 0.048 single-output 1K pricing reference to USD 0.05. It is not an exact conversion of a future GG usage record.",
@@ -10012,6 +10036,9 @@
                   "currency": "USD",
                   "scenario": "One 1920x1920 image, n=1, with a short text prompt and one reference image.",
                   "coverage": "One 1920x1920 output with one reference image; any separate reference-input charge is not independently quantified.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1920 × 1920 · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded from the reviewed USD 0.035 per-image reference to USD 0.04. The selected 1920x1920 size meets GG's minimum output area.",
@@ -10056,6 +10083,9 @@
                   "currency": "USD",
                   "scenario": "One 1920x1920 image, n=1, with a short text prompt.",
                   "coverage": "One 1920x1920 output; additional outputs are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1920 × 1920",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded from the reviewed USD 0.035 per-image reference to USD 0.04. The selected 1920x1920 size meets GG's minimum output area.",
@@ -10364,6 +10394,9 @@
                   "currency": "USD",
                   "scenario": "One 1024x1024 image, n=1, with a short text prompt and one reference image.",
                   "coverage": "One 1024x1024 output and one reference image. Exact request-to-billed-unit mapping and reference-provider totals remain uncertain; additional outputs are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1024 × 1024 · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Maintainer GG judgement of USD 0.10, informed by the current GG USD 0.0675 reported-unit tariff and reviewed native single-image examples. Final reference-provider pricing remains unconfirmed; this is not a verified provider quote or a one-request-equals-one-unit claim.",
@@ -10408,6 +10441,9 @@
                   "currency": "USD",
                   "scenario": "One 1024x1024 image, n=1, with a short text prompt.",
                   "coverage": "One 1024x1024 output. Exact request-to-billed-unit mapping and reference-provider totals remain uncertain; additional outputs are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1024 × 1024",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Maintainer GG judgement of USD 0.10, informed by the current GG USD 0.0675 reported-unit tariff and reviewed native single-image examples. Final reference-provider pricing remains unconfirmed; this is not a verified provider quote or a one-request-equals-one-unit claim.",
@@ -10748,6 +10784,9 @@
                   "currency": "USD",
                   "scenario": "One 1K image, n=1, with a short text prompt and one reference image.",
                   "coverage": "One 1K output and one reference image. Web search is off; content-dependent input or other reported usage may change the total.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1K · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate of USD 0.15, informed by the reviewed USD 0.15 standard-resolution image reference. GG's selected 1K setting does not use the reviewed 4K multiplier or optional web-search fee.",
@@ -10792,6 +10831,9 @@
                   "currency": "USD",
                   "scenario": "One 1K image, n=1, with a short text prompt.",
                   "coverage": "One 1K output. Web search is off; content-dependent input or other reported usage may change the total.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1K",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate of USD 0.15, informed by the reviewed USD 0.15 standard-resolution image reference. GG's selected 1K setting does not use the reviewed 4K multiplier or optional web-search fee.",
@@ -11156,6 +11198,9 @@
                   "currency": "USD",
                   "scenario": "One 1K image, n=1, with a short text prompt and one reference image.",
                   "coverage": "One 1K output and one reference image. Web search is off; additional outputs and optional high-thinking usage are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1K · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded from the reviewed USD 0.08 1K-image reference to USD 0.10. GG's selected settings do not enable web search or the optional high-thinking control.",
@@ -11200,6 +11245,9 @@
                   "currency": "USD",
                   "scenario": "One 1K image, n=1, with a short text prompt.",
                   "coverage": "One 1K output. Web search is off; additional outputs and optional high-thinking usage are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1K",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded from the reviewed USD 0.08 1K-image reference to USD 0.10. GG's selected settings do not enable web search or the optional high-thinking control.",
@@ -11787,6 +11835,9 @@
                   "currency": "USD",
                   "scenario": "One 1K image, n=1, with a short text prompt and one reference image.",
                   "coverage": "One 1K output and a short prompt, plus one reference image. Input and thinking-token counts vary; web search and extra outputs are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1K · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate of USD 0.06, informed by reviewed 1K image-output examples near USD 0.04 before variable input and thinking tokens. The amount is rounded with a planning allowance for the selected input, not an exact token prediction.",
@@ -11831,6 +11882,9 @@
                   "currency": "USD",
                   "scenario": "One 1K image, n=1, with a short text prompt.",
                   "coverage": "One 1K output and a short prompt. Input and thinking-token counts vary; web search and extra outputs are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1K",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate of USD 0.05, informed by reviewed 1K image-output examples near USD 0.04 before variable input and thinking tokens. The amount is rounded with a planning allowance for the selected input, not an exact token prediction.",
@@ -12373,6 +12427,9 @@
                   "currency": "USD",
                   "scenario": "One square_hd image at medium quality, n=1, with a short text prompt.",
                   "coverage": "One square_hd medium-quality output. Extra outputs and other quality tiers are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "Square HD · Medium",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate of USD 0.06, informed by the reviewed medium-quality single-output reference. The scenario uses GG's supported medium quality rather than another provider's high-quality tier.",
@@ -12417,6 +12474,9 @@
                   "currency": "USD",
                   "scenario": "One square_hd image at medium quality, n=1, with a short text prompt and one reference image.",
                   "coverage": "One square_hd medium-quality output and one reference image. Extra outputs and other quality tiers are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "Square HD · Medium · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate of USD 0.06, informed by the reviewed medium-quality single-output reference. The scenario uses GG's supported medium quality rather than another provider's high-quality tier.",
@@ -12675,6 +12735,9 @@
                   "currency": "USD",
                   "scenario": "One 1:1 image, n=1, with a short text prompt.",
                   "coverage": "One 1:1 output; additional outputs are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "Square",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG single-image estimate of USD 0.01, informed by the reviewed USD 0.01 image-generation reference and GG's one-output 1:1 configuration. No billing-unit identity is inferred.",
@@ -12719,6 +12782,9 @@
                   "currency": "USD",
                   "scenario": "One 1:1 image, n=1, with a short text prompt and one reference image.",
                   "coverage": "One 1:1 output with one reference image; any separate reference-input charge is not independently quantified.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "Square · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG single-image estimate of USD 0.01, informed by the reviewed USD 0.01 image-generation reference and GG's one-output 1:1 configuration. No billing-unit identity is inferred.",
@@ -13530,6 +13596,9 @@
                   "currency": "USD",
                   "scenario": "One 1024x1024 image at medium quality, n=1, with a short text prompt and one reference image.",
                   "coverage": "One static PNG output at the stated size and medium quality, with one reference image. Prompt, reference and text-output token counts can vary; GIF frames and extra outputs are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1024 × 1024 · Medium · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate of USD 0.07, informed by the published 1024x1024 medium output calculation of USD 0.05268 before input tokens. Rounded for a short prompt and one reference image; no exact GG billing-unit conversion or actual token count is asserted.",
@@ -13574,6 +13643,9 @@
                   "currency": "USD",
                   "scenario": "One 1024x1024 image at medium quality, n=1, with a short text prompt.",
                   "coverage": "One static PNG output at the stated size and medium quality. Prompt, reference and text-output token counts can vary; GIF frames and extra outputs are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1024 × 1024 · Medium",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate of USD 0.06, informed by the published 1024x1024 medium output calculation of USD 0.05268 before input tokens. Rounded for a short prompt; no exact GG billing-unit conversion or actual token count is asserted.",
@@ -14146,6 +14218,9 @@
                   "currency": "USD",
                   "scenario": "One 2048x2048 image at medium quality, n=1, with a short text prompt and one reference image.",
                   "coverage": "One static PNG output at the stated size and medium quality, with one reference image. Prompt, reference and text-output token counts can vary; GIF frames and extra outputs are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "2048 × 2048 · Medium · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate of USD 0.05, informed by the published 2048x2048 medium output calculation of USD 0.02676 before reference/prompt tokens. Rounded for a short prompt and one reference image; no exact GG billing-unit conversion or actual token count is asserted.",
@@ -14190,6 +14265,9 @@
                   "currency": "USD",
                   "scenario": "One 1024x1024 image at medium quality, n=1, with a short text prompt.",
                   "coverage": "One static PNG output at the stated size and medium quality. Prompt, reference and text-output token counts can vary; GIF frames and extra outputs are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1024 × 1024 · Medium",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate of USD 0.02, informed by the published 1024x1024 medium output calculation of USD 0.01317 before input tokens. Rounded for a short prompt; no exact GG billing-unit conversion or actual token count is asserted.",
@@ -14972,6 +15050,9 @@
                   "currency": "USD",
                   "scenario": "One 2048x2048 image at medium quality, n=1, with a short text prompt and one reference image.",
                   "coverage": "One static PNG output at the stated size and medium quality, with one reference image. Prompt, reference and text-output token counts can vary; GIF frames and extra outputs are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "2048 × 2048 · Medium · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate of USD 0.05, informed by the published 2048x2048 medium output calculation of USD 0.02676 before reference/prompt tokens. Rounded for a short prompt and one reference image; no exact GG billing-unit conversion or actual token count is asserted.",
@@ -15016,6 +15097,9 @@
                   "currency": "USD",
                   "scenario": "One 1024x1024 image at medium quality, n=1, with a short text prompt.",
                   "coverage": "One static PNG output at the stated size and medium quality. Prompt, reference and text-output token counts can vary; GIF frames and extra outputs are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1024 × 1024 · Medium",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate of USD 0.02, informed by the published 1024x1024 medium output calculation of USD 0.01317 before input tokens. Rounded for a short prompt; no exact GG billing-unit conversion or actual token count is asserted.",
@@ -15998,6 +16082,9 @@
                   "currency": "USD",
                   "scenario": "One 1024x1024 image at medium quality, n=1, with a short text prompt.",
                   "coverage": "One static PNG output at the stated size and medium quality. Prompt, reference and text-output token counts can vary; GIF frames and extra outputs are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1024 × 1024 · Medium",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate of USD 0.05, informed by the published 1024x1024 medium output calculation of USD 0.04347 before input tokens. Rounded for a short prompt; no exact GG billing-unit conversion or actual token count is asserted.",
@@ -16042,6 +16129,9 @@
                   "currency": "USD",
                   "scenario": "One 2048x2048 image at medium quality, n=1, with a short text prompt and one reference image.",
                   "coverage": "One static PNG output at the stated size and medium quality, with one reference image. Prompt, reference and text-output token counts can vary; GIF frames and extra outputs are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "2048 × 2048 · Medium · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate of USD 0.1, informed by the public 2048x2048 medium edit example at USD 0.0969 for its stated token quantities. Rounded for a short prompt and one reference image; no exact GG billing-unit conversion or actual token count is asserted.",
@@ -16757,6 +16847,9 @@
                   "currency": "USD",
                   "scenario": "One 1024x1024 image at medium quality, n=1, with a short text prompt.",
                   "coverage": "One static PNG output at the stated size and medium quality. Prompt, reference and text-output token counts can vary; GIF frames and extra outputs are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1024 × 1024 · Medium",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate of USD 0.05, informed by the published 1024x1024 medium output calculation of USD 0.04347 before input tokens. Rounded for a short prompt; no exact GG billing-unit conversion or actual token count is asserted.",
@@ -16801,6 +16894,9 @@
                   "currency": "USD",
                   "scenario": "One 2048x2048 image at medium quality, n=1, with a short text prompt and one reference image.",
                   "coverage": "One static PNG output at the stated size and medium quality, with one reference image. Prompt, reference and text-output token counts can vary; GIF frames and extra outputs are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "2048 × 2048 · Medium · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate of USD 0.1, informed by the public 2048x2048 medium edit example at USD 0.0969 for its stated token quantities. Rounded for a short prompt and one reference image; no exact GG billing-unit conversion or actual token count is asserted.",
@@ -17165,6 +17261,9 @@
                   "currency": "USD",
                   "scenario": "One square_hd image, n=1, with a short text prompt.",
                   "coverage": "One raster output from a short prompt; additional images and separate style-creation requests are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "Square HD",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded from the reviewed USD 0.035 raster-output reference to USD 0.04 for one square_hd image. No style-creation or vector-output scenario is selected.",
@@ -17532,6 +17631,9 @@
                   "currency": "USD",
                   "scenario": "One 1k image at medium quality, n=1, with a short text prompt and one reference image.",
                   "coverage": "One 1K medium-quality output and one reference image. Additional images and higher-resolution output are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1K · Medium · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate using the reviewed USD 0.06 1K medium-quality output reference plus USD 0.01 for one reference image, selecting USD 0.07. This does not establish an exact conversion of future GG reported units.",
@@ -17576,6 +17678,9 @@
                   "currency": "USD",
                   "scenario": "One 1k image at medium quality, n=1, with a short text prompt.",
                   "coverage": "One 1K medium-quality output. Additional images and higher-resolution output are excluded.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1K · Medium",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate using the reviewed USD 0.06 1K medium-quality output reference, selecting USD 0.06. This does not establish an exact conversion of future GG reported units.",
@@ -17949,6 +18054,9 @@
                   "currency": "USD",
                   "scenario": "One 5-second 1080p video from one 16:9 input image, with standard GG settings.",
                   "coverage": "One 5-second 1080p clip and one 16:9 input image. Actual reported units can differ with input content; additional clips and other operations are excluded.",
+                  "unit": "video",
+                  "per_quantity": "1",
+                  "label": "5s · 1080p · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded to USD 1, informed by the reviewed 1080p output reference of USD 0.20 per second, or USD 1 for five seconds. It is not an exact conversion of GG reported units.",
@@ -17993,6 +18101,9 @@
                   "currency": "USD",
                   "scenario": "One 5-second 1080p video from a short text prompt, with standard GG settings.",
                   "coverage": "One 5-second 1080p clip. Actual reported units can differ with input content; additional clips and other operations are excluded.",
+                  "unit": "video",
+                  "per_quantity": "1",
+                  "label": "5s · 1080p",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded to USD 1, informed by the reviewed 1080p output reference of USD 0.20 per second, or USD 1 for five seconds. It is not an exact conversion of GG reported units.",
@@ -18467,6 +18578,9 @@
                   "currency": "USD",
                   "scenario": "One 5-second 720p video from a short text prompt, with standard GG settings.",
                   "coverage": "One 5-second 720p clip. Actual reported units can differ with input content; additional clips and other operations are excluded.",
+                  "unit": "video",
+                  "per_quantity": "1",
+                  "label": "5s · 720p",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded to USD 0.9, informed by the reviewed 720p output reference of USD 0.17 per second, or USD 0.85 for five seconds. It is not an exact conversion of GG reported units.",
@@ -18511,6 +18625,9 @@
                   "currency": "USD",
                   "scenario": "One 5-second 720p video from one 16:9 input image, with standard GG settings.",
                   "coverage": "One 5-second 720p clip and one 16:9 input image. Actual reported units can differ with input content; additional clips and other operations are excluded.",
+                  "unit": "video",
+                  "per_quantity": "1",
+                  "label": "5s · 720p · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded to USD 0.9, informed by the reviewed 720p output reference of USD 0.17 per second, or USD 0.85 for five seconds. It is not an exact conversion of GG reported units.",
@@ -18929,6 +19046,9 @@
                   "currency": "USD",
                   "scenario": "One 5-second 720p video from one 16:9 input image, with standard GG settings.",
                   "coverage": "One 5-second 720p clip and one 16:9 input image. Generated audio is on; actual token usage and input-image aspect can change the bill. No input video is included.",
+                  "unit": "video",
+                  "per_quantity": "1",
+                  "label": "5s · 720p · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded to USD 1.5, informed by the reviewed rough 720p reference of about USD 0.3034 per second, approximately USD 1.52 for five seconds. It is not an exact conversion of GG reported units or a native per-second tariff for this token-priced model.",
@@ -18973,6 +19093,9 @@
                   "currency": "USD",
                   "scenario": "One 5-second 720p video from a short text prompt, with standard GG settings.",
                   "coverage": "One 5-second 720p clip. Generated audio is on; actual token usage and input-image aspect can change the bill. No input video is included.",
+                  "unit": "video",
+                  "per_quantity": "1",
+                  "label": "5s · 720p",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded to USD 1.5, informed by the reviewed rough 720p reference of about USD 0.3034 per second, approximately USD 1.52 for five seconds. It is not an exact conversion of GG reported units or a native per-second tariff for this token-priced model.",
@@ -19452,6 +19575,9 @@
                   "currency": "USD",
                   "scenario": "One 5-second 720p video from one 16:9 input image, with standard GG settings.",
                   "coverage": "One 5-second 720p clip and one 16:9 input image. Generated audio is on; actual token usage and input-image aspect can change the bill. No input video is included.",
+                  "unit": "video",
+                  "per_quantity": "1",
+                  "label": "5s · 720p · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded to USD 2.4, informed by the reviewed rough 720p reference of about USD 0.473 per second, approximately USD 2.365 for five seconds. It is not an exact conversion of GG reported units or a native per-second tariff for this token-priced model.",
@@ -19496,6 +19622,9 @@
                   "currency": "USD",
                   "scenario": "One 5-second 720p video from a short text prompt, with standard GG settings.",
                   "coverage": "One 5-second 720p clip. Generated audio is on; actual token usage and input-image aspect can change the bill. No input video is included.",
+                  "unit": "video",
+                  "per_quantity": "1",
+                  "label": "5s · 720p",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded to USD 2.4, informed by the reviewed rough 720p reference of about USD 0.473 per second, approximately USD 2.365 for five seconds. It is not an exact conversion of GG reported units or a native per-second tariff for this token-priced model.",
@@ -20014,6 +20143,9 @@
                   "currency": "USD",
                   "scenario": "One 8-second 720p video from a short text prompt, with standard GG settings.",
                   "coverage": "One 8-second 720p clip. Input and any separately billed text-token usage are not predicted exactly; additional clips are excluded.",
+                  "unit": "video",
+                  "per_quantity": "1",
+                  "label": "8s · 720p",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded to USD 0.8, informed by the reviewed 720p output reference of USD 0.10 per second, or USD 0.80 for eight seconds. It is not an exact conversion of GG reported units.",
@@ -20058,6 +20190,9 @@
                   "currency": "USD",
                   "scenario": "One 8-second 720p video from one 16:9 input image, with standard GG settings.",
                   "coverage": "One 8-second 720p clip and one 16:9 input image. Input and any separately billed text-token usage are not predicted exactly; additional clips are excluded.",
+                  "unit": "video",
+                  "per_quantity": "1",
+                  "label": "8s · 720p · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded to USD 0.85, informed by the reviewed 720p output reference of USD 0.10 per second, or USD 0.80 for eight seconds. It is not an exact conversion of GG reported units.",
@@ -20352,6 +20487,9 @@
                   "currency": "USD",
                   "scenario": "One 8-second 720p video from a short text prompt, with standard GG settings.",
                   "coverage": "One 8-second 720p clip. Input and any separately billed text-token usage are not predicted exactly; additional clips are excluded.",
+                  "unit": "video",
+                  "per_quantity": "1",
+                  "label": "8s · 720p",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded to USD 0.7, informed by the reviewed 720p output reference of USD 0.0819 per second, or USD 0.6552 for eight seconds before input tokens. It is not an exact conversion of GG reported units.",
@@ -20396,6 +20534,9 @@
                   "currency": "USD",
                   "scenario": "One 8-second 720p video from one 16:9 input image, with standard GG settings.",
                   "coverage": "One 8-second 720p clip and one 16:9 input image. Input and any separately billed text-token usage are not predicted exactly; additional clips are excluded.",
+                  "unit": "video",
+                  "per_quantity": "1",
+                  "label": "8s · 720p · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded to USD 0.7, informed by the reviewed 720p output reference of USD 0.0819 per second, or USD 0.6552 for eight seconds before input tokens. It is not an exact conversion of GG reported units.",
@@ -21786,6 +21927,9 @@
                   "currency": "USD",
                   "scenario": "One 5-second 768P video from a short text prompt, with standard GG settings.",
                   "coverage": "One 5-second 768P clip. Actual reported units can differ with input content; additional clips and other operations are excluded.",
+                  "unit": "video",
+                  "per_quantity": "1",
+                  "label": "5s · 768p",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded to USD 0.3, informed by the reviewed 768P output reference of USD 0.06 per second, or USD 0.30 for five seconds. It is not an exact conversion of GG reported units.",
@@ -21830,6 +21974,9 @@
                   "currency": "USD",
                   "scenario": "One 5-second 768P video from one 16:9 input image, with standard GG settings.",
                   "coverage": "One 5-second 768P clip and one 16:9 input image. Actual reported units can differ with input content; additional clips and other operations are excluded.",
+                  "unit": "video",
+                  "per_quantity": "1",
+                  "label": "5s · 768p · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded to USD 0.3, informed by the reviewed 768P output reference of USD 0.06 per second, or USD 0.30 for five seconds. It is not an exact conversion of GG reported units.",
@@ -22196,6 +22343,9 @@
                   "currency": "USD",
                   "scenario": "One 5-second 720p video from one 16:9 input image, with standard GG settings.",
                   "coverage": "One 5-second 720p clip and one 16:9 input image. Actual reported units can differ with input content; additional clips and other operations are excluded.",
+                  "unit": "video",
+                  "per_quantity": "1",
+                  "label": "5s · 720p · 1 reference",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded to USD 0.75, informed by the reviewed 720p output reference of USD 0.14 per second, or USD 0.70 for five seconds, plus the USD 0.01 single-reference example. It is not an exact conversion of GG reported units.",
@@ -22240,6 +22390,9 @@
                   "currency": "USD",
                   "scenario": "One 5-second 720p video from a short text prompt, with standard GG settings.",
                   "coverage": "One 5-second 720p clip. Actual reported units can differ with input content; additional clips and other operations are excluded.",
+                  "unit": "video",
+                  "per_quantity": "1",
+                  "label": "5s · 720p",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded to USD 0.7, informed by the reviewed 720p output reference of USD 0.14 per second, or USD 0.70 for five seconds. It is not an exact conversion of GG reported units.",
@@ -22426,6 +22579,9 @@
                   "currency": "USD",
                   "scenario": "One billed music generation from a short text prompt.",
                   "coverage": "One generation under GG's published per-generation price. Output duration and delivered-file count do not define extra billed generations; additional submissions are excluded.",
+                  "unit": "generation",
+                  "per_quantity": "1",
+                  "label": "Text to music",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manually calculated directly from GG's published tariff: one generation at USD 0.04. No fixed song duration or native/reseller conversion is assumed.",
@@ -22611,6 +22767,9 @@
                   "currency": "USD",
                   "scenario": "One billed music generation from a short text prompt.",
                   "coverage": "One generation under GG's published per-generation price. Output duration and delivered-file count do not define extra billed generations; additional submissions are excluded.",
+                  "unit": "generation",
+                  "per_quantity": "1",
+                  "label": "Text to music",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manually calculated directly from GG's published tariff: one generation at USD 0.08. No fixed song duration or native/reseller conversion is assumed.",
@@ -23349,6 +23508,9 @@
                   "currency": "USD",
                   "scenario": "One sound-effect generation with ten billed output seconds and loop=false.",
                   "coverage": "Ten original billed generated-audio seconds at GG's published per-second price. Any difference between requested and billed duration changes the actual total.",
+                  "unit": "second",
+                  "per_quantity": "10",
+                  "label": "10s · Loop off",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manually calculated directly from GG's published tariff: ten billed audio seconds multiplied by USD 0.002 per second.",
@@ -24485,6 +24647,9 @@
                   "currency": "USD",
                   "scenario": "One speech generation from 500 billed input characters using the stock Rachel voice.",
                   "coverage": "500 original billed input characters, including any audio tags if present, at GG's published character rate. This is not an output-duration estimate.",
+                  "unit": "character",
+                  "per_quantity": "500",
+                  "label": "500 characters · Rachel",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manually calculated directly from GG's published tariff: 500 billed characters multiplied by USD 0.00008 per character. Rachel is a supported stock voice.",
@@ -24684,6 +24849,9 @@
                   "currency": "USD",
                   "scenario": "One speech generation from 500 billed input characters using the stock Rachel voice.",
                   "coverage": "500 original billed input characters, including any audio tags if present, at GG's published character rate. This is not an output-duration estimate.",
+                  "unit": "character",
+                  "per_quantity": "500",
+                  "label": "500 characters · Rachel",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manually calculated directly from GG's published tariff: 500 billed characters multiplied by USD 0.00004 per character. Rachel is a supported stock voice.",
@@ -24912,6 +25080,9 @@
                   "currency": "USD",
                   "scenario": "One textured GLB from one image using standard GG settings.",
                   "coverage": "Default textured generation with PBR off and the fixed face-count setting. Any extra face-count billing is not independently quantified; no optional PBR or other operation is included.",
+                  "unit": "generation",
+                  "per_quantity": "1",
+                  "label": "Textured · 1 image",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded from the reviewed USD 0.375 base-generation example to USD 0.40. GG fixes the default face-count setting; whether that setting adds a separate billed component remains uncertain.",
@@ -25102,6 +25273,9 @@
                   "currency": "USD",
                   "scenario": "One textured GLB from a short text prompt using standard GG settings.",
                   "coverage": "Default textured generation with PBR off and the fixed face-count setting. Any extra face-count billing is not independently quantified; no optional PBR or other operation is included.",
+                  "unit": "generation",
+                  "per_quantity": "1",
+                  "label": "Textured · Text prompt",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate rounded from the reviewed USD 0.375 base-generation example to USD 0.40. GG fixes the default face-count setting; whether that setting adds a separate billed component remains uncertain.",
@@ -25409,6 +25583,9 @@
                   "currency": "USD",
                   "scenario": "One GLB from one image using GG's fixed 1024-resolution generation settings.",
                   "coverage": "Manually selected GG estimate for the fixed 1024-resolution generation. Other resolutions are not exposed by this GG operation; original reported usage determines the charge.",
+                  "unit": "generation",
+                  "per_quantity": "1",
+                  "label": "1024 resolution · 1 image",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manual GG estimate of USD 0.30, informed by the reviewed USD 0.30 1024-resolution generation reference. GG fixes this resolution; no exact reported-unit conversion or unsupported resolution choice is asserted.",
@@ -25843,6 +26020,9 @@
                   "currency": "USD",
                   "scenario": "One GLB from one image, with texture=true, pbr=true and standard textures.",
                   "coverage": "Illustrates 30 billed provider credits for the selected generation base and standard texture. GG charges actual original usage at its published tariff; detailed geometry, higher texture tiers and other add-ons are excluded.",
+                  "unit": "generation",
+                  "per_quantity": "1",
+                  "label": "Standard textures · 1 image",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manually calculated using the selected 20-credit generation base plus 10 standard-texture credits and GG's current USD 0.01 per provider credit. GG rejects texture=false with pbr=true; this scenario uses the supported true/true combination.",
@@ -25887,6 +26067,9 @@
                   "currency": "USD",
                   "scenario": "One GLB from two images (front and back), with texture=true, pbr=true and standard textures.",
                   "coverage": "Illustrates 30 billed provider credits for the selected generation base and standard texture. GG charges actual original usage at its published tariff; detailed geometry, higher texture tiers and other add-ons are excluded.",
+                  "unit": "generation",
+                  "per_quantity": "1",
+                  "label": "Standard textures · 2 views",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manually calculated using the selected 20-credit generation base plus 10 standard-texture credits and GG's current USD 0.01 per provider credit. GG rejects texture=false with pbr=true; this scenario uses the supported true/true combination.",
@@ -25931,6 +26114,9 @@
                   "currency": "USD",
                   "scenario": "One GLB from a short text prompt, with texture=true, pbr=true and standard textures.",
                   "coverage": "Illustrates 20 billed provider credits for the selected generation base and standard texture. GG charges actual original usage at its published tariff; detailed geometry, higher texture tiers and other add-ons are excluded.",
+                  "unit": "generation",
+                  "per_quantity": "1",
+                  "label": "Standard textures · Text prompt",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manually calculated using the selected 10-credit generation base plus 10 standard-texture credits and GG's current USD 0.01 per provider credit. GG rejects texture=false with pbr=true; this scenario uses the supported true/true combination.",
@@ -26292,6 +26478,9 @@
                   "currency": "USD",
                   "scenario": "One GLB from one image, with texture=true, pbr=true and standard textures.",
                   "coverage": "Illustrates 50 billed provider credits for the selected generation base and standard texture. GG charges actual original usage at its published tariff; detailed geometry, higher texture tiers and other add-ons are excluded.",
+                  "unit": "generation",
+                  "per_quantity": "1",
+                  "label": "Standard textures · 1 image",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manually calculated using the selected 40-credit generation base plus 10 standard-texture credits and GG's current USD 0.01 per provider credit. GG rejects texture=false with pbr=true; this scenario uses the supported true/true combination.",
@@ -26336,6 +26525,9 @@
                   "currency": "USD",
                   "scenario": "One GLB from two images (front and back), with texture=true, pbr=true and standard textures.",
                   "coverage": "Illustrates 50 billed provider credits for the selected generation base and standard texture. GG charges actual original usage at its published tariff; detailed geometry, higher texture tiers and other add-ons are excluded.",
+                  "unit": "generation",
+                  "per_quantity": "1",
+                  "label": "Standard textures · 2 views",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manually calculated using the selected 40-credit generation base plus 10 standard-texture credits and GG's current USD 0.01 per provider credit. GG rejects texture=false with pbr=true; this scenario uses the supported true/true combination.",
@@ -26380,6 +26572,9 @@
                   "currency": "USD",
                   "scenario": "One GLB from a short text prompt, with texture=true, pbr=true and standard textures.",
                   "coverage": "Illustrates 40 billed provider credits for the selected generation base and standard texture. GG charges actual original usage at its published tariff; detailed geometry, higher texture tiers and other add-ons are excluded.",
+                  "unit": "generation",
+                  "per_quantity": "1",
+                  "label": "Standard textures · Text prompt",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manually calculated using the selected 30-credit generation base plus 10 standard-texture credits and GG's current USD 0.01 per provider credit. GG rejects texture=false with pbr=true; this scenario uses the supported true/true combination.",
@@ -26762,6 +26957,9 @@
                   "currency": "USD",
                   "scenario": "One GLB from one image, with texture=true, pbr=true and standard textures.",
                   "coverage": "Illustrates 110 billed provider credits for the selected generation base and standard texture. GG charges actual original usage at its published tariff; detailed geometry, higher texture tiers and other add-ons are excluded.",
+                  "unit": "generation",
+                  "per_quantity": "1",
+                  "label": "Standard textures · 1 image",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manually calculated using the selected 100-credit generation base plus 10 standard-texture credits and GG's current USD 0.01 per provider credit. GG rejects texture=false with pbr=true; this scenario uses the supported true/true combination.",
@@ -26806,6 +27004,9 @@
                   "currency": "USD",
                   "scenario": "One GLB from two images (front and back), with texture=true, pbr=true and standard textures.",
                   "coverage": "Illustrates 110 billed provider credits for the selected generation base and standard texture. GG charges actual original usage at its published tariff; detailed geometry, higher texture tiers and other add-ons are excluded.",
+                  "unit": "generation",
+                  "per_quantity": "1",
+                  "label": "Standard textures · 2 views",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manually calculated using the selected 100-credit generation base plus 10 standard-texture credits and GG's current USD 0.01 per provider credit. GG rejects texture=false with pbr=true; this scenario uses the supported true/true combination.",
@@ -26850,6 +27051,9 @@
                   "currency": "USD",
                   "scenario": "One GLB from a short text prompt, with texture=true, pbr=true and standard textures.",
                   "coverage": "Illustrates 110 billed provider credits for the selected generation base and standard texture. GG charges actual original usage at its published tariff; detailed geometry, higher texture tiers and other add-ons are excluded.",
+                  "unit": "generation",
+                  "per_quantity": "1",
+                  "label": "Standard textures · Text prompt",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manually calculated using the selected 100-credit generation base plus 10 standard-texture credits and GG's current USD 0.01 per provider credit. GG rejects texture=false with pbr=true; this scenario uses the supported true/true combination.",
@@ -27054,6 +27258,9 @@
                   "currency": "USD",
                   "scenario": "One biped auto-rigging task with spec=tripo and a GLB mesh.",
                   "coverage": "Illustrates 25 billed provider credits for one rigging task. Additional processing or animation operations are excluded; actual recorded usage governs the charge.",
+                  "unit": "task",
+                  "per_quantity": "1",
+                  "label": "Biped",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manually calculated from the reviewed 25-credit auto-rigging example and GG's published USD 0.01 per provider credit. The anatomy and spec are supported by this GG operation.",
@@ -27225,6 +27432,9 @@
                   "currency": "USD",
                   "scenario": "One quadruped auto-rigging task with spec=tripo and a GLB mesh.",
                   "coverage": "Illustrates 25 billed provider credits for one rigging task. Additional processing or animation operations are excluded; actual recorded usage governs the charge.",
+                  "unit": "task",
+                  "per_quantity": "1",
+                  "label": "Quadruped",
                   "provenance": {
                     "maintenance": "manual",
                     "description": "Manually calculated from the reviewed 25-credit auto-rigging example and GG's published USD 0.01 per provider credit. The anatomy and spec are supported by this GG operation.",
@@ -27351,6 +27561,9 @@
                 "currency": "USD",
                 "scenario": "One rig-eligibility check on one GLB mesh.",
                 "coverage": "One check with zero consumed provider credits. Subsequent paid rigging or generation is excluded.",
+                "unit": "task",
+                "per_quantity": "1",
+                "label": "Rig eligibility check",
                 "provenance": {
                   "maintenance": "manual",
                   "description": "Manually reviewed as the free rig-check operation: the published provider check consumes no credits, so applying GG's per-credit tariff to zero credits gives zero. This does not imply that paid rigging is free.",

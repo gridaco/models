@@ -153,6 +153,9 @@ amount = "0.06"
 currency = "USD"
 scenario = "One square_hd image at medium quality, n=1, with a short text prompt."
 coverage = "One square_hd medium-quality output. Extra outputs and other quality tiers are excluded."
+unit = "image"
+per_quantity = "1"
+label = "Square HD · Medium"
 
 [providers.grida.endpoints.illustrative_costs.provenance]
 maintenance = "manual"
@@ -181,6 +184,9 @@ amount = "0.06"
 currency = "USD"
 scenario = "One square_hd image at medium quality, n=1, with a short text prompt and one reference image."
 coverage = "One square_hd medium-quality output and one reference image. Extra outputs and other quality tiers are excluded."
+unit = "image"
+per_quantity = "1"
+label = "Square HD · Medium · 1 reference"
 
 [providers.grida.endpoints.illustrative_costs.provenance]
 maintenance = "manual"
