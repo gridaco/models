@@ -120,7 +120,10 @@ license, and are used under each owner's guidelines.
 - **Facts only.** No product listing, lifecycle or routing defaults (`listed`, `status`,
   `legacy`, `deprecated`, `default`); those belong to each consumer.
   `reference_provider` identifies the native API for presentation, not a routing default.
-- **Sourced.** Every value traces to a first-party page; qualifications go in `PROVENANCE.md`.
+- **Sourced facts.** Model facts and published tariffs trace to first-party pages;
+  qualifications go in `PROVENANCE.md`. The separately labelled
+  [illustrative costs](#illustrative-costs) may be manually curated estimates with
+  their own provenance and optional supporting links.
 
 The schema's `$id` is `https://grida.co/schemas/ai-model-facts-v1.json`. It is kept
 unchanged from its origin; changing it is a breaking change.
@@ -129,6 +132,8 @@ unchanged from its origin; changing it is a breaking change.
 
 - `avg_cost_usd` (bindings and some cards) and `cost_usd` (image tools) are coarse
   per-request estimates, not published prices. Published prices are under `pricing`/`cost`.
+  These legacy fields retain their meaning; they do not establish a measured
+  average or inherit a scenario from `illustrative_costs`.
 
 ## Known exceptions
 
@@ -230,6 +235,108 @@ OpenAPI document by JSON Pointer; it retains the external document's dialect.
 For WebSocket protocols, the official AsyncAPI reference is authoritative even
 when no standalone schema document is published. Do not label an HTML reference
 page as a machine-readable request or result schema.
+
+## Illustrative costs
+
+Optional `illustrative_costs` is a nonempty array on a **provider binding or
+endpoint**. A legacy card or operation with an explicit direct `provider` may
+also use it for that provider. A canonical multi-provider card cannot carry a
+global illustration: a native example does not establish another provider's
+cost. Binding and endpoint arrays are independent; no inheritance, merging or
+override behavior is implied.
+
+Each item describes an **illustrative cost for one stated scenario and charge
+scope**, not a billing rate, attainable starting price, statistical average,
+reservation ceiling or guaranteed request total:
+
+- `amount`: an exact nonnegative decimal **string**, without exponent notation.
+- `currency`: the original `USD` or `CNY` currency; no conversion is implied.
+- Optional `unit` and `per_quantity` appear together or are both omitted. `unit`
+  is a lowercase token (`image`, `character`, `second`, for example), at most 64
+  characters. `per_quantity` is a positive exact decimal string, at most 64
+  characters, using the same spelling as `amount`; `1.0` and `0.50` retain their
+  precision, while zero, signs, exponents, leading zeros and whitespace are
+  invalid. The amount covers that selected quantity and configuration; it is
+  not an executable unit rate. For `image`, count generated output images,
+  never input/reference images. Other units retain the scope stated in the
+  scenario, such as 500 billed input characters.
+- Optional `label`: nonblank plain text, at most 256 characters, for a short
+  configuration label such as `1024 × 1024 · Medium · 1 reference`. It does not
+  replace the complete scenario or encode parameters or price rules.
+- `scenario`: nonblank plain text stating configuration and quantities. Retain
+  the provider's native parameter names where useful; no new parameter language
+  or formula is required for a maintainer judgement.
+- `coverage`: nonblank plain text stating included charges, exclusions and any
+  unknown coverage. An output-only amount must say that input or ancillary fees
+  are separate; an unknown charge is not zero.
+- `provenance`: an object with `maintenance: "manual"`, nonblank `description`
+  explaining the origin/derivation/assumptions, and a real calendar `reviewed_on`
+  date (`YYYY-MM-DD`). Optional `source_urls` is a nonempty, distinct list of
+  absolute HTTPS references without credentials. Omit the list when no useful,
+  maintainable link exists; a URL is not required for a manual illustration.
+
+For example, a manually chosen scenario may be authored without a source URL:
+
+```json
+{
+  "illustrative_costs": [
+    {
+      "amount": "0.05",
+      "currency": "USD",
+      "unit": "image",
+      "per_quantity": "1",
+      "label": "Medium · 1 output image",
+      "scenario": "One image at the author's chosen medium-quality setting.",
+      "coverage": "Illustrative output budget only; input and ancillary fees are unknown.",
+      "provenance": {
+        "maintenance": "manual",
+        "description": "Maintainer judgement for comparison, not a provider quote or a measured average.",
+        "reviewed_on": "2026-11-13"
+      }
+    }
+  ]
+}
+```
+
+This documentation example does not advertise a price for any model. An authored
+item may instead explain a provider-published example, a third-party estimate,
+or a calculation from published rates. `maintenance` says how it is maintained,
+not how certain it is. Preserve genuine supporting references when available;
+do not invent a homepage/anchor or attribute a judgement to a provider. This
+narrow estimate exception does not relax first-party evidence for actual model
+facts, regular tariffs, limits or capabilities. A source URL alone does not turn
+an estimate into a verified price.
+
+Use existing `pricing`, `token_pricing` or `published_pricing` when a clear
+per-generation, image, second, character or other unit rate already communicates
+the cost. An illustration adds a scenario; it does not duplicate or replace the
+authoritative price schedule. Omit it where neither a useful qualified example
+nor a reasonable explicit maintainer judgement is available. Omission does not
+mean free inference, provider absence, or unsupported capabilities.
+
+Authors review an illustration and its provenance together whenever a relevant
+rate, model/endpoint, formula, scenario or included charge changes. Revise it or
+remove it until reviewed; do not automatically advance `reviewed_on`, reuse a
+stale value, or regenerate a legacy average as a new illustration. The checker
+validates structure, scope, dates and supporting URLs; it cannot verify prose,
+price arithmetic or a maintainer's judgement and does not fetch sources. Review
+remains manual, including for changed assumptions not represented as a formula.
+
+Consumers can present these as **estimated media costs** and show the scenario and charge
+coverage alongside the amount, with provenance available in details. Keep exact
+rates accessible. Formatting/localization and whether to show an illustration
+belong to consumers; receiving this field does not change execution or billing.
+An explicit `image` / `1` denominator can display as `$0.05/image`. An amount
+of `$0.20` covering `image` / `2` stays `$0.20 / 2 images`; do not automatically
+divide or normalize it. An explicit `character` / `500` amount is for those 500
+characters, not one character. Without the pair, display the amount without an
+inferred denominator. Never infer output count from model kind or English prose,
+or inherit the pair from another example or binding. Use `label` for a compact
+configuration list, falling back to `scenario` when it is absent; both remain
+display text, with full coverage and provenance available.
+Unknown additive metadata must not invalidate the rest of a catalogue. Existing
+fields, schema version and `$id` remain unchanged; this contract requires no paid
+sampling or runtime source lookup.
 
 ## Model distribution
 

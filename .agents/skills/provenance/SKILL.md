@@ -14,6 +14,12 @@ description: >
 Use this when an entry needs a `release`, when an existing date is in doubt, or when a fact
 needs a qualification recorded next to it.
 
+For an illustrative cost's `provenance` object, follow the separate
+[illustrative-cost contract](../../../catalogue/README.md#illustrative-costs).
+Its manual explanation and review date describe an estimate, not a release date
+or verified tariff. Supporting links may be omitted when no maintainable
+reference exists; this does not relax the first-party release/fact rules below.
+
 ## The `release` object
 
 Every entry carries one:
@@ -74,8 +80,8 @@ history. Never fill in an approximate day.
 
 ## Provenance notes
 
-A JSON value cannot hold its own caveats. Write a note in
-[`catalogue/PROVENANCE.md`](../../../catalogue/PROVENANCE.md) when a fact needs one. For example:
+Write a note in [`catalogue/PROVENANCE.md`](../../../catalogue/PROVENANCE.md)
+when a model fact needs qualifications that do not fit its record. For example:
 
 - Regular-price evidence: the provider's source establishing its non-promotional rate,
   or a verification gap when only a promotional rate is published. Do not track discounted

@@ -6,6 +6,10 @@ Each entry records what a model is, what it can do, where it can be called, and 
 Every fact has a source. The catalogue is maintained by hand and reviewed like code, so one
 place answers "which models exist and what are they" for every Grida product.
 
+Optional [illustrative costs](./catalogue/README.md#illustrative-costs) explain a
+specific scenario separately from published rates. They carry explicit manual
+provenance and may omit source links when no durable reference exists.
+
 [Grida](https://grida.co) · [Catalogue](./catalogue/)
 
 > **Status: early.** The catalogue is at schema version 1. Snapshots are published as

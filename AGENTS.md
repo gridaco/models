@@ -82,9 +82,15 @@ doesn't belong in the contract.
 
 - **Source every fact.** Prices, limits, capabilities, and release dates cite a first-party
   page. [models.dev](https://models.dev) and similar aggregators are leads, never sources.
-  See `$catalogue` and `$provenance`.
+  See `$catalogue` and `$provenance`. Separately labelled
+  [`illustrative_costs`](./catalogue/README.md#illustrative-costs) are descriptive
+  estimates: maintain their explicit manual `provenance`, explanation and review
+  date; supporting URLs are optional. This exception does not establish a tariff
+  or permit unsourced model facts.
 - **Never fabricate.** If a value cannot be verified, leave it out and say so. Do not
-  estimate a price, round a limit, or infer a release day.
+  infer a published price, round a limit, or infer a release day. A deliberate
+  maintainer estimate belongs only in qualified `illustrative_costs`, never in
+  regular-price fields or as a claimed measured average.
 - **Published regular prices only.** Use sourced, non-promotional provider rates even
   during an active promotion. Do not maintain promotional prices or expiry tracking.
   No negotiated, wholesale, account-specific, or internal prices; no internal markup, credit
@@ -159,5 +165,7 @@ section.
 ## Commits and PRs
 
 - One concern per PR. A data change and a schema change are separate PRs.
-- The PR description names the source for every changed fact.
+- The PR description names the source for every changed fact. For illustrative
+  estimates, explain their provenance and assumptions; do not fabricate a source
+  URL when the manual record has no durable reference.
 - Write for a stranger who found the repository through search. No internal context.
