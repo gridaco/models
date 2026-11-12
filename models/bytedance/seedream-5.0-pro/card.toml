@@ -130,3 +130,27 @@ endpoints = [
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/models"
+
+[[providers.byteplus.illustrative_costs]]
+amount = "0.051"
+currency = "USD"
+scenario = "One image at or below 2.61 million output pixels, using three input images."
+coverage = "Single-image generation charge 0.045 plus two additional input images at 0.003; first input image included. Excludes layer decomposition."
+
+[providers.byteplus.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated from the native single-image generation schedule: USD 0.045 for the selected output tier plus two additional input images at USD 0.003 each; the first input image is included."
+reviewed_on = "2026-11-13"
+source_urls = ["https://docs.byteplus.com/en/docs/ModelArk/model-pricing"]
+
+[[providers.byteplus.illustrative_costs]]
+amount = "0.096"
+currency = "USD"
+scenario = "One image above 2.61 million output pixels, using three input images."
+coverage = "Single-image generation charge 0.09 plus two additional input images at 0.003; first input image included. Excludes layer decomposition."
+
+[providers.byteplus.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated from the native single-image generation schedule: USD 0.09 for the selected output tier plus two additional input images at USD 0.003 each; the first input image is included."
+reviewed_on = "2026-11-13"
+source_urls = ["https://docs.byteplus.com/en/docs/ModelArk/model-pricing"]

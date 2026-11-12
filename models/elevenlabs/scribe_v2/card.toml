@@ -105,3 +105,15 @@ source_url = "https://elevenlabs.io/docs/api-reference/speech-to-text/convert"
 [modalities]
 input = ["audio"]
 output = ["text"]
+
+[[providers.fal.illustrative_costs]]
+amount = "0.052"
+currency = "USD"
+scenario = "Five billed minutes of Scribe v2 transcription with keyterm prompting."
+coverage = "Includes base transcription and the 30% keyterm surcharge for five billed input-audio minutes. Other services or unselected charges are excluded."
+
+[providers.fal.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated from the exact fal Scribe v2 endpoint: five minutes at USD 0.008 gives USD 0.04 base transcription, plus its published 30% keyterm surcharge of USD 0.012."
+reviewed_on = "2026-11-13"
+source_urls = ["https://fal.ai/models/fal-ai/elevenlabs/speech-to-text/scribe-v2"]

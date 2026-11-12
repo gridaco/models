@@ -159,3 +159,15 @@ endpoints = [
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/models"
+
+[[providers.alibaba.illustrative_costs]]
+amount = "0.5"
+currency = "USD"
+scenario = "Five seconds of 720p video in Singapore International."
+coverage = "Published output-video second charge only; exact Singapore schedule, without promotion or cross-region substitution."
+
+[providers.alibaba.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated from the native Singapore International 720p schedule: five generated video seconds multiplied by USD 0.10 per second."
+reviewed_on = "2026-11-13"
+source_urls = ["https://www.alibabacloud.com/help/en/model-studio/wan3-0-video"]

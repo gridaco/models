@@ -99,3 +99,15 @@ fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/minimax/
 minimax = { "disposition" = "listed", "source_url" = "https://platform.minimax.io/docs/api-reference/video-generation-v2-create" }
 vercel = { "disposition" = "listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models" }
 openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.ai/api/v1/videos/models", "reason" = "The exact variant is absent from the published video model discovery response. Other variants do not establish its availability." }
+
+[[providers.minimax.illustrative_costs]]
+amount = "0.4"
+currency = "USD"
+scenario = "Five seconds of 768P H3Max generated video."
+coverage = "Native output-video component only. Input-video and additional reference-image charges are separate and excluded."
+
+[providers.minimax.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated from the native MiniMax-H3-Max 768P output schedule: five generated seconds multiplied by USD 0.08 per second."
+reviewed_on = "2026-11-13"
+source_urls = ["https://platform.minimax.io/docs/pricing/overview"]

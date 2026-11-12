@@ -89,3 +89,39 @@ endpoints = [
     "opaque",
   ] }, "n" = { "type" = "integer", "minimum" = 1, "maximum" = 10 }, "input_references" = { "type" = "integer", "minimum" = 0, "maximum" = 16 }, "output_compression" = { "type" = "integer", "minimum" = 0, "maximum" = 100 } }, "input" = "text" },
 ]
+
+[[providers.openai.illustrative_costs]]
+amount = "0.005"
+currency = "USD"
+scenario = "One 1024x1024 still image at low quality."
+coverage = "Published image-output amount only; excludes text/image input tokens and other request components."
+
+[providers.openai.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manually transcribed the native model page's 1024x1024, low-quality image-output example. The source presents this as an approximate output cost, with input-token charges separate."
+reviewed_on = "2026-11-13"
+source_urls = ["https://developers.openai.com/api/docs/models/gpt-image-1-mini"]
+
+[[providers.openai.illustrative_costs]]
+amount = "0.011"
+currency = "USD"
+scenario = "One 1024x1024 still image at medium quality."
+coverage = "Published image-output amount only; excludes text/image input tokens and other request components."
+
+[providers.openai.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manually transcribed the native model page's 1024x1024, medium-quality image-output example. The source presents this as an approximate output cost, with input-token charges separate."
+reviewed_on = "2026-11-13"
+source_urls = ["https://developers.openai.com/api/docs/models/gpt-image-1-mini"]
+
+[[providers.openai.illustrative_costs]]
+amount = "0.036"
+currency = "USD"
+scenario = "One 1024x1024 still image at high quality."
+coverage = "Published image-output amount only; excludes text/image input tokens and other request components."
+
+[providers.openai.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manually transcribed the native model page's 1024x1024, high-quality image-output example. The source presents this as an approximate output cost, with input-token charges separate."
+reviewed_on = "2026-11-13"
+source_urls = ["https://developers.openai.com/api/docs/models/gpt-image-1-mini"]

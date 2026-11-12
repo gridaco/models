@@ -179,3 +179,15 @@ endpoints = [
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/models"
+
+[[providers.byteplus.illustrative_costs]]
+amount = "0.76"
+currency = "USD"
+scenario = "Five seconds of 720p 16:9 video without input video."
+coverage = "Provider-published estimated video price. Actual charge uses usage.completion_tokens; no input-video minimum-floor assumption."
+
+[providers.byteplus.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manually transcribed the native Dreamina Seedance 2.0 billing example for 720p, 16:9, five output seconds and no input video. The provider labels the amount as an estimate; actual usage.completion_tokens determines billing."
+reviewed_on = "2026-11-13"
+source_urls = ["https://docs.byteplus.com/en/docs/ModelArk/model-pricing"]

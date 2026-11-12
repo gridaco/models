@@ -49,3 +49,15 @@ openrouter = { "disposition" = "listed", "source_url" = "https://openrouter.ai/g
 vercel = { "disposition" = "listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models" }
 fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/google/nano-banana-2-lite" }
 google = { "disposition" = "listed", "source_url" = "https://ai.google.dev/gemini-api/docs/pricing" }
+
+[[providers.google.illustrative_costs]]
+amount = "0.0336"
+currency = "USD"
+scenario = "One 1K (1024x1024) generated image at Standard pricing."
+coverage = "Image-output component only. Source-published approximate/rounded price where applicable; excludes input tokens, text/thinking output and grounding charges."
+
+[providers.google.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manually transcribed the native Standard image-output example for the stated resolution. The provider publishes USD 0.0336 for that output component; any source rounding is retained rather than inferred as an exact complete request bill."
+reviewed_on = "2026-11-13"
+source_urls = ["https://aistudio.google.com/docs/pricing"]

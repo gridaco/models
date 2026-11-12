@@ -238,3 +238,15 @@ endpoints = [
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/models"
+
+[[providers.fal.illustrative_costs]]
+amount = "1.45"
+currency = "USD"
+scenario = "blackforestlabs/flux-3/text-to-video: five seconds of 1080p generated video."
+coverage = "Exact fal output-video charge only; no claim that other input or request components are zero."
+
+[providers.fal.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated from the exact fal text-to-video endpoint: five generated 1080p seconds multiplied by USD 0.29 per second."
+reviewed_on = "2026-11-13"
+source_urls = ["https://fal.ai/models/blackforestlabs/flux-3/text-to-video"]

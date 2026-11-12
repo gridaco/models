@@ -42,3 +42,15 @@ openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.
 vercel = { "disposition" = "listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models" }
 fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/fal-ai/flux-pro/v1.1" }
 bfl = { "disposition" = "listed", "source_url" = "https://docs.bfl.ai/quick_start/pricing" }
+
+[[providers.fal.illustrative_costs]]
+amount = "0.08"
+currency = "USD"
+scenario = "One generated image with two billed megapixels."
+coverage = "Fal output-megapixel component only, using two already-billed units. Other input or ancillary charges are excluded."
+
+[providers.fal.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated as two billed output megapixels multiplied by the fal rate of USD 0.04 per megapixel."
+reviewed_on = "2026-11-13"
+source_urls = ["https://fal.ai/models/fal-ai/flux-pro/v1.1"]

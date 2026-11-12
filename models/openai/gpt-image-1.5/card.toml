@@ -63,3 +63,39 @@ openrouter = { "disposition" = "not_listed", "source_url" = "https://openrouter.
 vercel = { "disposition" = "listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models" }
 fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/fal-ai/gpt-image-1.5" }
 openai = { "disposition" = "listed", "source_url" = "https://developers.openai.com/api/docs/models/gpt-image-1.5" }
+
+[[providers.openai.illustrative_costs]]
+amount = "0.009"
+currency = "USD"
+scenario = "One 1024x1024 still image at low quality."
+coverage = "Published image-output amount only; excludes text/image input tokens and other request components."
+
+[providers.openai.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manually transcribed the native model page's 1024x1024, low-quality image-output example. The source presents this as an approximate output cost, with input-token charges separate."
+reviewed_on = "2026-11-13"
+source_urls = ["https://developers.openai.com/api/docs/models/gpt-image-1.5"]
+
+[[providers.openai.illustrative_costs]]
+amount = "0.034"
+currency = "USD"
+scenario = "One 1024x1024 still image at medium quality."
+coverage = "Published image-output amount only; excludes text/image input tokens and other request components."
+
+[providers.openai.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manually transcribed the native model page's 1024x1024, medium-quality image-output example. The source presents this as an approximate output cost, with input-token charges separate."
+reviewed_on = "2026-11-13"
+source_urls = ["https://developers.openai.com/api/docs/models/gpt-image-1.5"]
+
+[[providers.openai.illustrative_costs]]
+amount = "0.133"
+currency = "USD"
+scenario = "One 1024x1024 still image at high quality."
+coverage = "Published image-output amount only; excludes text/image input tokens and other request components."
+
+[providers.openai.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manually transcribed the native model page's 1024x1024, high-quality image-output example. The source presents this as an approximate output cost, with input-token charges separate."
+reviewed_on = "2026-11-13"
+source_urls = ["https://developers.openai.com/api/docs/models/gpt-image-1.5"]

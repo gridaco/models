@@ -130,3 +130,18 @@ endpoints = [
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/endpoints"
+
+[[illustrative_costs]]
+amount = "0.4"
+currency = "USD"
+scenario = "One text-to-3D P1 model with texture=false and pbr=true, using standard texture quality."
+coverage = "Includes the native generation base and the standard texture forced by PBR. Detailed/extreme texture and other add-ons are excluded."
+
+[illustrative_costs.provenance]
+maintenance = "manual"
+description = "The native endpoint forces texture=true when pbr=true, even if texture=false is supplied. Calculated as 30 base credits + 10 standard-texture credits = 40 credits at the published USD 0.01 per credit."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://developers.tripo3d.ai/en/docs/generation-text-to-model/p",
+  "https://developers.tripo3d.ai/en/pricing",
+]

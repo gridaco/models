@@ -107,3 +107,15 @@ source_url = "https://elevenlabs.io/docs/api-reference/text-to-sound-effects/con
 [modalities]
 input = ["text"]
 output = ["audio"]
+
+[[providers.fal.illustrative_costs]]
+amount = "0.02"
+currency = "USD"
+scenario = "Ten billed output-audio seconds for one sound-effect generation."
+coverage = "Exact fal output-duration component at 0.002/second. Uses selected billed duration; no assertion about inferred or typical output length."
+
+[providers.fal.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated from the exact fal sound-effects endpoint: ten billed output-audio seconds multiplied by USD 0.002 per second."
+reviewed_on = "2026-11-13"
+source_urls = ["https://fal.ai/models/fal-ai/elevenlabs/sound-effects/v2"]

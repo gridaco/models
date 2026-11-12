@@ -134,3 +134,39 @@ endpoints = [
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/models"
+
+[[providers.google.illustrative_costs]]
+amount = "0.045"
+currency = "USD"
+scenario = "One 0.5K (512px) generated image at Standard pricing."
+coverage = "Image-output component only. Source-published approximate/rounded price where applicable; excludes input tokens, text/thinking output and grounding charges."
+
+[providers.google.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manually transcribed the native Standard image-output example for the stated resolution. The provider publishes USD 0.045 for that output component; any source rounding is retained rather than inferred as an exact complete request bill."
+reviewed_on = "2026-11-13"
+source_urls = ["https://aistudio.google.com/docs/pricing"]
+
+[[providers.google.illustrative_costs]]
+amount = "0.101"
+currency = "USD"
+scenario = "One 2K (2048x2048) generated image at Standard pricing."
+coverage = "Image-output component only. Source-published approximate/rounded price where applicable; excludes input tokens, text/thinking output and grounding charges."
+
+[providers.google.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manually transcribed the native Standard image-output example for the stated resolution. The provider publishes USD 0.101 for that output component; any source rounding is retained rather than inferred as an exact complete request bill."
+reviewed_on = "2026-11-13"
+source_urls = ["https://aistudio.google.com/docs/pricing"]
+
+[[providers.google.illustrative_costs]]
+amount = "0.151"
+currency = "USD"
+scenario = "One 4K (4096x4096) generated image at Standard pricing."
+coverage = "Image-output component only. Source-published approximate/rounded price where applicable; excludes input tokens, text/thinking output and grounding charges."
+
+[providers.google.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manually transcribed the native Standard image-output example for the stated resolution. The provider publishes USD 0.151 for that output component; any source rounding is retained rather than inferred as an exact complete request bill."
+reviewed_on = "2026-11-13"
+source_urls = ["https://aistudio.google.com/docs/pricing"]

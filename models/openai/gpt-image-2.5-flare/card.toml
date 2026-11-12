@@ -209,3 +209,33 @@ endpoints = [
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/models"
+
+[[providers.openai.illustrative_costs]]
+amount = "0.01317"
+currency = "USD"
+scenario = "One 1024x1024 still image at medium quality (439 published-calculator output tokens)."
+coverage = "Standard image-output component only. Excludes prompt/reference tokens, streaming partial images, Responses mainline usage, GIF/SVG work and other charges."
+
+[providers.openai.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated with the provider's currently published model-family calculator: 439 output-image tokens multiplied by USD 30 per million tokens equals USD 0.01317. The selected size and quality are explicit; this is not a measured run average."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+  "https://developers.openai.com/api/docs/guides/image-generation",
+]
+
+[[providers.openai.illustrative_costs]]
+amount = "0.05268"
+currency = "USD"
+scenario = "One 1024x1024 still image at high quality (1756 published-calculator output tokens)."
+coverage = "Standard image-output component only. Excludes prompt/reference tokens, streaming partial images, Responses mainline usage, GIF/SVG work and other charges."
+
+[providers.openai.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated with the provider's currently published model-family calculator: 1756 output-image tokens multiplied by USD 30 per million tokens equals USD 0.05268. The selected size and quality are explicit; this is not a measured run average."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+  "https://developers.openai.com/api/docs/guides/image-generation",
+]

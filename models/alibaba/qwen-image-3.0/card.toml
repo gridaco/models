@@ -80,3 +80,27 @@ endpoints = [
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/models"
+
+[[providers.alibaba.illustrative_costs]]
+amount = "0.2"
+currency = "CNY"
+scenario = "Native Standard image editing in Beijing with one input image and one 1K output image."
+coverage = "CNY input-image and generated-image charges only; exact native Standard variant and Beijing region. No USD conversion."
+
+[providers.alibaba.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated from the native Standard Beijing schedule: CNY 0.02 for one input image plus CNY 0.18 for one generated image."
+reviewed_on = "2026-11-13"
+source_urls = ["https://help.aliyun.com/en/model-studio/qwen-image-3-0"]
+
+[[providers.alibaba.illustrative_costs]]
+amount = "0.247309"
+currency = "CNY"
+scenario = "Native Standard image editing in Singapore with one input image and one 1K output image."
+coverage = "CNY input-image and generated-image charges only; International Singapore schedule. No USD conversion."
+
+[providers.alibaba.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated from the native Standard Singapore schedule: CNY 0.022483 for one input image plus CNY 0.224826 for one generated image."
+reviewed_on = "2026-11-13"
+source_urls = ["https://help.aliyun.com/en/model-studio/qwen-image-3-0"]

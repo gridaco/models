@@ -90,3 +90,27 @@ source_url = "https://elevenlabs.io/docs/api-reference/music/compose"
 [modalities]
 input = ["text"]
 output = ["audio"]
+
+[[providers.fal.illustrative_costs]]
+amount = "0.6"
+currency = "USD"
+scenario = "Thirty seconds of billed output music."
+coverage = "Generated music duration only, with fal rounding up to whole minutes at USD 0.60 per billed minute. The duration is a selected scenario, not an observed average."
+
+[providers.fal.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated from fal's explicit whole-minute ceiling: 30 output seconds are billed as one minute at USD 0.60 per minute."
+reviewed_on = "2026-11-13"
+source_urls = ["https://fal.ai/models/elevenlabs/music/v2.5"]
+
+[[providers.fal.illustrative_costs]]
+amount = "1.2"
+currency = "USD"
+scenario = "Ninety seconds of billed output music."
+coverage = "Generated music duration only, with fal rounding up to whole minutes at USD 0.60 per billed minute. The duration is a selected scenario, not an observed average."
+
+[providers.fal.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated from fal's explicit whole-minute ceiling: 90 output seconds are billed as two minutes at USD 0.60 per minute."
+reviewed_on = "2026-11-13"
+source_urls = ["https://fal.ai/models/elevenlabs/music/v2.5"]

@@ -158,3 +158,15 @@ endpoints = [
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/models"
+
+[[providers.fal.illustrative_costs]]
+amount = "0.73"
+currency = "USD"
+scenario = "xai/grok-imagine-video/v1.5/image-to-video: five seconds of 720p video using three reference images."
+coverage = "Includes USD 0.70 for generated video and USD 0.03 for the selected reference images. Other operations or unselected charges are excluded."
+
+[providers.fal.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated from the exact fal image-to-video endpoint: five 720p output seconds at USD 0.14 per second plus three reference images at USD 0.01 each."
+reviewed_on = "2026-11-13"
+source_urls = ["https://fal.ai/models/xai/grok-imagine-video/v1.5/image-to-video"]

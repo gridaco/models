@@ -49,3 +49,15 @@ openrouter = { "disposition" = "listed", "source_url" = "https://openrouter.ai/r
 vercel = { "disposition" = "listed", "source_url" = "https://ai-gateway.vercel.sh/v1/models" }
 fal = { "disposition" = "listed", "source_url" = "https://fal.ai/models/fal-ai/recraft/v3/text-to-image" }
 recraft = { "disposition" = "listed", "source_url" = "https://www.recraft.ai/docs/api-reference/pricing" }
+
+[[providers.recraft.illustrative_costs]]
+amount = "0.045"
+currency = "USD"
+scenario = "One raster image generated using style references that create one style."
+coverage = "One raster image plus the separately published 0.005 style-creation request charge; excludes vector/Pro output variants."
+
+[providers.recraft.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated from the native raster generation price of USD 0.04 and the separate USD 0.005 style-creation charge when generation uses style references."
+reviewed_on = "2026-11-13"
+source_urls = ["https://www.recraft.ai/docs/api-reference/pricing"]

@@ -194,3 +194,15 @@ endpoints = [
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/models"
+
+[[providers.fal.illustrative_costs]]
+amount = "0.096"
+currency = "USD"
+scenario = "One image with two billed output megapixels."
+coverage = "Output megapixel component only; no image-input fee or request-total claim. Pixel-to-billed-MP conversion is outside this scenario."
+
+[providers.fal.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated as two billed output megapixels multiplied by the fal text-to-image rate of USD 0.048 per megapixel."
+reviewed_on = "2026-11-13"
+source_urls = ["https://fal.ai/models/blackforestlabs/flux-3/text-to-image"]

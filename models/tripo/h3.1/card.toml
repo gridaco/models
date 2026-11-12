@@ -152,3 +152,27 @@ endpoints = [
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/endpoints"
+
+[[illustrative_costs]]
+amount = "0.6"
+currency = "USD"
+scenario = "One image-to-3D H3.1 model with HD textures and detailed geometry."
+coverage = "Includes the native image base, HD texture and detailed geometry. Quad mesh, smart low-poly and other add-ons are excluded."
+
+[illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated from the native H Series image base and published add-ons: 20 base credits + 20 HD-texture credits + 20 detailed-geometry credits = 60 credits, at the published USD 0.01 per credit."
+reviewed_on = "2026-11-13"
+source_urls = ["https://developers.tripo3d.ai/en/pricing"]
+
+[[providers.fal.illustrative_costs]]
+amount = "0.65"
+currency = "USD"
+scenario = "tripo3d/h3.1/image-to-3d: one model with HD texture, detailed geometry and quad mesh."
+coverage = "Includes the four selected fal image-generation components. Other optional charges are excluded."
+
+[providers.fal.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Calculated from the fal image endpoint: USD 0.20 bare model + USD 0.20 HD texture + USD 0.20 detailed geometry + USD 0.05 quad mesh = USD 0.65."
+reviewed_on = "2026-11-13"
+source_urls = ["https://fal.ai/models/tripo3d/h3.1/image-to-3d"]
