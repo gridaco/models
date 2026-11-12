@@ -23,6 +23,7 @@ from __future__ import annotations
 import datetime
 import json
 import math
+import re
 import sys
 from decimal import Decimal, InvalidOperation
 from fractions import Fraction
@@ -326,12 +327,23 @@ def published_pricing_errors(pricing: dict[str, Any], where: str) -> Iterator[st
 
 
 def illustrative_cost_errors(examples: Any, where: str) -> Iterator[str]:
-    """Validate descriptive provenance without treating an example as a tariff."""
+    """Validate display basis and provenance without treating an example as a tariff."""
     if not isinstance(examples, list):
         return  # the schema reports malformed arrays and entries
     for index, example in enumerate(examples):
         if not isinstance(example, dict):
             continue
+        example_where = f"{where}/{index}"
+        if ("unit" in example) != ("per_quantity" in example):
+            yield f"{example_where}: unit and per_quantity must be supplied together"
+        if "per_quantity" in example:
+            quantity = example["per_quantity"]
+            if not (
+                isinstance(quantity, str) and len(quantity) <= 64
+                and re.fullmatch(r"(0|[1-9][0-9]*)(\.[0-9]+)?", quantity)
+                and any(digit in "123456789" for digit in quantity)
+            ):
+                yield f"{example_where}: per_quantity must be a positive exact decimal string"
         provenance = example.get("provenance")
         if not isinstance(provenance, dict):
             continue
