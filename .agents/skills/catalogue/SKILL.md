@@ -140,6 +140,11 @@ or deriving a different price from another provider. Never convert to credits, a
 internal margin, or substitute a negotiated/account-specific rate. The
 pricing shapes in use and their rules are in [`pricing.md`](./pricing.md).
 
+Explanatory `illustrative_costs` are a separate, deliberately manual estimate
+contract, not model facts or tariff overrides. Follow
+[`pricing.md`](./pricing.md#illustrative-costs) for scenario/coverage and
+`provenance`; a durable source URL is optional for these qualified estimates.
+
 ## Workflow
 
 1. **Discover.** Use the lookup script for leads:
@@ -203,8 +208,10 @@ do not make catalogue checks consume provider credits.
 
 ## After any update
 
-- [ ] Every new or changed fact has a first-party source, cited in the PR description
-- [ ] No value was estimated, rounded, or copied from an aggregator without verification
+- [ ] Every new or changed fact has a first-party source, cited in the PR description;
+      illustrative estimates separately explain their manual provenance and assumptions
+- [ ] No model fact or published rate was invented, rounded, or copied from an
+      aggregator without verification; illustrations are explicitly qualified estimates
 - [ ] Prices are sourced regular, non-promotional rates in the provider's own unit;
       promotional rates and expiry tracking are excluded
 - [ ] IDs are exact; field names are `lower_snake_case`
@@ -214,5 +221,7 @@ do not make catalogue checks consume provider credits.
 - [ ] Native reference, canonical provider coverage and any exclusions are sourced; existing
       model identities and unserved entries are preserved
 - [ ] `catalogue/models.json` was regenerated with `uv run scripts/build.py`, not edited by hand
+- [ ] Affected illustrative costs were reviewed or removed when their rates,
+      scenario or coverage changed; review dates were not automatically advanced
 - [ ] `uv run scripts/check.py` passes
 - [ ] Nothing from a private source made it into the diff, the commit, or the PR (see `AGENTS.md`)

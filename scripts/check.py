@@ -325,6 +325,37 @@ def published_pricing_errors(pricing: dict[str, Any], where: str) -> Iterator[st
                 yield f"{component_where}: exclusive range max must exceed min"
 
 
+def illustrative_cost_errors(examples: Any, where: str) -> Iterator[str]:
+    """Validate descriptive provenance without treating an example as a tariff."""
+    if not isinstance(examples, list):
+        return  # the schema reports malformed arrays and entries
+    for index, example in enumerate(examples):
+        if not isinstance(example, dict):
+            continue
+        provenance = example.get("provenance")
+        if not isinstance(provenance, dict):
+            continue
+        provenance_where = f"{where}/{index}/provenance"
+        reviewed_on = provenance.get("reviewed_on")
+        if not (isinstance(reviewed_on, str) and is_calendar_date(reviewed_on)):
+            yield f"{provenance_where}: reviewed_on must be a YYYY-MM-DD calendar date"
+        sources = provenance.get("source_urls", [])
+        if isinstance(sources, list):
+            for source_index, source in enumerate(sources):
+                yield from source_url_errors(source, f"{provenance_where}/source_urls/{source_index}")
+
+
+def has_illustrative_costs(value: dict[str, Any]) -> bool:
+    """A scope owns its examples and the examples on its endpoint variants."""
+    if "illustrative_costs" in value:
+        return True
+    endpoints = value.get("endpoints", [])
+    return isinstance(endpoints, list) and any(
+        isinstance(endpoint, dict) and "illustrative_costs" in endpoint
+        for endpoint in endpoints
+    )
+
+
 def provider_fact_errors(facts: dict[str, Any]) -> Iterator[str]:
     for section, table in facts.items():
         if not isinstance(table, dict):
@@ -335,11 +366,17 @@ def provider_fact_errors(facts: dict[str, Any]) -> Iterator[str]:
         for where, card in entries:
             if not isinstance(card, dict):
                 continue
+            direct = card.get("provider")
+            if has_illustrative_costs(card) and not (isinstance(direct, str) and direct.strip()):
+                yield f"{where}: card-level illustrative_costs requires a nonempty direct provider"
             providers = card.get("providers", {})
             providers = providers if isinstance(providers, dict) else {}
             for name, binding in providers.items():
                 if not isinstance(binding, dict):
                     continue
+                provider = binding.get("provider")
+                if has_illustrative_costs(binding) and not (isinstance(provider, str) and provider.strip()):
+                    yield f"{where}/providers/{name}: illustrative_costs requires a nonempty binding provider"
                 if binding.get("provider") != name:
                     yield f"{where}/providers/{name}: binding.provider is {binding.get('provider')!r}"
                 if not binding.get("id"):
@@ -354,7 +391,6 @@ def provider_fact_errors(facts: dict[str, Any]) -> Iterator[str]:
                                 qualification.get("source_url"),
                                 f"{where}/providers/{name}/qualifications/{index}",
                             )
-            direct = card.get("provider")
             reference = card.get("reference_provider")
             if isinstance(reference, str) and reference not in providers and reference != direct:
                 yield f"{where}: reference_provider has no provider binding or direct provider"
@@ -376,6 +412,8 @@ def provider_fact_errors(facts: dict[str, Any]) -> Iterator[str]:
 
 def published_fact_errors(facts: dict[str, Any]) -> Iterator[str]:
     for where, value in fact_objects(facts):
+        if "illustrative_costs" in value:
+            yield from illustrative_cost_errors(value["illustrative_costs"], f"{where}/illustrative_costs")
         for key in ("source_url", "request_schema_url", "result_schema_url"):
             if key in value:
                 yield from source_url_errors(value[key], f"{where}/{key}")

@@ -185,6 +185,9 @@
         },
         "provider_coverage": {
           "$ref": "#/$defs/provider_coverage"
+        },
+        "illustrative_costs": {
+          "$ref": "#/$defs/illustrative_costs"
         }
       }
     },
@@ -253,6 +256,20 @@
         {
           "if": { "anyOf": [{ "required": ["type"] }, { "required": ["modalities"] }] },
           "then": { "required": ["source_url"] }
+        },
+        {
+          "if": {
+            "required": ["illustrative_costs"]
+          },
+          "then": {
+            "required": ["provider"],
+            "properties": {
+              "provider": {
+                "type": "string",
+                "pattern": "\\S"
+              }
+            }
+          }
         }
       ],
       "properties": {
@@ -344,6 +361,9 @@
         },
         "provider_coverage": {
           "$ref": "#/$defs/provider_coverage"
+        },
+        "illustrative_costs": {
+          "$ref": "#/$defs/illustrative_costs"
         }
       }
     },
@@ -469,6 +489,9 @@
         },
         "decision_contract": {
           "$ref": "#/$defs/decision_contract"
+        },
+        "illustrative_costs": {
+          "$ref": "#/$defs/illustrative_costs"
         }
       }
     },
@@ -1209,6 +1232,9 @@
         },
         "decision_contract": {
           "$ref": "#/$defs/decision_contract"
+        },
+        "illustrative_costs": {
+          "$ref": "#/$defs/illustrative_costs"
         }
       }
     },
@@ -1306,6 +1332,82 @@
         },
         "decision_contract": {
           "$ref": "#/$defs/decision_contract"
+        }
+      }
+    },
+    "illustrative_costs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "Manually maintained illustrative amounts for stated scenarios and charge coverage, not tariffs, starting prices, measured averages or guaranteed request totals. Omission means no illustration is maintained.",
+      "items": {
+        "$ref": "#/$defs/illustrative_cost"
+      }
+    },
+    "illustrative_cost": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["amount", "currency", "scenario", "coverage", "provenance"],
+      "properties": {
+        "amount": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]+)?$",
+          "description": "Nonnegative decimal amount for the stated scenario and coverage; not an implicit per-unit rate.",
+          "not": {
+            "pattern": "\\s"
+          }
+        },
+        "currency": {
+          "enum": ["USD", "CNY"],
+          "description": "Original currency of this illustration; no currency conversion is implied."
+        },
+        "scenario": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Plain-language configuration and quantities, using provider parameter names where relevant."
+        },
+        "coverage": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Plain-language included charges, exclusions and unknown charge coverage."
+        },
+        "provenance": {
+          "$ref": "#/$defs/illustrative_cost_provenance"
+        }
+      }
+    },
+    "illustrative_cost_provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["maintenance", "description", "reviewed_on"],
+      "properties": {
+        "maintenance": {
+          "const": "manual",
+          "description": "The illustration is maintained by hand, including when calculated from published rates. This is not a confidence or provider-endorsement claim."
+        },
+        "description": {
+          "type": "string",
+          "pattern": "\\S",
+          "description": "Explain origin, derivation or maintainer judgement and its assumptions. A durable source URL is optional."
+        },
+        "reviewed_on": {
+          "type": "string",
+          "format": "date",
+          "description": "Date this illustration and its assumptions were reviewed, not a model release date."
+        },
+        "source_urls": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://[^/]+(?:/|$)",
+            "not": {
+              "pattern": "\\s"
+            }
+          },
+          "description": "Optional genuine supporting references; may include provider or third-party evidence. No placeholder URL is required for a manual illustration."
         }
       }
     }

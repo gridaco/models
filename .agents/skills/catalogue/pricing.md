@@ -25,6 +25,23 @@ Supplements [`SKILL.md`](./SKILL.md). Load this when you add or change a price.
   estimates, not published facts. Keep them consistent with the published rates and never
   cite them as a source.
 
+## Illustrative costs
+
+Use [`illustrative_costs`](../../../catalogue/README.md#illustrative-costs) for
+an explanatory scenario that a unit rate alone does not communicate. Keep it on
+the exact provider binding/endpoint, or an explicitly direct-provider card.
+Maintain its `provenance` with `maintenance: "manual"`, a useful explanation of
+origin and assumptions, and `reviewed_on`. Supporting URLs are optional; provider
+examples, third-party estimates and maintainer judgement must remain honestly
+labelled. Do not invent a reference merely to fill a field.
+
+Keep scenario, included/excluded charges and unknowns understandable in plain
+text. Preserve native currency and published rounding; do not convert an
+output-only example into a complete request quote. Review or remove affected
+illustrations when rates or assumptions change without automatically refreshing
+the review date. Exact rates still need first-party evidence; avoid repeating
+simple unit prices or relabelling legacy coarse estimates as measured averages.
+
 ## Shapes in use
 
 These are the `pricing.type` values in the current authored data. Before adding a new
