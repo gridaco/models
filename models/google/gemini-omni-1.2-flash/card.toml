@@ -95,13 +95,67 @@ vercel = { disposition = "listed", source_url = "https://ai-gateway.vercel.sh/v1
 provider = "grida"
 id = "google/gemini-omni-1.2-flash"
 url = "https://gateway.grida.ai/v1/models"
-endpoints = [
-  { "id" = "video.google.gemini-omni-1.2-flash.text", "operation" = "video.google.gemini-omni-1.2-flash.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.google.gemini-omni-1.2-flash.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result", "interface" = "videos", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.0273" },
-  ] } },
-  { "id" = "video.google.gemini-omni-1.2-flash.image", "operation" = "video.google.gemini-omni-1.2-flash.image", "input" = "image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.google.gemini-omni-1.2-flash.image.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result", "interface" = "videos", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.0273" },
-  ] } },
+
+[[providers.grida.endpoints]]
+id = "video.google.gemini-omni-1.2-flash.text"
+operation = "video.google.gemini-omni-1.2-flash.text"
+input = "text"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.google.gemini-omni-1.2-flash.text.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result"
+interface = "videos"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.0273" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.7"
+currency = "USD"
+scenario = "One 8-second 720p video from a short text prompt, with standard GG settings."
+coverage = "One 8-second 720p clip. Input and any separately billed text-token usage are not predicted exactly; additional clips are excluded."
+unit = "video"
+per_quantity = "1"
+label = "8s · 720p"
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG estimate rounded to USD 0.7, informed by the reviewed 720p output reference of USD 0.0819 per second, or USD 0.6552 for eight seconds before input tokens. It is not an exact conversion of GG reported units."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/video.google.gemini-omni-1.2-flash.text.input",
+  "https://fal.ai/models/google/gemini-omni-flash/v1.2/text-to-video",
+]
+
+[[providers.grida.endpoints]]
+id = "video.google.gemini-omni-1.2-flash.image"
+operation = "video.google.gemini-omni-1.2-flash.image"
+input = "image"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.google.gemini-omni-1.2-flash.image.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result"
+interface = "videos"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.0273" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.7"
+currency = "USD"
+scenario = "One 8-second 720p video from one 16:9 input image, with standard GG settings."
+coverage = "One 8-second 720p clip and one 16:9 input image. Input and any separately billed text-token usage are not predicted exactly; additional clips are excluded."
+unit = "video"
+per_quantity = "1"
+label = "8s · 720p · 1 reference"
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG estimate rounded to USD 0.7, informed by the reviewed 720p output reference of USD 0.0819 per second, or USD 0.6552 for eight seconds before input tokens. It is not an exact conversion of GG reported units."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/video.google.gemini-omni-1.2-flash.image.input",
+  "https://fal.ai/models/google/gemini-omni-flash/v1.2/image-to-video",
 ]
 
 [provider_coverage.grida]

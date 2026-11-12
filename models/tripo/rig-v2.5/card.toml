@@ -54,10 +54,36 @@ tripo = { "disposition" = "listed", "source_url" = "https://developers.tripo3d.a
 provider = "grida"
 id = "tripo/rig-v2.5"
 url = "https://gateway.grida.ai/v1/endpoints"
-endpoints = [
-  { "id" = "three-d.tripo.rig-v2.5.mesh", "operation" = "three-d.tripo.rig-v2.5.mesh", "input" = "asset", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.tripo.rig-v2.5.mesh.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/glb_result", "interface" = "endpoints", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/endpoints", "currency" = "USD", "components" = [
-    { "id" = "provider_credits", "meter" = "provider_credits", "unit" = "provider_credit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
-  ] } },
+
+[[providers.grida.endpoints]]
+id = "three-d.tripo.rig-v2.5.mesh"
+operation = "three-d.tripo.rig-v2.5.mesh"
+input = "asset"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.tripo.rig-v2.5.mesh.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/glb_result"
+interface = "endpoints"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/endpoints", "currency" = "USD", "components" = [
+  { "id" = "provider_credits", "meter" = "provider_credits", "unit" = "provider_credit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.25"
+currency = "USD"
+scenario = "One quadruped auto-rigging task with spec=tripo and a GLB mesh."
+coverage = "Illustrates 25 billed provider credits for one rigging task. Additional processing or animation operations are excluded; actual recorded usage governs the charge."
+unit = "task"
+per_quantity = "1"
+label = "Quadruped"
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manually calculated from the reviewed 25-credit auto-rigging example and GG's published USD 0.01 per provider credit. The anatomy and spec are supported by this GG operation."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/endpoints",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.tripo.rig-v2.5.mesh.input",
+  "https://developers.tripo3d.ai/en/pricing",
 ]
 
 [provider_coverage.grida]

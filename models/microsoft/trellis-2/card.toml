@@ -81,10 +81,36 @@ microsoft = { "disposition" = "not_listed", "source_url" = "https://github.com/m
 provider = "grida"
 id = "fal-ai/trellis-2"
 url = "https://gateway.grida.ai/v1/endpoints"
-endpoints = [
-  { "id" = "three-d.fal-ai.trellis-2.image", "operation" = "three-d.fal-ai.trellis-2.image", "input" = "image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.fal-ai.trellis-2.image.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/glb_result", "interface" = "endpoints", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/endpoints", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.05" },
-  ] } },
+
+[[providers.grida.endpoints]]
+id = "three-d.fal-ai.trellis-2.image"
+operation = "three-d.fal-ai.trellis-2.image"
+input = "image"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.fal-ai.trellis-2.image.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/glb_result"
+interface = "endpoints"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/endpoints", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.05" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.3"
+currency = "USD"
+scenario = "One GLB from one image using GG's fixed 1024-resolution generation settings."
+coverage = "Manually selected GG estimate for the fixed 1024-resolution generation. Other resolutions are not exposed by this GG operation; original reported usage determines the charge."
+unit = "generation"
+per_quantity = "1"
+label = "1024 resolution · 1 image"
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG estimate of USD 0.30, informed by the reviewed USD 0.30 1024-resolution generation reference. GG fixes this resolution; no exact reported-unit conversion or unsupported resolution choice is asserted."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/endpoints",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.fal-ai.trellis-2.image.input",
+  "https://fal.ai/models/fal-ai/trellis-2",
 ]
 
 [provider_coverage.grida]

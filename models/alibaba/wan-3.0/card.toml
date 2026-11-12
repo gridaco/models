@@ -147,13 +147,67 @@ endpoints = [
 provider = "grida"
 id = "alibaba/wan-3.0"
 url = "https://gateway.grida.ai/v1/models"
-endpoints = [
-  { "id" = "video.alibaba.wan-3.0.image", "operation" = "video.alibaba.wan-3.0.image", "input" = "image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.alibaba.wan-3.0.image.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result", "interface" = "videos", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.05" },
-  ] } },
-  { "id" = "video.alibaba.wan-3.0.text", "operation" = "video.alibaba.wan-3.0.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.alibaba.wan-3.0.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result", "interface" = "videos", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.05" },
-  ] } },
+
+[[providers.grida.endpoints]]
+id = "video.alibaba.wan-3.0.image"
+operation = "video.alibaba.wan-3.0.image"
+input = "image"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.alibaba.wan-3.0.image.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result"
+interface = "videos"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.05" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "1"
+currency = "USD"
+scenario = "One 5-second 1080p video from one 16:9 input image, with standard GG settings."
+coverage = "One 5-second 1080p clip and one 16:9 input image. Actual reported units can differ with input content; additional clips and other operations are excluded."
+unit = "video"
+per_quantity = "1"
+label = "5s · 1080p · 1 reference"
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG estimate rounded to USD 1, informed by the reviewed 1080p output reference of USD 0.20 per second, or USD 1 for five seconds. It is not an exact conversion of GG reported units."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/video.alibaba.wan-3.0.image.input",
+  "https://fal.ai/models/alibaba/wan-3.0/image-to-video",
+]
+
+[[providers.grida.endpoints]]
+id = "video.alibaba.wan-3.0.text"
+operation = "video.alibaba.wan-3.0.text"
+input = "text"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/video.alibaba.wan-3.0.text.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/single_video_result"
+interface = "videos"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.05" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "1"
+currency = "USD"
+scenario = "One 5-second 1080p video from a short text prompt, with standard GG settings."
+coverage = "One 5-second 1080p clip. Actual reported units can differ with input content; additional clips and other operations are excluded."
+unit = "video"
+per_quantity = "1"
+label = "5s · 1080p"
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG estimate rounded to USD 1, informed by the reviewed 1080p output reference of USD 0.20 per second, or USD 1 for five seconds. It is not an exact conversion of GG reported units."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/video.alibaba.wan-3.0.text.input",
+  "https://fal.ai/models/alibaba/wan-3.0/text-to-video",
 ]
 
 [provider_coverage.grida]

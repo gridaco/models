@@ -79,13 +79,67 @@ meta = { "disposition" = "listed", "source_url" = "https://dev.meta.ai/docs/imag
 provider = "grida"
 id = "meta/muse-image-1.0"
 url = "https://gateway.grida.ai/v1/models"
-endpoints = [
-  { "id" = "image.meta.muse-image-1.0.text", "operation" = "image.meta.muse-image-1.0.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.meta.muse-image-1.0.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4", "interface" = "images.generations", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
-  ] } },
-  { "id" = "image.meta.muse-image-1.0.references", "operation" = "image.meta.muse-image-1.0.references", "input" = "multi_image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.meta.muse-image-1.0.references.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4", "interface" = "images.edits", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
-  ] } },
+
+[[providers.grida.endpoints]]
+id = "image.meta.muse-image-1.0.text"
+operation = "image.meta.muse-image-1.0.text"
+input = "text"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.meta.muse-image-1.0.text.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4"
+interface = "images.generations"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.01"
+currency = "USD"
+scenario = "One 1:1 image, n=1, with a short text prompt."
+coverage = "One 1:1 output; additional outputs are excluded."
+unit = "image"
+per_quantity = "1"
+label = "Square"
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG single-image estimate of USD 0.01, informed by the reviewed USD 0.01 image-generation reference and GG's one-output 1:1 configuration. No billing-unit identity is inferred."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/image.meta.muse-image-1.0.text.input",
+  "https://fal.ai/models/meta/muse-image/text-to-image",
+]
+
+[[providers.grida.endpoints]]
+id = "image.meta.muse-image-1.0.references"
+operation = "image.meta.muse-image-1.0.references"
+input = "multi_image"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.meta.muse-image-1.0.references.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4"
+interface = "images.edits"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.01"
+currency = "USD"
+scenario = "One 1:1 image, n=1, with a short text prompt and one reference image."
+coverage = "One 1:1 output with one reference image; any separate reference-input charge is not independently quantified."
+unit = "image"
+per_quantity = "1"
+label = "Square · 1 reference"
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG single-image estimate of USD 0.01, informed by the reviewed USD 0.01 image-generation reference and GG's one-output 1:1 configuration. No billing-unit identity is inferred."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/image.meta.muse-image-1.0.references.input",
+  "https://fal.ai/models/meta/muse-image/edit",
 ]
 
 [provider_coverage.grida]

@@ -182,13 +182,67 @@ source_url = "https://fal.ai/models/blackforestlabs/flux-3/text-to-image/api"
 provider = "grida"
 id = "bfl/flux-3-image"
 url = "https://gateway.grida.ai/v1/models"
-endpoints = [
-  { "id" = "image.bfl.flux-3-image.text", "operation" = "image.bfl.flux-3-image.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bfl.flux-3-image.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_1", "interface" = "images.generations", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.048" },
-  ] } },
-  { "id" = "image.bfl.flux-3-image.references", "operation" = "image.bfl.flux-3-image.references", "input" = "multi_image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bfl.flux-3-image.references.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_1", "interface" = "images.edits", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.048" },
-  ] } },
+
+[[providers.grida.endpoints]]
+id = "image.bfl.flux-3-image.text"
+operation = "image.bfl.flux-3-image.text"
+input = "text"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bfl.flux-3-image.text.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_1"
+interface = "images.generations"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.048" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.05"
+currency = "USD"
+scenario = "One 1k image, n=1, with a short text prompt."
+coverage = "One 1K output; additional outputs are excluded."
+unit = "image"
+per_quantity = "1"
+label = "1K"
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG estimate rounded from the reviewed USD 0.048 single-output 1K pricing reference to USD 0.05. It is not an exact conversion of a future GG usage record."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bfl.flux-3-image.text.input",
+  "https://fal.ai/models/blackforestlabs/flux-3/text-to-image",
+]
+
+[[providers.grida.endpoints]]
+id = "image.bfl.flux-3-image.references"
+operation = "image.bfl.flux-3-image.references"
+input = "multi_image"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bfl.flux-3-image.references.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_1"
+interface = "images.edits"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.048" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.05"
+currency = "USD"
+scenario = "One 1k image, n=1, with a short text prompt and one reference image."
+coverage = "One 1K output with one reference image; any separate reference-input charge is not independently quantified."
+unit = "image"
+per_quantity = "1"
+label = "1K · 1 reference"
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG estimate rounded from the reviewed USD 0.048 single-output 1K pricing reference to USD 0.05. It is not an exact conversion of a future GG usage record."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/image.bfl.flux-3-image.references.input",
+  "https://fal.ai/models/blackforestlabs/flux-3/edit-image",
 ]
 
 [provider_coverage.grida]

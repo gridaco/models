@@ -145,13 +145,67 @@ xai = { "disposition" = "listed", "source_url" = "https://docs.x.ai/developers/m
 provider = "grida"
 id = "xai/grok-imagine-image-2.0"
 url = "https://gateway.grida.ai/v1/models"
-endpoints = [
-  { "id" = "image.xai.grok-imagine-image-2.0.references", "operation" = "image.xai.grok-imagine-image-2.0.references", "input" = "multi_image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.xai.grok-imagine-image-2.0.references.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4", "interface" = "images.edits", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
-  ] } },
-  { "id" = "image.xai.grok-imagine-image-2.0.text", "operation" = "image.xai.grok-imagine-image-2.0.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.xai.grok-imagine-image-2.0.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4", "interface" = "images.generations", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
-  ] } },
+
+[[providers.grida.endpoints]]
+id = "image.xai.grok-imagine-image-2.0.references"
+operation = "image.xai.grok-imagine-image-2.0.references"
+input = "multi_image"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.xai.grok-imagine-image-2.0.references.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4"
+interface = "images.edits"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.07"
+currency = "USD"
+scenario = "One 1k image at medium quality, n=1, with a short text prompt and one reference image."
+coverage = "One 1K medium-quality output and one reference image. Additional images and higher-resolution output are excluded."
+unit = "image"
+per_quantity = "1"
+label = "1K · Medium · 1 reference"
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG estimate using the reviewed USD 0.06 1K medium-quality output reference plus USD 0.01 for one reference image, selecting USD 0.07. This does not establish an exact conversion of future GG reported units."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/image.xai.grok-imagine-image-2.0.references.input",
+  "https://fal.ai/models/xai/grok-imagine-image/v2.0/edit",
+]
+
+[[providers.grida.endpoints]]
+id = "image.xai.grok-imagine-image-2.0.text"
+operation = "image.xai.grok-imagine-image-2.0.text"
+input = "text"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.xai.grok-imagine-image-2.0.text.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4"
+interface = "images.generations"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.06"
+currency = "USD"
+scenario = "One 1k image at medium quality, n=1, with a short text prompt."
+coverage = "One 1K medium-quality output. Additional images and higher-resolution output are excluded."
+unit = "image"
+per_quantity = "1"
+label = "1K · Medium"
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG estimate using the reviewed USD 0.06 1K medium-quality output reference, selecting USD 0.06. This does not establish an exact conversion of future GG reported units."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/image.xai.grok-imagine-image-2.0.text.input",
+  "https://fal.ai/models/xai/grok-imagine-image/v2.0/text-to-image",
 ]
 
 [provider_coverage.grida]

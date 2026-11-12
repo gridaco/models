@@ -74,10 +74,36 @@ recraft = { "disposition" = "listed", "source_url" = "https://www.recraft.ai/doc
 provider = "grida"
 id = "recraft/recraft-v4.1"
 url = "https://gateway.grida.ai/v1/models"
-endpoints = [
-  { "id" = "image.recraft.recraft-v4.1.text", "operation" = "image.recraft.recraft-v4.1.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.recraft.recraft-v4.1.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_1", "interface" = "images.generations", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.035" },
-  ] } },
+
+[[providers.grida.endpoints]]
+id = "image.recraft.recraft-v4.1.text"
+operation = "image.recraft.recraft-v4.1.text"
+input = "text"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/image.recraft.recraft-v4.1.text.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_1"
+interface = "images.generations"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.035" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.04"
+currency = "USD"
+scenario = "One square_hd image, n=1, with a short text prompt."
+coverage = "One raster output from a short prompt; additional images and separate style-creation requests are excluded."
+unit = "image"
+per_quantity = "1"
+label = "Square HD"
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG estimate rounded from the reviewed USD 0.035 raster-output reference to USD 0.04 for one square_hd image. No style-creation or vector-output scenario is selected."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/models",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/image.recraft.recraft-v4.1.text.input",
+  "https://fal.ai/models/fal-ai/recraft/v4.1/text-to-image",
 ]
 
 [provider_coverage.grida]

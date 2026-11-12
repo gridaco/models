@@ -8,10 +8,10 @@ feature = "model-generation"
 inputs = ["text", "image", "multiview"]
 output = { primary = "glb", compression = "none" }
 texture_quality = ["standard", "detailed", "extreme"]
-label = "Tripo P2 Preview"
+label = "Tripo P2"
 binding_id = "P2-20260801"
-preview = true
-short_description = "Preview of next-generation low-poly mesh generation."
+preview = false
+short_description = "Next-generation low-poly mesh generation."
 face_limit = { min = 48, max = 50_000 }
 url = "https://developers.tripo3d.ai/en/docs/generation-text-to-model/p"
 
@@ -124,16 +124,98 @@ tripo = { "disposition" = "listed", "source_url" = "https://developers.tripo3d.a
 provider = "grida"
 id = "tripo/p2"
 url = "https://gateway.grida.ai/v1/endpoints"
-endpoints = [
-  { "id" = "three-d.tripo.p2.image", "operation" = "three-d.tripo.p2.image", "input" = "image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.tripo.p2.image.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/glb_result", "interface" = "endpoints", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/endpoints", "currency" = "USD", "components" = [
-    { "id" = "provider_credits", "meter" = "provider_credits", "unit" = "provider_credit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
-  ] } },
-  { "id" = "three-d.tripo.p2.multiview", "operation" = "three-d.tripo.p2.multiview", "input" = "multi_image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.tripo.p2.multiview.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/glb_result", "interface" = "endpoints", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/endpoints", "currency" = "USD", "components" = [
-    { "id" = "provider_credits", "meter" = "provider_credits", "unit" = "provider_credit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
-  ] } },
-  { "id" = "three-d.tripo.p2.text", "operation" = "three-d.tripo.p2.text", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.tripo.p2.text.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/glb_result", "interface" = "endpoints", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/endpoints", "currency" = "USD", "components" = [
-    { "id" = "provider_credits", "meter" = "provider_credits", "unit" = "provider_credit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
-  ] } },
+
+[[providers.grida.endpoints]]
+id = "three-d.tripo.p2.image"
+operation = "three-d.tripo.p2.image"
+input = "image"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.tripo.p2.image.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/glb_result"
+interface = "endpoints"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/endpoints", "currency" = "USD", "components" = [
+  { "id" = "provider_credits", "meter" = "provider_credits", "unit" = "provider_credit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "1.1"
+currency = "USD"
+scenario = "One GLB from one image, with texture=true, pbr=true and standard textures."
+coverage = "Illustrates 110 billed provider credits for the selected generation base and standard texture. GG charges actual original usage at its published tariff; detailed geometry, higher texture tiers and other add-ons are excluded."
+unit = "generation"
+per_quantity = "1"
+label = "Standard textures · 1 image"
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manually calculated using the selected 100-credit generation base plus 10 standard-texture credits and GG's current USD 0.01 per provider credit. GG rejects texture=false with pbr=true; this scenario uses the supported true/true combination."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/endpoints",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.tripo.p2.image.input",
+  "https://developers.tripo3d.ai/en/pricing",
+]
+
+[[providers.grida.endpoints]]
+id = "three-d.tripo.p2.multiview"
+operation = "three-d.tripo.p2.multiview"
+input = "multi_image"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.tripo.p2.multiview.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/glb_result"
+interface = "endpoints"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/endpoints", "currency" = "USD", "components" = [
+  { "id" = "provider_credits", "meter" = "provider_credits", "unit" = "provider_credit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "1.1"
+currency = "USD"
+scenario = "One GLB from two images (front and back), with texture=true, pbr=true and standard textures."
+coverage = "Illustrates 110 billed provider credits for the selected generation base and standard texture. GG charges actual original usage at its published tariff; detailed geometry, higher texture tiers and other add-ons are excluded."
+unit = "generation"
+per_quantity = "1"
+label = "Standard textures · 2 views"
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manually calculated using the selected 100-credit generation base plus 10 standard-texture credits and GG's current USD 0.01 per provider credit. GG rejects texture=false with pbr=true; this scenario uses the supported true/true combination."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/endpoints",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.tripo.p2.multiview.input",
+  "https://developers.tripo3d.ai/en/pricing",
+]
+
+[[providers.grida.endpoints]]
+id = "three-d.tripo.p2.text"
+operation = "three-d.tripo.p2.text"
+input = "text"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.tripo.p2.text.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/glb_result"
+interface = "endpoints"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/endpoints", "currency" = "USD", "components" = [
+  { "id" = "provider_credits", "meter" = "provider_credits", "unit" = "provider_credit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.01" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "1.1"
+currency = "USD"
+scenario = "One GLB from a short text prompt, with texture=true, pbr=true and standard textures."
+coverage = "Illustrates 110 billed provider credits for the selected generation base and standard texture. GG charges actual original usage at its published tariff; detailed geometry, higher texture tiers and other add-ons are excluded."
+unit = "generation"
+per_quantity = "1"
+label = "Standard textures · Text prompt"
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manually calculated using the selected 100-credit generation base plus 10 standard-texture credits and GG's current USD 0.01 per provider credit. GG rejects texture=false with pbr=true; this scenario uses the supported true/true combination."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/endpoints",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.tripo.p2.text.input",
+  "https://developers.tripo3d.ai/en/pricing",
 ]
 
 [provider_coverage.grida]

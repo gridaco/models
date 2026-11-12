@@ -66,10 +66,36 @@ qualifications = [
 provider = "grida"
 id = "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d"
 url = "https://gateway.grida.ai/v1/endpoints"
-endpoints = [
-  { "id" = "three-d.fal-ai.hunyuan-3d.v3.1.pro.image-to-3d.image", "operation" = "three-d.fal-ai.hunyuan-3d.v3.1.pro.image-to-3d.image", "input" = "image", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.fal-ai.hunyuan-3d.v3.1.pro.image-to-3d.image.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/glb_result", "interface" = "endpoints", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/endpoints", "currency" = "USD", "components" = [
-    { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.015" },
-  ] } },
+
+[[providers.grida.endpoints]]
+id = "three-d.fal-ai.hunyuan-3d.v3.1.pro.image-to-3d.image"
+operation = "three-d.fal-ai.hunyuan-3d.v3.1.pro.image-to-3d.image"
+input = "image"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.fal-ai.hunyuan-3d.v3.1.pro.image-to-3d.image.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/glb_result"
+interface = "endpoints"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/endpoints", "currency" = "USD", "components" = [
+  { "id" = "fal_output_units", "meter" = "fal_output_units", "unit" = "provider_unit", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.015" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.4"
+currency = "USD"
+scenario = "One textured GLB from one image using standard GG settings."
+coverage = "Default textured generation with PBR off and the fixed face-count setting. Any extra face-count billing is not independently quantified; no optional PBR or other operation is included."
+unit = "generation"
+per_quantity = "1"
+label = "Textured · 1 image"
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manual GG estimate rounded from the reviewed USD 0.375 base-generation example to USD 0.40. GG fixes the default face-count setting; whether that setting adds a separate billed component remains uncertain."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/endpoints",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/three-d.fal-ai.hunyuan-3d.v3.1.pro.image-to-3d.image.input",
+  "https://fal.ai/models/fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
 ]
 
 [provider_coverage.grida]

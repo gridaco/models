@@ -106,10 +106,36 @@ output = ["audio"]
 provider = "grida"
 id = "eleven_v4"
 url = "https://gateway.grida.ai/v1/models"
-endpoints = [
-  { "id" = "speech.elevenlabs.eleven-v4.generate", "operation" = "speech.elevenlabs.eleven-v4.generate", "input" = "text", "source_url" = "https://gateway.grida.ai/schemas/operations.json", "request_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/speech.elevenlabs.eleven-v4.generate.input", "result_schema_url" = "https://gateway.grida.ai/schemas/operations.json#/$defs/speech_audio_result", "interface" = "endpoints", "published_pricing" = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
-    { "id" = "speech_characters", "meter" = "speech_characters", "unit" = "character", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.00008" },
-  ] } },
+
+[[providers.grida.endpoints]]
+id = "speech.elevenlabs.eleven-v4.generate"
+operation = "speech.elevenlabs.eleven-v4.generate"
+input = "text"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/speech.elevenlabs.eleven-v4.generate.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/speech_audio_result"
+interface = "endpoints"
+published_pricing = { "source_url" = "https://gateway.grida.ai/v1/models", "currency" = "USD", "components" = [
+  { "id" = "speech_characters", "meter" = "speech_characters", "unit" = "character", "per_quantity" = "1", "when" = {}, "quantity_rounding" = { "mode" = "none" }, "usd_per_unit" = "0.00008" },
+] }
+
+[[providers.grida.endpoints.illustrative_costs]]
+amount = "0.04"
+currency = "USD"
+scenario = "One speech generation from 500 billed input characters using the stock Rachel voice."
+coverage = "500 original billed input characters, including any audio tags if present, at GG's published character rate. This is not an output-duration estimate."
+unit = "character"
+per_quantity = "500"
+label = "500 characters · Rachel"
+
+[providers.grida.endpoints.illustrative_costs.provenance]
+maintenance = "manual"
+description = "Manually calculated directly from GG's published tariff: 500 billed characters multiplied by USD 0.00008 per character. Rachel is a supported stock voice."
+reviewed_on = "2026-11-13"
+source_urls = [
+  "https://gateway.grida.ai/v1/endpoints",
+  "https://gateway.grida.ai/schemas/operations.json#/$defs/speech.elevenlabs.eleven-v4.generate.input",
+  "https://fal.ai/models/elevenlabs/tts/eleven-v4",
 ]
 
 [provider_coverage.grida]
