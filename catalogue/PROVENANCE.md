@@ -1827,3 +1827,20 @@ are supported, with medium as the upstream default. Explicit cache controls,
 sampling controls, file/audio/video inputs and continuation are outside this
 published Grida offering. Native model facts and other provider bindings remain
 unchanged.
+
+## Grida ElevenLabs speech discovery — 2026-11-12
+
+[Grida model discovery](https://gateway.grida.ai/v1/models),
+[endpoint discovery](https://gateway.grida.ai/v1/endpoints),
+[operation schemas](https://gateway.grida.ai/schemas/operations.json) and the
+[public API reference](https://gateway.grida.ai/llms.txt) confirm `eleven_v4`,
+`eleven_v4_turbo` and `eleven_text_to_sound_v3` as asynchronous audio operations.
+Their exact operation IDs and request/result schema links are recorded on the
+Grida bindings. Completed jobs return MP3 audio references.
+
+Grida publishes USD 0.00008 per input character for v4, USD 0.00004 per input
+character for v4 Turbo, and USD 0.002 per generated second for SFX v3. Each
+published component uses one-unit quantities with no additional quantity
+rounding. TTS and sound-effects settings retain their distinct request schemas;
+these Grida bindings do not imply support for every native voice, format or
+operation.
