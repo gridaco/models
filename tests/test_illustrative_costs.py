@@ -37,6 +37,9 @@ def fixture(scope="binding"):
         card["providers"]["example"] = target
     elif scope.startswith("operation"):
         target = facts["three_d.rig_check.operation"]
+    elif scope.startswith("embedding"):
+        target = next(iter(facts["embedding.models"].values()))
+        target["provider"] = "example"
     else:
         target = next(iter(facts["three_d.models"].values()))
     if scope.endswith("endpoint"):
@@ -54,6 +57,7 @@ def errors(callback=lambda example: None, *, scope="binding"):
 
 @pytest.mark.parametrize("scope", [
     "binding", "binding_endpoint", "direct", "direct_endpoint", "operation", "operation_endpoint",
+    "embedding", "embedding_endpoint",
 ])
 def test_manual_examples_without_urls_are_valid_at_their_provider_scope(scope):
     facts, target = fixture(scope)
@@ -62,7 +66,23 @@ def test_manual_examples_without_urls_are_valid_at_their_provider_scope(scope):
 
 
 def test_legacy_catalogue_without_illustrative_costs_remains_valid():
-    assert check.check(CATALOGUE, SCHEMA) == []
+    facts = copy.deepcopy(CATALOGUE)
+    for _, value in check.fact_objects(facts):
+        value.pop("illustrative_costs", None)
+    assert check.check(facts, SCHEMA) == []
+
+
+@pytest.mark.parametrize("scope", ["embedding", "embedding_endpoint"])
+@pytest.mark.parametrize("change", [
+    lambda example: example.pop("amount"),
+    lambda example: example.update(amount="-1"),
+    lambda example: example.update(coverage=" "),
+    lambda example: example.update(unit="image"),
+    lambda example: example["provenance"].update(description=""),
+    lambda example: example["provenance"].update(maintenance="automatic"),
+])
+def test_embedding_envelope_does_not_bypass_the_shared_record_validation(scope, change):
+    assert errors(change, scope=scope)
 
 
 @pytest.mark.parametrize("currency", ["USD", "CNY"])

@@ -67,6 +67,13 @@
           {
             "if": { "anyOf": [{ "required": ["type"] }, { "required": ["modalities"] }] },
             "then": { "required": ["source_url"] }
+          },
+          {
+            "if": { "required": ["illustrative_costs"] },
+            "then": {
+              "required": ["provider"],
+              "properties": { "provider": { "type": "string", "pattern": "\\S" } }
+            }
           }
         ],
         "properties": {
@@ -93,6 +100,16 @@
           },
           "provider_coverage": {
             "$ref": "#/$defs/provider_coverage"
+          },
+          "illustrative_costs": {
+            "$ref": "#/$defs/illustrative_costs"
+          },
+          "endpoints": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/provider_endpoint"
+            }
           }
         }
       }
