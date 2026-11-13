@@ -1,0 +1,150 @@
+id = "google/gemini-4-hydrogen"
+section = "text.catalog"
+vendor = "google"
+reference_provider = "google"
+label = "Gemini 4 Hydrogen"
+multimodal = true
+image_input_mimes = ["image/png", "image/jpeg", "image/webp", "image/heic", "image/heif"]
+tool_call = true
+context_window = 1048576
+output_limit = 65536
+
+[cost]
+input = 1.5
+output = 7.5
+cache_read = 0.075
+
+[release]
+date = "2026-11-12"
+basis = "model"
+source_url = "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/"
+
+[vision_tokenization]
+source_url = "https://aistudio.google.com/docs/media-resolution"
+maximum_tokens_per_image = 2240
+token_counts_approximate = true
+
+[vision_tokenization.detail_token_budgets]
+unspecified = 1120
+low = 280
+medium = 560
+high = 1120
+ultra_high = 2240
+
+[providers.google]
+provider = "google"
+id = "gemini-4-hydrogen"
+url = "https://aistudio.google.com/docs/models/gemini-4-hydrogen"
+source_url = "https://aistudio.google.com/docs/models/gemini-4-hydrogen"
+endpoints = [
+  { id = "gemini-4-hydrogen", input = "text", source_url = "https://aistudio.google.com/docs/models/gemini-4-hydrogen" },
+]
+qualifications = [
+  { source_url = "https://aistudio.google.com/docs/long-decode", notes = "One foreground segment permits 65,536 output tokens with or without streaming, including thinking. Longer output requires continuation or background execution within the unified 1,048,576-token input/thinking/output window." },
+  { source_url = "https://aistudio.google.com/docs/whats-new-gemini-4-hydrogen", notes = "Text, images, audio, video and PDF inputs produce text. Thinking levels are low, medium, high and xhigh, with high as the native default." },
+  { source_url = "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/4-hydrogen", notes = "MINIMAL thinking and thinking_budget are invalid; custom temperature, top_p and top_k are ignored. Current caching is implicit only, with a 4,096-token minimum; explicit caching is unsupported. Image MIME types are image/png, image/jpeg, image/webp, image/heic and image/heif." },
+]
+
+[providers.google.limits]
+source_url = "https://aistudio.google.com/docs/models/gemini-4-hydrogen"
+context_tokens = 1048576
+max_output_tokens = 65536
+
+[providers.google.capabilities]
+source_url = "https://aistudio.google.com/docs/models/gemini-4-hydrogen"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.google.token_pricing]
+source_url = "https://aistudio.google.com/docs/pricing"
+unit = "usd_per_token"
+scope = "Regular paid Standard token rates. Output includes thinking. Implicit caching only; optional tools, Batch, Flex, Priority and Contributor tiers are excluded."
+input = "0.0000015"
+output = "0.0000075"
+input_cache_read = "0.000000075"
+
+[providers.vercel]
+provider = "vercel"
+id = "google/gemini-4-hydrogen"
+url = "https://vercel.com/ai-gateway/models/gemini-4-hydrogen"
+source_url = "https://vercel.com/ai-gateway/models/gemini-4-hydrogen"
+endpoints = [
+  { id = "google/gemini-4-hydrogen", input = "text", source_url = "https://vercel.com/ai-gateway/models/gemini-4-hydrogen" },
+]
+qualifications = [
+  { source_url = "https://aistudio.google.com/docs/long-decode", notes = "The native model permits 65,536 output tokens per foreground segment, with or without streaming. Longer output uses continuation or background execution; this provider's 1,000,000-token discovery ceiling is not a single synchronous-call guarantee." },
+  { source_url = "https://ai-gateway.vercel.sh/v1/models/google/gemini-4-hydrogen/endpoints", notes = "Discovery lists low, medium, high and xhigh reasoning, but does not establish the omitted-effort mapping or default for each compatible API. It lists temperature even though native documentation says custom sampling controls are ignored." },
+]
+
+[providers.vercel.limits]
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+context_tokens = 1000000
+max_output_tokens = 1000000
+
+[providers.vercel.capabilities]
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.vercel.token_pricing]
+source_url = "https://ai-gateway.vercel.sh/v1/models/google/gemini-4-hydrogen/endpoints"
+unit = "usd_per_token"
+scope = "Regular Standard global token rates from the provider's exact Google and Google Vertex endpoint records, with no discount. Implicit caching only; optional tools, alternate service tiers and regional premiums are excluded."
+input = "0.0000015"
+output = "0.0000075"
+input_cache_read = "0.000000075"
+
+[providers.openrouter]
+provider = "openrouter"
+id = "google/gemini-4-hydrogen"
+url = "https://openrouter.ai/google/gemini-4-hydrogen"
+source_url = "https://openrouter.ai/google/gemini-4-hydrogen"
+endpoints = [
+  { id = "google/gemini-4-hydrogen", input = "text", source_url = "https://openrouter.ai/google/gemini-4-hydrogen" },
+]
+qualifications = [
+  { source_url = "https://openrouter.ai/api/v1/models", notes = "The top_provider.max_completion_tokens discovery limit is 943,718. Reasoning is mandatory; low, medium, high and xhigh are listed, with medium as this provider's default, distinct from the native high default." },
+  { source_url = "https://aistudio.google.com/docs/long-decode", notes = "The native model permits 65,536 output tokens per foreground segment, with or without streaming. Longer output uses continuation or background execution; the provider discovery ceiling is not a single synchronous-call guarantee." },
+  { source_url = "https://openrouter.ai/api/v1/models", notes = "An input_cache_write amount is present, but its current applicable caching operation, TTL and billing unit are not established for this implicit-only model. No per-token cache-write price is recorded; omission does not mean zero cost. Listed sampling controls do not establish an effect when the native model ignores them." },
+]
+
+[providers.openrouter.limits]
+source_url = "https://openrouter.ai/api/v1/models"
+context_tokens = 1048576
+max_output_tokens = 943718
+
+[providers.openrouter.capabilities]
+source_url = "https://openrouter.ai/api/v1/models"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.openrouter.token_pricing]
+source_url = "https://openrouter.ai/google/gemini-4-hydrogen"
+unit = "usd_per_token"
+scope = "Regular Standard global token rates explicitly shown for Google Vertex and Google AI Studio. Optional tools, Batch, Flex, Priority and regional premiums are excluded."
+input = "0.0000015"
+output = "0.0000075"
+input_cache_read = "0.000000075"
+
+[provider_coverage.google]
+disposition = "listed"
+source_url = "https://aistudio.google.com/docs/models/gemini-4-hydrogen"
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/gemini-4-hydrogen"
+
+[provider_coverage.openrouter]
+disposition = "listed"
+source_url = "https://openrouter.ai/google/gemini-4-hydrogen"
+
+[provider_coverage.fal]
+disposition = "excluded"
+source_url = "https://fal.ai/models"
+reason = "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."
