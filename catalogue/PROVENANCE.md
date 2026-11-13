@@ -1844,3 +1844,51 @@ published component uses one-unit quantities with no additional quantity
 rounding. TTS and sound-effects settings retain their distinct request schemas;
 these Grida bindings do not imply support for every native voice, format or
 operation.
+
+## `google/gemini-4-hydrogen`
+
+Google's November 12, 2026 announcement establishes broad public availability of
+the exact model in the Gemini API and AI Studio. The native model accepts text,
+images, audio, video and PDF and returns text.
+https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/
+https://aistudio.google.com/docs/models/gemini-4-hydrogen
+
+Regular paid Standard prices are independently sourced for Google, Vercel and
+OpenRouter: $1.50 input, $7.50 output and $0.075 implicit-cache read per million
+tokens. Native output includes thinking. Vercel's exact Google and Google Vertex
+endpoint records publish those decimal per-token rates with no discount; the
+page's rounded $0.08 cache display is not the evidence for $0.075. OpenRouter's
+Standard provider rows independently publish the exact rates. Optional tools,
+alternate service tiers and regional premiums are outside these token schedules.
+https://aistudio.google.com/docs/pricing
+https://ai-gateway.vercel.sh/v1/models/google/gemini-4-hydrogen/endpoints
+https://openrouter.ai/google/gemini-4-hydrogen
+
+The native 1,048,576-token window includes input, thinking and output. The
+intrinsic/native output field records the 65,536-token foreground segment limit
+for streaming and non-streaming. Longer output requires background execution or
+continuation. Vercel's 1,000,000-token output ceiling and OpenRouter's 943,718-token
+ceiling remain provider discovery facts, not synchronous-call guarantees.
+https://aistudio.google.com/docs/long-decode
+https://ai-gateway.vercel.sh/v1/models
+https://openrouter.ai/api/v1/models
+
+Native thinking supports low, medium, high and xhigh, defaulting to high. MINIMAL
+and thinking_budget are invalid, and custom sampling controls are ignored.
+OpenRouter instead lists mandatory reasoning with medium as its provider default;
+Vercel discovery lists the four efforts without establishing omitted-effort
+mapping for every compatible API. Current native caching is implicit only with a
+4,096-token threshold. OpenRouter's cache-write amount lacks a verified current
+operation/TTL/unit and is left unpriced; omission is not a zero price. Forward
+cache-control documentation does not establish current cache-write behavior.
+https://aistudio.google.com/docs/whats-new-gemini-4-hydrogen
+https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/4-hydrogen
+https://ai-gateway.vercel.sh/v1/models/google/gemini-4-hydrogen/endpoints
+https://openrouter.ai/api/v1/models
+
+Google's media-resolution table explicitly covers Gemini 4 and Gemini 3, with
+Hydrogen examples. Image budgets are approximate: unspecified/high 1,120, low 280,
+medium 560 and ultra_high 2,240. This maximum comes from the allocation table, not
+the model page's default resolution. Image MIME types are sourced separately.
+https://aistudio.google.com/docs/media-resolution
+https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/4-hydrogen
