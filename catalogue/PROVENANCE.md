@@ -1892,3 +1892,21 @@ medium 560 and ultra_high 2,240. This maximum comes from the allocation table, n
 the model page's default resolution. Image MIME types are sourced separately.
 https://aistudio.google.com/docs/media-resolution
 https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/4-hydrogen
+
+## Grida Gemini 4 Hydrogen discovery — 2026-11-13
+
+[Grida model discovery](https://gateway.grida.ai/v1/models) and the
+[public API reference](https://gateway.grida.ai/llms.txt) list
+`google/gemini-4-hydrogen` through Chat Completions and Responses with text and
+image input, tools, reasoning and structured output. The published combined
+input/output window is 1,000,000 tokens; output includes thinking, defaults to
+32,768 tokens and is capped at 65,536 with or without streaming.
+
+The public binding records regular USD-per-token components of $0.0000015
+ordinary input, $0.000000075 cached input and $0.0000075 output, each with
+one-token quantities and no additional quantity rounding. Explicit effort accepts
+low, medium, high and xhigh. Omitting effort leaves the upstream setting
+unspecified; shared effort names do not promise a particular native thinking
+level. Sampling controls, explicit caches, grounding, file/audio/video input,
+background generation and continuation are outside this service contract.
+Native model facts and other provider bindings remain unchanged.
