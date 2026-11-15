@@ -1972,3 +1972,23 @@ Image detail `low`/`high` is forwarded and `auto` is dropped. Unpublished media
 counts, cache prices, question counts and context bands remain omitted. Generic
 tool-choice, web-search and positive max-completion metadata do not establish
 those features or charges for this decision offering.
+
+## Grida Gemini Decision 1 discovery — 2026-11-15
+
+[Grida model discovery](https://gateway.grida.ai/v1/models), the
+[Decisions schema](https://gateway.grida.ai/schemas/decisions.json) and the
+[public API reference](https://gateway.grida.ai/llms.txt) were verified together
+on 2026-11-15. They list `google/gemini-decision-1` through `POST /v1/decisions`
+with a 262,144-token context, predicate/choice/score question arrays, string or
+user-message input, and checked inline PNG/JPEG/WebP images. The public subset
+permits 32 questions, eight images, 2–255 choices and 2–10 score levels; it
+rejects boolean/string spelling collisions and defines ordered answers and
+per-question refusals.
+
+The binding records the advertised input-only price of USD 0.10 per million
+measured input tokens, with one-token quantities and no additional quantity
+rounding. No output or cache price component is published. This is a token
+price, not a fixed image price. The linked contract defines this service's
+OpenAI-compatible subset; Google's native named-map/`noul`/`Content` contract
+and safety behavior remain independent. Model release provenance and all other
+provider facts are unchanged.
