@@ -72,8 +72,8 @@ Preserve the external document's dialect, keywords and exact native field names.
 Our own layer owns provenance, identity relationships and provider bindings.
 An offering absent from the baseline, such as a 3D operation, still follows its
 native contract. Introduce an extension only for an independently documented
-need not represented by the baseline or provider contract. Keep existing v1
-fields and price shapes compatible; link or qualify facts that do not fit rather
+need not represented by the baseline or provider contract. Preserve released
+field meanings and price shapes; link or qualify facts that do not fit rather
 than inventing a request field or silently changing units.
 
 ## IDs are never portable
@@ -172,12 +172,16 @@ contract, not model facts or tariff overrides. Follow
 
 ## Decision offerings
 
-Decision endpoints are distinct offerings even when they share the underlying chat
-model. Author them in `decision.models`, with `underlying_model` pointing at that
-canonical model. Qualify each provider's exact `interface`, question vocabulary,
-input envelope and decision-only rates. Do not copy chat cache/output prices, tools,
-reasoning parameters or limits. Put contract differences on sourced
-`decision_contract` records and unresolved conflicts in provenance. See
+Use `decision.models` as semantic grouping only, not a common execution protocol.
+Record optional `underlying_model` only for a documented relationship; never infer
+a parent or use a self-reference to satisfy an assumed family shape. Qualify each
+provider's exact `interface`, question vocabulary, input envelope and decision-only
+rates. Do not copy chat cache/output prices, tools, reasoning parameters or limits.
+Put sourced descriptions on `decision_contract`; preserve native request/result
+schema links on the endpoint and qualify details that do not fit. A shared SDK
+factory does not establish a common model family, interchangeable confidence or
+compatible native contracts. Researching Jev or another interface does not decide
+whether to catalogue it. See
 [`catalogue/README.md`](../../../catalogue/README.md#decision-offerings).
 
 ## Reference pattern: text and image additions

@@ -23,8 +23,9 @@ Imported byte-identical from [gridaco/grida](https://github.com/gridaco/grida) (
 commit `f053893047af`), with the shape unchanged. It was then split into per-model cards in
 `models/`, from which the file is generated with the same data; only the order of cards and
 keys changed. It was named `facts.json` until release `v1.20261011.0`, and published under
-that name in that release; its schema `$id` keeps the original `ai-model-facts-v1` until the
-next breaking change.
+that name in that release. Schema version 1 retained the original
+`ai-model-facts-v1` identity. Version 2 uses `ai-model-facts-v2` and permits decision
+offerings without a documented underlying model; see [migration notes](../README.md#migrating-from-schema-version-1).
 
 ## Shape
 
@@ -93,7 +94,7 @@ Our own layer records provenance, canonical identities, provider-ID relationship
 and documented extensions. An operation outside the baseline, such as Tripo
 rigging, still mirrors its native request and result schemas. A provider-specific
 feature does not become a new shared field just because the baseline omits it.
-Released v1 fields and existing price shapes remain compatible. New structured
+Released field meanings and existing price shapes are retained. New structured
 extensions need their own documented gap and review; when the current shape
 cannot faithfully express a fact, retain its source and qualification rather
 than inventing an API parameter. A catalog-layout migration requires a separately
@@ -103,7 +104,7 @@ versioned change.
 
 `labs.json` is an object keyed by lab ID. Each lab has `id` (equal to its key), `name` (the
 display name as the lab writes it), and `url` (its first-party homepage). A card's `vendor`
-is a lab ID. Its `$id` is `https://grida.co/schemas/ai-model-labs-v1.json`.
+is a lab ID. Its `$id` is `https://grida.co/schemas/ai-model-labs-v2.json`.
 
 A lab may have a `logo`: `path` (the file in `logos/`, relative to `labs.json`),
 `media_type`, `kind` (`symbol`, `wordmark`, or `lockup`), `source_url`, optional
@@ -113,7 +114,7 @@ license, and are used under each owner's guidelines.
 
 ## Rules
 
-- **Additive.** Add fields; never rename, remove, or repurpose one in schema version 1. A
+- **Additive.** Add fields; never rename, remove, or repurpose one within a schema major. A
   breaking change needs a new schema version and a new `$id`.
 - **IDs are exact.** Model and provider IDs keep the spelling their owner uses.
 - **Fields are `lower_snake_case`.**
@@ -125,8 +126,9 @@ license, and are used under each owner's guidelines.
   [illustrative costs](#illustrative-costs) may be manually curated estimates with
   their own provenance and optional supporting links.
 
-The schema's `$id` is `https://grida.co/schemas/ai-model-facts-v1.json`. It is kept
-unchanged from its origin; changing it is a breaking change.
+The schema's `$id` is `https://grida.co/schemas/ai-model-facts-v2.json`. Changing it
+is an explicit version boundary; old schema validators are not assumed to accept
+new envelopes or newly optional fields.
 
 ## Field notes
 
@@ -425,18 +427,26 @@ Missing fields mean unrecorded facts, never unsupported features or zero prices.
 Single-provider cards and `three_d.rig_check.operation` may also carry
 `endpoints`, with the same shape as a binding's endpoint variants. New sourced
 objects have strict field vocabularies; pre-existing card and price shapes remain
-unchanged in schema version 1.
+unchanged in schema version 2.
 
 ## Decision offerings
 
-The optional `decision.models` section describes bounded decision offerings separately
-from text generation. Existing version 1 snapshots remain valid without the section;
-the generator emits it only when a card is authored there. A decision card uses the
-common identity, vendor, release and provider fields, and requires `underlying_model`
-(the canonical identity of the underlying model) and nonempty provider bindings.
-This relationship does not inherit that model's chat capabilities, limits or prices.
+The optional `decision.models` section groups decision offerings by their broad
+purpose, separately from text generation. It is a semantic category, not a shared
+request/result specification or a claim that the offerings are interchangeable.
+The generator emits the section only when a card is authored there. A decision
+card uses the common identity, vendor, release and provider fields, and requires
+nonempty provider bindings. Optional `underlying_model` records the canonical
+identity of a documented underlying model. Omission means no relationship is
+recorded; never infer a parent or introduce a self-reference to fill it.
+The relationship does not inherit that model's chat capabilities, limits or prices.
 Decision cards reject chat-only top-level fields such as `context_window`, `output_limit`
 and `cost`; use sourced provider limits and prices for this offering's exact interface.
+
+Version 1 required `underlying_model`. Version 2 makes it optional while retaining
+its nonempty-string constraint when present. Existing cards with a documented
+relationship keep that value. This permits an independent offering to be described
+without inventing a model relationship; it does not add any offering to the catalogue.
 
 Optional `decision_contract` on a card, binding or endpoint records sourced descriptive
 facts: `question_types` (exact wire vocabulary, such as `predicate` or `noul`),
@@ -454,3 +464,22 @@ contract and answer semantics. Provider vocabularies, image envelopes and pricin
 remain independent even when the underlying model is identical. No ZDR eligibility,
 probability calibration guarantee or output-generation pricing is inferred from
 this family membership.
+
+For example, the [OpenAI Decisions reference](https://developers.openai.com/api/reference/resources/decisions/methods/create)
+uses question/answer arrays and `predicate`, while [Google's Decisions API](https://aistudio.google.com/docs/decisions-api)
+uses named maps and `noul`. [TypeSafe's Jev interface](https://docs.typesafe.ai/api/system-one)
+uses `state` and includes a separate image-localization Box operation. These are
+design references, not catalogue listings or a new common primitive set. Native
+vocabularies, option identity, confidence meanings, refusal behavior and usage
+remain attached to the exact interface. Unrepresented details stay source-qualified
+rather than expanding a shared union to imply execution compatibility.
+
+Client compatibility also belongs to the selected interface and exact SDK version.
+The [OpenAI SDK contract](https://developers.openai.com/api/reference/typescript/resources/decisions/methods/create)
+and [AI SDK decision abstraction](https://ai-sdk.dev/docs/ai-sdk-core/decisions)
+do not make every provider endpoint interchangeable. An SDK adapter can translate
+a supported subset or use structured language-model output; neither establishes
+a native decision offering or portable probability/confidence semantics. Keep the
+provider's authoritative request/result schema links on its endpoint where
+available; `decision_contract` remains optional descriptive metadata, not a client
+generator or a substitute execution specification.

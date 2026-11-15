@@ -16,7 +16,7 @@ bindings, and published prices.
 
 [`models/`](./models/) is the authored source: one TOML card per model, grouped by lab.
 [`catalogue/models.json`](./catalogue/models.json) is generated from it and is the contract
-consumers read, at schema version 1. The catalogue was imported from
+consumers read, at schema version 2. The catalogue was imported from
 [gridaco/grida](https://github.com/gridaco/grida). Each content change to `catalogue/` on
 `main` is published as a versioned GitHub Release and as `@grida/ai-models` on npm. A hosted
 endpoint of its own is undecided; don't add anything that assumes an answer.
@@ -105,7 +105,7 @@ doesn't belong in the contract.
   AsyncAPI contract. Preserve standard keywords and native field names inside
   external schemas. Do not invent parallel parameter vocabularies or synthetic
   API fields to express pricing conditions. See the catalogue's compatibility
-  boundary before proposing an extension; preserve released v1 fields.
+  boundary before proposing an extension; preserve released field meanings.
 - **Additive by default.** Add fields; do not rename or repurpose them. A breaking change
   needs a new schema version, decided with the user.
 - **Facts are independent of products.** Being catalogued is not the same as being offered

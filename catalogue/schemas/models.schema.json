@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://grida.co/schemas/ai-model-facts-v1.json",
-  "title": "Canonical model facts, authoring envelope version 1",
+  "$id": "https://grida.co/schemas/ai-model-facts-v2.json",
+  "title": "Canonical model facts, authoring envelope version 2",
   "description": "Structural interchange schema with sourced, additive model and serving-provider facts.",
   "type": "object",
   "additionalProperties": false,
@@ -22,7 +22,7 @@
   "properties": {
     "$schema": {
       "description": "This file's schema: the `$id` of models.schema.json. Generated files always carry it.",
-      "const": "https://grida.co/schemas/ai-model-facts-v1.json"
+      "const": "https://grida.co/schemas/ai-model-facts-v2.json"
     },
     "text.catalog": {
       "type": "object",
@@ -209,6 +209,7 @@
       }
     },
     "decision.models": {
+      "description": "Semantic grouping of decision offerings, not a shared execution protocol. Each provider endpoint retains its own request, result and accounting contract.",
       "type": "object",
       "minProperties": 1,
       "additionalProperties": {
@@ -1339,13 +1340,13 @@
           "$ref": "#/$defs/card"
         }
       ],
-      "required": ["vendor", "underlying_model", "providers"],
+      "required": ["vendor", "providers"],
       "unevaluatedProperties": false,
       "properties": {
         "underlying_model": {
           "type": "string",
           "minLength": 1,
-          "description": "Canonical catalogue identity of the underlying model; this offering has its own interface and rates."
+          "description": "Canonical catalogue identity of a documented underlying model, when known. Omission means no relationship is recorded; this offering has its own interface and rates."
         },
         "decision_contract": {
           "$ref": "#/$defs/decision_contract"

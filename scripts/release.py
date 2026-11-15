@@ -2,18 +2,18 @@
 
 A snapshot is everything in `catalogue/`, published under a version tag:
 
-    v<schema major>.<YYYYMMDD>.<n>     e.g. v1.20261012.0
+    v<schema major>.<YYYYMMDD>.<n>     e.g. v2.20261115.0
 
-The major is the catalogue's schema version, so a semver range such as `^1` never crosses a
+The major is the catalogue's schema version, so a semver range such as `^2` never crosses a
 breaking change. The date is the UTC commit date of the snapshot, and `n` counts earlier
 snapshots from the same day.
 
 Usage:
     uv run scripts/release.py digest
     uv run scripts/release.py version
-    uv run scripts/release.py build --version v1.20261012.0 --out dist
-    uv run scripts/release.py notes --version v1.20261012.0 --previous previous/
-    uv run scripts/release.py npm --archive grida-models-v1.20261012.0.tar.gz --out package/
+    uv run scripts/release.py build --version v2.20261115.0 --out dist
+    uv run scripts/release.py notes --version v2.20261115.0 --previous previous/
+    uv run scripts/release.py npm --archive grida-models-v2.20261115.0.tar.gz --out package/
 
 `digest` prints a fingerprint of the catalogue's content; the release workflow publishes only
 when it differs from the latest release's. `build` writes the release assets, and builds the
@@ -46,7 +46,7 @@ NPM_NAME = "@grida/ai-models"
 
 # The catalogue's schema major version. Both schema `$id`s end in `-v<major>.json`;
 # a breaking change to either bumps it.
-SCHEMA_MAJOR = 1
+SCHEMA_MAJOR = 2
 
 # Files published individually, keyed by asset name. The names carry the schema major, so
 # `releases/latest/download/models.v1.json` only ever resolves to a compatible snapshot:
@@ -223,6 +223,20 @@ def notes(version: str, current: dict[str, Any], previous: dict[str, Any] | None
     if previous is None:
         lines += ["First release.", ""]
     else:
+        previous_major = previous["manifest"]["schema_version"]
+        if previous_major != current["schema_version"]:
+            lines += [
+                "## Schema version change",
+                "",
+                f"This release changes the catalogue contract from v{previous_major} to "
+                f"v{current['schema_version']}. Review the schemas before updating consumers.",
+                f"Previous v{previous_major} assets remain available at their explicit release tags; "
+                f"the GitHub `latest` release now contains v{current['schema_version']} assets. "
+                f"Existing `latest/download/models.v{previous_major}.json` and corresponding "
+                f"v{previous_major} asset URLs stop resolving. npm ranges pinned to "
+                f"`^{previous_major}` do not cross this schema change.",
+                "",
+            ]
         lines += [f"## Changes since `{previous['manifest']['version']}`", ""]
         sections = [
             ("models", cards_by_key(previous["models"]), cards_by_key(current["models"])),
@@ -274,12 +288,15 @@ def notes(version: str, current: dict[str, Any], previous: dict[str, Any] | None
 
 def load_previous(directory: Path) -> dict[str, Any] | None:
     """The previous release's manifest, models, and labs, from its downloaded assets."""
+    manifest_path = directory / "manifest.json"
+    if not manifest_path.exists():
+        return None
+    previous = {"manifest": json.loads(manifest_path.read_text())}
+    previous_major = previous["manifest"].get("schema_version", SCHEMA_MAJOR)
     names = {
-        "manifest": ["manifest.json"],
-        "models": [f"models.v{SCHEMA_MAJOR}.json", *LEGACY_ASSETS["models"]],
-        "labs": [f"labs.v{SCHEMA_MAJOR}.json", *LEGACY_ASSETS["labs"]],
+        "models": [f"models.v{previous_major}.json", *LEGACY_ASSETS["models"]],
+        "labs": [f"labs.v{previous_major}.json", *LEGACY_ASSETS["labs"]],
     }
-    previous = {}
     for key, candidates in names.items():
         path = next((directory / name for name in candidates if (directory / name).exists()), None)
         if path is None:
