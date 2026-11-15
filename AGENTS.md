@@ -16,7 +16,7 @@ bindings, and published prices.
 
 [`models/`](./models/) is the authored source: one TOML card per model, grouped by lab.
 [`catalogue/models.json`](./catalogue/models.json) is generated from it and is the contract
-consumers read, at schema version 1. The catalogue was imported from
+consumers read, at schema version 2. The catalogue was imported from
 [gridaco/grida](https://github.com/gridaco/grida). Each content change to `catalogue/` on
 `main` is published as a versioned GitHub Release and as `@grida/ai-models` on npm. A hosted
 endpoint of its own is undecided; don't add anything that assumes an answer.
@@ -105,9 +105,14 @@ doesn't belong in the contract.
   AsyncAPI contract. Preserve standard keywords and native field names inside
   external schemas. Do not invent parallel parameter vocabularies or synthetic
   API fields to express pricing conditions. See the catalogue's compatibility
-  boundary before proposing an extension; preserve released v1 fields.
+  boundary before proposing an extension; preserve released field meanings.
 - **Additive by default.** Add fields; do not rename or repurpose them. A breaking change
   needs a new schema version, decided with the user.
+- **Document contract changes in the same PR.** Update
+  [`catalogue/SCHEMA_CHANGELOG.md`](./catalogue/SCHEMA_CHANGELOG.md#maintaining-this-log)
+  for schema changes and consumer-visible validator/generator behavior, including
+  compatible extensions. Describe compatibility and migration. Catalogue-only
+  facts, rates and tooling-only changes do not need a schema-history entry.
 - **Facts are independent of products.** Being catalogued is not the same as being offered
   by a Grida product. Keep existing entries when reviewing provider coverage; deleting a
   model or expanding an offering requires a separate review.
@@ -165,6 +170,9 @@ section.
 ## Commits and PRs
 
 - One concern per PR. A data change and a schema change are separate PRs.
+- Review the schema changelog when the public contract changes. The PR check
+  enforces an update for changed schema JSON; behavioral changes outside those
+  files and the accuracy of the explanation still require review.
 - The PR description names the source for every changed fact. For illustrative
   estimates, explain their provenance and assumptions; do not fabricate a source
   URL when the manual record has no durable reference.

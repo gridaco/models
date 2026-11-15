@@ -25,6 +25,7 @@ change, a limit correction, a deprecation, or an audit against provider document
 | `catalogue/models.json`                | Generated from `models/` by `scripts/build.py`. Never edit by hand                      |
 | `catalogue/schemas/models.schema.json` | JSON Schema for `models.json`                                                           |
 | `catalogue/PROVENANCE.md`              | Source notes and qualifications that do not fit in JSON                                 |
+| `catalogue/SCHEMA_CHANGELOG.md`        | Authored contract changes, compatibility and migration; excludes catalogue-only facts   |
 
 Card layout and the `section` / `null_keys` authoring keys are in
 [`models/README.md`](../../../models/README.md); the shape and its rules are in
@@ -72,8 +73,8 @@ Preserve the external document's dialect, keywords and exact native field names.
 Our own layer owns provenance, identity relationships and provider bindings.
 An offering absent from the baseline, such as a 3D operation, still follows its
 native contract. Introduce an extension only for an independently documented
-need not represented by the baseline or provider contract. Keep existing v1
-fields and price shapes compatible; link or qualify facts that do not fit rather
+need not represented by the baseline or provider contract. Preserve released
+field meanings and price shapes; link or qualify facts that do not fit rather
 than inventing a request field or silently changing units.
 
 ## IDs are never portable
@@ -172,13 +173,27 @@ contract, not model facts or tariff overrides. Follow
 
 ## Decision offerings
 
-Decision endpoints are distinct offerings even when they share the underlying chat
-model. Author them in `decision.models`, with `underlying_model` pointing at that
-canonical model. Qualify each provider's exact `interface`, question vocabulary,
-input envelope and decision-only rates. Do not copy chat cache/output prices, tools,
-reasoning parameters or limits. Put contract differences on sourced
-`decision_contract` records and unresolved conflicts in provenance. See
+Use `decision.models` as semantic grouping only, not a common execution protocol.
+Record optional `underlying_model` only for a documented relationship; never infer
+a parent or use a self-reference to satisfy an assumed family shape. Qualify each
+provider's exact `interface`, question vocabulary, input envelope and decision-only
+rates. Do not copy chat cache/output prices, tools, reasoning parameters or limits.
+Put sourced descriptions on `decision_contract`; preserve native request/result
+schema links on the endpoint and qualify details that do not fit. A shared SDK
+factory does not establish a common model family, interchangeable confidence or
+compatible native contracts. Researching Jev or another interface does not decide
+whether to catalogue it. See
 [`catalogue/README.md`](../../../catalogue/README.md#decision-offerings).
+
+## Contract change history
+
+When changing the public schema, field meanings or consumer-visible validation /
+generation behavior, update [the schema changelog](../../../catalogue/SCHEMA_CHANGELOG.md#maintaining-this-log)
+in the same PR, including compatible extensions. Explain before/after behavior,
+compatibility and consumer migration, and link the PR. Follow its maintenance
+rules; do not add entries for catalogue-only facts, prices or tooling refactors.
+The PR check detects changed schema JSON, not every semantic change in scripts
+or the accuracy of the authored entry.
 
 ## Reference pattern: text and image additions
 
@@ -224,4 +239,6 @@ do not make catalogue checks consume provider credits.
 - [ ] Affected illustrative costs were reviewed or removed when their rates,
       scenario or coverage changed; review dates were not automatically advanced
 - [ ] `uv run scripts/check.py` passes
+- [ ] Public contract changes have a matching schema-changelog entry, including
+      consumer-visible validation/generation changes outside the schema files
 - [ ] Nothing from a private source made it into the diff, the commit, or the PR (see `AGENTS.md`)

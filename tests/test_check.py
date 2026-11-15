@@ -32,6 +32,12 @@ def test_catalogue_is_valid():
     assert check.check(MODELS_JSON, SCHEMA) == []
 
 
+def test_catalogue_rejects_the_previous_major_envelope():
+    facts = copy.deepcopy(MODELS_JSON)
+    facts["$schema"] = "https://grida.co/schemas/ai-model-facts-v1.json"
+    assert any("$schema" in error for error in check.check(facts, SCHEMA))
+
+
 OPTIONAL_AUDIO_SECTIONS = (
     "audio.transcription.models",
     "audio.realtime.models",
@@ -675,14 +681,40 @@ def test_decision_card_rejects_inherited_chat_fields(field):
     assert any(field in e for e in check.check(facts, SCHEMA))
 
 
-def test_decision_card_requires_a_vendor_underlying_model_and_binding():
-    for field in ("vendor", "underlying_model", "providers"):
+def test_decision_card_requires_a_vendor_and_binding():
+    for field in ("vendor", "providers"):
         facts = decision_facts()
         facts["decision.models"]["openai/decision-example"].pop(field)
         assert check.check(facts, SCHEMA)
     facts = decision_facts()
     facts["decision.models"]["openai/decision-example"]["providers"] = {}
     assert any("no provider bindings" in e for e in check.check(facts, SCHEMA))
+
+
+def test_standalone_decision_card_needs_no_inferred_parent():
+    facts = copy.deepcopy(MODELS_JSON)
+    standalone = decision_fixture()
+    standalone.pop("underlying_model")
+    facts["decision.models"][standalone["id"]] = standalone
+    assert check.check(facts, SCHEMA) == []
+    assert facts["decision.models"]["openai/gpt-6-luna-decisions"]["underlying_model"] == "openai/gpt-6-luna"
+
+
+@pytest.mark.parametrize("parent", ["", None, 42])
+def test_decision_card_rejects_invalid_parent_when_recorded(parent):
+    facts = decision_facts()
+    facts["decision.models"]["openai/decision-example"]["underlying_model"] = parent
+    assert any("underlying_model" in e for e in check.check(facts, SCHEMA))
+
+
+def test_generator_does_not_infer_a_standalone_decision_parent():
+    standalone = decision_fixture()
+    standalone.pop("underlying_model")
+    example = cards.Card("openai/decision-example", "card.toml", {"section": "decision.models", **standalone})
+    generated = cards.assemble(CARDS + [example], SECTIONS, check.build.schema_id(), check.build.required_sections())
+    assert check.check(generated, SCHEMA) == []
+    assert generated["decision.models"][standalone["id"]] == standalone
+    assert generated["decision.models"]["openai/gpt-6-luna-decisions"]["underlying_model"] == "openai/gpt-6-luna"
 
 
 def test_decision_contract_bounds_and_source_are_checked():

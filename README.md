@@ -12,7 +12,7 @@ provenance and may omit source links when no durable reference exists.
 
 [Grida](https://grida.co) · [Catalogue](./catalogue/)
 
-> **Status: early.** The catalogue is at schema version 1. Snapshots are published as
+> **Status: early.** The catalogue is at schema version 2. Snapshots are published as
 > [GitHub Releases](https://github.com/gridaco/models/releases); see
 > [Get the catalogue](#get-the-catalogue).
 
@@ -32,42 +32,69 @@ import models from "@grida/ai-models/models.json" with { type: "json" };
 ```
 
 For fetching at runtime, use the package through jsDelivr's CDN: compressed, cached at the
-edge, and with no redirects. `@1` follows the newest snapshot of schema version 1; a full
+edge, and with no redirects. `@2` follows the newest snapshot of schema version 2; a full
 version pins one snapshot.
 
 ```
-https://cdn.jsdelivr.net/npm/@grida/ai-models@1/models.json
-https://cdn.jsdelivr.net/npm/@grida/ai-models@1.20261011.1/models.json
+https://cdn.jsdelivr.net/npm/@grida/ai-models@2/models.json
 ```
 
 The GitHub Release assets suit scripts and archiving. The newest snapshot is always at:
 
 ```sh
-curl -LO https://github.com/gridaco/models/releases/latest/download/models.v1.json
-curl -LO https://github.com/gridaco/models/releases/latest/download/labs.v1.json
+curl -LO https://github.com/gridaco/models/releases/latest/download/models.v2.json
+curl -LO https://github.com/gridaco/models/releases/latest/download/labs.v2.json
 ```
 
-The `v1` in the file name is the schema version. `latest` always serves the newest snapshot
-that is compatible with it; after a breaking change, the `v1` names stop resolving instead of
-serving a different shape. To pin a snapshot, use its version instead of `latest`:
-`https://github.com/gridaco/models/releases/download/<version>/models.v1.json`.
+The `v2` in the file name is the schema version. GitHub `latest` follows the newest
+release across schema majors. Assets keep versioned names, so an old asset name
+stops resolving after a major change instead of serving a different shape. To pin
+a snapshot, use its version instead of `latest`:
+`https://github.com/gridaco/models/releases/download/<version>/models.v2.json`.
 
 Each release holds:
 
 | asset                                          | contents                                                                                      |
 | ---------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `models.v1.json`, `labs.v1.json`               | Model cards and labs (`catalogue/models.json`, `catalogue/labs.json`)                         |
-| `models.v1.schema.json`, `labs.v1.schema.json` | Their JSON Schemas                                                                            |
+| `models.v2.json`, `labs.v2.json`               | Model cards and labs (`catalogue/models.json`, `catalogue/labs.json`)                         |
+| `models.v2.schema.json`, `labs.v2.schema.json` | Their JSON Schemas                                                                            |
 | `grida-models-<version>.tar.gz`, `.zip`        | The whole catalogue, logos included, with `LICENSE` and `manifest.json`                       |
 | `manifest.json`                                | Version, schema version, source commit, content digest, counts, and the SHA-256 of every file |
 | `SHA256SUMS`                                   | Checksums of the other assets: `sha256sum -c SHA256SUMS --ignore-missing`                     |
 
-Versions read `v<schema>.<YYYYMMDD>.<n>`, for example `v1.20261012.0`: the schema version,
+Versions read `v<schema>.<YYYYMMDD>.<n>`: the schema version,
 the UTC date of the source commit, and a counter for snapshots on the same day. They are valid
-semver, so a range such as `^1` follows every snapshot without crossing a breaking schema
+semver, so a range such as `^2` follows every snapshot without crossing a breaking schema
 change. A release is published only when the catalogue's content changes, and the archives
 are reproducible from the same commit. Release notes list the models, labs, schemas, and
 other files that changed since the previous release.
+
+The authored [schema changelog](./catalogue/SCHEMA_CHANGELOG.md) explains contract
+changes, compatibility and consumer migration. It is included in snapshot archives
+and the npm package, and linked from generated release notes. Ordinary model and
+price updates remain in those release notes rather than growing the schema log.
+
+### Migrating from schema version 1
+
+Version 2 lets a decision offering omit `underlying_model` when no relationship is
+documented. Its existing meaning and all other record fields are retained. A new
+record without that field fails the version 1 schema, so update the validator and
+handle an absent relationship before selecting a version 2 snapshot. The Models
+`$schema` value and both published schema `$id`s now end in `v2`.
+
+Existing npm `^1` ranges and CDN `@1` URLs stay on version 1. Immutable version 1
+release URLs remain available, for example:
+
+```text
+https://github.com/gridaco/models/releases/download/v1.20261113.1/models.v1.json
+https://cdn.jsdelivr.net/npm/@grida/ai-models@1.20261113.1/models.json
+```
+
+Publishing the first version 2 release moves GitHub `latest`. Moving URLs such as
+`releases/latest/download/models.v1.json` and the matching labs/schema assets then
+stop resolving. Choose an explicit old tag to remain on version 1, or update both
+the asset names and reader to version 2. Labs retain their record shape; both
+schemas and asset names follow the catalogue's single release major.
 
 The catalogue data is MIT licensed. Lab logos are trademarks of their owners and are not
 covered by that license.
@@ -167,6 +194,14 @@ Add or correct a model by opening a pull request that changes its card in
 [`models/`](./models/), regenerates `catalogue/models.json`, and cites a first-party source
 for every new fact. Contributor and agent conventions live in
 [`AGENTS.md`](./AGENTS.md) and [`.agents/skills/`](./.agents/skills/).
+
+A public contract change also updates the [schema changelog](./catalogue/SCHEMA_CHANGELOG.md#maintaining-this-log)
+in the same PR, including compatible extensions and changes to consumer-visible
+validation or generation semantics. Explain the before/after behavior,
+compatibility and migration. The PR schema-content check catches a missing log
+update for changed JSON Schemas; reviewers must also check semantic changes
+implemented elsewhere. Catalogue-only model, provider and price changes need no
+schema entry.
 
 ## License
 
