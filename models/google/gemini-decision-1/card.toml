@@ -1,0 +1,157 @@
+id = "google/gemini-decision-1"
+section = "decision.models"
+vendor = "google"
+label = "Gemini Decision 1"
+reference_provider = "google"
+
+[release]
+date = "2026-11-11"
+basis = "model"
+source_url = "https://aistudio.google.com/docs/changelog"
+
+[providers.google]
+provider = "google"
+id = "gemini-decision-1"
+url = "https://aistudio.google.com/docs/models/gemini-decision-1"
+source_url = "https://aistudio.google.com/docs/decisions-api"
+qualifications = [
+  { source_url = "https://aistudio.google.com/docs/models/gemini-decision-1", notes = "Google describes a specialized multimodal model for the Decisions API without naming an underlying model. No parent relationship or inherited chat capabilities are recorded." },
+  { source_url = "https://aistudio.google.com/docs/decisions-api", notes = "The native v1beta Decisions API accepts input as a string, Content or Content[], with text, image, audio, video and PDF blocks, and questions/answers keyed by name. The structured input and Google's low/medium/high/ultra_high resolution vocabulary are not fully represented by decision_contract's existing shorthand. Raw inline base64, Files API URIs and public or signed HTTPS URLs are distinct native transports; no OpenAI image-form list is substituted." },
+  { source_url = "https://aistudio.google.com/docs/pricing", notes = "Standard paid input is USD 0.10 per million tokens across all supported modalities. Shared input is billed once; question instructions, criteria and formatting add input tokens. Output pricing is not applicable because output usage is zero; context caching is unavailable. Inapplicable output/cache rates are omitted, rather than recorded as free generation or caching." },
+  { source_url = "https://aistudio.google.com/docs/decisions-api", notes = "Questions require text instructions. Choice criteria use string keys; score criteria are ordered rubric levels. Confidence and probability semantics belong to this native interface and require thresholds calibrated on the consumer's own examples. Blocked input returns a request-level HTTP 400; no per-question refusal contract is recorded." },
+]
+
+[providers.google.token_pricing]
+source_url = "https://aistudio.google.com/docs/pricing"
+unit = "usd_per_token"
+scope = "Standard paid Decisions input across text, image, video, audio and PDF; shared input counted once plus question tokens. Output pricing is inapplicable and context caching is unavailable."
+input = "0.0000001"
+
+[providers.google.capabilities]
+source_url = "https://aistudio.google.com/docs/models/gemini-decision-1"
+image_input = true
+
+[providers.google.limits]
+source_url = "https://aistudio.google.com/docs/models/gemini-decision-1"
+context_tokens = 262144
+
+[providers.google.decision_contract]
+source_url = "https://aistudio.google.com/docs/decisions-api"
+question_types = ["noul", "choice", "score"]
+input_forms = ["string"]
+question_container = "named_object"
+maximum_questions = 1000
+minimum_choices = 2
+maximum_choices = 255
+minimum_score_levels = 2
+maximum_score_levels = 255
+
+[[providers.google.endpoints]]
+id = "gemini-decision-1"
+input = "text"
+interface = "gemini_decisions"
+source_url = "https://aistudio.google.com/docs/decisions-api"
+
+[provider_coverage.google]
+disposition = "listed"
+source_url = "https://aistudio.google.com/docs/models/gemini-decision-1"
+
+[providers.vercel]
+provider = "vercel"
+id = "google/gemini-decision-1"
+url = "https://vercel.com/ai-gateway/models/gemini-decision-1"
+source_url = "https://vercel.com/changelog/gemini-decision-1-now-available-on-ai-gateway"
+qualifications = [
+  { source_url = "https://vercel.com/changelog/gemini-decision-1-now-available-on-ai-gateway", notes = "Gemini Decision 1 is available through Vercel's Decisions API, TypeSafe-compatible API and AI SDK. The listed decisions endpoint records the OpenAI-compatible text/image facade; PDF/audio/video input is documented through AI SDK 7 and is not claimed for that endpoint." },
+  { source_url = "https://vercel.com/docs/ai-gateway/sdks-and-apis/openai-decisions", notes = "The compatible facade uses predicate/choice/score question arrays and string or user-message input, rather than Google's native noul/named-map/Content envelope. It requires inline image data URLs, accepts one to 255 choices and two to ten score levels, and rejects boolean/string spelling collisions. The source documents per-question refusal positions and input billing; this does not promise that native Google safety errors become partial refusals." },
+  { source_url = "https://ai-gateway.vercel.sh/v1/models/google/gemini-decision-1/endpoints", notes = "The Google endpoint publishes a 262144-token context, input USD 0.0000001/token, zero completion cost and no implicit caching, with discount zero. Generic reasoning, sampling and max_tokens metadata is not a Decisions capability contract; native chat controls and extra zero-priced generation/tool meters are not inherited." },
+]
+
+[providers.vercel.token_pricing]
+source_url = "https://ai-gateway.vercel.sh/v1/models/google/gemini-decision-1/endpoints"
+unit = "usd_per_token"
+scope = "Published decision endpoint regular base input/completion rates; no unrecorded context bands, regional modifiers or cache rates are inferred."
+input = "0.0000001"
+output = "0"
+
+[providers.vercel.capabilities]
+source_url = "https://vercel.com/changelog/gemini-decision-1-now-available-on-ai-gateway"
+image_input = true
+
+[providers.vercel.limits]
+source_url = "https://ai-gateway.vercel.sh/v1/models/google/gemini-decision-1/endpoints"
+context_tokens = 262144
+
+[providers.vercel.decision_contract]
+source_url = "https://vercel.com/docs/ai-gateway/sdks-and-apis/openai-decisions"
+question_types = ["predicate", "choice", "score"]
+input_forms = ["string", "user_messages"]
+question_container = "array"
+image_input_forms = ["data_url"]
+image_details = ["low", "high", "auto", "original"]
+maximum_images = 128
+minimum_choices = 1
+maximum_choices = 255
+minimum_score_levels = 2
+maximum_score_levels = 10
+typed_choice_values = false
+
+[[providers.vercel.endpoints]]
+id = "google/gemini-decision-1"
+input = "text"
+interface = "decisions"
+source_url = "https://vercel.com/docs/ai-gateway/sdks-and-apis/openai-decisions"
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/changelog/gemini-decision-1-now-available-on-ai-gateway"
+
+[providers.openrouter]
+provider = "openrouter"
+id = "google/gemini-decision-1"
+url = "https://openrouter.ai/google/gemini-decision-1"
+source_url = "https://openrouter.ai/google/gemini-decision-1"
+qualifications = [
+  { source_url = "https://openrouter.ai/docs/api/api-reference/alphadecisions/submit-a-decisions-request", notes = "The alpha Decisions API uses state, named questions, criteria and noul/choice/score, with answers keyed by name. Its envelope is distinct from Google's input field and OpenAI's question arrays. The alpha shape may change; a listing does not establish native Google or OpenAI SDK compatibility." },
+  { source_url = "https://openrouter.ai/docs/guides/community/multimodal-decisions", notes = "The Google adapter reads image_url, input_audio, video_url and file parts in the top-level state array. Gemini accepts inline image data URLs and public HTTPS image/video URLs; file parts additionally accept PDF, CSV, Office and OpenDocument types under the provider's extension and MIME rules. low/high image detail is forwarded as resolution and auto is dropped. No shared media-count limit is published for this adapter; native-provider limits still apply." },
+  { source_url = "https://openrouter.ai/api/v1/models/google/gemini-decision-1/endpoints", notes = "The model page and Google AI Studio endpoint establish availability even though the general /api/v1/models feed does not list this alpha model. The endpoint publishes context 262144, regular input USD 0.0000001/token and completion zero with discount zero. Generic tool-choice, web-search price and positive max-completion metadata do not establish native Decisions tools, output generation or additional charges; cache rates and unrecorded bands remain omitted." },
+]
+
+[providers.openrouter.token_pricing]
+source_url = "https://openrouter.ai/api/v1/models/google/gemini-decision-1/endpoints"
+unit = "usd_per_token"
+scope = "Published regular base decision input/completion rates; cache prices and unrecorded context/region modifiers are not inferred."
+input = "0.0000001"
+output = "0"
+
+[providers.openrouter.capabilities]
+source_url = "https://openrouter.ai/docs/guides/community/multimodal-decisions"
+image_input = true
+
+[providers.openrouter.limits]
+source_url = "https://openrouter.ai/api/v1/models/google/gemini-decision-1/endpoints"
+context_tokens = 262144
+
+[providers.openrouter.decision_contract]
+source_url = "https://openrouter.ai/docs/guides/community/multimodal-decisions"
+question_types = ["noul", "choice", "score"]
+input_forms = ["state"]
+question_container = "named_object"
+image_input_forms = ["data_url", "http_url"]
+image_details = ["auto", "low", "high"]
+
+[[providers.openrouter.endpoints]]
+id = "google/gemini-decision-1"
+input = "text"
+interface = "openrouter_alpha_decisions"
+source_url = "https://openrouter.ai/docs/api/api-reference/alphadecisions/submit-a-decisions-request"
+decision_contract = { source_url = "https://openrouter.ai/google/gemini-decision-1", maximum_choices = 255, maximum_score_levels = 255 }
+
+[provider_coverage.openrouter]
+disposition = "listed"
+source_url = "https://openrouter.ai/google/gemini-decision-1"
+
+[provider_coverage.fal]
+disposition = "excluded"
+source_url = "https://fal.ai/models"
+reason = "Catalogue coverage includes fal for media models only; no decision API compatibility is claimed."

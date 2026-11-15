@@ -1910,3 +1910,65 @@ unspecified; shared effort names do not promise a particular native thinking
 level. Sampling controls, explicit caches, grounding, file/audio/video input,
 background generation and continuation are outside this service contract.
 Native model facts and other provider bindings remain unchanged.
+
+## Gemini Decision 1 — 2026-11-15
+
+Google's [changelog](https://aistudio.google.com/docs/changelog) dates the first
+public release of `gemini-decision-1` and the Decisions API to 2026-11-11. The
+[model page](https://aistudio.google.com/docs/models/gemini-decision-1) describes
+a specialized multimodal model, without naming an underlying model. The card
+therefore omits `underlying_model`; no Gemini chat parent or self-reference is
+inferred. It adds facts under the existing schema 2 contract, with no new shared
+execution specification.
+
+The [native guide](https://aistudio.google.com/docs/decisions-api) uses `input`
+as a string, `Content` or `Content[]`, and named question/answer maps with
+`noul`, `choice` and `score`. The 262,144-token context includes shared input
+and all questions; it permits 1–1,000 questions, 2–255 choice options and 2–255
+score levels. The native content blocks include text, images, audio, video and
+PDF. Raw base64 data, Files API URIs, native resolution values
+`low`/`medium`/`high`/`ultra_high`, MIME restrictions and media size limits remain
+qualified rather than translated into OpenAI image fields or a new enum. Only
+the representable string input form is listed; this is not a text-only claim.
+The guide defers media counts to the Interactions API, so no guessed numeric
+image cap is recorded. Safety blocking is request-level HTTP 400, not a sourced
+partial-refusal guarantee. Confidence semantics remain native to each interface;
+applications must choose thresholds using their own labeled examples.
+
+Google's [Standard paid pricing](https://aistudio.google.com/docs/pricing)
+charges $0.10/M input tokens across supported modalities. Shared input is
+counted once, and each question contributes instructions, criteria and formatting
+tokens. The source labels output pricing inapplicable because output usage is
+zero, and caching unavailable. The native binding records its input rate only;
+inapplicable output/cache rates are not invented. Batch, Flex and Priority are
+unsupported; [project-tier quotas](https://aistudio.google.com/docs/rate-limits)
+are not intrinsic model limits.
+
+[Vercel's model-specific announcement](https://vercel.com/changelog/gemini-decision-1-now-available-on-ai-gateway)
+confirms its Decisions and TypeSafe-compatible text/image interfaces and additional
+PDF/audio/video input through AI SDK 7. The card's listed `decisions` endpoint
+records the [OpenAI-compatible facade](https://vercel.com/docs/ai-gateway/sdks-and-apis/openai-decisions):
+question arrays, `predicate`, user messages, inline image data URLs, 1–255 choices
+and 2–10 score levels. Its published refusal shape is not a guarantee that native
+Google safety errors become per-question refusals. The model page's AI SDK
+`state`/named-question/`boolean` example is another client interface, not that
+facade's REST request. The [endpoint feed](https://ai-gateway.vercel.sh/v1/models/google/gemini-decision-1/endpoints)
+independently publishes context 262144 and regular input/completion rates of
+$0.10/$0 per million, with discount zero and implicit caching disabled. Generic
+reasoning/sampling/max-token and generation/tool price metadata is not copied
+into the decision contract.
+
+[OpenRouter's model page](https://openrouter.ai/google/gemini-decision-1) and
+[Google AI Studio endpoint](https://openrouter.ai/api/v1/models/google/gemini-decision-1/endpoints)
+now establish availability, despite the general model feed omitting this alpha
+model. Its independent published regular input/completion rates are $0.10/$0
+per million with discount zero; context is 262144. Its
+[alpha API](https://openrouter.ai/docs/api/api-reference/alphadecisions/submit-a-decisions-request)
+uses `state` and named questions, distinct from Google's `input` and OpenAI's
+array envelope. The [multimodal guide](https://openrouter.ai/docs/guides/community/multimodal-decisions)
+explicitly describes its Google adapter's top-level image, audio, video and file
+parts, including public HTTPS media URLs and PDF/CSV/Office/OpenDocument files.
+Image detail `low`/`high` is forwarded and `auto` is dropped. Unpublished media
+counts, cache prices, question counts and context bands remain omitted. Generic
+tool-choice, web-search and positive max-completion metadata do not establish
+those features or charges for this decision offering.
