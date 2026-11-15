@@ -12,10 +12,16 @@ authored as one card per model in [`models/`](../models/); everything else outsi
 | `logos/`                     | Generated from `models/<lab>/logo.*`. Each lab's official logo                                                       |
 | `schemas/labs.schema.json`   | JSON Schema 2020-12 for `labs.json`                                                                                  |
 | `PROVENANCE.md`              | Source notes and qualifications that don't fit in JSON                                                               |
+| `SCHEMA_CHANGELOG.md`        | Authored public-contract changes, compatibility and migration history                                                |
 
 Released snapshots of this directory, versioned `v<schema>.<YYYYMMDD>.<n>`, are published at
 [github.com/gridaco/models/releases](https://github.com/gridaco/models/releases); see the
 [repository README](../README.md#get-the-catalogue).
+
+The [schema changelog](SCHEMA_CHANGELOG.md) records field-level contract changes.
+Update it [in the same PR](SCHEMA_CHANGELOG.md#maintaining-this-log) for schema or
+consumer-visible validation/generation changes; catalogue-only facts and prices
+remain in generated snapshot release notes.
 
 ## Origin
 

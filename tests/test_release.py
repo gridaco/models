@@ -117,6 +117,20 @@ def test_first_release_notes():
     assert "First release." in release.notes(VERSION, current_snapshot(), None)
 
 
+def test_notes_link_schema_history_at_the_snapshot_commit():
+    snapshot = current_snapshot({**FILES, "SCHEMA_CHANGELOG.md": b"Schema change fixture\n"})
+    snapshot["commit"] = "a" * 40
+    text = release.notes(VERSION, snapshot, None)
+    assert f"{release.REPOSITORY}/blob/{snapshot['commit']}/catalogue/SCHEMA_CHANGELOG.md" in text
+    assert "/blob/main/catalogue/SCHEMA_CHANGELOG.md" not in text
+
+
+def test_notes_do_not_link_history_missing_from_an_older_snapshot():
+    snapshot = current_snapshot()
+    snapshot["files"].pop("SCHEMA_CHANGELOG.md", None)
+    assert "SCHEMA_CHANGELOG.md" not in release.notes(VERSION, snapshot, None)
+
+
 def test_notes_without_content_changes():
     text = release.notes(VERSION, current_snapshot(), previous_snapshot(lambda p: None))
     assert f"Changes since `{PREVIOUS_VERSION}`" in text
@@ -237,6 +251,24 @@ def test_npm_package_is_the_released_data():
         f"logos/{name.split('/', 1)[1]}" for name in FILES if name.startswith("logos/")
     }
     assert json.loads(package["manifest.json"])["version"] == VERSION
+
+
+def test_schema_history_is_shipped_unchanged_in_archives_and_npm():
+    files = {**FILES, "SCHEMA_CHANGELOG.md": b"Schema change fixture\n"}
+    assets = release.build(VERSION, COMMIT, WHEN, files)
+    archive = release.read_archive(assets[f"grida-models-{VERSION}.tar.gz"])
+    package = release.npm_package(archive)
+    assert archive["catalogue/SCHEMA_CHANGELOG.md"] == files["SCHEMA_CHANGELOG.md"]
+    assert package["SCHEMA_CHANGELOG.md"] == archive["catalogue/SCHEMA_CHANGELOG.md"]
+    assert "SCHEMA_CHANGELOG.md" in json.loads(package["package.json"])["files"]
+
+
+def test_older_archive_package_does_not_advertise_missing_schema_history():
+    files = {name: content for name, content in FILES.items() if name != "SCHEMA_CHANGELOG.md"}
+    assets = release.build(VERSION, COMMIT, WHEN, files)
+    package = release.npm_package(release.read_archive(assets[f"grida-models-{VERSION}.tar.gz"]))
+    assert "SCHEMA_CHANGELOG.md" not in package
+    assert "SCHEMA_CHANGELOG.md" not in package["README.md"].decode()
 
 
 def test_npm_package_repository_matches_this_repository():

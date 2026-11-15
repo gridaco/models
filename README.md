@@ -69,6 +69,11 @@ change. A release is published only when the catalogue's content changes, and th
 are reproducible from the same commit. Release notes list the models, labs, schemas, and
 other files that changed since the previous release.
 
+The authored [schema changelog](./catalogue/SCHEMA_CHANGELOG.md) explains contract
+changes, compatibility and consumer migration. It is included in snapshot archives
+and the npm package, and linked from generated release notes. Ordinary model and
+price updates remain in those release notes rather than growing the schema log.
+
 ### Migrating from schema version 1
 
 Version 2 lets a decision offering omit `underlying_model` when no relationship is
@@ -189,6 +194,14 @@ Add or correct a model by opening a pull request that changes its card in
 [`models/`](./models/), regenerates `catalogue/models.json`, and cites a first-party source
 for every new fact. Contributor and agent conventions live in
 [`AGENTS.md`](./AGENTS.md) and [`.agents/skills/`](./.agents/skills/).
+
+A public contract change also updates the [schema changelog](./catalogue/SCHEMA_CHANGELOG.md#maintaining-this-log)
+in the same PR, including compatible extensions and changes to consumer-visible
+validation or generation semantics. Explain the before/after behavior,
+compatibility and migration. The PR schema-content check catches a missing log
+update for changed JSON Schemas; reviewers must also check semantic changes
+implemented elsewhere. Catalogue-only model, provider and price changes need no
+schema entry.
 
 ## License
 

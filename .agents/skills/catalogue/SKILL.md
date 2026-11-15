@@ -25,6 +25,7 @@ change, a limit correction, a deprecation, or an audit against provider document
 | `catalogue/models.json`                | Generated from `models/` by `scripts/build.py`. Never edit by hand                      |
 | `catalogue/schemas/models.schema.json` | JSON Schema for `models.json`                                                           |
 | `catalogue/PROVENANCE.md`              | Source notes and qualifications that do not fit in JSON                                 |
+| `catalogue/SCHEMA_CHANGELOG.md`        | Authored contract changes, compatibility and migration; excludes catalogue-only facts   |
 
 Card layout and the `section` / `null_keys` authoring keys are in
 [`models/README.md`](../../../models/README.md); the shape and its rules are in
@@ -184,6 +185,16 @@ compatible native contracts. Researching Jev or another interface does not decid
 whether to catalogue it. See
 [`catalogue/README.md`](../../../catalogue/README.md#decision-offerings).
 
+## Contract change history
+
+When changing the public schema, field meanings or consumer-visible validation /
+generation behavior, update [the schema changelog](../../../catalogue/SCHEMA_CHANGELOG.md#maintaining-this-log)
+in the same PR, including compatible extensions. Explain before/after behavior,
+compatibility and consumer migration, and link the PR. Follow its maintenance
+rules; do not add entries for catalogue-only facts, prices or tooling refactors.
+The PR check detects changed schema JSON, not every semantic change in scripts
+or the accuracy of the authored entry.
+
 ## Reference pattern: text and image additions
 
 The GPT-6 Sol, GPT-6 Luna, GPT-6.1 Sol and Gemini Nano Banana 2.1 cards demonstrate
@@ -228,4 +239,6 @@ do not make catalogue checks consume provider credits.
 - [ ] Affected illustrative costs were reviewed or removed when their rates,
       scenario or coverage changed; review dates were not automatically advanced
 - [ ] `uv run scripts/check.py` passes
+- [ ] Public contract changes have a matching schema-changelog entry, including
+      consumer-visible validation/generation changes outside the schema files
 - [ ] Nothing from a private source made it into the diff, the commit, or the PR (see `AGENTS.md`)

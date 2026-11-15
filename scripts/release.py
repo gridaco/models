@@ -220,6 +220,12 @@ def notes(version: str, current: dict[str, Any], previous: dict[str, Any] | None
         f"{counts['cards']} model cards, {counts['labs']} labs. Schema version {current['schema_version']}.",
         "",
     ]
+    if "SCHEMA_CHANGELOG.md" in current["files"]:
+        lines += [
+            "Schema contract history and migration notes: "
+            f"[SCHEMA_CHANGELOG.md]({REPOSITORY}/blob/{current['commit']}/catalogue/SCHEMA_CHANGELOG.md).",
+            "",
+        ]
     if previous is None:
         lines += ["First release.", ""]
     else:
@@ -338,6 +344,7 @@ This package is the data, published unchanged from release
 | `schemas/` | JSON Schemas for `models.json` and `labs.json` |
 | `manifest.json` | Version, source commit, content digest, and the SHA-256 of every file |
 | `PROVENANCE.md` | Source notes that do not fit in JSON |
+{schema_changelog_row}
 
 ```js
 import models from "{name}/models.json" with {{ type: "json" }};
@@ -373,7 +380,7 @@ def npm_package(archive: dict[str, bytes]) -> dict[str, bytes]:
     data_files = {
         name: content
         for name, content in catalogue.items()
-        if name in ("models.json", "labs.json", "PROVENANCE.md") or name.startswith(("schemas/", "logos/"))
+        if name in ("models.json", "labs.json", "PROVENANCE.md", "SCHEMA_CHANGELOG.md") or name.startswith(("schemas/", "logos/"))
     }
     package = {
         "name": NPM_NAME,
@@ -397,7 +404,11 @@ def npm_package(archive: dict[str, bytes]) -> dict[str, bytes]:
         "sideEffects": False,
     }
     readme = NPM_README.format(
-        name=NPM_NAME, tag=tag, version=version, major=version.split(".")[0], repository=REPOSITORY
+        name=NPM_NAME, tag=tag, version=version, major=version.split(".")[0], repository=REPOSITORY,
+        schema_changelog_row=(
+            "| `SCHEMA_CHANGELOG.md` | Authored schema changes, compatibility and migration notes |"
+            if "SCHEMA_CHANGELOG.md" in data_files else ""
+        ),
     )
     files = {
         **data_files,
