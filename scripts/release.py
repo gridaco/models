@@ -65,8 +65,8 @@ RENAMED = {
     "schemas/facts.schema.json": "schemas/models.schema.json",
 }
 
-# Each asset's name in earlier releases, before the schema major was part of it.
-LEGACY_ASSETS = {"models": ["facts.json"], "labs": ["labs.json"]}
+# The paired assets of the original schema-v1 releases.
+LEGACY_ASSETS = ("facts.json", "labs.json")
 
 
 def sha256(data: bytes) -> str:
@@ -211,6 +211,13 @@ def diff(before: dict[str, Any], after: dict[str, Any]) -> tuple[list[str], list
     return added, removed, changed
 
 
+def previous_schema_major(manifest: dict[str, Any]) -> int:
+    major = manifest.get("schema_version")
+    if type(major) is not int or major < 1:
+        raise ValueError("previous release needs a resolved positive schema_version; load its source assets first")
+    return major
+
+
 def notes(version: str, current: dict[str, Any], previous: dict[str, Any] | None) -> str:
     """Release notes: what this snapshot changes since the previous release."""
     download = f"{REPOSITORY}/releases/download/{version}"
@@ -229,7 +236,7 @@ def notes(version: str, current: dict[str, Any], previous: dict[str, Any] | None
     if previous is None:
         lines += ["First release.", ""]
     else:
-        previous_major = previous["manifest"]["schema_version"]
+        previous_major = previous_schema_major(previous["manifest"])
         if previous_major != current["schema_version"]:
             lines += [
                 "## Schema version change",
@@ -297,18 +304,31 @@ def load_previous(directory: Path) -> dict[str, Any] | None:
     manifest_path = directory / "manifest.json"
     if not manifest_path.exists():
         return None
-    previous = {"manifest": json.loads(manifest_path.read_text())}
-    previous_major = previous["manifest"].get("schema_version", SCHEMA_MAJOR)
-    names = {
-        "models": [f"models.v{previous_major}.json", *LEGACY_ASSETS["models"]],
-        "labs": [f"labs.v{previous_major}.json", *LEGACY_ASSETS["labs"]],
+    manifest = json.loads(manifest_path.read_text())
+    if not isinstance(manifest, dict):
+        raise ValueError("previous release manifest must be an object")
+    candidates = []
+    for models in sorted(directory.glob("models.v*.json")):
+        match = re.fullmatch(r"models\.v([1-9][0-9]*)\.json", models.name)
+        if match:
+            major = int(match.group(1))
+            labs = directory / f"labs.v{major}.json"
+            if models.is_file() and labs.is_file():
+                candidates.append((major, models, labs))
+    legacy = tuple(directory / name for name in LEGACY_ASSETS)
+    if all(path.is_file() for path in legacy):
+        candidates.append((1, *legacy))
+    if "schema_version" in manifest:
+        declared_major = previous_schema_major(manifest)
+        candidates = [candidate for candidate in candidates if candidate[0] == declared_major]
+    if len(candidates) != 1:
+        raise ValueError("previous release needs one unambiguous matching models/labs asset pair")
+    major, models, labs = candidates[0]
+    return {
+        "manifest": {**manifest, "schema_version": major},
+        "models": json.loads(models.read_text()),
+        "labs": json.loads(labs.read_text()),
     }
-    for key, candidates in names.items():
-        path = next((directory / name for name in candidates if (directory / name).exists()), None)
-        if path is None:
-            return None
-        previous[key] = json.loads(path.read_text())
-    return previous
 
 
 def read_archive(data: bytes) -> dict[str, bytes]:

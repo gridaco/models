@@ -165,11 +165,14 @@ def test_asset_names_carry_the_schema_major():
 
 def test_previous_release_under_legacy_names_is_read(tmp_path):
     meta = release.manifest(PREVIOUS_VERSION, COMMIT, WHEN, FILES)
+    meta.update(version="v1.20261011.0", schema_version=1)
+    models = json.loads(FILES["models.json"])
+    models["$schema"] = "https://grida.co/schemas/ai-model-facts-v1.json"
     (tmp_path / "manifest.json").write_text(json.dumps(meta))
-    (tmp_path / "facts.json").write_bytes(FILES["models.json"])
+    (tmp_path / "facts.json").write_text(json.dumps(models))
     (tmp_path / "labs.json").write_bytes(FILES["labs.json"])
     previous = release.load_previous(tmp_path)
-    assert previous["models"] == json.loads(FILES["models.json"])
+    assert previous["models"] == models
 
 
 @pytest.mark.parametrize("major", [1, 2])
@@ -196,7 +199,82 @@ def test_previous_release_does_not_mix_versioned_assets(tmp_path):
     (tmp_path / "manifest.json").write_text(json.dumps({"schema_version": 1}))
     (tmp_path / "models.v1.json").write_text("{}")
     (tmp_path / "labs.v2.json").write_text("{}")
-    assert release.load_previous(tmp_path) is None
+    with pytest.raises(ValueError, match="matching models/labs asset pair"):
+        release.load_previous(tmp_path)
+
+
+@pytest.mark.parametrize("major", [1, 2])
+def test_previous_major_is_resolved_from_its_versioned_asset_pair(tmp_path, major):
+    previous = previous_snapshot(lambda p: None)
+    previous["manifest"].pop("schema_version")
+    previous["manifest"]["version"] = f"v{major}.20261011.0"
+    previous["models"]["$schema"] = f"https://grida.co/schemas/ai-model-facts-v{major}.json"
+    (tmp_path / "manifest.json").write_text(json.dumps(previous["manifest"]))
+    (tmp_path / f"models.v{major}.json").write_text(json.dumps(previous["models"]))
+    (tmp_path / f"labs.v{major}.json").write_text(json.dumps(previous["labs"]))
+
+    loaded = release.load_previous(tmp_path)
+
+    assert loaded["manifest"]["schema_version"] == major
+    assert "schema_version" not in previous["manifest"]
+    text = release.notes(VERSION, current_snapshot(), loaded)
+    assert "First release." not in text
+    assert ("catalogue contract from v1 to v2" in text) == (major == 1)
+
+
+def test_previous_major_is_resolved_from_established_legacy_assets(tmp_path):
+    previous = previous_snapshot(lambda p: None)
+    previous["manifest"].pop("schema_version")
+    previous["manifest"]["version"] = "v1.20261011.0"
+    previous["models"]["$schema"] = "https://grida.co/schemas/ai-model-facts-v1.json"
+    (tmp_path / "manifest.json").write_text(json.dumps(previous["manifest"]))
+    (tmp_path / "facts.json").write_text(json.dumps(previous["models"]))
+    (tmp_path / "labs.json").write_text(json.dumps(previous["labs"]))
+
+    loaded = release.load_previous(tmp_path)
+
+    assert loaded["manifest"]["schema_version"] == 1
+    assert "catalogue contract from v1 to v2" in release.notes(VERSION, current_snapshot(), loaded)
+
+
+@pytest.mark.parametrize("assets", [
+    [],
+    ["models.v1.json", "labs.v2.json"],
+    ["facts.json", "labs.v1.json"],
+    ["models.json", "labs.json"],
+    ["models.v1.json", "labs.v1.json", "models.v2.json", "labs.v2.json"],
+    ["models.v1.json", "labs.v1.json", "facts.json", "labs.json"],
+])
+def test_previous_missing_major_rejects_incomplete_or_ambiguous_sources(tmp_path, assets):
+    (tmp_path / "manifest.json").write_text(json.dumps({"version": "unresolved"}))
+    for name in assets:
+        (tmp_path / name).write_text("{}")
+    with pytest.raises(ValueError, match="unambiguous matching models/labs asset pair"):
+        release.load_previous(tmp_path)
+
+
+@pytest.mark.parametrize("major", [None, True, "1", 0])
+def test_invalid_declared_previous_major_is_not_inferred(tmp_path, major):
+    (tmp_path / "manifest.json").write_text(json.dumps({"schema_version": major}))
+    (tmp_path / "models.v1.json").write_text("{}")
+    (tmp_path / "labs.v1.json").write_text("{}")
+    with pytest.raises(ValueError, match="resolved positive schema_version"):
+        release.load_previous(tmp_path)
+
+
+def test_declared_v2_does_not_use_legacy_v1_assets(tmp_path):
+    (tmp_path / "manifest.json").write_text(json.dumps({"schema_version": 2}))
+    (tmp_path / "facts.json").write_text("{}")
+    (tmp_path / "labs.json").write_text("{}")
+    with pytest.raises(ValueError, match="matching models/labs asset pair"):
+        release.load_previous(tmp_path)
+
+
+def test_notes_reject_unresolved_previous_metadata_instead_of_defaulting():
+    previous = previous_snapshot(lambda p: None)
+    previous["manifest"].pop("schema_version")
+    with pytest.raises(ValueError, match="load its source assets first"):
+        release.notes(VERSION, current_snapshot(), previous)
 
 
 def test_schema_major_transition_notes_preserve_the_previous_release(tmp_path):
@@ -217,8 +295,10 @@ def test_schema_major_transition_notes_preserve_the_previous_release(tmp_path):
 
 
 def test_previous_release_needs_models_labs_and_manifest(tmp_path):
-    (tmp_path / "manifest.json").write_text("{}")
     assert release.load_previous(tmp_path) is None
+    (tmp_path / "manifest.json").write_text("{}")
+    with pytest.raises(ValueError, match="unambiguous matching models/labs asset pair"):
+        release.load_previous(tmp_path)
 
 
 def test_renamed_files_compare_with_their_old_selves():
