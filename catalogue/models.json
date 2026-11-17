@@ -8333,6 +8333,696 @@
           "source_url": "https://gateway.grida.ai/v1/models"
         }
       }
+    },
+    "openai/gpt-6.2-astra": {
+      "id": "openai/gpt-6.2-astra",
+      "vendor": "openai",
+      "reference_provider": "openai",
+      "label": "GPT-6.2 Astra",
+      "multimodal": true,
+      "image_input_mimes": [
+        "image/png",
+        "image/jpeg",
+        "image/webp",
+        "image/gif"
+      ],
+      "tool_call": true,
+      "context_window": 1050000,
+      "output_limit": 128000,
+      "release": {
+        "date": "2026-11-17",
+        "basis": "model",
+        "source_url": "https://developers.openai.com/api/docs/changelog"
+      },
+      "cost": {
+        "input": 8,
+        "output": 40,
+        "cache_read": 0.4,
+        "cache_write": 10,
+        "long_context": {
+          "input_tokens_above": 272000,
+          "input_multiplier": 2,
+          "output_multiplier": 1.5
+        }
+      },
+      "providers": {
+        "openai": {
+          "provider": "openai",
+          "id": "gpt-6.2-astra",
+          "url": "https://developers.openai.com/api/docs/models/gpt-6.2-astra",
+          "source_url": "https://developers.openai.com/api/docs/models/gpt-6.2-astra",
+          "qualifications": [
+            {
+              "source_url": "https://developers.openai.com/api/docs/models/gpt-6.2-astra",
+              "notes": "The total context window is 1,050,000 tokens, with a separate input limit of 922,000 tokens and output limit of 128,000 tokens. The API rejects reasoning effort none."
+            },
+            {
+              "source_url": "https://developers.openai.com/api/docs/changelog",
+              "notes": "Both Responses and Chat Completions are available. Tool calling requires Responses."
+            },
+            {
+              "source_url": "https://developers.openai.com/api/docs/models",
+              "notes": "The model selector lists low, medium, high, xhigh and max as supported reasoning efforts."
+            },
+            {
+              "source_url": "https://developers.openai.com/api/docs/guides/images-vision",
+              "notes": "OpenAI documents image inputs, but its image sizing and token multiplier tables do not cover this model."
+            }
+          ],
+          "token_pricing": {
+            "source_url": "https://developers.openai.com/api/docs/pricing",
+            "unit": "usd_per_token",
+            "scope": "Standard synchronous global token rates; optional tools, regional processing and alternate service tiers are excluded. Cache-write rates shown are for 30-minute retention.",
+            "input": "0.000008",
+            "output": "0.00004",
+            "input_cache_read": "0.0000004",
+            "input_cache_write": "0.00001",
+            "tiers": [
+              {
+                "meter": "input",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.000008"
+              },
+              {
+                "meter": "input",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.000016"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.00004"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.00006"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.0000004"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.0000008"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.00001"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.00002"
+              }
+            ]
+          },
+          "capabilities": {
+            "source_url": "https://developers.openai.com/api/docs/models/gpt-6.2-astra",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true,
+            "streaming": true
+          },
+          "limits": {
+            "source_url": "https://developers.openai.com/api/docs/models/gpt-6.2-astra",
+            "context_tokens": 1050000,
+            "max_output_tokens": 128000
+          },
+          "endpoints": [
+            {
+              "id": "gpt-6.2-astra",
+              "input": "text",
+              "source_url": "https://developers.openai.com/api/docs/models/gpt-6.2-astra",
+              "interface": "responses",
+              "capabilities": {
+                "source_url": "https://developers.openai.com/api/docs/models/gpt-6.2-astra",
+                "image_input": true,
+                "tools": true,
+                "reasoning": true,
+                "structured_output": true,
+                "streaming": true
+              },
+              "parameters": {
+                "reasoning.effort": {
+                  "type": "string",
+                  "enum": [
+                    "low",
+                    "medium",
+                    "high",
+                    "xhigh",
+                    "max"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "openai/gpt-6.2-astra",
+          "url": "https://openrouter.ai/openai/gpt-6.2-astra",
+          "source_url": "https://openrouter.ai/api/v1/models/openai/gpt-6.2-astra/endpoints",
+          "qualifications": [
+            {
+              "source_url": "https://openrouter.ai/api/v1/models/openai/gpt-6.2-astra/endpoints",
+              "notes": "The Standard endpoint publishes its own long-context override starting at 272000 prompt tokens and a separate input limit of 922,000 prompt tokens."
+            }
+          ],
+          "token_pricing": {
+            "source_url": "https://openrouter.ai/api/v1/models/openai/gpt-6.2-astra/endpoints",
+            "unit": "usd_per_token",
+            "scope": "Standard synchronous global token rates; optional tools, regional processing and alternate service tiers are excluded.",
+            "input": "0.000008",
+            "output": "0.00004",
+            "input_cache_read": "0.0000004",
+            "input_cache_write": "0.00001",
+            "tiers": [
+              {
+                "meter": "input",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.000008"
+              },
+              {
+                "meter": "input",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.000016"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.00004"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.00006"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.0000004"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.0000008"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.00001"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.00002"
+              }
+            ]
+          },
+          "capabilities": {
+            "source_url": "https://openrouter.ai/api/v1/models/openai/gpt-6.2-astra/endpoints",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true
+          },
+          "limits": {
+            "source_url": "https://openrouter.ai/api/v1/models/openai/gpt-6.2-astra/endpoints",
+            "context_tokens": 1050000,
+            "max_output_tokens": 128000
+          },
+          "endpoints": [
+            {
+              "id": "openai/gpt-6.2-astra",
+              "input": "text",
+              "source_url": "https://openrouter.ai/api/v1/models/openai/gpt-6.2-astra/endpoints"
+            }
+          ]
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "openai/gpt-6.2-astra",
+          "url": "https://vercel.com/ai-gateway/models/gpt-6.2-astra",
+          "source_url": "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-astra/endpoints",
+          "qualifications": [
+            {
+              "source_url": "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-astra/endpoints",
+              "notes": "The provider catalogue lists a generic reasoning effort enum that differs from OpenAI's documented model-specific values. A Vercel effort enum is not asserted."
+            }
+          ],
+          "token_pricing": {
+            "source_url": "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-astra/endpoints",
+            "unit": "usd_per_token",
+            "scope": "Standard synchronous global token rates; optional tools, regional processing and alternate service tiers are excluded.",
+            "input": "0.000008",
+            "output": "0.00004",
+            "input_cache_read": "0.0000004",
+            "input_cache_write": "0.00001",
+            "tiers": [
+              {
+                "meter": "input",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.000008"
+              },
+              {
+                "meter": "input",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.000016"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.00004"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.00006"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.0000004"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.0000008"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.00001"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.00002"
+              }
+            ]
+          },
+          "capabilities": {
+            "source_url": "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-astra/endpoints",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true
+          },
+          "limits": {
+            "source_url": "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-astra/endpoints",
+            "context_tokens": 1050000,
+            "max_output_tokens": 128000
+          },
+          "endpoints": [
+            {
+              "id": "openai/gpt-6.2-astra",
+              "input": "text",
+              "source_url": "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-astra/endpoints"
+            }
+          ]
+        }
+      },
+      "provider_coverage": {
+        "openai": {
+          "disposition": "listed",
+          "source_url": "https://developers.openai.com/api/docs/models/gpt-6.2-astra"
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/api/v1/models/openai/gpt-6.2-astra/endpoints"
+        },
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-astra/endpoints"
+        },
+        "fal": {
+          "disposition": "excluded",
+          "source_url": "https://fal.ai/models",
+          "reason": "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."
+        }
+      }
+    },
+    "openai/gpt-6.2-sol": {
+      "id": "openai/gpt-6.2-sol",
+      "vendor": "openai",
+      "reference_provider": "openai",
+      "label": "GPT-6.2 Sol",
+      "multimodal": true,
+      "image_input_mimes": [
+        "image/png",
+        "image/jpeg",
+        "image/webp",
+        "image/gif"
+      ],
+      "tool_call": true,
+      "context_window": 1050000,
+      "output_limit": 128000,
+      "release": {
+        "date": "2026-11-17",
+        "basis": "model",
+        "source_url": "https://developers.openai.com/api/docs/changelog"
+      },
+      "cost": {
+        "input": 2,
+        "output": 10,
+        "cache_read": 0.1,
+        "cache_write": 2.5,
+        "long_context": {
+          "input_tokens_above": 272000,
+          "input_multiplier": 2,
+          "output_multiplier": 1.5
+        }
+      },
+      "providers": {
+        "openai": {
+          "provider": "openai",
+          "id": "gpt-6.2-sol",
+          "url": "https://developers.openai.com/api/docs/models/gpt-6.2-sol",
+          "source_url": "https://developers.openai.com/api/docs/models/gpt-6.2-sol",
+          "qualifications": [
+            {
+              "source_url": "https://developers.openai.com/api/docs/models/gpt-6.2-sol",
+              "notes": "The total context window is 1,050,000 tokens, with a separate input limit of 922,000 tokens and output limit of 128,000 tokens. The API rejects reasoning effort none."
+            },
+            {
+              "source_url": "https://developers.openai.com/api/docs/changelog",
+              "notes": "Both Responses and Chat Completions are available. Tool calling requires Responses."
+            },
+            {
+              "source_url": "https://developers.openai.com/api/docs/models",
+              "notes": "The model selector lists low, medium, high, xhigh and max as supported reasoning efforts."
+            },
+            {
+              "source_url": "https://developers.openai.com/api/docs/guides/images-vision",
+              "notes": "OpenAI documents image inputs, but its image sizing and token multiplier tables do not cover this model."
+            }
+          ],
+          "token_pricing": {
+            "source_url": "https://developers.openai.com/api/docs/pricing",
+            "unit": "usd_per_token",
+            "scope": "Standard synchronous global token rates; optional tools, regional processing and alternate service tiers are excluded. Cache-write rates shown are for 30-minute retention.",
+            "input": "0.000002",
+            "output": "0.00001",
+            "input_cache_read": "0.0000001",
+            "input_cache_write": "0.0000025",
+            "tiers": [
+              {
+                "meter": "input",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.000002"
+              },
+              {
+                "meter": "input",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.000004"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.00001"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.000015"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.0000001"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.0000002"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.0000025"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.000005"
+              }
+            ]
+          },
+          "capabilities": {
+            "source_url": "https://developers.openai.com/api/docs/models/gpt-6.2-sol",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true,
+            "streaming": true
+          },
+          "limits": {
+            "source_url": "https://developers.openai.com/api/docs/models/gpt-6.2-sol",
+            "context_tokens": 1050000,
+            "max_output_tokens": 128000
+          },
+          "endpoints": [
+            {
+              "id": "gpt-6.2-sol",
+              "input": "text",
+              "source_url": "https://developers.openai.com/api/docs/models/gpt-6.2-sol",
+              "interface": "responses",
+              "capabilities": {
+                "source_url": "https://developers.openai.com/api/docs/models/gpt-6.2-sol",
+                "image_input": true,
+                "tools": true,
+                "reasoning": true,
+                "structured_output": true,
+                "streaming": true
+              },
+              "parameters": {
+                "reasoning.effort": {
+                  "type": "string",
+                  "enum": [
+                    "low",
+                    "medium",
+                    "high",
+                    "xhigh",
+                    "max"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "openai/gpt-6.2-sol",
+          "url": "https://openrouter.ai/openai/gpt-6.2-sol",
+          "source_url": "https://openrouter.ai/api/v1/models/openai/gpt-6.2-sol/endpoints",
+          "qualifications": [
+            {
+              "source_url": "https://openrouter.ai/api/v1/models/openai/gpt-6.2-sol/endpoints",
+              "notes": "The Standard endpoint publishes its own long-context override starting at 272000 prompt tokens and a separate input limit of 922,000 prompt tokens."
+            }
+          ],
+          "token_pricing": {
+            "source_url": "https://openrouter.ai/api/v1/models/openai/gpt-6.2-sol/endpoints",
+            "unit": "usd_per_token",
+            "scope": "Standard synchronous global token rates; optional tools, regional processing and alternate service tiers are excluded.",
+            "input": "0.000002",
+            "output": "0.00001",
+            "input_cache_read": "0.0000001",
+            "input_cache_write": "0.0000025",
+            "tiers": [
+              {
+                "meter": "input",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.000002"
+              },
+              {
+                "meter": "input",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.000004"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.00001"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.000015"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.0000001"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.0000002"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272000,
+                "usd_per_token": "0.0000025"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 272000,
+                "usd_per_token": "0.000005"
+              }
+            ]
+          },
+          "capabilities": {
+            "source_url": "https://openrouter.ai/api/v1/models/openai/gpt-6.2-sol/endpoints",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true
+          },
+          "limits": {
+            "source_url": "https://openrouter.ai/api/v1/models/openai/gpt-6.2-sol/endpoints",
+            "context_tokens": 1050000,
+            "max_output_tokens": 128000
+          },
+          "endpoints": [
+            {
+              "id": "openai/gpt-6.2-sol",
+              "input": "text",
+              "source_url": "https://openrouter.ai/api/v1/models/openai/gpt-6.2-sol/endpoints"
+            }
+          ]
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "openai/gpt-6.2-sol",
+          "url": "https://vercel.com/ai-gateway/models/gpt-6.2-sol",
+          "source_url": "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-sol/endpoints",
+          "qualifications": [
+            {
+              "source_url": "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-sol/endpoints",
+              "notes": "The provider catalogue lists a generic reasoning effort enum that differs from OpenAI's documented model-specific values. A Vercel effort enum is not asserted."
+            }
+          ],
+          "token_pricing": {
+            "source_url": "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-sol/endpoints",
+            "unit": "usd_per_token",
+            "scope": "Standard synchronous global token rates; optional tools, regional processing and alternate service tiers are excluded.",
+            "input": "0.000002",
+            "output": "0.00001",
+            "input_cache_read": "0.0000001",
+            "input_cache_write": "0.0000025",
+            "tiers": [
+              {
+                "meter": "input",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.000002"
+              },
+              {
+                "meter": "input",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.000004"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.00001"
+              },
+              {
+                "meter": "output",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.000015"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.0000001"
+              },
+              {
+                "meter": "input_cache_read",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.0000002"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 0,
+                "maximum_input_tokens": 272001,
+                "usd_per_token": "0.0000025"
+              },
+              {
+                "meter": "input_cache_write",
+                "minimum_input_tokens": 272001,
+                "usd_per_token": "0.000005"
+              }
+            ]
+          },
+          "capabilities": {
+            "source_url": "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-sol/endpoints",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true
+          },
+          "limits": {
+            "source_url": "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-sol/endpoints",
+            "context_tokens": 1050000,
+            "max_output_tokens": 128000
+          },
+          "endpoints": [
+            {
+              "id": "openai/gpt-6.2-sol",
+              "input": "text",
+              "source_url": "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-sol/endpoints"
+            }
+          ]
+        }
+      },
+      "provider_coverage": {
+        "openai": {
+          "disposition": "listed",
+          "source_url": "https://developers.openai.com/api/docs/models/gpt-6.2-sol"
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/api/v1/models/openai/gpt-6.2-sol/endpoints"
+        },
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-sol/endpoints"
+        },
+        "fal": {
+          "disposition": "excluded",
+          "source_url": "https://fal.ai/models",
+          "reason": "The provider coverage policy includes fal for media models only; no text API compatibility is claimed."
+        }
+      }
     }
   },
   "image.models": {

@@ -1992,3 +1992,34 @@ price, not a fixed image price. The linked contract defines this service's
 OpenAI-compatible subset; Google's native named-map/`noul`/`Content` contract
 and safety behavior remain independent. Model release provenance and all other
 provider facts are unchanged.
+
+## GPT-6.2 Astra and Sol (2026-11-18)
+
+OpenAI's [launch announcement](https://openai.com/index/introducing-gpt-6-2-astra-sol/)
+and [API changelog](https://developers.openai.com/api/docs/changelog) establish
+public API availability on November 17, 2026. The native model pages for
+[Astra](https://developers.openai.com/api/docs/models/gpt-6.2-astra) and
+[Sol](https://developers.openai.com/api/docs/models/gpt-6.2-sol) publish a
+1,050,000-token context window, a 922,000-token input limit and a 128,000-token
+output limit. Both support Chat Completions and Responses, with tool calling
+through Responses. OpenAI's [model selector](https://developers.openai.com/api/docs/models)
+lists `low`, `medium`, `high`, `xhigh` and `max` for both. The model pages
+reject `none`; Vercel's generic reasoning metadata lists it, so the provider
+bindings leave Vercel's accepted effort values unspecified.
+
+[OpenAI Standard pricing](https://developers.openai.com/api/docs/pricing), the
+Vercel [Astra](https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-astra/endpoints)
+and [Sol](https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-sol/endpoints)
+endpoints, and the OpenRouter
+[Astra](https://openrouter.ai/api/v1/models/openai/gpt-6.2-astra/endpoints)
+and [Sol](https://openrouter.ai/api/v1/models/openai/gpt-6.2-sol/endpoints)
+endpoints independently establish regular token rates. The cards record
+Standard global synchronous token prices, including OpenAI's 30-minute cache
+write rate. The long-context band starts at 272001 input tokens on OpenAI and
+Vercel. OpenRouter publishes its override from 272000 prompt tokens. Each band
+applies to the full request; cache reads and writes keep their own meters.
+
+Both models accept image input. OpenAI's
+[vision guide](https://developers.openai.com/api/docs/guides/images-vision)
+lists image formats but leaves these exact models out of its detail sizing and
+image-token multiplier tables, so no tokenization formula is recorded.
