@@ -2023,3 +2023,17 @@ Both models accept image input. OpenAI's
 [vision guide](https://developers.openai.com/api/docs/guides/images-vision)
 lists image formats but leaves these exact models out of its detail sizing and
 image-token multiplier tables, so no tokenization formula is recorded.
+
+## Grida GPT-6.2 Astra and Sol bindings (2026-11-18)
+
+Grida's public [model discovery](https://gateway.grida.ai/v1/models) and
+[text API reference](https://gateway.grida.ai/llms.txt) list both models with
+text input on Chat Completions and Responses. The text contract places
+function calling on Responses and lists the reasoning settings supported
+by this service.
+
+The Grida bindings mirror the regular published USD token schedules. They
+keep separate input, output, cache-read and cache-write components. The
+long-context band starts at 272,001 original input tokens and applies to
+the whole request. The native OpenAI, OpenRouter and Vercel facts are
+recorded separately above.
