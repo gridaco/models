@@ -14298,7 +14298,28 @@
                     "usd_per_unit": "0.001"
                   }
                 ]
-              }
+              },
+              "illustrative_costs": [
+                {
+                  "amount": "0.04",
+                  "currency": "USD",
+                  "scenario": "One 1024 × 1024 PNG output from a short text prompt.",
+                  "coverage": "Includes one output image and a short text prompt. Actual usage varies with input tokens.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1K",
+                  "provenance": {
+                    "maintenance": "manual",
+                    "description": "Manual Gateway estimate of USD 0.04, based on the published 1K image-output example of USD 0.034816 before text input. The example is rounded up to allow for a short prompt and billing rounding.",
+                    "reviewed_on": "2026-11-19",
+                    "source_urls": [
+                      "https://gateway.grida.ai/v1/models",
+                      "https://gateway.grida.ai/schemas/operations.json#/$defs/image.microsoft.mai-image-2.7.text.input",
+                      "https://fal.ai/models/microsoft/mai-image-2.7/text-to-image"
+                    ]
+                  }
+                }
+              ]
             },
             {
               "id": "image.microsoft.mai-image-2.7.references",
@@ -14324,7 +14345,28 @@
                     "usd_per_unit": "0.001"
                   }
                 ]
-              }
+              },
+              "illustrative_costs": [
+                {
+                  "amount": "0.045",
+                  "currency": "USD",
+                  "scenario": "One 1024 × 1024 PNG output with a short edit prompt and one 1024 × 1024 reference image.",
+                  "coverage": "Includes one output image, one reference image and a short edit prompt. Actual usage varies with input tokens.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1K · 1 reference",
+                  "provenance": {
+                    "maintenance": "manual",
+                    "description": "Manual Gateway estimate of USD 0.045, based on the published 1K reference and output image-token example of USD 0.043008 before text input. The example is rounded up to allow for a short prompt and billing rounding.",
+                    "reviewed_on": "2026-11-19",
+                    "source_urls": [
+                      "https://gateway.grida.ai/v1/models",
+                      "https://gateway.grida.ai/schemas/operations.json#/$defs/image.microsoft.mai-image-2.7.references.input",
+                      "https://fal.ai/models/microsoft/mai-image-2.7/edit"
+                    ]
+                  }
+                }
+              ]
             }
           ]
         }
@@ -14550,7 +14592,28 @@
                     "usd_per_unit": "0.001"
                   }
                 ]
-              }
+              },
+              "illustrative_costs": [
+                {
+                  "amount": "0.011",
+                  "currency": "USD",
+                  "scenario": "One 1024 × 1024 PNG output from a short text prompt.",
+                  "coverage": "Includes one output image and a short text prompt. Actual usage varies with input tokens.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1K",
+                  "provenance": {
+                    "maintenance": "manual",
+                    "description": "Manual Gateway estimate of USD 0.011, based on the published 1K image-output example of USD 0.01024 before text input. The example is rounded up to allow for a short prompt and billing rounding.",
+                    "reviewed_on": "2026-11-19",
+                    "source_urls": [
+                      "https://gateway.grida.ai/v1/models",
+                      "https://gateway.grida.ai/schemas/operations.json#/$defs/image.microsoft.mai-image-2.7-flash.text.input",
+                      "https://fal.ai/models/microsoft/mai-image-2.7/flash/text-to-image"
+                    ]
+                  }
+                }
+              ]
             },
             {
               "id": "image.microsoft.mai-image-2.7-flash.references",
@@ -14576,7 +14639,28 @@
                     "usd_per_unit": "0.001"
                   }
                 ]
-              }
+              },
+              "illustrative_costs": [
+                {
+                  "amount": "0.014",
+                  "currency": "USD",
+                  "scenario": "One 1024 × 1024 PNG output with a short edit prompt and one 1024 × 1024 reference image.",
+                  "coverage": "Includes one output image, one reference image and a short edit prompt. Actual usage varies with input tokens.",
+                  "unit": "image",
+                  "per_quantity": "1",
+                  "label": "1K · 1 reference",
+                  "provenance": {
+                    "maintenance": "manual",
+                    "description": "Manual Gateway estimate of USD 0.014, based on the published 1K reference and output image-token example of USD 0.0128 before text input. The example is rounded up to allow for a short prompt and billing rounding.",
+                    "reviewed_on": "2026-11-19",
+                    "source_urls": [
+                      "https://gateway.grida.ai/v1/models",
+                      "https://gateway.grida.ai/schemas/operations.json#/$defs/image.microsoft.mai-image-2.7-flash.references.input",
+                      "https://fal.ai/models/microsoft/mai-image-2.7/flash/edit"
+                    ]
+                  }
+                }
+              ]
             }
           ]
         }
