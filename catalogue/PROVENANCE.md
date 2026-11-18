@@ -2037,3 +2037,50 @@ keep separate input, output, cache-read and cache-write components. The
 long-context band starts at 272,001 original input tokens and applies to
 the whole request. The native OpenAI, OpenRouter and Vercel facts are
 recorded separately above.
+
+## `microsoft/mai-image-2.7` and `microsoft/mai-image-2.7-flash`
+
+Microsoft's November 17 announcement and model card date public availability
+of the generation and editing offerings. Microsoft had offered an editing-only
+preview of the flagship through Arena, Artificial Analysis and MAI Playground
+on October 27. The data summary's October 23 date does not establish public
+access to the generation and editing offering.
+[November launch](https://microsoft.ai/news/introducing-mai-image-2-7/),
+[model card](https://microsoft.ai/pdf/MAI-Image-2.7-Model-Card.pdf),
+[October editing preview](https://microsoft.ai/news/mai-image-2-7-debut/),
+[data summary](https://microsoft.ai/pdf/MAI-Image-2.7-Data-Summary.pdf).
+
+The flagship's model card sets a total limit of 4,194,304 pixels. That is
+equivalent to a 2048 × 2048 square, with larger individual dimensions allowed
+within the pixel budget. Microsoft announces transparent backgrounds for both
+models. The Foundry guide specifically confirms native transparency for
+flagship generation. The launch quotes approximate Foundry costs of $35 per
+1,000 images for 2.7 and $10 per 1,000 images for Flash. Exact native token
+rates remain unverified.
+[Model card](https://microsoft.ai/pdf/MAI-Image-2.7-Model-Card.pdf),
+[launch](https://microsoft.ai/news/introducing-mai-image-2-7/),
+[Foundry API guide](https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-mai-image),
+[Azure price list](https://azure.microsoft.com/en-us/pricing/details/ai-foundry-models/microsoft/).
+
+Vercel's API announcement specifies five references and the playground lists
+four uploads. The catalogue records the API limit. Vercel lists the separate
+image-input meter under expanded provider input pricing. OpenRouter's endpoint
+metadata supplies all three token meters and the limits for `POST /api/v1/images`.
+[Vercel API announcement](https://vercel.com/changelog/mai-image-2-7-and-mai-image-2-7-flash-now-available-on-ai-gateway),
+[Vercel 2.7 pricing](https://vercel.com/ai-gateway/models/microsoft/mai-image-2.7),
+[Vercel Flash pricing](https://vercel.com/ai-gateway/models/microsoft/mai-image-2.7-flash),
+[OpenRouter Image API](https://openrouter.ai/collections/image-models/),
+[OpenRouter 2.7 metadata](https://openrouter.ai/api/v1/images/models/microsoft/mai-image-2.7/endpoints),
+[OpenRouter Flash metadata](https://openrouter.ai/api/v1/images/models/microsoft/mai-image-2.7-flash/endpoints).
+
+The fal flagship edit overview says two input images. Each edit endpoint's
+OpenAPI schema specifies one to five, so the bindings record the schema limit.
+The flagship edit page names all three token rates. Flash's generation page
+names the $2.50 per million image-input rate and its edit page's combined
+image-token example agrees with that rate. fal rounds the total request charge
+up to $0.0001.
+[fal 2.7 edit pricing](https://fal.ai/models/microsoft/mai-image-2.7/edit),
+[fal Flash generation pricing](https://fal.ai/models/microsoft/mai-image-2.7/flash/text-to-image),
+[fal Flash edit pricing](https://fal.ai/models/microsoft/mai-image-2.7/flash/edit),
+[fal 2.7 edit schema](https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=microsoft%2Fmai-image-2.7%2Fedit),
+[fal Flash edit schema](https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=microsoft%2Fmai-image-2.7%2Fflash%2Fedit).

@@ -1,0 +1,148 @@
+id = "microsoft/mai-image-2.7"
+section = "image.models"
+label = "MAI Image 2.7"
+short_description = "Text-to-image generation and precise image editing."
+vendor = "microsoft"
+type = "image"
+modalities = { input = ["text", "image"], output = ["image"] }
+source_url = "https://microsoft.ai/news/introducing-mai-image-2-7/"
+reference_provider = "azure"
+transparent_background = true
+
+[constraints]
+max_pixels = 4194304
+
+[release]
+date = "2026-11-17"
+basis = "model"
+source_url = "https://microsoft.ai/news/introducing-mai-image-2-7/"
+
+[providers.azure]
+provider = "azure"
+id = "MAI-Image-2.7"
+source_url = "https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-mai-image"
+qualifications = [
+  { source_url = "https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-mai-image", notes = "Global Standard public preview, model version 2026-11-02. The request model field takes the assigned deployment name. Both operations return base64-encoded PNG. Edits accept one to five JPEG or PNG references as multipart image fields." },
+  { source_url = "https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-mai-image", notes = "The generation endpoint accepts background set to transparent." },
+  { source_url = "https://azure.microsoft.com/en-us/pricing/details/ai-foundry-models/microsoft/", notes = "Exact Foundry token rates remain unverified." },
+]
+
+[providers.azure.limits]
+source_url = "https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-mai-image"
+context_tokens = 32000
+
+[providers.azure.references]
+id = "/mai/v1/images/edits"
+max = 5
+
+[[providers.azure.endpoints]]
+id = "/mai/v1/images/generations"
+input = "text"
+source_url = "https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-mai-image#api-endpoints"
+image_constraints = { min_edge = 768 }
+
+[[providers.azure.endpoints]]
+id = "/mai/v1/images/edits"
+input = "multi_image"
+source_url = "https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-mai-image#api-endpoints"
+
+[providers.vercel]
+provider = "vercel"
+id = "microsoft/mai-image-2.7"
+url = "https://vercel.com/ai-gateway/models/microsoft/mai-image-2.7"
+source_url = "https://vercel.com/ai-gateway/models/microsoft/mai-image-2.7"
+qualifications = [
+  { source_url = "https://vercel.com/ai-gateway/models/microsoft/mai-image-2.7", notes = "The model page lists output up to 2048 × 2048 and support for transparent backgrounds." },
+]
+
+[providers.vercel.pricing]
+type = "per_token"
+input = 5
+image_input = 8
+output = 34
+source_url = "https://vercel.com/ai-gateway/models/microsoft/mai-image-2.7"
+
+[providers.vercel.references]
+id = "microsoft/mai-image-2.7"
+max = 5
+
+[[providers.vercel.endpoints]]
+id = "microsoft/mai-image-2.7"
+input = "text"
+interface = "generateImage"
+source_url = "https://vercel.com/changelog/mai-image-2-7-and-mai-image-2-7-flash-now-available-on-ai-gateway"
+
+[providers.openrouter]
+provider = "openrouter"
+id = "microsoft/mai-image-2.7"
+url = "https://openrouter.ai/microsoft/mai-image-2.7"
+source_url = "https://openrouter.ai/api/v1/images/models/microsoft/mai-image-2.7/endpoints"
+qualifications = [
+  { source_url = "https://openrouter.ai/api/v1/images/models/microsoft/mai-image-2.7/endpoints", notes = "The Image API accepts zero to five input references and returns one image per request. Background options are opaque and transparent." },
+]
+
+[providers.openrouter.pricing]
+type = "per_token"
+input = 5
+image_input = 8
+output = 34
+source_url = "https://openrouter.ai/api/v1/images/models/microsoft/mai-image-2.7/endpoints"
+
+[providers.openrouter.references]
+id = "microsoft/mai-image-2.7"
+max = 5
+
+[[providers.openrouter.endpoints]]
+id = "microsoft/mai-image-2.7"
+input = "text"
+source_url = "https://openrouter.ai/api/v1/images/models/microsoft/mai-image-2.7/endpoints"
+
+[providers.fal]
+provider = "fal"
+id = "microsoft/mai-image-2.7/text-to-image"
+url = "https://fal.ai/models/microsoft/mai-image-2.7/text-to-image"
+source_url = "https://fal.ai/models/microsoft/mai-image-2.7/text-to-image/api"
+
+[providers.fal.pricing]
+type = "per_token"
+input = 5
+image_input = 8
+output = 34
+rounding_usd = 0.0001
+source_url = "https://fal.ai/models/microsoft/mai-image-2.7/edit"
+
+[providers.fal.references]
+id = "microsoft/mai-image-2.7/edit"
+max = 5
+
+[[providers.fal.endpoints]]
+id = "microsoft/mai-image-2.7/text-to-image"
+input = "text"
+source_url = "https://fal.ai/models/microsoft/mai-image-2.7/text-to-image/api"
+request_schema_url = "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=microsoft%2Fmai-image-2.7%2Ftext-to-image#/components/schemas/MaiImage27TextToImageInput"
+result_schema_url = "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=microsoft%2Fmai-image-2.7%2Ftext-to-image#/components/schemas/MaiImage27TextToImageOutput"
+image_constraints = { min_edge = 768, max_pixels = 4194304 }
+
+[[providers.fal.endpoints]]
+id = "microsoft/mai-image-2.7/edit"
+input = "multi_image"
+source_url = "https://fal.ai/models/microsoft/mai-image-2.7/edit/api"
+request_schema_url = "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=microsoft%2Fmai-image-2.7%2Fedit#/components/schemas/MaiImage27EditInput"
+result_schema_url = "https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=microsoft%2Fmai-image-2.7%2Fedit#/components/schemas/MaiImage27EditOutput"
+image_constraints = { min_edge = 768, max_pixels = 4194304 }
+
+[provider_coverage.azure]
+disposition = "listed"
+source_url = "https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-mai-image"
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/microsoft/mai-image-2.7"
+
+[provider_coverage.openrouter]
+disposition = "listed"
+source_url = "https://openrouter.ai/api/v1/images/models/microsoft/mai-image-2.7/endpoints"
+
+[provider_coverage.fal]
+disposition = "listed"
+source_url = "https://fal.ai/models/microsoft/mai-image-2.7/text-to-image"
