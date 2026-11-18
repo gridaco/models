@@ -14268,6 +14268,65 @@
               }
             }
           ]
+        },
+        "grida": {
+          "provider": "grida",
+          "id": "microsoft/mai-image-2.7",
+          "url": "https://gateway.grida.ai/v1/models",
+          "endpoints": [
+            {
+              "id": "image.microsoft.mai-image-2.7.text",
+              "operation": "image.microsoft.mai-image-2.7.text",
+              "input": "text",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/image.microsoft.mai-image-2.7.text.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4",
+              "interface": "images.generations",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_standard_cost_mills",
+                    "meter": "fal_standard_cost_mills",
+                    "unit": "mill",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.001"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "image.microsoft.mai-image-2.7.references",
+              "operation": "image.microsoft.mai-image-2.7.references",
+              "input": "multi_image",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/image.microsoft.mai-image-2.7.references.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4",
+              "interface": "images.edits",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_standard_cost_mills",
+                    "meter": "fal_standard_cost_mills",
+                    "unit": "mill",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.001"
+                  }
+                ]
+              }
+            }
+          ]
         }
       },
       "provider_coverage": {
@@ -14286,6 +14345,10 @@
         "fal": {
           "disposition": "listed",
           "source_url": "https://fal.ai/models/microsoft/mai-image-2.7/text-to-image"
+        },
+        "grida": {
+          "disposition": "listed",
+          "source_url": "https://gateway.grida.ai/v1/models"
         }
       }
     },
@@ -14457,6 +14520,65 @@
               }
             }
           ]
+        },
+        "grida": {
+          "provider": "grida",
+          "id": "microsoft/mai-image-2.7-flash",
+          "url": "https://gateway.grida.ai/v1/models",
+          "endpoints": [
+            {
+              "id": "image.microsoft.mai-image-2.7-flash.text",
+              "operation": "image.microsoft.mai-image-2.7-flash.text",
+              "input": "text",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/image.microsoft.mai-image-2.7-flash.text.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4",
+              "interface": "images.generations",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_standard_cost_mills",
+                    "meter": "fal_standard_cost_mills",
+                    "unit": "mill",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.001"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "image.microsoft.mai-image-2.7-flash.references",
+              "operation": "image.microsoft.mai-image-2.7-flash.references",
+              "input": "multi_image",
+              "source_url": "https://gateway.grida.ai/schemas/operations.json",
+              "request_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/image.microsoft.mai-image-2.7-flash.references.input",
+              "result_schema_url": "https://gateway.grida.ai/schemas/operations.json#/$defs/ImageResponse_4",
+              "interface": "images.edits",
+              "published_pricing": {
+                "source_url": "https://gateway.grida.ai/v1/models",
+                "currency": "USD",
+                "components": [
+                  {
+                    "id": "fal_standard_cost_mills",
+                    "meter": "fal_standard_cost_mills",
+                    "unit": "mill",
+                    "per_quantity": "1",
+                    "when": {},
+                    "quantity_rounding": {
+                      "mode": "none"
+                    },
+                    "usd_per_unit": "0.001"
+                  }
+                ]
+              }
+            }
+          ]
         }
       },
       "provider_coverage": {
@@ -14475,6 +14597,10 @@
         "fal": {
           "disposition": "listed",
           "source_url": "https://fal.ai/models/microsoft/mai-image-2.7/flash/text-to-image"
+        },
+        "grida": {
+          "disposition": "listed",
+          "source_url": "https://gateway.grida.ai/v1/models"
         }
       }
     },

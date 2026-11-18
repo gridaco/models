@@ -2084,3 +2084,10 @@ up to $0.0001.
 [fal Flash edit pricing](https://fal.ai/models/microsoft/mai-image-2.7/flash/edit),
 [fal 2.7 edit schema](https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=microsoft%2Fmai-image-2.7%2Fedit),
 [fal Flash edit schema](https://fal.ai/api/openapi/queue/openapi.json?endpoint_id=microsoft%2Fmai-image-2.7%2Fflash%2Fedit).
+
+Grida Gateway lists both variants for image generation and edits. The
+registered schemas specify one 1024 × 1024 PNG output and one equally sized
+PNG or JPEG reference on edits. Published rates come from model discovery.
+Verified 2026-11-19.
+[Grida model catalogue](https://gateway.grida.ai/v1/models),
+[Grida operation schemas](https://gateway.grida.ai/schemas/operations.json).
