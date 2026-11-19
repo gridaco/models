@@ -191,3 +191,47 @@ def test_fast_pricing_validates_provider_sources_and_rate_bands(catalogue_with_f
     assert any("/token_pricing/input" in error for error in errors)
     assert any("source_url must be an absolute HTTPS URL without credentials" in error for error in errors)
     assert any("overlapping input-token tiers for input" in error for error in errors)
+
+
+@pytest.mark.parametrize("field", ["offerings", "modes"])
+@pytest.mark.parametrize("number", ["nan", "inf", "-inf"])
+def test_build_rejects_nonfinite_numbers_in_authored_fast_requests(tmp_path, monkeypatch, field, number):
+    models = tmp_path / "models"
+    model_dir = models / MODEL_ID
+    model_dir.mkdir(parents=True)
+    source = f'''\
+id = "{MODEL_ID}"
+section = "text.catalog"
+vendor = "openai"
+label = "Example model"
+
+[release]
+date = "2026-01-01"
+basis = "model"
+source_url = "{SOURCE}"
+
+[providers.vercel]
+provider = "vercel"
+id = "{MODEL_ID}"
+'''
+    if field == "offerings":
+        source += f'''\
+[providers.vercel.offerings."{FAST_ID}"]
+id = "{FAST_ID}"
+canonical_model_id = "{MODEL_ID}"
+mode = "fast"
+label = "Example model (Fast)"
+'''
+    else:
+        source += "[providers.vercel.modes.fast]\n"
+    source += f'''\
+source_url = "{SOURCE}"
+request = {{ service_tier = "fast", options = {{ levels = [{{ threshold = {number} }}] }} }}
+'''
+    (model_dir / cards.CARD_FILE).write_text(source, encoding="utf-8")
+    monkeypatch.setattr(check.build, "MODELS", models)
+
+    outputs, errors = check.build.build()
+
+    assert not outputs
+    assert any("cannot generate valid JSON" in error for error in errors)
