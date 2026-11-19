@@ -13,7 +13,8 @@ An entry linked to an open PR does not mean the change has been released. See
 
 ### 2026-11-19 — Text cards may describe serving variants
 
-Reference: [#53](https://github.com/gridaco/models/issues/53).
+References [issue #53](https://github.com/gridaco/models/issues/53) and
+[PR #54](https://github.com/gridaco/models/pull/54).
 
 **Change** adds optional `text_card.variants` for named modes under an existing
 model. Each provider record refers to a base binding and records a sourced exact
