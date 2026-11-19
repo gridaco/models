@@ -11,23 +11,25 @@ An entry linked to an open PR does not mean the change has been released. See
 
 ## Schema v2
 
-### 2026-11-19 — Text cards may describe serving variants
+### 2026-11-19 — Text cards may describe Fast serving mode
 
 References [issue #53](https://github.com/gridaco/models/issues/53) and
 [PR #54](https://github.com/gridaco/models/pull/54).
 
-**Change** adds optional `text_card.variants` for named modes under an existing
-model. Each provider record refers to a base binding and records a sourced exact
-call ID, a request selector when the ID is shared, and any published facts scoped
-to that offering. Existing provider endpoints retain their input-variant semantics.
+**Change** adds optional `text_card.variants.fast` for the documented Fast serving
+tier of an existing model. The schema accepts `fast` as the only variant key.
+Each provider record refers to a base binding and records a sourced exact call ID,
+a request selector when the ID is shared, and any published facts scoped to Fast.
+Existing provider endpoints retain their input-variant semantics.
 
 **Compatibility** is additive. Existing cards validate unchanged, and the previous
 v2 schema accepts the new optional text-card property. The v2 envelope, model
 IDs, and existing binding and price fields retain their meanings.
 
 **Migration** is optional for consumers using only existing fields. Consumers that
-display or select a variant should read its exact provider ID and request selector
-and qualify its published rates separately from the base binding.
+display or select Fast should read its exact provider ID and request selector and
+qualify its published rates separately from the base binding. Future mode keys
+require a compatibility review.
 
 ### 2026-11-15 — Decision offerings may omit an underlying model
 

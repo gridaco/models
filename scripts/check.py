@@ -105,22 +105,14 @@ SOURCED_OBJECTS = (
 )
 
 
-def serving_variants(
-    card: dict[str, Any], where: str
-) -> Iterator[tuple[str, dict[str, Any], dict[str, Any]]]:
+def fast_variant(card: dict[str, Any]) -> dict[str, Any]:
     variants = card.get("variants")
-    if not isinstance(variants, dict):
-        return
-    for name, variant in variants.items():
-        if isinstance(variant, dict):
-            providers = variant.get("providers")
-            if not isinstance(providers, dict):
-                providers = {}
-            yield f"{where}/variants/{name}", variant, providers
+    fast = variants.get("fast") if isinstance(variants, dict) else None
+    return fast if isinstance(fast, dict) else {}
 
 
 def fact_objects(facts: dict[str, Any]) -> Iterator[tuple[str, dict[str, Any]]]:
-    """Visit cards, bindings, endpoints and serving variants without merging scopes."""
+    """Visit cards, bindings, endpoints and Fast facts without merging scopes."""
     for section, table in facts.items():
         if not isinstance(table, dict):
             continue
@@ -133,12 +125,14 @@ def fact_objects(facts: dict[str, Any]) -> Iterator[tuple[str, dict[str, Any]]]:
             if not isinstance(card, dict):
                 continue
             yield where, card
-            if section == "text.catalog":
-                for variant_where, variant, variant_providers in serving_variants(card, where):
-                    yield variant_where, variant
+            if section == "text.catalog" and (fast := fast_variant(card)):
+                fast_where = f"{where}/variants/fast"
+                yield fast_where, fast
+                variant_providers = fast.get("providers")
+                if isinstance(variant_providers, dict):
                     for name, provider in variant_providers.items():
                         if isinstance(provider, dict):
-                            yield f"{variant_where}/providers/{name}", provider
+                            yield f"{fast_where}/providers/{name}", provider
             endpoints = card.get("endpoints", [])
             if isinstance(endpoints, list):
                 for index, endpoint in enumerate(endpoints):
@@ -398,28 +392,23 @@ def qualification_source_errors(value: dict[str, Any], where: str) -> Iterator[s
                 )
 
 
-def serving_variant_errors(
+def fast_variant_errors(
     card: dict[str, Any], where: str, providers: dict[str, Any]
 ) -> Iterator[str]:
-    seen: set[tuple[str, str, str]] = set()
-    for variant_where, _, variant_providers in serving_variants(card, where):
-        for name, provider in variant_providers.items():
-            if not isinstance(provider, dict):
-                continue
-            provider_where = f"{variant_where}/providers/{name}"
-            binding = providers.get(name)
-            call_id = provider.get("id")
-            request = provider.get("request", {})
-            if not isinstance(binding, dict):
-                yield f"{provider_where}: variant provider has no provider binding"
-            elif isinstance(call_id, str) and call_id == binding.get("id") and not request:
-                yield f"{provider_where}: variant reuses the binding id without a request selector"
-            if isinstance(call_id, str) and isinstance(request, dict):
-                selector = name, call_id, json.dumps(request, sort_keys=True)
-                if selector in seen:
-                    yield f"{provider_where}: duplicate variant call ID and request selector"
-                seen.add(selector)
-            yield from qualification_source_errors(provider, provider_where)
+    variant_providers = fast_variant(card).get("providers")
+    if not isinstance(variant_providers, dict):
+        return
+    for name, provider in variant_providers.items():
+        if not isinstance(provider, dict):
+            continue
+        provider_where = f"{where}/variants/fast/providers/{name}"
+        binding = providers.get(name)
+        call_id = provider.get("id")
+        if not isinstance(binding, dict):
+            yield f"{provider_where}: variant provider has no provider binding"
+        elif isinstance(call_id, str) and call_id == binding.get("id") and not provider.get("request"):
+            yield f"{provider_where}: variant reuses the binding id without a request selector"
+        yield from qualification_source_errors(provider, provider_where)
 
 
 def provider_fact_errors(facts: dict[str, Any]) -> Iterator[str]:
@@ -451,7 +440,7 @@ def provider_fact_errors(facts: dict[str, Any]) -> Iterator[str]:
                     yield from source_url_errors(binding["source_url"], f"{where}/providers/{name}")
                 yield from qualification_source_errors(binding, f"{where}/providers/{name}")
             if section == "text.catalog":
-                yield from serving_variant_errors(card, where, providers)
+                yield from fast_variant_errors(card, where, providers)
             elif "variants" in card:
                 yield f"{where}/variants: variants are only supported on text cards"
             reference = card.get("reference_provider")
