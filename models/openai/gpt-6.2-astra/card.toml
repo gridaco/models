@@ -84,6 +84,38 @@ parameters = { "reasoning.effort" = { type = "string", enum = [
   "max",
 ] } }
 
+[providers.openai.modes.fast]
+source_url = "https://developers.openai.com/api/docs/guides/fast-mode"
+request = { service_tier = "fast" }
+qualifications = [
+  { source_url = "https://developers.openai.com/api/docs/pricing.md#fast-pricing-data", notes = "OpenAI separately publishes 12-hour cache-write rates of $40.00 in the short-context band and $80.00 in the long-context band per million tokens." },
+  { source_url = "https://developers.openai.com/api/docs/models/gpt-6.2-astra", notes = "The model publishes a separate maximum of 922,000 input tokens." },
+]
+
+[providers.openai.modes.fast.limits]
+source_url = "https://developers.openai.com/api/docs/models/gpt-6.2-astra"
+context_tokens = 1050000
+max_output_tokens = 128000
+
+[providers.openai.modes.fast.token_pricing]
+source_url = "https://developers.openai.com/api/docs/pricing.md#fast-pricing-data"
+unit = "usd_per_token"
+scope = "Regular global Fast token rates, including 30-minute cache writes. Long-context rates apply to the entire request above 272,000 input tokens."
+input = "0.000016"
+output = "0.00008"
+input_cache_read = "0.0000008"
+input_cache_write = "0.00002"
+tiers = [
+  { meter = "input", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.000016" },
+  { meter = "input", minimum_input_tokens = 272001, usd_per_token = "0.000032" },
+  { meter = "output", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.00008" },
+  { meter = "output", minimum_input_tokens = 272001, usd_per_token = "0.00012" },
+  { meter = "input_cache_read", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.0000008" },
+  { meter = "input_cache_read", minimum_input_tokens = 272001, usd_per_token = "0.0000016" },
+  { meter = "input_cache_write", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.00002" },
+  { meter = "input_cache_write", minimum_input_tokens = 272001, usd_per_token = "0.00004" },
+]
+
 [provider_coverage.openai]
 disposition = "listed"
 source_url = "https://developers.openai.com/api/docs/models/gpt-6.2-astra"
@@ -132,6 +164,44 @@ max_output_tokens = 128000
 id = "openai/gpt-6.2-astra"
 input = "text"
 source_url = "https://openrouter.ai/api/v1/models/openai/gpt-6.2-astra/endpoints"
+
+[providers.openrouter.modes.fast]
+source_url = "https://openrouter.ai/api/v1/models/openai/gpt-6.2-astra/endpoints"
+request = { service_tier = "fast", provider = { only = ["openai/fast"] } }
+qualifications = [
+  { source_url = "https://openrouter.ai/docs/guides/features/service-tiers", notes = "The provider.only tag selects the openai/fast endpoint. OpenRouter reports the tier that actually served the request." },
+  { source_url = "https://openrouter.ai/api/v1/models/openai/gpt-6.2-astra/endpoints", notes = "The Fast endpoint publishes a separate maximum of 922,000 prompt tokens." },
+]
+
+[providers.openrouter.modes.fast.limits]
+source_url = "https://openrouter.ai/api/v1/models/openai/gpt-6.2-astra/endpoints"
+context_tokens = 1050000
+max_output_tokens = 128000
+
+[providers.openrouter.modes.fast.capabilities]
+source_url = "https://openrouter.ai/api/v1/models/openai/gpt-6.2-astra/endpoints"
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.openrouter.modes.fast.token_pricing]
+source_url = "https://openrouter.ai/api/v1/models/openai/gpt-6.2-astra/endpoints"
+unit = "usd_per_token"
+scope = "Regular token rates for requests served on the OpenRouter Fast endpoint. Optional tools and regional premiums are excluded."
+input = "0.000016"
+output = "0.00008"
+input_cache_read = "0.0000008"
+input_cache_write = "0.00002"
+tiers = [
+  { meter = "input", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.000016" },
+  { meter = "input", minimum_input_tokens = 272000, usd_per_token = "0.000032" },
+  { meter = "output", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.00008" },
+  { meter = "output", minimum_input_tokens = 272000, usd_per_token = "0.00012" },
+  { meter = "input_cache_read", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.0000008" },
+  { meter = "input_cache_read", minimum_input_tokens = 272000, usd_per_token = "0.0000016" },
+  { meter = "input_cache_write", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.00002" },
+  { meter = "input_cache_write", minimum_input_tokens = 272000, usd_per_token = "0.00004" },
+]
 
 [provider_coverage.openrouter]
 disposition = "listed"
@@ -182,6 +252,47 @@ id = "openai/gpt-6.2-astra"
 input = "text"
 source_url = "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-astra/endpoints"
 
+[providers.vercel.offerings."openai/gpt-6.2-astra-fast"]
+id = "openai/gpt-6.2-astra-fast"
+canonical_model_id = "openai/gpt-6.2-astra"
+mode = "fast"
+label = "GPT-6.2 Astra (Fast)"
+source_url = "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-astra-fast/endpoints"
+qualifications = [
+  { source_url = "https://vercel.com/docs/ai-gateway/models-and-providers/fast-mode", notes = "Vercel can serve the base route at Standard speed when Fast capacity is unavailable. Fast prices apply when the request was served Fast." },
+]
+
+[providers.vercel.offerings."openai/gpt-6.2-astra-fast".limits]
+source_url = "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-astra-fast/endpoints"
+context_tokens = 1050000
+max_output_tokens = 128000
+
+[providers.vercel.offerings."openai/gpt-6.2-astra-fast".capabilities]
+source_url = "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-astra-fast/endpoints"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.vercel.offerings."openai/gpt-6.2-astra-fast".token_pricing]
+source_url = "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-astra-fast/endpoints"
+unit = "usd_per_token"
+scope = "Regular global token rates for requests served on the Vercel Fast endpoint. Optional tools and regional premiums are excluded."
+input = "0.000016"
+output = "0.00008"
+input_cache_read = "0.0000008"
+input_cache_write = "0.00002"
+tiers = [
+  { meter = "input", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.000016" },
+  { meter = "input", minimum_input_tokens = 272001, usd_per_token = "0.000032" },
+  { meter = "output", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.00008" },
+  { meter = "output", minimum_input_tokens = 272001, usd_per_token = "0.00012" },
+  { meter = "input_cache_read", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.0000008" },
+  { meter = "input_cache_read", minimum_input_tokens = 272001, usd_per_token = "0.0000016" },
+  { meter = "input_cache_write", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.00002" },
+  { meter = "input_cache_write", minimum_input_tokens = 272001, usd_per_token = "0.00004" },
+]
+
 [provider_coverage.vercel]
 disposition = "listed"
 source_url = "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-astra/endpoints"
@@ -213,117 +324,3 @@ limits = { "source_url" = "https://gateway.grida.ai/v1/models", "context_tokens"
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/models"
-
-[variants.fast]
-label = "Fast"
-source_url = "https://developers.openai.com/api/docs/pricing.md#fast-pricing-data"
-
-[variants.fast.providers.openai]
-id = "gpt-6.2-astra"
-source_url = "https://developers.openai.com/api/docs/guides/fast-mode"
-request = { service_tier = "fast" }
-qualifications = [
-  { source_url = "https://developers.openai.com/api/docs/pricing.md#fast-pricing-data", notes = "OpenAI separately publishes 12-hour cache-write rates of $40.00 in the short-context band and $80.00 in the long-context band per million tokens." },
-  { source_url = "https://developers.openai.com/api/docs/models/gpt-6.2-astra", notes = "The model publishes a separate maximum of 922,000 input tokens." },
-]
-
-[variants.fast.providers.openai.limits]
-source_url = "https://developers.openai.com/api/docs/models/gpt-6.2-astra"
-context_tokens = 1050000
-max_output_tokens = 128000
-
-[variants.fast.providers.openai.token_pricing]
-source_url = "https://developers.openai.com/api/docs/pricing.md#fast-pricing-data"
-unit = "usd_per_token"
-scope = "Regular global Fast token rates, including 30-minute cache writes. Long-context rates apply to the entire request above 272,000 input tokens."
-input = "0.000016"
-output = "0.00008"
-input_cache_read = "0.0000008"
-input_cache_write = "0.00002"
-tiers = [
-  { meter = "input", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.000016" },
-  { meter = "input", minimum_input_tokens = 272001, usd_per_token = "0.000032" },
-  { meter = "output", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.00008" },
-  { meter = "output", minimum_input_tokens = 272001, usd_per_token = "0.00012" },
-  { meter = "input_cache_read", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.0000008" },
-  { meter = "input_cache_read", minimum_input_tokens = 272001, usd_per_token = "0.0000016" },
-  { meter = "input_cache_write", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.00002" },
-  { meter = "input_cache_write", minimum_input_tokens = 272001, usd_per_token = "0.00004" },
-]
-
-[variants.fast.providers.openrouter]
-id = "openai/gpt-6.2-astra"
-source_url = "https://openrouter.ai/api/v1/models/openai/gpt-6.2-astra/endpoints"
-request = { service_tier = "fast", provider = { only = ["openai/fast"] } }
-qualifications = [
-  { source_url = "https://openrouter.ai/docs/guides/features/service-tiers", notes = "The provider.only tag selects the openai/fast endpoint. OpenRouter reports the tier that actually served the request." },
-  { source_url = "https://openrouter.ai/api/v1/models/openai/gpt-6.2-astra/endpoints", notes = "The Fast endpoint publishes a separate maximum of 922,000 prompt tokens." },
-]
-
-[variants.fast.providers.openrouter.limits]
-source_url = "https://openrouter.ai/api/v1/models/openai/gpt-6.2-astra/endpoints"
-context_tokens = 1050000
-max_output_tokens = 128000
-
-[variants.fast.providers.openrouter.capabilities]
-source_url = "https://openrouter.ai/api/v1/models/openai/gpt-6.2-astra/endpoints"
-tools = true
-reasoning = true
-structured_output = true
-
-[variants.fast.providers.openrouter.token_pricing]
-source_url = "https://openrouter.ai/api/v1/models/openai/gpt-6.2-astra/endpoints"
-unit = "usd_per_token"
-scope = "Regular token rates for requests served on the OpenRouter Fast endpoint. Optional tools and regional premiums are excluded."
-input = "0.000016"
-output = "0.00008"
-input_cache_read = "0.0000008"
-input_cache_write = "0.00002"
-tiers = [
-  { meter = "input", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.000016" },
-  { meter = "input", minimum_input_tokens = 272000, usd_per_token = "0.000032" },
-  { meter = "output", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.00008" },
-  { meter = "output", minimum_input_tokens = 272000, usd_per_token = "0.00012" },
-  { meter = "input_cache_read", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.0000008" },
-  { meter = "input_cache_read", minimum_input_tokens = 272000, usd_per_token = "0.0000016" },
-  { meter = "input_cache_write", minimum_input_tokens = 0, maximum_input_tokens = 272000, usd_per_token = "0.00002" },
-  { meter = "input_cache_write", minimum_input_tokens = 272000, usd_per_token = "0.00004" },
-]
-
-[variants.fast.providers.vercel]
-id = "openai/gpt-6.2-astra-fast"
-source_url = "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-astra-fast/endpoints"
-qualifications = [
-  { source_url = "https://vercel.com/docs/ai-gateway/models-and-providers/fast-mode", notes = "Vercel can serve the base route at Standard speed when Fast capacity is unavailable. Fast prices apply when the request was served Fast." },
-]
-
-[variants.fast.providers.vercel.limits]
-source_url = "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-astra-fast/endpoints"
-context_tokens = 1050000
-max_output_tokens = 128000
-
-[variants.fast.providers.vercel.capabilities]
-source_url = "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-astra-fast/endpoints"
-image_input = true
-tools = true
-reasoning = true
-structured_output = true
-
-[variants.fast.providers.vercel.token_pricing]
-source_url = "https://ai-gateway.vercel.sh/v1/models/openai/gpt-6.2-astra-fast/endpoints"
-unit = "usd_per_token"
-scope = "Regular global token rates for requests served on the Vercel Fast endpoint. Optional tools and regional premiums are excluded."
-input = "0.000016"
-output = "0.00008"
-input_cache_read = "0.0000008"
-input_cache_write = "0.00002"
-tiers = [
-  { meter = "input", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.000016" },
-  { meter = "input", minimum_input_tokens = 272001, usd_per_token = "0.000032" },
-  { meter = "output", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.00008" },
-  { meter = "output", minimum_input_tokens = 272001, usd_per_token = "0.00012" },
-  { meter = "input_cache_read", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.0000008" },
-  { meter = "input_cache_read", minimum_input_tokens = 272001, usd_per_token = "0.0000016" },
-  { meter = "input_cache_write", minimum_input_tokens = 0, maximum_input_tokens = 272001, usd_per_token = "0.00002" },
-  { meter = "input_cache_write", minimum_input_tokens = 272001, usd_per_token = "0.00004" },
-]
