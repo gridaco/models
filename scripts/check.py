@@ -105,10 +105,18 @@ SOURCED_OBJECTS = (
 )
 
 
-def fast_variant(card: dict[str, Any]) -> dict[str, Any]:
-    variants = card.get("variants")
-    fast = variants.get("fast") if isinstance(variants, dict) else None
-    return fast if isinstance(fast, dict) else {}
+FAST_BINDING_FIELDS = ("offerings", "modes")
+
+
+def fast_binding_objects(
+    binding: dict[str, Any], where: str
+) -> Iterator[tuple[str, dict[str, Any]]]:
+    for field in FAST_BINDING_FIELDS:
+        objects = binding.get(field)
+        if isinstance(objects, dict):
+            for key, value in objects.items():
+                if isinstance(value, dict):
+                    yield f"{where}/{field}/{key}", value
 
 
 def fact_objects(facts: dict[str, Any]) -> Iterator[tuple[str, dict[str, Any]]]:
@@ -125,14 +133,6 @@ def fact_objects(facts: dict[str, Any]) -> Iterator[tuple[str, dict[str, Any]]]:
             if not isinstance(card, dict):
                 continue
             yield where, card
-            if section == "text.catalog" and (fast := fast_variant(card)):
-                fast_where = f"{where}/variants/fast"
-                yield fast_where, fast
-                variant_providers = fast.get("providers")
-                if isinstance(variant_providers, dict):
-                    for name, provider in variant_providers.items():
-                        if isinstance(provider, dict):
-                            yield f"{fast_where}/providers/{name}", provider
             endpoints = card.get("endpoints", [])
             if isinstance(endpoints, list):
                 for index, endpoint in enumerate(endpoints):
@@ -146,6 +146,8 @@ def fact_objects(facts: dict[str, Any]) -> Iterator[tuple[str, dict[str, Any]]]:
                     continue
                 binding_where = f"{where}/providers/{name}"
                 yield binding_where, binding
+                if section == "text.catalog":
+                    yield from fast_binding_objects(binding, binding_where)
                 endpoints = binding.get("endpoints", [])
                 if not isinstance(endpoints, list):
                     continue
@@ -392,23 +394,49 @@ def qualification_source_errors(value: dict[str, Any], where: str) -> Iterator[s
                 )
 
 
-def fast_variant_errors(
-    card: dict[str, Any], where: str, providers: dict[str, Any]
-) -> Iterator[str]:
-    variant_providers = fast_variant(card).get("providers")
-    if not isinstance(variant_providers, dict):
+def text_provider_bindings(
+    facts: dict[str, Any],
+) -> Iterator[tuple[str, str, dict[str, Any]]]:
+    text = facts.get("text.catalog")
+    if not isinstance(text, dict):
         return
-    for name, provider in variant_providers.items():
-        if not isinstance(provider, dict):
+    for model_id, card in text.items():
+        providers = card.get("providers") if isinstance(card, dict) else None
+        if isinstance(providers, dict):
+            for name, binding in providers.items():
+                if isinstance(binding, dict):
+                    yield model_id, name, binding
+
+
+def fast_offering_errors(facts: dict[str, Any]) -> Iterator[str]:
+    bindings = list(text_provider_bindings(facts))
+    base_ids = {
+        (name, binding["id"])
+        for _, name, binding in bindings
+        if isinstance(binding.get("id"), str)
+    }
+    offering_ids: set[tuple[str, str]] = set()
+    for model_id, name, binding in bindings:
+        offerings = binding.get("offerings")
+        if not isinstance(offerings, dict):
             continue
-        provider_where = f"{where}/variants/fast/providers/{name}"
-        binding = providers.get(name)
-        call_id = provider.get("id")
-        if not isinstance(binding, dict):
-            yield f"{provider_where}: variant provider has no provider binding"
-        elif isinstance(call_id, str) and call_id == binding.get("id") and not provider.get("request"):
-            yield f"{provider_where}: variant reuses the binding id without a request selector"
-        yield from qualification_source_errors(provider, provider_where)
+        for key, offering in offerings.items():
+            if not isinstance(offering, dict):
+                continue
+            where = f"text.catalog/{model_id}/providers/{name}/offerings/{key}"
+            call_id = offering.get("id")
+            if call_id != key:
+                yield f"{where}: offering id does not match its key"
+            if offering.get("canonical_model_id") != model_id:
+                yield f"{where}: canonical_model_id does not match its containing model"
+            if not isinstance(call_id, str):
+                continue
+            selector = name, call_id
+            if selector in base_ids:
+                yield f"{where}: offering reuses an existing base binding id"
+            if selector in offering_ids:
+                yield f"{where}: duplicate offering id for provider {name!r}"
+            offering_ids.add(selector)
 
 
 def provider_fact_errors(facts: dict[str, Any]) -> Iterator[str]:
@@ -421,6 +449,8 @@ def provider_fact_errors(facts: dict[str, Any]) -> Iterator[str]:
         for where, card in entries:
             if not isinstance(card, dict):
                 continue
+            if any(field in card for field in FAST_BINDING_FIELDS):
+                yield f"{where}: offerings and modes are only supported on text provider bindings"
             direct = card.get("provider")
             if has_illustrative_costs(card) and not (isinstance(direct, str) and direct.strip()):
                 yield f"{where}: card-level illustrative_costs requires a nonempty direct provider"
@@ -429,20 +459,22 @@ def provider_fact_errors(facts: dict[str, Any]) -> Iterator[str]:
             for name, binding in providers.items():
                 if not isinstance(binding, dict):
                     continue
+                binding_where = f"{where}/providers/{name}"
                 provider = binding.get("provider")
                 if has_illustrative_costs(binding) and not (isinstance(provider, str) and provider.strip()):
-                    yield f"{where}/providers/{name}: illustrative_costs requires a nonempty binding provider"
+                    yield f"{binding_where}: illustrative_costs requires a nonempty binding provider"
                 if binding.get("provider") != name:
-                    yield f"{where}/providers/{name}: binding.provider is {binding.get('provider')!r}"
+                    yield f"{binding_where}: binding.provider is {binding.get('provider')!r}"
                 if not binding.get("id"):
-                    yield f"{where}/providers/{name}: binding has no id"
+                    yield f"{binding_where}: binding has no id"
                 if "source_url" in binding:
-                    yield from source_url_errors(binding["source_url"], f"{where}/providers/{name}")
-                yield from qualification_source_errors(binding, f"{where}/providers/{name}")
-            if section == "text.catalog":
-                yield from fast_variant_errors(card, where, providers)
-            elif "variants" in card:
-                yield f"{where}/variants: variants are only supported on text cards"
+                    yield from source_url_errors(binding["source_url"], binding_where)
+                yield from qualification_source_errors(binding, binding_where)
+                if section == "text.catalog":
+                    for fast_where, fast in fast_binding_objects(binding, binding_where):
+                        yield from qualification_source_errors(fast, fast_where)
+                elif any(field in binding for field in FAST_BINDING_FIELDS):
+                    yield f"{binding_where}: offerings and modes are only supported on text provider bindings"
             reference = card.get("reference_provider")
             if isinstance(reference, str) and reference not in providers and reference != direct:
                 yield f"{where}: reference_provider has no provider binding or direct provider"
@@ -563,6 +595,7 @@ def invariant_errors(facts: dict[str, Any]) -> Iterator[str]:
                     continue
 
     yield from provider_fact_errors(facts)
+    yield from fast_offering_errors(facts)
     yield from published_fact_errors(facts)
 
     for exception in sorted(KNOWN_EXCEPTIONS - used_exceptions):

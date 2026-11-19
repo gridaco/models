@@ -206,57 +206,55 @@ Maintain coverage for native APIs, OpenRouter, Vercel and fal media where verifi
 Grida bindings describe only models actually offered by its public service;
 other catalogue models remain useful independently.
 
-### Fast serving mode
+### Text provider offerings and Fast mode
 
-`variants.fast` records a documented Fast serving tier of the same underlying
-text model. Use first-party evidence that identifies both the base model and its
-Fast tier. A provider may call the tier Fast or use another documented name for
-the same tier. Keep distinct underlying models on their own cards.
+A text card records the canonical model. Each provider binding has its own base
+call ID and may also list separately callable IDs in `offerings`. An offering is
+keyed by its exact provider call ID and repeats that value in `id`. It carries its
+own display `label`, first-party `source_url` and `mode`. Its `canonical_model_id`
+points to the containing model card. Keep distinct underlying models on their own
+cards.
 
-`fast` is the only supported key in `variants`. Additional modes require an
-explicit spec change with their own semantics and compatibility review. A separate
-provider tier such as Ultrafast requires its own definition.
+Consumers can index these dedicated offerings by the pair `(provider, id)` for
+exact lookup alongside the base bindings. A dedicated offering's ID is unique
+within its provider across the text catalogue, including base binding IDs. The
+model link comes from `canonical_model_id`. Input endpoints retain their separate
+role in describing supported input variants.
 
-The Fast record has a display `label`, a first-party `source_url` and a nonempty
-`providers` map keyed by existing provider bindings on the card. Each record
-carries the exact callable model `id` and a first-party `source_url`. A provider
-can publish a dedicated call ID or reuse the base binding ID with a request
-selector. `request` is the nonempty, partial provider request body that selects
-Fast. It preserves the provider's field names, values and nesting. The `id` field
-records the model separately from `request`. Reusing the base binding ID requires
-a selector.
-The provider's linked documentation remains authoritative for the complete API.
+When Fast uses the binding's base ID, record it under `modes.fast` on that binding.
+This mode requires a first-party `source_url` and a nonempty `request` selector.
+An offering with a dedicated ID may also include a selector when its provider
+requires one. `request` contains the partial provider request body that selects the
+offering and preserves its exact field names, values and nesting. Omit `model`
+from `request` because the binding or offering already carries the callable ID.
+See the provider's linked documentation for the complete request contract.
 
-For example, GPT-6.2 Sol can use a dedicated Vercel ID and an OpenRouter selector
-on the base ID. Each of these tables is part of the existing text card.
+`fast` is the only mode defined here. Record it when first-party evidence
+identifies the model and its Fast serving tier. Additional modes, including a
+separate tier such as Ultrafast, require their own spec and compatibility review.
+
+GPT-6.2 Sol illustrates the dedicated Vercel offering and the same-ID OpenRouter
+mode. Both tables are part of its existing text card.
 
 ```toml
-[variants.fast]
-label = "Fast"
-source_url = "https://developers.openai.com/api/docs/guides/fast-mode"
-
-[variants.fast.providers.vercel]
+[providers.vercel.offerings."openai/gpt-6.2-sol-fast"]
 id = "openai/gpt-6.2-sol-fast"
+canonical_model_id = "openai/gpt-6.2-sol"
+label = "GPT-6.2 Sol (Fast)"
+mode = "fast"
 source_url = "https://vercel.com/ai-gateway/models/openai/gpt-6.2-sol-fast"
 
-[variants.fast.providers.openrouter]
-id = "openai/gpt-6.2-sol"
+[providers.openrouter.modes.fast]
 source_url = "https://openrouter.ai/api/v1/models/openai/gpt-6.2-sol/endpoints"
 request = { service_tier = "fast", provider = { only = ["openai/fast"] } }
 ```
 
 Use `token_pricing` or `published_pricing`, `limits`, `capabilities` and
-`qualifications` for facts at the variant-provider scope. Each facts object carries
-its own source as usual. Omitted facts remain unrecorded. Base prices, limits and
-capabilities do not establish values for a variant. A request selector describes
-the requested offering. When a provider can fall back, the applied tier and its
-charges follow the provider's documented behavior. Record tier-specific advertised
-prices for the tier actually served.
-
-Cards without `variants` retain their existing shape. `variants.fast` lives on the
-canonical model card alongside its base provider bindings and input endpoints.
-Consumers that display or use Fast should read this optional field explicitly and
-preserve provider-specific selection and price scope.
+`qualifications` for facts at the offering or mode scope. Each facts object
+carries its own source. Omitted facts remain unrecorded. A request selector
+describes the requested tier. When a provider can fall back, the applied tier and
+its charges follow the provider's documented behavior. Record tier-specific
+advertised prices for the tier actually served.
 
 ### Published service prices and contracts
 
