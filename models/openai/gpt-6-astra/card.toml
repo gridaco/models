@@ -301,6 +301,39 @@ endpoints = [
 capabilities = { "source_url" = "https://gateway.grida.ai/v1/models", "image_input" = true, "tools" = true, "reasoning" = true, "structured_output" = true }
 limits = { "source_url" = "https://gateway.grida.ai/v1/models", "context_tokens" = 1050000, "max_output_tokens" = 128000 }
 
+[providers.grida.offerings."openai/gpt-6-astra-fast"]
+id = "openai/gpt-6-astra-fast"
+canonical_model_id = "openai/gpt-6-astra"
+mode = "fast"
+label = "GPT-6 Astra (Fast)"
+source_url = "https://gateway.grida.ai/v1/models"
+
+[providers.grida.offerings."openai/gpt-6-astra-fast".capabilities]
+source_url = "https://gateway.grida.ai/v1/models"
+image_input = false
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.grida.offerings."openai/gpt-6-astra-fast".limits]
+source_url = "https://gateway.grida.ai/v1/models"
+context_tokens = 1050000
+max_output_tokens = 128000
+
+[providers.grida.offerings."openai/gpt-6-astra-fast".published_pricing]
+source_url = "https://gateway.grida.ai/v1/models"
+currency = "USD"
+components = [
+  { id = "input_tokens.0", meter = "input_tokens", unit = "token", per_quantity = "1", when = {}, quantity_rounding = { mode = "none" }, quantity_range = { meter = "total_input_tokens", min = "0", max = "272001" }, usd_per_unit = "0.00002" },
+  { id = "input_tokens.1", meter = "input_tokens", unit = "token", per_quantity = "1", when = {}, quantity_rounding = { mode = "none" }, quantity_range = { meter = "total_input_tokens", min = "272001" }, usd_per_unit = "0.00004" },
+  { id = "cached_input_tokens.0", meter = "cached_input_tokens", unit = "token", per_quantity = "1", when = {}, quantity_rounding = { mode = "none" }, quantity_range = { meter = "total_input_tokens", min = "0", max = "272001" }, usd_per_unit = "0.000002" },
+  { id = "cached_input_tokens.1", meter = "cached_input_tokens", unit = "token", per_quantity = "1", when = {}, quantity_rounding = { mode = "none" }, quantity_range = { meter = "total_input_tokens", min = "272001" }, usd_per_unit = "0.000004" },
+  { id = "output_tokens.0", meter = "output_tokens", unit = "token", per_quantity = "1", when = {}, quantity_rounding = { mode = "none" }, quantity_range = { meter = "total_input_tokens", min = "0", max = "272001" }, usd_per_unit = "0.0001" },
+  { id = "output_tokens.1", meter = "output_tokens", unit = "token", per_quantity = "1", when = {}, quantity_rounding = { mode = "none" }, quantity_range = { meter = "total_input_tokens", min = "272001" }, usd_per_unit = "0.00015" },
+  { id = "cache_write_tokens.0", meter = "cache_write_tokens", unit = "token", per_quantity = "1", when = {}, quantity_rounding = { mode = "none" }, quantity_range = { meter = "total_input_tokens", min = "0", max = "272001" }, usd_per_unit = "0.000025" },
+  { id = "cache_write_tokens.1", meter = "cache_write_tokens", unit = "token", per_quantity = "1", when = {}, quantity_rounding = { mode = "none" }, quantity_range = { meter = "total_input_tokens", min = "272001" }, usd_per_unit = "0.00005" },
+]
+
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/models"

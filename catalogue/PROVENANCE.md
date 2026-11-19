@@ -2091,3 +2091,14 @@ PNG or JPEG reference on edits. Published rates come from model discovery.
 Verified 2026-11-19.
 [Grida model catalogue](https://gateway.grida.ai/v1/models),
 [Grida operation schemas](https://gateway.grida.ai/schemas/operations.json).
+
+## Grida Gateway text Fast mode
+
+Grida Gateway's public model list and individual model details confirm 12
+separately callable Fast IDs on 2026-11-20. Both Chat Completions and Responses
+accept the exact `-fast` IDs with text input. The published capabilities and
+limits describe the Grida API. Each offering records the rates that apply when
+Fast serves the request. GPT offerings include their published long-context
+bands. The API guide describes billing for a verified Standard completion.
+[Model discovery](https://gateway.grida.ai/v1/models),
+[Fast mode API reference](https://gateway.grida.ai/llms.txt#fast-mode).

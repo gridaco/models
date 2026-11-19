@@ -225,6 +225,35 @@ endpoints = [
 capabilities = { "source_url" = "https://gateway.grida.ai/v1/models", "image_input" = true, "tools" = true, "reasoning" = true, "structured_output" = true }
 limits = { "source_url" = "https://gateway.grida.ai/v1/models", "context_tokens" = 1000000, "max_output_tokens" = 128000 }
 
+[providers.grida.offerings."anthropic/claude-opus-5.5-fast"]
+id = "anthropic/claude-opus-5.5-fast"
+canonical_model_id = "anthropic/claude-opus-5.5"
+mode = "fast"
+label = "Claude Opus 5.5 (Fast)"
+source_url = "https://gateway.grida.ai/v1/models"
+
+[providers.grida.offerings."anthropic/claude-opus-5.5-fast".capabilities]
+source_url = "https://gateway.grida.ai/v1/models"
+image_input = false
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.grida.offerings."anthropic/claude-opus-5.5-fast".limits]
+source_url = "https://gateway.grida.ai/v1/models"
+context_tokens = 1000000
+max_output_tokens = 128000
+
+[providers.grida.offerings."anthropic/claude-opus-5.5-fast".published_pricing]
+source_url = "https://gateway.grida.ai/v1/models"
+currency = "USD"
+components = [
+  { id = "input_tokens", meter = "input_tokens", unit = "token", per_quantity = "1", when = {}, quantity_rounding = { mode = "none" }, usd_per_unit = "0.000008" },
+  { id = "cached_input_tokens", meter = "cached_input_tokens", unit = "token", per_quantity = "1", when = {}, quantity_rounding = { mode = "none" }, usd_per_unit = "0.0000004" },
+  { id = "cache_write_tokens", meter = "cache_write_tokens", unit = "token", per_quantity = "1", when = {}, quantity_rounding = { mode = "none" }, usd_per_unit = "0.00001" },
+  { id = "output_tokens", meter = "output_tokens", unit = "token", per_quantity = "1", when = {}, quantity_rounding = { mode = "none" }, usd_per_unit = "0.00004" },
+]
+
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/models"

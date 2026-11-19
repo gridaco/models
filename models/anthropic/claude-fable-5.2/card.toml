@@ -229,6 +229,35 @@ endpoints = [
 capabilities = { "source_url" = "https://gateway.grida.ai/v1/models", "image_input" = true, "tools" = true, "reasoning" = true, "structured_output" = true }
 limits = { "source_url" = "https://gateway.grida.ai/v1/models", "context_tokens" = 1000000, "max_output_tokens" = 128000 }
 
+[providers.grida.offerings."anthropic/claude-fable-5.2-fast"]
+id = "anthropic/claude-fable-5.2-fast"
+canonical_model_id = "anthropic/claude-fable-5.2"
+mode = "fast"
+label = "Claude Fable 5.2 (Fast)"
+source_url = "https://gateway.grida.ai/v1/models"
+
+[providers.grida.offerings."anthropic/claude-fable-5.2-fast".capabilities]
+source_url = "https://gateway.grida.ai/v1/models"
+image_input = false
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.grida.offerings."anthropic/claude-fable-5.2-fast".limits]
+source_url = "https://gateway.grida.ai/v1/models"
+context_tokens = 1000000
+max_output_tokens = 128000
+
+[providers.grida.offerings."anthropic/claude-fable-5.2-fast".published_pricing]
+source_url = "https://gateway.grida.ai/v1/models"
+currency = "USD"
+components = [
+  { id = "input_tokens", meter = "input_tokens", unit = "token", per_quantity = "1", when = {}, quantity_rounding = { mode = "none" }, usd_per_unit = "0.000016" },
+  { id = "cached_input_tokens", meter = "cached_input_tokens", unit = "token", per_quantity = "1", when = {}, quantity_rounding = { mode = "none" }, usd_per_unit = "0.0000004" },
+  { id = "cache_write_tokens", meter = "cache_write_tokens", unit = "token", per_quantity = "1", when = {}, quantity_rounding = { mode = "none" }, usd_per_unit = "0.00002" },
+  { id = "output_tokens", meter = "output_tokens", unit = "token", per_quantity = "1", when = {}, quantity_rounding = { mode = "none" }, usd_per_unit = "0.00008" },
+]
+
 [provider_coverage.grida]
 disposition = "listed"
 source_url = "https://gateway.grida.ai/v1/models"
