@@ -46,6 +46,38 @@ source_url = "https://ai-gateway.vercel.sh/v1/models"
 context_tokens = 1000000
 max_output_tokens = 128000
 
+[providers.vercel.offerings."anthropic/claude-fable-5.2-fast"]
+id = "anthropic/claude-fable-5.2-fast"
+canonical_model_id = "anthropic/claude-fable-5.2"
+mode = "fast"
+label = "Claude Fable 5.2 (Fast)"
+source_url = "https://ai-gateway.vercel.sh/v1/models/anthropic/claude-fable-5.2-fast/endpoints"
+qualifications = [
+  { source_url = "https://vercel.com/docs/ai-gateway/models-and-providers/fast-mode", notes = "Vercel can serve the base route at Standard speed when Fast capacity is unavailable. Fast prices apply when the request was served Fast." },
+  { source_url = "https://vercel.com/changelog/claude-fable-5-2-now-available-on-ai-gateway", notes = "Vercel documents 30-day retention for prompts and completions on Claude Fable 5.2." },
+]
+
+[providers.vercel.offerings."anthropic/claude-fable-5.2-fast".limits]
+source_url = "https://ai-gateway.vercel.sh/v1/models/anthropic/claude-fable-5.2-fast/endpoints"
+context_tokens = 1000000
+max_output_tokens = 128000
+
+[providers.vercel.offerings."anthropic/claude-fable-5.2-fast".capabilities]
+source_url = "https://ai-gateway.vercel.sh/v1/models/anthropic/claude-fable-5.2-fast/endpoints"
+image_input = true
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.vercel.offerings."anthropic/claude-fable-5.2-fast".token_pricing]
+source_url = "https://ai-gateway.vercel.sh/v1/models/anthropic/claude-fable-5.2-fast/endpoints"
+unit = "usd_per_token"
+scope = "Regular global token rates for requests served on the Vercel Fast endpoint. Optional tools and regional premiums are excluded."
+input = "0.000016"
+output = "0.00008"
+input_cache_read = "0.0000004"
+input_cache_write = "0.00002"
+
 [vision_tokenization]
 source_url = "https://platform.claude.com/docs/en/build-with-claude/vision"
 patch_size_px = 28
@@ -81,6 +113,32 @@ source_url = "https://platform.claude.com/docs/en/models/fable-5-2/overview"
 context_tokens = 1000000
 max_output_tokens = 128000
 
+[providers.anthropic.modes.fast]
+source_url = "https://platform.claude.com/docs/en/build-with-claude/fast-mode"
+request = { speed = "fast" }
+qualifications = [
+  { source_url = "https://platform.claude.com/docs/en/models/fable-5-2/overview", notes = "Anthropic documents a 30-day data retention requirement for Claude Fable 5.2, subject to explicit authorization from Anthropic for zero data retention." },
+]
+
+[providers.anthropic.modes.fast.limits]
+source_url = "https://platform.claude.com/docs/en/models/fable-5-2/overview"
+context_tokens = 1000000
+max_output_tokens = 128000
+
+[providers.anthropic.modes.fast.capabilities]
+source_url = "https://platform.claude.com/docs/en/build-with-claude/fast-mode"
+streaming = true
+
+[providers.anthropic.modes.fast.token_pricing]
+source_url = "https://platform.claude.com/docs/en/about-claude/pricing"
+unit = "usd_per_token"
+scope = "Regular global Fast token rates across the full context window. Cache-write rates distinguish five-minute and one-hour retention."
+input = "0.000016"
+output = "0.00008"
+input_cache_read = "0.0000004"
+input_cache_write = "0.00002"
+input_cache_write_1h = "0.000032"
+
 [providers.openrouter]
 provider = "openrouter"
 id = "anthropic/claude-fable-5.2"
@@ -111,6 +169,34 @@ structured_output = true
 source_url = "https://openrouter.ai/api/v1/models"
 context_tokens = 1000000
 max_output_tokens = 128000
+
+[providers.openrouter.modes.fast]
+source_url = "https://openrouter.ai/api/v1/models/anthropic/claude-fable-5.2/endpoints"
+request = { service_tier = "fast", provider = { only = ["anthropic/fast"] } }
+qualifications = [
+  { source_url = "https://openrouter.ai/docs/guides/features/service-tiers", notes = "The provider.only tag selects the anthropic/fast endpoint. OpenRouter reports the tier that actually served the request." },
+]
+
+[providers.openrouter.modes.fast.limits]
+source_url = "https://openrouter.ai/api/v1/models/anthropic/claude-fable-5.2/endpoints"
+context_tokens = 1000000
+max_output_tokens = 128000
+
+[providers.openrouter.modes.fast.capabilities]
+source_url = "https://openrouter.ai/api/v1/models/anthropic/claude-fable-5.2/endpoints"
+tools = true
+reasoning = true
+structured_output = true
+
+[providers.openrouter.modes.fast.token_pricing]
+source_url = "https://openrouter.ai/api/v1/models/anthropic/claude-fable-5.2/endpoints"
+unit = "usd_per_token"
+scope = "Regular token rates for requests served on the OpenRouter Fast endpoint. Optional tools and regional premiums are excluded. Cache-write rates distinguish five-minute and one-hour retention."
+input = "0.000016"
+output = "0.00008"
+input_cache_read = "0.0000004"
+input_cache_write = "0.00002"
+input_cache_write_1h = "0.000032"
 
 [provider_coverage.anthropic]
 disposition = "listed"
