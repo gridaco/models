@@ -11,6 +11,23 @@ An entry linked to an open PR does not mean the change has been released. See
 
 ## Schema v2
 
+### 2026-11-19 — Text cards may describe serving variants
+
+Reference: [#53](https://github.com/gridaco/models/issues/53).
+
+**Change** adds optional `text_card.variants` for named modes under an existing
+model. Each provider record refers to a base binding and records a sourced exact
+call ID, a request selector when the ID is shared, and any published facts scoped
+to that offering. Existing provider endpoints retain their input-variant semantics.
+
+**Compatibility** is additive. Existing cards validate unchanged, and the previous
+v2 schema accepts the new optional text-card property. The v2 envelope, model
+IDs, and existing binding and price fields retain their meanings.
+
+**Migration** is optional for consumers using only existing fields. Consumers that
+display or select a variant should read its exact provider ID and request selector
+and qualify its published rates separately from the base binding.
+
 ### 2026-11-15 — Decision offerings may omit an underlying model
 
 Reference: [#44](https://github.com/gridaco/models/pull/44).

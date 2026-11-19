@@ -206,6 +206,59 @@ Maintain coverage for native APIs, OpenRouter, Vercel and fal media where verifi
 Grida bindings describe only models actually offered by its public service;
 other catalogue models remain useful independently.
 
+### Text serving variants
+
+A text card may carry `variants`, an optional map keyed by a stable `lower_snake_case`
+name within the card. Each variant has a `label`, a first-party `source_url` and
+a nonempty `providers` map keyed by existing provider bindings on that card.
+Use this relationship when a source documents another way to serve the same model,
+such as Fast. Keep distinct underlying models on their own cards. `fast` and
+`ultrafast` identify separate variants when the provider documents separate tiers.
+Assign a provider offering to a variant using the documented relationship to the
+base model and mode. A similar name, marketing claim or observed speed alone is
+insufficient evidence.
+
+A variant's provider record carries the exact callable model `id` and a first-party
+`source_url`. A provider can publish a dedicated call ID or reuse the base binding
+ID with a request selector. `request` is the nonempty, partial provider request
+body that selects the published offering. It preserves the provider's field names,
+values and nesting. Omit the `model` field from `request` because `id` records it
+separately. A variant with the same ID as its provider binding requires a selector.
+For one provider on one card, a call ID and selector can identify only one variant.
+The provider's linked documentation remains authoritative for the complete API.
+
+For example, GPT-6.2 Sol can use a dedicated Vercel ID and an OpenRouter selector
+on the base ID. Each of these tables is part of the existing text card.
+
+```toml
+[variants.fast]
+label = "Fast"
+source_url = "https://developers.openai.com/api/docs/guides/fast-mode"
+
+[variants.fast.providers.vercel]
+id = "openai/gpt-6.2-sol-fast"
+source_url = "https://vercel.com/ai-gateway/models/openai/gpt-6.2-sol-fast"
+
+[variants.fast.providers.openrouter]
+id = "openai/gpt-6.2-sol"
+source_url = "https://openrouter.ai/api/v1/models/openai/gpt-6.2-sol/endpoints"
+request = { service_tier = "fast", provider = { only = ["openai/fast"] } }
+```
+
+Use `token_pricing` or `published_pricing`, `limits`, `capabilities` and
+`qualifications` for facts at the variant-provider scope. Each facts object carries
+its own source as usual. Omitted facts remain unrecorded. Base prices, limits and
+capabilities do not establish values for a variant. A request selector describes
+the requested offering. When a provider can fall back, the applied tier and its
+charges follow the provider's documented behavior. Record tier-specific advertised
+prices for the tier actually served.
+
+Cards without `variants` retain their existing shape. Variant keys do not add
+top-level model IDs, replace base bindings or change the meaning of input endpoints.
+Consumers can continue reading the existing model and provider fields. Consumers
+that display or use variants should read the optional map explicitly and preserve
+provider-specific selection and price scope.
+
 ### Published service prices and contracts
 
 A binding or endpoint may record `published_pricing` with first-party
