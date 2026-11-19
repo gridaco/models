@@ -11,25 +11,24 @@ An entry linked to an open PR does not mean the change has been released. See
 
 ## Schema v2
 
-### 2026-11-19 — Text cards may describe Fast serving mode
+### 2026-11-19 — Text bindings may describe Fast offerings and modes
 
 References [issue #53](https://github.com/gridaco/models/issues/53) and
 [PR #54](https://github.com/gridaco/models/pull/54).
 
-**Change** adds optional `text_card.variants.fast` for the documented Fast serving
-tier of an existing model. The schema accepts `fast` as the only variant key.
-Each provider record refers to a base binding and records a sourced exact call ID,
-a request selector when the ID is shared, and any published facts scoped to Fast.
-Existing provider endpoints retain their input-variant semantics.
+**Change** adds optional `offerings` and `modes` on text provider bindings. A
+dedicated Fast call ID has its own offering record linked to its canonical model.
+Same-ID Fast uses `modes.fast` with a provider request selector. The records carry
+their own sourced serving terms. Existing input endpoints retain their meaning.
 
-**Compatibility** is additive. Existing cards validate unchanged, and the previous
-v2 schema accepts the new optional text-card property. The v2 envelope, model
-IDs, and existing binding and price fields retain their meanings.
+**Compatibility** is additive. Existing cards continue to validate, and the
+previous v2 schema accepts the new optional binding fields. The v2 envelope,
+model IDs and existing binding and price fields retain their meanings.
 
-**Migration** is optional for consumers using only existing fields. Consumers that
-display or select Fast should read its exact provider ID and request selector and
-qualify its published rates separately from the base binding. Future mode keys
-require a compatibility review.
+**Migration** is optional for consumers using existing fields. Consumers that
+offer exact provider-ID lookup can index dedicated `offerings` by provider and
+call ID. Consumers that display same-ID Fast should read `modes.fast` on the base
+binding. Review compatibility before defining additional modes.
 
 ### 2026-11-15 — Decision offerings may omit an underlying model
 
