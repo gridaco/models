@@ -206,25 +206,25 @@ Maintain coverage for native APIs, OpenRouter, Vercel and fal media where verifi
 Grida bindings describe only models actually offered by its public service;
 other catalogue models remain useful independently.
 
-### Text serving variants
+### Fast serving mode
 
-A text card may carry `variants`, an optional map keyed by a stable `lower_snake_case`
-name within the card. Each variant has a `label`, a first-party `source_url` and
-a nonempty `providers` map keyed by existing provider bindings on that card.
-Use this relationship when a source documents another way to serve the same model,
-such as Fast. Keep distinct underlying models on their own cards. `fast` and
-`ultrafast` identify separate variants when the provider documents separate tiers.
-Assign a provider offering to a variant using the documented relationship to the
-base model and mode. A similar name, marketing claim or observed speed alone is
-insufficient evidence.
+`variants.fast` records a documented Fast serving tier of the same underlying
+text model. Use first-party evidence that identifies both the base model and its
+Fast tier. A provider may call the tier Fast or use another documented name for
+the same tier. Keep distinct underlying models on their own cards.
 
-A variant's provider record carries the exact callable model `id` and a first-party
-`source_url`. A provider can publish a dedicated call ID or reuse the base binding
-ID with a request selector. `request` is the nonempty, partial provider request
-body that selects the published offering. It preserves the provider's field names,
-values and nesting. Omit the `model` field from `request` because `id` records it
-separately. A variant with the same ID as its provider binding requires a selector.
-For one provider on one card, a call ID and selector can identify only one variant.
+`fast` is the only supported key in `variants`. Additional modes require an
+explicit spec change with their own semantics and compatibility review. A separate
+provider tier such as Ultrafast requires its own definition.
+
+The Fast record has a display `label`, a first-party `source_url` and a nonempty
+`providers` map keyed by existing provider bindings on the card. Each record
+carries the exact callable model `id` and a first-party `source_url`. A provider
+can publish a dedicated call ID or reuse the base binding ID with a request
+selector. `request` is the nonempty, partial provider request body that selects
+Fast. It preserves the provider's field names, values and nesting. The `id` field
+records the model separately from `request`. Reusing the base binding ID requires
+a selector.
 The provider's linked documentation remains authoritative for the complete API.
 
 For example, GPT-6.2 Sol can use a dedicated Vercel ID and an OpenRouter selector
@@ -253,11 +253,10 @@ the requested offering. When a provider can fall back, the applied tier and its
 charges follow the provider's documented behavior. Record tier-specific advertised
 prices for the tier actually served.
 
-Cards without `variants` retain their existing shape. Variant keys do not add
-top-level model IDs, replace base bindings or change the meaning of input endpoints.
-Consumers can continue reading the existing model and provider fields. Consumers
-that display or use variants should read the optional map explicitly and preserve
-provider-specific selection and price scope.
+Cards without `variants` retain their existing shape. `variants.fast` lives on the
+canonical model card alongside its base provider bindings and input endpoints.
+Consumers that display or use Fast should read this optional field explicitly and
+preserve provider-specific selection and price scope.
 
 ### Published service prices and contracts
 

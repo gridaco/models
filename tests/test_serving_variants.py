@@ -1,4 +1,4 @@
-"""Serving variants retain canonical identity and preserve provider-scoped facts."""
+"""Fast serving facts retain canonical identity and provider scope."""
 
 from copy import deepcopy
 
@@ -101,8 +101,11 @@ def test_native_request_selector_must_be_a_nonempty_object_without_model(catalog
     assert any("/request" in error for error in errors)
 
 
-def test_variant_key_is_lower_snake_case(catalogue_with_variant):
-    catalogue_with_variant["text.catalog"][MODEL_ID]["variants"] = {"Fast-mode": fast_variant()}
+@pytest.mark.parametrize("variant_keys", [(), ("Fast",), ("turbo",), ("fast", "ultrafast")])
+def test_fast_is_the_only_supported_variant(catalogue_with_variant, variant_keys):
+    catalogue_with_variant["text.catalog"][MODEL_ID]["variants"] = {
+        key: fast_variant() for key in variant_keys
+    }
     errors = check.check(catalogue_with_variant, SCHEMA)
     assert any("/variants" in error for error in errors)
 
@@ -112,30 +115,6 @@ def test_serving_variants_are_text_only(catalogue_with_variant):
     image_card["variants"] = {"fast": fast_variant()}
     errors = check.check(catalogue_with_variant, SCHEMA)
     assert any("variants are only supported on text cards" in error for error in errors)
-
-
-def test_provider_can_use_the_same_id_for_distinct_variant_selectors(catalogue_with_variant):
-    variants = catalogue_with_variant["text.catalog"][MODEL_ID]["variants"]
-    ultrafast = fast_variant()
-    router = ultrafast["providers"]["openrouter"]
-    ultrafast["label"] = "Ultrafast"
-    ultrafast["providers"] = {"openrouter": router}
-    router["request"] = {"service_tier": "ultrafast"}
-    variants["ultrafast"] = ultrafast
-
-    assert not check.check(catalogue_with_variant, SCHEMA)
-
-
-def test_exact_duplicate_provider_call_and_selector_is_rejected(catalogue_with_variant):
-    variants = catalogue_with_variant["text.catalog"][MODEL_ID]["variants"]
-    duplicate = fast_variant()
-    router = duplicate["providers"]["openrouter"]
-    duplicate["providers"] = {"openrouter": router}
-    router["request"] = dict(reversed(list(router["request"].items())))
-    variants["fast_again"] = duplicate
-
-    errors = check.check(catalogue_with_variant, SCHEMA)
-    assert any("duplicate variant call ID and request selector" in error for error in errors)
 
 
 def test_variant_prices_validate_provider_sources_and_rate_bands(catalogue_with_variant):

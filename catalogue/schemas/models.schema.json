@@ -411,12 +411,12 @@
         },
         "variants": {
           "type": "object",
-          "minProperties": 1,
-          "propertyNames": {
-            "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$"
-          },
-          "additionalProperties": {
-            "$ref": "#/$defs/serving_variant"
+          "additionalProperties": false,
+          "required": ["fast"],
+          "properties": {
+            "fast": {
+              "$ref": "#/$defs/fast_variant"
+            }
           }
         },
         "cost": {
@@ -462,8 +462,8 @@
         }
       }
     },
-    "serving_variant": {
-      "description": "A named serving variant of the containing text model.",
+    "fast_variant": {
+      "description": "A documented Fast serving tier of the containing text model.",
       "type": "object",
       "additionalProperties": false,
       "required": ["label", "source_url", "providers"],
@@ -481,13 +481,13 @@
           "type": "object",
           "minProperties": 1,
           "additionalProperties": {
-            "$ref": "#/$defs/serving_variant_provider"
+            "$ref": "#/$defs/fast_variant_provider"
           }
         }
       }
     },
-    "serving_variant_provider": {
-      "description": "Provider facts scoped to a variant of the containing model.",
+    "fast_variant_provider": {
+      "description": "Provider facts scoped to Fast serving of the containing model.",
       "type": "object",
       "additionalProperties": false,
       "required": ["id", "source_url"],
