@@ -61,10 +61,19 @@ def build() -> tuple[dict[Path, bytes], list[str]]:
     cards = load_cards(MODELS)
     labs = load_labs(MODELS)
     names = sections()
-    outputs = {
-        MODELS_JSON: dumps(assemble(cards, names, schema_id(), required_sections())).encode(),
-        LABS: dumps(assemble_labs(labs)).encode(),
-    }
+    documents = (
+        (MODELS_JSON, assemble(cards, names, schema_id(), required_sections())),
+        (LABS, assemble_labs(labs)),
+    )
+    outputs = {}
+    for path, document in documents:
+        try:
+            outputs[path] = dumps(document).encode()
+        except (TypeError, ValueError) as error:
+            return {}, [
+                *layout_errors(cards, names),
+                f"{path.relative_to(ROOT)}: cannot generate valid JSON ({error})",
+            ]
     for lab in labs:
         path, name = logo_output(lab), lab.data.get("logo", {}).get("file")
         if path and name in lab.files:

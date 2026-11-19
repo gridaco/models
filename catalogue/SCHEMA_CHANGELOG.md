@@ -20,6 +20,8 @@ References [issue #53](https://github.com/gridaco/models/issues/53) and
 dedicated Fast call ID has its own offering record linked to its canonical model.
 Same-ID Fast uses `modes.fast` with a provider request selector. The records carry
 their own sourced serving terms. Existing input endpoints retain their meaning.
+Generation rejects non-finite numbers, including in nested request selectors,
+before writing catalogue JSON.
 
 **Compatibility** is additive. Existing cards continue to validate, and the
 previous v2 schema accepts the new optional binding fields. The v2 envelope,
