@@ -1,0 +1,81 @@
+id = "microsoft/mai-transcribe-2"
+section = "audio.transcription.models"
+label = "MAI-Transcribe-2"
+short_description = "Multilingual transcription of recorded audio with speaker diarization and word-level timestamps."
+vendor = "microsoft"
+source_url = "https://learn.microsoft.com/en-us/azure/ai-services/speech-service/mai-transcribe"
+type = "transcription"
+modalities = { input = ["audio"], output = ["text"] }
+reference_provider = "azure"
+
+[release]
+date = "2026-09-03"
+basis = "model"
+source_url = "https://microsoft.ai/news/mai-transcribe-2-is-the-fastest-most-accurate-and-cheapest-speech-recognition-model-in-the-world/"
+
+[providers.azure]
+provider = "azure"
+id = "MAI-Transcribe-2"
+url = "https://learn.microsoft.com/en-us/azure/ai-services/speech-service/mai-transcribe"
+source_url = "https://learn.microsoft.com/en-us/azure/ai-services/speech-service/mai-transcribe"
+qualifications = [
+  { source_url = "https://learn.microsoft.com/en-us/azure/ai-services/speech-service/mai-transcribe", notes = "The multipart request selects this model in definition.enhancedMode.model, with enhancedMode.enabled set to true. Azure documents optional diarization, word timestamps, phrase biasing and verbatim or clean output." },
+  { source_url = "https://azure.microsoft.com/en-us/pricing/details/speech/", notes = "The published MAI-Transcribe-2 rate is promotional. A regular Azure rate is unverified." },
+]
+
+[[providers.azure.endpoints]]
+id = "/speechtotext/transcriptions:transcribe?api-version=2025-10-15"
+input = "audio"
+interface = "http"
+source_url = "https://learn.microsoft.com/en-us/rest/api/speechtotext/transcriptions/transcribe?view=rest-speechtotext-2025-10-15"
+
+[providers.vercel]
+provider = "vercel"
+id = "microsoft/mai-transcribe-2"
+url = "https://vercel.com/ai-gateway/models/microsoft/mai-transcribe-2"
+source_url = "https://ai-gateway.vercel.sh/v1/models"
+type = "transcription"
+modalities = { input = ["audio"], output = ["text"] }
+qualifications = [
+  { source_url = "https://vercel.com/ai-gateway/models/microsoft/mai-transcribe-2", notes = "The listed Azure route carries the publicly advertised launch rate. A regular rate for this route is unverified." },
+]
+
+[[providers.vercel.endpoints]]
+id = "/v4/ai/transcription-model"
+input = "audio"
+interface = "http"
+source_url = "https://vercel.com/docs/ai-gateway/modalities/speech-to-text#transcribe-with-the-rest-api"
+
+[providers.openrouter]
+provider = "openrouter"
+id = "microsoft/mai-transcribe-2"
+url = "https://openrouter.ai/microsoft/mai-transcribe-2"
+source_url = "https://openrouter.ai/api/v1/models/microsoft/mai-transcribe-2/endpoints"
+qualifications = [
+  { source_url = "https://openrouter.ai/microsoft/mai-transcribe-2", notes = "The listed Azure route carries the publicly advertised launch rate. A regular rate for this route is unverified." },
+]
+
+[[providers.openrouter.endpoints]]
+id = "/api/v1/audio/transcriptions"
+input = "audio"
+interface = "http"
+source_url = "https://openrouter.ai/openapi.json"
+request_schema_url = "https://openrouter.ai/openapi.json#/components/schemas/STTRequest"
+result_schema_url = "https://openrouter.ai/openapi.json#/components/schemas/STTResponse"
+
+[provider_coverage.azure]
+disposition = "listed"
+source_url = "https://learn.microsoft.com/en-us/azure/ai-services/speech-service/mai-transcribe"
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/microsoft/mai-transcribe-2"
+
+[provider_coverage.openrouter]
+disposition = "listed"
+source_url = "https://openrouter.ai/api/v1/models/microsoft/mai-transcribe-2/endpoints"
+
+[provider_coverage.fal]
+disposition = "not_listed"
+source_url = "https://fal.ai/api/models?keywords=microsoft&size=100"
+reason = "The complete Microsoft search results do not list this model."

@@ -2102,3 +2102,37 @@ Fast serves the request. GPT offerings include their published long-context
 bands. The API guide describes billing for a verified Standard completion.
 [Model discovery](https://gateway.grida.ai/v1/models),
 [Fast mode API reference](https://gateway.grida.ai/llms.txt#fast-mode).
+
+## GPT Transcribe, MAI-Transcribe 2 and Gemini 3.5 Transcribe
+
+OpenAI's API changelog dates exact `gpt-transcribe` to July 28, 2026. The
+model page sets the native rate per minute of input audio. The file API
+reference shows token usage in its example response and defines both duration
+and token variants of `usage`. The card records the published duration price
+and links the response schema without imposing a single usage response shape.
+[OpenAI changelog](https://developers.openai.com/api/docs/changelog),
+[model and pricing](https://developers.openai.com/api/docs/models/gpt-transcribe),
+[file API reference](https://developers.openai.com/api/reference/resources/audio/subresources/transcriptions/methods/create).
+
+Microsoft announced the public preview of MAI-Transcribe 2 on September 3, 2026. Azure Speech selects it through `enhancedMode.model` with the exact value
+`MAI-Transcribe-2`. Azure's advertised initial rate is time-limited. The native
+binding leaves the regular rate unrecorded. Vercel and OpenRouter list the same
+rate and describe pass-through model pricing. Neither source establishes a
+separate regular rate for its MAI-Transcribe 2 binding.
+[Microsoft announcement](https://microsoft.ai/news/mai-transcribe-2-is-the-fastest-most-accurate-and-cheapest-speech-recognition-model-in-the-world/),
+[Azure Speech request guide](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/mai-transcribe),
+[Azure Speech pricing](https://azure.microsoft.com/en-us/pricing/details/speech/),
+[Vercel model pricing](https://vercel.com/ai-gateway/models/microsoft/mai-transcribe-2),
+[Vercel pricing policy](https://vercel.com/docs/ai-gateway/pricing),
+[OpenRouter model pricing](https://openrouter.ai/collections/speech-to-text-models),
+[OpenRouter pricing policy](https://openrouter.ai/pricing).
+
+Google's Developer API changelog dates the exact recorded-audio
+`gemini-3.5-transcribe` ID to August 26, 2026. Google Cloud documents its own
+later GA rollout and a distinct GenerateContent contract. The two APIs publish
+audio input and text output token rates. Minute-based figures in their pricing
+pages are estimates based on assumed token counts.
+[Gemini API changelog](https://aistudio.google.com/docs/changelog#08-26-2026),
+[Gemini API pricing](https://aistudio.google.com/docs/pricing#gemini-3.5-transcribe),
+[Google Cloud model reference](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-5-transcribe),
+[Google Cloud pricing](https://cloud.google.com/model-garden/pricing).
