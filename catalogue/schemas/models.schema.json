@@ -409,6 +409,32 @@
           "type": "integer",
           "minimum": 1
         },
+        "providers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "offerings": {
+                "type": "object",
+                "minProperties": 1,
+                "propertyNames": { "minLength": 1 },
+                "additionalProperties": {
+                  "$ref": "#/$defs/fast_offering"
+                }
+              },
+              "modes": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["fast"],
+                "properties": {
+                  "fast": {
+                    "$ref": "#/$defs/fast_mode"
+                  }
+                }
+              }
+            }
+          }
+        },
         "cost": {
           "type": "object",
           "additionalProperties": false,
@@ -449,6 +475,68 @@
               }
             }
           }
+        }
+      }
+    },
+    "fast_offering": {
+      "description": "A separately callable Fast offering of the containing text model.",
+      "$ref": "#/$defs/fast_facts",
+      "unevaluatedProperties": false,
+      "required": ["id", "canonical_model_id", "mode", "label"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "canonical_model_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mode": { "const": "fast" },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "fast_mode": {
+      "description": "Fast mode selected by request fields on the base binding ID.",
+      "$ref": "#/$defs/fast_facts",
+      "unevaluatedProperties": false,
+      "required": ["request"]
+    },
+    "fast_facts": {
+      "description": "Provider facts scoped to documented Fast serving.",
+      "type": "object",
+      "required": ["source_url"],
+      "properties": {
+        "source_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://[^/]+(?:/|$)"
+        },
+        "request": {
+          "description": "Native request fields and values selecting Fast for this call ID.",
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "not": { "const": "model" }
+          }
+        },
+        "capabilities": {
+          "$ref": "#/$defs/capabilities"
+        },
+        "limits": {
+          "$ref": "#/$defs/limits"
+        },
+        "token_pricing": {
+          "$ref": "#/$defs/token_pricing"
+        },
+        "published_pricing": {
+          "$ref": "#/$defs/published_pricing"
+        },
+        "qualifications": {
+          "$ref": "#/$defs/qualifications"
         }
       }
     },
@@ -1229,30 +1317,33 @@
           "$ref": "#/$defs/published_pricing"
         },
         "qualifications": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "object",
-            "additionalProperties": false,
-            "required": ["source_url", "notes"],
-            "properties": {
-              "source_url": {
-                "type": "string",
-                "format": "uri",
-                "pattern": "^https://[^/]+(?:/|$)"
-              },
-              "notes": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
+          "$ref": "#/$defs/qualifications"
         },
         "decision_contract": {
           "$ref": "#/$defs/decision_contract"
         },
         "illustrative_costs": {
           "$ref": "#/$defs/illustrative_costs"
+        }
+      }
+    },
+    "qualifications": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_url", "notes"],
+        "properties": {
+          "source_url": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://[^/]+(?:/|$)"
+          },
+          "notes": {
+            "type": "string",
+            "minLength": 1
+          }
         }
       }
     },

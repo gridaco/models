@@ -206,6 +206,56 @@ Maintain coverage for native APIs, OpenRouter, Vercel and fal media where verifi
 Grida bindings describe only models actually offered by its public service;
 other catalogue models remain useful independently.
 
+### Text provider offerings and Fast mode
+
+A text card records the canonical model. Each provider binding has its own base
+call ID and may also list separately callable IDs in `offerings`. An offering is
+keyed by its exact provider call ID and repeats that value in `id`. It carries its
+own display `label`, first-party `source_url` and `mode`. Its `canonical_model_id`
+points to the containing model card. Keep distinct underlying models on their own
+cards.
+
+Consumers can index these dedicated offerings by the pair `(provider, id)` for
+exact lookup alongside the base bindings. A dedicated offering's ID is unique
+within its provider across the text catalogue, including base binding IDs. The
+model link comes from `canonical_model_id`. Input endpoints retain their separate
+role in describing supported input variants.
+
+When Fast uses the binding's base ID, record it under `modes.fast` on that binding.
+This mode requires a first-party `source_url` and a nonempty `request` selector.
+An offering with a dedicated ID may also include a selector when its provider
+requires one. `request` contains the partial provider request body that selects the
+offering and preserves its exact field names, values and nesting. Omit `model`
+from `request` because the binding or offering already carries the callable ID.
+See the provider's linked documentation for the complete request contract.
+
+`fast` is the only mode defined here. Record it when first-party evidence
+identifies the model and its Fast serving tier. Additional modes, including a
+separate tier such as Ultrafast, require their own spec and compatibility review.
+
+GPT-6.2 Sol illustrates the dedicated Vercel offering and the same-ID OpenRouter
+mode. Both tables are part of its existing text card.
+
+```toml
+[providers.vercel.offerings."openai/gpt-6.2-sol-fast"]
+id = "openai/gpt-6.2-sol-fast"
+canonical_model_id = "openai/gpt-6.2-sol"
+label = "GPT-6.2 Sol (Fast)"
+mode = "fast"
+source_url = "https://vercel.com/ai-gateway/models/openai/gpt-6.2-sol-fast"
+
+[providers.openrouter.modes.fast]
+source_url = "https://openrouter.ai/api/v1/models/openai/gpt-6.2-sol/endpoints"
+request = { service_tier = "fast", provider = { only = ["openai/fast"] } }
+```
+
+Use `token_pricing` or `published_pricing`, `limits`, `capabilities` and
+`qualifications` for facts at the offering or mode scope. Each facts object
+carries its own source. Omitted facts remain unrecorded. A request selector
+describes the requested tier. When a provider can fall back, the applied tier and
+its charges follow the provider's documented behavior. Record tier-specific
+advertised prices for the tier actually served.
+
 ### Published service prices and contracts
 
 A binding or endpoint may record `published_pricing` with first-party

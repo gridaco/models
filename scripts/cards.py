@@ -258,4 +258,4 @@ def assemble_labs(labs: list[Lab]) -> dict[str, Any]:
 
 
 def dumps(value: dict[str, Any]) -> str:
-    return json.dumps(value, indent=2, ensure_ascii=False) + "\n"
+    return json.dumps(value, indent=2, ensure_ascii=False, allow_nan=False) + "\n"

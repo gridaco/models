@@ -11,6 +11,27 @@ An entry linked to an open PR does not mean the change has been released. See
 
 ## Schema v2
 
+### 2026-11-19 — Text bindings may describe Fast offerings and modes
+
+References [issue #53](https://github.com/gridaco/models/issues/53) and
+[PR #54](https://github.com/gridaco/models/pull/54).
+
+**Change** adds optional `offerings` and `modes` on text provider bindings. A
+dedicated Fast call ID has its own offering record linked to its canonical model.
+Same-ID Fast uses `modes.fast` with a provider request selector. The records carry
+their own sourced serving terms. Existing input endpoints retain their meaning.
+Generation rejects non-finite numbers, including in nested request selectors,
+before writing catalogue JSON.
+
+**Compatibility** is additive. Existing cards continue to validate, and the
+previous v2 schema accepts the new optional binding fields. The v2 envelope,
+model IDs and existing binding and price fields retain their meanings.
+
+**Migration** is optional for consumers using existing fields. Consumers that
+offer exact provider-ID lookup can index dedicated `offerings` by provider and
+call ID. Consumers that display same-ID Fast should read `modes.fast` on the base
+binding. Review compatibility before defining additional modes.
+
 ### 2026-11-15 — Decision offerings may omit an underlying model
 
 Reference: [#44](https://github.com/gridaco/models/pull/44).
