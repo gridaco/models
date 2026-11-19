@@ -1,0 +1,81 @@
+reference_provider = "openai"
+id = "openai/gpt-transcribe"
+section = "audio.transcription.models"
+label = "GPT-Transcribe"
+short_description = "Speech recognition for recorded audio and committed Realtime turns, with context, keyword, and language hints."
+vendor = "openai"
+source_url = "https://developers.openai.com/api/docs/models/gpt-transcribe"
+type = "transcription"
+
+[release]
+date = "2026-07-28"
+basis = "model"
+source_url = "https://developers.openai.com/api/docs/changelog"
+
+[providers.openai]
+provider = "openai"
+id = "gpt-transcribe"
+source_url = "https://developers.openai.com/api/docs/models/gpt-transcribe"
+url = "https://developers.openai.com/api/docs/models/gpt-transcribe"
+qualifications = [
+  { source_url = "https://developers.openai.com/api/docs/guides/speech-to-text", notes = "The file endpoint accepts a multipart recording up to 25 MB. It can return a final transcript or stream the transcript of the uploaded recording using server-sent events." },
+  { source_url = "https://developers.openai.com/api/docs/guides/realtime-transcription#transcribe-a-committed-turn", notes = "In a Realtime transcription session over WebSocket, the model starts transcribing after the audio turn is committed and can report detected languages in the final event." },
+]
+endpoints = [
+  { id = "/v1/audio/transcriptions", input = "audio", interface = "http", source_url = "https://developers.openai.com/api/reference/resources/audio/subresources/transcriptions/methods/create", request_schema_url = "https://raw.githubusercontent.com/openai/openai-openapi/main/openapi.json#/components/schemas/CreateTranscriptionRequest", result_schema_url = "https://raw.githubusercontent.com/openai/openai-openapi/main/openapi.json#/components/schemas/CreateTranscriptionResponseJson" },
+  { id = "/v1/realtime?intent=transcription", input = "audio", interface = "websocket", source_url = "https://developers.openai.com/api/docs/guides/realtime-transcription#transcribe-a-committed-turn" },
+]
+
+[providers.openai.published_pricing]
+source_url = "https://developers.openai.com/api/docs/models/gpt-transcribe"
+currency = "USD"
+components = [{ meter = "input_audio_duration", unit = "minute", usd_per_unit = "0.0045" }]
+
+[providers.vercel]
+provider = "vercel"
+id = "openai/gpt-transcribe"
+source_url = "https://vercel.com/docs/ai-gateway/modalities/speech-to-text"
+url = "https://vercel.com/ai-gateway/models/openai/gpt-transcribe"
+endpoints = [
+  { id = "/v4/ai/transcription-model", input = "audio", interface = "http", source_url = "https://vercel.com/docs/ai-gateway/modalities/speech-to-text#transcribe-with-the-rest-api" },
+]
+
+[providers.vercel.published_pricing]
+source_url = "https://ai-gateway.vercel.sh/v1/models/openai/gpt-transcribe/endpoints"
+currency = "USD"
+components = [{ meter = "input_audio_duration", unit = "second", usd_per_unit = "0.000075" }]
+
+[providers.openrouter]
+provider = "openrouter"
+id = "openai/gpt-transcribe"
+source_url = "https://openrouter.ai/collections/speech-to-text-models"
+url = "https://openrouter.ai/openai/gpt-transcribe"
+endpoints = [
+  { id = "/api/v1/audio/transcriptions", input = "audio", interface = "http", source_url = "https://openrouter.ai/openapi.json", request_schema_url = "https://openrouter.ai/openapi.json#/components/schemas/STTRequest", result_schema_url = "https://openrouter.ai/openapi.json#/components/schemas/STTResponse" },
+]
+
+[providers.openrouter.published_pricing]
+source_url = "https://openrouter.ai/openai/gpt-transcribe"
+currency = "USD"
+components = [{ meter = "input_audio_duration", unit = "second", usd_per_unit = "0.000075" }]
+
+[provider_coverage.fal]
+disposition = "not_listed"
+source_url = "https://fal.ai/api/models?keywords=transcribe&size=100"
+reason = "The public transcription search does not list an exact GPT-Transcribe endpoint."
+
+[provider_coverage.openai]
+disposition = "listed"
+source_url = "https://developers.openai.com/api/docs/models/gpt-transcribe"
+
+[provider_coverage.openrouter]
+disposition = "listed"
+source_url = "https://openrouter.ai/api/v1/models/openai/gpt-transcribe/endpoints"
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://ai-gateway.vercel.sh/v1/models/openai/gpt-transcribe/endpoints"
+
+[modalities]
+input = ["audio"]
+output = ["text"]

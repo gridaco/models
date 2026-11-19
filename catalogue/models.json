@@ -34758,6 +34758,456 @@
     }
   },
   "audio.transcription.models": {
+    "google/gemini-3.5-transcribe": {
+      "id": "google/gemini-3.5-transcribe",
+      "label": "Gemini 3.5 Transcribe",
+      "short_description": "Recorded speech transcription with automatic language detection, speaker diarization, word-level timestamps and custom vocabulary.",
+      "vendor": "google",
+      "source_url": "https://aistudio.google.com/docs/models/gemini-3.5-transcribe",
+      "type": "transcription",
+      "reference_provider": "google",
+      "release": {
+        "date": "2026-08-26",
+        "basis": "model",
+        "source_url": "https://aistudio.google.com/docs/changelog#08-26-2026"
+      },
+      "modalities": {
+        "input": [
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "providers": {
+        "google": {
+          "provider": "google",
+          "id": "gemini-3.5-transcribe",
+          "source_url": "https://aistudio.google.com/docs/transcribe",
+          "url": "https://aistudio.google.com/docs/models/gemini-3.5-transcribe",
+          "endpoints": [
+            {
+              "id": "/v1beta/interactions",
+              "input": "audio",
+              "interface": "http",
+              "source_url": "https://aistudio.google.com/docs/transcribe"
+            }
+          ],
+          "qualifications": [
+            {
+              "source_url": "https://aistudio.google.com/docs/models/gemini-3.5-transcribe",
+              "notes": "Recorded audio is limited to one hour per request, or 30 minutes with speaker diarization or word-level timestamps."
+            },
+            {
+              "source_url": "https://aistudio.google.com/docs/pricing#gemini-3.5-transcribe",
+              "notes": "The published per-minute amounts are estimates based on assumed input and output token counts. Paid Standard rates are token-based."
+            }
+          ],
+          "published_pricing": {
+            "source_url": "https://aistudio.google.com/docs/pricing#gemini-3.5-transcribe",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "input_audio_tokens",
+                "unit": "token",
+                "usd_per_unit": "0.000002"
+              },
+              {
+                "meter": "output_text_tokens",
+                "unit": "token",
+                "usd_per_unit": "0.000012"
+              }
+            ]
+          }
+        },
+        "vertex": {
+          "provider": "vertex",
+          "id": "gemini-3.5-transcribe",
+          "source_url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-5-transcribe",
+          "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-5-transcribe",
+          "endpoints": [
+            {
+              "id": "/v1/{model}:generateContent",
+              "input": "audio",
+              "interface": "http",
+              "source_url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/reference/rest/v1/projects.locations.publishers.models/generateContent"
+            }
+          ],
+          "qualifications": [
+            {
+              "source_url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-5-transcribe#synchronous-transcription",
+              "notes": "Google Cloud's Gemini Enterprise Agent Platform uses GenerateContent with AudioTranscriptionConfig for recordings."
+            },
+            {
+              "source_url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-5-transcribe#feature-support-and-limitations",
+              "notes": "The Cloud model reference specifies a 15-minute audio limit when enabling diarization or timestamps."
+            },
+            {
+              "source_url": "https://cloud.google.com/model-garden/pricing",
+              "notes": "The blended amount per audio minute is estimated. Standard pay-as-you-go bills audio input and text output tokens."
+            }
+          ],
+          "published_pricing": {
+            "source_url": "https://cloud.google.com/model-garden/pricing",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "input_audio_tokens",
+                "unit": "token",
+                "usd_per_unit": "0.000002"
+              },
+              {
+                "meter": "output_text_tokens",
+                "unit": "token",
+                "usd_per_unit": "0.000012"
+              }
+            ]
+          }
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "google/gemini-3.5-transcribe",
+          "source_url": "https://vercel.com/ai-gateway/models/google/gemini-3.5-transcribe",
+          "url": "https://vercel.com/ai-gateway/models/google/gemini-3.5-transcribe",
+          "type": "transcription",
+          "endpoints": [
+            {
+              "id": "/v4/ai/transcription-model",
+              "input": "audio",
+              "interface": "http",
+              "source_url": "https://vercel.com/docs/ai-gateway/modalities/speech-to-text#transcribe-with-the-rest-api"
+            }
+          ],
+          "published_pricing": {
+            "source_url": "https://ai-gateway.vercel.sh/v1/models/google/gemini-3.5-transcribe/endpoints",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "input_audio_tokens",
+                "unit": "token",
+                "usd_per_unit": "0.000002"
+              },
+              {
+                "meter": "output_text_tokens",
+                "unit": "token",
+                "usd_per_unit": "0.000012"
+              }
+            ]
+          }
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "google/gemini-3.5-transcribe",
+          "source_url": "https://openrouter.ai/google/gemini-3.5-transcribe",
+          "url": "https://openrouter.ai/google/gemini-3.5-transcribe",
+          "endpoints": [
+            {
+              "id": "/api/v1/audio/transcriptions",
+              "input": "audio",
+              "interface": "http",
+              "source_url": "https://openrouter.ai/openapi.json",
+              "request_schema_url": "https://openrouter.ai/openapi.json#/components/schemas/STTRequest",
+              "result_schema_url": "https://openrouter.ai/openapi.json#/components/schemas/STTResponse"
+            }
+          ],
+          "published_pricing": {
+            "source_url": "https://openrouter.ai/api/v1/models/google/gemini-3.5-transcribe/endpoints",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "input_tokens",
+                "unit": "token",
+                "usd_per_unit": "0.000002"
+              },
+              {
+                "meter": "output_tokens",
+                "unit": "token",
+                "usd_per_unit": "0.000012"
+              }
+            ]
+          }
+        }
+      },
+      "provider_coverage": {
+        "google": {
+          "disposition": "listed",
+          "source_url": "https://aistudio.google.com/docs/transcribe"
+        },
+        "vertex": {
+          "disposition": "listed",
+          "source_url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-5-transcribe"
+        },
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/google/gemini-3.5-transcribe"
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/google/gemini-3.5-transcribe"
+        },
+        "fal": {
+          "disposition": "not_listed",
+          "source_url": "https://fal.ai/api/models?keywords=transcribe&size=100",
+          "reason": "The public transcription search does not list this Google model."
+        }
+      }
+    },
+    "microsoft/mai-transcribe-2": {
+      "id": "microsoft/mai-transcribe-2",
+      "label": "MAI-Transcribe-2",
+      "short_description": "Multilingual transcription of recorded audio with speaker diarization and word-level timestamps.",
+      "vendor": "microsoft",
+      "source_url": "https://learn.microsoft.com/en-us/azure/ai-services/speech-service/mai-transcribe",
+      "type": "transcription",
+      "modalities": {
+        "input": [
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "reference_provider": "azure",
+      "release": {
+        "date": "2026-09-03",
+        "basis": "model",
+        "source_url": "https://microsoft.ai/news/mai-transcribe-2-is-the-fastest-most-accurate-and-cheapest-speech-recognition-model-in-the-world/"
+      },
+      "providers": {
+        "azure": {
+          "provider": "azure",
+          "id": "MAI-Transcribe-2",
+          "url": "https://learn.microsoft.com/en-us/azure/ai-services/speech-service/mai-transcribe",
+          "source_url": "https://learn.microsoft.com/en-us/azure/ai-services/speech-service/mai-transcribe",
+          "qualifications": [
+            {
+              "source_url": "https://learn.microsoft.com/en-us/azure/ai-services/speech-service/mai-transcribe",
+              "notes": "The multipart request selects this model in definition.enhancedMode.model, with enhancedMode.enabled set to true. Azure documents optional diarization, word timestamps, phrase biasing and verbatim or clean output."
+            },
+            {
+              "source_url": "https://azure.microsoft.com/en-us/pricing/details/speech/",
+              "notes": "The published MAI-Transcribe-2 rate is promotional. A regular Azure rate is unverified."
+            }
+          ],
+          "endpoints": [
+            {
+              "id": "/speechtotext/transcriptions:transcribe?api-version=2025-10-15",
+              "input": "audio",
+              "interface": "http",
+              "source_url": "https://learn.microsoft.com/en-us/rest/api/speechtotext/transcriptions/transcribe?view=rest-speechtotext-2025-10-15"
+            }
+          ]
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "microsoft/mai-transcribe-2",
+          "url": "https://vercel.com/ai-gateway/models/microsoft/mai-transcribe-2",
+          "source_url": "https://ai-gateway.vercel.sh/v1/models",
+          "type": "transcription",
+          "modalities": {
+            "input": [
+              "audio"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "qualifications": [
+            {
+              "source_url": "https://vercel.com/ai-gateway/models/microsoft/mai-transcribe-2",
+              "notes": "The listed Azure route carries the publicly advertised launch rate. A regular rate for this route is unverified."
+            }
+          ],
+          "endpoints": [
+            {
+              "id": "/v4/ai/transcription-model",
+              "input": "audio",
+              "interface": "http",
+              "source_url": "https://vercel.com/docs/ai-gateway/modalities/speech-to-text#transcribe-with-the-rest-api"
+            }
+          ]
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "microsoft/mai-transcribe-2",
+          "url": "https://openrouter.ai/microsoft/mai-transcribe-2",
+          "source_url": "https://openrouter.ai/api/v1/models/microsoft/mai-transcribe-2/endpoints",
+          "qualifications": [
+            {
+              "source_url": "https://openrouter.ai/microsoft/mai-transcribe-2",
+              "notes": "The listed Azure route carries the publicly advertised launch rate. A regular rate for this route is unverified."
+            }
+          ],
+          "endpoints": [
+            {
+              "id": "/api/v1/audio/transcriptions",
+              "input": "audio",
+              "interface": "http",
+              "source_url": "https://openrouter.ai/openapi.json",
+              "request_schema_url": "https://openrouter.ai/openapi.json#/components/schemas/STTRequest",
+              "result_schema_url": "https://openrouter.ai/openapi.json#/components/schemas/STTResponse"
+            }
+          ]
+        }
+      },
+      "provider_coverage": {
+        "azure": {
+          "disposition": "listed",
+          "source_url": "https://learn.microsoft.com/en-us/azure/ai-services/speech-service/mai-transcribe"
+        },
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/microsoft/mai-transcribe-2"
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/api/v1/models/microsoft/mai-transcribe-2/endpoints"
+        },
+        "fal": {
+          "disposition": "not_listed",
+          "source_url": "https://fal.ai/api/models?keywords=microsoft&size=100",
+          "reason": "The complete Microsoft search results do not list this model."
+        }
+      }
+    },
+    "openai/gpt-transcribe": {
+      "reference_provider": "openai",
+      "id": "openai/gpt-transcribe",
+      "label": "GPT-Transcribe",
+      "short_description": "Speech recognition for recorded audio and committed Realtime turns, with context, keyword, and language hints.",
+      "vendor": "openai",
+      "source_url": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+      "type": "transcription",
+      "release": {
+        "date": "2026-07-28",
+        "basis": "model",
+        "source_url": "https://developers.openai.com/api/docs/changelog"
+      },
+      "providers": {
+        "openai": {
+          "provider": "openai",
+          "id": "gpt-transcribe",
+          "source_url": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+          "url": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+          "qualifications": [
+            {
+              "source_url": "https://developers.openai.com/api/docs/guides/speech-to-text",
+              "notes": "The file endpoint accepts a multipart recording up to 25 MB. It can return a final transcript or stream the transcript of the uploaded recording using server-sent events."
+            },
+            {
+              "source_url": "https://developers.openai.com/api/docs/guides/realtime-transcription#transcribe-a-committed-turn",
+              "notes": "In a Realtime transcription session over WebSocket, the model starts transcribing after the audio turn is committed and can report detected languages in the final event."
+            }
+          ],
+          "endpoints": [
+            {
+              "id": "/v1/audio/transcriptions",
+              "input": "audio",
+              "interface": "http",
+              "source_url": "https://developers.openai.com/api/reference/resources/audio/subresources/transcriptions/methods/create",
+              "request_schema_url": "https://raw.githubusercontent.com/openai/openai-openapi/main/openapi.json#/components/schemas/CreateTranscriptionRequest",
+              "result_schema_url": "https://raw.githubusercontent.com/openai/openai-openapi/main/openapi.json#/components/schemas/CreateTranscriptionResponseJson"
+            },
+            {
+              "id": "/v1/realtime?intent=transcription",
+              "input": "audio",
+              "interface": "websocket",
+              "source_url": "https://developers.openai.com/api/docs/guides/realtime-transcription#transcribe-a-committed-turn"
+            }
+          ],
+          "published_pricing": {
+            "source_url": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "input_audio_duration",
+                "unit": "minute",
+                "usd_per_unit": "0.0045"
+              }
+            ]
+          }
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "openai/gpt-transcribe",
+          "source_url": "https://vercel.com/docs/ai-gateway/modalities/speech-to-text",
+          "url": "https://vercel.com/ai-gateway/models/openai/gpt-transcribe",
+          "endpoints": [
+            {
+              "id": "/v4/ai/transcription-model",
+              "input": "audio",
+              "interface": "http",
+              "source_url": "https://vercel.com/docs/ai-gateway/modalities/speech-to-text#transcribe-with-the-rest-api"
+            }
+          ],
+          "published_pricing": {
+            "source_url": "https://ai-gateway.vercel.sh/v1/models/openai/gpt-transcribe/endpoints",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "input_audio_duration",
+                "unit": "second",
+                "usd_per_unit": "0.000075"
+              }
+            ]
+          }
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "openai/gpt-transcribe",
+          "source_url": "https://openrouter.ai/collections/speech-to-text-models",
+          "url": "https://openrouter.ai/openai/gpt-transcribe",
+          "endpoints": [
+            {
+              "id": "/api/v1/audio/transcriptions",
+              "input": "audio",
+              "interface": "http",
+              "source_url": "https://openrouter.ai/openapi.json",
+              "request_schema_url": "https://openrouter.ai/openapi.json#/components/schemas/STTRequest",
+              "result_schema_url": "https://openrouter.ai/openapi.json#/components/schemas/STTResponse"
+            }
+          ],
+          "published_pricing": {
+            "source_url": "https://openrouter.ai/openai/gpt-transcribe",
+            "currency": "USD",
+            "components": [
+              {
+                "meter": "input_audio_duration",
+                "unit": "second",
+                "usd_per_unit": "0.000075"
+              }
+            ]
+          }
+        }
+      },
+      "provider_coverage": {
+        "fal": {
+          "disposition": "not_listed",
+          "source_url": "https://fal.ai/api/models?keywords=transcribe&size=100",
+          "reason": "The public transcription search does not list an exact GPT-Transcribe endpoint."
+        },
+        "openai": {
+          "disposition": "listed",
+          "source_url": "https://developers.openai.com/api/docs/models/gpt-transcribe"
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/api/v1/models/openai/gpt-transcribe/endpoints"
+        },
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://ai-gateway.vercel.sh/v1/models/openai/gpt-transcribe/endpoints"
+        }
+      },
+      "modalities": {
+        "input": [
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      }
+    },
     "scribe_v1": {
       "reference_provider": "elevenlabs",
       "id": "scribe_v1",

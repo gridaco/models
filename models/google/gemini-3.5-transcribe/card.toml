@@ -1,0 +1,116 @@
+id = "google/gemini-3.5-transcribe"
+section = "audio.transcription.models"
+label = "Gemini 3.5 Transcribe"
+short_description = "Recorded speech transcription with automatic language detection, speaker diarization, word-level timestamps and custom vocabulary."
+vendor = "google"
+source_url = "https://aistudio.google.com/docs/models/gemini-3.5-transcribe"
+type = "transcription"
+reference_provider = "google"
+
+[release]
+date = "2026-08-26"
+basis = "model"
+source_url = "https://aistudio.google.com/docs/changelog#08-26-2026"
+
+[modalities]
+input = ["audio"]
+output = ["text"]
+
+[providers.google]
+provider = "google"
+id = "gemini-3.5-transcribe"
+source_url = "https://aistudio.google.com/docs/transcribe"
+url = "https://aistudio.google.com/docs/models/gemini-3.5-transcribe"
+endpoints = [
+  { id = "/v1beta/interactions", input = "audio", interface = "http", source_url = "https://aistudio.google.com/docs/transcribe" },
+]
+qualifications = [
+  { source_url = "https://aistudio.google.com/docs/models/gemini-3.5-transcribe", notes = "Recorded audio is limited to one hour per request, or 30 minutes with speaker diarization or word-level timestamps." },
+  { source_url = "https://aistudio.google.com/docs/pricing#gemini-3.5-transcribe", notes = "The published per-minute amounts are estimates based on assumed input and output token counts. Paid Standard rates are token-based." },
+]
+
+[providers.google.published_pricing]
+source_url = "https://aistudio.google.com/docs/pricing#gemini-3.5-transcribe"
+currency = "USD"
+components = [
+  { meter = "input_audio_tokens", unit = "token", usd_per_unit = "0.000002" },
+  { meter = "output_text_tokens", unit = "token", usd_per_unit = "0.000012" },
+]
+
+[providers.vertex]
+provider = "vertex"
+id = "gemini-3.5-transcribe"
+source_url = "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-5-transcribe"
+url = "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-5-transcribe"
+endpoints = [
+  { id = "/v1/{model}:generateContent", input = "audio", interface = "http", source_url = "https://docs.cloud.google.com/gemini-enterprise-agent-platform/reference/rest/v1/projects.locations.publishers.models/generateContent" },
+]
+qualifications = [
+  { source_url = "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-5-transcribe#synchronous-transcription", notes = "Google Cloud's Gemini Enterprise Agent Platform uses GenerateContent with AudioTranscriptionConfig for recordings." },
+  { source_url = "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-5-transcribe#feature-support-and-limitations", notes = "The Cloud model reference specifies a 15-minute audio limit when enabling diarization or timestamps." },
+  { source_url = "https://cloud.google.com/model-garden/pricing", notes = "The blended amount per audio minute is estimated. Standard pay-as-you-go bills audio input and text output tokens." },
+]
+
+[providers.vertex.published_pricing]
+source_url = "https://cloud.google.com/model-garden/pricing"
+currency = "USD"
+components = [
+  { meter = "input_audio_tokens", unit = "token", usd_per_unit = "0.000002" },
+  { meter = "output_text_tokens", unit = "token", usd_per_unit = "0.000012" },
+]
+
+[providers.vercel]
+provider = "vercel"
+id = "google/gemini-3.5-transcribe"
+source_url = "https://vercel.com/ai-gateway/models/google/gemini-3.5-transcribe"
+url = "https://vercel.com/ai-gateway/models/google/gemini-3.5-transcribe"
+type = "transcription"
+endpoints = [
+  { id = "/v4/ai/transcription-model", input = "audio", interface = "http", source_url = "https://vercel.com/docs/ai-gateway/modalities/speech-to-text#transcribe-with-the-rest-api" },
+]
+
+[providers.vercel.published_pricing]
+source_url = "https://ai-gateway.vercel.sh/v1/models/google/gemini-3.5-transcribe/endpoints"
+currency = "USD"
+components = [
+  { meter = "input_audio_tokens", unit = "token", usd_per_unit = "0.000002" },
+  { meter = "output_text_tokens", unit = "token", usd_per_unit = "0.000012" },
+]
+
+[providers.openrouter]
+provider = "openrouter"
+id = "google/gemini-3.5-transcribe"
+source_url = "https://openrouter.ai/google/gemini-3.5-transcribe"
+url = "https://openrouter.ai/google/gemini-3.5-transcribe"
+endpoints = [
+  { id = "/api/v1/audio/transcriptions", input = "audio", interface = "http", source_url = "https://openrouter.ai/openapi.json", request_schema_url = "https://openrouter.ai/openapi.json#/components/schemas/STTRequest", result_schema_url = "https://openrouter.ai/openapi.json#/components/schemas/STTResponse" },
+]
+
+[providers.openrouter.published_pricing]
+source_url = "https://openrouter.ai/api/v1/models/google/gemini-3.5-transcribe/endpoints"
+currency = "USD"
+components = [
+  { meter = "input_tokens", unit = "token", usd_per_unit = "0.000002" },
+  { meter = "output_tokens", unit = "token", usd_per_unit = "0.000012" },
+]
+
+[provider_coverage.google]
+disposition = "listed"
+source_url = "https://aistudio.google.com/docs/transcribe"
+
+[provider_coverage.vertex]
+disposition = "listed"
+source_url = "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-5-transcribe"
+
+[provider_coverage.vercel]
+disposition = "listed"
+source_url = "https://vercel.com/ai-gateway/models/google/gemini-3.5-transcribe"
+
+[provider_coverage.openrouter]
+disposition = "listed"
+source_url = "https://openrouter.ai/google/gemini-3.5-transcribe"
+
+[provider_coverage.fal]
+disposition = "not_listed"
+source_url = "https://fal.ai/api/models?keywords=transcribe&size=100"
+reason = "The public transcription search does not list this Google model."
