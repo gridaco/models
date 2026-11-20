@@ -2143,3 +2143,46 @@ pages are estimates based on assumed token counts.
 [Gemini API pricing](https://aistudio.google.com/docs/pricing#gemini-3.5-transcribe),
 [Google Cloud model reference](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-5-transcribe),
 [Google Cloud pricing](https://cloud.google.com/model-garden/pricing).
+
+## `google/gemini-4-neon`
+
+Google announced paid Gemini API availability for the exact model on November 18, 2026. The Developer API is the reference binding. It accepts text, images, video,
+audio and PDF and returns text. Its 1,048,576-token window is shared across input,
+thinking and output. The 65,536-token output limit includes thinking and applies
+per foreground segment with or without streaming. Longer generation uses
+continuation or background execution within the shared window.
+[Google launch](https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/),
+[model specification](https://aistudio.google.com/docs/models/gemini-4-neon),
+[long decode](https://aistudio.google.com/docs/long-decode).
+
+As verified on November 20, 2026, Google, Vercel and OpenRouter independently
+publish regular Standard rates of $3 input, $15 output and $0.15 cached input per
+million tokens. Google bills thinking at the output rate and uses implicit caching
+on eligible prompts of at least 4,096 tokens. Search and Maps grounding have
+separate charges. Google Cloud has a separate regional and service-tier schedule
+with future cache-write pricing. OpenRouter exposes a cache-write amount, but its
+applicable operation, TTL and billing basis for Neon remain unverified, so the
+card records only cache reads.
+[Google pricing](https://aistudio.google.com/docs/pricing#gemini-4-neon),
+[Google migration guide](https://aistudio.google.com/docs/whats-new-gemini-4-neon),
+[Google Cloud pricing](https://cloud.google.com/model-garden/pricing),
+[Vercel endpoint discovery](https://ai-gateway.vercel.sh/v1/models/google/gemini-4-neon/endpoints),
+[OpenRouter endpoint discovery](https://openrouter.ai/api/v1/models/google/gemini-4-neon/endpoints).
+
+Vercel advertises a 1,000,000-token output ceiling in discovery. Its synchronous
+limit and default reasoning effort remain unverified. OpenRouter advertises
+943,718 max completion tokens in model discovery and on its Standard Google
+Vertex route. Its Standard Google AI Studio route advertises 65,536. All three
+providers list low, medium, high and xhigh reasoning. Google defaults to high and
+OpenRouter lists mandatory reasoning with a medium default.
+[Google migration guide](https://aistudio.google.com/docs/whats-new-gemini-4-neon),
+[Vercel model discovery](https://ai-gateway.vercel.sh/v1/models),
+[Vercel endpoint discovery](https://ai-gateway.vercel.sh/v1/models/google/gemini-4-neon/endpoints),
+[OpenRouter model discovery](https://openrouter.ai/api/v1/models),
+[OpenRouter endpoint discovery](https://openrouter.ai/api/v1/models/google/gemini-4-neon/endpoints).
+
+Image token budgets are approximate and follow Google's Gemini 4
+media-resolution table. Per-image `ultra_high` reaches 2,240 tokens. Google
+lists the accepted image MIME types separately.
+[Media resolution](https://aistudio.google.com/docs/media-resolution#token-counts),
+[image formats](https://aistudio.google.com/docs/image-understanding#supported-formats).
