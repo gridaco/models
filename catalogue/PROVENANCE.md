@@ -2186,3 +2186,20 @@ media-resolution table. Per-image `ultra_high` reaches 2,240 tokens. Google
 lists the accepted image MIME types separately.
 [Media resolution](https://aistudio.google.com/docs/media-resolution#token-counts),
 [image formats](https://aistudio.google.com/docs/image-understanding#supported-formats).
+
+### Grida Gemini 4 Neon discovery — 2026-11-21
+
+Grida lists `google/gemini-4-neon` for Chat Completions and Responses. Both
+interfaces accept text and image input with reasoning and streaming and return
+text. Function tools and JSON output modes are unavailable. The shared context
+window is 1,000,000 tokens. The 65,536-token output cap includes thinking and
+the default output allowance is 32,768 tokens. Explicit reasoning effort accepts
+`low`, `medium`, `high` and `xhigh`.
+[Grida model details](https://gateway.grida.ai/v1/models/google/gemini-4-neon),
+[Grida API reference](https://gateway.grida.ai/llms.txt).
+
+Grida publishes regular rates of $3 input, $0.15 cached input and $15 output
+per million tokens. The binding records these as exact USD-per-token rates.
+Each component uses one-token quantities with no additional rounding.
+[Grida model discovery](https://gateway.grida.ai/v1/models),
+[Grida model details](https://gateway.grida.ai/v1/models/google/gemini-4-neon).
