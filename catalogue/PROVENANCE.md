@@ -2114,6 +2114,13 @@ and links the response schema without imposing a single usage response shape.
 [model and pricing](https://developers.openai.com/api/docs/models/gpt-transcribe),
 [file API reference](https://developers.openai.com/api/reference/resources/audio/subresources/transcriptions/methods/create).
 
+Grida Gateway's public API lists `openai/gpt-transcribe` for recorded audio,
+verified on 2026-11-20. Its multipart endpoint takes one mono PCM16 WAV at
+16 kHz, up to 300 seconds within a 10 MiB request, and returns the final text
+as JSON. Grida publishes a regular price of USD 0.000075 per started second.
+[Grida model details](https://gateway.grida.ai/v1/models/openai/gpt-transcribe) ·
+[Grida operation schemas](https://gateway.grida.ai/schemas/operations.json).
+
 Microsoft announced the public preview of MAI-Transcribe 2 on September 3, 2026. Azure Speech selects it through `enhancedMode.model` with the exact value
 `MAI-Transcribe-2`. Azure's advertised initial rate is time-limited. The native
 binding leaves the regular rate unrecorded. Vercel and OpenRouter list the same

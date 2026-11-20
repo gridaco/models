@@ -59,10 +59,31 @@ source_url = "https://openrouter.ai/openai/gpt-transcribe"
 currency = "USD"
 components = [{ meter = "input_audio_duration", unit = "second", usd_per_unit = "0.000075" }]
 
+[providers.grida]
+provider = "grida"
+id = "openai/gpt-transcribe"
+url = "https://gateway.grida.ai/v1/models"
+
+[[providers.grida.endpoints]]
+id = "transcription.openai.gpt-transcribe"
+operation = "transcription.openai.gpt-transcribe"
+input = "audio"
+source_url = "https://gateway.grida.ai/schemas/operations.json"
+request_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/transcription.openai.gpt-transcribe.input"
+result_schema_url = "https://gateway.grida.ai/schemas/operations.json#/$defs/transcription.openai.gpt-transcribe.result"
+interface = "audio.transcriptions"
+published_pricing = { source_url = "https://gateway.grida.ai/v1/models", currency = "USD", components = [
+  { id = "audio_seconds", meter = "audio_seconds", unit = "second", per_quantity = "1", when = {}, quantity_rounding = { mode = "ceil", increment = "1" }, usd_per_unit = "0.000075" },
+] }
+
 [provider_coverage.fal]
 disposition = "not_listed"
 source_url = "https://fal.ai/api/models?keywords=transcribe&size=100"
 reason = "The public transcription search does not list an exact GPT-Transcribe endpoint."
+
+[provider_coverage.grida]
+disposition = "listed"
+source_url = "https://gateway.grida.ai/v1/models"
 
 [provider_coverage.openai]
 disposition = "listed"
