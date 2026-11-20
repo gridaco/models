@@ -4220,6 +4220,238 @@
         }
       }
     },
+    "google/gemini-4-neon": {
+      "id": "google/gemini-4-neon",
+      "vendor": "google",
+      "reference_provider": "google",
+      "label": "Gemini 4 Neon",
+      "type": "language",
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio",
+          "pdf"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "source_url": "https://aistudio.google.com/docs/models/gemini-4-neon",
+      "multimodal": true,
+      "image_input_mimes": [
+        "image/png",
+        "image/jpeg",
+        "image/webp",
+        "image/heic",
+        "image/heif"
+      ],
+      "tool_call": true,
+      "context_window": 1048576,
+      "output_limit": 65536,
+      "cost": {
+        "input": 3,
+        "output": 15,
+        "cache_read": 0.15
+      },
+      "release": {
+        "date": "2026-11-18",
+        "basis": "model",
+        "source_url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/"
+      },
+      "vision_tokenization": {
+        "source_url": "https://aistudio.google.com/docs/media-resolution",
+        "maximum_tokens_per_image": 2240,
+        "token_counts_approximate": true,
+        "detail_token_budgets": {
+          "unspecified": 1120,
+          "low": 280,
+          "medium": 560,
+          "high": 1120,
+          "ultra_high": 2240
+        }
+      },
+      "providers": {
+        "google": {
+          "provider": "google",
+          "id": "gemini-4-neon",
+          "url": "https://aistudio.google.com/docs/models/gemini-4-neon",
+          "source_url": "https://aistudio.google.com/docs/models/gemini-4-neon",
+          "endpoints": [
+            {
+              "id": "gemini-4-neon",
+              "input": "text",
+              "source_url": "https://aistudio.google.com/docs/models/gemini-4-neon"
+            }
+          ],
+          "qualifications": [
+            {
+              "source_url": "https://aistudio.google.com/docs/whats-new-gemini-4-neon",
+              "notes": "The Developer API offers Neon on the paid tier. Thinking levels are low, medium, high and xhigh. The default is high. Caching is implicit only and requires at least 4,096 prompt tokens. The server ignores in-range temperature, top_p and top_k settings."
+            },
+            {
+              "source_url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/4-neon",
+              "notes": "Use thinking levels. MINIMAL and thinking_budget are invalid."
+            },
+            {
+              "source_url": "https://aistudio.google.com/docs/long-decode",
+              "notes": "A foreground segment allows 65,536 output tokens including thinking, with or without streaming. Continuation or background execution can extend generation within the unified input, thinking and output window."
+            },
+            {
+              "source_url": "https://aistudio.google.com/docs/image-understanding#supported-formats",
+              "notes": "Supported image MIME types are image/png, image/jpeg, image/webp, image/heic and image/heif."
+            }
+          ],
+          "limits": {
+            "source_url": "https://aistudio.google.com/docs/models/gemini-4-neon",
+            "context_tokens": 1048576,
+            "max_output_tokens": 65536
+          },
+          "capabilities": {
+            "source_url": "https://aistudio.google.com/docs/models/gemini-4-neon",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true
+          },
+          "token_pricing": {
+            "source_url": "https://aistudio.google.com/docs/pricing#gemini-4-neon",
+            "unit": "usd_per_token",
+            "scope": "Regular paid Standard rates across the full context window. Output includes thinking. Cached input is implicit. This schedule covers tokens and excludes optional tool charges and alternate service tiers.",
+            "input": "0.000003",
+            "output": "0.000015",
+            "input_cache_read": "0.00000015"
+          }
+        },
+        "vercel": {
+          "provider": "vercel",
+          "id": "google/gemini-4-neon",
+          "url": "https://vercel.com/ai-gateway/models/google/gemini-4-neon",
+          "source_url": "https://ai-gateway.vercel.sh/v1/models",
+          "type": "language",
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf",
+              "video"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "endpoints": [
+            {
+              "id": "google/gemini-4-neon",
+              "input": "text",
+              "source_url": "https://vercel.com/changelog/gemini-4-neon-now-available-on-ai-gateway"
+            }
+          ],
+          "qualifications": [
+            {
+              "source_url": "https://ai-gateway.vercel.sh/v1/models/google/gemini-4-neon/endpoints",
+              "notes": "Discovery lists low, medium, high and xhigh. The default effort and the synchronous output limit for each compatible API remain unverified. The 1,000,000-token output value is a discovery ceiling."
+            }
+          ],
+          "limits": {
+            "source_url": "https://ai-gateway.vercel.sh/v1/models",
+            "context_tokens": 1000000,
+            "max_output_tokens": 1000000
+          },
+          "capabilities": {
+            "source_url": "https://ai-gateway.vercel.sh/v1/models",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true
+          },
+          "token_pricing": {
+            "source_url": "https://ai-gateway.vercel.sh/v1/models/google/gemini-4-neon/endpoints",
+            "unit": "usd_per_token",
+            "scope": "Regular global Standard token rates from the Google and Vertex endpoint records. Optional tools, alternate service tiers and regional premiums are excluded.",
+            "input": "0.000003",
+            "output": "0.000015",
+            "input_cache_read": "0.00000015"
+          }
+        },
+        "openrouter": {
+          "provider": "openrouter",
+          "id": "google/gemini-4-neon",
+          "url": "https://openrouter.ai/google/gemini-4-neon",
+          "source_url": "https://openrouter.ai/api/v1/models",
+          "type": "language",
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "audio",
+              "video",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "endpoints": [
+            {
+              "id": "google/gemini-4-neon",
+              "input": "text",
+              "source_url": "https://openrouter.ai/google/gemini-4-neon"
+            }
+          ],
+          "qualifications": [
+            {
+              "source_url": "https://openrouter.ai/api/v1/models",
+              "notes": "Model discovery lists reasoning as mandatory with low, medium, high and xhigh. The default is medium. The dated canonical slug is google/gemini-4-neon-20261118."
+            },
+            {
+              "source_url": "https://openrouter.ai/api/v1/models/google/gemini-4-neon/endpoints",
+              "notes": "Model discovery reports 943,718 max completion tokens. Standard endpoint records report 65,536 for Google AI Studio and 943,718 for Google Vertex. The larger value is an advertised ceiling. Endpoint discovery lists a cache-write amount, but its applicable operation, TTL and billing unit remain unverified. The recorded cache price covers reads."
+            }
+          ],
+          "limits": {
+            "source_url": "https://openrouter.ai/api/v1/models",
+            "context_tokens": 1048576,
+            "max_output_tokens": 943718
+          },
+          "capabilities": {
+            "source_url": "https://openrouter.ai/api/v1/models",
+            "image_input": true,
+            "tools": true,
+            "reasoning": true,
+            "structured_output": true
+          },
+          "token_pricing": {
+            "source_url": "https://openrouter.ai/api/v1/models/google/gemini-4-neon/endpoints",
+            "unit": "usd_per_token",
+            "scope": "Regular Standard token rates from the Google AI Studio and Google Vertex endpoint records. Optional tools and alternate service tiers are excluded.",
+            "input": "0.000003",
+            "output": "0.000015",
+            "input_cache_read": "0.00000015"
+          }
+        }
+      },
+      "provider_coverage": {
+        "google": {
+          "disposition": "listed",
+          "source_url": "https://aistudio.google.com/docs/models/gemini-4-neon"
+        },
+        "vercel": {
+          "disposition": "listed",
+          "source_url": "https://vercel.com/ai-gateway/models/google/gemini-4-neon"
+        },
+        "openrouter": {
+          "disposition": "listed",
+          "source_url": "https://openrouter.ai/google/gemini-4-neon"
+        },
+        "fal": {
+          "disposition": "excluded",
+          "source_url": "https://fal.ai/models",
+          "reason": "Provider coverage includes fal for media models only."
+        }
+      }
+    },
     "openai/gpt-5.5": {
       "id": "openai/gpt-5.5",
       "vendor": "openai",
