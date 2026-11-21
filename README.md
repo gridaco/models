@@ -2,19 +2,15 @@
 
 **A hand-curated, source-backed catalogue of AI models.**
 
-Each entry records what a model is, what it can do, where it can be called, and what it costs.
-Every fact has a source. The catalogue is maintained by hand and reviewed like code, so one
-place answers "which models exist and what are they" for every Grida product.
+Explore model capabilities, limits, provider IDs, and published prices, with links to
+the original sources.
 
-Optional [illustrative costs](./catalogue/README.md#illustrative-costs) explain a
-specific scenario separately from published rates. They carry explicit manual
-provenance and may omit source links when no durable reference exists.
+[Get the catalogue](#get-the-catalogue) · [Browse the model cards](./models/) · [View releases](https://github.com/gridaco/models/releases)
 
-[Grida](https://grida.co) · [Catalogue](./catalogue/)
-
-> **Status: early.** The catalogue is at schema version 2. Snapshots are published as
-> [GitHub Releases](https://github.com/gridaco/models/releases); see
-> [Get the catalogue](#get-the-catalogue).
+<picture>
+  <source media="(max-width: 680px)" srcset="./.github/images/release-index-mobile.svg">
+  <img src="./.github/images/release-index.svg" alt="Latest model releases and a breakdown of the remaining catalogue by medium">
+</picture>
 
 ## Get the catalogue
 
