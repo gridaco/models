@@ -2,3 +2,4 @@ catalogue/models.json linguist-generated=true
 catalogue/labs.json linguist-generated=true
 catalogue/agents.json linguist-generated=true
 catalogue/logos/** linguist-generated=true
+.github/images/release-index*.svg linguist-generated=true

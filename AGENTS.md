@@ -146,14 +146,16 @@ Tooling runs with [uv](https://docs.astral.sh/uv/) (Python 3.12+).
 
 ```sh
 uv sync                              # install tooling dependencies
-uv run scripts/build.py              # regenerate catalogue JSON and logos from authored sources
+uv run scripts/build.py              # regenerate catalogue JSON, logos, and README images
 uv run scripts/check.py              # validate the source, generated files, schemas + invariants
 uv run pytest                        # test the checker
 npx -y oxfmt@0.71.0                  # format Markdown, TOML, JSON, YAML
 ```
 
 After editing a model or agent card, run `build.py` then `check.py`, and commit
-the source with its regenerated JSON. CI runs `check.py` and `pytest` on every PR.
+the source with its regenerated files. The README release index under `.github/images/`
+uses documented public model release dates and the lab artwork from the same catalogue.
+CI checks both generated README layouts on every PR.
 
 Releases are automatic: on every push to `main` that changes the content of `catalogue/`,
 `.github/workflows/release.yml` publishes a snapshot built by `scripts/release.py`

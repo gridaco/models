@@ -4,6 +4,7 @@
 - `catalogue/labs.json` from the lab files (`models/<lab>/lab.toml`)
 - `catalogue/logos/<lab>.<ext>`, copied from each lab's logo (`models/<lab>/logo.<ext>`)
 - `catalogue/agents.json` from agent cards (`agents/<agent-id>.toml`)
+- `.github/images/release-index*.svg` from the generated models and labs
 
 Usage:
     uv run scripts/build.py           # write the generated files
@@ -134,6 +135,12 @@ def main() -> int:
         print(error, file=sys.stderr)
     if errors:
         return 1
+    # Keep README images outside the published catalogue snapshot.
+    from readme_preview import render_previews
+
+    logos = {path.relative_to(LABS.parent).as_posix(): data for path, data in outputs.items() if path.parent == LOGOS}
+    previews = render_previews(outputs[MODELS_JSON], outputs[LABS], logos)
+    outputs.update({ROOT / ".github" / "images" / name: data for name, data in previews.items()})
     out_of_date, extra = stale(outputs), orphans(outputs)
     if "--check" in sys.argv[1:]:
         for path in out_of_date:

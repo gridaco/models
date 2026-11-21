@@ -25,6 +25,8 @@ jobs:
       - run: uv sync --locked
       - name: Validate catalogue
         run: uv run scripts/check.py
+      - name: Verify generated README images
+        run: uv run scripts/build.py --check
       - name: Test checker
         run: uv run pytest
 
