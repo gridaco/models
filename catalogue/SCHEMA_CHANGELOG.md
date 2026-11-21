@@ -13,7 +13,8 @@ An entry linked to an open PR does not mean the change has been released. See
 
 ### 2026-11-21 — Agent Models catalogue
 
-Reference [issue #64](https://github.com/gridaco/models/issues/64).
+References [issue #64](https://github.com/gridaco/models/issues/64) and
+[PR #65](https://github.com/gridaco/models/pull/65).
 
 **Change** adds `agent-models.json` and its schema. A profile maps exact primary
 model selectors on a named agent access surface to canonical `text.catalog` IDs.
