@@ -27,9 +27,17 @@ files and no code.
 npm install @grida/ai-models
 ```
 
+Use JSON import attributes in Node.js ESM. The agent catalogue import requires a v2
+release that includes `agents.json`.
+
 ```js
 import models from "@grida/ai-models/models.json" with { type: "json" };
+import agentCatalogue from "@grida/ai-models/agents.json" with { type: "json" };
 ```
+
+Agent Models lists documented primary model selectors by agent. Resolve its canonical
+model IDs against `models.json` from the same snapshot. The agent's live discovery
+supplies the choices for the current account. [Agent Models contract](./catalogue/README.md#agent-models) · [Claude Agent SDK example](./catalogue/README.md#join-claude-agent-sdk-models)
 
 For fetching at runtime, use the package through jsDelivr's CDN: compressed, cached at the
 edge, and with no redirects. `@2` follows the newest snapshot of schema version 2; a full
@@ -37,13 +45,18 @@ version pins one snapshot.
 
 ```
 https://cdn.jsdelivr.net/npm/@grida/ai-models@2/models.json
+https://cdn.jsdelivr.net/npm/@grida/ai-models@2/agents.json
+https://cdn.jsdelivr.net/npm/@grida/ai-models@2/schemas/agents.schema.json
 ```
+
+Pin the URLs to the same full version when the files are used together.
 
 The GitHub Release assets suit scripts and archiving. The newest snapshot is always at:
 
 ```sh
 curl -LO https://github.com/gridaco/models/releases/latest/download/models.v2.json
 curl -LO https://github.com/gridaco/models/releases/latest/download/labs.v2.json
+curl -LO https://github.com/gridaco/models/releases/latest/download/agents.v2.json
 ```
 
 The `v2` in the file name is the schema version. GitHub `latest` follows the newest
@@ -52,12 +65,14 @@ stops resolving after a major change instead of serving a different shape. To pi
 a snapshot, use its version instead of `latest`:
 `https://github.com/gridaco/models/releases/download/<version>/models.v2.json`.
 
-Each release holds:
+Agent Models is published with the following catalogue assets.
 
 | asset                                          | contents                                                                                      |
 | ---------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `models.v2.json`, `labs.v2.json`               | Model cards and labs (`catalogue/models.json`, `catalogue/labs.json`)                         |
+| `agents.v2.json`                               | Primary model selectors by agent (`catalogue/agents.json`)                                    |
 | `models.v2.schema.json`, `labs.v2.schema.json` | Their JSON Schemas                                                                            |
+| `agents.v2.schema.json`                        | JSON Schema for Agent Models, also at `@grida/ai-models/schemas/agents.schema.json`           |
 | `grida-models-<version>.tar.gz`, `.zip`        | The whole catalogue, logos included, with `LICENSE` and `manifest.json`                       |
 | `manifest.json`                                | Version, schema version, source commit, content digest, counts, and the SHA-256 of every file |
 | `SHA256SUMS`                                   | Checksums of the other assets: `sha256sum -c SHA256SUMS --ignore-missing`                     |
@@ -173,6 +188,8 @@ with a JSON Schema, readable from any language. Its shape and rules are document
 - **Labs are registered.** Each lab directory holds a `lab.toml` with the lab's display
   name, first-party homepage, and official logo, published as `catalogue/labs.json` and
   `catalogue/logos/`. A card's `vendor` is a lab ID.
+- **One card per agent.** Agent cards in `agents/<agent-id>.toml` map exact selectable IDs
+  to canonical text cards. Maintainers review public evidence for each row.
 - **Snapshots are GitHub Releases and an npm package.** Each content change to `catalogue/`
   on `main` is published as a versioned, checksummed release and as `@grida/ai-models` on
   npm, through trusted publishing (`scripts/release.py`, `.github/workflows/release.yml`).

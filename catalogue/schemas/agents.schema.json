@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grida.co/schemas/ai-agents-v2.json",
+  "title": "Agent models, version 2",
+  "description": "Source-backed primary model selectors by agent.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "agents"],
+  "properties": {
+    "$schema": { "const": "https://grida.co/schemas/ai-agents-v2.json" },
+    "agents": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z0-9]",
+        "not": { "pattern": "[^a-z0-9-]" }
+      },
+      "additionalProperties": { "$ref": "#/$defs/agent" }
+    }
+  },
+  "$defs": {
+    "source_url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://"
+    },
+    "agent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "source_url", "models"],
+      "properties": {
+        "label": { "type": "string", "minLength": 1 },
+        "source_url": { "$ref": "#/$defs/source_url" },
+        "models": {
+          "description": "Model records keyed by exact primary selector for this agent card.",
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "minLength": 1,
+            "not": { "pattern": "\\s" }
+          },
+          "additionalProperties": { "$ref": "#/$defs/model" }
+        }
+      }
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical_model_id", "source_url"],
+      "properties": {
+        "canonical_model_id": {
+          "description": "The exact key of a text.catalog card in this snapshot's models.json.",
+          "type": "string",
+          "minLength": 1
+        },
+        "source_url": { "$ref": "#/$defs/source_url" },
+        "service_tiers": {
+          "description": "Documented service tiers for this selector. Omission leaves tiers unrecorded.",
+          "type": "object",
+          "additionalProperties": false,
+          "minProperties": 1,
+          "properties": {
+            "fast": { "$ref": "#/$defs/service_tier" },
+            "ultrafast": { "$ref": "#/$defs/service_tier" }
+          }
+        }
+      }
+    },
+    "service_tier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["service_tier", "source_url"],
+      "properties": {
+        "service_tier": {
+          "description": "The native service tier value for the mode on this same selector.",
+          "type": "string",
+          "minLength": 1,
+          "not": { "pattern": "\\s" }
+        },
+        "source_url": { "$ref": "#/$defs/source_url" }
+      }
+    }
+  }
+}

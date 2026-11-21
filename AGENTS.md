@@ -15,11 +15,13 @@ bindings, and published prices.
 ## Current state
 
 [`models/`](./models/) is the authored source: one TOML card per model, grouped by lab.
-[`catalogue/models.json`](./catalogue/models.json) is generated from it and is the contract
-consumers read, at schema version 2. The catalogue was imported from
-[gridaco/grida](https://github.com/gridaco/grida). Each content change to `catalogue/` on
-`main` is published as a versioned GitHub Release and as `@grida/ai-models` on npm. A hosted
-endpoint of its own is undecided; don't add anything that assumes an answer.
+[`catalogue/models.json`](./catalogue/models.json) is generated from it. Agent model selectors
+are authored in one card per agent at `agents/<agent-id>.toml` and generated into
+[`catalogue/agents.json`](./catalogue/agents.json). The catalogue uses schema version 2.
+The model catalogue was imported from [gridaco/grida](https://github.com/gridaco/grida).
+Each content change to `catalogue/` on `main` is published as a versioned GitHub Release
+and as `@grida/ai-models` on npm. A hosted endpoint of its own is undecided; don't add
+anything that assumes an answer.
 
 ## Project Structure
 
@@ -28,6 +30,7 @@ endpoint of its own is undecided; don't add anything that assumes an answer.
 | path                                 | notes                                                                |
 | ------------------------------------ | -------------------------------------------------------------------- |
 | [models/](./models/)                 | **The source.** One card per model: `models/<lab>/<model>/card.toml` |
+| `agents/`                            | **Agent Models source.** One TOML card per agent                     |
 | [catalogue/](./catalogue/)           | **The contract.** Generated JSON, JSON Schema, provenance notes      |
 | [scripts/](./scripts/)               | Tooling: build, validation, and release snapshots                    |
 | [tests/](./tests/)                   | Tests for the tooling                                                |
@@ -35,12 +38,12 @@ endpoint of its own is undecided; don't add anything that assumes an answer.
 | [README.md](./README.md)             | Public overview, principles, decisions                               |
 | [AGENTS.md](./AGENTS.md)             | This file. `CLAUDE.md` is a symlink to it                            |
 
-**Source vs. contract vs. tooling.** Facts are authored once, as cards in `models/`.
+**Source vs. contract vs. tooling.** Model facts are authored once, as cards in `models/`.
+Agent cards hold sourced selector IDs and references to the canonical text cards.
 Everything a consumer reads lives in `catalogue/` and must be readable from any language:
 plain JSON and JSON Schema, no generated code, no language-specific files.
-`catalogue/models.json` is generated from the cards; never edit it by hand. Tooling outside
-both may use whichever language fits the job (Python today, TypeScript when it fits better),
-and is never part of the contract.
+Use the source TOML to change generated JSON. Tooling lives outside the contract and uses
+whichever language fits the job (Python today, TypeScript when it fits better).
 
 Each lab directory in `models/` holds a `lab.toml` (display name, first-party homepage, and
 the source of its logo) and the lab's official logo, generated into `catalogue/labs.json` and
@@ -116,6 +119,10 @@ doesn't belong in the contract.
 - **Facts are independent of products.** Being catalogued is not the same as being offered
   by a Grida product. Keep existing entries when reviewing provider coverage; deleting a
   model or expanding an offering requires a separate review.
+- **Agent Models covers primary model selection.** Verify exact selectors and speed settings
+  for the named access surface from first-party sources. Follow the catalogue skill for
+  manual additions and removals. Account-specific availability and defaults belong to the
+  application or service that supplies them.
 - **Provider coverage is explicit.** Qualify the native lab API as `reference_provider`
   where it exists. It is a presentation reference, never a routing default. Record
   OpenRouter, Vercel and fal (media only) where verified, and Grida where it serves the
@@ -139,15 +146,14 @@ Tooling runs with [uv](https://docs.astral.sh/uv/) (Python 3.12+).
 
 ```sh
 uv sync                              # install tooling dependencies
-uv run scripts/build.py              # regenerate catalogue/models.json and labs.json from models/
+uv run scripts/build.py              # regenerate catalogue JSON and logos from authored sources
 uv run scripts/check.py              # validate the source, generated files, schemas + invariants
 uv run pytest                        # test the checker
 npx -y oxfmt@0.71.0                  # format Markdown, TOML, JSON, YAML
 ```
 
-After editing a card, run `build.py` then `check.py`, and commit the card with the regenerated
-`models.json`. CI runs `check.py` (which fails if `models.json` is out of date) and `pytest` on
-every PR.
+After editing a model or agent card, run `build.py` then `check.py`, and commit
+the source with its regenerated JSON. CI runs `check.py` and `pytest` on every PR.
 
 Releases are automatic: on every push to `main` that changes the content of `catalogue/`,
 `.github/workflows/release.yml` publishes a snapshot built by `scripts/release.py`
@@ -155,11 +161,11 @@ Releases are automatic: on every push to `main` that changes the content of `cat
 `@grida/ai-models` (`<schema>.<YYYYMMDD>.<n>`) through trusted publishing, with no stored
 token. The npm job publishes the latest release whenever npm lacks it, so a failed publish is
 caught up by the next run. A breaking schema change must bump `SCHEMA_MAJOR` in
-`scripts/release.py` together with both schema `$id`s. Pull requests that touch the catalogue
-get a preview of the release as a workflow artifact.
+`scripts/release.py` together with the published schema `$id`s. Pull requests that touch
+the catalogue get a preview of the release as a workflow artifact.
 
 Formatting uses [oxfmt](https://oxc.rs/docs/guide/usage/formatter) through `npx`, with no
-`package.json`; its settings are in `.oxfmtrc.json`, and the generated `models.json` is
+`package.json`; its settings are in `.oxfmtrc.json`, and generated catalogue JSON is
 excluded. CI runs `npx -y oxfmt@0.71.0 --check`; keep the version here and in
 `.github/workflows/check.yml` in sync.
 

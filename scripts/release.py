@@ -44,8 +44,8 @@ REPOSITORY = "https://github.com/gridaco/models"
 NAME = "grida-models"
 NPM_NAME = "@grida/ai-models"
 
-# The catalogue's schema major version. Both schema `$id`s end in `-v<major>.json`;
-# a breaking change to either bumps it.
+# The catalogue's schema major version. The schema `$id`s end in `-v<major>.json`;
+# a breaking change to any published schema bumps it.
 SCHEMA_MAJOR = 2
 
 # Files published individually, keyed by asset name. The names carry the schema major, so
@@ -54,8 +54,10 @@ SCHEMA_MAJOR = 2
 ASSETS = {
     f"models.v{SCHEMA_MAJOR}.json": "models.json",
     f"labs.v{SCHEMA_MAJOR}.json": "labs.json",
+    f"agents.v{SCHEMA_MAJOR}.json": "agents.json",
     f"models.v{SCHEMA_MAJOR}.schema.json": "schemas/models.schema.json",
     f"labs.v{SCHEMA_MAJOR}.schema.json": "schemas/labs.schema.json",
+    f"agents.v{SCHEMA_MAJOR}.schema.json": "schemas/agents.schema.json",
 }
 
 # Catalogue files renamed since an earlier release: old path -> current path. Release notes
@@ -117,7 +119,9 @@ def commit_info(rev: str = "HEAD") -> tuple[str, datetime.datetime]:
 def schema_major(files: dict[str, bytes]) -> set[int]:
     """The major version each schema `$id` declares."""
     majors = set()
-    for name in ("schemas/models.schema.json", "schemas/labs.schema.json"):
+    for name in ASSETS.values():
+        if not name.startswith("schemas/"):
+            continue
         match = re.search(r"-v(\d+)\.json$", json.loads(files[name])["$id"])
         majors.add(int(match.group(1)) if match else -1)
     return majors
@@ -286,7 +290,7 @@ def notes(version: str, current: dict[str, Any], previous: dict[str, Any] | None
     lines += [
         "## Download",
         "",
-        "- Models and labs: " + ", ".join(f"[`{name}`]({download}/{name})" for name in ASSETS),
+        "- Catalogue files and schemas: " + ", ".join(f"[`{name}`]({download}/{name})" for name in ASSETS),
         f"- Everything, logos included: [`{NAME}-{version}.tar.gz`]({download}/{NAME}-{version}.tar.gz) or "
         f"[`.zip`]({download}/{NAME}-{version}.zip)",
         f"- Always the newest schema v{SCHEMA_MAJOR} snapshot: "
@@ -361,10 +365,10 @@ This package is the data, published unchanged from release
 | `models.json` | Model cards, by family (`text.catalog`, `image.models`, `video.models`, ...) |
 | `labs.json` | Labs, keyed by lab ID: name, homepage, and logo |
 | `logos/` | Each lab's official logo |
-| `schemas/` | JSON Schemas for `models.json` and `labs.json` |
+| `schemas/` | JSON Schemas for the catalogue files |
 | `manifest.json` | Version, source commit, content digest, and the SHA-256 of every file |
 | `PROVENANCE.md` | Source notes that do not fit in JSON |
-{schema_changelog_row}
+{agents_row}{schema_changelog_row}
 
 ```js
 import models from "{name}/models.json" with {{ type: "json" }};
@@ -400,7 +404,8 @@ def npm_package(archive: dict[str, bytes]) -> dict[str, bytes]:
     data_files = {
         name: content
         for name, content in catalogue.items()
-        if name in ("models.json", "labs.json", "PROVENANCE.md", "SCHEMA_CHANGELOG.md") or name.startswith(("schemas/", "logos/"))
+        if name in ("models.json", "labs.json", "agents.json", "PROVENANCE.md", "SCHEMA_CHANGELOG.md")
+        or name.startswith(("schemas/", "logos/"))
     }
     package = {
         "name": NPM_NAME,
@@ -423,8 +428,11 @@ def npm_package(archive: dict[str, bytes]) -> dict[str, bytes]:
         },
         "sideEffects": False,
     }
+    if "agents.json" in data_files:
+        package["exports"]["./agents.json"] = "./agents.json"
     readme = NPM_README.format(
         name=NPM_NAME, tag=tag, version=version, major=version.split(".")[0], repository=REPOSITORY,
+        agents_row="| `agents.json` | Model selections by agent |\n" if "agents.json" in data_files else "",
         schema_changelog_row=(
             "| `SCHEMA_CHANGELOG.md` | Authored schema changes, compatibility and migration notes |"
             if "SCHEMA_CHANGELOG.md" in data_files else ""

@@ -1,13 +1,12 @@
-"""Validate the authored cards in `models/` and the catalogue contract in `catalogue/`.
+"""Validate the authored model and agent cards and public catalogue files.
 
 Three layers:
 
 1. Source: every card in `models/` sits at the path its lab and ID give it, names a
    known section, every lab directory has a `lab.toml`, and the generated
-   `catalogue/models.json` and `catalogue/labs.json` are exactly what the source
-   generates (`scripts/build.py`).
-2. Structure: `catalogue/models.json` and `catalogue/labs.json` against their schemas in
-   `catalogue/schemas/` (JSON Schema 2020-12, with format assertions on).
+   models, labs, and agent models match their authored sources (`scripts/build.py`).
+2. Structure: catalogue documents against their schemas in `catalogue/schemas/`
+   (JSON Schema 2020-12, with format assertions on).
 3. Invariants the schema cannot express: table keys equal card IDs, release
    dates are real calendar dates, facts carry no product policy, and provider
    bindings are keyed by their own provider.
@@ -609,6 +608,27 @@ def check(facts: Any, schema: Any) -> list[str]:
     return errors
 
 
+def agent_model_errors(agent_models: Any, schema: Any, facts: Any) -> Iterator[str]:
+    errors = list(schema_errors(agent_models, schema))
+    if errors:
+        yield from errors
+        return
+
+    text_models = facts.get("text.catalog", {}) if isinstance(facts, dict) else {}
+    if not isinstance(text_models, dict):
+        text_models = {}
+    for agent_id, agent in agent_models["agents"].items():
+        where = f"agents/{agent_id}"
+        yield from source_url_errors(agent["source_url"], where)
+        for selector, model in agent["models"].items():
+            model_where = f"{where}/models/{selector}"
+            if model["canonical_model_id"] not in text_models:
+                yield f"{model_where}: canonical_model_id {model['canonical_model_id']!r} must identify a text.catalog card"
+            yield from source_url_errors(model["source_url"], model_where)
+            for tier_name, tier in model.get("service_tiers", {}).items():
+                yield from source_url_errors(tier["source_url"], f"{model_where}/service_tiers/{tier_name}")
+
+
 def source_errors(committed: dict[Path, bytes] | None = None) -> list[str]:
     outputs, errors = build.build()
     errors += cards.lab_errors(
@@ -626,6 +646,11 @@ def main() -> int:
     facts = load(MODELS_JSON)
     errors = source_errors() + check(facts, load(MODELS_SCHEMA))
     errors += [f"labs.json {error}" for error in schema_errors(load(LABS), load(LABS_SCHEMA))]
+    if build.AGENTS_JSON.exists():
+        errors += [
+            f"agents.json {error}"
+            for error in agent_model_errors(load(build.AGENTS_JSON), load(build.AGENTS_SCHEMA), facts)
+        ]
     for error in errors:
         print(error, file=sys.stderr)
     if errors:
@@ -636,7 +661,8 @@ def main() -> int:
         for section, table in facts.items()
         if section not in NON_TABLE_SECTIONS and isinstance(table, dict)
     )
-    print(f"ok: {MODELS_JSON.relative_to(ROOT)} ({count} cards), {LABS.relative_to(ROOT)} ({len(load(LABS))} labs)")
+    print(f"ok: {MODELS_JSON.relative_to(ROOT)} ({count} cards), {LABS.relative_to(ROOT)} ({len(load(LABS))} labs), "
+          f"{build.AGENTS_JSON.relative_to(ROOT)}")
     return 0
 
 

@@ -1,16 +1,17 @@
 # Catalogue
 
-This directory is the contract: language-agnostic JSON that consumers read. Its facts are
-authored as one card per model in [`models/`](../models/); everything else outside it
-(scripts, tests, skills) is tooling for maintaining it.
+This directory holds the language-agnostic JSON contract. Sources are the model cards
+in [`models/`](../models/) and the agent cards in `agents/`.
 
 | file                         | role                                                                                                                 |
 | ---------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | `models.json`                | Generated from `models/`. Model identities, release provenance, provider bindings, capabilities, limits, list prices |
 | `labs.json`                  | Generated from `models/<lab>/lab.toml`. The labs that make catalogued models                                         |
+| `agents.json`                | Generated from `agents/<agent-id>.toml`. Exact primary model selectors by agent                                      |
 | `schemas/models.schema.json` | JSON Schema 2020-12 for `models.json`                                                                                |
 | `logos/`                     | Generated from `models/<lab>/logo.*`. Each lab's official logo                                                       |
 | `schemas/labs.schema.json`   | JSON Schema 2020-12 for `labs.json`                                                                                  |
+| `schemas/agents.schema.json` | JSON Schema 2020-12 for `agents.json`                                                                                |
 | `PROVENANCE.md`              | Source notes and qualifications that don't fit in JSON                                                               |
 | `SCHEMA_CHANGELOG.md`        | Authored public-contract changes, compatibility and migration history                                                |
 
@@ -117,6 +118,68 @@ A lab may have a `logo`: `path` (the file in `logos/`, relative to `labs.json`),
 `guidelines_url`, and `retrieved`. Logo files are the labs' official artwork, copied
 unchanged. They are trademarks of their owners, are not covered by this repository's
 license, and are used under each owner's guidelines.
+
+## Agent Models
+
+`agents.json` maps documented primary model selectors for each agent.
+
+- **OpenAI Codex (ChatGPT plan)** uses ID `openai-codex` and records selectors OpenAI
+  documents for ChatGPT sign-in. The signed-in App Server `model/list` supplies the
+  choices available to the active account, workspace and client. [Codex App Server](https://learn.chatgpt.com/docs/app-server#list-models-modellist)
+- **Claude Code (Claude plan)** uses ID `anthropic-claude-code` and records full model IDs
+  for `--model` that resolve to existing `text.catalog` cards. Versioned IDs fix the
+  model identity. Aliases like `opus` can resolve differently across client versions and
+  providers. The signed-in `/model` picker shows the choices for the current account. [Claude Code selectors](https://support.claude.com/en/articles/11940350-claude-code-model-configuration) · [Alias resolution](https://code.claude.com/docs/en/model-config#model-aliases) · [Account availability](https://support.claude.com/en/articles/14552983-models-usage-and-limits-in-claude-code)
+
+| Field                                       | Meaning                                                                                                                            |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `$schema`                                   | `https://grida.co/schemas/ai-agents-v2.json`                                                                                       |
+| `agents`                                    | Agent cards keyed by agent ID. An empty map records no agents.                                                                     |
+| Agent `label` and `source_url`              | Agent display name and first-party source for the access surface.                                                                  |
+| `models`                                    | Map keyed by the exact selectable ID for that agent. Preserve spelling and case. Order carries no meaning.                         |
+| Model `canonical_model_id` and `source_url` | The referenced `text.catalog` ID in the same snapshot's `models.json` and first-party evidence for the selector on this surface.   |
+| `service_tiers`                             | Optional map with `fast`, `ultrafast`, or both. Each entry records the native `service_tier` value and a first-party `source_url`. |
+
+Agent cards contain only reviewed entries. An omitted selector or service tier is
+unrecorded. The Codex card covers the primary `model` choice in the CLI and App
+Server. Codex Fast (`priority`) and Ultrafast (`ultrafast`) use the same model selector.
+Tier availability depends on the account and workspace. The image generation tool selects
+GPT Image internally. [Codex speed](https://learn.chatgpt.com/docs/agent-configuration/speed) · [Codex image generation](https://learn.chatgpt.com/docs/image-generation)
+
+Claude Code exposes Fast through `/fast` and the `fastMode` setting. Its card lists model
+selectors only. [Claude Code Fast mode](https://code.claude.com/docs/en/fast-mode#toggle-fast-mode)
+
+Author one card per agent at `agents/<agent-id>.toml`. The filename supplies the agent ID.
+The card accepts `label`, `source_url`, and `models`. For Claude Code, check its supported
+model list for exact IDs and monitor its changelog and the Claude Platform model lifecycle
+for additions and retirements that apply to Claude plan sign-in. [Claude Code changelog](https://code.claude.com/docs/en/changelog) · [Claude model lifecycle](https://platform.claude.com/docs/en/about-claude/model-deprecations) · [Catalogue skill](../.agents/skills/catalogue/SKILL.md#agent-models)
+
+### Join Claude Agent SDK models
+
+Pass an initialized `Query` from your Claude plan session to this function. It
+uses `resolvedModel ?? value` to look up catalogue metadata and keeps every row
+from `supportedModels()`, including rows without a catalogue match. Pass the
+row's original `value` to `query()` as `options.model` or to `setModel()` when
+the user selects it. [Claude Agent SDK `ModelInfo`](https://code.claude.com/docs/en/agent-sdk/typescript#modelinfo)
+
+```js
+import agentCatalogue from "@grida/ai-models/agents.json" with { type: "json" };
+import modelCatalogue from "@grida/ai-models/models.json" with { type: "json" };
+
+const selectors = agentCatalogue.agents["anthropic-claude-code"]?.models ?? {};
+const textModels = modelCatalogue["text.catalog"];
+
+export async function claudeModelOptions(session) {
+  return (await session.supportedModels()).map((model) => {
+    const catalogueModelId = selectors[model.resolvedModel ?? model.value]?.canonical_model_id;
+    return {
+      ...model,
+      catalogueModelId,
+      catalogueModel: catalogueModelId ? textModels[catalogueModelId] : undefined,
+    };
+  });
+}
+```
 
 ## Rules
 

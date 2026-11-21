@@ -11,6 +11,25 @@ An entry linked to an open PR does not mean the change has been released. See
 
 ## Schema v2
 
+### 2026-11-21 — Agent Models catalogue
+
+References [issue #64](https://github.com/gridaco/models/issues/64) and
+[PR #65](https://github.com/gridaco/models/pull/65).
+
+**Change** adds `agents.json` and `schemas/agents.schema.json`. The `agents` map holds one
+card per agent, linking exact primary model selectors to canonical `text.catalog` IDs.
+Each selector has a first-party source. Its optional `service_tiers` map records
+Fast and Ultrafast on that same selector, with the exact native `service_tier`
+value and its source. Omitted tiers are unrecorded. Agent IDs, model selectors,
+and native service tier values reject whitespace.
+
+**Compatibility** is additive within schema v2. The Agent Models schema is a
+separate contract and supports an empty `agents` map.
+
+**Migration** is optional. Use `agents.json` from the same pinned snapshot
+as `models.json` when resolving canonical model IDs. Use the agent's live discovery
+for the active account's choices.
+
 ### 2026-11-19 — Text bindings may describe Fast offerings and modes
 
 References [issue #53](https://github.com/gridaco/models/issues/53) and
