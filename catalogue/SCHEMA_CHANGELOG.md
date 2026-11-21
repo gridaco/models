@@ -18,8 +18,10 @@ References [issue #64](https://github.com/gridaco/models/issues/64) and
 
 **Change** adds `agents.json` and `schemas/agents.schema.json`. The `agents` map holds one
 card per agent, linking exact primary model selectors to canonical `text.catalog` IDs.
-Each selector has a first-party source and can record sourced Fast and Ultrafast
-service tiers on that same selector.
+Each selector has a first-party source. Its optional `service_tiers` map records
+Fast and Ultrafast on that same selector, with the exact native `service_tier`
+value and its source. Omitted tiers are unrecorded. Agent IDs, model selectors,
+and native service tier values reject whitespace.
 
 **Compatibility** is additive within schema v2. The Agent Models schema is a
 separate contract and supports an empty `agents` map.

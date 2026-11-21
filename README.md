@@ -37,7 +37,7 @@ import agentCatalogue from "@grida/ai-models/agents.json" with { type: "json" };
 
 Agent Models lists documented primary model selectors by agent. Resolve its canonical
 model IDs against `models.json` from the same snapshot. The agent's live discovery
-supplies the choices for the current account. [Agent Models contract](./catalogue/README.md#agent-models)
+supplies the choices for the current account. [Agent Models contract](./catalogue/README.md#agent-models) · [Claude Agent SDK example](./catalogue/README.md#join-claude-agent-sdk-models)
 
 For fetching at runtime, use the package through jsDelivr's CDN: compressed, cached at the
 edge, and with no redirects. `@2` follows the newest snapshot of schema version 2; a full

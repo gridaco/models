@@ -28,7 +28,7 @@ def agent_models():
                     SELECTOR: {
                         "canonical_model_id": TEXT_ID,
                         "source_url": SOURCE_URL,
-                        "modes": {
+                        "service_tiers": {
                             "fast": {"service_tier": "priority", "source_url": SOURCE_URL},
                             "ultrafast": {"service_tier": "ultrafast", "source_url": SOURCE_URL},
                         },
@@ -44,21 +44,40 @@ def test_exact_selectors_can_share_a_canonical_model(agent_models):
     assert list(check.agent_model_errors(agent_models, SCHEMA, FACTS)) == []
 
 
-def test_rejects_namespaced_agent_ids(agent_models):
+@pytest.mark.parametrize("agent_id", ["example/agent", f"{AGENT_ID}\n"])
+def test_rejects_invalid_agent_ids(agent_models, agent_id):
     agents = agent_models["agents"]
-    agents["example/agent"] = agents.pop(AGENT_ID)
-    assert list(check.agent_model_errors(agent_models, SCHEMA, FACTS))
+    agents[agent_id] = agents.pop(AGENT_ID)
+    errors = list(check.agent_model_errors(agent_models, SCHEMA, FACTS))
+    assert len(errors) == 1
+    assert errors[0].startswith("schema: agents:")
 
 
-@pytest.mark.parametrize("mode", ["fast", "ultrafast"])
-def test_each_speed_mode_can_appear_on_its_own(agent_models, mode):
+def test_rejects_selector_with_trailing_newline(agent_models):
+    models = agent_models["agents"][AGENT_ID]["models"]
+    models[f"{SELECTOR}\n"] = models.pop(SELECTOR)
+    errors = list(check.agent_model_errors(agent_models, SCHEMA, FACTS))
+    assert len(errors) == 1
+    assert errors[0].startswith(f"schema: agents/{AGENT_ID}/models:")
+
+
+def test_rejects_native_service_tier_with_trailing_newline(agent_models):
+    tiers = agent_models["agents"][AGENT_ID]["models"][SELECTOR]["service_tiers"]
+    tiers["fast"]["service_tier"] = "priority\n"
+    errors = list(check.agent_model_errors(agent_models, SCHEMA, FACTS))
+    assert len(errors) == 1
+    assert f"/models/{SELECTOR}/service_tiers/fast/service_tier:" in errors[0]
+
+
+@pytest.mark.parametrize("tier", ["fast", "ultrafast"])
+def test_each_speed_tier_can_appear_on_its_own(agent_models, tier):
     model = agent_models["agents"][AGENT_ID]["models"][SELECTOR]
-    model["modes"] = {mode: model["modes"][mode]}
+    model["service_tiers"] = {tier: model["service_tiers"][tier]}
     assert list(check.agent_model_errors(agent_models, SCHEMA, FACTS)) == []
 
 
-def test_modes_map_must_be_nonempty_when_present(agent_models):
-    agent_models["agents"][AGENT_ID]["models"][SELECTOR]["modes"] = {}
+def test_service_tiers_map_must_be_nonempty_when_present(agent_models):
+    agent_models["agents"][AGENT_ID]["models"][SELECTOR]["service_tiers"] = {}
     errors = list(check.agent_model_errors(agent_models, SCHEMA, FACTS))
     assert len(errors) == 1
     assert "non-empty" in errors[0]
@@ -76,18 +95,18 @@ def test_rejects_targets_outside_text_catalog(agent_models, target):
 def test_rejects_source_urls_with_credentials(agent_models, level):
     agent = agent_models["agents"][AGENT_ID]
     model = agent["models"][SELECTOR]
-    records = {"agent": agent, "model": model, **model["modes"]}
+    records = {"agent": agent, "model": model, **model["service_tiers"]}
     records[level]["source_url"] = "https://user@example.com/selection"
     errors = list(check.agent_model_errors(agent_models, SCHEMA, FACTS))
     assert len(errors) == 1
     assert "absolute HTTPS URL without credentials" in errors[0]
 
 
-@pytest.mark.parametrize("mode_name", ["fast", "ultrafast"])
-def test_speed_mode_requires_evidence_and_keeps_the_base_selector(agent_models, mode_name):
-    mode = agent_models["agents"][AGENT_ID]["models"][SELECTOR]["modes"][mode_name]
-    mode.pop("source_url")
-    mode["model"] = f"{SELECTOR}-{mode_name}"
+@pytest.mark.parametrize("tier_name", ["fast", "ultrafast"])
+def test_speed_tier_requires_evidence_and_keeps_the_base_selector(agent_models, tier_name):
+    tier = agent_models["agents"][AGENT_ID]["models"][SELECTOR]["service_tiers"][tier_name]
+    tier.pop("source_url")
+    tier["model"] = f"{SELECTOR}-{tier_name}"
     errors = list(check.agent_model_errors(agent_models, SCHEMA, FACTS))
     assert len(errors) == 2
     assert any("'source_url' is a required property" in error for error in errors)

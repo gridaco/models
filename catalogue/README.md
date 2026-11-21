@@ -131,19 +131,19 @@ license, and are used under each owner's guidelines.
   model identity. Aliases like `opus` can resolve differently across client versions and
   providers. The signed-in `/model` picker shows the choices for the current account. [Claude Code selectors](https://support.claude.com/en/articles/11940350-claude-code-model-configuration) · [Alias resolution](https://code.claude.com/docs/en/model-config#model-aliases) · [Account availability](https://support.claude.com/en/articles/14552983-models-usage-and-limits-in-claude-code)
 
-| Field                                       | Meaning                                                                                                                          |
-| ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `$schema`                                   | `https://grida.co/schemas/ai-agents-v2.json`                                                                                     |
-| `agents`                                    | Agent cards keyed by agent ID. An empty map records no agents.                                                                   |
-| Agent `label` and `source_url`              | Agent display name and first-party source for the access surface.                                                                |
-| `models`                                    | Map keyed by the exact selectable ID for that agent. Preserve spelling and case. Order carries no meaning.                       |
-| Model `canonical_model_id` and `source_url` | The referenced `text.catalog` ID in the same snapshot's `models.json` and first-party evidence for the selector on this surface. |
-| `modes`                                     | Optional map with `fast`, `ultrafast`, or both. Each mode records its exact `service_tier` and first-party `source_url`.         |
+| Field                                       | Meaning                                                                                                                            |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `$schema`                                   | `https://grida.co/schemas/ai-agents-v2.json`                                                                                       |
+| `agents`                                    | Agent cards keyed by agent ID. An empty map records no agents.                                                                     |
+| Agent `label` and `source_url`              | Agent display name and first-party source for the access surface.                                                                  |
+| `models`                                    | Map keyed by the exact selectable ID for that agent. Preserve spelling and case. Order carries no meaning.                         |
+| Model `canonical_model_id` and `source_url` | The referenced `text.catalog` ID in the same snapshot's `models.json` and first-party evidence for the selector on this surface.   |
+| `service_tiers`                             | Optional map with `fast`, `ultrafast`, or both. Each entry records the native `service_tier` value and a first-party `source_url`. |
 
-Agent cards contain only reviewed entries. Absence means the snapshot records no fact for
-that selector. The Codex card covers the primary `model` choice in the CLI and App
+Agent cards contain only reviewed entries. An omitted selector or service tier is
+unrecorded. The Codex card covers the primary `model` choice in the CLI and App
 Server. Codex Fast (`priority`) and Ultrafast (`ultrafast`) use the same model selector.
-The available modes depend on the account and workspace. The image generation tool selects
+Tier availability depends on the account and workspace. The image generation tool selects
 GPT Image internally. [Codex speed](https://learn.chatgpt.com/docs/agent-configuration/speed) · [Codex image generation](https://learn.chatgpt.com/docs/image-generation)
 
 Claude Code exposes Fast through `/fast` and the `fastMode` setting. Its card lists model
@@ -153,6 +153,33 @@ Author one card per agent at `agents/<agent-id>.toml`. The filename supplies the
 The card accepts `label`, `source_url`, and `models`. For Claude Code, check its supported
 model list for exact IDs and monitor its changelog and the Claude Platform model lifecycle
 for additions and retirements that apply to Claude plan sign-in. [Claude Code changelog](https://code.claude.com/docs/en/changelog) · [Claude model lifecycle](https://platform.claude.com/docs/en/about-claude/model-deprecations) · [Catalogue skill](../.agents/skills/catalogue/SKILL.md#agent-models)
+
+### Join Claude Agent SDK models
+
+Pass an initialized `Query` from your Claude plan session to this function. It
+uses `resolvedModel ?? value` to look up catalogue metadata and keeps every row
+from `supportedModels()`, including rows without a catalogue match. Pass the
+row's original `value` to `query()` as `options.model` or to `setModel()` when
+the user selects it. [Claude Agent SDK `ModelInfo`](https://code.claude.com/docs/en/agent-sdk/typescript#modelinfo)
+
+```js
+import agentCatalogue from "@grida/ai-models/agents.json" with { type: "json" };
+import modelCatalogue from "@grida/ai-models/models.json" with { type: "json" };
+
+const selectors = agentCatalogue.agents["anthropic-claude-code"]?.models ?? {};
+const textModels = modelCatalogue["text.catalog"];
+
+export async function claudeModelOptions(session) {
+  return (await session.supportedModels()).map((model) => {
+    const catalogueModelId = selectors[model.resolvedModel ?? model.value]?.canonical_model_id;
+    return {
+      ...model,
+      catalogueModelId,
+      catalogueModel: catalogueModelId ? textModels[catalogueModelId] : undefined,
+    };
+  });
+}
+```
 
 ## Rules
 

@@ -46,9 +46,9 @@ for ChatGPT sign-in. Check the documented scope before adding a selector. A bund
 can contain hidden IDs and IDs offered under different authentication methods. [Codex models](https://learn.chatgpt.com/docs/models) · [Codex changelog](https://learn.chatgpt.com/docs/changelog)
 
 Use the exact selector and link to the corresponding `text.catalog` ID. Cite first-party
-evidence for each row and speed setting. Codex uses `priority` for Fast and `ultrafast`
-for Ultrafast. Record a mode on the same selector when first-party sources establish both
-support on the named surface and the native service tier value. Availability depends on
+evidence for each row and service tier. Codex uses `priority` for Fast and `ultrafast`
+for Ultrafast. Record a tier under `service_tiers` on the same selector when first-party
+sources establish support on the named surface and the native value. Availability depends on
 the account and workspace. Record removals when first-party evidence shows a selector
 has retired for the agent on the documented access surface. A change in one account's
 picker can be a lead for research. [Codex speed](https://learn.chatgpt.com/docs/agent-configuration/speed)

@@ -50,7 +50,7 @@
         "gpt-5.6-luna": {
           "canonical_model_id": "openai/gpt-5.6-luna",
           "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L1494-L1633",
-          "modes": {
+          "service_tiers": {
             "fast": {
               "service_tier": "priority",
               "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L1619-L1630"
@@ -60,7 +60,7 @@
         "gpt-5.6-sol": {
           "canonical_model_id": "openai/gpt-5.6-sol",
           "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L1212-L1351",
-          "modes": {
+          "service_tiers": {
             "fast": {
               "service_tier": "priority",
               "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L1337-L1348"
@@ -70,7 +70,7 @@
         "gpt-5.6-terra": {
           "canonical_model_id": "openai/gpt-5.6-terra",
           "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L1353-L1492",
-          "modes": {
+          "service_tiers": {
             "fast": {
               "service_tier": "priority",
               "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L1478-L1489"
@@ -80,7 +80,7 @@
         "gpt-6-astra": {
           "canonical_model_id": "openai/gpt-6-astra",
           "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L349-L520",
-          "modes": {
+          "service_tiers": {
             "fast": {
               "service_tier": "priority",
               "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L506-L517"
@@ -94,7 +94,7 @@
         "gpt-6-luna": {
           "canonical_model_id": "openai/gpt-6-luna",
           "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L1045-L1210",
-          "modes": {
+          "service_tiers": {
             "fast": {
               "service_tier": "priority",
               "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L1196-L1207"
@@ -104,7 +104,7 @@
         "gpt-6-sol": {
           "canonical_model_id": "openai/gpt-6-sol",
           "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L874-L1043",
-          "modes": {
+          "service_tiers": {
             "fast": {
               "service_tier": "priority",
               "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L1029-L1040"
@@ -114,7 +114,7 @@
         "gpt-6.1-sol": {
           "canonical_model_id": "openai/gpt-6.1-sol",
           "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L522-L696",
-          "modes": {
+          "service_tiers": {
             "fast": {
               "service_tier": "priority",
               "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L681-L692"
@@ -128,7 +128,7 @@
         "gpt-6.1-terra": {
           "canonical_model_id": "openai/gpt-6.1-terra",
           "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L698-L872",
-          "modes": {
+          "service_tiers": {
             "fast": {
               "service_tier": "priority",
               "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L856-L868"
@@ -138,7 +138,7 @@
         "gpt-6.2-astra": {
           "canonical_model_id": "openai/gpt-6.2-astra",
           "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L184-L347",
-          "modes": {
+          "service_tiers": {
             "fast": {
               "service_tier": "priority",
               "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L333-L344"
@@ -152,7 +152,7 @@
         "gpt-6.2-sol": {
           "canonical_model_id": "openai/gpt-6.2-sol",
           "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L4-L182",
-          "modes": {
+          "service_tiers": {
             "fast": {
               "service_tier": "priority",
               "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L168-L179"
