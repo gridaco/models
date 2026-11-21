@@ -42,6 +42,10 @@
             "fast": {
               "service_tier": "priority",
               "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L506-L517"
+            },
+            "ultrafast": {
+              "service_tier": "ultrafast",
+              "source_url": "https://learn.chatgpt.com/docs/agent-configuration/speed#ultrafast-mode"
             }
           }
         },
@@ -72,6 +76,10 @@
             "fast": {
               "service_tier": "priority",
               "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L681-L692"
+            },
+            "ultrafast": {
+              "service_tier": "ultrafast",
+              "source_url": "https://learn.chatgpt.com/docs/agent-configuration/speed#ultrafast-mode"
             }
           }
         },
@@ -92,6 +100,10 @@
             "fast": {
               "service_tier": "priority",
               "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L333-L344"
+            },
+            "ultrafast": {
+              "service_tier": "ultrafast",
+              "source_url": "https://learn.chatgpt.com/docs/agent-configuration/speed#ultrafast-mode"
             }
           }
         },
@@ -102,6 +114,10 @@
             "fast": {
               "service_tier": "priority",
               "source_url": "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L168-L179"
+            },
+            "ultrafast": {
+              "service_tier": "ultrafast",
+              "source_url": "https://learn.chatgpt.com/docs/agent-configuration/speed#ultrafast-mode"
             }
           }
         }

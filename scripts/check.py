@@ -625,8 +625,8 @@ def agent_model_errors(agent_models: Any, schema: Any, facts: Any) -> Iterator[s
             if model["canonical_model_id"] not in text_models:
                 yield f"{model_where}: canonical_model_id {model['canonical_model_id']!r} must identify a text.catalog card"
             yield from source_url_errors(model["source_url"], model_where)
-            if "modes" in model:
-                yield from source_url_errors(model["modes"]["fast"]["source_url"], f"{model_where}/modes/fast")
+            for mode, settings in model.get("modes", {}).items():
+                yield from source_url_errors(settings["source_url"], f"{model_where}/modes/{mode}")
 
 
 def source_errors(committed: dict[Path, bytes] | None = None) -> list[str]:

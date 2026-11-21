@@ -127,19 +127,20 @@ on a named access surface. Codex with ChatGPT sign-in uses profile ID
 least one supported ChatGPT sign-in configuration. The signed-in App Server `model/list`
 supplies the choices available to the active account, workspace and client. [Codex App Server](https://learn.chatgpt.com/docs/app-server#list-models-modellist)
 
-| Field                                       | Meaning                                                                                                                              |
-| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `$schema`                                   | `https://grida.co/schemas/ai-agent-models-v2.json`                                                                                   |
-| `profiles`                                  | Profile map keyed by `<owner>/<surface>`. An empty map records no profiles.                                                          |
-| Profile `label` and `source_url`            | Profile display name and first-party source for the access surface.                                                                  |
-| `models`                                    | Map keyed by the exact selectable ID for that profile. Preserve spelling and case. Order carries no meaning.                         |
-| Model `canonical_model_id` and `source_url` | The referenced `text.catalog` ID in the same snapshot's `models.json` and first-party evidence for the selector on this surface.     |
-| `modes.fast`                                | Optional Fast setting on the same selector, with its exact `service_tier` value and first-party `source_url`. Codex uses `priority`. |
+| Field                                       | Meaning                                                                                                                          |
+| ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `$schema`                                   | `https://grida.co/schemas/ai-agent-models-v2.json`                                                                               |
+| `profiles`                                  | Profile map keyed by `<owner>/<surface>`. An empty map records no profiles.                                                      |
+| Profile `label` and `source_url`            | Profile display name and first-party source for the access surface.                                                              |
+| `models`                                    | Map keyed by the exact selectable ID for that profile. Preserve spelling and case. Order carries no meaning.                     |
+| Model `canonical_model_id` and `source_url` | The referenced `text.catalog` ID in the same snapshot's `models.json` and first-party evidence for the selector on this surface. |
+| `modes`                                     | Optional map with `fast`, `ultrafast`, or both. Each mode records its exact `service_tier` and first-party `source_url`.         |
 
 Profiles contain only reviewed entries. Absence means the snapshot records no fact for
 that selector. The Codex profile covers the primary `model` choice in the CLI and App
-Server. Fast uses that same model choice. The image generation tool selects GPT Image
-internally. [Codex speed](https://learn.chatgpt.com/docs/agent-configuration/speed) · [Codex image generation](https://learn.chatgpt.com/docs/image-generation)
+Server. Codex Fast (`priority`) and Ultrafast (`ultrafast`) use the same model selector.
+The available modes depend on the account and workspace. The image generation tool selects
+GPT Image internally. [Codex speed](https://learn.chatgpt.com/docs/agent-configuration/speed) · [Codex image generation](https://learn.chatgpt.com/docs/image-generation)
 
 Author each profile in `agent-models/<owner>/<surface>.toml`. The source path supplies its
 ID. See the [catalogue skill](../.agents/skills/catalogue/SKILL.md#agent-models) for

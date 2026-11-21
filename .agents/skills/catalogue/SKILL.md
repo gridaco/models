@@ -44,10 +44,12 @@ changelog for ChatGPT sign-in. Check the documented scope before adding a select
 can contain hidden IDs and IDs offered under different authentication methods. [Codex models](https://learn.chatgpt.com/docs/models) · [Codex changelog](https://learn.chatgpt.com/docs/changelog)
 
 Use the exact selector and link to the corresponding `text.catalog` ID. Cite first-party
-evidence for each row and each Fast setting. Record `priority` for Codex Fast when both
-the model's Fast support on the surface and the wire value are sourced. Record removals
-when first-party evidence shows a selector has retired on the profile's surface. A change
-in one account's picker can be a lead for research. [Codex speed](https://learn.chatgpt.com/docs/agent-configuration/speed)
+evidence for each row and speed setting. Codex uses `priority` for Fast and `ultrafast`
+for Ultrafast. Record a mode on the same selector when first-party sources establish both
+support on the named surface and the native service tier value. Use the applicable account
+and workspace controls to interpret availability. Record removals when first-party evidence
+shows a selector has retired on the profile's surface. A change in one account's picker
+can be a lead for research. [Codex speed](https://learn.chatgpt.com/docs/agent-configuration/speed)
 
 Use public documents and tagged source for review. Catalogue maintenance uses no paid
 inference calls. Regenerate and check the JSON, and cite the additions and removals in the

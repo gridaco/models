@@ -50,18 +50,21 @@
         "modes": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["fast"],
-          "properties": { "fast": { "$ref": "#/$defs/fast" } }
+          "minProperties": 1,
+          "properties": {
+            "fast": { "$ref": "#/$defs/mode" },
+            "ultrafast": { "$ref": "#/$defs/mode" }
+          }
         }
       }
     },
-    "fast": {
+    "mode": {
       "type": "object",
       "additionalProperties": false,
       "required": ["service_tier", "source_url"],
       "properties": {
         "service_tier": {
-          "description": "The native Fast service tier value for this same selector.",
+          "description": "The native service tier value for the mode on this same selector.",
           "type": "string",
           "pattern": "^\\S+$"
         },

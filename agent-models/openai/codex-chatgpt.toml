@@ -6,6 +6,9 @@
 # Codex maps Fast to the priority service tier for eligible signed-in users.
 # https://learn.chatgpt.com/docs/agent-configuration/speed#fast-mode
 # https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/protocol/src/config_types.rs#L484-L511
+# Ultrafast uses the ultrafast tier on the same selector for eligible accounts.
+# https://learn.chatgpt.com/docs/agent-configuration/speed#ultrafast-mode
+# https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/core/src/config/mod.rs#L4058-L4074
 label = "Codex with ChatGPT sign-in"
 source_url = "https://learn.chatgpt.com/docs/auth#openai-authentication"
 
@@ -41,6 +44,10 @@ source_url = "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8
 service_tier = "priority"
 source_url = "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L506-L517"
 
+[models."gpt-6-astra".modes.ultrafast]
+service_tier = "ultrafast"
+source_url = "https://learn.chatgpt.com/docs/agent-configuration/speed#ultrafast-mode"
+
 [models."gpt-6-luna"]
 canonical_model_id = "openai/gpt-6-luna"
 source_url = "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L1045-L1210"
@@ -65,6 +72,10 @@ source_url = "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8
 service_tier = "priority"
 source_url = "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L681-L692"
 
+[models."gpt-6.1-sol".modes.ultrafast]
+service_tier = "ultrafast"
+source_url = "https://learn.chatgpt.com/docs/agent-configuration/speed#ultrafast-mode"
+
 [models."gpt-6.1-terra"]
 canonical_model_id = "openai/gpt-6.1-terra"
 source_url = "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L698-L872"
@@ -81,6 +92,10 @@ source_url = "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8
 service_tier = "priority"
 source_url = "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L333-L344"
 
+[models."gpt-6.2-astra".modes.ultrafast]
+service_tier = "ultrafast"
+source_url = "https://learn.chatgpt.com/docs/agent-configuration/speed#ultrafast-mode"
+
 [models."gpt-6.2-sol"]
 canonical_model_id = "openai/gpt-6.2-sol"
 source_url = "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L4-L182"
@@ -88,3 +103,7 @@ source_url = "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8
 [models."gpt-6.2-sol".modes.fast]
 service_tier = "priority"
 source_url = "https://github.com/openai/codex/blob/ccf9be8cc458bd6b8336fe84d68d8893f2691a5e/codex-rs/models-manager/models.json#L168-L179"
+
+[models."gpt-6.2-sol".modes.ultrafast]
+service_tier = "ultrafast"
+source_url = "https://learn.chatgpt.com/docs/agent-configuration/speed#ultrafast-mode"

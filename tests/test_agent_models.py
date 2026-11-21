@@ -28,7 +28,10 @@ def agent_models():
                     SELECTOR: {
                         "canonical_model_id": TEXT_ID,
                         "source_url": SOURCE_URL,
-                        "modes": {"fast": {"service_tier": "priority", "source_url": SOURCE_URL}},
+                        "modes": {
+                            "fast": {"service_tier": "priority", "source_url": SOURCE_URL},
+                            "ultrafast": {"service_tier": "ultrafast", "source_url": SOURCE_URL},
+                        },
                     },
                     "example/alias": {"canonical_model_id": TEXT_ID, "source_url": SOURCE_URL},
                 },
@@ -41,6 +44,20 @@ def test_exact_selectors_can_share_a_canonical_model(agent_models):
     assert list(check.agent_model_errors(agent_models, SCHEMA, FACTS)) == []
 
 
+@pytest.mark.parametrize("mode", ["fast", "ultrafast"])
+def test_each_speed_mode_can_appear_on_its_own(agent_models, mode):
+    model = agent_models["profiles"][PROFILE_ID]["models"][SELECTOR]
+    model["modes"] = {mode: model["modes"][mode]}
+    assert list(check.agent_model_errors(agent_models, SCHEMA, FACTS)) == []
+
+
+def test_modes_map_must_be_nonempty_when_present(agent_models):
+    agent_models["profiles"][PROFILE_ID]["models"][SELECTOR]["modes"] = {}
+    errors = list(check.agent_model_errors(agent_models, SCHEMA, FACTS))
+    assert len(errors) == 1
+    assert "non-empty" in errors[0]
+
+
 @pytest.mark.parametrize("target", ["example/absent", "example/Model.V1", IMAGE_ID])
 def test_rejects_targets_outside_text_catalog(agent_models, target):
     agent_models["profiles"][PROFILE_ID]["models"][SELECTOR]["canonical_model_id"] = target
@@ -49,21 +66,22 @@ def test_rejects_targets_outside_text_catalog(agent_models, target):
     ]
 
 
-@pytest.mark.parametrize("level", ["profile", "model", "fast"])
+@pytest.mark.parametrize("level", ["profile", "model", "fast", "ultrafast"])
 def test_rejects_source_urls_with_credentials(agent_models, level):
     profile = agent_models["profiles"][PROFILE_ID]
     model = profile["models"][SELECTOR]
-    records = {"profile": profile, "model": model, "fast": model["modes"]["fast"]}
+    records = {"profile": profile, "model": model, **model["modes"]}
     records[level]["source_url"] = "https://user@example.com/selection"
     errors = list(check.agent_model_errors(agent_models, SCHEMA, FACTS))
     assert len(errors) == 1
     assert "absolute HTTPS URL without credentials" in errors[0]
 
 
-def test_fast_requires_evidence_and_keeps_the_base_selector(agent_models):
-    mode = agent_models["profiles"][PROFILE_ID]["models"][SELECTOR]["modes"]["fast"]
+@pytest.mark.parametrize("mode_name", ["fast", "ultrafast"])
+def test_speed_mode_requires_evidence_and_keeps_the_base_selector(agent_models, mode_name):
+    mode = agent_models["profiles"][PROFILE_ID]["models"][SELECTOR]["modes"][mode_name]
     mode.pop("source_url")
-    mode["model"] = "Model.V1-Fast"
+    mode["model"] = f"{SELECTOR}-{mode_name}"
     errors = list(check.agent_model_errors(agent_models, SCHEMA, FACTS))
     assert len(errors) == 2
     assert any("'source_url' is a required property" in error for error in errors)
