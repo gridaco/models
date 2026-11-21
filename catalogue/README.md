@@ -1,13 +1,13 @@
 # Catalogue
 
 This directory holds the language-agnostic JSON contract. Sources are the model cards
-in [`models/`](../models/) and the agent model profiles in `agent-models/`.
+in [`models/`](../models/) and the agent cards in `agents/`.
 
 | file                               | role                                                                                                                 |
 | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | `models.json`                      | Generated from `models/`. Model identities, release provenance, provider bindings, capabilities, limits, list prices |
 | `labs.json`                        | Generated from `models/<lab>/lab.toml`. The labs that make catalogued models                                         |
-| `agent-models.json`                | Generated from `agent-models/<owner>/<surface>.toml`. Exact primary model selectors by agent access surface          |
+| `agent-models.json`                | Generated from `agents/<agent-id>.toml`. Exact primary model selectors by agent                                      |
 | `schemas/models.schema.json`       | JSON Schema 2020-12 for `models.json`                                                                                |
 | `logos/`                           | Generated from `models/<lab>/logo.*`. Each lab's official logo                                                       |
 | `schemas/labs.schema.json`         | JSON Schema 2020-12 for `labs.json`                                                                                  |
@@ -121,30 +121,30 @@ license, and are used under each owner's guidelines.
 
 ## Agent Models
 
-`agent-models.json` maps documented primary model selectors for an agent session or turn
-on a named access surface. Codex with ChatGPT sign-in uses profile ID
-`openai/codex-chatgpt`. A selector belongs in that profile when OpenAI documents it for at
-least one supported ChatGPT sign-in configuration. The signed-in App Server `model/list`
-supplies the choices available to the active account, workspace and client. [Codex App Server](https://learn.chatgpt.com/docs/app-server#list-models-modellist)
+`agent-models.json` maps documented primary model selectors for each agent. The
+**OpenAI Codex (ChatGPT plan)** card uses ID `openai-codex` and records selectors OpenAI
+documents for at least one supported ChatGPT sign-in configuration. The signed-in App Server
+`model/list` supplies the choices available to the active account, workspace and client. [Codex App Server](https://learn.chatgpt.com/docs/app-server#list-models-modellist)
 
 | Field                                       | Meaning                                                                                                                          |
 | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | `$schema`                                   | `https://grida.co/schemas/ai-agent-models-v2.json`                                                                               |
-| `profiles`                                  | Profile map keyed by `<owner>/<surface>`. An empty map records no profiles.                                                      |
-| Profile `label` and `source_url`            | Profile display name and first-party source for the access surface.                                                              |
-| `models`                                    | Map keyed by the exact selectable ID for that profile. Preserve spelling and case. Order carries no meaning.                     |
+| `agents`                                    | Agent cards keyed by agent ID. An empty map records no agents.                                                                   |
+| Agent `label` and `source_url`              | Agent display name and first-party source for the access surface.                                                                |
+| `models`                                    | Map keyed by the exact selectable ID for that agent. Preserve spelling and case. Order carries no meaning.                       |
 | Model `canonical_model_id` and `source_url` | The referenced `text.catalog` ID in the same snapshot's `models.json` and first-party evidence for the selector on this surface. |
 | `modes`                                     | Optional map with `fast`, `ultrafast`, or both. Each mode records its exact `service_tier` and first-party `source_url`.         |
 
-Profiles contain only reviewed entries. Absence means the snapshot records no fact for
-that selector. The Codex profile covers the primary `model` choice in the CLI and App
+Agent cards contain only reviewed entries. Absence means the snapshot records no fact for
+that selector. The Codex card covers the primary `model` choice in the CLI and App
 Server. Codex Fast (`priority`) and Ultrafast (`ultrafast`) use the same model selector.
 The available modes depend on the account and workspace. The image generation tool selects
 GPT Image internally. [Codex speed](https://learn.chatgpt.com/docs/agent-configuration/speed) · [Codex image generation](https://learn.chatgpt.com/docs/image-generation)
 
-Author each profile in `agent-models/<owner>/<surface>.toml`. The source path supplies its
-ID. See the [catalogue skill](../.agents/skills/catalogue/SKILL.md#agent-models) for
-evidence and manual upkeep.
+Author one card per agent at `agents/<agent-id>.toml`. Use `agents/openai-codex.toml`
+for Codex. The filename supplies the agent ID. The card accepts `label`, `source_url`,
+and `models`. See the [catalogue skill](../.agents/skills/catalogue/SKILL.md#agent-models)
+for evidence and manual upkeep.
 
 ## Rules
 

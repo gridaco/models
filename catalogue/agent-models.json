@@ -1,8 +1,8 @@
 {
   "$schema": "https://grida.co/schemas/ai-agent-models-v2.json",
-  "profiles": {
-    "openai/codex-chatgpt": {
-      "label": "Codex with ChatGPT sign-in",
+  "agents": {
+    "openai-codex": {
+      "label": "OpenAI Codex (ChatGPT plan)",
       "source_url": "https://learn.chatgpt.com/docs/auth#openai-authentication",
       "models": {
         "gpt-5.6-luna": {

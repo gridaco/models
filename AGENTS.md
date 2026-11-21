@@ -15,8 +15,8 @@ bindings, and published prices.
 ## Current state
 
 [`models/`](./models/) is the authored source: one TOML card per model, grouped by lab.
-[`catalogue/models.json`](./catalogue/models.json) is generated from it. Agent model profiles
-are authored in `agent-models/<owner>/<surface>.toml` and generated into
+[`catalogue/models.json`](./catalogue/models.json) is generated from it. Agent model selectors
+are authored in one card per agent at `agents/<agent-id>.toml` and generated into
 [`catalogue/agent-models.json`](./catalogue/agent-models.json). The catalogue uses schema version 2.
 The model catalogue was imported from [gridaco/grida](https://github.com/gridaco/grida).
 Each content change to `catalogue/` on `main` is published as a versioned GitHub Release
@@ -30,7 +30,7 @@ anything that assumes an answer.
 | path                                 | notes                                                                |
 | ------------------------------------ | -------------------------------------------------------------------- |
 | [models/](./models/)                 | **The source.** One card per model: `models/<lab>/<model>/card.toml` |
-| `agent-models/`                      | **Agent Models source.** One TOML file per access surface            |
+| `agents/`                            | **Agent Models source.** One TOML card per agent                     |
 | [catalogue/](./catalogue/)           | **The contract.** Generated JSON, JSON Schema, provenance notes      |
 | [scripts/](./scripts/)               | Tooling: build, validation, and release snapshots                    |
 | [tests/](./tests/)                   | Tests for the tooling                                                |
@@ -39,7 +39,7 @@ anything that assumes an answer.
 | [AGENTS.md](./AGENTS.md)             | This file. `CLAUDE.md` is a symlink to it                            |
 
 **Source vs. contract vs. tooling.** Model facts are authored once, as cards in `models/`.
-Agent Models profiles hold sourced selector IDs and references to the canonical text cards.
+Agent cards hold sourced selector IDs and references to the canonical text cards.
 Everything a consumer reads lives in `catalogue/` and must be readable from any language:
 plain JSON and JSON Schema, no generated code, no language-specific files.
 Use the source TOML to change generated JSON. Tooling lives outside the contract and uses
@@ -152,7 +152,7 @@ uv run pytest                        # test the checker
 npx -y oxfmt@0.71.0                  # format Markdown, TOML, JSON, YAML
 ```
 
-After editing a card or an Agent Models profile, run `build.py` then `check.py`, and commit
+After editing a model or agent card, run `build.py` then `check.py`, and commit
 the source with its regenerated JSON. CI runs `check.py` and `pytest` on every PR.
 
 Releases are automatic: on every push to `main` that changes the content of `catalogue/`,

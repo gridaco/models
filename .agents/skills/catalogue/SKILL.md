@@ -23,9 +23,9 @@ against provider documentation.
 | -------------------------------------- | --------------------------------------------------------------------------------------- |
 | `models/<lab>/<model>/card.toml`       | One card: identity, release provenance, provider bindings, capabilities, limits, prices |
 | `models/<lab>/lab.toml`                | The lab's display name and first-party homepage. Required for every lab                 |
-| `agent-models/<owner>/<surface>.toml`  | Sourced selectors for primary models on one agent access surface                        |
+| `agents/<agent-id>.toml`               | One agent card with sourced primary model selectors                                     |
 | `catalogue/models.json`                | Generated from `models/` by `scripts/build.py`. Never edit by hand                      |
-| `catalogue/agent-models.json`          | Agent Models generated from profile TOML by `scripts/build.py`                          |
+| `catalogue/agent-models.json`          | Agent Models generated from agent cards by `scripts/build.py`                           |
 | `catalogue/schemas/models.schema.json` | JSON Schema for `models.json`                                                           |
 | `catalogue/PROVENANCE.md`              | Source notes and qualifications that do not fit in JSON                                 |
 | `catalogue/SCHEMA_CHANGELOG.md`        | Authored contract changes, compatibility and migration; excludes catalogue-only facts   |
@@ -38,18 +38,19 @@ policy (which models a product lists, tiers, defaults) is not part of the catalo
 ## Agent Models
 
 Review [Agent Models](../../../catalogue/README.md#agent-models) by hand when the owner
-announces additions, changes or retirements. For Codex with ChatGPT sign-in, compare
-picker-visible selectors in a tagged Codex bundle with OpenAI's model documentation and
-changelog for ChatGPT sign-in. Check the documented scope before adding a selector. A bundle
+announces additions, changes or retirements. Use `agents/<agent-id>.toml` and derive the
+agent ID from the filename. For `agents/openai-codex.toml`, compare picker-visible
+selectors in a tagged Codex bundle with OpenAI's model documentation and changelog
+for ChatGPT sign-in. Check the documented scope before adding a selector. A bundle
 can contain hidden IDs and IDs offered under different authentication methods. [Codex models](https://learn.chatgpt.com/docs/models) · [Codex changelog](https://learn.chatgpt.com/docs/changelog)
 
 Use the exact selector and link to the corresponding `text.catalog` ID. Cite first-party
 evidence for each row and speed setting. Codex uses `priority` for Fast and `ultrafast`
 for Ultrafast. Record a mode on the same selector when first-party sources establish both
-support on the named surface and the native service tier value. Use the applicable account
-and workspace controls to interpret availability. Record removals when first-party evidence
-shows a selector has retired on the profile's surface. A change in one account's picker
-can be a lead for research. [Codex speed](https://learn.chatgpt.com/docs/agent-configuration/speed)
+support on the named surface and the native service tier value. Availability depends on
+the account and workspace. Record removals when first-party evidence shows a selector
+has retired for the agent on the documented access surface. A change in one account's
+picker can be a lead for research. [Codex speed](https://learn.chatgpt.com/docs/agent-configuration/speed)
 
 Use public documents and tagged source for review. Catalogue maintenance uses no paid
 inference calls. Regenerate and check the JSON, and cite the additions and removals in the

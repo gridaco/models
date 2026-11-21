@@ -2,16 +2,16 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://grida.co/schemas/ai-agent-models-v2.json",
   "title": "Agent models, version 2",
-  "description": "Source-backed primary model selectors for named agent access surfaces.",
+  "description": "Source-backed primary model selectors by agent.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["$schema", "profiles"],
+  "required": ["$schema", "agents"],
   "properties": {
     "$schema": { "const": "https://grida.co/schemas/ai-agent-models-v2.json" },
-    "profiles": {
+    "agents": {
       "type": "object",
-      "propertyNames": { "pattern": "^[a-z0-9][a-z0-9-]*/[a-z0-9][a-z0-9-]*$" },
-      "additionalProperties": { "$ref": "#/$defs/profile" }
+      "propertyNames": { "pattern": "^[a-z0-9][a-z0-9-]*$" },
+      "additionalProperties": { "$ref": "#/$defs/agent" }
     }
   },
   "$defs": {
@@ -20,7 +20,7 @@
       "format": "uri",
       "pattern": "^https://"
     },
-    "profile": {
+    "agent": {
       "type": "object",
       "additionalProperties": false,
       "required": ["label", "source_url", "models"],
@@ -28,7 +28,7 @@
         "label": { "type": "string", "minLength": 1 },
         "source_url": { "$ref": "#/$defs/source_url" },
         "models": {
-          "description": "Model records keyed by the exact primary selector on this surface.",
+          "description": "Model records keyed by exact primary selector for this agent card.",
           "type": "object",
           "minProperties": 1,
           "propertyNames": { "pattern": "^\\S+$" },

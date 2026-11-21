@@ -1,9 +1,9 @@
-"""Generate the catalogue from the authored source in `models/` and `agent-models/`.
+"""Generate the catalogue from the authored source in `models/` and `agents/`.
 
 - `catalogue/models.json` from the model cards (`models/<lab>/<model>/card.toml`)
 - `catalogue/labs.json` from the lab files (`models/<lab>/lab.toml`)
 - `catalogue/logos/<lab>.<ext>`, copied from each lab's logo (`models/<lab>/logo.<ext>`)
-- `catalogue/agent-models.json` from the profiles (`agent-models/<owner>/<surface>.toml`)
+- `catalogue/agent-models.json` from agent cards (`agents/<agent-id>.toml`)
 
 Usage:
     uv run scripts/build.py           # write the generated files
@@ -36,7 +36,7 @@ MODELS_JSON = ROOT / "catalogue" / "models.json"
 LABS = ROOT / "catalogue" / "labs.json"
 LOGOS = ROOT / "catalogue" / "logos"
 MODELS_SCHEMA = ROOT / "catalogue" / "schemas" / "models.schema.json"
-AGENT_MODELS_SOURCE = ROOT / "agent-models"
+AGENT_MODELS_SOURCE = ROOT / "agents"
 AGENT_MODELS_JSON = ROOT / "catalogue" / "agent-models.json"
 AGENT_MODELS_SCHEMA = ROOT / "catalogue" / "schemas" / "agent-models.schema.json"
 
@@ -62,25 +62,25 @@ def schema_id(path: Path = MODELS_SCHEMA) -> str:
         return json.load(f)["$id"]
 
 
-def load_agent_profiles(root: Path) -> tuple[dict[str, Any], list[str]]:
-    profiles = {}
+def load_agent_cards(root: Path) -> tuple[dict[str, Any], list[str]]:
+    agents = {}
     errors = []
     for path in sorted(root.rglob("*.toml")):
         relative = path.relative_to(root)
-        location = f"agent-models/{relative.as_posix()}"
-        if len(relative.parts) != 2:
-            errors.append(f"{location}: expected agent-models/<owner>/<surface>.toml")
+        location = f"agents/{relative.as_posix()}"
+        if len(relative.parts) != 1:
+            errors.append(f"{location}: expected agents/<agent-id>.toml")
             continue
         try:
             with path.open("rb") as f:
-                profile = tomllib.load(f)
+                agent = tomllib.load(f)
         except (tomllib.TOMLDecodeError, UnicodeDecodeError) as error:
             errors.append(f"{location}: {error}")
             continue
-        if isinstance(models := profile.get("models"), dict):
-            profile["models"] = dict(sorted(models.items()))
-        profiles[relative.with_suffix("").as_posix()] = profile
-    return profiles, errors
+        if isinstance(models := agent.get("models"), dict):
+            agent["models"] = dict(sorted(models.items()))
+        agents[path.stem] = agent
+    return agents, errors
 
 
 def build() -> tuple[dict[Path, bytes], list[str]]:
@@ -88,12 +88,12 @@ def build() -> tuple[dict[Path, bytes], list[str]]:
     cards = load_cards(MODELS)
     labs = load_labs(MODELS)
     names = sections()
-    profiles, errors = load_agent_profiles(AGENT_MODELS_SOURCE)
+    agents, errors = load_agent_cards(AGENT_MODELS_SOURCE)
     errors.extend(layout_errors(cards, names))
     documents = (
         (MODELS_JSON, assemble(cards, names, schema_id(), required_sections())),
         (LABS, assemble_labs(labs)),
-        (AGENT_MODELS_JSON, {"$schema": schema_id(AGENT_MODELS_SCHEMA), "profiles": profiles}),
+        (AGENT_MODELS_JSON, {"$schema": schema_id(AGENT_MODELS_SCHEMA), "agents": agents}),
     )
     outputs = {}
     for path, document in documents:

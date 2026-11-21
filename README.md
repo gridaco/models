@@ -32,7 +32,7 @@ import models from "@grida/ai-models/models.json" with { type: "json" };
 import agentModels from "@grida/ai-models/agent-models.json" with { type: "json" };
 ```
 
-Agent Models lists documented primary model selectors for an agent access surface. Resolve
+Agent Models lists documented primary model selectors by agent. Resolve
 its canonical model IDs against `models.json` from the same snapshot. Use the agent's own
 discovery interface for the current account's availability. Older v2 snapshots predate
 Agent Models. [Agent Models contract](./catalogue/README.md#agent-models)
@@ -68,7 +68,7 @@ Current releases hold the following assets.
 | asset                                          | contents                                                                                      |
 | ---------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `models.v2.json`, `labs.v2.json`               | Model cards and labs (`catalogue/models.json`, `catalogue/labs.json`)                         |
-| `agent-models.v2.json`                         | Agent model profiles (`catalogue/agent-models.json`)                                          |
+| `agent-models.v2.json`                         | Primary model selectors by agent (`catalogue/agent-models.json`)                              |
 | `models.v2.schema.json`, `labs.v2.schema.json` | Their JSON Schemas                                                                            |
 | `agent-models.v2.schema.json`                  | JSON Schema for Agent Models, also at `@grida/ai-models/schemas/agent-models.schema.json`     |
 | `grida-models-<version>.tar.gz`, `.zip`        | The whole catalogue, logos included, with `LICENSE` and `manifest.json`                       |
@@ -186,8 +186,8 @@ with a JSON Schema, readable from any language. Its shape and rules are document
 - **Labs are registered.** Each lab directory holds a `lab.toml` with the lab's display
   name, first-party homepage, and official logo, published as `catalogue/labs.json` and
   `catalogue/logos/`. A card's `vendor` is a lab ID.
-- **Agent model selection is documented by surface.** Agent Models profiles map exact
-  selectable IDs to canonical text cards. Maintainers review public evidence for each row.
+- **One card per agent.** Agent cards in `agents/<agent-id>.toml` map exact selectable IDs
+  to canonical text cards. Maintainers review public evidence for each row.
 - **Snapshots are GitHub Releases and an npm package.** Each content change to `catalogue/`
   on `main` is published as a versioned, checksummed release and as `@grida/ai-models` on
   npm, through trusted publishing (`scripts/release.py`, `.github/workflows/release.yml`).

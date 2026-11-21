@@ -1,4 +1,4 @@
-"""Validate the authored models, agent profiles, and public catalogue files.
+"""Validate the authored model and agent cards and public catalogue files.
 
 Three layers:
 
@@ -617,10 +617,10 @@ def agent_model_errors(agent_models: Any, schema: Any, facts: Any) -> Iterator[s
     text_models = facts.get("text.catalog", {}) if isinstance(facts, dict) else {}
     if not isinstance(text_models, dict):
         text_models = {}
-    for profile_id, profile in agent_models["profiles"].items():
-        where = f"profiles/{profile_id}"
-        yield from source_url_errors(profile["source_url"], where)
-        for selector, model in profile["models"].items():
+    for agent_id, agent in agent_models["agents"].items():
+        where = f"agents/{agent_id}"
+        yield from source_url_errors(agent["source_url"], where)
+        for selector, model in agent["models"].items():
             model_where = f"{where}/models/{selector}"
             if model["canonical_model_id"] not in text_models:
                 yield f"{model_where}: canonical_model_id {model['canonical_model_id']!r} must identify a text.catalog card"

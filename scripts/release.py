@@ -433,7 +433,7 @@ def npm_package(archive: dict[str, bytes]) -> dict[str, bytes]:
     readme = NPM_README.format(
         name=NPM_NAME, tag=tag, version=version, major=version.split(".")[0], repository=REPOSITORY,
         agent_models_row=(
-            "| `agent-models.json` | Model selection profiles for agent runtimes |\n"
+            "| `agent-models.json` | Model selections by agent |\n"
             if "agent-models.json" in data_files else ""
         ),
         schema_changelog_row=(
