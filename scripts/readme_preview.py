@@ -136,9 +136,17 @@ def lab_mark(path: str, content: bytes) -> tuple[str, int, int]:
     # Source metadata belongs on the catalogue asset. Embed only the display pixels.
     image.info.clear()
     buffer = io.BytesIO()
-    image.save(buffer, format="PNG", optimize=True)
-    uri = "data:image/png;base64," + base64.b64encode(buffer.getvalue()).decode("ascii")
-    return uri, image.width, image.height
+    image.save(buffer, format="PNG", compress_level=0)
+    pixels = base64.b64encode(buffer.getvalue()).decode("ascii")
+    width, height = image.size
+    # Use the same PNG encoder on each platform so build --check can compare bytes.
+    png = svg_to_bytes(svg_string=(
+        f'<svg xmlns="{SVG_NS}" width="{width}" height="{height}">'
+        f'<image width="{width}" height="{height}" href="data:image/png;base64,{pixels}"/>'
+        '</svg>'
+    ), skip_system_fonts=True)
+    uri = "data:image/png;base64," + base64.b64encode(png).decode("ascii")
+    return uri, width, height
 
 
 def index_rows(
