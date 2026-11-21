@@ -121,10 +121,15 @@ license, and are used under each owner's guidelines.
 
 ## Agent Models
 
-`agents.json` maps documented primary model selectors for each agent. The
-**OpenAI Codex (ChatGPT plan)** card uses ID `openai-codex` and records selectors OpenAI
-documents for at least one supported ChatGPT sign-in configuration. The signed-in App Server
-`model/list` supplies the choices available to the active account, workspace and client. [Codex App Server](https://learn.chatgpt.com/docs/app-server#list-models-modellist)
+`agents.json` maps documented primary model selectors for each agent.
+
+- **OpenAI Codex (ChatGPT plan)** uses ID `openai-codex` and records selectors OpenAI
+  documents for ChatGPT sign-in. The signed-in App Server `model/list` supplies the
+  choices available to the active account, workspace and client. [Codex App Server](https://learn.chatgpt.com/docs/app-server#list-models-modellist)
+- **Claude Code (Claude plan)** uses ID `anthropic-claude-code` and records full model IDs
+  for `--model` that resolve to existing `text.catalog` cards. Versioned IDs fix the
+  model identity. Aliases like `opus` can resolve differently across client versions and
+  providers. The signed-in `/model` picker shows the choices for the current account. [Claude Code selectors](https://support.claude.com/en/articles/11940350-claude-code-model-configuration) · [Alias resolution](https://code.claude.com/docs/en/model-config#model-aliases) · [Account availability](https://support.claude.com/en/articles/14552983-models-usage-and-limits-in-claude-code)
 
 | Field                                       | Meaning                                                                                                                          |
 | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
@@ -141,10 +146,13 @@ Server. Codex Fast (`priority`) and Ultrafast (`ultrafast`) use the same model s
 The available modes depend on the account and workspace. The image generation tool selects
 GPT Image internally. [Codex speed](https://learn.chatgpt.com/docs/agent-configuration/speed) · [Codex image generation](https://learn.chatgpt.com/docs/image-generation)
 
-Author one card per agent at `agents/<agent-id>.toml`. Use `agents/openai-codex.toml`
-for Codex. The filename supplies the agent ID. The card accepts `label`, `source_url`,
-and `models`. See the [catalogue skill](../.agents/skills/catalogue/SKILL.md#agent-models)
-for evidence and manual upkeep.
+Claude Code exposes Fast through `/fast` and the `fastMode` setting. Its card lists model
+selectors only. [Claude Code Fast mode](https://code.claude.com/docs/en/fast-mode#toggle-fast-mode)
+
+Author one card per agent at `agents/<agent-id>.toml`. The filename supplies the agent ID.
+The card accepts `label`, `source_url`, and `models`. For Claude Code, check its supported
+model list for exact IDs and monitor its changelog and the Claude Platform model lifecycle
+for additions and retirements that apply to Claude plan sign-in. [Claude Code changelog](https://code.claude.com/docs/en/changelog) · [Claude model lifecycle](https://platform.claude.com/docs/en/about-claude/model-deprecations) · [Catalogue skill](../.agents/skills/catalogue/SKILL.md#agent-models)
 
 ## Rules
 

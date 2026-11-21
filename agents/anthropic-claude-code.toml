@@ -1,0 +1,42 @@
+# Exact model IDs are documented by the Claude Help Center and checked against
+# the model lifecycle dates that apply to Claude Code with a Claude plan.
+# https://platform.claude.com/docs/en/about-claude/model-deprecations#model-status
+# https://code.claude.com/docs/en/changelog
+label = "Claude Code (Claude plan)"
+source_url = "https://code.claude.com/docs/en/authentication"
+
+[models."claude-fable-5"]
+canonical_model_id = "anthropic/claude-fable-5"
+source_url = "https://support.claude.com/en/articles/11940350-claude-code-model-configuration"
+
+[models."claude-fable-5-1"]
+canonical_model_id = "anthropic/claude-fable-5.1"
+source_url = "https://support.claude.com/en/articles/11940350-claude-code-model-configuration"
+
+[models."claude-fable-5-2"]
+canonical_model_id = "anthropic/claude-fable-5.2"
+source_url = "https://support.claude.com/en/articles/11940350-claude-code-model-configuration"
+
+[models."claude-haiku-5-5"]
+canonical_model_id = "anthropic/claude-haiku-5.5"
+source_url = "https://support.claude.com/en/articles/11940350-claude-code-model-configuration"
+
+[models."claude-opus-4-8"]
+canonical_model_id = "anthropic/claude-opus-4.8"
+source_url = "https://support.claude.com/en/articles/11940350-claude-code-model-configuration"
+
+[models."claude-opus-5"]
+canonical_model_id = "anthropic/claude-opus-5"
+source_url = "https://support.claude.com/en/articles/11940350-claude-code-model-configuration"
+
+[models."claude-opus-5-5"]
+canonical_model_id = "anthropic/claude-opus-5.5"
+source_url = "https://support.claude.com/en/articles/11940350-claude-code-model-configuration"
+
+[models."claude-sonnet-5"]
+canonical_model_id = "anthropic/claude-sonnet-5"
+source_url = "https://support.claude.com/en/articles/11940350-claude-code-model-configuration"
+
+[models."claude-sonnet-5-5"]
+canonical_model_id = "anthropic/claude-sonnet-5.5"
+source_url = "https://support.claude.com/en/articles/11940350-claude-code-model-configuration"

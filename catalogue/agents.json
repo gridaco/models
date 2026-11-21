@@ -1,6 +1,48 @@
 {
   "$schema": "https://grida.co/schemas/ai-agents-v2.json",
   "agents": {
+    "anthropic-claude-code": {
+      "label": "Claude Code (Claude plan)",
+      "source_url": "https://code.claude.com/docs/en/authentication",
+      "models": {
+        "claude-fable-5": {
+          "canonical_model_id": "anthropic/claude-fable-5",
+          "source_url": "https://support.claude.com/en/articles/11940350-claude-code-model-configuration"
+        },
+        "claude-fable-5-1": {
+          "canonical_model_id": "anthropic/claude-fable-5.1",
+          "source_url": "https://support.claude.com/en/articles/11940350-claude-code-model-configuration"
+        },
+        "claude-fable-5-2": {
+          "canonical_model_id": "anthropic/claude-fable-5.2",
+          "source_url": "https://support.claude.com/en/articles/11940350-claude-code-model-configuration"
+        },
+        "claude-haiku-5-5": {
+          "canonical_model_id": "anthropic/claude-haiku-5.5",
+          "source_url": "https://support.claude.com/en/articles/11940350-claude-code-model-configuration"
+        },
+        "claude-opus-4-8": {
+          "canonical_model_id": "anthropic/claude-opus-4.8",
+          "source_url": "https://support.claude.com/en/articles/11940350-claude-code-model-configuration"
+        },
+        "claude-opus-5": {
+          "canonical_model_id": "anthropic/claude-opus-5",
+          "source_url": "https://support.claude.com/en/articles/11940350-claude-code-model-configuration"
+        },
+        "claude-opus-5-5": {
+          "canonical_model_id": "anthropic/claude-opus-5.5",
+          "source_url": "https://support.claude.com/en/articles/11940350-claude-code-model-configuration"
+        },
+        "claude-sonnet-5": {
+          "canonical_model_id": "anthropic/claude-sonnet-5",
+          "source_url": "https://support.claude.com/en/articles/11940350-claude-code-model-configuration"
+        },
+        "claude-sonnet-5-5": {
+          "canonical_model_id": "anthropic/claude-sonnet-5.5",
+          "source_url": "https://support.claude.com/en/articles/11940350-claude-code-model-configuration"
+        }
+      }
+    },
     "openai-codex": {
       "label": "OpenAI Codex (ChatGPT plan)",
       "source_url": "https://learn.chatgpt.com/docs/auth#openai-authentication",
