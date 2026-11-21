@@ -35,7 +35,8 @@ anything that assumes an answer.
 | [scripts/](./scripts/)               | Tooling: build, validation, and release snapshots                    |
 | [tests/](./tests/)                   | Tests for the tooling                                                |
 | [.agents/skills/](./.agents/skills/) | Agent skills. `.claude/skills` is a symlink to it                    |
-| [README.md](./README.md)             | Public overview, principles, decisions                               |
+| [README.md](./README.md)             | Public overview and catalogue access                                 |
+| [CONTRIBUTING.md](./CONTRIBUTING.md) | Contribution workflow, principles, and design decisions              |
 | [AGENTS.md](./AGENTS.md)             | This file. `CLAUDE.md` is a symlink to it                            |
 
 **Source vs. contract vs. tooling.** Model facts are authored once, as cards in `models/`.
@@ -52,8 +53,8 @@ aggregator or a redrawing. A provider registry is still undecided (open decision
 
 ## Open decisions
 
-These are listed in the [README](./README.md#open-decisions). Treat them as quarantined:
-nothing written here may depend on an answer that has not been decided. When a task forces
+See the [contributor guide](./CONTRIBUTING.md#open-decisions). Treat these decisions as
+quarantined: nothing written here may depend on an answer that has not been decided. When a task forces
 one of these questions, raise it with the user instead of answering it implicitly.
 
 1. Hosted endpoint: whether to serve the catalogue from a domain of its own.

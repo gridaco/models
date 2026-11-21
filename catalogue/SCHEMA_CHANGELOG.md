@@ -77,11 +77,24 @@ follow the same release major.
 Provider request/result contracts, uncertainty meanings, usage and prices remain
 independent. No new primitive set, model card or published rate is introduced.
 
-**Migration:** update the reader/validator before selecting a v2 snapshot and
-handle an absent relationship. Existing v1 pins remain on v1; GitHub `latest`
-moves across majors, so moving v1 asset URLs stop resolving after the first v2
-release. See the [v1-to-v2 migration instructions](https://github.com/gridaco/models/blob/5fd023df088af38a135246c8e476f60d7c30cbc6/README.md#migrating-from-schema-version-1)
-for schema identifiers, asset names and pin choices.
+#### Migrating from schema version 1
+
+Before selecting a v2 snapshot, update your Models validator and allow decision offerings
+to omit `underlying_model`. The Models `$schema` value and the Models and Labs schema
+`$id` values use v2 identifiers. Keep the reader, schemas, and data on the same snapshot.
+
+Existing npm `^1` ranges and CDN `@1` URLs stay on version 1. You can also pin a version 1
+snapshot directly.
+
+```text
+https://github.com/gridaco/models/releases/download/v1.20261113.1/models.v1.json
+https://cdn.jsdelivr.net/npm/@grida/ai-models@1.20261113.1/models.json
+```
+
+GitHub's `latest` follows new releases across schema majors. When it moved to v2,
+`releases/latest/download/models.v1.json` and the corresponding v1 labs and schema assets
+stopped resolving. Use a v1 tag to stay on v1, or switch the reader and asset filenames
+to v2 together.
 
 ## Schema v1
 

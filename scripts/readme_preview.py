@@ -268,7 +268,10 @@ def render_previews(models_json: bytes, labs_json: bytes, logo_files: dict[str, 
         official_mark = ET.parse(ASSETS / "grida-symbol-240.svg").getroot()
         for path in official_mark:
             element(brand, "path", **path.attrib)
-        text(root, width - pad, 34 if compact else 40, "Latest model releases", 15 if compact else 18,
+        baseline = 34 if compact else 40
+        text(root, pad + (35 if compact else 42), baseline, "/", 17 if compact else 21, color="#777")
+        text(root, pad + (50 if compact else 60), baseline, "Models", 17 if compact else 21, 540, tracking=-.4)
+        text(root, width - pad, baseline, "Latest model releases", 15 if compact else 18,
              540, anchor="end", tracking=-.35)
         footer_y = index_rows(root, featured, labs, marks, compact, font)
         height = catalogue_mix(root, footer_y, counts, compact, font)

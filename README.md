@@ -1,16 +1,16 @@
-# Grida Models
+<picture>
+  <source media="(max-width: 680px)" srcset="./.github/images/release-index-mobile.svg">
+  <img src="./.github/images/release-index.svg" alt="Latest model releases and a breakdown of the remaining catalogue by medium">
+</picture>
+
+# Models
 
 **A hand-curated, source-backed catalogue of AI models.**
 
 Explore model capabilities, limits, provider IDs, and published prices, with links to
 the original sources.
 
-[Get the catalogue](#get-the-catalogue) · [Browse the model cards](./models/) · [View releases](https://github.com/gridaco/models/releases)
-
-<picture>
-  <source media="(max-width: 680px)" srcset="./.github/images/release-index-mobile.svg">
-  <img src="./.github/images/release-index.svg" alt="Latest model releases and a breakdown of the remaining catalogue by medium">
-</picture>
+[Get the catalogue](#get-the-catalogue) · [Browse models](https://grida.co/ai/models) · [View releases](https://github.com/gridaco/models/releases)
 
 ## Get the catalogue
 
@@ -80,39 +80,13 @@ change. A release is published only when the catalogue's content changes, and th
 are reproducible from the same commit. Release notes list the models, labs, schemas, and
 other files that changed since the previous release.
 
-The authored [schema changelog](./catalogue/SCHEMA_CHANGELOG.md) explains contract
-changes, compatibility and consumer migration. It is included in snapshot archives
-and the npm package, and linked from generated release notes. Ordinary model and
-price updates remain in those release notes rather than growing the schema log.
-
-### Migrating from schema version 1
-
-Version 2 lets a decision offering omit `underlying_model` when no relationship is
-documented. Its existing meaning and all other record fields are retained. A new
-record without that field fails the version 1 schema, so update the validator and
-handle an absent relationship before selecting a version 2 snapshot. The Models
-`$schema` value and both published schema `$id`s now end in `v2`.
-
-Existing npm `^1` ranges and CDN `@1` URLs stay on version 1. Immutable version 1
-release URLs remain available, for example:
-
-```text
-https://github.com/gridaco/models/releases/download/v1.20261113.1/models.v1.json
-https://cdn.jsdelivr.net/npm/@grida/ai-models@1.20261113.1/models.json
-```
-
-Publishing the first version 2 release moves GitHub `latest`. Moving URLs such as
-`releases/latest/download/models.v1.json` and the matching labs/schema assets then
-stop resolving. Choose an explicit old tag to remain on version 1, or update both
-the asset names and reader to version 2. Labs retain their record shape; both
-schemas and asset names follow the catalogue's single release major.
+[Schema changelog](./catalogue/SCHEMA_CHANGELOG.md) · [Migrate from v1](./catalogue/SCHEMA_CHANGELOG.md#migrating-from-schema-version-1)
 
 The catalogue data is MIT licensed. Lab logos are trademarks of their owners and are not
 covered by that license.
 
-Snapshots describe public model facts, not a consuming application's live offering. For
-models currently served by Grida, see the [model directory](https://grida.co/ai/models) or
-[Gateway discovery](https://gateway.grida.ai/v1/models).
+Snapshots record public model facts. To see which models Grida currently serves,
+use [Gateway discovery](https://gateway.grida.ai/v1/models).
 
 When updating a consumer, handle unfamiliar optional display metadata gracefully rather
 than reject the whole catalogue. Execution and pricing fields still need explicit support.
@@ -155,66 +129,14 @@ consumes a projection of it.
   Which models a product lists, and in what order, is that product's decision.
 
 Each model is authored as one TOML card in [`models/`](./models/), grouped by lab
-(`models/openai/gpt-5.5/card.toml`). The contract consumers read,
+([`models/openai/gpt-6.2-astra/card.toml`](./models/openai/gpt-6.2-astra/card.toml)). The contract consumers read,
 [`catalogue/models.json`](./catalogue/models.json), is generated from those cards: plain JSON
 with a JSON Schema, readable from any language. Its shape and rules are documented in
 [`catalogue/README.md`](./catalogue/README.md).
 
-## Principles
-
-- **Every fact has a source.** Prices, limits, and release dates cite a first-party page.
-- **Regular prices, without promotion tracking.** Record sourced, non-promotional
-  provider rates even during an active discount. Do not maintain discounted prices or
-  promotion expiry dates. Existing models remain available for consumer review; provider
-  coverage changes do not silently remove them.
-- **An ID is never portable.** The same model has different IDs, availability, parameters
-  and prices on different providers. Bindings retain those differences. A sourced native
-  `reference_provider` is presented first; it does not choose a consumer's route.
-- **Additive by default.** Consumers depend on the shape. Fields are added; breaking changes
-  get a new schema version.
-
-## Decided
-
-- **The contract is language-agnostic.** Consumers read JSON, JSON Schema, and provenance
-  notes. Tooling and tests use whichever language fits (currently Python). Typed bindings
-  and code generation live in each consumer.
-- **One card per model.** Facts are authored as TOML cards in `models/<lab>/<model>/`, and
-  `catalogue/models.json` is generated from them. A card's directory leaves room for
-  per-model material such as example assets.
-- **Labs are registered.** Each lab directory holds a `lab.toml` with the lab's display
-  name, first-party homepage, and official logo, published as `catalogue/labs.json` and
-  `catalogue/logos/`. A card's `vendor` is a lab ID.
-- **One card per agent.** Agent cards in `agents/<agent-id>.toml` map exact selectable IDs
-  to canonical text cards. Maintainers review public evidence for each row.
-- **Snapshots are GitHub Releases and an npm package.** Each content change to `catalogue/`
-  on `main` is published as a versioned, checksummed release and as `@grida/ai-models` on
-  npm, through trusted publishing (`scripts/release.py`, `.github/workflows/release.yml`).
-- **Facts only.** Product policy (which models a product lists, its tiers and defaults)
-  stays with each product.
-
-## Open decisions
-
-These are deliberately undecided, and are tracked here so nobody mistakes them for settled.
-
-1. **Hosted endpoint.** Whether to serve the catalogue from a domain of its own, beyond
-   GitHub Releases, npm, and the CDNs that mirror npm.
-2. **Provider registry.** Whether this repository also owns display labels, logos, and
-   ID-prefix rules for providers.
-
 ## Contributing
 
-Add or correct a model by opening a pull request that changes its card in
-[`models/`](./models/), regenerates `catalogue/models.json`, and cites a first-party source
-for every new fact. Contributor and agent conventions live in
-[`AGENTS.md`](./AGENTS.md) and [`.agents/skills/`](./.agents/skills/).
-
-A public contract change also updates the [schema changelog](./catalogue/SCHEMA_CHANGELOG.md#maintaining-this-log)
-in the same PR, including compatible extensions and changes to consumer-visible
-validation or generation semantics. Explain the before/after behavior,
-compatibility and migration. The PR schema-content check catches a missing log
-update for changed JSON Schemas; reviewers must also check semantic changes
-implemented elsewhere. Catalogue-only model, provider and price changes need no
-schema entry.
+See the [contributor guide](./CONTRIBUTING.md).
 
 ## License
 

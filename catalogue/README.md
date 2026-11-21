@@ -32,7 +32,7 @@ commit `f053893047af`), with the shape unchanged. It was then split into per-mod
 keys changed. It was named `facts.json` until release `v1.20261011.0`, and published under
 that name in that release. Schema version 1 retained the original
 `ai-model-facts-v1` identity. Version 2 uses `ai-model-facts-v2` and permits decision
-offerings without a documented underlying model; see [migration notes](../README.md#migrating-from-schema-version-1).
+offerings without a documented underlying model; see [migration notes](./SCHEMA_CHANGELOG.md#migrating-from-schema-version-1).
 
 ## Shape
 
