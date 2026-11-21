@@ -158,7 +158,8 @@ jobs:
             sleep 15
           done
           major="${version%%.*}"
-          for file in models.json labs.json manifest.json; do
+          for file in models.json labs.json agent-models.json schemas/agent-models.schema.json manifest.json; do
+            [ -f "package/$file" ] || continue
             curl -fsS "https://purge.jsdelivr.net/npm/$NPM_PACKAGE@$major/$file" > /dev/null \
               || echo "Could not refresh $file; jsDelivr will pick it up within hours."
           done

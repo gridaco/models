@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grida.co/schemas/ai-agent-models-v2.json",
+  "title": "Agent models, version 2",
+  "description": "Source-backed primary model selectors for named agent access surfaces.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "profiles"],
+  "properties": {
+    "$schema": { "const": "https://grida.co/schemas/ai-agent-models-v2.json" },
+    "profiles": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z0-9][a-z0-9-]*/[a-z0-9][a-z0-9-]*$" },
+      "additionalProperties": { "$ref": "#/$defs/profile" }
+    }
+  },
+  "$defs": {
+    "source_url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://"
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "source_url", "models"],
+      "properties": {
+        "label": { "type": "string", "minLength": 1 },
+        "source_url": { "$ref": "#/$defs/source_url" },
+        "models": {
+          "description": "Model records keyed by the exact primary selector on this surface.",
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": { "pattern": "^\\S+$" },
+          "additionalProperties": { "$ref": "#/$defs/model" }
+        }
+      }
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical_model_id", "source_url"],
+      "properties": {
+        "canonical_model_id": {
+          "description": "The exact key of a text.catalog card in this snapshot's models.json.",
+          "type": "string",
+          "minLength": 1
+        },
+        "source_url": { "$ref": "#/$defs/source_url" },
+        "modes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["fast"],
+          "properties": { "fast": { "$ref": "#/$defs/fast" } }
+        }
+      }
+    },
+    "fast": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["service_tier", "source_url"],
+      "properties": {
+        "service_tier": {
+          "description": "The native Fast service tier value for this same selector.",
+          "type": "string",
+          "pattern": "^\\S+$"
+        },
+        "source_url": { "$ref": "#/$defs/source_url" }
+      }
+    }
+  }
+}

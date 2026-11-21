@@ -3,7 +3,7 @@ name: catalogue
 description: >
   Research, add, update, deprecate, or remove AI model catalogue entries —
   text, decision, image, video, audio, 3D, image tools, and embedding models — with
-  their capabilities, limits, provider bindings, and published prices.
+  their capabilities, limits, provider bindings, published prices, and agent model selectors.
   Covers what an entry is, per-provider ID rules, regular pricing, native
   reference and provider coverage, public distribution, and the verification
   checklist. Use when bumping a model version, adding a model or provider
@@ -14,7 +14,8 @@ description: >
 # Catalogue — research and update workflow
 
 Use this when a model fact changes: a new model or version, a new provider route, a price
-change, a limit correction, a deprecation, or an audit against provider documentation.
+change, a limit correction, a deprecation, an agent model selector change, or an audit
+against provider documentation.
 
 ## Where to edit
 
@@ -22,7 +23,9 @@ change, a limit correction, a deprecation, or an audit against provider document
 | -------------------------------------- | --------------------------------------------------------------------------------------- |
 | `models/<lab>/<model>/card.toml`       | One card: identity, release provenance, provider bindings, capabilities, limits, prices |
 | `models/<lab>/lab.toml`                | The lab's display name and first-party homepage. Required for every lab                 |
+| `agent-models/<owner>/<surface>.toml`  | Sourced selectors for primary models on one agent access surface                        |
 | `catalogue/models.json`                | Generated from `models/` by `scripts/build.py`. Never edit by hand                      |
+| `catalogue/agent-models.json`          | Agent Models generated from profile TOML by `scripts/build.py`                          |
 | `catalogue/schemas/models.schema.json` | JSON Schema for `models.json`                                                           |
 | `catalogue/PROVENANCE.md`              | Source notes and qualifications that do not fit in JSON                                 |
 | `catalogue/SCHEMA_CHANGELOG.md`        | Authored contract changes, compatibility and migration; excludes catalogue-only facts   |
@@ -31,6 +34,24 @@ Card layout and the `section` / `null_keys` authoring keys are in
 [`models/README.md`](../../../models/README.md); the shape and its rules are in
 [`catalogue/README.md`](../../../catalogue/README.md). Product
 policy (which models a product lists, tiers, defaults) is not part of the catalogue.
+
+## Agent Models
+
+Review [Agent Models](../../../catalogue/README.md#agent-models) by hand when the owner
+announces additions, changes or retirements. For Codex with ChatGPT sign-in, compare
+picker-visible selectors in a tagged Codex bundle with OpenAI's model documentation and
+changelog for ChatGPT sign-in. Check the documented scope before adding a selector. A bundle
+can contain hidden IDs and IDs offered under different authentication methods. [Codex models](https://learn.chatgpt.com/docs/models) · [Codex changelog](https://learn.chatgpt.com/docs/changelog)
+
+Use the exact selector and link to the corresponding `text.catalog` ID. Cite first-party
+evidence for each row and each Fast setting. Record `priority` for Codex Fast when both
+the model's Fast support on the surface and the wire value are sourced. Record removals
+when first-party evidence shows a selector has retired on the profile's surface. A change
+in one account's picker can be a lead for research. [Codex speed](https://learn.chatgpt.com/docs/agent-configuration/speed)
+
+Use public documents and tagged source for review. Catalogue maintenance uses no paid
+inference calls. Regenerate and check the JSON, and cite the additions and removals in the
+PR description.
 
 ## What an entry is
 

@@ -11,6 +11,21 @@ An entry linked to an open PR does not mean the change has been released. See
 
 ## Schema v2
 
+### 2026-11-21 — Agent Models catalogue
+
+Reference [issue #64](https://github.com/gridaco/models/issues/64).
+
+**Change** adds `agent-models.json` and its schema. A profile maps exact primary
+model selectors on a named agent access surface to canonical `text.catalog` IDs.
+Each selector has a first-party source and can record a sourced Fast service tier.
+
+**Compatibility** is additive within schema v2. The Agent Models schema is a
+separate contract and supports an empty profile map.
+
+**Migration** is optional. Use the Agent Models asset from the same pinned snapshot
+as `models.json` when resolving canonical model IDs. Use the agent's live discovery
+for the active account's choices.
+
 ### 2026-11-19 — Text bindings may describe Fast offerings and modes
 
 References [issue #53](https://github.com/gridaco/models/issues/53) and

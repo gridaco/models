@@ -29,7 +29,13 @@ npm install @grida/ai-models
 
 ```js
 import models from "@grida/ai-models/models.json" with { type: "json" };
+import agentModels from "@grida/ai-models/agent-models.json" with { type: "json" };
 ```
+
+Agent Models lists documented primary model selectors for an agent access surface. Resolve
+its canonical model IDs against `models.json` from the same snapshot. Use the agent's own
+discovery interface for the current account's availability. Older v2 snapshots predate
+Agent Models. [Agent Models contract](./catalogue/README.md#agent-models)
 
 For fetching at runtime, use the package through jsDelivr's CDN: compressed, cached at the
 edge, and with no redirects. `@2` follows the newest snapshot of schema version 2; a full
@@ -37,13 +43,18 @@ version pins one snapshot.
 
 ```
 https://cdn.jsdelivr.net/npm/@grida/ai-models@2/models.json
+https://cdn.jsdelivr.net/npm/@grida/ai-models@2/agent-models.json
+https://cdn.jsdelivr.net/npm/@grida/ai-models@2/schemas/agent-models.schema.json
 ```
+
+Pin both URLs to the same full version when the files are used together.
 
 The GitHub Release assets suit scripts and archiving. The newest snapshot is always at:
 
 ```sh
 curl -LO https://github.com/gridaco/models/releases/latest/download/models.v2.json
 curl -LO https://github.com/gridaco/models/releases/latest/download/labs.v2.json
+curl -LO https://github.com/gridaco/models/releases/latest/download/agent-models.v2.json
 ```
 
 The `v2` in the file name is the schema version. GitHub `latest` follows the newest
@@ -52,12 +63,14 @@ stops resolving after a major change instead of serving a different shape. To pi
 a snapshot, use its version instead of `latest`:
 `https://github.com/gridaco/models/releases/download/<version>/models.v2.json`.
 
-Each release holds:
+Current releases hold the following assets.
 
 | asset                                          | contents                                                                                      |
 | ---------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `models.v2.json`, `labs.v2.json`               | Model cards and labs (`catalogue/models.json`, `catalogue/labs.json`)                         |
+| `agent-models.v2.json`                         | Agent model profiles (`catalogue/agent-models.json`)                                          |
 | `models.v2.schema.json`, `labs.v2.schema.json` | Their JSON Schemas                                                                            |
+| `agent-models.v2.schema.json`                  | JSON Schema for Agent Models, also at `@grida/ai-models/schemas/agent-models.schema.json`     |
 | `grida-models-<version>.tar.gz`, `.zip`        | The whole catalogue, logos included, with `LICENSE` and `manifest.json`                       |
 | `manifest.json`                                | Version, schema version, source commit, content digest, counts, and the SHA-256 of every file |
 | `SHA256SUMS`                                   | Checksums of the other assets: `sha256sum -c SHA256SUMS --ignore-missing`                     |
@@ -173,6 +186,8 @@ with a JSON Schema, readable from any language. Its shape and rules are document
 - **Labs are registered.** Each lab directory holds a `lab.toml` with the lab's display
   name, first-party homepage, and official logo, published as `catalogue/labs.json` and
   `catalogue/logos/`. A card's `vendor` is a lab ID.
+- **Agent model selection is documented by surface.** Agent Models profiles map exact
+  selectable IDs to canonical text cards. Maintainers review public evidence for each row.
 - **Snapshots are GitHub Releases and an npm package.** Each content change to `catalogue/`
   on `main` is published as a versioned, checksummed release and as `@grida/ai-models` on
   npm, through trusted publishing (`scripts/release.py`, `.github/workflows/release.yml`).
