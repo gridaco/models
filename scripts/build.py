@@ -3,7 +3,7 @@
 - `catalogue/models.json` from the model cards (`models/<lab>/<model>/card.toml`)
 - `catalogue/labs.json` from the lab files (`models/<lab>/lab.toml`)
 - `catalogue/logos/<lab>.<ext>`, copied from each lab's logo (`models/<lab>/logo.<ext>`)
-- `catalogue/agent-models.json` from agent cards (`agents/<agent-id>.toml`)
+- `catalogue/agents.json` from agent cards (`agents/<agent-id>.toml`)
 
 Usage:
     uv run scripts/build.py           # write the generated files
@@ -36,9 +36,9 @@ MODELS_JSON = ROOT / "catalogue" / "models.json"
 LABS = ROOT / "catalogue" / "labs.json"
 LOGOS = ROOT / "catalogue" / "logos"
 MODELS_SCHEMA = ROOT / "catalogue" / "schemas" / "models.schema.json"
-AGENT_MODELS_SOURCE = ROOT / "agents"
-AGENT_MODELS_JSON = ROOT / "catalogue" / "agent-models.json"
-AGENT_MODELS_SCHEMA = ROOT / "catalogue" / "schemas" / "agent-models.schema.json"
+AGENTS_SOURCE = ROOT / "agents"
+AGENTS_JSON = ROOT / "catalogue" / "agents.json"
+AGENTS_SCHEMA = ROOT / "catalogue" / "schemas" / "agents.schema.json"
 
 
 def sections() -> list[str]:
@@ -88,12 +88,12 @@ def build() -> tuple[dict[Path, bytes], list[str]]:
     cards = load_cards(MODELS)
     labs = load_labs(MODELS)
     names = sections()
-    agents, errors = load_agent_cards(AGENT_MODELS_SOURCE)
+    agents, errors = load_agent_cards(AGENTS_SOURCE)
     errors.extend(layout_errors(cards, names))
     documents = (
         (MODELS_JSON, assemble(cards, names, schema_id(), required_sections())),
         (LABS, assemble_labs(labs)),
-        (AGENT_MODELS_JSON, {"$schema": schema_id(AGENT_MODELS_SCHEMA), "agents": agents}),
+        (AGENTS_JSON, {"$schema": schema_id(AGENTS_SCHEMA), "agents": agents}),
     )
     outputs = {}
     for path, document in documents:

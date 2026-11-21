@@ -3,17 +3,17 @@
 This directory holds the language-agnostic JSON contract. Sources are the model cards
 in [`models/`](../models/) and the agent cards in `agents/`.
 
-| file                               | role                                                                                                                 |
-| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `models.json`                      | Generated from `models/`. Model identities, release provenance, provider bindings, capabilities, limits, list prices |
-| `labs.json`                        | Generated from `models/<lab>/lab.toml`. The labs that make catalogued models                                         |
-| `agent-models.json`                | Generated from `agents/<agent-id>.toml`. Exact primary model selectors by agent                                      |
-| `schemas/models.schema.json`       | JSON Schema 2020-12 for `models.json`                                                                                |
-| `logos/`                           | Generated from `models/<lab>/logo.*`. Each lab's official logo                                                       |
-| `schemas/labs.schema.json`         | JSON Schema 2020-12 for `labs.json`                                                                                  |
-| `schemas/agent-models.schema.json` | JSON Schema 2020-12 for `agent-models.json`                                                                          |
-| `PROVENANCE.md`                    | Source notes and qualifications that don't fit in JSON                                                               |
-| `SCHEMA_CHANGELOG.md`              | Authored public-contract changes, compatibility and migration history                                                |
+| file                         | role                                                                                                                 |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `models.json`                | Generated from `models/`. Model identities, release provenance, provider bindings, capabilities, limits, list prices |
+| `labs.json`                  | Generated from `models/<lab>/lab.toml`. The labs that make catalogued models                                         |
+| `agents.json`                | Generated from `agents/<agent-id>.toml`. Exact primary model selectors by agent                                      |
+| `schemas/models.schema.json` | JSON Schema 2020-12 for `models.json`                                                                                |
+| `logos/`                     | Generated from `models/<lab>/logo.*`. Each lab's official logo                                                       |
+| `schemas/labs.schema.json`   | JSON Schema 2020-12 for `labs.json`                                                                                  |
+| `schemas/agents.schema.json` | JSON Schema 2020-12 for `agents.json`                                                                                |
+| `PROVENANCE.md`              | Source notes and qualifications that don't fit in JSON                                                               |
+| `SCHEMA_CHANGELOG.md`        | Authored public-contract changes, compatibility and migration history                                                |
 
 Released snapshots of this directory, versioned `v<schema>.<YYYYMMDD>.<n>`, are published at
 [github.com/gridaco/models/releases](https://github.com/gridaco/models/releases); see the
@@ -121,14 +121,14 @@ license, and are used under each owner's guidelines.
 
 ## Agent Models
 
-`agent-models.json` maps documented primary model selectors for each agent. The
+`agents.json` maps documented primary model selectors for each agent. The
 **OpenAI Codex (ChatGPT plan)** card uses ID `openai-codex` and records selectors OpenAI
 documents for at least one supported ChatGPT sign-in configuration. The signed-in App Server
 `model/list` supplies the choices available to the active account, workspace and client. [Codex App Server](https://learn.chatgpt.com/docs/app-server#list-models-modellist)
 
 | Field                                       | Meaning                                                                                                                          |
 | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `$schema`                                   | `https://grida.co/schemas/ai-agent-models-v2.json`                                                                               |
+| `$schema`                                   | `https://grida.co/schemas/ai-agents-v2.json`                                                                                     |
 | `agents`                                    | Agent cards keyed by agent ID. An empty map records no agents.                                                                   |
 | Agent `label` and `source_url`              | Agent display name and first-party source for the access surface.                                                                |
 | `models`                                    | Map keyed by the exact selectable ID for that agent. Preserve spelling and case. Order carries no meaning.                       |

@@ -646,10 +646,10 @@ def main() -> int:
     facts = load(MODELS_JSON)
     errors = source_errors() + check(facts, load(MODELS_SCHEMA))
     errors += [f"labs.json {error}" for error in schema_errors(load(LABS), load(LABS_SCHEMA))]
-    if build.AGENT_MODELS_JSON.exists():
+    if build.AGENTS_JSON.exists():
         errors += [
-            f"agent-models.json {error}"
-            for error in agent_model_errors(load(build.AGENT_MODELS_JSON), load(build.AGENT_MODELS_SCHEMA), facts)
+            f"agents.json {error}"
+            for error in agent_model_errors(load(build.AGENTS_JSON), load(build.AGENTS_SCHEMA), facts)
         ]
     for error in errors:
         print(error, file=sys.stderr)
@@ -662,7 +662,7 @@ def main() -> int:
         if section not in NON_TABLE_SECTIONS and isinstance(table, dict)
     )
     print(f"ok: {MODELS_JSON.relative_to(ROOT)} ({count} cards), {LABS.relative_to(ROOT)} ({len(load(LABS))} labs), "
-          f"{build.AGENT_MODELS_JSON.relative_to(ROOT)}")
+          f"{build.AGENTS_JSON.relative_to(ROOT)}")
     return 0
 
 

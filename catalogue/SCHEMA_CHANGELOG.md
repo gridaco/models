@@ -16,7 +16,7 @@ An entry linked to an open PR does not mean the change has been released. See
 References [issue #64](https://github.com/gridaco/models/issues/64) and
 [PR #65](https://github.com/gridaco/models/pull/65).
 
-**Change** adds `agent-models.json` and its schema. The `agents` map holds one
+**Change** adds `agents.json` and `schemas/agents.schema.json`. The `agents` map holds one
 card per agent, linking exact primary model selectors to canonical `text.catalog` IDs.
 Each selector has a first-party source and can record sourced Fast and Ultrafast
 service tiers on that same selector.
@@ -24,7 +24,7 @@ service tiers on that same selector.
 **Compatibility** is additive within schema v2. The Agent Models schema is a
 separate contract and supports an empty `agents` map.
 
-**Migration** is optional. Use the Agent Models asset from the same pinned snapshot
+**Migration** is optional. Use `agents.json` from the same pinned snapshot
 as `models.json` when resolving canonical model IDs. Use the agent's live discovery
 for the active account's choices.
 

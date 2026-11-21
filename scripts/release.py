@@ -54,10 +54,10 @@ SCHEMA_MAJOR = 2
 ASSETS = {
     f"models.v{SCHEMA_MAJOR}.json": "models.json",
     f"labs.v{SCHEMA_MAJOR}.json": "labs.json",
-    f"agent-models.v{SCHEMA_MAJOR}.json": "agent-models.json",
+    f"agents.v{SCHEMA_MAJOR}.json": "agents.json",
     f"models.v{SCHEMA_MAJOR}.schema.json": "schemas/models.schema.json",
     f"labs.v{SCHEMA_MAJOR}.schema.json": "schemas/labs.schema.json",
-    f"agent-models.v{SCHEMA_MAJOR}.schema.json": "schemas/agent-models.schema.json",
+    f"agents.v{SCHEMA_MAJOR}.schema.json": "schemas/agents.schema.json",
 }
 
 # Catalogue files renamed since an earlier release: old path -> current path. Release notes
@@ -368,7 +368,7 @@ This package is the data, published unchanged from release
 | `schemas/` | JSON Schemas for the catalogue files |
 | `manifest.json` | Version, source commit, content digest, and the SHA-256 of every file |
 | `PROVENANCE.md` | Source notes that do not fit in JSON |
-{agent_models_row}{schema_changelog_row}
+{agents_row}{schema_changelog_row}
 
 ```js
 import models from "{name}/models.json" with {{ type: "json" }};
@@ -404,7 +404,7 @@ def npm_package(archive: dict[str, bytes]) -> dict[str, bytes]:
     data_files = {
         name: content
         for name, content in catalogue.items()
-        if name in ("models.json", "labs.json", "agent-models.json", "PROVENANCE.md", "SCHEMA_CHANGELOG.md")
+        if name in ("models.json", "labs.json", "agents.json", "PROVENANCE.md", "SCHEMA_CHANGELOG.md")
         or name.startswith(("schemas/", "logos/"))
     }
     package = {
@@ -428,14 +428,11 @@ def npm_package(archive: dict[str, bytes]) -> dict[str, bytes]:
         },
         "sideEffects": False,
     }
-    if "agent-models.json" in data_files:
-        package["exports"]["./agent-models.json"] = "./agent-models.json"
+    if "agents.json" in data_files:
+        package["exports"]["./agents.json"] = "./agents.json"
     readme = NPM_README.format(
         name=NPM_NAME, tag=tag, version=version, major=version.split(".")[0], repository=REPOSITORY,
-        agent_models_row=(
-            "| `agent-models.json` | Model selections by agent |\n"
-            if "agent-models.json" in data_files else ""
-        ),
+        agents_row="| `agents.json` | Model selections by agent |\n" if "agents.json" in data_files else "",
         schema_changelog_row=(
             "| `SCHEMA_CHANGELOG.md` | Authored schema changes, compatibility and migration notes |"
             if "SCHEMA_CHANGELOG.md" in data_files else ""

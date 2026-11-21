@@ -17,7 +17,7 @@ bindings, and published prices.
 [`models/`](./models/) is the authored source: one TOML card per model, grouped by lab.
 [`catalogue/models.json`](./catalogue/models.json) is generated from it. Agent model selectors
 are authored in one card per agent at `agents/<agent-id>.toml` and generated into
-[`catalogue/agent-models.json`](./catalogue/agent-models.json). The catalogue uses schema version 2.
+[`catalogue/agents.json`](./catalogue/agents.json). The catalogue uses schema version 2.
 The model catalogue was imported from [gridaco/grida](https://github.com/gridaco/grida).
 Each content change to `catalogue/` on `main` is published as a versioned GitHub Release
 and as `@grida/ai-models` on npm. A hosted endpoint of its own is undecided; don't add

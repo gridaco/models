@@ -1,5 +1,5 @@
 {
-  "$schema": "https://grida.co/schemas/ai-agent-models-v2.json",
+  "$schema": "https://grida.co/schemas/ai-agents-v2.json",
   "agents": {
     "openai-codex": {
       "label": "OpenAI Codex (ChatGPT plan)",

@@ -1,4 +1,4 @@
 catalogue/models.json linguist-generated=true
 catalogue/labs.json linguist-generated=true
-catalogue/agent-models.json linguist-generated=true
+catalogue/agents.json linguist-generated=true
 catalogue/logos/** linguist-generated=true

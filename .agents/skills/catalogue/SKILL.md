@@ -25,8 +25,9 @@ against provider documentation.
 | `models/<lab>/lab.toml`                | The lab's display name and first-party homepage. Required for every lab                 |
 | `agents/<agent-id>.toml`               | One agent card with sourced primary model selectors                                     |
 | `catalogue/models.json`                | Generated from `models/` by `scripts/build.py`. Never edit by hand                      |
-| `catalogue/agent-models.json`          | Agent Models generated from agent cards by `scripts/build.py`                           |
+| `catalogue/agents.json`                | Agent Models generated from agent cards by `scripts/build.py`                           |
 | `catalogue/schemas/models.schema.json` | JSON Schema for `models.json`                                                           |
+| `catalogue/schemas/agents.schema.json` | JSON Schema for `agents.json`                                                           |
 | `catalogue/PROVENANCE.md`              | Source notes and qualifications that do not fit in JSON                                 |
 | `catalogue/SCHEMA_CHANGELOG.md`        | Authored contract changes, compatibility and migration; excludes catalogue-only facts   |
 

@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://grida.co/schemas/ai-agent-models-v2.json",
+  "$id": "https://grida.co/schemas/ai-agents-v2.json",
   "title": "Agent models, version 2",
   "description": "Source-backed primary model selectors by agent.",
   "type": "object",
   "additionalProperties": false,
   "required": ["$schema", "agents"],
   "properties": {
-    "$schema": { "const": "https://grida.co/schemas/ai-agent-models-v2.json" },
+    "$schema": { "const": "https://grida.co/schemas/ai-agents-v2.json" },
     "agents": {
       "type": "object",
       "propertyNames": { "pattern": "^[a-z0-9][a-z0-9-]*$" },

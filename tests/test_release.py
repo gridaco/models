@@ -26,11 +26,11 @@ def test_schemas_declare_the_release_major():
     assert release.schema_major(FILES) == {release.SCHEMA_MAJOR}
 
 
-def test_agent_models_schema_must_match_the_release_major():
-    path = "schemas/agent-models.schema.json"
+def test_agents_schema_must_match_the_release_major():
+    path = "schemas/agents.schema.json"
     schema = json.loads(FILES[path])
     other_major = release.SCHEMA_MAJOR + 1
-    schema["$id"] = f"https://grida.co/schemas/ai-agent-models-v{other_major}.json"
+    schema["$id"] = f"https://grida.co/schemas/ai-agents-v{other_major}.json"
     files = {**FILES, path: json.dumps(schema).encode()}
     assert release.schema_major(files) == {release.SCHEMA_MAJOR, other_major}
 
@@ -74,8 +74,8 @@ def test_build_publishes_the_contract_files_and_checksums():
     for name, path in release.ASSETS.items():
         assert assets[name] == FILES[path]
     major = release.SCHEMA_MAJOR
-    assert assets[f"agent-models.v{major}.json"] == FILES["agent-models.json"]
-    assert assets[f"agent-models.v{major}.schema.json"] == FILES["schemas/agent-models.schema.json"]
+    assert assets[f"agents.v{major}.json"] == FILES["agents.json"]
+    assert assets[f"agents.v{major}.schema.json"] == FILES["schemas/agents.schema.json"]
     sums = dict(line.split("  ")[::-1] for line in assets["SHA256SUMS"].decode().splitlines())
     assert set(sums) == set(assets) - {"SHA256SUMS"}
     for name, digest in sums.items():
@@ -339,10 +339,10 @@ def test_npm_package_is_the_released_data():
     assert meta["version"] == VERSION.removeprefix("v")
     assert package["models.json"] == FILES["models.json"]
     assert package["labs.json"] == FILES["labs.json"]
-    assert package["agent-models.json"] == FILES["agent-models.json"]
-    assert package["schemas/agent-models.schema.json"] == FILES["schemas/agent-models.schema.json"]
-    assert meta["exports"]["./agent-models.json"] == "./agent-models.json"
-    assert "`agent-models.json`" in package["README.md"].decode()
+    assert package["agents.json"] == FILES["agents.json"]
+    assert package["schemas/agents.schema.json"] == FILES["schemas/agents.schema.json"]
+    assert meta["exports"]["./agents.json"] == "./agents.json"
+    assert "`agents.json`" in package["README.md"].decode()
     assert {name for name in package if name.startswith("logos/")} == {
         f"logos/{name.split('/', 1)[1]}" for name in FILES if name.startswith("logos/")
     }
@@ -367,8 +367,8 @@ def test_older_archive_package_does_not_advertise_missing_schema_history():
     assert "SCHEMA_CHANGELOG.md" not in package["README.md"].decode()
 
 
-def test_older_archive_package_does_not_export_missing_agent_models():
-    agent_files = {"agent-models.json", "schemas/agent-models.schema.json"}
+def test_older_archive_package_does_not_export_missing_agents():
+    agent_files = {"agents.json", "schemas/agents.schema.json"}
     files = {name: content for name, content in FILES.items() if name not in agent_files}
     archive = {
         **{f"catalogue/{name}": content for name, content in files.items()},
@@ -378,9 +378,9 @@ def test_older_archive_package_does_not_export_missing_agent_models():
     package = release.npm_package(archive)
     meta = json.loads(package["package.json"])
     assert agent_files.isdisjoint(package)
-    assert "./agent-models.json" not in meta["exports"]
-    assert "agent-models.json" not in meta["files"]
-    assert "agent-models.json" not in package["README.md"].decode()
+    assert "./agents.json" not in meta["exports"]
+    assert "agents.json" not in meta["files"]
+    assert "agents.json" not in package["README.md"].decode()
 
 
 def test_npm_package_repository_matches_this_repository():

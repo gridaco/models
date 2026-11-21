@@ -7,7 +7,7 @@ import pytest
 import build
 import check
 
-SCHEMA = check.load(build.AGENT_MODELS_SCHEMA)
+SCHEMA = check.load(build.AGENTS_SCHEMA)
 SOURCE_URL = "https://example.com/model-selection"
 AGENT_ID = "example-agent"
 SELECTOR = "Model.V1"
@@ -108,10 +108,10 @@ source_url = "{SOURCE_URL}"
 canonical_model_id = "{TEXT_ID}"
 source_url = "{SOURCE_URL}"
 ''', encoding="utf-8")
-    monkeypatch.setattr(build, "AGENT_MODELS_SOURCE", root)
+    monkeypatch.setattr(build, "AGENTS_SOURCE", root)
     outputs, errors = build.build()
     assert errors == []
-    document = json.loads(outputs[build.AGENT_MODELS_JSON])
+    document = json.loads(outputs[build.AGENTS_JSON])
     assert list(document["agents"][AGENT_ID]["models"]) == [SELECTOR, "example/alias"]
     assert list(check.agent_model_errors(document, SCHEMA, FACTS)) == []
 
@@ -129,6 +129,6 @@ def test_source_rejects_duplicate_selectors_and_nested_cards(tmp_path):
 
 
 def test_source_rejects_stale_agent_models():
-    assert "catalogue/agent-models.json is out of date" in "\n".join(
-        check.source_errors({build.AGENT_MODELS_JSON: b"{}\n"}),
+    assert "catalogue/agents.json is out of date" in "\n".join(
+        check.source_errors({build.AGENTS_JSON: b"{}\n"}),
     )
